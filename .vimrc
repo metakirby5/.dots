@@ -1,9 +1,6 @@
 " ~/.vimrc
-" Angie Nguyen, Minji Yoon
-" Last modified: 11 January 2014
+" Angie Nguyen, Minji Yoon, Ethan Chan
 " Sources: http://vim.wikia.com/
-"
-" If you have any questions, email me at ann045@ucsd.edu
 
 " **************************************
 " * VARIABLES
@@ -35,7 +32,7 @@ set hlsearch			" highlights all search hits
 set smartcase			" smart search casing
 
 " **************************************
-" * Macros
+" * MACROS
 " **************************************
 " Python
 autocmd BufRead *.py inoremap # X#
