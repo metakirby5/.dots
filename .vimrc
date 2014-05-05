@@ -35,6 +35,12 @@ set hlsearch			" highlights all search hits
 set smartcase			" smart search casing
 
 " **************************************
+" * Macros
+" **************************************
+" Python
+autocmd BufRead *.py inoremap # X#
+
+" **************************************
 " * OVER 80 CHARS!
 " **************************************
 " When going over 80 chars, will start highlighting red
@@ -63,7 +69,7 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 set tabstop=4
 set shiftwidth=4
 
-au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set expandtab
+au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml} set expandtab
 au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set tabstop=4
 au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set shiftwidth=4
 
@@ -72,7 +78,6 @@ au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set shiftwidth=4
 au BufRead,BufNewFile *.s set noexpandtab
 au BufRead,BufNewFile *.s set tabstop=8
 au BufRead,BufNewFile *.s set shiftwidth=8
-
 
 " **************************************
 " * AESTHETICS
