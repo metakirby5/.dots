@@ -43,6 +43,18 @@ autocmd BufRead *.py inoremap # X#
 " When going over 80 chars, will start highlighting red
 let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
+" Toggle with F10
+function! Toggle80Char ()
+	if exists('w:m2')
+		call matchdelete(w:m2)
+		unlet w:m2
+	else
+		let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+	endif
+endfunction
+
+nmap <silent> <F10> :call Toggle80Char()<CR>
+
 " Removes any trailing whitespace in the file upon closing
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
@@ -108,7 +120,6 @@ endif
 " You can add shortcuts of your own similarly.
 
 " hit F10 while not in insert mode to do a quick write and quit
-map <F10> <Esc>:wq<CR>
+" map <F10> <Esc>:wq<CR>
 " hit F11 while not in insert mode to quickly retab everything
-map <F11> <Esc>gg=G<ESC>:retab<CR>
-
+" map <F11> <Esc>gg=G<ESC>:retab<CR>
