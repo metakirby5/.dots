@@ -10,9 +10,9 @@
 " * Setup
 " **************************************
 
-" Enable more shortcuts with , key
-let mapleader = ","
-let g:mapleader = ","
+" Enable more shortcuts with <Space> key
+let mapleader = " "
+let g:mapleader = " "
 
 " **************************************
 " * Theme
@@ -83,10 +83,19 @@ set smartcase			" smart search casing
 " **************************************
 
 " ,w - Save
-nmap <leader>w :w<cr>
+nnoremap <leader>w :w<cr>
+
+" ,q - Quit
+noremap <leader>q :q<CR>
 
 " ,p - Toggle paste mode
-map <leader>p :setlocal paste!<cr>
+noremap <leader>p :setlocal paste!<cr>
+
+" ,<cr> - Disable highlight
+noremap <silent> <leader><cr> :noh<cr>
+
+" ,= - Quick retab of everything
+noremap <leader>= <Esc>gg=G<ESC>:retab<CR>
 
 " ,c - Toggle over 80 char highlighting
 function! Toggle80Char ()
@@ -98,13 +107,13 @@ function! Toggle80Char ()
 	endif
 endfunction
 
-map <silent> <leader>c :call Toggle80Char()<CR>
+noremap <silent> <leader>c :call Toggle80Char()<CR>
 
-" ,<cr> - Disable highlight
-map <silent> <leader><cr> :noh<cr>
-
-" ,= - Quick retab of everything
-map <leader>= <Esc>gg=G<ESC>:retab<CR>
+" ,[jk] - Move line of text
+nnoremap <leader>j mz:m+<cr>`z
+nnoremap <leader>k mz:m-2<cr>`z
+vnoremap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
 
 " **************************************
 " * Style
@@ -123,13 +132,13 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " ,ss - Toggle spellcheck
-map <leader>ss :setlocal spell!<cr>
+noremap <leader>ss :setlocal spell!<cr>
 
 " Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+noremap <leader>sn ]s
+noremap <leader>sp [s
+noremap <leader>sa zg
+noremap <leader>s? z=
 
 " **************************************
 " * Indentation
@@ -165,42 +174,50 @@ autocmd BufRead *.py inoremap # X#
 " **************************************
 
 " Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " 0 - First non-blank character
-map 0 ^
+noremap 0 ^
+" ,0 - Legacy behavior
+noremap <leader>0 0
+
+" ,[hv] - Horizontal/vertical split
+noremap <leader>h <C-w>s
+noremap <leader>v <C-w>v
 
 " ctrl-[hjkl] - Switch to split
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" ,[jk] - Move line of text
-nmap <leader>j mz:m+<cr>`z
-nmap <leader>k mz:m-2<cr>`z
-vmap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
-vmap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Close the current buffer
-map <leader>bd :bd<cr>
+noremap <leader>bd :bd<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+noremap <leader>ba :1,1000 bd!<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
+noremap <C-t> :tabnew<cr>
+noremap <leader>to :tabonly<cr>
+noremap <leader>tc :tabclose<cr>
+noremap <leader>tm :tabmove<Space>
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" ctrl-[leftarrow | rightarrow] - Switch tabs
+noremap <silent> <C-Right> :tabnext<CR>
+noremap <silent> <C-Left> :tabprevious<CR>
+
+" ctrl-shift-[leftarrow | rightarrow] - Move tabs
+noremap <silent> <C-S-Right> :tabmove +1<CR>
+noremap <silent> <C-S-Left> :tabmove -1<CR>
 
 " Switch CWD to the directory of the open buffer
-map <leader>d :cd %:p:h<cr>:pwd<cr>
+noremap <leader>d :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
