@@ -10,9 +10,36 @@
 " * Setup
 " **************************************
 
-" Enable more shortcuts with <Space> key
+" Enable more shortcuts with <space> key (denoted as , in shortcuts)
 let mapleader = " "
 let g:mapleader = " "
+
+" **************************************
+" * Variables
+" **************************************
+
+set nocompatible		" get rid of strict vi compatibility
+set nu					" line numbering on
+set noerrorbells		" turns off annoying bell sounds for errors
+set backspace=2			" backspace over everything
+set fileformats=unix,dos,mac	" open files from mac/dos
+set exrc				" open local config files
+set nojoinspaces		" don't add white space when I don't tell you to
+set noswapfile			" no intermediate files used when saving
+set wildmenu			" show autocomplete for commands
+set autowrite			" write before make
+set mouse-=a			" disallow mouse usage
+set hlsearch			" highlights all search hits
+set smartcase			" smart search casing
+filetype on				" filetype identification
+filetype plugin on		" filetype identificaiton
+
+" Set these to your preference
+"set incsearch			" incremental search
+"set visualbell			" screen flashes instead of error bell
+"set ignorecase			" search without regards to case
+"set confirm			" Shows dialog when exiting without saving
+"set nowrap				" turns off word wrapping
 
 " **************************************
 " * Theme
@@ -25,6 +52,7 @@ set background=light
 
 " Syntax highlighting
 syntax on
+set showmatch			" show match when inserting {}, [], or ()
 
 " Extra options for GUI mode
 if has('gui_running')
@@ -49,44 +77,26 @@ function! HasPaste()
     return ''
 endfunction
 
-" **************************************
-" * Variables
-" **************************************
-
-set nocompatible		" get rid of strict vi compatibility
-set nu				" line numbering on
-set autoindent			" turns autoindent on
-set smartindent			" turns smartindent on
-set noerrorbells		" turns off annoying bell sounds for errors
-set backspace=2			" backspace over everything
-set fileformats=unix,dos,mac	" open files from mac/dos
-set exrc			" open local config files
-set nojoinspaces		" don't add white space when I don't tell you to
-set showmatch			" show match when inserting {}, [], or ()
-set noswapfile			" no intermediate files used when saving
-set ruler			" always show position in file
-set wildmenu			" show autocomplete for commands
-set autowrite			" write before make
-set mouse-=a			" disallow mouse usage
-set hlsearch			" highlights all search hits
-set smartcase			" smart search casing
-
-" Set these to your preference
-"set incsearch			" incremental search
-"set visualbell			" screen flashes instead of error bell
-"set ignorecase			" search without regards to case
-"set confirm			" Shows dialog when exiting without saving
-"set nowrap			" turns off word wrapping
+"set ruler			" default ruler
 
 " **************************************
 " * Shortcuts
 " **************************************
 
+" Swap ; and :
+" nnoremap ; :
+" nnoremap : ;
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+map N Nzz
+map n nzz
+
 " ,w - Save
 nnoremap <leader>w :w<cr>
 
 " ,q - Quit
-noremap <leader>q :q<CR>
+noremap <leader>q :q<cr>
 
 " ,p - Toggle paste mode
 noremap <leader>p :setlocal paste!<cr>
@@ -95,7 +105,77 @@ noremap <leader>p :setlocal paste!<cr>
 noremap <silent> <leader><cr> :noh<cr>
 
 " ,= - Quick retab of everything
-noremap <leader>= <Esc>gg=G<ESC>:retab<CR>
+noremap <leader>= <Esc>gg=G<ESC>:retab<cr>
+
+" ,[jk] - Move line of text
+nnoremap <leader>j mz:m+<cr>`z
+nnoremap <leader>k mz:m-2<cr>`z
+vnoremap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
+
+" ,[oO] - Create newlines in normal mode
+nnoremap <silent> <leader>o o<Esc>
+nnoremap <silent> <leader>O O<Esc>
+
+" **************************************
+" * Macros
+" **************************************
+
+function FileHeader()
+	let s:line=line(".")
+	call setline(s:line, "/*******************************************************************************")
+	call append(s:line,  "* Filename: ")
+	call append(s:line+1,"* Author: Ethan Chan")
+	call append(s:line+2,"* Userid: cs30xhy")
+	call append(s:line+3,"* Date: ".strftime("%D"))
+	call append(s:line+4,"* Sources of Help: CSE 30 Website, handouts")
+	call append(s:line+5,"*")
+	call append(s:line+6,"* Description: ")
+	call append(s:line+7,"*     TODO")
+	call append(s:line+8,"* *****************************************************************************/")
+	unlet s:line
+endfunction
+
+" ,mf - Insert file header
+nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>`zjA
+
+" Automatically do this in .{c,s} files
+autocmd BufNewFile *.{c,s} normal mz
+autocmd BufNewFile *.{c,s} exec FileHeader()
+autocmd BufNewFile *.{c,s} normal 'zjA
+
+function MethodHeader()
+	let s:line=line(".")
+	call setline(s:line,  "/*******************************************************************************")
+	call append(s:line,   "* Function name: ")
+	call append(s:line+1, "* Function prototype: TODO")
+	call append(s:line+2, "*")
+	call append(s:line+3, "* Description:")
+	call append(s:line+4, "*     TODO")
+	call append(s:line+5, "*")
+	call append(s:line+6, "* Parameters:")
+	call append(s:line+7, "*     TODO")
+	call append(s:line+8, "* Side effects:")
+	call append(s:line+9, "*     TODO")
+	call append(s:line+10, "* Error conditions:")
+	call append(s:line+11,"*     TODO")
+	call append(s:line+12,"* Return value: TODO")
+	call append(s:line+13,"*")
+	call append(s:line+14,"* Registers used:")
+	call append(s:line+15,"*     TODO")
+	call append(s:line+16,"* *****************************************************************************/")
+	unlet s:line
+endfunction
+
+" ,mm - Insert method header
+nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
+
+" **************************************
+" * Style
+" **************************************
+
+" When going over 80 chars, will start highlighting red
+let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " ,c - Toggle over 80 char highlighting
 function! Toggle80Char ()
@@ -107,20 +187,7 @@ function! Toggle80Char ()
 	endif
 endfunction
 
-noremap <silent> <leader>c :call Toggle80Char()<CR>
-
-" ,[jk] - Move line of text
-nnoremap <leader>j mz:m+<cr>`z
-nnoremap <leader>k mz:m-2<cr>`z
-vnoremap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
-vnoremap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
-
-" **************************************
-" * Style
-" **************************************
-
-" When going over 80 chars, will start highlighting red
-let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+noremap <silent> <leader>c :call Toggle80Char()<cr>
 
 " Removes any trailing whitespace in the file upon closing
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -129,12 +196,12 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 :set formatoptions+=r
 
 " ,m - Remove Windows' ^M
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " ,ss - Toggle spellcheck
 noremap <leader>ss :setlocal spell!<cr>
 
-" Shortcuts using <leader>
+" More spellcheck shortcuts
 noremap <leader>sn ]s
 noremap <leader>sp [s
 noremap <leader>sa zg
@@ -149,8 +216,9 @@ noremap <leader>s? z=
 " shiftwidth: (with auto-indentation) when indent happens, inserts 4 spaces
 "             instead
 
-" Remove tabs intelligently
-set smarttab
+set smarttab			" remove tabs intelligently
+set autoindent			" turns autoindent on
+set smartindent			" turns smartindent on
 
 " Defaults
 set tabstop=4
@@ -174,13 +242,17 @@ autocmd BufRead *.py inoremap # X#
 " **************************************
 
 " Treat long lines as break lines (useful when moving around in them)
-noremap j gj
-noremap k gk
+noremap <silent> j gj
+noremap <silent> k gk
+inoremap <silent> <Up> <Esc>gka
+inoremap <silent> <Down> <Esc>gja
 
 " 0 - First non-blank character
 noremap 0 ^
 " ,0 - Legacy behavior
 noremap <leader>0 0
+
+" === Splits
 
 " ,[hv] - Horizontal/vertical split
 noremap <leader>h <C-w>s
@@ -192,11 +264,7 @@ noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
-" Close the current buffer
-noremap <leader>bd :bd<cr>
-
-" Close all the buffers
-noremap <leader>ba :1,1000 bd!<cr>
+" === Tabs
 
 " Useful mappings for managing tabs
 noremap <C-t> :tabnew<cr>
@@ -208,13 +276,62 @@ noremap <leader>tm :tabmove<Space>
 " Super useful when editing files in the same directory
 noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
+" ,[1-9] - Switch to tab #
+noremap <leader>1 :tabmove 1<cr>
+noremap <leader>2 :tabmove 2<cr>
+noremap <leader>3 :tabmove 3<cr>
+noremap <leader>4 :tabmove 4<cr>
+noremap <leader>5 :tabmove 5<cr>
+noremap <leader>6 :tabmove 6<cr>
+noremap <leader>7 :tabmove 7<cr>
+noremap <leader>8 :tabmove 8<cr>
+noremap <leader>9 :tabmove 9<cr>
+
 " ctrl-[leftarrow | rightarrow] - Switch tabs
-noremap <silent> <C-Right> :tabnext<CR>
-noremap <silent> <C-Left> :tabprevious<CR>
+noremap <silent> <C-Right> :tabnext<cr>
+noremap <silent> <C-Left> :tabprevious<cr>
 
 " ctrl-shift-[leftarrow | rightarrow] - Move tabs
-noremap <silent> <C-S-Right> :tabmove +1<CR>
-noremap <silent> <C-S-Left> :tabmove -1<CR>
+noremap <silent> <C-S-Right> :tabmove +1<cr>
+noremap <silent> <C-S-Left> :tabmove -1<cr>
+
+" === Folds
+
+set foldenable
+
+" ,ff - Toggle folds in normal mode, make folds in visual mode
+nnoremap <leader>ff za
+vnoremap <leader>ff zf
+
+" ,fa - Unfold all
+nnoremap <leader>fa zMzR
+
+" ,fA - Fold all
+nnoremap <leader>fA zRzM
+
+" ,fd - Delete fold
+nnoremap <leader>fd zd
+
+" ,f[jk] - Open/close folds by one level
+nnoremap <leader>fj zr
+nnoremap <leader>fk zm
+
+" ,fm - Manual mode
+nnoremap <leader>fm :set foldmethod=manual<cr>
+
+" ,fi - Indent mode
+nnoremap <leader>fi :set foldmethod=indent<cr>
+
+" ,fs - Syntax mode
+nnoremap <leader>fs :set foldmethod=syntax<cr>
+
+" === Buffers
+
+" Close the current buffer
+noremap <leader>bd :bd<cr>
+
+" Close all the buffers
+noremap <leader>ba :1,1000 bd!<cr>
 
 " Switch CWD to the directory of the open buffer
 noremap <leader>d :cd %:p:h<cr>:pwd<cr>
@@ -225,6 +342,8 @@ try
   set stal=2
 catch
 endtry
+
+" === On exit
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
