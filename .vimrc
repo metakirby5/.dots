@@ -23,6 +23,7 @@ set nu					" line numbering on
 set noerrorbells		" turns off annoying bell sounds for errors
 set backspace=2			" backspace over everything
 set fileformats=unix,dos,mac	" open files from mac/dos
+set hidden				" hide abandoned buffers
 set exrc				" open local config files
 set nojoinspaces		" don't add white space when I don't tell you to
 set noswapfile			" no intermediate files used when saving
@@ -30,17 +31,21 @@ set wildmenu			" show autocomplete for commands
 set autowrite			" write before make
 set mouse-=a			" disallow mouse usage
 set hlsearch			" highlights all search hits
-set smartcase			" smart search casing
-filetype on				" filetype identification
-filetype plugin on		" filetype identificaiton
+set ignorecase			" search without regards to case
+set smartcase			" search with smart casing
+filetype on				" filetype stuff
+filetype plugin on		" filetype stuff
+filetype plugin indent on	" filetype stuff
 
-set undofile			" use an undo file
-set undodir=~/dotfiles/.vimUndo/	" set undo directory
+try
+	set undodir=~/dotfiles/.vimUndo/	" set undo directory
+	set undofile			" use an undo file
+catch
+endtry
 
 " Set these to your preference
 "set incsearch			" incremental search
 "set visualbell			" screen flashes instead of error bell
-"set ignorecase			" search without regards to case
 "set confirm			" shows dialog when exiting without saving
 "set nowrap				" turns off word wrapping
 
@@ -60,6 +65,9 @@ endif
 " **************************************
 " * UI
 " **************************************
+
+set scrolloff=5               " keep at least 5 lines above/below
+set sidescrolloff=5           " keep at least 5 lines left/right
 
 " Alawys show status line
 set ls=2
@@ -196,14 +204,20 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 " ,m - Remove Windows' ^M
 " noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" ,ss - Toggle spellcheck
-noremap <leader>ss :setlocal spell!<cr>
+" Spellcheck
+if v:version >= 700
+	" ,ss - Toggle spellcheck
+	noremap <leader>ss :setlocal spell!<cr>
 
-" More spellcheck shortcuts
-noremap <leader>sn ]s
-noremap <leader>sp [s
-noremap <leader>sa zg
-noremap <leader>s? z=
+	" More spellcheck shortcuts
+	noremap <leader>sn ]s
+	noremap <leader>sp [s
+	noremap <leader>sa zg
+	noremap <leader>s? z=
+
+	" Enable spell check for text files
+	autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en
+endif
 
 " **************************************
 " * Indentation
