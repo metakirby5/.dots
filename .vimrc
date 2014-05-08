@@ -281,7 +281,7 @@ noremap <C-l> <C-W>l
 " Useful mappings for managing tabs
 noremap <C-t> :tabnew<cr>
 noremap <leader>to :tabonly<cr>
-noremap <leader>tc :tabclose<cr>
+noremap <leader>tw :tabclose<cr>
 noremap <leader>tm :tabmove<Space>
 
 " Opens a new tab with the current buffer's path
