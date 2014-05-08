@@ -127,6 +127,9 @@ nnoremap <silent> <leader>O O<Esc>
 " * Macros
 " **************************************
 
+" Insert matching curly brace
+inoremap {<CR> {<CR>}<C-o>O
+
 function FileHeader()
 	let s:line=line(".")
 	call setline(s:line, "/*******************************************************************************")
