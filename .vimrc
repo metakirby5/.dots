@@ -34,21 +34,19 @@ set smartcase			" smart search casing
 filetype on				" filetype identification
 filetype plugin on		" filetype identificaiton
 
+set undofile			" use an undo file
+set undodir=~/dotfiles/.vimUndo/	" set undo directory
+
 " Set these to your preference
 "set incsearch			" incremental search
 "set visualbell			" screen flashes instead of error bell
 "set ignorecase			" search without regards to case
-"set confirm			" Shows dialog when exiting without saving
+"set confirm			" shows dialog when exiting without saving
 "set nowrap				" turns off word wrapping
 
 " **************************************
 " * Theme
 " **************************************
-
-colorscheme default
-
-" If no color schemes installed, light bg
-set background=light
 
 " Syntax highlighting
 syntax on
@@ -277,15 +275,15 @@ noremap <leader>tm :tabmove<Space>
 noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " ,[1-9] - Switch to tab #
-noremap <leader>1 :tabmove 1<cr>
-noremap <leader>2 :tabmove 2<cr>
-noremap <leader>3 :tabmove 3<cr>
-noremap <leader>4 :tabmove 4<cr>
-noremap <leader>5 :tabmove 5<cr>
-noremap <leader>6 :tabmove 6<cr>
-noremap <leader>7 :tabmove 7<cr>
-noremap <leader>8 :tabmove 8<cr>
-noremap <leader>9 :tabmove 9<cr>
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
 
 " ctrl-[leftarrow | rightarrow] - Switch tabs
 noremap <silent> <C-Right> :tabnext<cr>
