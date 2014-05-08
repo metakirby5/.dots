@@ -38,7 +38,7 @@ filetype plugin on		" filetype stuff
 filetype plugin indent on	" filetype stuff
 
 try
-	set undodir=~/dotfiles/.vimUndo/	" set undo directory
+	set undodir=~/.vimUndo/	" set undo directory
 	set undofile			" use an undo file
 catch
 endtry
