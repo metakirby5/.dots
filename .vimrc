@@ -305,10 +305,14 @@ noremap <leader>9 9gt
 " ctrl-[leftarrow | rightarrow] - Switch tabs
 noremap <silent> <C-Right> :tabnext<cr>
 noremap <silent> <C-Left> :tabprevious<cr>
+inoremap <silent> <C-Right> <esc>:tabnext<cr>
+inoremap <silent> <C-Left> <esc>:tabprevious<cr>
 
 " ctrl-shift-[leftarrow | rightarrow] - Move tabs
 noremap <silent> <C-S-Right> :tabmove +1<cr>
 noremap <silent> <C-S-Left> :tabmove -1<cr>
+inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
+inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
 
 " === Folds
 
