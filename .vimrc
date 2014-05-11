@@ -299,12 +299,12 @@ noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
 " ,[jk] - Resize height
-noremap <silent> <leader>k :resize +1<cr>
-noremap <silent> <leader>j :resize -1<cr>
+noremap <silent> <leader>k :resize +5<cr>
+noremap <silent> <leader>j :resize -5<cr>
 
 " ,[hl] - Resize width
-noremap <silent> <leader>l :vertical resize +1<cr>
-noremap <silent> <leader>h :vertical resize -1<cr>
+noremap <silent> <leader>l :vertical resize +5<cr>
+noremap <silent> <leader>h :vertical resize -5<cr>
 
 " === Tabs
 
