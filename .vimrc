@@ -195,7 +195,7 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " **************************************
 
 " When going over 80 chars, will start highlighting red
-" let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " When going over 80 chars, line break
 set textwidth=80
@@ -205,11 +205,8 @@ function! Toggle80Char ()
 	if exists('w:m2')
 		call matchdelete(w:m2)
 		unlet w:m2
-		set textwidth=80
-		normal gqG
 	else
 		let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
-		set textwidth=0
 	endif
 endfunction
 
