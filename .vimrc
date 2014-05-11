@@ -72,13 +72,13 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 " Alawys show status line
 set ls=2
 
-" example: .vimrc [sh] [+]        PASTE MODE | 5 - 71/94 - 42%
-set statusline=%f\ %y\ %m%=%{HasPaste()}%c\ -\ %l/%L\ -\ %P
+" example: .vimrc [sh] [+]        PASTE | TW 0 | 5 - 71/94 - 42%
+set statusline=%f\ %y\ %m%=%{HasPaste()}TW\ %{&tw}\ \|\ %c\ -\ %l/%L\ -\ %P
 
-" Returns true if paste mode is enabled
+" Returns text if paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE MODE | '
+        return 'PASTE | '
     en
     return ''
 endfunction
@@ -194,13 +194,16 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " * Style
 " **************************************
 
-" When going over 80 chars, will start highlighting red
-let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-
-" When going over 80 chars, line break
+" When typing over 80 chars, line break
 set textwidth=80
 
-" ,c - Toggle over 80 char highlighting / textwidth
+" ,\ - Toggle textwidth
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<CR>
+
+" Highlight anything after virtual column 80 red
+let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+" ,c - Toggle over 80 char highlighting
 function! Toggle80Char ()
 	if exists('w:m2')
 		call matchdelete(w:m2)
