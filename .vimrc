@@ -149,9 +149,9 @@ endfunction
 nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>`zjA
 
 " Automatically do this in .{c,s} files
-autocmd BufNewFile *.{c,s} normal mz
-autocmd BufNewFile *.{c,s} exec FileHeader()
-autocmd BufNewFile *.{c,s} normal 'zjA
+autocmd BufNewFile *.{c,cpp,s} normal mz
+autocmd BufNewFile *.{c,cpp,s} exec FileHeader()
+autocmd BufNewFile *.{c,cpp,s} normal 'zjA
 
 function MethodHeader()
 	let s:line=line(".")
