@@ -276,10 +276,10 @@ autocmd BufRead *.py inoremap # X#
 " Treat long lines as break lines (useful when moving around in them)
 noremap <silent> j gj
 noremap <silent> k gk
-noremap <silent> <Up> gj
-noremap <silent> <Down> gk
-inoremap <silent> <Up> <esc>gka
-inoremap <silent> <Down> <esc>gja
+noremap <silent> <down> gj
+noremap <silent> <up> gk
+inoremap <silent> <down> <esc>gja
+inoremap <silent> <up> <esc>gka
 
 " 0 - First non-blank character
 noremap 0 ^
@@ -299,12 +299,12 @@ noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
 " ,[jk] - Resize height
-noremap <silent> <leader>k :resize +5<cr>
-noremap <silent> <leader>j :resize -5<cr>
+noremap <silent> <leader><up> :resize +5<cr>
+noremap <silent> <leader><down> :resize -5<cr>
 
 " ,[hl] - Resize width
-noremap <silent> <leader>l :vertical resize +5<cr>
-noremap <silent> <leader>h :vertical resize -5<cr>
+noremap <silent> <leader><right> :vertical resize +5<cr>
+noremap <silent> <leader><left> :vertical resize -5<cr>
 
 " === Tabs
 
