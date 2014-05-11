@@ -111,7 +111,7 @@ noremap <leader>p :setlocal paste!<cr>
 noremap <silent> <leader><cr> :noh<cr>
 
 " ,= - Quick retab of everything
-noremap <leader>= <Esc>gg=G<ESC>:retab<cr>
+noremap <leader>= <esc>gg=G<esc>:retab<cr>
 
 " ,[jk] - Move line of text
 nnoremap <leader>j mz:m+<cr>`z
@@ -120,16 +120,20 @@ vnoremap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
 vnoremap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
 
 " ,[oO] - Create newlines in normal mode
-nnoremap <silent> <leader>o o<Esc>
-nnoremap <silent> <leader>O O<Esc>
+nnoremap <silent> <leader>o o<esc>
+nnoremap <silent> <leader>O O<esc>
+
+" ,n - Splits a line at the cursor, then moves to column 81
+nnoremap <silent> <leader>n i<cr><esc>80l
 
 " **************************************
 " * Macros
 " **************************************
 
 " Insert matching curly brace
-inoremap {<CR> {<CR>}<C-o>O
+inoremap {<cr> {<cr>}<C-o>O
 
+" File header function
 function FileHeader()
 	let s:line=line(".")
 	call setline(s:line, "/*******************************************************************************")
@@ -153,6 +157,7 @@ autocmd BufNewFile *.{c,cpp,s} normal mz
 autocmd BufNewFile *.{c,cpp,s} exec FileHeader()
 autocmd BufNewFile *.{c,cpp,s} normal 'z8jA
 
+" Method header function
 function MethodHeader()
 	let s:line=line(".")
 	call setline(s:line,  "/*******************************************************************************")
@@ -186,7 +191,10 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " When going over 80 chars, will start highlighting red
 " let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
-" ,c - Toggle over 80 char highlighting
+" When going over 80 chars, line break
+set textwidth=80
+
+" ,c - Toggle over 80 char highlighting / textwidth
 function! Toggle80Char ()
 	if exists('w:m2')
 		call matchdelete(w:m2)
@@ -262,8 +270,8 @@ autocmd BufRead *.py inoremap # X#
 " Treat long lines as break lines (useful when moving around in them)
 noremap <silent> j gj
 noremap <silent> k gk
-inoremap <silent> <Up> <Esc>gka
-inoremap <silent> <Down> <Esc>gja
+inoremap <silent> <Up> <esc>gka
+inoremap <silent> <Down> <esc>gja
 
 " 0 - First non-blank character
 noremap 0 ^
