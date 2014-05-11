@@ -133,25 +133,25 @@ inoremap {<CR> {<CR>}<C-o>O
 function FileHeader()
 	let s:line=line(".")
 	call setline(s:line, "/*******************************************************************************")
-	call append(s:line,  "* Filename: ")
+	call append(s:line,  "* Filename: ".expand("%:t"))
 	call append(s:line+1,"* Author: Ethan Chan")
 	call append(s:line+2,"* Userid: cs30xhy")
 	call append(s:line+3,"* Date: ".strftime("%D"))
 	call append(s:line+4,"* Sources of Help: CSE 30 Website, handouts")
 	call append(s:line+5,"*")
 	call append(s:line+6,"* Description: ")
-	call append(s:line+7,"*     TODO")
+	call append(s:line+7,"*      ")
 	call append(s:line+8,"* *****************************************************************************/")
 	unlet s:line
 endfunction
 
-" ,mf - Insert file header
-nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>`zjA
+" ,mh - Insert file header
+nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>`z8jA<backspace>
 
 " Automatically do this in .{c,s} files
 autocmd BufNewFile *.{c,cpp,s} normal mz
 autocmd BufNewFile *.{c,cpp,s} exec FileHeader()
-autocmd BufNewFile *.{c,cpp,s} normal 'zjA
+autocmd BufNewFile *.{c,cpp,s} normal 'z8jA
 
 function MethodHeader()
 	let s:line=line(".")
