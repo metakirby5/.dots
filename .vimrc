@@ -168,16 +168,22 @@ function MethodHeader()
 	call append(s:line+4, "*     TODO")
 	call append(s:line+5, "*")
 	call append(s:line+6, "* Parameters:")
-	call append(s:line+7, "*     TODO")
+	call append(s:line+7, "*     arg 1: $name -- $desc TODO")
 	call append(s:line+8, "* Side effects:")
 	call append(s:line+9, "*     TODO")
-	call append(s:line+10, "* Error conditions:")
-	call append(s:line+11,"*     TODO")
-	call append(s:line+12,"* Return value: TODO")
-	call append(s:line+13,"*")
-	call append(s:line+14,"* Registers used:")
-	call append(s:line+15,"*     TODO")
-	call append(s:line+16,"* *****************************************************************************/")
+	call append(s:line+10,"* Error conditions:")
+	call append(s:line+11,"*     $errcond TODO")
+	call append(s:line+12,"*         Action: $action TODO")
+	call append(s:line+13,"* Return value: $type TODO")
+	call append(s:line+14,"*     $val -- $meaning TODO")
+	call append(s:line+15,"*")
+	call append(s:line+16,"* Registers used:")
+	call append(s:line+17,"*     %i0: $name -- $desc TODO")
+	call append(s:line+18,"*")
+	call append(s:line+19,"*     %l0: $name -- $desc TODO")
+	call append(s:line+20,"*")
+	call append(s:line+21,"*     %o0: $name -- $desc TODO")
+	call append(s:line+22,"* *****************************************************************************/")
 	unlet s:line
 endfunction
 
@@ -220,14 +226,14 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Spellcheck
 if v:version >= 700
-	" ,ss - Toggle spellcheck
-	noremap <leader>ss :setlocal spell!<cr>
+	" ,/ss - Toggle spellcheck
+	noremap <leader>/ss :setlocal spell!<cr>
 
 	" More spellcheck shortcuts
-	noremap <leader>sn ]s
-	noremap <leader>sp [s
-	noremap <leader>sa zg
-	noremap <leader>s? z=
+	noremap <leader>/sn ]s
+	noremap <leader>/sp [s
+	noremap <leader>/sa zg
+	noremap <leader>/s? z=
 
 	" Enable spell check for text files
 	autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en
@@ -242,7 +248,7 @@ endif
 " shiftwidth: (with auto-indentation) when indent happens, inserts 4 spaces
 "             instead
 
-set smarttab			" remove tabs intelligently
+" set smarttab			" remove tabs intelligently
 set autoindent			" turns autoindent on
 set smartindent			" turns smartindent on
 
@@ -270,6 +276,8 @@ autocmd BufRead *.py inoremap # X#
 " Treat long lines as break lines (useful when moving around in them)
 noremap <silent> j gj
 noremap <silent> k gk
+noremap <silent> <Up> gj
+noremap <silent> <Down> gk
 inoremap <silent> <Up> <esc>gka
 inoremap <silent> <Down> <esc>gja
 
@@ -280,8 +288,8 @@ noremap <leader>0 0
 
 " === Splits
 
-" ,[hv] - Horizontal/vertical split
-noremap <leader>h <C-w>s
+" ,[sv] - Horizontal/vertical split
+noremap <leader>s <C-w>s
 noremap <leader>v <C-w>v
 
 " ctrl-[hjkl] - Switch to split
@@ -289,6 +297,14 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+
+" ,[jk] - Resize height
+noremap <silent> <leader>k :resize +1<cr>
+noremap <silent> <leader>j :resize -1<cr>
+
+" ,[hl] - Resize width
+noremap <silent> <leader>l :vertical resize +1<cr>
+noremap <silent> <leader>h :vertical resize -1<cr>
 
 " === Tabs
 
