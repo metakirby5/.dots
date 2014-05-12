@@ -311,13 +311,38 @@ noremap 0 ^
 " ,0 - Legacy behavior
 noremap <leader>0 0
 
+" === Buffers
+
+" ^[up / down] - Switch to prev/next buffer
+nnoremap <C-down> :next<CR>
+nnoremap <C-up> :previous<CR>
+
+" ,bd - Close the current buffer
+noremap <leader>bd :bd<cr>
+
+" ,ba - Close all the buffers
+noremap <leader>ba :1,1000 bd!<cr>
+
+" ,bt - Open all buffers as tabs
+noremap <leader>bt :tab ball<cr>
+
+" ,d - Switch CWD to the directory of the open buffer
+noremap <leader>d :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
 " === Splits
 
 " ,[sv] - Horizontal/vertical split
 noremap <leader>s <C-w>s
 noremap <leader>v <C-w>v
 
-" ctrl-[hjkl] - Switch to split
+" ^[hjkl] - Switch to split
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
@@ -338,6 +363,8 @@ noremap <C-t> :tabnew<cr>
 noremap <leader>to :tabonly<cr>
 noremap <leader>tw :tabclose<cr>
 noremap <leader>tm :tabmove<Space>
+noremap <leader>tb :tab ball<cr>
+noremap <leader>tl :tabs<cr>
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -354,13 +381,13 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-" ctrl-[leftarrow | rightarrow] - Switch tabs
+" ^[left / right] - Switch tabs
 noremap <silent> <C-Right> :tabnext<cr>
 noremap <silent> <C-Left> :tabprevious<cr>
 inoremap <silent> <C-Right> <esc>:tabnext<cr>
 inoremap <silent> <C-Left> <esc>:tabprevious<cr>
 
-" ctrl-shift-[leftarrow | rightarrow] - Move tabs
+" ^shift[left / right] - Move tabs
 noremap <silent> <C-S-Right> :tabmove +1<cr>
 noremap <silent> <C-S-Left> :tabmove -1<cr>
 inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
@@ -395,24 +422,6 @@ nnoremap <leader>fi :set foldmethod=indent<cr>
 
 " ,fs - Syntax mode
 nnoremap <leader>fs :set foldmethod=syntax<cr>
-
-" === Buffers
-
-" Close the current buffer
-noremap <leader>bd :bd<cr>
-
-" Close all the buffers
-noremap <leader>ba :1,1000 bd!<cr>
-
-" Switch CWD to the directory of the open buffer
-noremap <leader>d :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
 
 " === On exit
 
