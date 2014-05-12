@@ -201,14 +201,14 @@ set textwidth=80
 set formatoptions+=w
 
 " Reformat if textwidth changed
-function! ToggleTW ()
-	if &tw != 0
+function! FmtTW ()
+	if &tw
 		normal gqG
 	endif
 endfunction
 
-" ,\ - Toggle textwidth
-noremap <silent> <leader>\ mz:let &tw = (&tw ? 0 : 80)<cr>:call ToggleTW()<cr>'z
+" ,\ - Toggle textwidth and reformat if needed
+noremap <silent> <leader>\ mz:let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>'z
 
 " Highlight anything after virtual column 80 red
 let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
