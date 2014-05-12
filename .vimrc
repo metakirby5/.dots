@@ -27,7 +27,6 @@ set hidden				" hide abandoned buffers
 set exrc				" open local config files
 set nojoinspaces		" don't add white space when I don't tell you to
 set noswapfile			" no intermediate files used when saving
-set wildmenu			" show autocomplete for commands
 set autowrite			" write before make
 set mouse-=a			" disallow mouse usage
 set hlsearch			" highlights all search hits
@@ -37,6 +36,22 @@ filetype on				" filetype stuff
 filetype plugin on		" filetype stuff
 filetype plugin indent on	" filetype stuff
 
+" Autocomplete menus
+if has("wildmenu")
+    set wildignore+=*.a,*.o
+    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+    set wildignore+=.DS_Store,.git,.hg,.svn
+    set wildignore+=*~,*.swp,*.tmp
+    set wildmenu
+	set wildignorecase
+	set wildmode=full
+	set wildcharm=<C-i>
+endif
+
+" Autocomplete text
+set omnifunc=syntaxcomplete#Complete
+
+" Persistent undo
 try
 	set undodir=~/.vimUndo/	" set undo directory
 	set undofile			" use an undo file
@@ -103,6 +118,9 @@ noremap n nzz
 " // ?? - Quick case insensitive search
 noremap // /\c
 noremap ?? ?\c
+
+" shift-<tab> - Autocomplete
+inoremap <S-tab> <C-x><C-o>
 
 " ^\ - Save
 noremap <C-\> <esc>:w<cr>
@@ -317,17 +335,23 @@ noremap <leader>0 0
 nnoremap <C-down> :next<CR>
 nnoremap <C-up> :previous<CR>
 
+" ,bl - List all buffers
+nnoremap <leader>bl :buffers<CR>
+
+" ,bs - Switch to buffer by name
+nnoremap <leader>bs :buffers<CR>:buffer<space>
+
 " ,bd - Close the current buffer
-noremap <leader>bd :bd<cr>
+nnoremap <leader>bd :bd<cr>
 
 " ,ba - Close all the buffers
-noremap <leader>ba :1,1000 bd!<cr>
+nnoremap <leader>ba :1,1000 bd!<cr>
 
 " ,bt - Open all buffers as tabs
-noremap <leader>bt :tab ball<cr>
+nnoremap <leader>bt :tab ball<cr>
 
 " ,d - Switch CWD to the directory of the open buffer
-noremap <leader>d :cd %:p:h<cr>:pwd<cr>
+nnoremap <leader>d :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
@@ -359,16 +383,15 @@ noremap <silent> <leader><left> :vertical resize -5<cr>
 " === Tabs
 
 " Useful mappings for managing tabs
-noremap <C-t> :tabnew<cr>
-noremap <leader>to :tabonly<cr>
-noremap <leader>tw :tabclose<cr>
-noremap <leader>tm :tabmove<Space>
-noremap <leader>tb :tab ball<cr>
-noremap <leader>tl :tabs<cr>
+nnoremap <C-t> :tabnew<cr>
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tw :tabclose<cr>
+nnoremap <leader>tm :tabmove<Space>
+nnoremap <leader>tb :tab ball<cr>
+nnoremap <leader>tl :tabs<cr>
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+" Opens a new tab with a file
+nnoremap <leader>te :tabedit <tab><S-tab>
 
 " ,[1-9] - Switch to tab #
 noremap <leader>1 1gt
