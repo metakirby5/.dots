@@ -107,8 +107,8 @@ endfunction
 " **************************************
 
 " Swap ; and :
-" nnoremap ; :
-" nnoremap : ;
+" noremap ; :
+" noremap : ;
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -332,26 +332,28 @@ noremap <leader>0 0
 " === Buffers
 
 " ^[up / down] - Switch to prev/next buffer
-nnoremap <C-down> :next<CR>
-nnoremap <C-up> :previous<CR>
+noremap <C-down> :next<CR>
+noremap <C-up> :previous<CR>
+inoremap <silent> <C-down> <esc>:next<cr>
+inoremap <silent> <C-up> <esc>:previous<cr>
 
 " ,bl - List all buffers
-nnoremap <leader>bl :buffers<CR>
+noremap <leader>bl :buffers<CR>
 
 " ,bs - Switch to buffer by name
-nnoremap <leader>bs :buffers<CR>:buffer<space>
+noremap <leader>bs :buffers<CR>:buffer<space>
 
 " ,bd - Close the current buffer
-nnoremap <leader>bd :bd<cr>
+noremap <leader>bd :bd<cr>
 
 " ,ba - Close all the buffers
-nnoremap <leader>ba :1,1000 bd!<cr>
+noremap <leader>ba :1,1000 bd!<cr>
 
 " ,bt - Open all buffers as tabs
-nnoremap <leader>bt :tab ball<cr>
+noremap <leader>bt :tab ball<cr>
 
 " ,d - Switch CWD to the directory of the open buffer
-nnoremap <leader>d :cd %:p:h<cr>:pwd<cr>
+noremap <leader>d :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
@@ -371,6 +373,10 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+inoremap <C-j> <esc><C-W>j
+inoremap <C-k> <esc><C-W>k
+inoremap <C-h> <esc><C-W>h
+inoremap <C-l> <esc><C-W>l
 
 " ,[jk] - Resize height
 noremap <silent> <leader><up> :resize +5<cr>
@@ -383,15 +389,15 @@ noremap <silent> <leader><left> :vertical resize -5<cr>
 " === Tabs
 
 " Useful mappings for managing tabs
-nnoremap <C-t> :tabnew<cr>
-nnoremap <leader>to :tabonly<cr>
-nnoremap <leader>tw :tabclose<cr>
-nnoremap <leader>tm :tabmove<Space>
-nnoremap <leader>tb :tab ball<cr>
-nnoremap <leader>tl :tabs<cr>
+noremap <C-t> :tabnew<cr>
+noremap <leader>to :tabonly<cr>
+noremap <leader>tw :tabclose<cr>
+noremap <leader>tm :tabmove<Space>
+noremap <leader>tb :tab ball<cr>
+noremap <leader>tl :tabs<cr>
 
 " Opens a new tab with a file
-nnoremap <leader>te :tabedit <tab><S-tab>
+noremap <leader>te :tabedit <tab><S-tab>
 
 " ,[1-9] - Switch to tab #
 noremap <leader>1 1gt
@@ -425,26 +431,26 @@ nnoremap <leader>ff za
 vnoremap <leader>ff zf
 
 " ,fa - Unfold all
-nnoremap <leader>fa zMzR
+noremap <leader>fa zMzR
 
 " ,fA - Fold all
-nnoremap <leader>fA zRzM
+noremap <leader>fA zRzM
 
 " ,fd - Delete fold
-nnoremap <leader>fd zd
+noremap <leader>fd zd
 
 " ,f[jk] - Open/close folds by one level
-nnoremap <leader>fj zr
-nnoremap <leader>fk zm
+noremap <leader>fj zr
+noremap <leader>fk zm
 
 " ,fm - Manual mode
-nnoremap <leader>fm :set foldmethod=manual<cr>
+noremap <leader>fm :set foldmethod=manual<cr>
 
 " ,fi - Indent mode
-nnoremap <leader>fi :set foldmethod=indent<cr>
+noremap <leader>fi :set foldmethod=indent<cr>
 
 " ,fs - Syntax mode
-nnoremap <leader>fs :set foldmethod=syntax<cr>
+noremap <leader>fs :set foldmethod=syntax<cr>
 
 " === On exit
 
