@@ -194,16 +194,22 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " * Style
 " **************************************
 
+" Format options:
+" 	t - Wrap text using textwidth
+" 	cro - Auto-insert comment leader when newlining
+" 	q - Enable formatting with 'gq'
+" 	w - Don't treat as 'paragraph' unless there's whitespace at the end
+" 	a - Reformat as you type
+" 	mM - Multi-byte char (asian) stuff
+set formatoptions+=tcroqwamM
+
 " When typing over 80 chars, line break
 set textwidth=80
-
-" Don't join lines together unless there's whitespace at the end
-set formatoptions+=w
 
 " Reformat if textwidth changed
 function! FmtTW ()
 	if &tw
-		normal gqG
+		normal gggqG
 	endif
 endfunction
 
@@ -228,11 +234,8 @@ noremap <silent> <leader>c :call Toggle80Char()<cr>
 " Removes any trailing whitespace in the file upon closing
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" Automate the formatted insertion of a new line in multi-line comments
-set formatoptions+=cro
-
-" ,m - Remove Windows' ^M
-" noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" ,/m - Remove Windows' ^M
+noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Spellcheck
 if v:version >= 700
@@ -406,5 +409,6 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
 " Remember info about open buffers on close
 set viminfo^=%
