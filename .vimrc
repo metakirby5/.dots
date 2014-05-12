@@ -111,7 +111,7 @@ noremap <leader>p :setlocal paste!<cr>
 noremap <silent> <leader><cr> :noh<cr>
 
 " ,= - Quick retab of everything
-noremap <leader>= <esc>gg=G<esc>:retab<cr>
+noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
 
 " ,[jk] - Move line of text
 nnoremap <leader>j mz:m+<cr>`z
@@ -137,15 +137,15 @@ inoremap {<cr> {<cr>}<C-o>O<cr>
 function FileHeader()
 	let s:line=line(".")
 	call setline(s:line, "/*******************************************************************************")
-	call append(s:line,  "* Filename: ".expand("%:t"))
-	call append(s:line+1,"* Author: Ethan Chan")
-	call append(s:line+2,"* Userid: cs30xhy")
-	call append(s:line+3,"* Date: ".strftime("%D"))
-	call append(s:line+4,"* Sources of Help: CSE 30 Website, handouts")
-	call append(s:line+5,"*")
-	call append(s:line+6,"* Description: ")
-	call append(s:line+7,"*      ")
-	call append(s:line+8,"* *****************************************************************************/")
+	call append(s:line,  " * Filename: ".expand("%:t"))
+	call append(s:line+1," * Author: Ethan Chan")
+	call append(s:line+2," * Userid: cs30xhy")
+	call append(s:line+3," * Date: ".strftime("%D"))
+	call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
+	call append(s:line+5," *")
+	call append(s:line+6," * Description: ")
+	call append(s:line+7," *      ")
+	call append(s:line+8," * ****************************************************************************/")
 	unlet s:line
 endfunction
 
@@ -161,29 +161,29 @@ autocmd BufNewFile *.{c,cpp,s} normal 'z8jA
 function MethodHeader()
 	let s:line=line(".")
 	call setline(s:line,  "/*******************************************************************************")
-	call append(s:line,   "* Function name: ")
-	call append(s:line+1, "* Function prototype: TODO")
-	call append(s:line+2, "*")
-	call append(s:line+3, "* Description:")
-	call append(s:line+4, "*     TODO")
-	call append(s:line+5, "*")
-	call append(s:line+6, "* Parameters:")
-	call append(s:line+7, "*     arg 1: $name -- $desc TODO")
-	call append(s:line+8, "* Side effects:")
-	call append(s:line+9, "*     TODO")
-	call append(s:line+10,"* Error conditions:")
-	call append(s:line+11,"*     $errcond TODO")
-	call append(s:line+12,"*         Action: $action TODO")
-	call append(s:line+13,"* Return value: $type TODO")
-	call append(s:line+14,"*     $val -- $meaning TODO")
-	call append(s:line+15,"*")
-	call append(s:line+16,"* Registers used:")
-	call append(s:line+17,"*     %i0: $name -- $desc TODO")
-	call append(s:line+18,"*")
-	call append(s:line+19,"*     %l0: $name -- $desc TODO")
-	call append(s:line+20,"*")
-	call append(s:line+21,"*     %o0: $name -- $desc TODO")
-	call append(s:line+22,"* *****************************************************************************/")
+	call append(s:line,   " * Function name: ")
+	call append(s:line+1, " * Function prototype: TODO")
+	call append(s:line+2, " *")
+	call append(s:line+3, " * Description:")
+	call append(s:line+4, " *     TODO")
+	call append(s:line+5, " *")
+	call append(s:line+6, " * Parameters:")
+	call append(s:line+7, " *     arg 1: $name -- $desc TODO")
+	call append(s:line+8, " * Side effects:")
+	call append(s:line+9, " *     TODO")
+	call append(s:line+10," * Error conditions:")
+	call append(s:line+11," *     $errcond TODO")
+	call append(s:line+12," *         Action: $action TODO")
+	call append(s:line+13," * Return value: $type TODO")
+	call append(s:line+14," *     $val -- $meaning TODO")
+	call append(s:line+15," *")
+	call append(s:line+16," * Registers used:")
+	call append(s:line+17," *     %i0: $name -- $desc TODO")
+	call append(s:line+18," *")
+	call append(s:line+19," *     %l0: $name -- $desc TODO")
+	call append(s:line+20," *")
+	call append(s:line+21," *     %o0: $name -- $desc TODO")
+	call append(s:line+22," * ****************************************************************************/")
 	unlet s:line
 endfunction
 
