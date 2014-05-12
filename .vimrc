@@ -212,6 +212,7 @@ set formatoptions+=tcroqwamM
 
 " When typing over 80 chars, line break
 set textwidth=80
+set linebreak
 
 " Reformat if textwidth changed
 function! FmtTW ()
