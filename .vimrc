@@ -150,7 +150,7 @@ function FileHeader()
 endfunction
 
 " ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>`z8jA<backspace>
+nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>'z8jA<backspace>
 
 " Automatically do this in .{c,s} files
 autocmd BufNewFile *.{c,cpp,s} normal mz
@@ -197,8 +197,18 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " When typing over 80 chars, line break
 set textwidth=80
 
+" Don't join lines together unless there's whitespace at the end
+set formatoptions+=w
+
+" Reformat if textwidth changed
+function! ToggleTW ()
+	if &tw != 0
+		normal gqG
+	endif
+endfunction
+
 " ,\ - Toggle textwidth
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<CR>
+noremap <silent> <leader>\ mz:let &tw = (&tw ? 0 : 80)<cr>:call ToggleTW()<cr>'z
 
 " Highlight anything after virtual column 80 red
 let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -219,7 +229,7 @@ noremap <silent> <leader>c :call Toggle80Char()<cr>
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Automate the formatted insertion of a new line in multi-line comments
-:set formatoptions+=r
+set formatoptions+=cro
 
 " ,m - Remove Windows' ^M
 " noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
