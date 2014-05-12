@@ -138,7 +138,7 @@ nnoremap <silent> <leader>n i<cr><esc>80l
 " **************************************
 
 " Insert matching curly brace
-inoremap {<cr> {<cr>}<C-o>O<cr>
+inoremap {<cr> {<cr>}<C-o>O
 
 " File header function
 function FileHeader()
