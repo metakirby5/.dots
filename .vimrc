@@ -66,19 +66,21 @@ endif
 " * UI
 " **************************************
 
+set shortmess+=I              " no splash screen
+
 set scrolloff=5               " keep at least 5 lines above/below
 set sidescrolloff=5           " keep at least 5 lines left/right
 
 " Alawys show status line
 set ls=2
 
-" example: .vimrc [sh] [+]        PASTE | TW 0 | 5 - 71/94 - 42%
-set statusline=%f\ %y\ %m%=%{HasPaste()}TW\ %{&tw}\ \|\ %c\ -\ %l/%L\ -\ %P
+" example: .vimrc [sh] [+]        5 - 71/94 - 42% | TW 80 | PASTE
+set statusline=%f\ %y\ %m%=%c\ -\ %l/%L\ -\ %P\ \|\ TW\ %{&tw}\ %{HasPaste()}
 
 " Returns text if paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE | '
+        return '| PASTE '
     en
     return ''
 endfunction
@@ -95,11 +97,16 @@ endfunction
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-map N Nzz
-map n nzz
+noremap N Nzz
+noremap n nzz
 
-" ,w - Save
-nnoremap <leader>w :w<cr>
+" // ?? - Quick case insensitive search
+noremap // /\c
+noremap ?? ?\c
+
+" ^\ - Save
+noremap <C-\> <esc>:w<cr>
+inoremap <C-\> <esc>:w<cr>
 
 " ,q - Quit
 noremap <leader>q :q<cr>
@@ -293,6 +300,10 @@ noremap <silent> <down> gj
 noremap <silent> <up> gk
 inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
+
+" Preserve selection when (de)indenting in visual mode
+vnoremap > ><CR>gv
+vnoremap < <<CR>gv
 
 " 0 - First non-blank character
 noremap 0 ^
