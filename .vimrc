@@ -128,8 +128,8 @@ noremap n nzz
 noremap // /\c
 noremap ?? ?\c
 
-" shift-<tab> - Autocomplete
-inoremap <S-tab> <C-x><C-o>
+" shift-<tab> - Omni complete (not really useful in C)
+" inoremap <S-tab> <C-x><C-o>
 
 " ^\ - Save
 noremap <C-\> :w<cr>
@@ -315,7 +315,7 @@ au BufRead,BufNewFile *.s set tabstop=8
 au BufRead,BufNewFile *.s set shiftwidth=8
 
 " For python, one-line comments indent weird. This fixes it.
-autocmd BufRead,BufNewFile *.py inoremap # X#
+au BufRead,BufNewFile *.py inoremap # X#
 
 " **************************************
 " * Navigation
@@ -457,14 +457,21 @@ noremap <leader>fd zd
 noremap <leader>fj zr
 noremap <leader>fk zm
 
+" The mode settings below all start with folds open
+
 " ,fm - Manual mode
-noremap <leader>fm :set foldmethod=manual<cr>
+noremap <leader>fm :set foldmethod=manual<cr>zMzR
 
 " ,fi - Indent mode
-noremap <leader>fi :set foldmethod=indent<cr>
+noremap <leader>fi :set foldmethod=indent<cr>zMzR
 
 " ,fs - Syntax mode
-noremap <leader>fs :set foldmethod=syntax<cr>
+noremap <leader>fs :set foldmethod=syntax<cr>zMzR
+
+" Use syntax mode by default
+set foldmethod=syntax
+" Unfold everything at start
+au BufRead,BufNewFile * normal zMzR
 
 " === On exit
 
