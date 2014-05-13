@@ -129,10 +129,10 @@ noremap // /\c
 noremap ?? ?\c
 
 " shift-<tab> - Autocomplete
-inoremap <S-tab> <C-x><C-o>
+inoremap <leader><tab> <C-x><C-o>
 
 " ^\ - Save
-noremap <C-\> <esc>:w<cr>
+noremap <C-\> :w<cr>
 inoremap <C-\> <esc>:w<cr>
 
 " ,q - Quit
@@ -399,6 +399,7 @@ noremap <silent> <leader><left> :vertical resize -5<cr>
 
 " Useful mappings for managing tabs
 noremap <C-t> :tabnew<cr>
+inoremap <C-t> <esc>:tabnew<cr>
 noremap <leader>to :tabonly<cr>
 noremap <leader>tw :tabclose<cr>
 noremap <leader>tm :tabmove<Space>
