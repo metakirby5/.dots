@@ -453,6 +453,9 @@ noremap <leader>fA zRzM
 " ,fd - Delete fold
 noremap <leader>fd zd
 
+" ,fD - Delete all folds
+noremap <leader>fD mzggVGzD'm
+
 " ,f[jk] - Open/close folds by one level
 noremap <leader>fj zr
 noremap <leader>fk zm
