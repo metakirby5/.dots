@@ -129,7 +129,7 @@ noremap // /\c
 noremap ?? ?\c
 
 " shift-<tab> - Autocomplete
-inoremap <leader><tab> <C-x><C-o>
+inoremap <S-tab> <C-x><C-o>
 
 " ^\ - Save
 noremap <C-\> :w<cr>
