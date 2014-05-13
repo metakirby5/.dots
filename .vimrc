@@ -96,7 +96,8 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " example: .vimrc [sh] [+]        5 - 71/94 - 42% | TW 80 | PASTE
-set statusline=%f\ %y\ %m%=%c\ -\ %l/%L\ -\ %P\ \|\ TW\ %{&tw}\ \|\ FOLD\ %{&foldmethod}\ %{HasPaste()}
+set statusline=%f\ %y\ %m%=%c\ -\ %l/%L\ -\ %P\ \|\
+    \ TW\ %{&tw}\ \|\ FOLD\ %{&foldmethod}\ %{HasPaste()}
 
 " Returns text if paste mode is enabled
 function! HasPaste()
@@ -433,7 +434,7 @@ inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
 " Enable folds
 set foldenable
 
-" Enable fold columns
+" Enable fold column
 set foldcolumn=1
 
 " ,ff - Toggle folds in normal mode, make folds in visual mode
