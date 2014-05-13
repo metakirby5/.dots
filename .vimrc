@@ -97,14 +97,16 @@ set ls=2
 
 " example: .vimrc [sh] [+]        5 - 71/94 - 42% | TW 80 | PASTE
 set statusline=%f\ %y\ %m%=%c\ -\ %l/%L\ -\ %P\ \|\
-    \ TW\ %{&tw}\ \|\ FOLD\ %{&foldmethod}\ %{HasPaste()}
+    \ %{Has80Char()}%{&tw}\ \|\ %{&foldmethod}\ \|\ %{&fo}\ %{HasPaste()}
 
-" Returns text if paste mode is enabled
+" Returns '*' if > 80 char highlighting enabled
+function! Has80Char()
+	return (exists('w:m2')) ? '*' : ''
+endfunction
+
+" Returns '| PASTE ' if paste mode is enabled
 function! HasPaste()
-    if &paste
-        return '| PASTE '
-    en
-    return ''
+	return (&paste) ? '| PASTE ' : ''
 endfunction
 
 "set ruler			" default ruler
@@ -238,7 +240,7 @@ set textwidth=80
 set linebreak
 
 " Reformat if textwidth changed
-function! FmtTW ()
+function! FmtTW()
 	if &tw
 		normal mz
 		normal gggqG
@@ -253,7 +255,7 @@ noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
 let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " ,c - Toggle over 80 char highlighting
-function! Toggle80Char ()
+function! Toggle80Char()
 	if exists('w:m2')
 		call matchdelete(w:m2)
 		unlet w:m2
