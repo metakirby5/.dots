@@ -230,10 +230,8 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " 	t - Wrap text using textwidth
 " 	cro - Auto-insert comment leader when newlining
 " 	q - Enable formatting with 'gq'
-" 	w - Don't treat as 'paragraph' unless there's whitespace at the end
-" 	a - Reformat as you type
-" 	mM - Multi-byte char (asian) stuff
-set formatoptions+=tcroqwamM
+" 	1 - Break lines before one-letter words
+autocmd BufNewFile,BufRead * setlocal formatoptions=tcroq1
 
 " When typing over 80 chars, line break
 set textwidth=80
@@ -242,12 +240,14 @@ set linebreak
 " Reformat if textwidth changed
 function! FmtTW ()
 	if &tw
+		normal mz
 		normal gggqG
+		normal 'z
 	endif
 endfunction
 
 " ,\ - Toggle textwidth and reformat if needed
-noremap <silent> <leader>\ mz:let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>'z
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
 
 " Highlight anything after virtual column 80 red
 let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -313,7 +313,7 @@ au BufRead,BufNewFile *.s set tabstop=8
 au BufRead,BufNewFile *.s set shiftwidth=8
 
 " For python, one-line comments indent weird. This fixes it.
-autocmd BufRead *.py inoremap # X#
+autocmd BufRead,BufNewFile *.py inoremap # X#
 
 " **************************************
 " * Navigation
