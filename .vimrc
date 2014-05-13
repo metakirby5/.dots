@@ -437,44 +437,53 @@ inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
 " Enable folds
 set foldenable
 
+"" ,ft - Toggle foldenable
+"noremap <leader>ft zi
+
 " Enable fold column
 set foldcolumn=1
 
-" ,ff - Toggle folds in normal mode, make folds in visual mode
-nnoremap <leader>ff za
-vnoremap <leader>ff zf
-
-" ,fa - Unfold all
-noremap <leader>fa zMzR
-
-" ,fA - Fold all
-noremap <leader>fA zRzM
-
-" ,fd - Delete fold
-noremap <leader>fd zd
-
-" ,fD - Delete all folds
-noremap <leader>fD mzggVGzD<esc><esc>'m
-
-" ,f[jk] - Open/close folds by one level
-noremap <leader>fj zr
-noremap <leader>fk zm
+"" ,ff - Toggle folds in normal mode, make folds in visual mode
+"nnoremap <leader>ff za
+"vnoremap <leader>ff zf
+"
+"" ,fF - Toggle folds recursively
+"nnoremap <leader>fF zA
+"
+"" ,fa - Unfold all
+"noremap <leader>fa zR
+"
+"" ,fA - Fold all
+"noremap <leader>fA zM
+"
+"" ,fd - Delete fold
+"noremap <leader>fd zd
+"
+"" ,fD - Delete folds recursively
+"noremap <leader>fD zD
+"
+"" ,fE - Delete all folds
+"noremap <leader>fE zE
+"
+"" ,f[jk] - Open/close folds by one level
+"noremap <leader>fj zr
+"noremap <leader>fk zm
 
 " The mode settings below all start with folds open
 
 " ,fm - Manual mode
-noremap <leader>fm :set foldmethod=manual<cr>zMzR
+noremap <leader>fm :set foldmethod=manual<cr>zR
 
 " ,fi - Indent mode
-noremap <leader>fi :set foldmethod=indent<cr>zMzR
+noremap <leader>fi :set foldmethod=indent<cr>zR
 
 " ,fs - Syntax mode
-noremap <leader>fs :set foldmethod=syntax<cr>zMzR
+noremap <leader>fs :set foldmethod=syntax<cr>zR
 
 " Use syntax mode by default
 set foldmethod=syntax
 " Unfold everything at start
-au BufRead,BufNewFile * normal zMzR
+au BufRead,BufNewFile * normal zR
 
 " === On exit
 
