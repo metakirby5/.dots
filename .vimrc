@@ -193,7 +193,7 @@ nnoremap <silent> <leader>n i<cr><esc>80l
 " * Macros
 " **************************************
 
-" Insert matching curly brace
+" Auto-insert matching curly brace
 inoremap {<cr> {<cr>}<C-o>O
 
 " File header function
@@ -215,10 +215,11 @@ endfunction
 " ,mh - Insert file header
 nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>'z8jA<backspace>
 
-" Automatically do this in .{c,cpp,h,s} files
-autocmd BufNewFile *.{c,cpp,h,s} normal mz
-autocmd BufNewFile *.{c,cpp,h,s} exec FileHeader()
-autocmd BufNewFile *.{c,cpp,h,s} normal 'z8jA
+" Automatically insert file header in *.{c,cpp,h,s}
+au BufNewFile *.{c,cpp,h,s} normal mz
+au BufNewFile *.{c,cpp,h,s} exec FileHeader()
+au BufNewFile *.{c,cpp,h,s} normal zR
+au BufNewFile *.{c,cpp,h,s} normal 'z8jA
 
 " Method header function
 function MethodHeader()
@@ -228,24 +229,24 @@ function MethodHeader()
     call append(s:line+1, " * Function prototype: TODO")
     call append(s:line+2, " *")
     call append(s:line+3, " * Description:")
-    call append(s:line+4, " *     TODO")
+    call append(s:line+4, " *      TODO")
     call append(s:line+5, " *")
     call append(s:line+6, " * Parameters:")
-    call append(s:line+7, " *     arg 1: $name -- $desc TODO")
+    call append(s:line+7, " *      arg 1: _name -- _desc TODO")
     call append(s:line+8, " * Side effects:")
-    call append(s:line+9, " *     TODO")
+    call append(s:line+9, " *      TODO")
     call append(s:line+10," * Error conditions:")
-    call append(s:line+11," *     $errcond TODO")
-    call append(s:line+12," *         Action: $action TODO")
-    call append(s:line+13," * Return value: $type TODO")
-    call append(s:line+14," *     $val -- $meaning TODO")
+    call append(s:line+11," *      _errcond TODO")
+    call append(s:line+12," *          Action: _action TODO")
+    call append(s:line+13," * Return value: _type TODO")
+    call append(s:line+14," *      _val -- _meaning TODO")
     call append(s:line+15," *")
     call append(s:line+16," * Registers used:")
-    call append(s:line+17," *     %i0: $name -- $desc TODO")
+    call append(s:line+17," *      %i0: _name -- _desc TODO")
     call append(s:line+18," *")
-    call append(s:line+19," *     %l0: $name -- $desc TODO")
+    call append(s:line+19," *      %l0: _name -- _desc TODO")
     call append(s:line+20," *")
-    call append(s:line+21," *     %o0: $name -- $desc TODO")
+    call append(s:line+21," *      %o0: _name -- _desc TODO")
     call append(s:line+22," * ****************************************************************************/")
     unlet s:line
 endfunction
@@ -263,7 +264,7 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 "   q - Enable formatting with 'gq'
 "   w - End lines unless there is whitespace at the end
 "   1 - Break lines before one-letter words
-autocmd BufNewFile,BufRead * setlocal formatoptions=tcroqw1
+au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
 " When typing over 80 chars, line break
 set textwidth=80
@@ -298,7 +299,7 @@ endfunction
 noremap <silent> <leader>c :call Toggle80Char()<cr>
 
 " Removes any trailing whitespace in the file upon closing
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " ,/m - Remove Windows' ^M
 noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -315,7 +316,7 @@ if v:version >= 700
     noremap <leader>/s? z=
 
     " Enable spell check for text files
-    " autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en
+    " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
 endif
 
 " **************************************
@@ -465,37 +466,8 @@ inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
 " Enable folds
 set foldenable
 
-"" ,ft - Toggle foldenable
-"noremap <leader>ft zi
-
 " Enable fold column
 set foldcolumn=1
-
-"" ,ff - Toggle folds in normal mode, make folds in visual mode
-"nnoremap <leader>ff za
-"vnoremap <leader>ff zf
-"
-"" ,fF - Toggle folds recursively
-"nnoremap <leader>fF zA
-"
-"" ,fa - Unfold all
-"noremap <leader>fa zR
-"
-"" ,fA - Fold all
-"noremap <leader>fA zM
-"
-"" ,fd - Delete fold
-"noremap <leader>fd zd
-"
-"" ,fD - Delete folds recursively
-"noremap <leader>fD zD
-"
-"" ,fE - Delete all folds
-"noremap <leader>fE zE
-"
-"" ,f[jk] - Open/close folds by one level
-"noremap <leader>fj zr
-"noremap <leader>fk zm
 
 " The mode settings below all start with folds open
 
@@ -510,13 +482,14 @@ noremap <leader>zs :set foldmethod=syntax<cr>zR
 
 " Use syntax mode by default
 set foldmethod=syntax
+
 " Unfold everything at start
-au BufRead,BufNewFile * normal zR
+au BufWinEnter,BufRead,BufNewFile * normal zR
 
 " === On exit
 
 " Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
+au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
