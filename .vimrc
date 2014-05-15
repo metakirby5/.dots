@@ -95,18 +95,46 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 " Alawys show status line
 set ls=2
 
-" example: .vimrc [sh] [+]        5 - 71/94 - 42% | TW 80 | PASTE
-set statusline=%f\ %y\ %m%=%c\ -\ %l/%L\ -\ %P\ \|\
-    \ %{Has80Char()}%{&tw}\ \|\ %{&foldmethod}\ \|\ %{&fo}\ %{HasPaste()}
+" Statusline
+" example: .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
+set statusline=\ %2n                " buffer number
+set statusline+=\ \|\             " separator
+set statusline+=%f                " relative path
+set statusline+=\ %y              " filetype
+set statusline+=\ %m              " modified flag
+set statusline+=%=                " left/right separator
+set statusline+=%{FDMShort()}     " fold method
+set statusline+=/%{&fo}           " format options
+set statusline+=\ \|\             " separator
+set statusline+=%{Has80Char()}    " 80 char highlighting
+set statusline+=%2{TextWidth()}   " text width/paste mode
+set statusline+=\ \|\             " separator
+
+" char# - curline/totline - file%
+set statusline+=%20(\ %2c\ -\ %3l/%3L\ -\ %P\ %)
 
 " Returns '*' if > 80 char highlighting enabled
 function! Has80Char()
 	return (exists('w:m2')) ? '*' : ''
 endfunction
 
-" Returns '| PASTE ' if paste mode is enabled
-function! HasPaste()
-	return (&paste) ? '| PASTE ' : ''
+" Returns &tw if paste mode is disabled
+" Otherwise, return 'P'
+function! TextWidth()
+	return (!&paste) ? &tw : 'P'
+endfunction
+
+" Returns a shortened form of &fdm
+function! FDMShort()
+	if &fdm == 'manual'
+		return 'm'
+	elseif &fdm == 'syntax'
+		return 's'
+	elseif &fdm == 'indent'
+		return 'i'
+	else
+		return &fdm
+	endif
 endfunction
 
 "set ruler			" default ruler
