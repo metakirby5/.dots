@@ -97,7 +97,7 @@ set ls=2
 
 " Statusline
 " example: .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
-set statusline=\ %2n                " buffer number
+set statusline =\ %2n             " buffer number
 set statusline+=\ \|\             " separator
 set statusline+=%f                " relative path
 set statusline+=\ %y              " filetype
@@ -499,13 +499,13 @@ set foldcolumn=1
 
 " The mode settings below all start with folds open
 
-" ,fm - Manual mode
+" ,zm - Manual mode
 noremap <leader>zm :set foldmethod=manual<cr>zR
 
-" ,fi - Indent mode
+" ,zi - Indent mode
 noremap <leader>zi :set foldmethod=indent<cr>zR
 
-" ,fs - Syntax mode
+" ,zs - Syntax mode
 noremap <leader>zs :set foldmethod=syntax<cr>zR
 
 " Use syntax mode by default
