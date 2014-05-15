@@ -261,21 +261,23 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " 	t - Wrap text using textwidth
 " 	cro - Auto-insert comment leader when newlining
 " 	q - Enable formatting with 'gq'
+" 	w - End lines unless there is whitespace at the end
 " 	1 - Break lines before one-letter words
-autocmd BufNewFile,BufRead * setlocal formatoptions=tcroq1
+autocmd BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
 " When typing over 80 chars, line break
 set textwidth=80
 set linebreak
 
-" Reformat if textwidth changed
+" Reformat all
 function! FmtTW()
-	if &tw
-		normal mz
-		normal gggqG
-		normal 'z
-	endif
+	normal mz
+	normal gggqG
+	normal 'z
 endfunction
+
+" ,f - Reformat all
+noremap <silent> <leader>f mzgggqG'z
 
 " ,\ - Toggle textwidth and reformat if needed
 noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
@@ -319,26 +321,23 @@ endif
 " **************************************
 " * Indentation
 " **************************************
-" expandtab: Expand tabs in the following file extensions to spaces so that
-"            they are spaces instead of tabs
-" tabstop: When tab is pressed, inserts 4 spaces instead
-" shiftwidth: (with auto-indentation) when indent happens, inserts 4 spaces
-"             instead
+"  expandtab: Expand tabs into spaces.
+"    tabstop: The width of a tab.
+" shiftwidth: The width of an auto-inserted tab.
 
-" set smarttab			" remove tabs intelligently
-set autoindent			" turns autoindent on
-set smartindent			" turns smartindent on
+" set smarttab			" remove spaces grouped as tabs
+set autoindent			" copy indent from previous line
+set smartindent			" adjust indentation for curly braces, etc.
 
 " Defaults
+set expandtab
 set tabstop=4
 set shiftwidth=4
 
-au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml} set expandtab
-au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set tabstop=4
-au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py} set shiftwidth=4
+" Define tab settings for filetypes via:
+" au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py,othertypes} set whatever=#
 
-" For assembly files, will do special tabbing.  Make them 8 chars wide.
-" The following is for assembly file indentation
+" For assembly files, 8 char wide tabs, no expansion
 au BufRead,BufNewFile *.s set noexpandtab
 au BufRead,BufNewFile *.s set tabstop=8
 au BufRead,BufNewFile *.s set shiftwidth=8
