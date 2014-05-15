@@ -157,11 +157,11 @@ noremap n nzz
 noremap // /\c
 noremap ?? ?\c
 
-" ctrl-p - Paste from register 0 (not overwritten by yanks)
+" ^p - Paste from register 0 (not overwritten by yanks)
 noremap <C-p> "0p
 
-" ,ctrl-p - Same as ctrl-p, but paste before this line
-noremap <leader><C-p> "0P
+" ^P - Same as ^p, but paste before this line
+noremap <C-P> "0P
 
 " shift-<tab> - Omni complete (not really useful in C)
 " inoremap <S-tab> <C-x><C-o>
@@ -376,10 +376,10 @@ noremap <leader>0 0
 " === Buffers
 
 " ^[up / down] - Switch to prev/next buffer
-noremap <C-down> :next<CR>
-noremap <C-up> :previous<CR>
-inoremap <silent> <C-down> <esc>:next<cr>
-inoremap <silent> <C-up> <esc>:previous<cr>
+noremap <silent> <C-down> :bn<CR>
+noremap <silent> <C-up> :bN<CR>
+inoremap <silent> <C-down> <esc>:bn<cr>
+inoremap <silent> <C-up> <esc>:bN<cr>
 
 " ,bl - List all buffers
 noremap <leader>bl :buffers<CR>
