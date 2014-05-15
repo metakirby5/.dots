@@ -500,13 +500,13 @@ set foldcolumn=1
 " The mode settings below all start with folds open
 
 " ,fm - Manual mode
-noremap <leader>fm :set foldmethod=manual<cr>zR
+noremap <leader>zm :set foldmethod=manual<cr>zR
 
 " ,fi - Indent mode
-noremap <leader>fi :set foldmethod=indent<cr>zR
+noremap <leader>zi :set foldmethod=indent<cr>zR
 
 " ,fs - Syntax mode
-noremap <leader>fs :set foldmethod=syntax<cr>zR
+noremap <leader>zs :set foldmethod=syntax<cr>zR
 
 " Use syntax mode by default
 set foldmethod=syntax
