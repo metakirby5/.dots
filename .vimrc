@@ -96,8 +96,9 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
-set statusline =\ %2n             " buffer number
+" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
+set statusline=                   " initialize
+set statusline+=\ %2n             " buffer number
 set statusline+=\ \|\             " separator
 set statusline+=%f                " relative path
 set statusline+=\ %y              " filetype
