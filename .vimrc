@@ -157,6 +157,12 @@ noremap n nzz
 noremap // /\c
 noremap ?? ?\c
 
+" ctrl-p - Paste from register 0 (not overwritten by yanks)
+noremap <C-p> "0p
+
+" ,ctrl-p - Same as ctrl-p, but paste before this line
+noremap <leader><C-p> "0P
+
 " shift-<tab> - Omni complete (not really useful in C)
 " inoremap <S-tab> <C-x><C-o>
 
