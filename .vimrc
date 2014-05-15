@@ -21,23 +21,23 @@ noremap <leader><space> <space>
 " * Variables
 " **************************************
 
-set nocompatible		" get rid of strict vi compatibility
-set nu					" line numbering on
-set noerrorbells		" turns off annoying bell sounds for errors
-set backspace=2			" backspace over everything
-set fileformats=unix,dos,mac	" open files from mac/dos
-set hidden				" hide abandoned buffers
-set exrc				" open local config files
-set nojoinspaces		" don't add white space when I don't tell you to
-set noswapfile			" no intermediate files used when saving
-set autowrite			" write before make
-set mouse-=a			" disallow mouse usage
-set hlsearch			" highlights all search hits
-set ignorecase			" search without regards to case
-set smartcase			" search with smart casing
-filetype on				" filetype stuff
-filetype plugin on		" filetype stuff
-filetype plugin indent on	" filetype stuff
+set nocompatible        " get rid of strict vi compatibility
+set nu                  " line numbering on
+set noerrorbells        " turns off annoying bell sounds for errors
+set backspace=2         " backspace over everything
+set fileformats=unix,dos,mac    " open files from mac/dos
+set hidden              " hide abandoned buffers
+set exrc                " open local config files
+set nojoinspaces        " don't add white space when I don't tell you to
+set noswapfile          " no intermediate files used when saving
+set autowrite           " write before make
+set mouse-=a            " disallow mouse usage
+set hlsearch            " highlights all search hits
+set ignorecase          " search without regards to case
+set smartcase           " search with smart casing
+filetype on             " filetype stuff
+filetype plugin on      " filetype stuff
+filetype plugin indent on   " filetype stuff
 
 " Autocomplete menus
 if has("wildmenu")
@@ -46,9 +46,9 @@ if has("wildmenu")
     set wildignore+=.DS_Store,.git,.hg,.svn
     set wildignore+=*~,*.swp,*.tmp
     set wildmenu
-	set wildignorecase
-	set wildmode=full
-	set wildcharm=<C-i>
+    set wildignorecase
+    set wildmode=full
+    set wildcharm=<C-i>
 endif
 
 " Autocomplete text
@@ -56,16 +56,16 @@ set omnifunc=syntaxcomplete#Complete
 
 " Persistent undo
 try
-	set undodir=~/.vimUndo/	" set undo directory
-	set undofile			" use an undo file
+    set undodir=~/.vimUndo/ " set undo directory
+    set undofile            " use an undo file
 catch
 endtry
 
 " Set these to your preference
-"set incsearch			" incremental search
-"set visualbell			" screen flashes instead of error bell
-"set confirm			" shows dialog when exiting without saving
-"set nowrap				" turns off word wrapping
+"set incsearch          " incremental search
+"set visualbell         " screen flashes instead of error bell
+"set confirm            " shows dialog when exiting without saving
+"set nowrap             " turns off word wrapping
 
 " **************************************
 " * Theme
@@ -76,11 +76,11 @@ colorscheme desert
 
 " Syntax highlighting
 syntax on
-set showmatch			" show match when inserting {}, [], or ()
+set showmatch           " show match when inserting {}, [], or ()
 
 " Extra options for GUI mode
 if has('gui_running')
-	set guifont=Consolas:h12:cANSI
+    set guifont=Consolas:h12:cANSI
 endif
 
 " **************************************
@@ -116,29 +116,29 @@ set statusline+=%20(\ %2c\ -\ %3l/%3L\ -\ %P\ %)
 
 " Returns '*' if > 80 char highlighting enabled
 function! Has80Char()
-	return (exists('w:m2')) ? '*' : ''
+    return (exists('w:m2')) ? '*' : ''
 endfunction
 
 " Returns &tw if paste mode is disabled
 " Otherwise, return 'P'
 function! TextWidth()
-	return (!&paste) ? &tw : 'P'
+    return (!&paste) ? &tw : 'P'
 endfunction
 
 " Returns a shortened form of &fdm
 function! FDMShort()
-	if &fdm == 'manual'
-		return 'm'
-	elseif &fdm == 'syntax'
-		return 's'
-	elseif &fdm == 'indent'
-		return 'i'
-	else
-		return &fdm
-	endif
+    if &fdm == 'manual'
+        return 'm'
+    elseif &fdm == 'syntax'
+        return 's'
+    elseif &fdm == 'indent'
+        return 'i'
+    else
+        return &fdm
+    endif
 endfunction
 
-"set ruler			" default ruler
+"set ruler          " default ruler
 
 " **************************************
 " * Shortcuts
@@ -198,18 +198,18 @@ inoremap {<cr> {<cr>}<C-o>O
 
 " File header function
 function FileHeader()
-	let s:line=line(".")
-	call setline(s:line, "/*******************************************************************************")
-	call append(s:line,  " * Filename: ".expand("%:t"))
-	call append(s:line+1," * Author: Ethan Chan")
-	call append(s:line+2," * Userid: cs30xhy")
-	call append(s:line+3," * Date: ".strftime("%D"))
-	call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
-	call append(s:line+5," *")
-	call append(s:line+6," * Description: ")
-	call append(s:line+7," *      ")
-	call append(s:line+8," * ****************************************************************************/")
-	unlet s:line
+    let s:line=line(".")
+    call setline(s:line, "/*******************************************************************************")
+    call append(s:line,  " * Filename: ".expand("%:t"))
+    call append(s:line+1," * Author: Ethan Chan")
+    call append(s:line+2," * Userid: cs30xhy")
+    call append(s:line+3," * Date: ".strftime("%D"))
+    call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
+    call append(s:line+5," *")
+    call append(s:line+6," * Description: ")
+    call append(s:line+7," *      ")
+    call append(s:line+8," * ****************************************************************************/")
+    unlet s:line
 endfunction
 
 " ,mh - Insert file header
@@ -222,32 +222,32 @@ autocmd BufNewFile *.{c,cpp,s} normal 'z8jA
 
 " Method header function
 function MethodHeader()
-	let s:line=line(".")
-	call setline(s:line,  "/*******************************************************************************")
-	call append(s:line,   " * Function name: ")
-	call append(s:line+1, " * Function prototype: TODO")
-	call append(s:line+2, " *")
-	call append(s:line+3, " * Description:")
-	call append(s:line+4, " *     TODO")
-	call append(s:line+5, " *")
-	call append(s:line+6, " * Parameters:")
-	call append(s:line+7, " *     arg 1: $name -- $desc TODO")
-	call append(s:line+8, " * Side effects:")
-	call append(s:line+9, " *     TODO")
-	call append(s:line+10," * Error conditions:")
-	call append(s:line+11," *     $errcond TODO")
-	call append(s:line+12," *         Action: $action TODO")
-	call append(s:line+13," * Return value: $type TODO")
-	call append(s:line+14," *     $val -- $meaning TODO")
-	call append(s:line+15," *")
-	call append(s:line+16," * Registers used:")
-	call append(s:line+17," *     %i0: $name -- $desc TODO")
-	call append(s:line+18," *")
-	call append(s:line+19," *     %l0: $name -- $desc TODO")
-	call append(s:line+20," *")
-	call append(s:line+21," *     %o0: $name -- $desc TODO")
-	call append(s:line+22," * ****************************************************************************/")
-	unlet s:line
+    let s:line=line(".")
+    call setline(s:line,  "/*******************************************************************************")
+    call append(s:line,   " * Function name: ")
+    call append(s:line+1, " * Function prototype: TODO")
+    call append(s:line+2, " *")
+    call append(s:line+3, " * Description:")
+    call append(s:line+4, " *     TODO")
+    call append(s:line+5, " *")
+    call append(s:line+6, " * Parameters:")
+    call append(s:line+7, " *     arg 1: $name -- $desc TODO")
+    call append(s:line+8, " * Side effects:")
+    call append(s:line+9, " *     TODO")
+    call append(s:line+10," * Error conditions:")
+    call append(s:line+11," *     $errcond TODO")
+    call append(s:line+12," *         Action: $action TODO")
+    call append(s:line+13," * Return value: $type TODO")
+    call append(s:line+14," *     $val -- $meaning TODO")
+    call append(s:line+15," *")
+    call append(s:line+16," * Registers used:")
+    call append(s:line+17," *     %i0: $name -- $desc TODO")
+    call append(s:line+18," *")
+    call append(s:line+19," *     %l0: $name -- $desc TODO")
+    call append(s:line+20," *")
+    call append(s:line+21," *     %o0: $name -- $desc TODO")
+    call append(s:line+22," * ****************************************************************************/")
+    unlet s:line
 endfunction
 
 " ,mm - Insert method header
@@ -258,11 +258,11 @@ nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
 " **************************************
 
 " Format options:
-" 	t - Wrap text using textwidth
-" 	cro - Auto-insert comment leader when newlining
-" 	q - Enable formatting with 'gq'
-" 	w - End lines unless there is whitespace at the end
-" 	1 - Break lines before one-letter words
+"   t - Wrap text using textwidth
+"   cro - Auto-insert comment leader when newlining
+"   q - Enable formatting with 'gq'
+"   w - End lines unless there is whitespace at the end
+"   1 - Break lines before one-letter words
 autocmd BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
 " When typing over 80 chars, line break
@@ -271,9 +271,9 @@ set linebreak
 
 " Reformat all
 function! FmtTW()
-	normal mz
-	normal gggqG
-	normal 'z
+    normal mz
+    normal gggqG
+    normal 'z
 endfunction
 
 " ,f - Reformat all
@@ -287,12 +287,12 @@ let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " ,c - Toggle over 80 char highlighting
 function! Toggle80Char()
-	if exists('w:m2')
-		call matchdelete(w:m2)
-		unlet w:m2
-	else
-		let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
-	endif
+    if exists('w:m2')
+        call matchdelete(w:m2)
+        unlet w:m2
+    else
+        let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
 endfunction
 
 noremap <silent> <leader>c :call Toggle80Char()<cr>
@@ -305,17 +305,17 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Spellcheck
 if v:version >= 700
-	" ,/ss - Toggle spellcheck
-	noremap <leader>/ss :setlocal spell!<cr>
+    " ,/ss - Toggle spellcheck
+    noremap <leader>/ss :setlocal spell!<cr>
 
-	" More spellcheck shortcuts
-	noremap <leader>/sn ]s
-	noremap <leader>/sp [s
-	noremap <leader>/sa zg
-	noremap <leader>/s? z=
+    " More spellcheck shortcuts
+    noremap <leader>/sn ]s
+    noremap <leader>/sp [s
+    noremap <leader>/sa zg
+    noremap <leader>/s? z=
 
-	" Enable spell check for text files
-	" autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en
+    " Enable spell check for text files
+    " autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en
 endif
 
 " **************************************
@@ -325,9 +325,9 @@ endif
 "    tabstop: The width of a tab.
 " shiftwidth: The width of an auto-inserted tab.
 
-" set smarttab			" remove spaces grouped as tabs
-set autoindent			" copy indent from previous line
-set smartindent			" adjust indentation for curly braces, etc.
+" set smarttab          " remove spaces grouped as tabs
+set autoindent          " copy indent from previous line
+set smartindent         " adjust indentation for curly braces, etc.
 
 " Defaults
 set expandtab
@@ -394,8 +394,8 @@ noremap <leader>d :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
+    set switchbuf=useopen,usetab,newtab
+    set stal=2
 catch
 endtry
 
@@ -517,9 +517,9 @@ au BufRead,BufNewFile * normal zR
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 
 " Remember info about open buffers on close
 set viminfo^=%
