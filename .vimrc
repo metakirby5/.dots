@@ -215,10 +215,10 @@ endfunction
 " ,mh - Insert file header
 nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>'z8jA<backspace>
 
-" Automatically do this in .{c,s} files
-autocmd BufNewFile *.{c,cpp,s} normal mz
-autocmd BufNewFile *.{c,cpp,s} exec FileHeader()
-autocmd BufNewFile *.{c,cpp,s} normal 'z8jA
+" Automatically do this in .{c,cpp,h,s} files
+autocmd BufNewFile *.{c,cpp,h,s} normal mz
+autocmd BufNewFile *.{c,cpp,h,s} exec FileHeader()
+autocmd BufNewFile *.{c,cpp,h,s} normal 'z8jA
 
 " Method header function
 function MethodHeader()
