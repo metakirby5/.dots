@@ -393,6 +393,23 @@ noremap <leader>bd :bd<cr>
 " ,ba - Close all the buffers
 noremap <leader>ba :1,1000 bd!<cr>
 
+" Close all empty buffers
+function! DeleteEmptyBuffers()
+    let [i, n; empty] = [1, bufnr('$')]
+    while i <= n
+        if bufloaded(i) && bufname(i) == '' && getbufline(i, 1, 2) == ['']
+            call add(empty, i)
+        endif
+        let i += 1
+    endwhile
+    if len(empty) > 0
+        exe 'bdelete' join(empty)
+    endif
+endfunction
+
+" ,be - Close all empty buffers
+noremap <leader>be :exec DeleteEmptyBuffers()<cr>
+
 " ,bt - Open all buffers as tabs
 noremap <leader>bt :tab ball<cr>
 
