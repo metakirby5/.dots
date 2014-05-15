@@ -338,9 +338,9 @@ set shiftwidth=4
 " au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py,othertypes} set whatever=#
 
 " For assembly files, 8 char wide tabs, no expansion
-au BufRead,BufNewFile *.s set noexpandtab
-au BufRead,BufNewFile *.s set tabstop=8
-au BufRead,BufNewFile *.s set shiftwidth=8
+au BufRead,BufNewFile *.s setlocal noexpandtab
+au BufRead,BufNewFile *.s setlocal tabstop=8
+au BufRead,BufNewFile *.s setlocal shiftwidth=8
 
 " For python, one-line comments indent weird. This fixes it.
 au BufRead,BufNewFile *.py inoremap # X#
