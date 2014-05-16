@@ -182,11 +182,11 @@ noremap <silent> <leader><cr> :noh<cr>
 " ,= - Quick retab of everything
 noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
 
-" ,[jk] - Move line of text
-nnoremap <leader>j mz:m+<cr>`z
-nnoremap <leader>k mz:m-2<cr>`z
-vnoremap <leader>j :m'>+<cr>`<my`>mzgv`yo`z
-vnoremap <leader>k :m'<-2<cr>`>my`<mzgv`yo`z
+" ^[jk] - Move line of text
+nnoremap <silent> <C-j> mz:m+<cr>`z
+nnoremap <silent> <C-k> mz:m-2<cr>`z
+vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " ,[oO] - Create newlines in normal mode
 nnoremap <silent> <leader>o o<esc>
@@ -375,6 +375,12 @@ noremap <leader>0 0
 
 " === Buffers
 
+" ^[hl] - Switch to prev/next buffer
+noremap <silent> <C-l> :n<CR>
+noremap <silent> <C-h> :N<CR>
+inoremap <silent> <C-l> <esc>:n<cr>
+inoremap <silent> <C-h> <esc>:N<cr>
+
 " ^[up / down] - Switch to prev/next buffer
 noremap <silent> <C-down> :bn<CR>
 noremap <silent> <C-up> :bN<CR>
@@ -429,21 +435,21 @@ endtry
 noremap <leader>s <C-w>s
 noremap <leader>v <C-w>v
 
-" ^[hjkl] - Switch to split
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
-inoremap <C-j> <esc><C-W>j
-inoremap <C-k> <esc><C-W>k
-inoremap <C-h> <esc><C-W>h
-inoremap <C-l> <esc><C-W>l
+" ,[hjkl] - Switch to split
+noremap <leader>j <C-W>j
+noremap <leader>k <C-W>k
+noremap <leader>h <C-W>h
+noremap <leader>l <C-W>l
+inoremap <leader>j <esc><C-W>j
+inoremap <leader>k <esc><C-W>k
+inoremap <leader>h <esc><C-W>h
+inoremap <leader>l <esc><C-W>l
 
-" ,[jk] - Resize height
+" ,[up/down] - Resize height
 noremap <silent> <leader><up> :resize +5<cr>
 noremap <silent> <leader><down> :resize -5<cr>
 
-" ,[hl] - Resize width
+" ,[left/right] - Resize width
 noremap <silent> <leader><right> :vertical resize +5<cr>
 noremap <silent> <leader><left> :vertical resize -5<cr>
 
