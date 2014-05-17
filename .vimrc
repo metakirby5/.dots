@@ -305,7 +305,9 @@ endfunction
 noremap <silent> <leader>c :call Toggle80Char()<cr>
 
 " Removes any trailing whitespace in the file upon closing
+au BufRead,BufWrite * normal mz
 au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+au BufRead,BufWrite * normal 'z
 
 " ,/m - Remove Windows' ^M
 noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
