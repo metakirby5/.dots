@@ -219,12 +219,12 @@ function FileHeader()
 endfunction
 
 " ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>'z8jA<backspace>
+nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>jzo'z8jA
 
 " Automatically insert file header in *.{c,cpp,h,s}
 au BufNewFile *.{c,cpp,h,s} normal mz
 au BufNewFile *.{c,cpp,h,s} exec FileHeader()
-au BufNewFile *.{c,cpp,h,s} normal zR
+au BufNewFile *.{c,cpp,h,s} normal jzo
 au BufNewFile *.{c,cpp,h,s} normal 'z8jA
 
 " Method header function
@@ -258,7 +258,7 @@ function MethodHeader()
 endfunction
 
 " ,mm - Insert method header
-nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>'zjA
+nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>jzo'zjA
 
 " **************************************
 " * Style
