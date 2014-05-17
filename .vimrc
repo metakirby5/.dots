@@ -292,7 +292,8 @@ noremap <silent> <leader>f mzgggqG'z
 noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
 
 " Highlight anything after virtual column 80 red
-let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+au BufWinEnter,BufNewFile,BufRead * let w:m2=
+   \matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " ,c - Toggle over 80 char highlighting
 function! Toggle80Char()
