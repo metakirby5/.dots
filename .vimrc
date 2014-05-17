@@ -226,7 +226,7 @@ nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>jzo'z8jA
 " Automatically insert file header in *.{c,cpp,h,s}
 au BufNewFile *.{c,cpp,h,s} normal mz
 au BufNewFile *.{c,cpp,h,s} exec FileHeader()
-au BufNewFile *.{c,cpp,h,s} normal jzo
+au BufNewFile *.{c,cpp,h,s} if foldlevel('.') != 0 | exe "normal jzO" | endif
 au BufNewFile *.{c,cpp,h,s} normal 'z8jA
 
 " Method header function
@@ -513,7 +513,7 @@ noremap <leader>zs :set foldmethod=syntax<cr>zR
 set foldmethod=syntax
 
 " Unfold everything at start
-au BufWinEnter,BufRead,BufNewFile * normal zR
+au BufWinEnter,BufRead,BufNewFile * if &foldenable | exe "normal zR" | endif
 
 " === On exit
 
