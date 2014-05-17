@@ -440,10 +440,6 @@ noremap <leader>j <C-W>j
 noremap <leader>k <C-W>k
 noremap <leader>h <C-W>h
 noremap <leader>l <C-W>l
-inoremap <leader>j <esc><C-W>j
-inoremap <leader>k <esc><C-W>k
-inoremap <leader>h <esc><C-W>h
-inoremap <leader>l <esc><C-W>l
 
 " ,[up/down] - Resize height
 noremap <silent> <leader><up> :resize +5<cr>
