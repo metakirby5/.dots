@@ -185,6 +185,8 @@ noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
 " ^[jk] - Move line of text
 nnoremap <silent> <C-j> mz:m+<cr>`z
 nnoremap <silent> <C-k> mz:m-2<cr>`z
+inoremap <silent> <C-j> <esc>mz:m+<cr>`za
+inoremap <silent> <C-k> <esc>mz:m-2<cr>`za
 vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
