@@ -75,7 +75,7 @@ endtry
 " **************************************
 
 " Set color scheme
-colorscheme desert
+colorscheme peachpuff
 
 " Syntax highlighting
 syntax on
@@ -89,6 +89,10 @@ endif
 " **************************************
 " * UI
 " **************************************
+
+" Highlight current column
+set cursorline
+hi CursorLine term=bold cterm=bold ctermbg=NONE guibg=NONE
 
 set shortmess+=I              " no splash screen
 
@@ -291,6 +295,7 @@ set foldenable
 
 " Enable fold column
 set foldcolumn=1
+hi FoldColumn ctermbg=NONE guibg=NONE
 
 " The mode settings below all start with folds open
 
