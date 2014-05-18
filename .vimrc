@@ -17,6 +17,9 @@ let g:mapleader = " "
 " Preserve legacy mapping
 noremap <leader><space> <space>
 
+" Set up w:created variable
+autocmd VimEnter * autocmd WinEnter * let w:created=1
+
 " **************************************
 " * Variables
 " **************************************
@@ -141,223 +144,6 @@ endfunction
 "set ruler          " default ruler
 
 " **************************************
-" * Shortcuts
-" **************************************
-
-" Swap ; and :
-" noremap ; :
-" noremap : ;
-
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-noremap N Nzz
-noremap n nzz
-
-" // ?? - Quick case insensitive search
-noremap // /\c
-noremap ?? ?\c
-
-" ^p - Paste from register 0 (not overwritten by yanks)
-noremap <C-p> "0p
-
-" ^P - Same as ^p, but paste before this line
-noremap <C-P> "0P
-
-" shift-<tab> - Omni complete (not really useful in C)
-" inoremap <S-tab> <C-x><C-o>
-
-" ^\ - Save
-noremap <C-\> :w<cr>
-inoremap <C-\> <esc>:w<cr>
-
-" ,q - Quit
-noremap <leader>q :q<cr>
-
-" ,p - Toggle paste mode
-noremap <leader>p :setlocal paste!<cr>
-
-" ,<cr> - Disable highlight
-noremap <silent> <leader><cr> :noh<cr>
-
-" ,= - Quick retab of everything
-noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
-
-" ^[jk] - Move line of text
-nnoremap <silent> <C-j> mz:m+<cr>`z
-nnoremap <silent> <C-k> mz:m-2<cr>`z
-inoremap <silent> <C-j> <esc>mz:m+<cr>`za
-inoremap <silent> <C-k> <esc>mz:m-2<cr>`za
-vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-" ,[oO] - Create newlines in normal mode
-nnoremap <silent> <leader>o o<esc>
-nnoremap <silent> <leader>O O<esc>
-
-" ,n - Splits a line at the cursor, then moves to column 81
-nnoremap <silent> <leader>n i<cr><esc>80l
-
-" **************************************
-" * Macros
-" **************************************
-
-" Auto-insert matching curly brace
-inoremap {<cr> {<cr>}<C-o>O
-
-" File header function
-function FileHeader()
-    let s:line=line(".")
-    call setline(s:line, "/*******************************************************************************")
-    call append(s:line,  " * Filename: ".expand("%:t"))
-    call append(s:line+1," * Author: Ethan Chan")
-    call append(s:line+2," * Userid: cs30xhy")
-    call append(s:line+3," * Date: ".strftime("%D"))
-    call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
-    call append(s:line+5," *")
-    call append(s:line+6," * Description: ")
-    call append(s:line+7," *      ")
-    call append(s:line+8," * ****************************************************************************/")
-    unlet s:line
-endfunction
-
-" ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exec FileHeader()<cr>jzo'z8jA
-
-" Automatically insert file header in *.{c,cpp,h,s}
-au BufNewFile *.{c,cpp,h,s} normal mz
-au BufNewFile *.{c,cpp,h,s} exec FileHeader()
-au BufNewFile *.{c,cpp,h,s} if foldlevel('.') != 0 | exe "normal jzO" | endif
-au BufNewFile *.{c,cpp,h,s} normal 'z8jA
-
-" Method header function
-function MethodHeader()
-    let s:line=line(".")
-    call setline(s:line,  "/*******************************************************************************")
-    call append(s:line,   " * Function name: ")
-    call append(s:line+1, " * Function prototype: TODO")
-    call append(s:line+2, " *")
-    call append(s:line+3, " * Description:")
-    call append(s:line+4, " *      TODO")
-    call append(s:line+5, " *")
-    call append(s:line+6, " * Parameters:")
-    call append(s:line+7, " *      arg 1: _name -- _desc TODO")
-    call append(s:line+8, " * Side effects:")
-    call append(s:line+9, " *      TODO")
-    call append(s:line+10," * Error conditions:")
-    call append(s:line+11," *      _errcond TODO")
-    call append(s:line+12," *          Action: _action TODO")
-    call append(s:line+13," * Return value: _type TODO")
-    call append(s:line+14," *      _val -- _meaning TODO")
-    call append(s:line+15," *")
-    call append(s:line+16," * Registers used:")
-    call append(s:line+17," *      %i0: _name -- _desc TODO")
-    call append(s:line+18," *")
-    call append(s:line+19," *      %l0: _name -- _desc TODO")
-    call append(s:line+20," *")
-    call append(s:line+21," *      %o0: _name -- _desc TODO")
-    call append(s:line+22," * ****************************************************************************/")
-    unlet s:line
-endfunction
-
-" ,mm - Insert method header
-nnoremap <silent> <leader>mm mz:exec MethodHeader()<cr>jzo'zjA
-
-" **************************************
-" * Style
-" **************************************
-
-" Format options:
-"   t - Wrap text using textwidth
-"   cro - Auto-insert comment leader when newlining
-"   q - Enable formatting with 'gq'
-"   w - End lines unless there is whitespace at the end
-"   1 - Break lines before one-letter words
-au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
-
-" When typing over 80 chars, line break
-set textwidth=80
-set linebreak
-
-" Reformat all
-function! FmtTW()
-    normal mz
-    normal gggqG
-    normal 'z
-endfunction
-
-" ,f - Reformat all
-noremap <silent> <leader>f mzgggqG'z
-
-" ,\ - Toggle textwidth and reformat if needed
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
-
-" Highlight anything after virtual column 80 red
-au BufWinEnter,BufNewFile,BufRead * let w:m2=
-   \matchadd('ErrorMsg', '\%>80v.\+', -1)
-
-" ,c - Toggle over 80 char highlighting
-function! Toggle80Char()
-    if exists('w:m2')
-        call matchdelete(w:m2)
-        unlet w:m2
-    else
-        let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
-    endif
-endfunction
-
-noremap <silent> <leader>c :call Toggle80Char()<cr>
-
-" Removes any trailing whitespace in the file upon closing
-au BufRead,BufWrite * normal mz
-au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
-au BufRead,BufWrite * normal 'z
-
-" ,/m - Remove Windows' ^M
-noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Spellcheck
-if v:version >= 700
-    " ,/ss - Toggle spellcheck
-    noremap <leader>/ss :setlocal spell!<cr>
-
-    " More spellcheck shortcuts
-    noremap <leader>/sn ]s
-    noremap <leader>/sp [s
-    noremap <leader>/sa zg
-    noremap <leader>/s? z=
-
-    " Enable spell check for text files
-    " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
-endif
-
-" **************************************
-" * Indentation
-" **************************************
-"  expandtab: Expand tabs into spaces.
-"    tabstop: The width of a tab.
-" shiftwidth: The width of an auto-inserted tab.
-
-" set smarttab          " remove spaces grouped as tabs
-set autoindent          " copy indent from previous line
-set smartindent         " adjust indentation for curly braces, etc.
-
-" Defaults
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-" Define tab settings for filetypes via:
-" au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py,othertypes} set whatever=#
-
-" For assembly files, 8 char wide tabs, no expansion
-au BufRead,BufNewFile *.s setlocal noexpandtab
-au BufRead,BufNewFile *.s setlocal tabstop=8
-au BufRead,BufNewFile *.s setlocal shiftwidth=8
-
-" For python, one-line comments indent weird. This fixes it.
-au BufRead,BufNewFile *.py inoremap # X#
-
-" **************************************
 " * Navigation
 " **************************************
 
@@ -419,7 +205,7 @@ function! DeleteEmptyBuffers()
 endfunction
 
 " ,be - Close all empty buffers
-noremap <leader>be :exec DeleteEmptyBuffers()<cr>
+noremap <leader>be :exe DeleteEmptyBuffers()<cr>
 
 " ,bt - Open all buffers as tabs
 noremap <leader>bt :tab ball<cr>
@@ -514,7 +300,8 @@ noremap <leader>zs :set foldmethod=syntax<cr>zR
 set foldmethod=syntax
 
 " Unfold everything at start
-au BufWinEnter,BufRead,BufNewFile * if &foldenable | exe "normal zR" | endif
+au WinEnter,BufRead,BufNewFile * if &foldenable && !exists('w:created') |
+            \ exe "normal zR" | endif
 
 " === On exit
 
@@ -526,3 +313,221 @@ au BufReadPost *
 
 " Remember info about open buffers on close
 set viminfo^=%
+
+" **************************************
+" * Style
+" **************************************
+
+" Format options:
+"   t - Wrap text using textwidth
+"   cro - Auto-insert comment leader when newlining
+"   q - Enable formatting with 'gq'
+"   w - End lines unless there is whitespace at the end
+"   1 - Break lines before one-letter words
+au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
+
+" When typing over 80 chars, line break
+set textwidth=80
+set linebreak
+
+" Reformat all
+function! FmtTW()
+    normal mz
+    normal gggqG
+    normal 'z
+endfunction
+
+" ,f - Reformat all
+noremap <silent> <leader>f mzgggqG'z
+
+" ,\ - Toggle textwidth and reformat if needed
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
+
+" Highlight anything after virtual column 80 red
+au WinEnter,BufNewFile,BufRead * if !exists('w:created') |
+   \let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1) |
+   \ endif
+
+" ,c - Toggle over 80 char highlighting
+function! Toggle80Char()
+    if exists('w:m2')
+        call matchdelete(w:m2)
+        unlet w:m2
+    else
+        let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
+endfunction
+
+noremap <silent> <leader>c :call Toggle80Char()<cr>
+
+" Removes any trailing whitespace in the file upon closing
+au BufRead,BufWrite * normal mz
+au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+au BufRead,BufWrite * normal 'z
+
+" ,/m - Remove Windows' ^M
+noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Spellcheck
+if v:version >= 700
+    " ,/ss - Toggle spellcheck
+    noremap <leader>/ss :setlocal spell!<cr>
+
+    " More spellcheck shortcuts
+    noremap <leader>/sn ]s
+    noremap <leader>/sp [s
+    noremap <leader>/sa zg
+    noremap <leader>/s? z=
+
+    " Enable spell check for text files
+    " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+endif
+
+" **************************************
+" * Indentation
+" **************************************
+"  expandtab: Expand tabs into spaces.
+"    tabstop: The width of a tab.
+" shiftwidth: The width of an auto-inserted tab.
+
+" set smarttab          " remove spaces grouped as tabs
+set autoindent          " copy indent from previous line
+set smartindent         " adjust indentation for curly braces, etc.
+
+" Defaults
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+" Define tab settings for filetypes via:
+" au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py,othertypes} set whatever=#
+
+" For assembly files, 8 char wide tabs, no expansion
+au BufRead,BufNewFile *.s setlocal noexpandtab
+au BufRead,BufNewFile *.s setlocal tabstop=8
+au BufRead,BufNewFile *.s setlocal shiftwidth=8
+
+" For python, one-line comments indent weird. This fixes it.
+au BufRead,BufNewFile *.py inoremap # X#
+
+" **************************************
+" * Shortcuts
+" **************************************
+
+" Swap ; and :
+" noremap ; :
+" noremap : ;
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+noremap N Nzz
+noremap n nzz
+
+" // ?? - Quick case insensitive search
+noremap // /\c
+noremap ?? ?\c
+
+" ^p - Paste from register 0 (not overwritten by yanks)
+noremap <C-p> "0p
+
+" ^P - Same as ^p, but paste before this line
+noremap <C-P> "0P
+
+" shift-<tab> - Omni complete (not really useful in C)
+" inoremap <S-tab> <C-x><C-o>
+
+" ^\ - Save
+noremap <C-\> :w<cr>
+inoremap <C-\> <esc>:w<cr>
+
+" ,q - Quit
+noremap <leader>q :q<cr>
+
+" ,p - Toggle paste mode
+noremap <leader>p :setlocal paste!<cr>
+
+" ,<cr> - Disable highlight
+noremap <silent> <leader><cr> :noh<cr>
+
+" ,= - Quick retab of everything
+noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
+
+" ^[jk] - Move line of text
+nnoremap <silent> <C-j> mz:m+<cr>`z
+nnoremap <silent> <C-k> mz:m-2<cr>`z
+inoremap <silent> <C-j> <esc>mz:m+<cr>`za
+inoremap <silent> <C-k> <esc>mz:m-2<cr>`za
+vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" ,[oO] - Create newlines in normal mode
+nnoremap <silent> <leader>o o<esc>
+nnoremap <silent> <leader>O O<esc>
+
+" ,n - Splits a line at the cursor, then moves to column 81
+nnoremap <silent> <leader>n i<cr><esc>80l
+
+" **************************************
+" * Macros
+" **************************************
+
+" Auto-insert matching curly brace
+inoremap {<cr> {<cr>}<C-o>O
+
+" File header function
+function FileHeader()
+    let s:line=line(".")
+    call setline(s:line, "/*******************************************************************************")
+    call append(s:line,  " * Filename: ".expand("%:t"))
+    call append(s:line+1," * Author: Ethan Chan")
+    call append(s:line+2," * Userid: cs30xhy")
+    call append(s:line+3," * Date: ".strftime("%D"))
+    call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
+    call append(s:line+5," *")
+    call append(s:line+6," * Description: ")
+    call append(s:line+7," *      ")
+    call append(s:line+8," * ****************************************************************************/")
+    unlet s:line
+endfunction
+
+" ,mh - Insert file header
+nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>jzo'z8jA
+
+" Automatically insert file header in *.{c,cpp,h,s}
+au BufNewFile *.{c,cpp,h,s} normal mz
+au BufNewFile *.{c,cpp,h,s} exec FileHeader()
+au BufNewFile *.{c,cpp,h,s} if foldlevel('.') != 0 | exe "normal jzO" | endif
+au BufNewFile *.{c,cpp,h,s} normal 'z8jA
+
+" Method header function
+function MethodHeader()
+    let s:line=line(".")
+    call setline(s:line,  "/*******************************************************************************")
+    call append(s:line,   " * Function name: ")
+    call append(s:line+1, " * Function prototype: TODO")
+    call append(s:line+2, " *")
+    call append(s:line+3, " * Description:")
+    call append(s:line+4, " *      TODO")
+    call append(s:line+5, " *")
+    call append(s:line+6, " * Parameters:")
+    call append(s:line+7, " *      arg 1: _name -- _desc TODO")
+    call append(s:line+8, " * Side effects:")
+    call append(s:line+9, " *      TODO")
+    call append(s:line+10," * Error conditions:")
+    call append(s:line+11," *      _errcond TODO")
+    call append(s:line+12," *          Action: _action TODO")
+    call append(s:line+13," * Return value: _type TODO")
+    call append(s:line+14," *      _val -- _meaning TODO")
+    call append(s:line+15," *")
+    call append(s:line+16," * Registers used:")
+    call append(s:line+17," *      %i0: _name -- _desc TODO")
+    call append(s:line+18," *")
+    call append(s:line+19," *      %l0: _name -- _desc TODO")
+    call append(s:line+20," *")
+    call append(s:line+21," *      %o0: _name -- _desc TODO")
+    call append(s:line+22," * ****************************************************************************/")
+    unlet s:line
+endfunction
+
+" ,mm - Insert method header
+nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>jzo'zjA
