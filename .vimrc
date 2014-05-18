@@ -222,9 +222,16 @@ endtry
 
 " === Splits
 
+" Open new split panes to the right and bottom, instead of left and top
+set splitbelow
+set splitright
+
 " ,[sv] - Horizontal/vertical split
 noremap <leader>s <C-w>s
 noremap <leader>v <C-w>v
+
+" ,e - Equalize splits
+noremap <leader>e <C-w>=
 
 " ,[hjkl] - Switch to split
 noremap <leader>j <C-W>j
