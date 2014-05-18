@@ -300,8 +300,7 @@ noremap <leader>zs :set foldmethod=syntax<cr>zR
 set foldmethod=syntax
 
 " Unfold everything at start
-au WinEnter,BufRead,BufNewFile * if &foldenable && !exists('w:created') |
-            \ exe "normal zR" | endif
+au BufRead,BufNewFile * if &foldenable | exe "normal zR" | endif
 
 " === On exit
 
@@ -400,15 +399,15 @@ set tabstop=4
 set shiftwidth=4
 
 " Define tab settings for filetypes via:
-" au BufRead,BufNewFile *.{c,h,cpp,hpp,java,ml,py,othertypes} set whatever=#
+" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
 
 " For assembly files, 8 char wide tabs, no expansion
-au BufRead,BufNewFile *.s setlocal noexpandtab
-au BufRead,BufNewFile *.s setlocal tabstop=8
-au BufRead,BufNewFile *.s setlocal shiftwidth=8
+au Syntax asm setlocal noexpandtab
+au Syntax asm setlocal tabstop=8
+au Syntax asm setlocal shiftwidth=8
 
 " For python, one-line comments indent weird. This fixes it.
-au BufRead,BufNewFile *.py inoremap # X#
+au Syntax py inoremap # X#
 
 " **************************************
 " * Shortcuts
@@ -491,13 +490,7 @@ function FileHeader()
 endfunction
 
 " ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>jzo'z8jA
-
-" Automatically insert file header in *.{c,cpp,h,s}
-au BufNewFile *.{c,cpp,h,s} normal mz
-au BufNewFile *.{c,cpp,h,s} exec FileHeader()
-au BufNewFile *.{c,cpp,h,s} if foldlevel('.') != 0 | exe "normal jzO" | endif
-au BufNewFile *.{c,cpp,h,s} normal 'z8jA
+nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>'z8jA
 
 " Method header function
 function MethodHeader()
@@ -530,4 +523,15 @@ function MethodHeader()
 endfunction
 
 " ,mm - Insert method header
-nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>jzo'zjA
+nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>'zjA
+
+" Automatic actions on file open
+" Make marker
+au BufNewFile *.{c,cpp,h,s} normal mz
+" Insert file header
+au BufNewFile *.{c,cpp,h,s} exe FileHeader()
+" Unfold everything
+au BufNewFile *.{c,cpp,h,s} normal zR
+" Return to marker
+au BufNewFile *.{c,cpp,h,s} normal 'z8jA
+
