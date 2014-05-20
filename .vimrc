@@ -372,9 +372,11 @@ endfunction
 noremap <silent> <leader>c :call Toggle80Char()<cr>
 
 " Removes any trailing whitespace in the file upon closing
-au BufRead,BufWrite * normal mz
-au BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
-au BufRead,BufWrite * normal 'z
+au BufRead,BufWrite * if ! &bin |
+            \exe "normal mz" |
+            \silent! %s/\s\+$//ge |
+            \exe "normal 'z" |
+            \endif
 
 " ,/m - Remove Windows' ^M
 noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -502,7 +504,7 @@ function FileHeader()
 endfunction
 
 " ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>'z8jA
+nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>'z8<cr>A
 
 " Method header function
 function MethodHeader()
@@ -535,15 +537,7 @@ function MethodHeader()
 endfunction
 
 " ,mm - Insert method header
-nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>'zjA
+nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>'z8<cr>A
 
 " Automatic actions on file open
-" Make marker
-au BufNewFile *.{c,cpp,h,s} normal mz
-" Insert file header
-au BufNewFile *.{c,cpp,h,s} exe FileHeader()
-" Unfold everything
-au BufNewFile *.{c,cpp,h,s} normal zR
-" Return to marker
-au BufNewFile *.{c,cpp,h,s} normal 'z8jA
-
+au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR'z8\<cr>A"
