@@ -539,5 +539,7 @@ endfunction
 " ,mm - Insert method header
 nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>'z8<cr>A
 
-" Automatic actions on file open
+" ===Automatic actions on file open
+
+" Automatically insert file header in *.{c,cpp,h,s}
 au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR'z8\<cr>A"
