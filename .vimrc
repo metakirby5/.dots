@@ -438,11 +438,11 @@ noremap n nzz
 noremap // /\c
 noremap ?? ?\c
 
-" ^p - Paste from register 0 (not overwritten by yanks)
+" ^p - Paste from register 0 (not overwritten by dels)
 noremap <C-p> "0p
 
-" ^P - Same as ^p, but paste before this line
-noremap <C-P> "0P
+" ,^P - Same as ^p, but paste before this line
+noremap <leader><C-P> "0P
 
 " shift-<tab> - Omni complete (not really useful in C)
 " inoremap <S-tab> <C-x><C-o>
