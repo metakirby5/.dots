@@ -17,8 +17,8 @@ let g:mapleader = " "
 " Preserve legacy mapping
 noremap <leader><space> <space>
 
-" Set up w:created variable
-autocmd VimEnter * autocmd WinEnter * let w:created=1
+" Set up w:created autocmd to run later
+au VimEnter * au WinEnter * let w:created=1
 
 " **************************************
 " * Variables
@@ -355,9 +355,14 @@ noremap <silent> <leader>f mzgggqG'z
 noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
 
 " Highlight anything after virtual column 80 red
-au WinEnter,BufNewFile,BufRead * if !exists('w:created') |
+" Set on initial window
+let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+" Set on subsequent windows
+au WinEnter * if !exists('w:created') |
    \let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1) |
-   \ endif
+   \endif
+" Re-set whenever opening
+au BufNewFile,BufRead * let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " ,c - Toggle over 80 char highlighting
 function! Toggle80Char()
