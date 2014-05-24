@@ -109,7 +109,7 @@ set statusline+=\ %2n             " buffer number
 set statusline+=\ \|\             " separator
 set statusline+=%f                " relative path
 set statusline+=\ %y              " filetype
-set statusline+=\ %m              " modified flag
+set statusline+=%m              " modified flag
 set statusline+=%=                " left/right separator
 set statusline+=%{FDMShort()}     " fold method
 set statusline+=/%{&fo}           " format options
