@@ -170,7 +170,7 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^[hl] - Switch to prev/next buffer
+" ^[hl] - Switch to prev/next file
 noremap <silent> <C-l> :n<CR>
 noremap <silent> <C-h> :N<CR>
 inoremap <silent> <C-l> <esc>:n<cr>
