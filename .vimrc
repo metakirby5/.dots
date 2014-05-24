@@ -121,17 +121,6 @@ set statusline+=\ \|\             " separator
 " char# - curline/totline - file%
 set statusline+=%20(\ %2c\ -\ %3l/%3L\ -\ %P\ %)
 
-" Returns '*' if > 80 char highlighting enabled
-function! Has80Char()
-    return (exists('w:m2')) ? '*' : ''
-endfunction
-
-" Returns &tw if paste mode is disabled
-" Otherwise, return 'P'
-function! TextWidth()
-    return (!&paste) ? &tw : 'P'
-endfunction
-
 " Returns a shortened form of &fdm
 function! FDMShort()
     if &fdm == 'manual'
@@ -143,6 +132,17 @@ function! FDMShort()
     else
         return &fdm
     endif
+endfunction
+
+" Returns '*' if > 80 char highlighting enabled
+function! Has80Char()
+    return (exists('w:m2')) ? '*' : ''
+endfunction
+
+" Returns &tw if paste mode is disabled
+" Otherwise, return 'P'
+function! TextWidth()
+    return (!&paste) ? &tw : 'P'
 endfunction
 
 "set ruler          " default ruler
@@ -444,6 +444,9 @@ noremap n nzz
 " // ?? - Quick case insensitive search
 noremap // /\c
 noremap ?? ?\c
+
+" <f5> - Reload file
+noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 
 " ^p - Paste from register 0 (not overwritten by dels)
 noremap <C-p> "0p
