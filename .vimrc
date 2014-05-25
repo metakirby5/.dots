@@ -10,6 +10,9 @@
 " * Setup
 " **************************************
 
+" get rid of strict vi compatibility
+set nocompatible
+
 " Enable more shortcuts with <space> key (denoted as , in shortcuts)
 let mapleader = " "
 let g:mapleader = " "
@@ -18,29 +21,29 @@ let g:mapleader = " "
 noremap <leader><space> <space>
 
 " Set up w:created autocmd to run later
-au VimEnter * au WinEnter * let w:created=1
+au VimEnter * au WinEnter * let w:created = 1
 
 " **************************************
 " * Variables
 " **************************************
 
-set nocompatible        " get rid of strict vi compatibility
-set nu                  " line numbering on
-set noerrorbells        " turns off annoying bell sounds for errors
-set backspace=2         " backspace over everything
+set nu                          " line numbering on
+set autoread                    " automatically read ext. file changes
+set noerrorbells                " turns off annoying bell sounds for errors
+set backspace=2                 " backspace over everything
 set fileformats=unix,dos,mac    " open files from mac/dos
-set hidden              " hide abandoned buffers
-set exrc                " open local config files
-set nojoinspaces        " don't add white space when I don't tell you to
-set noswapfile          " no intermediate files used when saving
-set autowrite           " write before make
-set mouse-=a            " disallow mouse usage
-set hlsearch            " highlights all search hits
-set ignorecase          " search without regards to case
-set smartcase           " search with smart casing
-filetype on             " filetype stuff
-filetype plugin on      " filetype stuff
-filetype plugin indent on   " filetype stuff
+set hidden                      " hide abandoned buffers
+set exrc                        " open local config files
+set nojoinspaces                " don't add white space when I don't tell you to
+set noswapfile                  " no intermediate files used when saving
+set autowrite                   " write before make
+set mouse-=a                    " disallow mouse usage
+set hlsearch                    " highlights all search hits
+set ignorecase                  " search without regards to case
+set smartcase                   " search with smart casing
+filetype on                     " filetype stuff
+filetype plugin on              " filetype stuff
+filetype plugin indent on       " filetype stuff
 
 " Autocomplete menus
 if has("wildmenu")
@@ -104,22 +107,35 @@ set ls=2
 
 " Statusline
 " example: 1 | .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
-set statusline=                   " initialize
-set statusline+=\ %2n             " buffer number
-set statusline+=\ \|\             " separator
-set statusline+=%f                " relative path
-set statusline+=\ %y              " filetype
-set statusline+=%m              " modified flag
-set statusline+=%=                " left/right separator
-set statusline+=%{FDMShort()}     " fold method
-set statusline+=/%{&fo}           " format options
-set statusline+=\ \|\             " separator
-set statusline+=%{Has80Char()}    " 80 char highlighting
-set statusline+=%2{TextWidth()}   " text width/paste mode
-set statusline+=\ \|\             " separator
+set statusline=                     " initialize
+set statusline+=\ %2n               " buffer number
+set statusline+=\ \|\               " separator
+set statusline+=%f                  " relative path
+set statusline+=\                   " separator
+set statusline+=%y                  " filetype
+set statusline+=%{ExtModified()}    " externally modified?
+set statusline+=%m                  " modified flag
+set statusline+=%=                  " left/right separator
+set statusline+=%{FDMShort()}       " fold method
+set statusline+=/%{&fo}             " format options
+set statusline+=\ \|\               " separator
+set statusline+=%{Has80Char()}      " 80 char highlighting
+set statusline+=%2{TextWidth()}     " text width/paste mode
+set statusline+=\ \|\               " separator
 
 " char# - curline/totline - file%
 set statusline+=%20(\ %2c\ -\ %3l/%3L\ -\ %P\ %)
+
+" Returns '[!]' if file externally modified since last read/write
+" :e to get rid of this warning
+function! ExtModified()
+    return (exists('b:modified')) ? '[!]' : ''
+endfunction
+
+au FileChangedShellPost * let b:modified = 1
+au BufRead,BufWrite * if exists('b:modified') |
+            \ unlet b:modified |
+            \ endif
 
 " Returns a shortened form of &fdm
 function! FDMShort()
@@ -430,6 +446,20 @@ au Syntax asm setlocal shiftwidth=8
 
 " For python, one-line comments indent weird. This fixes it.
 au Syntax py inoremap # X#
+
+
+" **************************************
+" * Misc
+" **************************************
+
+" Check if file modified periodically
+set updatetime=1000
+au CursorHold * checktime
+au CursorMoved * checktime
+
+" Use DiffOrig to see file differences
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+            \ | diffthis | wincmd p | diffthis
 
 " **************************************
 " * Shortcuts
