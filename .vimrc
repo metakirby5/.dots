@@ -348,8 +348,11 @@ function! FmtTW()
     normal 'z
 endfunction
 
-" ,f - Reformat all
+" ,f (normal mode) - Reformat all
 noremap <silent> <leader>f mzgggqG'z
+
+" ,f (visual mode) - Reflow selection
+vnoremap <silent> <leader>f Jgqq
 
 " ,\ - Toggle textwidth and reformat if needed
 noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
