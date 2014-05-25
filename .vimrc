@@ -312,7 +312,7 @@ noremap <leader>zs :set foldmethod=syntax<cr>zR
 set foldmethod=syntax
 
 " Unfold everything at start
-au BufRead,BufNewFile * if &foldenable | exe "normal zR" | endif
+set foldlevel=99
 
 " === On exit
 
