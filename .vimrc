@@ -588,7 +588,7 @@ function MethodHeader()
 endfunction
 
 " ,im - Insert method header
-nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z8<cr>A
+nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z<cr>A
 
 " ===Automatic actions on file open
 
