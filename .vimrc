@@ -186,12 +186,6 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^[hl] - Switch to prev/next file
-noremap <silent> <C-l> :n<CR>
-noremap <silent> <C-h> :N<CR>
-inoremap <silent> <C-l> <esc>:n<cr>
-inoremap <silent> <C-h> <esc>:N<cr>
-
 " ^[up / down] - Switch to prev/next buffer
 noremap <silent> <C-down> :bn<CR>
 noremap <silent> <C-up> :bN<CR>
@@ -488,6 +482,12 @@ noremap <leader><C-P> "0P
 
 " shift-<tab> - Omni complete (not really useful in C)
 " inoremap <S-tab> <C-x><C-o>
+
+" ^[hl] - Previous/next error
+noremap <silent> <C-l> :cn<CR>
+noremap <silent> <C-h> :cN<CR>
+inoremap <silent> <C-l> <esc>:cn<cr>
+inoremap <silent> <C-h> <esc>:cN<cr>
 
 " ^\ - Save
 noremap <C-\> :w<cr>
