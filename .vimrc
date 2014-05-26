@@ -43,7 +43,7 @@ set ignorecase                  " search without regards to case
 set smartcase                   " search with smart casing
 filetype on                     " filetype stuff
 filetype plugin on              " filetype stuff
-filetype plugin indent on       " filetype stuff
+filetype indent on              " filetype stuff
 
 " Autocomplete menus
 if has("wildmenu")
@@ -426,20 +426,20 @@ set autoindent          " copy indent from previous line
 set smartindent         " adjust indentation for curly braces, etc.
 
 " Defaults
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-" Define tab settings for filetypes via:
-" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
-
-" For assembly files, 8 char wide tabs, no expansion
-au Syntax asm setlocal noexpandtab
-au Syntax asm setlocal tabstop=8
-au Syntax asm setlocal shiftwidth=8
-
-" For python, one-line comments indent weird. This fixes it.
-au Syntax py inoremap # X#
+"set expandtab
+"set tabstop=4
+"set shiftwidth=4
+"
+"" Define tab settings for filetypes via:
+"" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
+"
+"" For assembly files, 8 char wide tabs, no expansion
+"au Syntax asm setlocal noexpandtab
+"au Syntax asm setlocal tabstop=8
+"au Syntax asm setlocal shiftwidth=8
+"
+"" For python, one-line comments indent weird. This fixes it.
+"au Syntax py inoremap # X#
 
 
 " **************************************
