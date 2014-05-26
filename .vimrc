@@ -457,7 +457,8 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 " === Make
 
 " ,m - Make and go to first error
-nnoremap <leader>m :silent make\|redraw!\|cw|call\ clearmatches()<CR><c-w>k
+nnoremap <leader>m :silent make\|redraw!\|cw<cr>
+            \ :call clearmatches()<cr><c-w>k
 
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
