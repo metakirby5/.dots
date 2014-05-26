@@ -457,10 +457,10 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 " === Make
 
 " ,m - Make and go to first error
-nnoremap <leader>m :silent make!\|redraw!\|cw<CR>
+nnoremap <leader>m :silent make\|redraw!\|cw<CR><c-w>k
 
 " Set error formats for lint
-set errorformat+=\ (%l)\ error:\ %m
+set efm+=\ (%l)\ error:\ %m
 
 " **************************************
 " * Shortcuts
