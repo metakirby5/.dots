@@ -461,6 +461,7 @@ nnoremap <leader>m :silent make\|redraw!\|cw<cr>
             \ :call clearmatches()<cr><c-w>k
 
 " Set error formats for lint
+set efm+=lint\ -c\ -err=warn\ %f
 set efm+=\ (%l)\ error:\ %m
 
 " **************************************
