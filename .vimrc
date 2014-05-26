@@ -224,8 +224,8 @@ noremap <leader>be :exe DeleteEmptyBuffers()<cr>
 " ,bt - Open all buffers as tabs
 noremap <leader>bt :tab ball<cr>
 
-" ,d - Switch CWD to the directory of the open buffer
-noremap <leader>d :cd %:p:h<cr>:pwd<cr>
+" ,bcd - Switch CWD to the directory of the open buffer
+noremap <leader>bcd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
@@ -426,20 +426,20 @@ set autoindent          " copy indent from previous line
 set smartindent         " adjust indentation for curly braces, etc.
 
 " Defaults
-"set expandtab
-"set tabstop=4
-"set shiftwidth=4
-"
-"" Define tab settings for filetypes via:
-"" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
-"
-"" For assembly files, 8 char wide tabs, no expansion
-"au Syntax asm setlocal noexpandtab
-"au Syntax asm setlocal tabstop=8
-"au Syntax asm setlocal shiftwidth=8
-"
-"" For python, one-line comments indent weird. This fixes it.
-"au Syntax py inoremap # X#
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+" Define tab settings for filetypes via:
+" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
+
+" For assembly files, 8 char wide tabs, no expansion
+au Syntax asm setlocal noexpandtab
+au Syntax asm setlocal tabstop=8
+au Syntax asm setlocal shiftwidth=8
+
+" For python, one-line comments indent weird. This fixes it.
+au Syntax py inoremap # X#
 
 
 " **************************************
@@ -453,6 +453,14 @@ au CursorHold * checktime
 " Use DiffOrig to see file differences
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
             \ | diffthis | wincmd p | diffthis
+
+" === Make
+
+" ,m - Make and go to first error
+nnoremap <leader>m :silent make!\|redraw!\|cw<CR>
+
+" Set error formats for lint
+set errorformat+=\ (%l)\ error:\ %m
 
 " **************************************
 " * Shortcuts
@@ -517,6 +525,9 @@ vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 nnoremap <silent> <leader>o o<esc>
 nnoremap <silent> <leader>O O<esc>
 
+" ,dd - Delete current line contents
+nnoremap <silent> <leader>dd cc<esc>
+
 " ,n - Splits a line at the cursor, then moves to column 81
 nnoremap <silent> <leader>n i<cr><esc>80l
 
@@ -543,8 +554,8 @@ function FileHeader()
     unlet s:line
 endfunction
 
-" ,mh - Insert file header
-nnoremap <silent> <leader>mh mz:exe FileHeader()<cr>'z8<cr>A
+" ,ih - Insert file header
+nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>'z8<cr>A
 
 " Method header function
 function MethodHeader()
@@ -576,8 +587,8 @@ function MethodHeader()
     unlet s:line
 endfunction
 
-" ,mm - Insert method header
-nnoremap <silent> <leader>mm mz:exe MethodHeader()<cr>'z8<cr>A
+" ,im - Insert method header
+nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z8<cr>A
 
 " ===Automatic actions on file open
 
