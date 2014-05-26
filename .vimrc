@@ -455,7 +455,6 @@ au Syntax py inoremap # X#
 " Check if file modified periodically
 set updatetime=1000
 au CursorHold * checktime
-au CursorMoved * checktime
 
 " Use DiffOrig to see file differences
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
