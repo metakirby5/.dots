@@ -433,7 +433,10 @@ set shiftwidth=4
 " Define tab settings for filetypes via:
 " au Syntax c,cpp,asm,java,py,othertypes set whatever=#
 
-" For assembly files, 8 char wide tabs, no expansion
+" No expansion
+au Syntax sh,py setlocal noexpandtab
+
+" Assembly - 8 char wide tabs, no expansion
 au Syntax asm setlocal noexpandtab
 au Syntax asm setlocal tabstop=8
 au Syntax asm setlocal shiftwidth=8
