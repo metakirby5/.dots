@@ -525,8 +525,8 @@ vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " ,[oO] - Create newlines in normal mode
-nnoremap <silent> <leader>o o<esc>
-nnoremap <silent> <leader>O O<esc>
+nnoremap <silent> <leader>o o<esc>cc<esc>
+nnoremap <silent> <leader>O O<esc>cc<esc>
 
 " ,dd - Delete current line contents
 nnoremap <silent> <leader>dd cc<esc>
