@@ -28,7 +28,6 @@ au VimEnter * au WinEnter * let w:created = 1
 " **************************************
 
 set nu                          " line numbering on
-set autoread                    " automatically read ext. file changes
 set noerrorbells                " turns off annoying bell sounds for errors
 set backspace=2                 " backspace over everything
 set fileformats=unix,dos,mac    " open files from mac/dos
@@ -72,6 +71,7 @@ endtry
 "set visualbell         " screen flashes instead of error bell
 "set confirm            " shows dialog when exiting without saving
 "set nowrap             " turns off word wrapping
+"set autoread           " automatically read ext. file changes
 
 " **************************************
 " * Theme
@@ -450,8 +450,8 @@ au Syntax py inoremap # X#
 " **************************************
 
 " Check if file modified periodically
-set updatetime=1000
-au CursorHold * checktime
+" set updatetime=1000
+" au CursorHold * checktime
 
 " Use DiffOrig to see file differences
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
