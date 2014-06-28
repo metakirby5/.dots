@@ -30,7 +30,6 @@ au VimEnter * au WinEnter * let w:created = 1
 set nu                          " line numbering on
 set noerrorbells                " turns off annoying bell sounds for errors
 set backspace=2                 " backspace over everything
-set ve=all                      " place cursor anywhere in any mode
 set fileformats=unix,dos,mac    " open files from mac/dos
 set hidden                      " hide abandoned buffers
 set exrc                        " open local config files
@@ -68,6 +67,7 @@ catch
 endtry
 
 " Set these to your preference
+"set ve=all             " place cursor anywhere in any mode
 "set incsearch          " incremental search
 "set visualbell         " screen flashes instead of error bell
 "set confirm            " shows dialog when exiting without saving
