@@ -107,7 +107,7 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
+" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *79 |  52 - 099/523 - 17%
 set statusline=                     " initialize
 set statusline+=\ %2n               " buffer number
 set statusline+=\ \|\               " separator
@@ -120,7 +120,7 @@ set statusline+=%=                  " left/right separator
 set statusline+=%{FDMShort()}       " fold method
 set statusline+=/%{&fo}             " format options
 set statusline+=\ \|\               " separator
-set statusline+=%{Has80Char()}      " 80 char highlighting
+set statusline+=%{Has79Char()}      " 79 char highlighting
 set statusline+=%2{TextWidth()}     " text width/paste mode
 set statusline+=\ \|\               " separator
 
@@ -151,8 +151,8 @@ function! FDMShort()
     endif
 endfunction
 
-" Returns '*' if > 80 char highlighting enabled
-function! Has80Char()
+" Returns '*' if > 79 char highlighting enabled
+function! Has79Char()
     return (exists('w:m2')) ? '*' : ''
 endfunction
 
@@ -348,8 +348,8 @@ set viminfo^=%
 "   1 - Break lines before one-letter words
 au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
-" When typing over 80 chars, line break
-set textwidth=80
+" When typing over 79 chars, line break
+set textwidth=79
 set linebreak
 
 " Reformat all
@@ -366,29 +366,29 @@ noremap <silent> <leader>f mzgggqG'z
 vnoremap <silent> <leader>f Jgqq
 
 " ,\ - Toggle textwidth and reformat if needed
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>:call FmtTW()<cr>
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 79)<cr>:call FmtTW()<cr>
 
-" Highlight anything after virtual column 80 red
+" Highlight anything after virtual column 79 red
 " Set on initial window
-let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
 " Set on subsequent windows
 au WinEnter * if !exists('w:created') |
-   \let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1) |
+   \let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1) |
    \endif
 " Re-set whenever opening
-au BufNewFile,BufRead * let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+au BufNewFile,BufRead * let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
 
-" ,c - Toggle over 80 char highlighting
-function! Toggle80Char()
+" ,c - Toggle over 79 char highlighting
+function! Toggle79Char()
     if exists('w:m2')
         call matchdelete(w:m2)
         unlet w:m2
     else
-        let w:m2 = matchadd('ErrorMsg', '\%>80v.\+', -1)
+        let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
     endif
 endfunction
 
-noremap <silent> <leader>c :call Toggle80Char()<cr>
+noremap <silent> <leader>c :call Toggle79Char()<cr>
 
 " Removes any trailing whitespace in the file upon closing
 au BufRead,BufWrite * if ! &bin |
@@ -532,8 +532,8 @@ nnoremap <silent> <leader>O O<esc>cc<esc>
 " ,dd - Delete current line contents
 nnoremap <silent> <leader>dd cc<esc>
 
-" ,n - Splits a line at the cursor, then moves to column 81
-nnoremap <silent> <leader>n i<cr><esc>80l
+" ,n - Splits a line at the cursor, then moves to column 80
+nnoremap <silent> <leader>n i<cr><esc>79l
 
 " **************************************
 " * Macros
