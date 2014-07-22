@@ -44,27 +44,27 @@ filetype on                     " filetype stuff
 filetype plugin on              " filetype stuff
 filetype indent on              " filetype stuff
 
-" Autocomplete menus
-if has("wildmenu")
-    set wildignore+=*.a,*.o
-    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-    set wildignore+=.DS_Store,.git,.hg,.svn
-    set wildignore+=*~,*.swp,*.tmp
-    set wildmenu
-    set wildignorecase
-    set wildmode=full
-    set wildcharm=<C-i>
-endif
-
-" Autocomplete text
-set omnifunc=syntaxcomplete#Complete
-
 " Persistent undo
 try
     set undodir=~/.vimUndo/ " set undo directory
     set undofile            " use an undo file
 catch
 endtry
+
+" Autocomplete menus
+" if has("wildmenu")
+"     set wildignore+=*.a,*.o
+"     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+"     set wildignore+=.DS_Store,.git,.hg,.svn
+"     set wildignore+=*~,*.swp,*.tmp
+"     set wildmenu
+"     set wildignorecase
+"     set wildmode=full
+"     set wildcharm=<C-i>
+" endif
+
+" Autocomplete text
+" set omnifunc=syntaxcomplete#Complete
 
 " Set these to your preference
 "set ve=all             " place cursor anywhere in any mode
