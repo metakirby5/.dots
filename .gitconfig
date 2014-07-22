@@ -1,0 +1,11 @@
+[user]
+    name = metakirby5
+    email = echan@circleup.com
+[color]
+    ui = auto
+[alias]
+    ci = commit
+    st = status
+    co = checkout
+[core]
+    excludesfile = /Users/ethan/.gitignore_global
