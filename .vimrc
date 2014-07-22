@@ -435,7 +435,7 @@ set shiftwidth=4
 " au Syntax c,cpp,asm,java,py,othertypes set whatever=#
 
 " No expansion
-au Syntax sh,py setlocal noexpandtab
+au Syntax sh setlocal noexpandtab
 
 " Assembly - 8 char wide tabs, no expansion
 au Syntax asm setlocal noexpandtab
