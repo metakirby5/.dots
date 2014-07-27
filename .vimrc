@@ -79,7 +79,7 @@ endtry
 " **************************************
 
 " Set color scheme
-colorscheme peachpuff
+:silent! colorscheme peachpuff
 
 " Syntax highlighting
 syntax on
