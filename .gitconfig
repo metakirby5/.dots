@@ -1,13 +1,12 @@
 [user]
-    name = metakirby5
+    name = Ethan Chan
     email = metakirby5@gmail.com
-[color]
-    ui = auto
 [alias]
-    ci = commit
     st = status
+    ci = commit
+    br = branch
     co = checkout
 [core]
-    excludesfile = /Users/ethan/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [push]
     default = simple
