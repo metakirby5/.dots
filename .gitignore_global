@@ -8,3 +8,4 @@ core
 tester_files
 .nfs*
 *.out
+*.pyc

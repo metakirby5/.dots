@@ -1,6 +1,6 @@
 [user]
     name = metakirby5
-    email = echan@circleup.com
+    email = metakirby5@gmail.com
 [color]
     ui = auto
 [alias]
@@ -9,3 +9,5 @@
     co = checkout
 [core]
     excludesfile = /Users/ethan/.gitignore_global
+[push]
+    default = simple
