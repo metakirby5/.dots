@@ -20,8 +20,3 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-# Aliases
-alias clean-branches="git checkout master; git pull; git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d"
-alias clean-pyc="find . -name \*.pyc -delete"
-alias resource="source ~/.profile"
