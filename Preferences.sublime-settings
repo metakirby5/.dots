@@ -1,0 +1,11 @@
+// Settings in here override those in "Default/Preferences.sublime-settings", and
+// are overridden in turn by file type specific settings.
+{
+    "rulers": [80],
+    "translate_tabs_to_spaces": true,
+    "highlight_line": true,
+    "save_on_focus_lost": true,
+    "highlight_modified_tabs": true,
+    "ignored_packages": [],
+    "vintage_start_in_command_mode": true
+}
