@@ -162,7 +162,7 @@ function! TextWidth()
     return (!&paste) ? &tw : 'P'
 endfunction
 
-"set ruler          " default ruler
+" set ruler          " default ruler
 
 " **************************************
 " * Navigation
@@ -400,20 +400,20 @@ au BufRead,BufWrite * if ! &bin |
 " ,/m - Remove Windows' ^M
 noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Spellcheck
-if v:version >= 700
-    " ,/ss - Toggle spellcheck
-    noremap <leader>/ss :setlocal spell!<cr>
-
-    " More spellcheck shortcuts
-    noremap <leader>/sn ]s
-    noremap <leader>/sp [s
-    noremap <leader>/sa zg
-    noremap <leader>/s? z=
-
-    " Enable spell check for text files
-    " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
-endif
+" " Spellcheck
+" if v:version >= 700
+"     " ,/ss - Toggle spellcheck
+"     noremap <leader>/ss :setlocal spell!<cr>
+"
+"     " More spellcheck shortcuts
+"     noremap <leader>/sn ]s
+"     noremap <leader>/sp [s
+"     noremap <leader>/sa zg
+"     noremap <leader>/s? z=
+"
+"     " Enable spell check for text files
+"     " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+" endif
 
 " **************************************
 " * Indentation
