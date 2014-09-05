@@ -1,5 +1,5 @@
 {
-	"font_size": 12,
+	"font_size": 14.0,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -10,6 +10,8 @@
 		80
 	],
 	"save_on_focus_lost": true,
+	"tab_size": 2,
 	"translate_tabs_to_spaces": true,
+	"show_panel_on_build": false,
 	"vintage_start_in_command_mode": true
 }
