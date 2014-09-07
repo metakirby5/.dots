@@ -354,9 +354,11 @@ set linebreak
 
 " Reformat all
 function! FmtTW()
-    normal mz
-    normal gggqG
-    normal 'z
+    if &tw
+        normal mz
+        normal gggqG
+        normal 'z
+    endif
 endfunction
 
 " ,f (normal mode) - Reformat all
