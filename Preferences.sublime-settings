@@ -2,17 +2,9 @@
 	"font_size": 14.0,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
-	"hot_exit": false,
-	"ignored_packages":
-	[
-	],
-	"remember_open_files": false,
-	"rulers":
-	[
-		80
-	],
+	"ignored_packages": [],
+	"rulers": [80],
 	"save_on_focus_lost": true,
-	"show_panel_on_build": true,
 	"tab_size": 2,
 	"translate_tabs_to_spaces": true,
 	"vintage_start_in_command_mode": true
