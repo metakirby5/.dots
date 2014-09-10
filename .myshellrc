@@ -2,7 +2,7 @@
 alias resource='. ~/.bashrc'
 ## Git
 alias ghp-publish='git checkout master && git pull && git checkout gh-pages && git pull && git merge master --no-edit && git push && git checkout master'
-alias clean-branches='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
+alias clean-branches='git checkout master && git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 ## Program-specific
 alias clean-chrome='killall chrome && rm .config/google-chrome/Default/Web\ Data'
 
