@@ -1,7 +1,11 @@
 # Aliases
 alias resource='. ~/.bashrc'
+## Git
 alias ghp-publish='git checkout master && git pull && git checkout gh-pages && git pull && git merge master --no-edit && git push && git checkout master'
+alias clean-branches='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
+## Program-specific
 alias clean-chrome='killall chrome && rm .config/google-chrome/Default/Web\ Data'
 
-# Add git branch to prompt
+# Prompt
+## Add git branch to prompt
 PS1=$PS1'$(__git_ps1 "\[\e[0;32m\](%s) \[\e[0m\]")'
