@@ -1,5 +1,5 @@
 {
-	"font_size": 12.0,
+	"font_size": 12,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -12,5 +12,10 @@
 	"save_on_focus_lost": true,
 	"tab_size": 2,
 	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"ensure_newline_at_eof_on_save": true,
+	"word_wrap": false,
+	"shift_tab_unindent": true,
+	"highlight_modified_tabs": true,
 	"vintage_start_in_command_mode": true
 }
