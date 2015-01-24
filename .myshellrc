@@ -11,7 +11,9 @@ alias clean-chrome='killall chrome && rm .config/google-chrome/Default/Web\ Data
 ## Compile and run Java program
 function javar {
     if [[ ! $1 ]]; then
-        echo 'Please provide Java class name!'
+        echo 'Usage: javar <class name>'
+        echo 'Example for a file named "Test.java":'
+        echo '    $ javar Test'
         return
     fi
     javac -cp '*':'.' $1.java
