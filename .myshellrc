@@ -7,6 +7,17 @@ alias clean-branches='git checkout master && git branch --merged master | grep -
 ## Program-specific
 alias clean-chrome='killall chrome && rm .config/google-chrome/Default/Web\ Data'
 
+# Functions
+## Compile and run Java program
+function javar {
+    if [[ ! $1 ]]; then
+        echo 'Please provide Java class name!'
+        return
+    fi
+    javac -cp '*':'.' $1.java
+    java -cp '*':'.' $1
+}
+
 # Prompt
 ## Add git branch to prompt
 PS1=$PS1'$(__git_ps1 "\[\e[0;32m\](%s) \[\e[0m\]")'
