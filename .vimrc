@@ -254,6 +254,12 @@ noremap <leader>k <C-W>k
 noremap <leader>h <C-W>h
 noremap <leader>l <C-W>l
 
+" ,[hjkl] - Move split
+noremap <leader>J <C-W>J
+noremap <leader>K <C-W>K
+noremap <leader>H <C-W>H
+noremap <leader>L <C-W>L
+
 " ,[up/down] - Resize height
 noremap <silent> <leader><up> :resize +5<cr>
 noremap <silent> <leader><down> :resize -5<cr>
@@ -430,8 +436,8 @@ set smartindent         " adjust indentation for curly braces, etc.
 
 " Defaults
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " Define tab settings for filetypes via:
 " au Syntax c,cpp,asm,java,py,othertypes set whatever=#
