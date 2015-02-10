@@ -359,7 +359,7 @@ set linebreak
 
 " Highlight column 80 for all but certain types
 function! Set80Chars()
-  if &ft =~ '^$\|(^text\|qf\|vim$)'
+  if &ft =~ '^$\|^\(text\|qf\|vim\)$'
     return
   endif
   setlocal textwidth=80
