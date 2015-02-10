@@ -20,7 +20,7 @@ let g:mapleader = " "
 " Preserve legacy mapping
 noremap <leader><space> <space>
 
-" Set up w:created autocmd to run later
+" Set up w:created au to run later
 au VimEnter * au WinEnter * let w:created = 1
 
 " **************************************
@@ -60,11 +60,11 @@ if has("wildmenu")
     set wildmenu
     set wildignorecase
     set wildmode=longest:full,full
-    set wildcharm=<Tab>
+    set wildcharm=<tab>
 endif
 
 " Autocomplete text
-" set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 " Set these to your preference
 "set ve=all             " place cursor anywhere in any mode
@@ -280,7 +280,7 @@ noremap <leader>tb :tab ball<cr>
 noremap <leader>tl :tabs<cr>
 
 " Opens a new tab with a file
-noremap <leader>te :tabedit <tab><S-tab>
+noremap <leader>te :tabedit <tab>
 
 " ,[1-9] - Switch to tab #
 noremap <leader>1 1gt
@@ -354,11 +354,18 @@ set viminfo^=%
 "   1 - Break lines before one-letter words
 au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
-" When typing over 80 chars, line break
-" Also highlight column 80
-set textwidth=80
-set colorcolumn=80
+" When typing over textwidth, line break
 set linebreak
+
+" Highlight column 80 for all but certain types
+function! Set80Chars()
+  if &ft =~ '^$\|(^text\|qf\|vim$)'
+    return
+  endif
+  setlocal textwidth=80
+  setlocal colorcolumn=80
+endfunction
+au BufNewFile,BufRead * call Set80Chars()
 
 " Reformat all
 function! FmtTW()
@@ -484,7 +491,7 @@ noremap <C-p> "0p
 noremap <leader><C-P> "0P
 
 " shift-<tab> - Omni complete (not really useful in C)
-" inoremap <S-tab> <C-x><C-o>
+inoremap <S-tab> <C-x><C-o>
 
 " ^[hl] - Previous/next error
 noremap <silent> <C-l> :cn<CR>
@@ -534,14 +541,16 @@ nnoremap <silent> <leader>n i<cr><esc>80l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
-autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-autocmd FileType conf,fstab       let b:comment_leader = '# '
-autocmd FileType tex              let b:comment_leader = '% '
-autocmd FileType mail             let b:comment_leader = '> '
-autocmd FileType vim              let b:comment_leader = '" '
+au FileType c,cpp,java,scala let b:comment_leader = '// '
+au FileType sh,ruby,python   let b:comment_leader = '# '
+au FileType conf,fstab       let b:comment_leader = '# '
+au FileType tex              let b:comment_leader = '% '
+au FileType mail             let b:comment_leader = '> '
+au FileType vim              let b:comment_leader = '" '
 noremap <silent> <leader>// :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> <leader>?? :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+vnoremap <silent> <leader>// :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
+vnoremap <silent> <leader>?? :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
 
 " == ORD STUFF ==
 " " File header function
