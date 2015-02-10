@@ -547,10 +547,24 @@ au FileType conf,fstab       let b:comment_leader = '# '
 au FileType tex              let b:comment_leader = '% '
 au FileType mail             let b:comment_leader = '> '
 au FileType vim              let b:comment_leader = '" '
-noremap <silent> <leader>// :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <leader>?? :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-vnoremap <silent> <leader>// :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
-vnoremap <silent> <leader>?? :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
+
+function! StoreSearch()
+  let g:ps = getreg('/', 1)
+  let g:ps_t = getregtype('/')
+endfunction
+
+function! RestoreSearch()
+  if !(exists('g:ps') && exists('g:ps_t'))
+    return
+  endif
+
+  call setreg('/', g:ps, g:ps_t)
+endfunction
+
+noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
+noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
+vnoremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
+vnoremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
 
 " == ORD STUFF ==
 " " File header function
