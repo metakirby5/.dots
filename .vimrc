@@ -27,22 +27,22 @@ au VimEnter * au WinEnter * let w:created = 1
 " * Variables
 " **************************************
 
-set nu                          " line numbering on
-set noerrorbells                " turns off annoying bell sounds for errors
-set backspace=2                 " backspace over everything
-set fileformats=unix,dos,mac    " open files from mac/dos
-set hidden                      " hide abandoned buffers
-set exrc                        " open local config files
-set nojoinspaces                " don't add white space when I don't tell you to
-set noswapfile                  " no intermediate files used when saving
-set autowrite                   " write before make
-set mouse-=a                    " disallow mouse usage
-set hlsearch                    " highlights all search hits
-set ignorecase                  " search without regards to case
-set smartcase                   " search with smart casing
-filetype on                     " filetype stuff
-filetype plugin on              " filetype stuff
-filetype indent on              " filetype stuff
+set nu                         " line numbering on
+set noerrorbells               " turns off annoying bell sounds for errors
+set backspace=2                " backspace over everything
+set fileformats=unix,dos,mac   " open files from mac/dos
+set hidden                     " hide abandoned buffers
+set exrc                       " open local config files
+set nojoinspaces               " don't add white space when I don't tell you to
+set noswapfile                 " no intermediate files used when saving
+set autowrite                  " write before make
+set mouse-=a                   " disallow mouse usage
+set hlsearch                   " highlights all search hits
+set ignorecase                 " search without regards to case
+set smartcase                  " search with smart casing
+filetype on                    " filetype stuff
+filetype plugin on             " filetype stuff
+filetype indent on             " filetype stuff
 
 " Persistent undo
 try
@@ -52,23 +52,23 @@ catch
 endtry
 
 " Autocomplete menus
-" if has("wildmenu")
-"     set wildignore+=*.a,*.o
-"     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-"     set wildignore+=.DS_Store,.git,.hg,.svn
-"     set wildignore+=*~,*.swp,*.tmp
-"     set wildmenu
-"     set wildignorecase
-"     set wildmode=full
-"     set wildcharm=<C-i>
-" endif
+if has("wildmenu")
+    set wildignore+=*.a,*.o
+    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+    set wildignore+=.DS_Store,.git,.hg,.svn
+    set wildignore+=*~,*.swp,*.tmp
+    set wildmenu
+    set wildignorecase
+    set wildmode=longest:full,full
+    set wildcharm=<Tab>
+endif
 
 " Autocomplete text
 " set omnifunc=syntaxcomplete#Complete
 
 " Set these to your preference
 "set ve=all             " place cursor anywhere in any mode
-"set incsearch          " incremental search
+"set incsearch          " highlight as you search
 "set visualbell         " screen flashes instead of error bell
 "set confirm            " shows dialog when exiting without saving
 "set nowrap             " turns off word wrapping
@@ -107,7 +107,7 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *79 |  52 - 099/523 - 17%
+" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
 set statusline=                     " initialize
 set statusline+=\ %2n               " buffer number
 set statusline+=\ \|\               " separator
@@ -120,7 +120,7 @@ set statusline+=%=                  " left/right separator
 set statusline+=%{FDMShort()}       " fold method
 set statusline+=/%{&fo}             " format options
 set statusline+=\ \|\               " separator
-set statusline+=%{Has79Char()}      " 79 char highlighting
+set statusline+=%{Has80Char()}      " 80 char highlighting
 set statusline+=%2{TextWidth()}     " text width/paste mode
 set statusline+=\ \|\               " separator
 
@@ -151,9 +151,9 @@ function! FDMShort()
     endif
 endfunction
 
-" Returns '*' if > 79 char highlighting enabled
-function! Has79Char()
-    return (exists('w:m2')) ? '*' : ''
+" Returns '*' if > 80 char highlighting enabled
+function! Has80Char()
+    return (&colorcolumn) ? '*' : ''
 endfunction
 
 " Returns &tw if paste mode is disabled
@@ -354,8 +354,10 @@ set viminfo^=%
 "   1 - Break lines before one-letter words
 au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
-" When typing over 79 chars, line break
-set textwidth=79
+" When typing over 80 chars, line break
+" Also highlight column 80
+set textwidth=80
+set colorcolumn=80
 set linebreak
 
 " Reformat all
@@ -373,30 +375,11 @@ noremap <silent> <leader>f mzgggqG'z
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
 
-" ,\ - Toggle textwidth and reformat if needed
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 79)<cr>:call FmtTW()<cr>
+" ,\ - Toggle textwidth
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>
 
-" Highlight anything after virtual column 79 red
-" Set on initial window
-let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
-" Set on subsequent windows
-au WinEnter * if !exists('w:created') |
-   \let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1) |
-   \endif
-" Re-set whenever opening
-au BufNewFile,BufRead * let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
-
-" ,c - Toggle over 79 char highlighting
-function! Toggle79Char()
-    if exists('w:m2')
-        call matchdelete(w:m2)
-        unlet w:m2
-    else
-        let w:m2 = matchadd('ErrorMsg', '\%>79v.\+', -1)
-    endif
-endfunction
-
-noremap <silent> <leader>c :call Toggle79Char()<cr>
+" ,c - Toggle over 80 char highlighting
+noremap <silent> <leader>c :let &cc = (&cc ? 0 : 80)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 au BufRead,BufWrite * if ! &bin |
@@ -541,7 +524,7 @@ nnoremap <silent> <leader>O O<esc>cc<esc>
 nnoremap <silent> <leader>dd cc<esc>
 
 " ,n - Splits a line at the cursor, then moves to column 80
-nnoremap <silent> <leader>n i<cr><esc>79l
+nnoremap <silent> <leader>n i<cr><esc>80l
 
 " **************************************
 " * Macros
@@ -550,59 +533,71 @@ nnoremap <silent> <leader>n i<cr><esc>79l
 " Auto-insert matching curly brace
 inoremap {<cr> {<cr>}<C-o>O
 
-" File header function
-function FileHeader()
-    let s:line=line(".")
-    call setline(s:line, "/*******************************************************************************")
-    call append(s:line,  " * Filename: ".expand("%:t"))
-    call append(s:line+1," * Author: Ethan Chan")
-    call append(s:line+2," * Userid: cs30xhy")
-    call append(s:line+3," * Date: ".strftime("%D"))
-    call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
-    call append(s:line+5," *")
-    call append(s:line+6," * Description: ")
-    call append(s:line+7," *      ")
-    call append(s:line+8," * ****************************************************************************/")
-    unlet s:line
-endfunction
+" ,// and ,?? - Comment/uncomment blocks of code
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+noremap <silent> <leader>// :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> <leader>?? :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-" ,ih - Insert file header
-nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>'z8<cr>A
-
-" Method header function
-function MethodHeader()
-    let s:line=line(".")
-    call setline(s:line,  "/*******************************************************************************")
-    call append(s:line,   " * Function name: ")
-    call append(s:line+1, " * Function prototype: TODO")
-    call append(s:line+2, " *")
-    call append(s:line+3, " * Description:")
-    call append(s:line+4, " *      TODO")
-    call append(s:line+5, " *")
-    call append(s:line+6, " * Parameters:")
-    call append(s:line+7, " *      arg 1: _name -- _desc TODO")
-    call append(s:line+8, " * Side effects:")
-    call append(s:line+9, " *      TODO")
-    call append(s:line+10," * Error conditions:")
-    call append(s:line+11," *      _errcond TODO")
-    call append(s:line+12," *          Action: _action TODO")
-    call append(s:line+13," * Return value: _type TODO")
-    call append(s:line+14," *      _val -- _meaning TODO")
-    call append(s:line+15," *")
-    call append(s:line+16," * Registers used:")
-    call append(s:line+17," *      %i0: _name -- _desc TODO")
-    call append(s:line+18," *")
-    call append(s:line+19," *      %l0: _name -- _desc TODO")
-    call append(s:line+20," *")
-    call append(s:line+21," *      %o0: _name -- _desc TODO")
-    call append(s:line+22," * ****************************************************************************/")
-    unlet s:line
-endfunction
-
-" ,im - Insert method header
-nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z<cr>A
+" == ORD STUFF ==
+" " File header function
+" function FileHeader()
+"     let s:line=line(".")
+"     call setline(s:line, "/*******************************************************************************")
+"     call append(s:line,  " * Filename: ".expand("%:t"))
+"     call append(s:line+1," * Author: Ethan Chan")
+"     call append(s:line+2," * Userid: cs30xhy")
+"     call append(s:line+3," * Date: ".strftime("%D"))
+"     call append(s:line+4," * Sources of Help: CSE 30 Website, handouts")
+"     call append(s:line+5," *")
+"     call append(s:line+6," * Description: ")
+"     call append(s:line+7," *      ")
+"     call append(s:line+8," * ****************************************************************************/")
+"     unlet s:line
+" endfunction
+"
+" " ,ih - Insert file header
+" nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>'z8<cr>A
+"
+" " Method header function
+" function MethodHeader()
+"     let s:line=line(".")
+"     call setline(s:line,  "/*******************************************************************************")
+"     call append(s:line,   " * Function name: ")
+"     call append(s:line+1, " * Function prototype: TODO")
+"     call append(s:line+2, " *")
+"     call append(s:line+3, " * Description:")
+"     call append(s:line+4, " *      TODO")
+"     call append(s:line+5, " *")
+"     call append(s:line+6, " * Parameters:")
+"     call append(s:line+7, " *      arg 1: _name -- _desc TODO")
+"     call append(s:line+8, " * Side effects:")
+"     call append(s:line+9, " *      TODO")
+"     call append(s:line+10," * Error conditions:")
+"     call append(s:line+11," *      _errcond TODO")
+"     call append(s:line+12," *          Action: _action TODO")
+"     call append(s:line+13," * Return value: _type TODO")
+"     call append(s:line+14," *      _val -- _meaning TODO")
+"     call append(s:line+15," *")
+"     call append(s:line+16," * Registers used:")
+"     call append(s:line+17," *      %i0: _name -- _desc TODO")
+"     call append(s:line+18," *")
+"     call append(s:line+19," *      %l0: _name -- _desc TODO")
+"     call append(s:line+20," *")
+"     call append(s:line+21," *      %o0: _name -- _desc TODO")
+"     call append(s:line+22," * ****************************************************************************/")
+"     unlet s:line
+" endfunction
+"
+" " ,im - Insert method header
+" nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z<cr>A
 
 " ===Automatic actions on file open
 
+" == ORD STUFF ==
 " Automatically insert file header in *.{c,cpp,h,s}
-au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR'z8\<cr>A"
+" au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR'z8\<cr>A"

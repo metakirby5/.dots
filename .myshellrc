@@ -1,3 +1,7 @@
+# Environment variables
+export EDITOR=vim
+export CLASSPATH='*':'.'
+
 # Aliases
 alias resource='. ~/.bashrc'
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
@@ -16,8 +20,8 @@ function javar {
         echo '    $ javar Test'
         return
     fi
-    javac -cp '*':'.' $1.java
-    java -cp '*':'.' $1
+    javac $1.java
+    java $1
 }
 
 # Prompt
