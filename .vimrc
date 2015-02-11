@@ -354,27 +354,11 @@ set viminfo^=%
 "   1 - Break lines before one-letter words
 au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 
-" When typing over textwidth, line break
+" Line break only at breaking characters
 set linebreak
 
-" Highlight column 80 for all but certain types
-function! Set80Chars()
-  if &ft =~ '^$\|^\(text\|qf\|vim\)$'
-    return
-  endif
-  setlocal textwidth=80
-  setlocal colorcolumn=80
-endfunction
-au BufNewFile,BufRead * call Set80Chars()
-
-" Reformat all
-function! FmtTW()
-    if &tw
-        normal mz
-        normal gggqG
-        normal 'z
-    endif
-endfunction
+" Highlight column / textwidth 80 for some filetypes
+au Filetype python,c,cpp,java,sh,ruby setlocal tw=80 | setlocal cc=80
 
 " ,f (normal mode) - Reformat all
 noremap <silent> <leader>f mzgggqG'z
