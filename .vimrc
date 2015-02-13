@@ -547,8 +547,8 @@ endfunction
 
 noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
 noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
-vnoremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
-vnoremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
+vnoremap <silent> <leader>// :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
+vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
 
 " == ORD STUFF ==
 " " File header function
