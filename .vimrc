@@ -58,7 +58,9 @@ if has("wildmenu")
     set wildignore+=.DS_Store,.git,.hg,.svn
     set wildignore+=*~,*.swp,*.tmp
     set wildmenu
-    set wildignorecase
+    if has("wildignorecase")
+      set wildignorecase
+    endif
     set wildmode=longest:full,full
     set wildcharm=<tab>
 endif
@@ -107,7 +109,7 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *80 |  52 - 099/523 - 17%
+" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *78 |  52 - 099/523 - 17%
 set statusline=                     " initialize
 set statusline+=\ %2n               " buffer number
 set statusline+=\ \|\               " separator
@@ -120,7 +122,7 @@ set statusline+=%=                  " left/right separator
 set statusline+=%{FDMShort()}       " fold method
 set statusline+=/%{&fo}             " format options
 set statusline+=\ \|\               " separator
-set statusline+=%{Has80Char()}      " 80 char highlighting
+set statusline+=%{Has78Char()}      " 78 char highlighting
 set statusline+=%2{TextWidth()}     " text width/paste mode
 set statusline+=\ \|\               " separator
 
@@ -151,9 +153,13 @@ function! FDMShort()
     endif
 endfunction
 
-" Returns '*' if > 80 char highlighting enabled
-function! Has80Char()
+" Returns '*' if > 78 char highlighting enabled
+function! Has78Char()
+  if exists("+colorcolumn")
     return (&colorcolumn) ? '*' : ''
+  else
+    return 'X'
+  endif
 endfunction
 
 " Returns &tw if paste mode is disabled
@@ -357,8 +363,8 @@ au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
 " Line break only at breaking characters
 set linebreak
 
-" Highlight column / textwidth 80 for some filetypes
-au Filetype python,c,cpp,java,sh,ruby setlocal tw=80 | setlocal cc=80
+" Highlight column / textwidth 78 for some filetypes
+au Filetype python,c,cpp,java,sh,ruby setlocal tw=78 | setlocal cc=78
 
 " ,f (normal mode) - Reformat all
 noremap <silent> <leader>f mzgggqG'z
@@ -367,10 +373,10 @@ noremap <silent> <leader>f mzgggqG'z
 vnoremap <silent> <leader>f Jgqq
 
 " ,\ - Toggle textwidth
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 80)<cr>
+noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 78)<cr>
 
-" ,c - Toggle over 80 char highlighting
-noremap <silent> <leader>c :let &cc = (&cc ? 0 : 80)<cr>
+" ,c - Toggle over 78 char highlighting
+noremap <silent> <leader>c :let &cc = (&cc ? 0 : 78)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 au BufRead,BufWrite * if ! &bin |
@@ -514,8 +520,8 @@ nnoremap <silent> <leader>O O<esc>cc<esc>
 " ,dd - Delete current line contents
 nnoremap <silent> <leader>dd cc<esc>
 
-" ,n - Splits a line at the cursor, then moves to column 80
-nnoremap <silent> <leader>n i<cr><esc>80l
+" ,n - Splits a line at the cursor, then moves to column 78
+nnoremap <silent> <leader>n i<cr><esc>78l
 
 " **************************************
 " * Macros
