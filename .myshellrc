@@ -1,5 +1,6 @@
 # Environment variables
 export EDITOR=vim
+export VISUAL=$EDITOR
 export CLASSPATH='*':'.'
 
 # Aliases
