@@ -531,12 +531,12 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
-au FileType c,cpp,java,scala let b:comment_leader = '// '
-au FileType sh,ruby,python   let b:comment_leader = '# '
-au FileType conf,fstab       let b:comment_leader = '# '
-au FileType tex              let b:comment_leader = '% '
-au FileType mail             let b:comment_leader = '> '
-au FileType vim              let b:comment_leader = '" '
+au FileType c,cpp,java,scala      let b:comment_leader = '// '
+au FileType zsh,sh,ruby,python    let b:comment_leader = '# '
+au FileType conf,fstab            let b:comment_leader = '# '
+au FileType tex                   let b:comment_leader = '% '
+au FileType mail                  let b:comment_leader = '> '
+au FileType vim                   let b:comment_leader = '" '
 
 function! StoreSearch()
   let g:ps = getreg('/', 1)
