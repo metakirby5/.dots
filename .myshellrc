@@ -4,7 +4,6 @@ export EDITOR=$EDITOR
 export CLASSPATH='*':'.'
 
 # Aliases
-alias resource='. ~/.bashrc'
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 ## Git
 alias ghp-publish='git checkout master && git pull && git checkout gh-pages && git pull && sleep 3 && git merge master --no-edit && git push && git checkout master'
@@ -25,8 +24,3 @@ function javar {
     java $1
 }
 
-# Prompt
-## Add git branch to prompt
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export PS1='\[\033[00;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " \[\e[0;32m\](%s)\[\e[0m\]")\$ '
