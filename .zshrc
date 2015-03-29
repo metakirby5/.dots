@@ -62,6 +62,7 @@ ENABLE_CORRECTION="true"
 plugins=(gitfast sudo wd)
 
 # User configuration
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/code/bash-scripts
 alias resource='source ~/.zshrc'
 alias git=hub
 source ~/dotfiles/.myshellrc
