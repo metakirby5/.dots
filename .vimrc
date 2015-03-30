@@ -410,7 +410,7 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 "    tabstop: The width of a tab.
 " shiftwidth: The width of an auto-inserted tab.
 
-" set smarttab          " remove spaces grouped as tabs
+set smarttab          " remove spaces grouped as tabs
 set autoindent          " copy indent from previous line
 set smartindent         " adjust indentation for curly braces, etc.
 
