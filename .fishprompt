@@ -1,0 +1,47 @@
+function fish_prompt
+  switch $status
+    case 0
+      set chevcolor (set_color -o green)
+    case '*'
+      set chevcolor (set_color -o red)
+  end
+
+  switch $USER
+    case root
+      set chev '»'
+    case '*'
+      set chev '›'
+  end
+
+  set -l cwd (set_color green) (basename (prompt_pwd))
+
+  echo -n -s $cwd ' ' $chevcolor $chev (set_color normal) ' '
+end
+
+function fish_right_prompt
+  if not set -q -g __fish_metakirby5_right_functions_defined
+    set -g __fish_metakirby5_right_functions_defined
+    function _git_branch_name
+      echo (git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+    end
+
+    function _is_git_dirty
+      echo (git status -s --ignore-submodules=dirty ^/dev/null)
+    end
+  end
+
+  set -l yellow (set_color -o yellow)
+  set -l gray (set_color -o 555)
+  set -l normal (set_color normal)
+
+  if [ (_git_branch_name) ]
+    set git_info $gray (_git_branch_name)
+
+    if [ (_is_git_dirty) ]
+      set -l dirty " $yellow✗"
+      set git_info "$dirty$git_info"
+    end
+  end
+
+  echo -n -s $git_info $normal
+end
