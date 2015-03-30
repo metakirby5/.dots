@@ -1,3 +1,8 @@
+#### DOWNLOAD THESE PLUGINS:
+# cd ~/.oh-my-zsh/custom/plugins
+# git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+#### END
+
 #### PUT THE FOLLOWING IN ~/.zshrc:
 
 ### TOP
@@ -32,5 +37,5 @@ unsetopt autocd notify
 ZSH_THEME="nicoulaj"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(gitfast sudo wd yum)
+plugins=(gitfast sudo wd yum zsh-syntax-highlighting)
 
