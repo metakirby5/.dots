@@ -410,7 +410,7 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 "    tabstop: The width of a tab.
 " shiftwidth: The width of an auto-inserted tab.
 
-set smarttab          " remove spaces grouped as tabs
+set smarttab            " remove spaces grouped as tabs
 set autoindent          " copy indent from previous line
 set smartindent         " adjust indentation for curly braces, etc.
 
@@ -420,19 +420,12 @@ set tabstop=2
 set shiftwidth=2
 
 " Define tab settings for filetypes via:
-" au Syntax c,cpp,asm,java,py,othertypes set whatever=#
-
-" No expansion
-au Syntax sh setlocal noexpandtab
+" au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
 
 " Assembly - 8 char wide tabs, no expansion
 au Syntax asm setlocal noexpandtab
 au Syntax asm setlocal tabstop=8
 au Syntax asm setlocal shiftwidth=8
-
-" For python, one-line comments indent weird. This fixes it.
-au Syntax py inoremap # X#
-
 
 " **************************************
 " * Misc
@@ -531,6 +524,7 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
+let b:comment_leader = '// '      " Default comment is //
 au FileType c,cpp,java,scala      let b:comment_leader = '// '
 au FileType zsh,sh,ruby,python    let b:comment_leader = '# '
 au FileType conf,fstab            let b:comment_leader = '# '
