@@ -12,11 +12,25 @@ function __mk5_git_pwd {
 }
 
 function __mk5_git_branch {
-  echo "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  local branch="$(git symbolic-ref HEAD 2>/dev/null)"
+
+  if [[ $? == 0 ]]; then
+    echo $branch | sed "s|^refs/heads/||"
+  else # detached head
+    echo "$(git rev-parse --short HEAD 2>/dev/null)"
+  fi
 }
 
 function __mk5_git_dirty {
-  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null)"
+  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l)"
+}
+
+function __mk5_git_outgoing {
+  echo "$(git log origin/HEAD..HEAD | grep '^commit' | wc -l)"
+}
+
+function __mk5_git_incoming {
+  echo "$(git log HEAD..origin/HEAD | grep '^commit' | wc -l)"
 }
 
 function __mk5_set_prompt {
@@ -31,6 +45,8 @@ function __mk5_set_prompt {
   local b_red='\[\e[1;31m\]'
 
   local dirty_char=$(echo -e '\xc2\xb1\x0a')
+  local incoming_char=$(echo -e '\xe2\xac\x87\x0a')
+  local outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
   local chev_char=$(echo -e '\xe2\x9d\xb1\x0a')
 
   local chevcolor
@@ -51,8 +67,16 @@ function __mk5_set_prompt {
   if [[ $(__mk5_git_branch) ]]; then
     git_info="$white($(__mk5_git_branch)"
 
-    if [[ $(__mk5_git_dirty) ]]; then
-      git_info="$git_info $b_yellow$dirty_char"
+    if [[ $(__mk5_git_dirty) != 0 ]]; then
+      git_info="$git_info $b_yellow$(__mk5_git_dirty)$dirty_char"
+    fi
+
+    if [[ $(__mk5_git_incoming) != 0 ]]; then
+      git_info="$git_info $b_red$(__mk5_git_incoming)$incoming_char"
+    fi
+
+    if [[ $(__mk5_git_outgoing) != 0 ]]; then
+      git_info="$git_info $b_blue$(__mk5_git_outgoing)$outgoing_char"
     fi
 
     git_info="$git_info$white) "
