@@ -1,9 +1,10 @@
-# Please set the following variables before sourcing this file:
-#   $__mk5_color_normal
-#   $__mk5_color_branch
-#   $__mk5_color_dirty
-#   $__mk5_color_status_ok
-#   $__mk5_color_status_bad
+# Please set the following colors before sourcing this file:
+# export __mk5_color_normal=
+# export __mk5_color_branch=
+# export __mk5_color_dirty=
+# export __mk5_color_pwd=
+# export __mk5_color_status_ok=
+# export __mk5_color_status_bad=
 
 function __mk5_git_dirty {
   local dirtymark='\xc2\xb1\x0a'
@@ -24,8 +25,10 @@ $__mk5_color_branch)$__mk5_color_normal "
 function __mk5_git_pwd {
   # Get git base directory
   local gitbase=$(git rev-parse --show-toplevel 2>/dev/null)
+  local gitpwd
+
   if [[ $gitbase ]]; then
-    printf "$(basename $gitbase)${PWD##$gitbase}"
+    gitpwd="$(basename $gitbase)${PWD##$gitbase}"
   else
     local homesed
     if [[ $USER == 'root' ]]; then
@@ -33,8 +36,10 @@ function __mk5_git_pwd {
     else
       homesed="s/^\/home\/$USER/~/"
     fi
-    printf "$PWD" | sed "$homesed"
+    gitpwd="$PWD" | sed "$homesed"
   fi
+
+  printf "$__mk5_color_pwd$gitpwd$__mk5_color_normal"
 }
 
 # arg 1 is last status code
