@@ -18,7 +18,7 @@
 # export ZSH=~/.oh-my-zsh
 ##
 
-# source location/of/.myzshrc.zsh
+# source location/of/config.zsh
 
 ### END TOP
 
