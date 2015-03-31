@@ -68,15 +68,15 @@ function fish_right_prompt
     set git_info "$gray"(__mk5_git_branch)
 
     if [ (__mk5_git_dirty) != 0 ]
-      set git_info "$yellow"(__mk5_git_dirty)"± $git_info"
+      set git_info "$yellow±"(__mk5_git_dirty)" $git_info"
     end
 
     if [ (__mk5_git_incoming) != 0 ]
-      set git_info "$red"(__mk5_git_incoming)"⬇ $git_info"
+      set git_info "$red⬇"(__mk5_git_incoming)" $git_info"
     end
 
     if [ (__mk5_git_outgoing) != 0 ]
-      set git_info "$blue"(__mk5_git_outgoing)"⬆ $git_info"
+      set git_info "$blue⬆"(__mk5_git_outgoing)" $git_info"
     end
   end
 

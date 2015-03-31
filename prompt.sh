@@ -73,15 +73,15 @@ function __mk5_set_prompt {
     git_info="$white($(__mk5_git_branch)"
 
     if [[ $(__mk5_git_dirty) != 0 ]]; then
-      git_info="$git_info $b_yellow$(__mk5_git_dirty)$dirty_char"
+      git_info="$git_info $b_yellow$dirty_char$(__mk5_git_dirty)"
     fi
 
     if [[ $(__mk5_git_incoming) != 0 ]]; then
-      git_info="$git_info $b_red$(__mk5_git_incoming)$incoming_char"
+      git_info="$git_info $b_red$incoming_char$(__mk5_git_incoming)"
     fi
 
     if [[ $(__mk5_git_outgoing) != 0 ]]; then
-      git_info="$git_info $b_blue$(__mk5_git_outgoing)$outgoing_char"
+      git_info="$git_info $b_blue$outgoing_char$(__mk5_git_outgoing)"
     fi
 
     git_info="$git_info$white) "
