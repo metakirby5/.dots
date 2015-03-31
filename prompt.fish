@@ -17,7 +17,7 @@ function __mk5_git_branch
   if [ $status = 0 ]
     echo $branch | sed "s|^refs/heads/||"
   else # detached head
-    echo (git rev-parse --short HEAD)
+    echo (git rev-parse --short HEAD ^/dev/null)
   end
 end
 
