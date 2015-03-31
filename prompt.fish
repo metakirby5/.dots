@@ -19,6 +19,10 @@ function __mk5_git_dirty
   echo (git status -s --ignore-submodules=dirty ^/dev/null)
 end
 
+function __mk5_git_pushpending
+  echo (git log origin/master..HEAD)
+end
+
 function fish_prompt
   # Grab status code first
   set last_status $status
@@ -41,6 +45,7 @@ end
 
 function fish_right_prompt
   set yellow (set_color -o yellow)
+  set blue (set_color -o blue)
   set gray (set_color -o 555)
   set normal (set_color normal)
 
@@ -49,6 +54,10 @@ function fish_right_prompt
 
     if [ (__mk5_git_dirty) ]
       set git_info "$yellow± $git_info"
+    end
+
+    if [ (__mk5_git_pushpending) ]
+      set git_info "$blue⬆ $git_info"
     end
   end
 
