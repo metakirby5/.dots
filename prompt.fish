@@ -19,8 +19,12 @@ function __mk5_git_dirty
   echo (git status -s --ignore-submodules=dirty ^/dev/null)
 end
 
-function __mk5_git_pushpending
-  echo (git log origin/master..HEAD)
+function __mk5_git_outgoing
+  echo (git log @{u}.. ^/dev/null)
+end
+
+function __mk5_git_incoming
+  echo (git log ..@{u} ^/dev/null)
 end
 
 function fish_prompt
@@ -44,9 +48,10 @@ function fish_prompt
 end
 
 function fish_right_prompt
-  set yellow (set_color -o yellow)
-  set blue (set_color -o blue)
   set gray (set_color -o 555)
+  set yellow (set_color -o yellow)
+  set red (set_color -o red)
+  set blue (set_color -o blue)
   set normal (set_color normal)
 
   if [ (__mk5_git_branch) ]
@@ -56,7 +61,11 @@ function fish_right_prompt
       set git_info "$yellow± $git_info"
     end
 
-    if [ (__mk5_git_pushpending) ]
+    if [ (__mk5_git_incoming) ]
+      set git_info "$red⬇ $git_info"
+    end
+
+    if [ (__mk5_git_outgoing) ]
       set git_info "$blue⬆ $git_info"
     end
   end
