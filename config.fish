@@ -3,9 +3,9 @@ function fish_greeting
 end
 
 # Environment variables
-set -e VISUAL vim
-set -e EDITOR $VISUAL
-set -e CLASSPATH '*':'.'
+set VISUAL vim
+set EDITOR $VISUAL
+set CLASSPATH '*':'.'
 
 # Functions
 

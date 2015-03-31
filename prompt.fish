@@ -1,32 +1,27 @@
-# Prompt functions
-if not set -q -g __fish_mk5_prompt_functions_defined
-  set -g __fish_mk5_prompt_functions_defined
+function __mk5_git_pwd
+  # Get git base directory
+  set gitbase (git rev-parse --show-toplevel ^/dev/null)
 
-  function __fish_mk5_git_pwd
-    # Get git base directory
-    set -l gitbase (git rev-parse --show-toplevel ^/dev/null)
-    if [ $gitbase ]
-      # Strip git base directory
-      echo -s (basename $gitbase) (pwd | sed "s|^$gitbase||")
-    else
-      # Replace home with ~
-      echo (pwd) | sed "s|^$HOME|~|"
-    end
+  if [ $gitbase ]
+    # Strip git base directory
+    echo -s (basename $gitbase) (pwd | sed "s|^$gitbase||")
+  else
+    # Replace home with ~
+    echo (pwd) | sed "s|^$HOME|~|"
   end
+end
 
-  function __fish_mk5_git_branch
-    echo (git rev-parse --abbrev-ref HEAD ^/dev/null)
-  end
+function __mk5_git_branch
+  echo (git rev-parse --abbrev-ref HEAD ^/dev/null)
+end
 
-  function __fish_mk5_git_is_dirty
-    echo (git status -s --ignore-submodules=dirty ^/dev/null)
-  end
-
+function __mk5_git_dirty
+  echo (git status -s --ignore-submodules=dirty ^/dev/null)
 end
 
 function fish_prompt
   # Grab status code first
-  set -l last_status $status
+  set last_status $status
 
   if [ $last_status = 0 ]
     set chevcolor (set_color -o green)
@@ -40,21 +35,20 @@ function fish_prompt
     set chev '❱'
   end
 
-  echo -n -s (set_color green) (__fish_mk5_git_pwd) ' ' \
+  echo -n -s (set_color green) (__mk5_git_pwd) ' ' \
              $chevcolor $chev (set_color normal) ' '
 end
 
 function fish_right_prompt
-  set -l yellow (set_color -o yellow)
-  set -l gray (set_color -o 555)
-  set -l normal (set_color normal)
+  set yellow (set_color -o yellow)
+  set gray (set_color -o 555)
+  set normal (set_color normal)
 
-  if [ (__fish_mk5_git_branch) ]
-    set git_info $gray(__fish_mk5_git_branch)
+  if [ (__mk5_git_branch) ]
+    set git_info "$gray"(__mk5_git_branch)
 
-    if [ (__fish_mk5_git_is_dirty) ]
-      set -l dirty "$yellow±"
-      set git_info "$dirty $git_info"
+    if [ (__mk5_git_dirty) ]
+      set git_info "$yellow± $git_info"
     end
   end
 
