@@ -6,6 +6,8 @@ end
 set VISUAL vim
 set EDITOR $VISUAL
 set CLASSPATH '*':'.'
+
+# Grep hotfix
 alias grep "/usr/bin/grep $GREP_OPTIONS"
 set -e GREP_OPTIONS
 
