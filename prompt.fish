@@ -22,7 +22,7 @@ function __mk5_git_branch
 end
 
 function __mk5_git_dirty
-  echo (git status -s --ignore-submodules=dirty ^/dev/null)
+  echo (git status -s --ignore-submodules=dirty ^/dev/null | wc -l)
 end
 
 function __mk5_git_outgoing
@@ -63,8 +63,8 @@ function fish_right_prompt
   if [ (__mk5_git_branch) ]
     set git_info "$gray"(__mk5_git_branch)
 
-    if [ (__mk5_git_dirty) ]
-      set git_info "$yellow± $git_info"
+    if [ (__mk5_git_dirty) != 0 ]
+      set git_info "$yellow"(__mk5_git_dirty)"± $git_info"
     end
 
     if [ (__mk5_git_incoming) != 0 ]
