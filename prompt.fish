@@ -12,9 +12,13 @@ function __mk5_git_pwd
 end
 
 function __mk5_git_branch
+  # Grab status code first
+  git symbolic-ref HEAD > /dev/null ^&1
+  set last_status $status
+
   set branch (git symbolic-ref HEAD ^/dev/null)
 
-  if [ $status = 0 ]
+  if [ $last_status = 0 ]
     echo $branch | sed "s|^refs/heads/||"
   else # detached head
     echo (git rev-parse --short HEAD ^/dev/null)
