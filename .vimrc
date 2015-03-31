@@ -524,7 +524,7 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
-let b:comment_leader = '// '      " Default comment is //
+let b:comment_leader = '# '       " Default comment is #
 au FileType c,cpp,java,scala      let b:comment_leader = '// '
 au FileType zsh,sh,ruby,python    let b:comment_leader = '# '
 au FileType conf,fstab            let b:comment_leader = '# '
