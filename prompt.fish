@@ -6,14 +6,11 @@ if not set -q -g __fish_mk5_prompt_functions_defined
     # Get git base directory
     set -l gitbase (git rev-parse --show-toplevel ^/dev/null)
     if [ $gitbase ]
-      # Format for sed
-      set -l sed_gitbase (echo $gitbase | sed 's/\//\\\\\//g')
       # Strip git base directory
-      echo -s (basename $gitbase) (pwd | sed "s/$sed_gitbase//g")
+      echo -s (basename $gitbase) (pwd | sed "s|^$gitbase||")
     else
       # Replace home with ~
-      set -l homesed (echo $HOME | sed 's/\//\\\\\//g')
-      echo (pwd) | sed "s/^$homesed/~/"
+      echo (pwd) | sed "s|^$HOME|~|"
     end
   end
 

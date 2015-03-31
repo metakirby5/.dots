@@ -29,8 +29,7 @@ function __mk5_git_pwd {
   if [[ $gitbase ]]; then
     gitpwd="$(basename $gitbase)${PWD##$gitbase}"
   else
-    local homesed=$(echo $HOME | sed 's/\//\\\//g')
-    gitpwd=$(echo $PWD | sed "s/^$homesed/~/")
+    gitpwd=$(echo $PWD | sed "s|^$HOME|~|")
   fi
 
   echo "$__mk5_color_pwd$gitpwd$__mk5_color_normal"
