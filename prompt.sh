@@ -64,9 +64,9 @@ function __mk5_chevron {
 
 function __mk5_set_prompt {
   local last_status=$?
-  export PS1="$(__mk5_git_branch)\
+  PS1="$(__mk5_git_branch)\
 $(__mk5_git_pwd) \
 $(__mk5_chevron $last_status) "
 }
 
-__mk5_set_prompt
+PROMPT_COMMAND=__mk5_set_prompt
