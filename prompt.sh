@@ -36,7 +36,7 @@ function __mk5_git_pwd {
     else
       homesed="s/^\/home\/$USER/~/"
     fi
-    gitpwd="$PWD" | sed "$homesed"
+    gitpwd="$(printf $PWD | sed $homesed)"
   fi
 
   printf "$__mk5_color_pwd$gitpwd$__mk5_color_normal"
