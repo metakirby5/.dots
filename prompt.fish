@@ -20,7 +20,7 @@ if not set -q -g __fish_mk5_prompt_functions_defined
     end
   end
 
-  function __fish_mk5_git_branch_name
+  function __fish_mk5_git_branch
     echo (git rev-parse --abbrev-ref HEAD ^/dev/null)
   end
 
@@ -55,11 +55,11 @@ function fish_right_prompt
   set -l gray (set_color -o 555)
   set -l normal (set_color normal)
 
-  if [ (__fish_mk5_git_branch_name) ]
-    set git_info $gray(__fish_mk5_git_branch_name)
+  if [ (__fish_mk5_git_branch) ]
+    set git_info $gray(__fish_mk5_git_branch)
 
     if [ (__fish_mk5_git_is_dirty) ]
-      set -l dirty "$yellow✗"
+      set -l dirty "$yellow±"
       set git_info "$dirty $git_info"
     end
   end
