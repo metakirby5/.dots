@@ -26,11 +26,11 @@ function __mk5_git_dirty
 end
 
 function __mk5_git_outgoing
-  echo (git log @{u}.. ^/dev/null)
+  echo (git log origin/HEAD..HEAD | grep '^commit' | wc -l)
 end
 
 function __mk5_git_incoming
-  echo (git log ..@{u} ^/dev/null)
+  echo (git log HEAD..origin/HEAD | grep '^commit' | wc -l)
 end
 
 function fish_prompt
@@ -67,12 +67,12 @@ function fish_right_prompt
       set git_info "$yellow± $git_info"
     end
 
-    if [ (__mk5_git_incoming) ]
-      set git_info "$red⬇ $git_info"
+    if [ (__mk5_git_incoming) != 0 ]
+      set git_info "$red"(__mk5_git_incoming)"⬇ $git_info"
     end
 
-    if [ (__mk5_git_outgoing) ]
-      set git_info "$blue⬆ $git_info"
+    if [ (__mk5_git_outgoing) != 0 ]
+      set git_info "$blue"(__mk5_git_outgoing)"⬆ $git_info"
     end
   end
 
