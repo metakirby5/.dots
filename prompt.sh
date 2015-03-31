@@ -47,6 +47,7 @@ function __mk5_set_prompt {
   local b_green='\[\e[1;32m\]'
   local b_yellow='\[\e[1;33m\]'
   local b_red='\[\e[1;31m\]'
+  local b_blue='\[\e[1;34m\]'
 
   local dirty_char=$(echo -e '\xc2\xb1\x0a')
   local incoming_char=$(echo -e '\xe2\xac\x87\x0a')
