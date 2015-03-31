@@ -12,11 +12,8 @@ if not set -q -g __fish_mk5_prompt_functions_defined
       echo -s (basename $gitbase) (pwd | sed "s/$sed_gitbase//g")
     else
       # Replace home with ~
-      if [ $USER = 'root' ]
-        echo (pwd) | sed "s/^\/root/~/"
-      else
-        echo (pwd) | sed "s/^\/home\/$USER/~/"
-      end
+      set -l homesed (echo $HOME | sed 's/\//\\\\\//g')
+      echo (pwd) | sed "s/^$homesed/~/"
     end
   end
 
