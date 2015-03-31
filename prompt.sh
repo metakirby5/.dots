@@ -1,13 +1,12 @@
-# Please set the following colors before sourcing this file:
-# export __mk5_color_normal=
-# export __mk5_color_branch=
-# export __mk5_color_dirty=
-# export __mk5_color_pwd=
-# export __mk5_color_status_ok=
-# export __mk5_color_status_bad=
+__mk5_color_normal='\[\e[0m\]'
+__mk5_color_branch='\[\e[0;37m\]'
+__mk5_color_dirty='\[\e[1;33m\]'
+__mk5_color_pwd='\[\e[0;32m\]'
+__mk5_color_status_ok='\[\e[1;32m\]'
+__mk5_color_status_bad='\[\e[1;31m\]'
 
 function __mk5_git_dirty {
-  local dirtymark='\xc2\xb1\x0a'
+  local dirtymark=$(echo -e '\xc2\xb1\x0a')
   if [[ "$(git status -s --ignore-submodules=dirty 2>/dev/null)" ]]; then
     echo " $__mk5_color_dirty$dirtymark$__mk5_color_normal"
   fi
@@ -44,7 +43,7 @@ function __mk5_git_pwd {
 
 # arg 1 is last status code
 function __mk5_chevron {
-  local prompt_char='\xe2\x9d\xb1\x0a'
+  local prompt_char=$(echo -e '\xe2\x9d\xb1\x0a')
   local prompt
   local color
 
@@ -65,9 +64,9 @@ function __mk5_chevron {
 
 function __mk5_set_prompt {
   local last_status=$?
-  export PS1='$(__mk5_git_branch)\
+  PS1="$(__mk5_git_branch)\
 $(__mk5_git_pwd) \
-$(__mk5_chevron last_status) '
+$(__mk5_chevron $last_status) "
 }
 
-__mk5_set_prompt
+PROMPT_COMMAND=__mk5_set_prompt

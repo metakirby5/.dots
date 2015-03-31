@@ -34,7 +34,7 @@ SAVEHIST=1000
 setopt appendhistory beep extendedglob nomatch
 unsetopt autocd notify
 
-# ZSH_THEME="nicoulaj"
+ZSH_THEME="nicoulaj"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(gitfast sudo wd yum zsh-syntax-highlighting)
