@@ -30,11 +30,11 @@ function __mk5_git_dirty {
 }
 
 function __mk5_git_outgoing {
-  echo "$(git log origin/HEAD..HEAD 2>/dev/null | grep '^commit' | wc -l)"
+  echo "$(git @{u}.. 2>/dev/null | grep '^commit' | wc -l)"
 }
 
 function __mk5_git_incoming {
-  echo "$(git log HEAD..origin/HEAD 2>/dev/null | grep '^commit' | wc -l)"
+  echo "$(git log ..@{u} 2>/dev/null | grep '^commit' | wc -l)"
 }
 
 function __mk5_set_prompt {

@@ -30,11 +30,11 @@ function __mk5_git_dirty
 end
 
 function __mk5_git_outgoing
-  echo (git log origin/HEAD..HEAD ^/dev/null | grep '^commit' | wc -l)
+  echo (git log @\{u\}.. ^/dev/null | grep '^commit' | wc -l)
 end
 
 function __mk5_git_incoming
-  echo (git log HEAD..origin/HEAD ^/dev/null | grep '^commit' | wc -l)
+  echo (git log ..@\{u\} ^/dev/null | grep '^commit' | wc -l)
 end
 
 function fish_prompt
