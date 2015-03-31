@@ -9,14 +9,14 @@
 function __mk5_git_dirty {
   local dirtymark='\xc2\xb1\x0a'
   if [[ "$(git status -s --ignore-submodules=dirty 2>/dev/null)" ]]; then
-    printf " $__mk5_color_dirty$dirtymark$__mk5_color_normal"
+    echo " $__mk5_color_dirty$dirtymark$__mk5_color_normal"
   fi
 }
 
 function __mk5_git_branch {
   local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
   if [[ $branch ]]; then
-    printf "$__mk5_color_branch\
+    echo "$__mk5_color_branch\
 ($branch$(__mk5_git_dirty)\
 $__mk5_color_branch)$__mk5_color_normal "
   fi
@@ -36,10 +36,10 @@ function __mk5_git_pwd {
     else
       homesed="s/^\/home\/$USER/~/"
     fi
-    gitpwd="$(printf $PWD | sed $homesed)"
+    gitpwd="$(echo $PWD | sed $homesed)"
   fi
 
-  printf "$__mk5_color_pwd$gitpwd$__mk5_color_normal"
+  echo "$__mk5_color_pwd$gitpwd$__mk5_color_normal"
 }
 
 # arg 1 is last status code
@@ -60,7 +60,7 @@ function __mk5_chevron {
     prompt="$prompt_char"
   fi
 
-  printf "$color$prompt$__mk5_color_normal"
+  echo "$color$prompt$__mk5_color_normal"
 }
 
 function __mk5_set_prompt {
