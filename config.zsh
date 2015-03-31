@@ -28,11 +28,40 @@
 
 #### END
 
-HISTFILE=~/.histfile
+HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory beep extendedglob nomatch
 unsetopt autocd notify
+
+# http://askubuntu.com/questions/1577/moving-from-bash-to-zsh
+autoload -U compinit
+compinit
+
+setopt completeinword
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
+
+autoload select-word-style
+select-word-style shell
+
+if [[ -x "`whence -p dircolors`" ]]; then
+  eval `dircolors`
+  alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F'
+fi
+
+alias ll='ls -l'
+alias la='ls -a'
+
+setopt sharehistory extendedhistory
+
+setopt extendedglob
+unsetopt caseglob
+
+REPORTTIME=10
 
 ZSH_THEME="nicoulaj"
 ENABLE_CORRECTION="true"
