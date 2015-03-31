@@ -314,28 +314,30 @@ inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
 " === Folds
 
 " Enable folds
-set foldenable
+if exists("+foldenable")
+  set foldenable
 
-" Enable fold column
-set foldcolumn=1
-hi FoldColumn ctermbg=NONE guibg=NONE
+  " Enable fold column
+  set foldcolumn=1
+  hi FoldColumn ctermbg=NONE guibg=NONE
 
-" The mode settings below all start with folds open
+  " The mode settings below all start with folds open
 
-" ,zm - Manual mode
-noremap <leader>zm :set foldmethod=manual<cr>zR
+  " ,zm - Manual mode
+  noremap <leader>zm :set foldmethod=manual<cr>zR
 
-" ,zi - Indent mode
-noremap <leader>zi :set foldmethod=indent<cr>zR
+  " ,zi - Indent mode
+  noremap <leader>zi :set foldmethod=indent<cr>zR
 
-" ,zs - Syntax mode
-noremap <leader>zs :set foldmethod=syntax<cr>zR
+  " ,zs - Syntax mode
+  noremap <leader>zs :set foldmethod=syntax<cr>zR
 
-" Use syntax mode by default
-set foldmethod=syntax
+  " Use syntax mode by default
+  set foldmethod=syntax
 
-" Unfold everything at start
-set foldlevel=99
+  " Unfold everything at start
+  set foldlevel=99
+endif
 
 " === On exit
 
