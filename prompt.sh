@@ -52,7 +52,7 @@ function __mk5_set_prompt {
   local dirty_char=$(echo -e '\xc2\xb1\x0a')
   local incoming_char=$(echo -e '\xe2\xac\x87\x0a')
   local outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
-  local chev_char=$(echo -e '\xe2\x9d\xb1\x0a')
+  local chev_char=$(echo -e '\xe2\x9d\xaf\x0a')
 
   local chevcolor
   if [[ $last_status == 0 ]]; then

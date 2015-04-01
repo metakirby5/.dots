@@ -48,9 +48,9 @@ function fish_prompt
   end
 
   if [ $USER = 'root' ]
-    set chev '❱❱❱'
+    set chev '❯❯❯'
   else
-    set chev '❱'
+    set chev '❯'
   end
 
   echo -n -s (set_color green) (__mk5_git_pwd) ' ' \
