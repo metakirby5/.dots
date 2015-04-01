@@ -55,3 +55,13 @@ function javar
     and java $argv[1]
 end
 
+# BASH workarounds
+
+function sudo
+  if test "$argv" = !!
+    eval command sudo $history[1]
+  else
+    command sudo $argv
+  end
+end
+
