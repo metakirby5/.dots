@@ -4,12 +4,9 @@ export EDITOR=$VISUAL
 export CLASSPATH='*':'.'
 
 # Functions
-
 function flatten-dir {
   find . -mindepth 2 -type f -exec mv -t . -i '{}' +
 }
-
-## Git
 
 function ghp-publish {
   local cur_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -28,8 +25,6 @@ function clean-branches {
     grep -v "\* master$" | \
     xargs -n 1 git branch -d
 }
-
-## Program-specific
 
 function clean-chrome {
   killall chrome && \
