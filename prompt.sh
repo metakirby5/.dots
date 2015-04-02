@@ -24,11 +24,11 @@ function __mk5_git_dirty {
 }
 
 function __mk5_git_outgoing {
-  echo "$(git log @{u}.. 2>/dev/null | grep '^commit' | wc -l)"
+  echo "$(git log origin/HEAD.. 2>/dev/null | grep '^commit' | wc -l)"
 }
 
 function __mk5_git_incoming {
-  echo "$(git log ..@{u} 2>/dev/null | grep '^commit' | wc -l)"
+  echo "$(git log ..origin/HEAD 2>/dev/null | grep '^commit' | wc -l)"
 }
 
 function __mk5_set_prompt {
