@@ -34,18 +34,19 @@ end
 function variety
   if [ (count $argv) = 0 ]
     command variety
-  end
-  switch $argv[1]
-    case nsfw
-      variety-mv ~/Pictures/Wallpapers/Desktop/NSFW/
-    case mv
-      if [ (count $argv) = 2 ]
-        variety-mv $argv[2]
-      else
-        echo "Please provide a destination."
-      end
-    case '*'
-      command variety $argv
+  else
+    switch $argv[1]
+      case nsfw
+        variety-mv ~/Pictures/Wallpapers/Desktop/NSFW/
+      case mv
+        if [ (count $argv) = 2 ]
+          variety-mv $argv[2]
+        else
+          echo "Please provide a destination."
+        end
+      case '*'
+        command variety $argv
+    end
   end
 end
 
