@@ -57,7 +57,7 @@ end
 function fish_right_prompt
 
   if [ (__mk5_git_branch) ]
-    set git_info (set_color -o 555) (__mk5_git_branch)
+    set git_info (set_color -o black) (__mk5_git_branch)
 
     if [ (__mk5_git_dirty) != 0 ]
       set git_info (set_color -o yellow) '±' (__mk5_git_dirty) ' ' $git_info

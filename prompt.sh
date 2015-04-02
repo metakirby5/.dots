@@ -36,7 +36,6 @@ function __mk5_set_prompt {
   local last_status=$?
 
   local normal='\[\e[0m\]'
-  local white='\[\e[0;37m\]'
   local cyan='\[\e[0;36m\]'
   local green='\[\e[0;32m\]'
   local b_cyan='\[\e[1;36m\]'
@@ -44,6 +43,8 @@ function __mk5_set_prompt {
   local b_yellow='\[\e[1;33m\]'
   local b_red='\[\e[1;31m\]'
   local b_blue='\[\e[1;34m\]'
+  local l_gray='\[\e[0;37m\]'
+  local d_gray='\[\e[1;30m\]'
 
   local dirty_char=$(echo -e '\xc2\xb1\x0a')
   local incoming_char=$(echo -e '\xe2\xac\x87\x0a')
@@ -66,7 +67,7 @@ function __mk5_set_prompt {
 
   local git_info
   if [[ $(__mk5_git_branch) ]]; then
-    git_info="$white($(__mk5_git_branch)"
+    git_info=$(__mk5_git_branch)
 
     if [[ $(__mk5_git_dirty) != 0 ]]; then
       git_info="$git_info $b_yellow$dirty_char$(__mk5_git_dirty)"
@@ -80,11 +81,13 @@ function __mk5_set_prompt {
       git_info="$git_info $b_blue$outgoing_char$(__mk5_git_outgoing)"
     fi
 
-    git_info="$git_info$white) "
+    git_info="$d_gray$git_info $l_gray$chev $normal"
   fi
 
-  PS1="$cyan$USER@$__mk5_hostname$b_cyan $chev \
-$git_info$green$(__mk5_git_pwd) $chevcolor$chev$normal "
+  PS1="\
+$cyan$USER@$__mk5_hostname $b_cyan$chev \
+$green$(__mk5_git_pwd) $chevcolor$chev \
+$normal$git_info"
 }
 
 PROMPT_COMMAND=__mk5_set_prompt
