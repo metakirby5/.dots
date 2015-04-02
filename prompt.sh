@@ -86,8 +86,9 @@ function __mk5_set_prompt {
 
   PS1="\
 $cyan$USER@$__mk5_hostname $b_cyan$chev \
+$git_info\
 $green$(__mk5_git_pwd) $chevcolor$chev \
-$normal$git_info"
+$normal"
 }
 
 PROMPT_COMMAND=__mk5_set_prompt
