@@ -9,11 +9,6 @@ __mk5_b_blue='\[\e[1;34m\]'
 __mk5_l_gray='\[\e[0;37m\]'
 __mk5_d_gray='\[\e[1;30m\]'
 
-# __mk5_dirty_char=$(echo -e '\xc2\xb1\x0a')
-# __mk5_incoming_char=$(echo -e '\xe2\xac\x87\x0a')
-# __mk5_outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
-# __mk5_chev_char=$(echo -e '\xe2\x9d\xaf\x0a')
-
 __mk5_chev_char='❯'
 __mk5_dirty_char='±'
 __mk5_incoming_char='⬇'
