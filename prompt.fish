@@ -1,3 +1,5 @@
+set -g __mk5_hostname (hostname|cut -d . -f 1)
+
 function __mk5_git_pwd
   # Get git base directory
   set gitbase (git rev-parse --show-toplevel ^/dev/null)
@@ -12,17 +14,9 @@ function __mk5_git_pwd
 end
 
 function __mk5_git_branch
-  # Grab status code first
-  git symbolic-ref HEAD > /dev/null ^&1
-  set last_status $status
-
-  set branch (git symbolic-ref HEAD ^/dev/null)
-
-  if [ $last_status = 0 ]
-    echo $branch | sed "s|^refs/heads/||"
-  else # detached head
-    echo (git rev-parse --short HEAD ^/dev/null)
-  end
+  echo (git symbolic-ref HEAD ^/dev/null
+  or git rev-parse --short HEAD ^/dev/null) \
+  | sed "s|^refs/heads/||"
 end
 
 function __mk5_git_dirty
@@ -53,32 +47,30 @@ function fish_prompt
     set chev '❯'
   end
 
-  echo -n -s (set_color green) (__mk5_git_pwd) ' ' \
-             $chevcolor $chev (set_color normal) ' '
+  echo -n -s \
+    (set_color cyan) "$USER@$__mk5_hostname" \
+    (set_color -o cyan) ' ❯ ' (set_color normal) \
+    (set_color green) (__mk5_git_pwd) ' ' \
+    $chevcolor $chev (set_color normal) ' '
 end
 
 function fish_right_prompt
-  set gray (set_color -o 555)
-  set yellow (set_color -o yellow)
-  set red (set_color -o red)
-  set blue (set_color -o blue)
-  set normal (set_color normal)
 
   if [ (__mk5_git_branch) ]
-    set git_info "$gray"(__mk5_git_branch)
+    set git_info (set_color -o 555) (__mk5_git_branch)
 
     if [ (__mk5_git_dirty) != 0 ]
-      set git_info "$yellow±"(__mk5_git_dirty)" $git_info"
+      set git_info (set_color -o yellow) '±' (__mk5_git_dirty) ' ' $git_info
     end
 
     if [ (__mk5_git_incoming) != 0 ]
-      set git_info "$red⬇"(__mk5_git_incoming)" $git_info"
+      set git_info (set_color -o red) '⬇' (__mk5_git_incoming) ' ' $git_info
     end
 
     if [ (__mk5_git_outgoing) != 0 ]
-      set git_info "$blue⬆"(__mk5_git_outgoing)" $git_info"
+      set git_info (set_color -o blue) '⬆' (__mk5_git_outgoing) ' ' $git_info
     end
   end
 
-  echo -n -s $git_info $normal
+  echo -n -s $git_info (set_color normal)
 end

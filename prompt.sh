@@ -1,3 +1,5 @@
+__mk5_hostname=$(hostname|cut -d . -f 1)
+
 function __mk5_git_pwd {
   # Get git base directory
   local gitbase=$(git rev-parse --show-toplevel 2>/dev/null)
@@ -12,17 +14,9 @@ function __mk5_git_pwd {
 }
 
 function __mk5_git_branch {
-  # Grab status code first
-  git symbolic-ref HEAD > /dev/null 2>&1
-  local last_status=$?
-
-  local branch="$(git symbolic-ref HEAD 2>/dev/null)"
-
-  if [[ $last_status == 0 ]]; then
-    echo $branch | sed "s|^refs/heads/||"
-  else # detached head
-    echo "$(git rev-parse --short HEAD 2>/dev/null)"
-  fi
+  echo $(git symbolic-ref HEAD 2>/dev/null || \
+         git rev-parse --short HEAD 2>/dev/null) \
+       | sed "s|^refs/heads/||"
 }
 
 function __mk5_git_dirty {
@@ -43,7 +37,9 @@ function __mk5_set_prompt {
 
   local normal='\[\e[0m\]'
   local white='\[\e[0;37m\]'
+  local cyan='\[\e[0;36m\]'
   local green='\[\e[0;32m\]'
+  local b_cyan='\[\e[1;36m\]'
   local b_green='\[\e[1;32m\]'
   local b_yellow='\[\e[1;33m\]'
   local b_red='\[\e[1;31m\]'
@@ -56,9 +52,9 @@ function __mk5_set_prompt {
 
   local chevcolor
   if [[ $last_status == 0 ]]; then
-    chevcolor="$b_green"
+    chevcolor=$b_green
   else
-    chevcolor="$b_red"
+    chevcolor=$b_red
   fi
 
   local chev
@@ -87,7 +83,8 @@ function __mk5_set_prompt {
     git_info="$git_info$white) "
   fi
 
-  PS1="$git_info$green$(__mk5_git_pwd) $chevcolor$chev$normal "
+  PS1="$cyan$USER@$__mk5_hostname$b_cyan $chev \
+$git_info$green$(__mk5_git_pwd) $chevcolor$chev$normal "
 }
 
 PROMPT_COMMAND=__mk5_set_prompt
