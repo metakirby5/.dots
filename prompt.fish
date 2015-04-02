@@ -1,3 +1,8 @@
+set __mk5_chev_char ❯
+set __mk5_dirty_char ±
+set __mk5_incoming_char ⬇
+set __mk5_outgoing_char ⬆
+
 set -g __mk5_hostname (hostname|cut -d . -f 1)
 
 function __mk5_git_pwd
@@ -42,16 +47,16 @@ function fish_prompt
   end
 
   if [ $USER = 'root' ]
-    set chev '❯❯❯'
+    set chev "$__mk5_chev_char$__mk5_chev_char$__mk5_chev_char"
   else
-    set chev '❯'
+    set chev "$__mk5_chev_char"
   end
 
   echo -n -s \
-    (set_color cyan) "$USER@$__mk5_hostname" \
-    (set_color -o cyan) ' ❯ ' (set_color normal) \
+    (set_color cyan) "$USER@$__mk5_hostname " \
+    (set_color -o cyan) "$__mk5_chev_char " (set_color normal) \
     (set_color green) (__mk5_git_pwd) ' ' \
-    $chevcolor $chev (set_color normal) ' '
+    $chevcolor $chev ' ' (set_color normal)
 end
 
 function fish_right_prompt
@@ -60,15 +65,15 @@ function fish_right_prompt
     set git_info (set_color -o black) (__mk5_git_branch)
 
     if [ (__mk5_git_dirty) != 0 ]
-      set git_info (set_color -o yellow) '±' (__mk5_git_dirty) ' ' $git_info
+      set git_info (set_color -o yellow) "$__mk5_dirty_char" (__mk5_git_dirty) ' ' $git_info
     end
 
     if [ (__mk5_git_incoming) != 0 ]
-      set git_info (set_color -o red) '⬇' (__mk5_git_incoming) ' ' $git_info
+      set git_info (set_color -o red) "$__mk5_incoming_char" (__mk5_git_incoming) ' ' $git_info
     end
 
     if [ (__mk5_git_outgoing) != 0 ]
-      set git_info (set_color -o blue) '⬆' (__mk5_git_outgoing) ' ' $git_info
+      set git_info (set_color -o blue) "$__mk5_outgoing_char" (__mk5_git_outgoing) ' ' $git_info
     end
   end
 

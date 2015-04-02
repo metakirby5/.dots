@@ -1,3 +1,24 @@
+__mk5_normal='\[\e[0m\]'
+__mk5_cyan='\[\e[0;36m\]'
+__mk5_green='\[\e[0;32m\]'
+__mk5_b_cyan='\[\e[1;36m\]'
+__mk5_b_green='\[\e[1;32m\]'
+__mk5_b_yellow='\[\e[1;33m\]'
+__mk5_b_red='\[\e[1;31m\]'
+__mk5_b_blue='\[\e[1;34m\]'
+__mk5_l_gray='\[\e[0;37m\]'
+__mk5_d_gray='\[\e[1;30m\]'
+
+# __mk5_dirty_char=$(echo -e '\xc2\xb1\x0a')
+# __mk5_incoming_char=$(echo -e '\xe2\xac\x87\x0a')
+# __mk5_outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
+# __mk5_chev_char=$(echo -e '\xe2\x9d\xaf\x0a')
+
+__mk5_chev_char='❯'
+__mk5_dirty_char='±'
+__mk5_incoming_char='⬇'
+__mk5_outgoing_char='⬆'
+
 __mk5_hostname=$(hostname|cut -d . -f 1)
 
 function __mk5_git_pwd {
@@ -35,34 +56,18 @@ function __mk5_set_prompt {
   # Grab status code first
   local last_status=$?
 
-  local normal='\[\e[0m\]'
-  local cyan='\[\e[0;36m\]'
-  local green='\[\e[0;32m\]'
-  local b_cyan='\[\e[1;36m\]'
-  local b_green='\[\e[1;32m\]'
-  local b_yellow='\[\e[1;33m\]'
-  local b_red='\[\e[1;31m\]'
-  local b_blue='\[\e[1;34m\]'
-  local l_gray='\[\e[0;37m\]'
-  local d_gray='\[\e[1;30m\]'
-
-  local dirty_char=$(echo -e '\xc2\xb1\x0a')
-  local incoming_char=$(echo -e '\xe2\xac\x87\x0a')
-  local outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
-  local chev_char=$(echo -e '\xe2\x9d\xaf\x0a')
-
   local chevcolor
   if [[ $last_status == 0 ]]; then
-    chevcolor=$b_green
+    chevcolor=$__mk5_b_green
   else
-    chevcolor=$b_red
+    chevcolor=$__mk5_b_red
   fi
 
   local chev
   if [[ $USER == 'root' ]]; then
-    chev="$chev_char$chev_char$chev_char"
+    chev="$__mk5_chev_char$__mk5_chev_char$__mk5_chev_char"
   else
-    chev="$chev_char"
+    chev="$__mk5_chev_char"
   fi
 
   local git_info
@@ -70,25 +75,29 @@ function __mk5_set_prompt {
     git_info=$(__mk5_git_branch)
 
     if [[ $(__mk5_git_dirty) != 0 ]]; then
-      git_info="$git_info $b_yellow$dirty_char$(__mk5_git_dirty)"
+      git_info="$git_info \
+$__mk5_b_yellow$__mk5_dirty_char$(__mk5_git_dirty)"
     fi
 
     if [[ $(__mk5_git_incoming) != 0 ]]; then
-      git_info="$git_info $b_red$incoming_char$(__mk5_git_incoming)"
+      git_info="$git_info \
+$__mk5_b_red$__mk5_incoming_char$(__mk5_git_incoming)"
     fi
 
     if [[ $(__mk5_git_outgoing) != 0 ]]; then
-      git_info="$git_info $b_blue$outgoing_char$(__mk5_git_outgoing)"
+      git_info="$git_info \
+$__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
     fi
 
-    git_info="$d_gray$git_info $l_gray$chev $normal"
+    git_info="$__mk5_d_gray$git_info \
+$__mk5_l_gray$__mk5_chev_char $__mk5_normal"
   fi
 
   PS1="\
-$cyan$USER@$__mk5_hostname $b_cyan$chev \
+$__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_chev_char \
 $git_info\
-$green$(__mk5_git_pwd) $chevcolor$chev \
-$normal"
+$__mk5_green$(__mk5_git_pwd) $chevcolor$chev \
+$__mk5_normal"
 }
 
 PROMPT_COMMAND=__mk5_set_prompt
