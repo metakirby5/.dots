@@ -6,20 +6,13 @@
 	[
 		"BracketHighlighter",
 		"ColorPicker",
-		"DocBlockr",
 		"Emmet",
 		"Git",
 		"GitGutter",
-		"Hayaku - tools for writing CSS faster",
-		"Jade",
-		"Jade Build",
-		"Jade Snippets",
 		"LaTeXTools",
 		"Package Control",
-		"SCSS",
 		"Stylus",
-		"SublimeCodeIntel",
-		"SublimeLinter",
+		"sublimelint",
 		"Zen Tabs"
 	]
 }
