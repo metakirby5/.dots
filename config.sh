@@ -3,9 +3,35 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 export CLASSPATH='*':'.'
 
+# Aliases
+alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
+alias vty="variety >/dev/null"
+
 # Functions
-function flatten-dir {
-  find . -mindepth 2 -type f -exec mv -t . -i '{}' +
+function variety-mv {
+  mv "$(variety --get | grep '/')" "$1" && variety --next
+}
+
+function variety {
+  if [[ "$#" -eq 0 ]]; then
+    command variety
+  else
+    case "$1" in
+      nsfw)
+        variety-mv "/home/echan/Pictures/Wallpapers/Desktop/NSFW/"
+        ;;
+      mv)
+        if [[ $# -eq 2 ]]; then
+          variety-mv "$2"
+        else
+          echo "Please provide a destination."
+        fi
+        ;;
+      *)
+        command variety "$@"
+        ;;
+    esac
+  fi
 }
 
 function ghp-publish {
