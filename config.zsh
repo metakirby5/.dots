@@ -29,8 +29,7 @@
 #### END
 
 HISTFILE=~/.zhistory
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=SAVEHIST=1000
 setopt appendhistory beep extendedglob nomatch
 unsetopt autocd notify
 
@@ -57,9 +56,9 @@ alias ll='ls -l'
 alias la='ls -a'
 
 setopt sharehistory extendedhistory
-
 setopt extendedglob
 unsetopt caseglob
+setopt interactivecomments
 
 REPORTTIME=10
 
