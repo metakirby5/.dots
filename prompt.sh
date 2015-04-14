@@ -1,8 +1,10 @@
 __mk5_normal='\[\e[0m\]'
 __mk5_cyan='\[\e[0;36m\]'
 __mk5_green='\[\e[0;32m\]'
+__mk5_purple='\[\e[0;35m\]'
 __mk5_b_cyan='\[\e[1;36m\]'
 __mk5_b_green='\[\e[1;32m\]'
+__mk5_b_purple='\[\e[1;35m\]'
 __mk5_b_yellow='\[\e[1;33m\]'
 __mk5_b_red='\[\e[1;31m\]'
 __mk5_b_blue='\[\e[1;34m\]'
@@ -88,8 +90,15 @@ $__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
 $__mk5_l_gray$__mk5_chev_char $__mk5_normal"
   fi
 
+  local virtualenv_info
+  if [[ $VIRTUAL_ENV ]]; then
+    virtualenv_info="$__mk5_purple$(basename $VIRTUAL_ENV) \
+$mk5_b_purple$__mk5_chev_char $__mk5_normal"
+  fi
+
   PS1="\
 $__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_chev_char \
+$virtualenv_info\
 $git_info\
 $__mk5_green$(__mk5_git_pwd) $chevcolor$chev \
 $__mk5_normal"
