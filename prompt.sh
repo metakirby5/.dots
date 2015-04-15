@@ -1,16 +1,21 @@
 __mk5_normal='\[\e[0m\]'
-__mk5_cyan='\[\e[0;36m\]'
+
+# Line colors
 __mk5_green='\[\e[0;32m\]'
 __mk5_purple='\[\e[0;35m\]'
-__mk5_b_cyan='\[\e[1;36m\]'
+__mk5_cyan='\[\e[0;36m\]'
+__mk5_gray='\[\e[0;37m\]'
 __mk5_b_green='\[\e[1;32m\]'
 __mk5_b_purple='\[\e[1;35m\]'
-__mk5_b_yellow='\[\e[1;33m\]'
-__mk5_b_red='\[\e[1;31m\]'
-__mk5_b_blue='\[\e[1;34m\]'
-__mk5_l_gray='\[\e[0;37m\]'
-__mk5_d_gray='\[\e[1;30m\]'
+__mk5_b_cyan='\[\e[1;36m\]'
+__mk5_b_gray='\[\e[1;37m\]'
 
+# Git status colors
+__mk5_b_red='\[\e[1;31m\]'
+__mk5_b_yellow='\[\e[1;33m\]'
+__mk5_b_blue='\[\e[1;34m\]'
+
+# Special characters
 __mk5_chev_char='❯'
 __mk5_dirty_char='±'
 __mk5_incoming_char='⬇'
@@ -86,8 +91,8 @@ $__mk5_b_red$__mk5_incoming_char$(__mk5_git_incoming)"
 $__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
     fi
 
-    git_info="$__mk5_d_gray$git_info \
-$__mk5_l_gray$__mk5_chev_char $__mk5_normal"
+    git_info="$__mk5_gray$git_info \
+$__mk5_b_gray$__mk5_chev_char $__mk5_normal"
   fi
 
   local virtualenv_info
