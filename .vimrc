@@ -26,15 +26,22 @@ au VimEnter * au WinEnter * let w:created = 1
 " Vundle
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'molokai'
-Plugin 'ScrollColors'
-Plugin 'The-NERD-tree'
-Plugin 'jistr/vim-nerdtree-tabs'
+try
+  call vundle#begin()
 
-call vundle#end()
+  Plugin 'gmarik/Vundle.vim'
+  Plugin 'molokai'
+  Plugin 'ScrollColors'
+  Plugin 'The-NERD-tree'
+  Plugin 'jistr/vim-nerdtree-tabs'
+
+  call vundle#end()
+
+  noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
+catch
+endtry
+
 filetype plugin indent on
 
 " **************************************
