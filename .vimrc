@@ -23,6 +23,10 @@ noremap <leader><space> <space>
 " Set up w:created au to run later
 au VimEnter * au WinEnter * let w:created = 1
 
+" Pathogen
+silent! execute pathogen#infect()
+silent! Helptags
+
 " **************************************
 " * Variables
 " **************************************
@@ -81,7 +85,8 @@ set omnifunc=syntaxcomplete#Complete
 " **************************************
 
 " Set color scheme
-:silent! colorscheme peachpuff
+silent! colorscheme peachpuff  " Fallback
+silent! colorscheme molokai
 
 " Syntax highlighting
 syntax on
