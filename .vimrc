@@ -23,9 +23,19 @@ noremap <leader><space> <space>
 " Set up w:created au to run later
 au VimEnter * au WinEnter * let w:created = 1
 
-" Pathogen
-silent! execute pathogen#infect()
-silent! Helptags
+" Vundle
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'molokai'
+Plugin 'ScrollColors'
+Plugin 'The-NERD-tree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
+call vundle#end()
+filetype plugin indent on
 
 " **************************************
 " * Variables
@@ -44,14 +54,14 @@ set mouse-=a                   " disallow mouse usage
 set hlsearch                   " highlights all search hits
 set ignorecase                 " search without regards to case
 set smartcase                  " search with smart casing
-filetype on                    " filetype stuff
-filetype plugin on             " filetype stuff
-filetype indent on             " filetype stuff
 
 " Persistent undo
 try
     set undodir=~/.vimUndo/ " set undo directory
     set undofile            " use an undo file
+
+    " Make undo directory if doesn't exist
+    silent !mkdir ~/.vimUndo > /dev/null 2>&1
 catch
 endtry
 
