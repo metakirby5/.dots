@@ -31,7 +31,6 @@ try
   call vundle#begin()
 
   Plugin 'gmarik/Vundle.vim'
-  Plugin 'molokai'
   Plugin 'ScrollColors'
   Plugin 'The-NERD-tree'
   Plugin 'jistr/vim-nerdtree-tabs'
@@ -102,8 +101,7 @@ set omnifunc=syntaxcomplete#Complete
 " **************************************
 
 " Set color scheme
-silent! colorscheme peachpuff  " Fallback
-silent! colorscheme molokai
+silent! colorscheme peachpuff
 
 " Syntax highlighting
 syntax on
