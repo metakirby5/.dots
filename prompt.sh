@@ -17,8 +17,10 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-__mk5_chev_char='»'
-__mk5_dirty_char='±'
+__mk5_usr_pchar='$'
+__mk5_root_pchar='#'
+__mk5_sepchar='+'
+__mk5_dirty_char='*'
 __mk5_incoming_char='v'
 __mk5_outgoing_char='^'
 
@@ -59,18 +61,18 @@ function __mk5_set_prompt {
   # Grab status code first
   local last_status=$?
 
-  local chevcolor
+  local pcharcolor
   if [[ $last_status == 0 ]]; then
-    chevcolor=$__mk5_b_green
+    pcharcolor=$__mk5_b_green
   else
-    chevcolor=$__mk5_b_red
+    pcharcolor=$__mk5_b_red
   fi
 
-  local chev
+  local pchar
   if [[ $USER == 'root' ]]; then
-    chev="$__mk5_chev_char$__mk5_chev_char$__mk5_chev_char"
+    pchar="$__mk5_root_pchar"
   else
-    chev="$__mk5_chev_char"
+    pchar="$__mk5_usr_pchar"
   fi
 
   local git_info
@@ -93,20 +95,20 @@ $__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
     fi
 
     git_info="$__mk5_purple$git_info \
-$__mk5_b_purple$__mk5_chev_char $__mk5_normal"
+$__mk5_b_purple$__mk5_sepchar $__mk5_normal"
   fi
 
   local virtualenv_info
   if [[ $VIRTUAL_ENV ]]; then
     virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
-$__mk5_b_blue$__mk5_chev_char $__mk5_normal"
+$__mk5_b_blue$__mk5_sepchar $__mk5_normal"
   fi
 
   PS1="\
-$__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_chev_char \
+$__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
 $virtualenv_info\
 $git_info\
-$__mk5_green$(__mk5_git_pwd) $chevcolor$chev \
+$__mk5_green$(__mk5_git_pwd) $pcharcolor$pchar \
 $__mk5_normal"
 }
 
