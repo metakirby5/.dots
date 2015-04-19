@@ -27,7 +27,7 @@ au VimEnter * au WinEnter * let w:created = 1
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-try
+if exists('*vundle#begin()')
   call vundle#begin()
 
   Plugin 'gmarik/Vundle.vim'
@@ -38,8 +38,7 @@ try
   call vundle#end()
 
   noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
-catch
-endtry
+endif
 
 filetype plugin indent on
 
