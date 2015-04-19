@@ -30,10 +30,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
-  Plugin 'gmarik/Vundle.vim'
-  Plugin 'ScrollColors'
-  Plugin 'The-NERD-tree'
-  Plugin 'jistr/vim-nerdtree-tabs'
+  Plugin 'gmarik/Vundle.vim'        " Bundle manager
+  Plugin 'ScrollColors'             " Scroll through colorschemes
+  Plugin 'The-NERD-tree'            " File explorer
+  Plugin 'jistr/vim-nerdtree-tabs'  " NERD-tree persistence through tabs
 
   call vundle#end()
 
