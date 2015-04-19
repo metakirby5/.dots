@@ -27,7 +27,7 @@ au VimEnter * au WinEnter * let w:created = 1
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-if exists('*vundle#begin()')
+if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
   Plugin 'gmarik/Vundle.vim'
