@@ -61,14 +61,13 @@ set ignorecase                 " search without regards to case
 set smartcase                  " search with smart casing
 
 " Persistent undo
-try
-    set undodir=~/.vimUndo/ " set undo directory
-    set undofile            " use an undo file
-
-    " Make undo directory if doesn't exist
-    silent !mkdir ~/.vimUndo > /dev/null 2>&1
-catch
-endtry
+if exists('&undodir')
+  if !isdirectory($HOME . '/.vimUndo/')
+    silent call mkdir($HOME . '/.vimUndo/', 'p')
+  endif
+  set undodir=~/.vimUndo/ " set undo directory
+  set undofile            " use an undo file
+endif
 
 " Autocomplete menus
 if has("wildmenu")
@@ -254,11 +253,10 @@ noremap <leader>bt :tab ball<cr>
 noremap <leader>bcd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
-try
-    set switchbuf=useopen,usetab,newtab
-    set stal=2
-catch
-endtry
+if exists('&switchbuf')
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+endif
 
 " === Splits
 
