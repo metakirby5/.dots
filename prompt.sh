@@ -17,10 +17,10 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-__mk5_chev_char=$(echo -e '\xe2\x9d\xaf\x0a')
-__mk5_dirty_char=$(echo -e '\xc2\xb1\x0a')
-__mk5_incoming_char=$(echo -e '\xe2\xac\x87\x0a')
-__mk5_outgoing_char=$(echo -e '\xe2\xac\x86\x0a')
+__mk5_chev_char='»'
+__mk5_dirty_char='±'
+__mk5_incoming_char='v'
+__mk5_outgoing_char='^'
 
 __mk5_hostname=$(hostname|cut -d . -f 1)
 
@@ -99,7 +99,7 @@ $__mk5_b_purple$__mk5_chev_char $__mk5_normal"
   local virtualenv_info
   if [[ $VIRTUAL_ENV ]]; then
     virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
-$mk5_b_blue$__mk5_chev_char $__mk5_normal"
+$__mk5_b_blue$__mk5_chev_char $__mk5_normal"
   fi
 
   PS1="\
