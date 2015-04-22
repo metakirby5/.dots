@@ -69,7 +69,7 @@ function __mk5_set_prompt {
   fi
 
   local pchar
-  if [[ $USER == 'root' ]]; then
+  if [[ $EUID -eq 0 ]]; then
     pchar="$__mk5_root_pchar"
   else
     pchar="$__mk5_usr_pchar"
