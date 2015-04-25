@@ -1,12 +1,15 @@
 [user]
-    name = Ethan Chan
-    email = metakirby5@gmail.com
+  name = Ethan Chan
+  email = metakirby5@gmail.com
 [alias]
-    st = status
-    ci = commit
-    br = branch
-    co = checkout
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
 [core]
-    excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
 [push]
-    default = simple
+  default = simple
+[merge]
+  tool = meld
+  conflictstyle = diff3
