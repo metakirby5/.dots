@@ -45,11 +45,16 @@ function ghp-publish {
     git checkout $cur_branch
 }
 
-function clean-branches {
+function git-clean-branches {
   git checkout master && \
+    git pull --prune && \
     git branch --merged master | \
     grep -v "\* master$" | \
     xargs -n 1 git branch -d
+}
+
+function git-clean-orig {
+    git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -ri
 }
 
 function clean-chrome {
