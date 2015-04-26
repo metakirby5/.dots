@@ -27,15 +27,15 @@ __mk5_outgoing_char='^'
 __mk5_hostname=$(hostname|cut -d . -f 1)
 
 function __mk5_git_pwd {
-  # Get git base directory
-  local gitbase=$(git rev-parse --show-toplevel 2>/dev/null)
+  # Get git path
+  local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
 
-  if [[ $gitbase ]]; then
-    # Strip git base directory
-    echo "$(basename $gitbase)${PWD##$gitbase}"
+  if [[ "$gitpath" ]]; then
+    # Strip git path
+    echo "$(basename $gitpath)${PWD##$gitpath}"
   else
     # Replace home with ~
-    echo $PWD | sed "s|^$HOME|~|"
+    echo "$PWD" | sed "s|^$HOME|~|"
   fi
 }
 
@@ -61,13 +61,15 @@ function __mk5_set_prompt {
   # Grab status code first
   local last_status=$?
 
+  # Status color
   local pcharcolor
   if [[ $last_status == 0 ]]; then
-    pcharcolor=$__mk5_b_green
+    pcharcolor="$__mk5_b_green"
   else
-    pcharcolor=$__mk5_b_red
+    pcharcolor="$__mk5_b_red"
   fi
 
+  # Use $ or # for prompt
   local pchar
   if [[ $EUID -eq 0 ]]; then
     pchar="$__mk5_root_pchar"
@@ -75,40 +77,51 @@ function __mk5_set_prompt {
     pchar="$__mk5_usr_pchar"
   fi
 
+  # Git stuff
   local git_info
-  if [[ $(__mk5_git_branch) ]]; then
+  if [[ "$(__mk5_git_branch)" ]]; then
     git_info=$(__mk5_git_branch)
 
-    if [[ $(__mk5_git_dirty) != 0 ]]; then
+    if [[ "$(__mk5_git_dirty)" != 0 ]]; then
       git_info="$git_info \
 $__mk5_b_yellow$__mk5_dirty_char$(__mk5_git_dirty)"
     fi
 
-    if [[ $(__mk5_git_incoming) != 0 ]]; then
+    if [[ "$(__mk5_git_incoming)" != 0 ]]; then
       git_info="$git_info \
 $__mk5_b_red$__mk5_incoming_char$(__mk5_git_incoming)"
     fi
 
-    if [[ $(__mk5_git_outgoing) != 0 ]]; then
+    if [[ "$(__mk5_git_outgoing)" != 0 ]]; then
       git_info="$git_info \
 $__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
     fi
 
     git_info="$__mk5_purple$git_info \
-$__mk5_b_purple$__mk5_sepchar $__mk5_normal"
+$__mk5_b_purple$__mk5_sepchar "
   fi
 
+  # Virtualenv stuff
+  local colorpwd="$__mk5_green$(__mk5_git_pwd) "
   local virtualenv_info
-  if [[ $VIRTUAL_ENV ]]; then
-    virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
-$__mk5_b_blue$__mk5_sepchar $__mk5_normal"
+  if [[ "$VIRTUAL_ENV" ]]; then
+    local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
+    local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
+
+    if [[ "$gitpath" == "$envpath" ]]; then
+      colorpwd="$__mk5_blue$(basename $gitpath)$__mk5_green${PWD##$gitpath} "
+    else
+      virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
+$__mk5_b_blue$__mk5_sepchar "
+    fi
   fi
 
   PS1="\
 $__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
 $virtualenv_info\
 $git_info\
-$__mk5_green$(__mk5_git_pwd) $pcharcolor$pchar \
+$colorpwd\
+$pcharcolor$pchar \
 $__mk5_normal"
 }
 
