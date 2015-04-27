@@ -108,7 +108,7 @@ $__mk5_b_purple$__mk5_sepchar "
     local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
     local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
 
-    if [[ "$gitpath" == "$envpath" ]]; then
+    if [[ "$envpath" && "$gitpath" == "$envpath" ]]; then
       colorpwd="$__mk5_blue$(basename $gitpath)$__mk5_green${PWD##$gitpath} "
     else
       virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
