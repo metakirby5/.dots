@@ -63,12 +63,15 @@ clean-chrome() {
 }
 
 pip-update() {
-  if [[ ! $1 ]]; then
-      echo 'Usage: pip-update [requirements.txt]'
+  local reqs='requirements.txt'
+
+  if [[ ! -f $reqs ]]; then
+      echo "ERROR: $reqs not found."
       return
   fi
-  pip freeze | grep -v -f $1 - | xargs pip uninstall -y && \
-    pip install -r $1
+
+  pip freeze | grep -v -f $reqs - | xargs pip uninstall -y 2>/dev/null
+  pip install -r $reqs
 }
 
 javar() {
