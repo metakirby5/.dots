@@ -54,7 +54,7 @@ git-clean-branches() {
 }
 
 git-clean-orig() {
-    git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -ri
+    git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
 }
 
 clean-chrome() {
