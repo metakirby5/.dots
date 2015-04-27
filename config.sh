@@ -67,7 +67,7 @@ pip-update() {
       echo 'Usage: pip-update [requirements.txt]'
       return
   fi
-  pip freeze | grep -v -f $1 - | xargs pip uninstall && \
+  pip freeze | grep -v -f $1 - | xargs pip uninstall -y && \
     pip install -r $1
 }
 
