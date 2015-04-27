@@ -8,11 +8,11 @@ alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
 
 # Functions
-function variety-mv {
+variety-mv() {
   mv "$(variety --get | grep '/')" "$1" && variety --next
 }
 
-function variety {
+variety() {
   if [[ "$#" -eq 0 ]]; then
     command variety
   else
@@ -34,7 +34,7 @@ function variety {
   fi
 }
 
-function ghp-publish {
+ghp-publish() {
   local cur_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   git checkout master && \
     git pull && \
@@ -45,7 +45,7 @@ function ghp-publish {
     git checkout $cur_branch
 }
 
-function git-clean-branches {
+git-clean-branches() {
   git checkout master && \
     git pull --prune && \
     git branch --merged master | \
@@ -53,18 +53,27 @@ function git-clean-branches {
     xargs -n 1 git branch -d
 }
 
-function git-clean-orig {
+git-clean-orig() {
     git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -ri
 }
 
-function clean-chrome {
+clean-chrome() {
   killall chrome && \
     rm ~/.config/google-chrome/Default/Web\ Data
 }
 
-function javar {
+pip-update() {
+  if [[ ! $1 ]]; then
+      echo 'Usage: pip-update [requirements.txt]'
+      return
+  fi
+  pip freeze | grep -v -f $1 - | xargs pip uninstall && \
+    pip install -r $1
+}
+
+javar() {
     if [[ ! $1 ]]; then
-        echo 'Usage: javar <class name>'
+        echo 'Usage: javar [class name]'
         echo 'Example for a file named "Test.java":'
         echo '    $ javar Test'
         return
