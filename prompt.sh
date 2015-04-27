@@ -121,6 +121,7 @@ $__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
 $virtualenv_info\
 $git_info\
 $colorpwd\
+\n\
 $pcharcolor$pchar \
 $__mk5_normal"
 }
