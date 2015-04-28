@@ -8,10 +8,13 @@ alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
 
 # Functions
+
+# Moves the current wallpaper to $1
 variety-mv() {
   mv "$(variety --get | grep '/')" "$1" && variety --next
 }
 
+# Add aliases for mv and nsfw
 variety() {
   if [[ "$#" -eq 0 ]]; then
     command variety
@@ -34,6 +37,7 @@ variety() {
   fi
 }
 
+# Publish to github-pages
 ghp-publish() {
   local cur_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   git checkout master && \
@@ -45,6 +49,7 @@ ghp-publish() {
     git checkout $cur_branch
 }
 
+# Get rid of already-merged branches
 git-clean-branches() {
   git checkout master && \
     git pull --prune && \
@@ -53,16 +58,19 @@ git-clean-branches() {
     xargs -n 1 git branch -d
 }
 
+# Get rid of .orig files from merge conflicts
 git-clean-orig() {
     git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
 }
 
+# Fix chrome profile loading bugs
 clean-chrome() {
   killall chrome && \
     rm ~/.config/google-chrome/Default/Web\ Data
 }
 
-pip-update() {
+# Makes pip packages match requirements.txt
+pip-sync() {
   local reqs='requirements.txt'
 
   if [[ ! -f $reqs ]]; then
@@ -74,6 +82,7 @@ pip-update() {
   pip install -r $reqs
 }
 
+# Compile and run a Java class
 javar() {
     if [[ ! $1 ]]; then
         echo 'Usage: javar [class name]'
