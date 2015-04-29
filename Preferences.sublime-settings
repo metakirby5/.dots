@@ -1,4 +1,5 @@
 {
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"font_size": 12,
 	"highlight_line": true,

@@ -11,8 +11,11 @@
 		"GitGutter",
 		"LaTeXTools",
 		"Package Control",
+		"Simple Print Function",
 		"Stylus",
 		"sublimelint",
+		"SublimeLinter",
+		"SublimeLinter-javac",
 		"Theme - Spacegray",
 		"Zen Tabs"
 	]
