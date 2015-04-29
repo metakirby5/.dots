@@ -4,16 +4,17 @@
 	],
 	"installed_packages":
 	[
+		"Babel",
 		"BracketHighlighter",
 		"ColorPicker",
 		"Emmet",
 		"Git",
 		"GitGutter",
+		"JSX",
 		"LaTeXTools",
 		"Package Control",
 		"Simple Print Function",
 		"Stylus",
-		"sublimelint",
 		"SublimeLinter",
 		"SublimeLinter-javac",
 		"Theme - Spacegray",
