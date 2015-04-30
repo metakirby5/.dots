@@ -50,8 +50,17 @@ function __mk5_git_dirty {
 }
 
 function __mk5_git_outgoing {
-  echo "$(git log origin/$(__mk5_git_branch).. 2>/dev/null \
-    | grep '^commit' | wc -l)"
+  # Check if branch exists on remote; if so, echo !
+  local branch_exists=$(git branch -r \
+    | grep -E "^\s*origin/$(__mk5_git_branch)\$")
+  if [[ ! $branch_exists ]]; then
+    echo '!'
+
+  # Otherwise, compare wih remote branch; echo # commits ahead
+  else
+    echo "$(git log origin/$(__mk5_git_branch).. 2>/dev/null \
+      | grep '^commit' | wc -l)"
+  fi
 }
 
 function __mk5_git_incoming {
