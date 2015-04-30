@@ -51,7 +51,7 @@ function __mk5_git_dirty {
 
 function __mk5_git_outgoing {
   # Check if branch exists on remote; if so, echo !
-  local branch_exists=$(git branch -r \
+  local branch_exists=$(git branch -r 2>/dev/null \
     | grep -E "^\s*origin/$(__mk5_git_branch)\$")
   if [[ ! $branch_exists ]]; then
     echo '!'
