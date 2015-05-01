@@ -69,6 +69,18 @@ clean-chrome() {
     rm ~/.config/google-chrome/Default/Web\ Data
 }
 
+# Check differences between current packages and requirements.txt
+pip-diff() {
+  local reqs='requirements.txt'
+
+  if [[ ! -f $reqs ]]; then
+      echo "ERROR: $reqs not found."
+      return
+  fi
+
+  diff <(pip freeze) $reqs
+}
+
 # Makes pip packages match requirements.txt
 pip-sync() {
   local reqs='requirements.txt'
