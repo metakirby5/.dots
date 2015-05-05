@@ -22,6 +22,7 @@ __mk5_root_pchar='#'
 __mk5_sepchar='+'
 __mk5_dirty_char='*'
 __mk5_incoming_char='v'
+__mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
 __mk5_hostname=$(hostname|cut -d . -f 1)
@@ -49,6 +50,16 @@ function __mk5_git_dirty {
   echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l)"
 }
 
+function __mk5_git_incoming {
+  echo "$(git log ..origin/$(__mk5_git_branch) 2>/dev/null \
+    | grep '^commit' | wc -l)"
+}
+
+function __mk5_git_behindmaster {
+  echo "$(git log ..origin/master 2>/dev/null \
+    | grep '^commit' | wc -l)"
+}
+
 function __mk5_git_outgoing {
   # Check if branch exists on remote; if so, echo !
   local branch_exists=$(git branch -r 2>/dev/null \
@@ -61,11 +72,6 @@ function __mk5_git_outgoing {
     echo "$(git log origin/$(__mk5_git_branch).. 2>/dev/null \
       | grep '^commit' | wc -l)"
   fi
-}
-
-function __mk5_git_incoming {
-  echo "$(git log ..origin/$(__mk5_git_branch) 2>/dev/null \
-    | grep '^commit' | wc -l)"
 }
 
 function __mk5_set_prompt {
@@ -101,6 +107,11 @@ $__mk5_b_yellow$__mk5_dirty_char$(__mk5_git_dirty)"
     if [[ "$(__mk5_git_incoming)" != 0 ]]; then
       git_info="$git_info \
 $__mk5_b_red$__mk5_incoming_char$(__mk5_git_incoming)"
+    fi
+
+    if [[ "$(__mk5_git_behindmaster)" != 0 ]]; then
+      git_info="$git_info \
+$__mk5_b_green$__mk5_behindmaster_char$(__mk5_git_behindmaster)"
     fi
 
     if [[ "$(__mk5_git_outgoing)" != 0 ]]; then
