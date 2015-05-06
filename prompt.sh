@@ -29,14 +29,15 @@ __mk5_hostname=$(hostname|cut -d . -f 1)
 
 function __mk5_git_pwd {
   # Get git path
+  local thePWD=$(readlink -f "$PWD")
   local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
 
   if [[ "$gitpath" ]]; then
     # Strip git path
-    echo "$(basename $gitpath)${PWD##$gitpath}"
+    echo "${gitpath##*/}${thePWD##$gitpath}"
   else
     # Replace home with ~
-    echo "$PWD" | sed "s|^$HOME|~|"
+    echo "$thePWD" | sed "s|^$HOME|~|"
   fi
 }
 
@@ -127,17 +128,18 @@ $__mk5_b_purple$__mk5_sepchar "
   local colorpwd="$__mk5_green$(__mk5_git_pwd) "
   local virtualenv_info
   if [[ "$VIRTUAL_ENV" ]]; then
+    local thePWD=$(readlink -f "$PWD")
     local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
     local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
 
     # If we're in a git repo and the directory matches the current env
     # project path, make it blue
     if [[ "$envpath" && "$gitpath" == "$envpath" ]]; then
-      colorpwd="$__mk5_blue$(basename $gitpath)$__mk5_green${PWD##$gitpath} "
+      colorpwd="$__mk5_blue${gitpath##*/}$__mk5_green${thePWD##$gitpath} "
 
     # Otherwise, just print out the virtualenv info separately
     else
-      virtualenv_info="$__mk5_blue$(basename $VIRTUAL_ENV) \
+      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/} \
 $__mk5_b_blue$__mk5_sepchar "
     fi
   fi
