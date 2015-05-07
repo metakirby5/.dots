@@ -52,6 +52,7 @@ ghp-publish() {
 # Get rid of already-merged branches
 git-clean-branches() {
   git checkout master && \
+    git pull && \
     git branch --merged master | \
     grep -v "\* master$" | \
     xargs -n 1 git branch -d && \
