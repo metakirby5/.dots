@@ -70,6 +70,11 @@ clean-chrome() {
     rm ~/.config/google-chrome/Default/Web\ Data
 }
 
+# Cleans all *.pyc files recursively in the current directory
+clean-pyc() {
+  find . -name '*.pyc' -delete
+}
+
 # Check differences between current packages and requirements.txt
 pip-diff() {
   local reqs='requirements.txt'
