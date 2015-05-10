@@ -293,6 +293,9 @@ noremap <silent> <leader><left> :vertical resize -5<cr>
 
 " === Tabs
 
+" Change maximum number of tabs
+set tabpagemax=100
+
 " Useful mappings for managing tabs
 noremap <C-t> :tabnew<cr>
 inoremap <C-t> <esc>:tabnew<cr>
