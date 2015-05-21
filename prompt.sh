@@ -57,7 +57,7 @@ function __mk5_git_incoming {
 }
 
 function __mk5_git_behindmaster {
-  echo "$(git log ..origin/master 2>/dev/null \
+  echo "$(git log ..master 2>/dev/null \
     | grep '^commit' | wc -l)"
 }
 
