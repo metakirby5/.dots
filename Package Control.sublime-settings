@@ -10,7 +10,6 @@
 		"Emmet",
 		"Git",
 		"GitGutter",
-		"JSX",
 		"LaTeXTools",
 		"Package Control",
 		"Simple Print Function",
@@ -18,6 +17,9 @@
 		"SublimeLinter",
 		"SublimeLinter-flake8",
 		"SublimeLinter-javac",
+		"SublimeLinter-jshint",
+		"SublimeLinter-json",
+		"SublimeLinter-jsxhint",
 		"Theme - Spacegray",
 		"Zen Tabs"
 	]
