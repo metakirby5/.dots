@@ -16,6 +16,7 @@
 		"Simple Print Function",
 		"Stylus",
 		"SublimeLinter",
+		"SublimeLinter-flake8",
 		"SublimeLinter-javac",
 		"Theme - Spacegray",
 		"Zen Tabs"
