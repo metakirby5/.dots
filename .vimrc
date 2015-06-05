@@ -319,11 +319,11 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-" ^[left / right] - Switch tabs
-noremap <silent> <C-Right> :tabnext<cr>
-noremap <silent> <C-Left> :tabprevious<cr>
-inoremap <silent> <C-Right> <esc>:tabnext<cr>
-inoremap <silent> <C-Left> <esc>:tabprevious<cr>
+" ^[l / h] - Switch tabs
+noremap <silent> <C-l> :tabnext<cr>
+noremap <silent> <C-h> :tabprevious<cr>
+inoremap <silent> <C-l> <esc>:tabnext<cr>
+inoremap <silent> <C-h> <esc>:tabprevious<cr>
 
 " ^shift[left / right] - Move tabs
 noremap <silent> <C-S-Right> :tabmove +1<cr>
@@ -497,12 +497,6 @@ noremap <leader><C-P> "0P
 
 " shift-<tab> - Omni complete (not really useful in C)
 inoremap <S-tab> <C-x><C-o>
-
-" ^[hl] - Previous/next error
-noremap <silent> <C-l> :cn<CR>
-noremap <silent> <C-h> :cN<CR>
-inoremap <silent> <C-l> <esc>:cn<cr>
-inoremap <silent> <C-h> <esc>:cN<cr>
 
 " ^\ - Save
 noremap <C-\> :w<cr>
