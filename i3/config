@@ -12,9 +12,12 @@ set $cFocusIN                             #88DEF1
 set $cSubFocusBG                          #777777
 set $cSubFocusFG                          #CCCCCC
 set $cSubFocusIN                          #888888
-set $cNoFocusBG                           #444444
-set $cNoFocusFG                           #AAAAAA
-set $cNoFocusIN                           #555555
+set $cUnfocusBG                           #444444
+set $cUnfocusFG                           #AAAAAA
+set $cUnfocusIN                           #555555
+set $cUrgentBG                            #C62828
+set $cUrgentFG                            #FFFFFF
+set $cUrgentIN                            #F44336
 set $barBG                                #2D2D2D
 set $barFG                                #DEDEDE
 set $font pango:DejaVu Sans Mono          24
@@ -54,8 +57,10 @@ exec feh --bg-fill $wallpaper
 # Colors
 # class                 border        backgr.       text          indicator
 client.focused          $cFocusBG     $cFocusBG     $cFocusFG     $cFocusIN
-client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $SubcFocusIN
-client.unfocused        $cNoFocusBG   $cNoFocusBG   $cNoFocusFG   $cFocusIN
+client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $cSubFocusIN
+client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
+client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
+client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 
 ## SYSTEM
 
@@ -81,7 +86,7 @@ bar {
     statusline $barFG
     background $barBG
     focused_workspace $cFocusBG $cFocusBG $cFocusFG
-    inactive_workspace $cNoFocusIN $cNoFocusIN $cNoFocusFG
+    inactive_workspace $cUnfocusIN $cUnfocusIN $cUnfocusFG
   }
 }
 

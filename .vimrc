@@ -402,7 +402,9 @@ noremap <silent> <leader>c :let &cc = (&cc ? 0 : 78)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 au BufRead,BufWrite * if ! &bin |
+            \exe "normal mz" |
             \silent! %s/\s\+$//ge |
+            \exe "normal 'z" |
             \endif
 
 " ,/m - Remove Windows' ^M
