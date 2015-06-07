@@ -6,6 +6,7 @@ export CLASSPATH='*':'.'
 # Aliases
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
+alias xopen="xdg-open"
 
 # Functions
 
