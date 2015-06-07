@@ -2,7 +2,7 @@ Xcursor.theme:    Vanilla-DMZ-AA
 
 !urxvt color scheme:
 
-URxvt*background: #2B2B2B
+URxvt*background: #2D2D2D
 URxvt*foreground: #DEDEDE
 
 URxvt*colorUL: #86a2b0
