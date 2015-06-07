@@ -33,6 +33,7 @@ set $dmH                                  100
 
 # KEYS
 set $mod                                  Mod4
+set $mod2                                 Mod1
 set $up                                   k
 set $down                                 j
 set $left                                 h
@@ -79,8 +80,13 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec $brightPct
 
 # Status bar
 # https://github.com/ivyl/i3-config/blob/master/conkyrc
+bindsym $mod+b bar hidden_state toggle
 bar {
+  mode hide
+  hidden_state show
+  modifier $mod2
   position top
+  tray_output none
   status_command ~/.i3/bin/conky-wrapper
   colors {
     statusline $barFG
