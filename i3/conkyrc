@@ -16,5 +16,5 @@ TEXT
   {"full_text": " ♪ ${exec amixer get Master | tail -n1 | cut -d ' ' -f7} ", "color":"\#FFEB3B"},
   {"full_text": " ☇ [${wireless_essid wlp1s0}] ","color":"\#4CAF50"},
   {"full_text": " 🕒 [${time %a %b %d %H:%M}] ", "color":"\#2196F3"},
-  {"full_text": " λ [${exec echo $USER@$(hostname)}] ", "color":"\#673AB7"}
+  {"full_text": " λ [${exec echo $USER@$(hostname)}] ", "color":"\#9C27B0"}
 ]
