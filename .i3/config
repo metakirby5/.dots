@@ -18,8 +18,8 @@ set $cUnfocusIN                           #555555
 set $cUrgentBG                            #C62828
 set $cUrgentFG                            #FFFFFF
 set $cUrgentIN                            #F44336
-set $barBG                                #2D2D2D
-set $barFG                                #DEDEDE
+set $cBarBG                               #2D2D2D
+set $cBarFG                               #DEDEDE
 set $font                                 pango:Monospace 24
 set $border                               7
 set $gaps                                 50
@@ -90,10 +90,10 @@ bar {
   strip_workspace_numbers yes
   status_command ~/.i3/bin/conky-wrapper
   colors {
-    statusline $barFG
-    background $barBG
-    focused_workspace $cFocusBG $cFocusBG $cFocusFG
-    inactive_workspace $cUnfocusIN $cUnfocusIN $cUnfocusFG
+    statusline $cBarFG
+    background $cBarBG
+    focused_workspace $cBarBG $cFocusBG $cFocusFG
+    inactive_workspace $cBarBG $cUnfocusBG $cUnfocusFG
   }
 }
 

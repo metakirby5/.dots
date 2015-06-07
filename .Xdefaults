@@ -45,7 +45,7 @@ URxvt*cursorBlink: true
 
 ! extensions:
 
-URxvt.perl-ext-common:  default,matcher,tabbedex
+URxvt.perl-ext-common:  default, matcher, tabbedex
 
 ! tabs settings:
 
@@ -56,6 +56,7 @@ URxvt.perl-ext-common:  default,matcher,tabbedex
 ! URxvt.tabbed.autohide:  true
 ! URxvt.tabbed.new-button:  false
 ! URxvt.tabbed.title: true
+! URxvt.keysym.Control-t: perl:tabbedex:new_tab
 
 ! enabling clickable links:
 
