@@ -20,7 +20,7 @@ set $cUrgentFG                            #FFFFFF
 set $cUrgentIN                            #F44336
 set $barBG                                #2D2D2D
 set $barFG                                #DEDEDE
-set $font pango:DejaVu Sans Mono          24
+set $font                                 pango:Monospace 24
 set $border                               7
 set $gaps                                 50
 
