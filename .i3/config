@@ -28,9 +28,9 @@ set $gaps                                 50
 set $dmHistory                            ~/.dmenu_history
 set $dmPrompt                             λ
 set $dmX                                  0
-set $dmW                                  3200
+set $dmWidth                              3200
 set $dmY                                  1700
-set $dmH                                  100
+set $dmHeight                             100
 
 # Keys
 set $mod                                  Mod4
@@ -109,7 +109,7 @@ bar {
 }
 
 # Dmenu
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$font" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmW -y $dmY -h $dmH -hist "$dmHistory"'
+bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$font" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 
 
 focus_follows_mouse no
