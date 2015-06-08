@@ -44,6 +44,13 @@ set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct                               5
 set $brightPct                            10
 
+## SESSION
+
+# Terminal on scratch
+for_window [title="^urxvt_scratchpad$"] move scratchpad
+bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
+exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:5555/5555/5555/5555
+
 ## THEME
 
 # Font
@@ -66,8 +73,11 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 
 ## SYSTEM
 
-# Auto-start gnome-settings-daemon
+# Start gnome-settings-daemon
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
+
+# Start compton for shadows/transparency
+exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
