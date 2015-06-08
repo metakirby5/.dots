@@ -49,7 +49,7 @@ set $brightPct                            10
 # Terminal on scratch
 for_window [title="^urxvt_scratchpad$"] move scratchpad
 bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
-exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:5555/5555/5555/5555
+exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
 ## THEME
 
