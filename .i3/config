@@ -53,7 +53,7 @@ for_window [class="^.*"] border pixel $border
 gaps inner $gaps
 
 # Wallpaper
-exec feh --bg-fill $wallpaper
+exec --no-startup-id feh --bg-fill $wallpaper
 
 # Colors
 # class                 border        backgr.       text          indicator
@@ -66,7 +66,7 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 ## SYSTEM
 
 # Auto-start gnome-settings-daemon
-exec /usr/libexec/gnome-settings-daemon
+exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
 # Volume controls
 set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
@@ -75,8 +75,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master $volPct%+ &&
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && ogg123 $volChangeSound
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc $brightPct
-bindsym XF86MonBrightnessDown exec xbacklight -dec $brightPct
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc $brightPct
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
 
 # Status bar
 # https://github.com/ivyl/i3-config/blob/master/conkyrc
