@@ -25,10 +25,11 @@ set $border                               7
 set $gaps                                 50
 
 # DMENU
+set $dmHistory                            ~/.dmenu_history
 set $dmPrompt                             λ
-set $dmX                                  100
-set $dmW                                  3000
-set $dmY                                  750
+set $dmX                                  0
+set $dmW                                  3200
+set $dmY                                  1700
 set $dmH                                  100
 
 # KEYS
@@ -108,7 +109,7 @@ bar {
 }
 
 # Dmenu
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$font" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmW -y $dmY -h $dmH'
+bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$font" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmW -y $dmY -h $dmH -hist "$dmHistory"'
 
 
 focus_follows_mouse no
