@@ -40,6 +40,7 @@ set $left                                 h
 set $right                                l
 
 # SYSTEM
+set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct                               5
 set $brightPct                            10
 
@@ -69,7 +70,6 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
 # Volume controls
-set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master $volPct%+ && ogg123 $volChangeSound
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && ogg123 $volChangeSound
