@@ -4,7 +4,7 @@
 
 ## VARIABLES
 
-# THEME
+# Theme
 set $wallpaper                            /usr/share/backgrounds/ethan/ene_black.png
 set $cFocusBG                             #3FCFEE
 set $cFocusFG                             #FFFFFF
@@ -24,7 +24,7 @@ set $font                                 pango:Monospace 24
 set $border                               7
 set $gaps                                 50
 
-# DMENU
+# dmenu
 set $dmHistory                            ~/.dmenu_history
 set $dmPrompt                             λ
 set $dmX                                  0
@@ -32,7 +32,7 @@ set $dmW                                  3200
 set $dmY                                  1700
 set $dmH                                  100
 
-# KEYS
+# Keys
 set $mod                                  Mod4
 set $mod2                                 Mod1
 set $up                                   k
@@ -91,11 +91,11 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
 
 # Status bar
 # https://github.com/ivyl/i3-config/blob/master/conkyrc
-bindsym $mod+b bar hidden_state toggle
+# bindsym $mod+b bar hidden_state toggle
 bar {
-  mode hide
-  hidden_state show
-  modifier $mod2
+#   mode hide
+#   hidden_state show
+#   modifier $mod2
   position top
   tray_output none
   strip_workspace_numbers yes
