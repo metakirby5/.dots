@@ -2,8 +2,8 @@
 
 ! fonts:
 
-URxvt*font: xft:Monospace:pixelsize=32
-URxvt*boldFont: xft:Monospace:bold:pixelsize=32
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=30
+URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=30
 
 ! color scheme:
 
