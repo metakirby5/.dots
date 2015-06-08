@@ -55,7 +55,8 @@ set exrc                       " open local config files
 set nojoinspaces               " don't add white space when I don't tell you to
 set noswapfile                 " no intermediate files used when saving
 set autowrite                  " write before make
-set mouse-=a                   " disallow mouse usage
+set mouse=a                    " allow mouse usage
+set ttymouse=xterm2            " urxvt scrolling
 set hlsearch                   " highlights all search hits
 set ignorecase                 " search without regards to case
 set smartcase                  " search with smart casing
