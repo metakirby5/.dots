@@ -49,17 +49,18 @@ set $brightPct                            10
 ## SESSION
 
 # Autostart
+exec --no-startup-id urxvtd -qof
 exec --no-startup-id mpd
 exec --no-startup-id dropbox start
 
 # Terminal on scratch
-for_window [title="^urxvt_scratchpad$"] move scratchpad
-bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
-exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
+for_window [title="^urxvtc_scratchpad$"] move scratchpad
+bindsym $mod+equal [title="^urxvtc_scratchpad$"] scratchpad show
+exec --no-startup-id urxvtc -name urxvtc_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
 # Dash
 exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; append_layout ~/.i3/layouts/dash.json'
-exec --no-startup-id i3-msg 'exec urxvt -e ncmpcpp'
+exec --no-startup-id i3-msg 'exec urxvtc -e ncmpcpp'
 exec --no-startup-id i3-msg 'exec firefox -P "i3"'
 
 ## THEME
@@ -134,7 +135,7 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+T exec i3-sensible-terminal
+bindsym $mod+T exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
