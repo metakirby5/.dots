@@ -99,7 +99,9 @@
     background: inherit !important;
 }
 
-.tab-close-button, #alltabs-button, #new-tab-button,
+.tab-close-button,
+#alltabs-button,
+#new-tab-button, .tabs-newtab-button,
 .tab-background-start, .tab-background-end, .tab-icon {
     display: none !important;
 }
