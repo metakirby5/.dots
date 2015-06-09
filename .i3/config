@@ -48,6 +48,9 @@ set $brightPct                            10
 
 ## SESSION
 
+# Autostart
+exec --no-startup-id dropbox start
+
 # Terminal on scratch
 for_window [title="^urxvt_scratchpad$"] move scratchpad
 bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
@@ -104,7 +107,7 @@ bar {
 #   hidden_state show
 #   modifier $mod2
   position top
-  tray_output none
+#   tray_output none
   strip_workspace_numbers yes
   status_command ~/.i3/bin/conky-wrapper
   colors {
