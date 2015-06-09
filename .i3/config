@@ -57,7 +57,7 @@ exec --no-startup-id feh --bg-fill $wallpaper
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
 
 # Terminal on scratch
@@ -67,8 +67,8 @@ exec urxvtc -name urxvtc_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
 # Dash
 # exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
-exec urxvtc -e ncmpcpp
-exec firefox -P "i3"
+# exec urxvtc -e ncmpcpp
+# exec firefox -P "i3"
 
 ## SETTINGS
 
@@ -95,7 +95,7 @@ bar {
 #   mode hide
 #   hidden_state show
 #   modifier $mod2
-#   tray_output none
+  tray_output none
   position top
   strip_workspace_numbers yes
   status_command ~/.i3/bin/conky-wrapper
