@@ -42,7 +42,7 @@ set $left                                 h
 set $right                                l
 
 # SYSTEM
-set $dashName                             1:ダッシュ
+set $dashName                             1:★
 set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct                               5
 set $brightPct                            10
@@ -52,6 +52,10 @@ set $brightPct                            10
 # Autostart
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id mpd
+exec --no-startup-id feh --bg-fill $wallpaper
+exec --no-startup-id /usr/libexec/gnome-settings-daemon
+exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
+exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
 
 # Terminal on scratch
@@ -73,9 +77,6 @@ font pango:$fontName $fontSize
 for_window [class="^.*"] border pixel $border
 gaps inner $gaps
 
-# Wallpaper
-exec --no-startup-id feh --bg-fill $wallpaper
-
 # Colors
 # class                 border        backgr.       text          indicator
 client.focused          $cFocusBG     $cFocusBG     $cFocusFG     $cFocusIN
@@ -86,17 +87,12 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 
 ## SYSTEM
 
-# Start gnome-settings-daemon
-exec --no-startup-id /usr/libexec/gnome-settings-daemon
-
-# Start compton for shadows/transparency
-exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 
 # Media controls
-bindsym $mod+Home         exec mpc toggle
-bindsym $mod+End          exec mpc stop
-bindsym $mod+Page_Up      exec mpc prev
-bindsym $mod+Page_Down    exec mpc next
+bindsym $mod+Home         exec --no-startup-id mpc toggle
+bindsym $mod+End          exec --no-startup-id mpc stop
+bindsym $mod+Page_Up      exec --no-startup-id mpc prev
+bindsym $mod+Page_Down    exec --no-startup-id mpc next
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
