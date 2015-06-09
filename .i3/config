@@ -49,6 +49,7 @@ set $brightPct                            10
 ## SESSION
 
 # Autostart
+exec --no-startup-id mpd
 exec --no-startup-id dropbox start
 
 # Terminal on scratch
@@ -89,6 +90,9 @@ exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
 # Start compton for shadows/transparency
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
+
+# Media controls
+bindsym $mod+Home exec mpc toggle
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
