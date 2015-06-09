@@ -54,7 +54,7 @@ bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
 exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
 ## Dash
-exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; exec firefox -new-instance -P "i3"'
+exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; exec firefox -P "i3"'
 
 ## Start on dash
 exec --no-startup-id i3-msg 'workspace "1:ダッシュ"'
