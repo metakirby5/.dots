@@ -42,6 +42,7 @@ set $left                                 h
 set $right                                l
 
 # SYSTEM
+set $dashName                             1:ダッシュ
 set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct                               5
 set $brightPct                            10
@@ -49,7 +50,7 @@ set $brightPct                            10
 ## SESSION
 
 # Autostart
-exec --no-startup-id urxvtd -qof
+exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id mpd
 exec --no-startup-id dropbox start
 
@@ -59,7 +60,7 @@ bindsym $mod+equal [title="^urxvtc_scratchpad$"] scratchpad show
 exec --no-startup-id urxvtc -name urxvtc_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
 # Dash
-exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; append_layout ~/.i3/layouts/dash.json'
+exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
 exec --no-startup-id i3-msg 'exec urxvtc -e ncmpcpp'
 exec --no-startup-id i3-msg 'exec firefox -P "i3"'
 
@@ -192,30 +193,30 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Switch to workspace
-bindsym $mod+grave workspace "1:ダッシュ"
-bindsym $mod+1 workspace "11:一"
-bindsym $mod+2 workspace "12:二"
-bindsym $mod+3 workspace "13:三"
-bindsym $mod+4 workspace "14:四"
-bindsym $mod+5 workspace "15:五"
-bindsym $mod+6 workspace "16:六"
-bindsym $mod+7 workspace "17:七"
-bindsym $mod+8 workspace "18:八"
-bindsym $mod+9 workspace "19:九"
-bindsym $mod+0 workspace "20:十"
+bindsym $mod+grave workspace        "$dashName"
+bindsym $mod+1 workspace            "11:一"
+bindsym $mod+2 workspace            "12:二"
+bindsym $mod+3 workspace            "13:三"
+bindsym $mod+4 workspace            "14:四"
+bindsym $mod+5 workspace            "15:五"
+bindsym $mod+6 workspace            "16:六"
+bindsym $mod+7 workspace            "17:七"
+bindsym $mod+8 workspace            "18:八"
+bindsym $mod+9 workspace            "19:九"
+bindsym $mod+0 workspace            "20:十"
 
 # Move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace "1:ダッシュ"
-bindsym $mod+Shift+1 move container to workspace "11:一"
-bindsym $mod+Shift+2 move container to workspace "12:二"
-bindsym $mod+Shift+3 move container to workspace "13:三"
-bindsym $mod+Shift+4 move container to workspace "14:四"
-bindsym $mod+Shift+5 move container to workspace "15:五"
-bindsym $mod+Shift+6 move container to workspace "16:六"
-bindsym $mod+Shift+7 move container to workspace "17:七"
-bindsym $mod+Shift+8 move container to workspace "18:八"
-bindsym $mod+Shift+9 move container to workspace "19:九"
-bindsym $mod+Shift+0 move container to workspace "20:十"
+bindsym $mod+Shift+grave move container to workspace        "$dashName"
+bindsym $mod+Shift+1 move container to workspace            "11:一"
+bindsym $mod+Shift+2 move container to workspace            "12:二"
+bindsym $mod+Shift+3 move container to workspace            "13:三"
+bindsym $mod+Shift+4 move container to workspace            "14:四"
+bindsym $mod+Shift+5 move container to workspace            "15:五"
+bindsym $mod+Shift+6 move container to workspace            "16:六"
+bindsym $mod+Shift+7 move container to workspace            "17:七"
+bindsym $mod+Shift+8 move container to workspace            "18:八"
+bindsym $mod+Shift+9 move container to workspace            "19:九"
+bindsym $mod+Shift+0 move container to workspace            "20:十"
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
