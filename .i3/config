@@ -57,11 +57,10 @@ for_window [title="^urxvt_scratchpad$"] move scratchpad
 bindsym $mod+equal [title="^urxvt_scratchpad$"] scratchpad show
 exec --no-startup-id urxvt -name urxvt_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
 
-## Dash
-exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; exec firefox -P "i3"'
-
-## Start on dash
-exec --no-startup-id i3-msg 'workspace "1:ダッシュ"'
+# Dash
+exec --no-startup-id i3-msg 'workspace "1:ダッシュ"; append_layout ~/.i3/layouts/dash.json'
+exec --no-startup-id i3-msg 'exec urxvt -e ncmpcpp'
+exec --no-startup-id i3-msg 'exec firefox -P "i3"'
 
 ## THEME
 
@@ -92,7 +91,10 @@ exec --no-startup-id /usr/libexec/gnome-settings-daemon
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 
 # Media controls
-bindsym $mod+Home exec mpc toggle
+bindsym $mod+Home         exec mpc toggle
+bindsym $mod+End          exec mpc stop
+bindsym $mod+Page_Up      exec mpc prev
+bindsym $mod+Page_Down    exec mpc next
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
