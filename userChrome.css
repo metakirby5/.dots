@@ -74,7 +74,7 @@
     font-size: 12px !important;
     color: white !important;
     border: none !important;
-    padding: 0 0 0 13px !important;
+    padding-left: 13px !important;
 }
 
 .tabbrowser-tab:hover {
@@ -83,6 +83,10 @@
 
 .tabbrowser-tab[selected=true] {
     background-color: #444444 !important;
+}
+
+.tab-content {
+    min-height: 30px !important;
 }
 
 .scrollbutton-up, .scrollbutton-down {
