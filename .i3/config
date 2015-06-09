@@ -53,7 +53,7 @@ set $right              l
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id mpd
 
-exec --no-startup-id feh --bg-fill $wallpaper
+exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
