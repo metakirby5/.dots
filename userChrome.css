@@ -109,7 +109,10 @@
     background: inherit !important;
 }
 
-.tab-close-button,
+.tab-close-button {
+    visibility: hidden !important;
+}
+
 #alltabs-button,
 #new-tab-button, .tabs-newtab-button,
 .tab-background-start, .tab-background-end, .tab-icon {
