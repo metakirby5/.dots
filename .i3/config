@@ -5,56 +5,58 @@
 ## VARIABLES
 
 # Theme
-set $wallpaper                            /usr/share/backgrounds/ethan/ene_black.png
-set $cFocusBG                             #3FCFEE
-set $cFocusFG                             #FFFFFF
-set $cFocusIN                             #88DEF1
-set $cSubFocusBG                          #777777
-set $cSubFocusFG                          #CCCCCC
-set $cSubFocusIN                          #888888
-set $cUnfocusBG                           #444444
-set $cUnfocusFG                           #AAAAAA
-set $cUnfocusIN                           #555555
-set $cUrgentBG                            #C62828
-set $cUrgentFG                            #FFFFFF
-set $cUrgentIN                            #F44336
-set $cBarBG                               #2D2D2D
-set $cBarFG                               #DEDEDE
-set $fontName                             DejaVu Sans
-set $fontSize                             24
-set $border                               7
-set $gaps                                 50
+set $wallpaper          /usr/share/backgrounds/ethan/ene_black.png
+set $cFocusBG           #3FCFEE
+set $cFocusFG           #FFFFFF
+set $cFocusIN           #88DEF1
+set $cSubFocusBG        #777777
+set $cSubFocusFG        #CCCCCC
+set $cSubFocusIN        #888888
+set $cUnfocusBG         #444444
+set $cUnfocusFG         #AAAAAA
+set $cUnfocusIN         #555555
+set $cUrgentBG          #C62828
+set $cUrgentFG          #FFFFFF
+set $cUrgentIN          #F44336
+set $cBarBG             #2D2D2D
+set $cBarFG             #DEDEDE
+set $fontName           DejaVu Sans
+set $fontSize           24
+set $border             7
+set $gaps               50
 
 # dmenu
-set $dmHistory                            ~/.dmenu_history
-set $dmPrompt                             λ
-set $dmX                                  0
-set $dmWidth                              3200
-set $dmY                                  1700
-set $dmHeight                             100
+set $dmHistory          ~/.dmenu_history
+set $dmPrompt           λ
+set $dmX                0
+set $dmWidth            3200
+set $dmY                1700
+set $dmHeight           100
+
+# Settings
+set $dashName           1:★
+set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
+set $volPct             5
+set $brightPct          10
 
 # Keys
-set $mod                                  Mod4
-set $mod2                                 Mod1
-set $up                                   k
-set $down                                 j
-set $left                                 h
-set $right                                l
-
-# SYSTEM
-set $dashName                             1:★
-set $volChangeSound /usr/share/sounds/gnome/default/alerts/drip.ogg
-set $volPct                               5
-set $brightPct                            10
+set $mod                Mod4
+set $mod2               Mod1
+set $up                 k
+set $down               j
+set $left               h
+set $right              l
 
 ## SESSION
 
 # Autostart
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id mpd
+
 exec --no-startup-id feh --bg-fill $wallpaper
-exec --no-startup-id /usr/libexec/gnome-settings-daemon
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
+exec --no-startup-id /usr/libexec/gnome-settings-daemon
+
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
 
@@ -68,10 +70,11 @@ exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/
 exec --no-startup-id i3-msg 'exec urxvtc -e ncmpcpp'
 exec --no-startup-id i3-msg 'exec firefox -P "i3"'
 
-## THEME
+## SETTINGS
 
-# Font
 font pango:$fontName $fontSize
+floating_modifier $mod
+focus_follows_mouse no
 
 # Gaps
 for_window [class="^.*"] border pixel $border
@@ -85,8 +88,30 @@ client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
 client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 
-## SYSTEM
+# Bar
+# https://github.com/ivyl/i3-config/blob/master/conkyrc
+# bindsym $mod+b bar hidden_state toggle
+bar {
+#   mode hide
+#   hidden_state show
+#   modifier $mod2
+#   tray_output none
+  position top
+  strip_workspace_numbers yes
+  status_command ~/.i3/bin/conky-wrapper
+  colors {
+    statusline $cBarFG
+    background $cBarBG
+    focused_workspace $cBarBG $cFocusBG $cFocusFG
+    inactive_workspace $cBarBG $cUnfocusBG $cUnfocusFG
+  }
+}
 
+## KEYS
+
+# Executables
+bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+T exec urxvtc
 
 # Media controls
 bindsym $mod+Home         exec --no-startup-id mpc toggle
@@ -103,51 +128,32 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && ogg123 $v
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc $brightPct
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
 
-# Status bar
-# https://github.com/ivyl/i3-config/blob/master/conkyrc
-# bindsym $mod+b bar hidden_state toggle
-bar {
-#   mode hide
-#   hidden_state show
-#   modifier $mod2
-  position top
-#   tray_output none
-  strip_workspace_numbers yes
-  status_command ~/.i3/bin/conky-wrapper
-  colors {
-    statusline $cBarFG
-    background $cBarBG
-    focused_workspace $cBarBG $cFocusBG $cFocusFG
-    inactive_workspace $cBarBG $cUnfocusBG $cUnfocusFG
-  }
-}
-
-# Dmenu
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
-
-
-focus_follows_mouse no
-
-# use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# start a terminal
-bindsym $mod+T exec urxvtc
-
-# kill focused window
+# Tasks
+bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exit
 
 # Change focus
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
+bindsym $mod+minus scratchpad show
 
 # Move focused window
+bindsym $mod+Shift+space floating toggle
+
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+minus move scratchpad
 
 # Resize focused windows
 bindsym $mod+Control+$left       resize shrink width 1 px or 1 ppt
@@ -155,38 +161,14 @@ bindsym $mod+Control+$down       resize grow height 1 px or 1 ppt
 bindsym $mod+Control+$up         resize shrink height 1 px or 1 ppt
 bindsym $mod+Control+$right      resize grow width 1 px or 1 ppt
 
-# Split in horizontal orientation
-bindsym $mod+n split h
-
-# Split in vertical orientation
-bindsym $mod+v split v
-
-# Enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# Focus the parent container
-bindsym $mod+a focus parent
-
-# Focus the child container
-bindsym $mod+z focus child
-
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+# Splits
+bindsym $mod+n split h
+bindsym $mod+v split v
 
 # Switch to workspace
 bindsym $mod+grave workspace        "$dashName"
@@ -213,11 +195,4 @@ bindsym $mod+Shift+7 move container to workspace            "17:七"
 bindsym $mod+Shift+8 move container to workspace            "18:八"
 bindsym $mod+Shift+9 move container to workspace            "19:九"
 bindsym $mod+Shift+0 move container to workspace            "20:十"
-
-# Reload the configuration file
-bindsym $mod+Shift+c reload
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec i3-msg exit
 
