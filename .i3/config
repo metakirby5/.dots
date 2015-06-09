@@ -20,7 +20,8 @@ set $cUrgentFG                            #FFFFFF
 set $cUrgentIN                            #F44336
 set $cBarBG                               #2D2D2D
 set $cBarFG                               #DEDEDE
-set $font                                 pango:Source Code Pro 24
+set $fontName                             DejaVu Sans
+set $fontSize                             24
 set $border                               7
 set $gaps                                 50
 
@@ -61,7 +62,7 @@ exec --no-startup-id i3-msg 'workspace "1:ダッシュ"'
 ## THEME
 
 # Font
-font $font
+font pango:$fontName $fontSize
 
 # Gaps
 for_window [class="^.*"] border pixel $border
@@ -115,7 +116,7 @@ bar {
 }
 
 # Dmenu
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$font" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 
 
 focus_follows_mouse no
