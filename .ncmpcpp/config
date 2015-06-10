@@ -296,6 +296,7 @@ visualizer_fifo_path = "/tmp/mpd.fifo"
 ## be used to build 'empty' part of progressbar.
 ##
 #progressbar_look = "=>"
+progressbar_look = "─╼ "
 #
 #default_place_to_search_in = "database" (database/playlist)
 #
