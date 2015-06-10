@@ -1,6 +1,6 @@
 # metakirby5's i3 config
 
-# TODO less janky bar
+# TODO less janky bar, less sucky dmenu
 
 ## VARIABLES
 
@@ -23,7 +23,13 @@ set $cBarFG             #DEDEDE
 set $fontName           DejaVu Sans
 set $fontSize           24
 set $border             7
-set $gaps               50
+set $gapsInner          50
+set $gapsOuter          0
+
+# Bar
+set $barFontName        tewi
+set $barFontSize        24
+set $barSeparator       <
 
 # dmenu
 set $dmHistory          ~/.dmenu_history
@@ -78,7 +84,8 @@ focus_follows_mouse no
 
 # Gaps
 for_window [class="^.*"] border pixel $border
-gaps inner $gaps
+gaps inner $gapsInner
+gaps outer $gapsOuter
 
 # Colors
 # class                 border        backgr.       text          indicator
@@ -98,6 +105,8 @@ bar {
   tray_output none
   position top
   strip_workspace_numbers yes
+  font pango:$barFontName $barFontSize
+  separator_symbol "$barSeparator"
   status_command ~/.i3/bin/conky-wrapper
   colors {
     statusline $cBarFG
@@ -108,6 +117,13 @@ bar {
 }
 
 ## KEYS
+
+# Tasks
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exit
 
 # Executables
 bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
@@ -127,13 +143,6 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && ogg123 $v
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc $brightPct
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
-
-# Tasks
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q kill
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exit
 
 # Change focus
 bindsym $mod+space focus mode_toggle
@@ -160,6 +169,11 @@ bindsym $mod+Control+$left       resize shrink width 1 px or 1 ppt
 bindsym $mod+Control+$down       resize grow height 1 px or 1 ppt
 bindsym $mod+Control+$up         resize shrink height 1 px or 1 ppt
 bindsym $mod+Control+$right      resize grow width 1 px or 1 ppt
+
+# Gaps
+bindsym $mod+g            gaps inner all plus   5
+bindsym $mod+Shift+g      gaps inner all minus  5
+bindsym $mod+Control+g    gaps inner all set    $gapsInner
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
