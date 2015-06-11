@@ -129,6 +129,10 @@ bindsym $mod+Shift+e exit
 bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 bindsym $mod+T exec urxvtc
 
+# Screenshots to clipboard
+bindsym Print             exec escrotum -C
+bindsym Shift+Print       exec escrotum -Cs
+
 # Media controls
 bindsym $mod+Home         exec --no-startup-id mpc toggle
 bindsym $mod+End          exec --no-startup-id mpc stop
