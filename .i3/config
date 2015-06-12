@@ -20,7 +20,7 @@ set $cUrgentFG          #FFFFFF
 set $cUrgentIN          #F44336
 set $cBarBG             #2D2D2D
 set $cBarFG             #DEDEDE
-set $fontName           DejaVu Sans
+set $fontName           tewi
 set $fontSize           24
 set $border             7
 set $gapsInner          50
@@ -33,6 +33,7 @@ set $barSeparator       <
 
 # dmenu
 set $dmHistory          ~/.dmenu_history
+set $dmFontName         tewi
 set $dmPrompt           λ
 set $dmX                0
 set $dmWidth            3200
@@ -127,7 +128,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exit
 
 # Executables
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 bindsym $mod+T exec urxvtc
 
 # Screenshots to clipboard
