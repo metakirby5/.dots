@@ -11,7 +11,7 @@ override_utf8_locale yes
 TEXT
 ,[
   {"full_text": " ❤ $acpitemp°C @ $cpu% ","color": "\#F44336"},
-  {"full_text": " ⚡ ${battery_percent BAT1}% ","color":"\#FF9800"},
+  {"full_text": " ± ${battery_percent BAT1}% ","color":"\#FF9800"},
   # janky as heck
   {"full_text": " ♪ $if_mpd_playing$mpd_elapsed / $mpd_length @ $endif${exec amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1} ", "color":"\#FFEB3B"},
   {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#4CAF50"},
