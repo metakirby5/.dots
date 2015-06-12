@@ -11,11 +11,11 @@ override_utf8_locale yes
 TEXT
 ,[
   {"full_text": " ❤ $acpitemp°C @ $cpu% ","color": "\#F44336"},
-  {"full_text": " ± ${battery_percent BAT1}% ","color":"\#FF9800"},
+  {"full_text": " ⌼ ${battery_percent BAT1}% ","color":"\#FF9800"},
   # janky as heck
   {"full_text": " ♪ $if_mpd_playing$mpd_elapsed / $mpd_length @ $endif${exec amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1} ", "color":"\#FFEB3B"},
   {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#4CAF50"},
-  {"full_text": " ⌛ ${time %a %b %d %H:%M} ", "color":"\#2196F3"},
-  {"full_text": " ○ ${exec dropbox running || echo 'dbx '}", "color":"\#3F51B5"},
-  {"full_text": " λ ${exec echo $USER@$(hostname)} ", "color":"\#9C27B0"}
+  {"full_text": " » ${exec dropbox running || echo 'dbx '}", "color":"\#2196F3"},
+  {"full_text": " ${time %a %b %d %H:%M} ", "color":"\#5C6BC0"},
+  {"full_text": " ${exec echo $USER@$(hostname)} ", "color":"\#AB47BC"}
 ]
