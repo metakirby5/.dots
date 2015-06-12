@@ -5,7 +5,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpaper          /usr/share/backgrounds/ethan/youmu.jpg
+set $wallpaper          /usr/share/backgrounds/ethan/nitori.png
 set $cFocusBG           #3FCFEE
 set $cFocusFG           #FFFFFF
 set $cFocusIN           #88DEF1
