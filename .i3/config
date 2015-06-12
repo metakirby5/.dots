@@ -1,11 +1,11 @@
 # metakirby5's i3 config
 
-# TODO less janky bar, less sucky dmenu
+# TODO bar font
 
 ## VARIABLES
 
 # Theme
-set $wallpaper          /usr/share/backgrounds/ethan/ene_black.png
+set $wallpaper          /usr/share/backgrounds/ethan/youmu.jpg
 set $cFocusBG           #3FCFEE
 set $cFocusFG           #FFFFFF
 set $cFocusIN           #88DEF1
@@ -59,12 +59,13 @@ set $right              l
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id mpd
 
-exec --no-startup-id feh --bg-fill $wallpaper
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
 
 # exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
+
+exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Terminal on scratch
 for_window [title="^urxvtc_scratchpad$"] move scratchpad
@@ -190,27 +191,27 @@ bindsym $mod+v split v
 
 # Switch to workspace
 bindsym $mod+grave workspace        "$dashName"
-bindsym $mod+1 workspace            "11:一"
-bindsym $mod+2 workspace            "12:二"
-bindsym $mod+3 workspace            "13:三"
-bindsym $mod+4 workspace            "14:四"
-bindsym $mod+5 workspace            "15:五"
-bindsym $mod+6 workspace            "16:六"
-bindsym $mod+7 workspace            "17:七"
-bindsym $mod+8 workspace            "18:八"
-bindsym $mod+9 workspace            "19:九"
-bindsym $mod+0 workspace            "20:十"
+bindsym $mod+1 workspace            "11:one"
+bindsym $mod+2 workspace            "12:two"
+bindsym $mod+3 workspace            "13:three"
+bindsym $mod+4 workspace            "14:four"
+bindsym $mod+5 workspace            "15:five"
+bindsym $mod+6 workspace            "16:six"
+bindsym $mod+7 workspace            "17:seven"
+bindsym $mod+8 workspace            "18:eight"
+bindsym $mod+9 workspace            "19:nine"
+bindsym $mod+0 workspace            "20:ten"
 
 # Move focused container to workspace
 bindsym $mod+Shift+grave move container to workspace        "$dashName"
-bindsym $mod+Shift+1 move container to workspace            "11:一"
-bindsym $mod+Shift+2 move container to workspace            "12:二"
-bindsym $mod+Shift+3 move container to workspace            "13:三"
-bindsym $mod+Shift+4 move container to workspace            "14:四"
-bindsym $mod+Shift+5 move container to workspace            "15:五"
-bindsym $mod+Shift+6 move container to workspace            "16:六"
-bindsym $mod+Shift+7 move container to workspace            "17:七"
-bindsym $mod+Shift+8 move container to workspace            "18:八"
-bindsym $mod+Shift+9 move container to workspace            "19:九"
-bindsym $mod+Shift+0 move container to workspace            "20:十"
+bindsym $mod+Shift+1 move container to workspace            "11:one"
+bindsym $mod+Shift+2 move container to workspace            "12:two"
+bindsym $mod+Shift+3 move container to workspace            "13:three"
+bindsym $mod+Shift+4 move container to workspace            "14:four"
+bindsym $mod+Shift+5 move container to workspace            "15:five"
+bindsym $mod+Shift+6 move container to workspace            "16:six"
+bindsym $mod+Shift+7 move container to workspace            "17:seven"
+bindsym $mod+Shift+8 move container to workspace            "18:eight"
+bindsym $mod+Shift+9 move container to workspace            "19:nine"
+bindsym $mod+Shift+0 move container to workspace            "20:ten"
 
