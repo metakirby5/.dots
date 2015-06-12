@@ -126,7 +126,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exit
 
 # Executables
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$fontName" -nf "$cFocusFG" -nb "$cFocusBG" -sf "$cFocusFG" -sb "$cFocusIN" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 bindsym $mod+T exec urxvtc
 
 # Screenshots to clipboard

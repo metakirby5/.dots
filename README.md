@@ -9,6 +9,7 @@ All of my dotfile configs.
 - i3-gaps
 - compton
 - dmenu2
+- j4-dmenu-desktop
 - feh
 - mpd
 - conky
