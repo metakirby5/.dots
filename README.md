@@ -6,16 +6,19 @@ All of my dotfile configs.
 ## Dependencies
 
 - urxvt
-- i3-gaps
-- compton
-- dmenu2
-- j4-dmenu-desktop
+- Airblader/i3-gaps
+- chjj/compton
+- melek/dmenu2
+- enkore/j4-dmenu-desktop
+- dunst
 - feh
 - mpd
 - conky
-- escrotum
+- ranger
+- Roger/escrotum
 - dropbox
 - nmtui
+- jomo/imgur-screenshot
 
 ## Installation
 

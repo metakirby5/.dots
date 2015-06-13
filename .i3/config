@@ -127,9 +127,11 @@ bindsym $mod+Shift+e exit
 
 # Executables
 bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
-bindsym $mod+T exec urxvtc
+bindsym $mod+t exec urxvtc
 # Network manager
-bindsym $mod+C exec urxvtc -e nmtui
+bindsym $mod+c exec urxvtc -e nmtui
+# File browser
+bindsym $mod+e exec urxvtc -e ranger
 
 # Screenshots to clipboard
 bindsym Print             exec escrotum -C
@@ -184,7 +186,7 @@ bindsym $mod+Control+g    gaps inner all set    $gapsInner
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+b layout toggle split
 
 # Splits
 bindsym $mod+n split h
