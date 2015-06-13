@@ -1,5 +1,9 @@
 ! ===== URxvt =====
 
+! window:
+
+URxvt.internalBorder: 25
+
 ! fonts:
 
 URxvt*font: xft:Source Code Pro:pixelsize=30
