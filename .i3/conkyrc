@@ -3,8 +3,9 @@ out_to_console    yes
 out_to_x    no
 update_interval   1
 total_run_times   0
-short_units   yes
-pad_percents    3
+short_units       yes
+pad_percents      3
+use_spacer        left
 
 override_utf8_locale yes
 
@@ -15,7 +16,7 @@ TEXT
   # janky as heck
   {"full_text": " ♪ $if_mpd_playing$mpd_elapsed / $mpd_length @ $endif${exec amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1} ", "color":"\#FFEB3B"},
   {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#4CAF50"},
-  {"full_text": " » ${exec dropbox running || echo 'dbx '}", "color":"\#2196F3"},
+  {"full_text": " » ${exec dropbox running || echo 'dbx '}${exec ps cax | grep xflux >/dev/null && echo 'flx '}", "color":"\#2196F3"},
   {"full_text": " ${time %a %b %d %H:%M} ", "color":"\#5C6BC0"},
   {"full_text": " ${exec echo $USER@$(hostname)} ", "color":"\#AB47BC"}
 ]
