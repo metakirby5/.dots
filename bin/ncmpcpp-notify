@@ -1,0 +1,18 @@
+#!/bin/sh
+# Sends a notify-osd notification with informatin from mpc -f
+# Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
+
+FMT_SUMMARY="[%artist% - %album%]|[%artist%]|[%album%]|[%file%]"
+FMT_BODY="[%title%]"
+
+mpc_format() {
+  args=("$@")
+  mpc -f "${args[0]}" current
+}
+
+# Gotta use nasty evals to get around the quotes...
+notify-send \
+  "$(eval 'mpc_format "$FMT_SUMMARY"')" \
+  "$(eval 'mpc_format "$FMT_BODY"')" \
+  -a "ncmpcpp" \
+  -h string:synchronous:ncmpcpp

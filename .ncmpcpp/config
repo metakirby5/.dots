@@ -36,7 +36,7 @@ mpd_music_dir = "~/Music"
 #
 #mpd_crossfade_time = "5"
 #
-#mpd_communication_mode = "notifications" (polling/notifications)
+mpd_communication_mode = "notifications" # (polling/notifications)
 #
 ##### music visualizer #####
 ##
@@ -265,7 +265,7 @@ visualizer_fifo_path = "/tmp/mpd.fifo"
 ## Attention: It doesn't support song format anymore.
 ## Use `ncmpcpp --now-playing SONG_FORMAT` instead.
 ##
-#execute_on_song_change = ""
+execute_on_song_change = "ncmpcpp-notify"
 #
 #playlist_show_remaining_time = "no"
 #

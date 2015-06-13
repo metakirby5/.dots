@@ -139,10 +139,10 @@ bindsym Print             exec escrotum -Cs
 bindsym Shift+Print       exec imgur-screenshot
 
 # Media controls
-bindsym $mod+Home         exec --no-startup-id mpc-notify toggle
-bindsym $mod+End          exec --no-startup-id mpc-notify stop
-bindsym $mod+Page_Up      exec --no-startup-id mpc-notify prev
-bindsym $mod+Page_Down    exec --no-startup-id mpc-notify next
+bindsym $mod+Home         exec --no-startup-id mpc toggle
+bindsym $mod+End          exec --no-startup-id mpc stop
+bindsym $mod+Page_Up      exec --no-startup-id mpc prev
+bindsym $mod+Page_Down    exec --no-startup-id mpc next
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
