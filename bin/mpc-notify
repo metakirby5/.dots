@@ -1,0 +1,22 @@
+#!/bin/sh
+# Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
+
+FMT_SUMMARY="[%artist% - %album%]|[%artist%]|[%album%]|[%file%]"
+FMT_BODY="[%title%]"
+
+mpc_format() {
+  args=("$@")
+  mpc -f "${args[0]}" current
+}
+
+# Run the mpc command
+mpc "$@"
+
+if [ "$1" != "stop" ]; then
+  # Gotta use nasty evals to get around the quotes...
+  notify-send \
+    "$(eval 'mpc_format "$FMT_SUMMARY"')" \
+    "$(eval 'mpc_format "$FMT_BODY"')" \
+    -a "mpd" \
+    -h string:synchronous:mpd
+fi

@@ -60,11 +60,11 @@ exec --no-startup-id mpd
 
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
-exec --no-startup-id dunst
 
 # exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
 
+exec_always --no-startup-id killall dunst && dunst
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Terminal on scratch
@@ -139,10 +139,10 @@ bindsym Print             exec escrotum -Cs
 bindsym Shift+Print       exec imgur-screenshot
 
 # Media controls
-bindsym $mod+Home         exec --no-startup-id mpc toggle
-bindsym $mod+End          exec --no-startup-id mpc stop
-bindsym $mod+Page_Up      exec --no-startup-id mpc prev
-bindsym $mod+Page_Down    exec --no-startup-id mpc next
+bindsym $mod+Home         exec --no-startup-id mpc-notify toggle
+bindsym $mod+End          exec --no-startup-id mpc-notify stop
+bindsym $mod+Page_Up      exec --no-startup-id mpc-notify prev
+bindsym $mod+Page_Down    exec --no-startup-id mpc-notify next
 
 # Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
