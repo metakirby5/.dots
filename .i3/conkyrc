@@ -4,10 +4,7 @@ out_to_x                      no
 update_interval               1
 update_interval_on_battery    5
 total_run_times               0
-
 short_units                   yes
-pad_percents                  3
-use_spacer                    left
 
 override_utf8_locale          yes
 
