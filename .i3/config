@@ -134,6 +134,8 @@ bindsym $mod+t exec urxvtc
 bindsym $mod+c exec urxvtc -e nmtui
 # File browser
 bindsym $mod+e exec urxvtc -e ranger
+# Music player
+bindsym $mod+m exec urxvtc -e ncmpcpp
 
 # Screenshots to clipboard
 bindsym Print             exec escrotum -Cs
