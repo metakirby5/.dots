@@ -11,7 +11,8 @@ URxvt*boldFont: xft:Source Code Pro:bold:pixelsize=30
 
 ! color scheme:
 
-URxvt*background: #2D2D2D
+URxvt*depth: 32
+URxvt*background: rgba:2D2D/2D2D/2D2D/CCCC
 URxvt*foreground: #DEDEDE
 
 URxvt*colorUL: #86a2b0

@@ -71,7 +71,7 @@ exec_always --no-startup-id feh --bg-fill $wallpaper
 # Terminal on scratch
 for_window [title="^urxvtc_scratchpad$"] move scratchpad
 bindsym $mod+equal [title="^urxvtc_scratchpad$"] scratchpad show
-exec urxvtc -name urxvtc_scratchpad -depth 32 -bg rgba:2D2D/2D2D/2D2D/CCCC
+exec urxvtc -name urxvtc_scratchpad
 
 # Dash
 # exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
