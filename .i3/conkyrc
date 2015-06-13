@@ -1,13 +1,15 @@
-background        no
-out_to_console    yes
-out_to_x    no
-update_interval   1
-total_run_times   0
-short_units       yes
-pad_percents      3
-use_spacer        left
+background                    no
+out_to_console                yes
+out_to_x                      no
+update_interval               1
+update_interval_on_battery    5
+total_run_times               0
 
-override_utf8_locale yes
+short_units                   yes
+pad_percents                  3
+use_spacer                    left
+
+override_utf8_locale          yes
 
 TEXT
 ,[
