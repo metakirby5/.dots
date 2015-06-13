@@ -134,8 +134,8 @@ bindsym $mod+c exec urxvtc -e nmtui
 bindsym $mod+e exec urxvtc -e ranger
 
 # Screenshots to clipboard
-bindsym Print             exec escrotum -C
-bindsym Shift+Print       exec escrotum -Cs
+bindsym Print             exec escrotum -Cs
+bindsym Shift+Print       exec imgur-screenshot
 
 # Media controls
 bindsym $mod+Home         exec --no-startup-id mpc toggle
