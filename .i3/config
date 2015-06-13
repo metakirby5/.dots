@@ -26,7 +26,7 @@ set $gapsOuter          0
 
 # Bar
 set $barFontName        tewi
-set $barFontSize        20
+set $barFontSize        24
 set $barSeparator       <
 
 # dmenu
