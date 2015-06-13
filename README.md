@@ -15,6 +15,7 @@ All of my dotfile configs.
 - conky
 - escrotum
 - dropbox
+- nmtui
 
 ## Installation
 

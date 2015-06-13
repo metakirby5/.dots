@@ -1,7 +1,5 @@
 # metakirby5's i3 config
 
-# TODO bar font
-
 ## VARIABLES
 
 # Theme
@@ -130,6 +128,8 @@ bindsym $mod+Shift+e exit
 # Executables
 bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -q -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
 bindsym $mod+T exec urxvtc
+# Network manager
+bindsym $mod+C exec urxvtc -e nmtui
 
 # Screenshots to clipboard
 bindsym Print             exec escrotum -C
