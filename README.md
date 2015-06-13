@@ -12,13 +12,13 @@ All of my dotfile configs.
 - enkore/j4-dmenu-desktop
 - dunst
 - feh
-- mpd
 - conky
+- mpd
+- ncmpcpp
 - ranger
 - Roger/escrotum
 - dropbox
 - nmtui
-- jomo/imgur-screenshot
 
 ## Installation
 

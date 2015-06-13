@@ -138,8 +138,8 @@ bindsym $mod+e exec urxvtc -e ranger
 bindsym $mod+m exec urxvtc -e ncmpcpp
 
 # Screenshots to clipboard
-bindsym Print             exec escrotum -Cs
-bindsym Shift+Print       exec imgur-screenshot
+bindsym Print             exec escrotum -C
+bindsym Shift+Print       exec escrotum -Cs
 
 # Media controls
 bindsym $mod+Home         exec --no-startup-id mpc toggle
