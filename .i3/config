@@ -60,6 +60,8 @@ exec --no-startup-id mpd
 
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
 exec --no-startup-id /usr/libexec/gnome-settings-daemon
+exec --no-startup-id gnome-screensaver
+exec --no-startup-id lightsOn
 
 # exec --no-startup-id nm-applet
 exec --no-startpu-id xflux -z 92129
