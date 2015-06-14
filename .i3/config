@@ -64,7 +64,7 @@ exec --no-startup-id gnome-screensaver
 exec --no-startup-id lightsOn
 
 # exec --no-startup-id nm-applet
-exec --no-startpu-id xflux -z 92129
+exec --no-startup-id xflux -z 92129
 exec --no-startup-id dropbox start
 
 exec_always --no-startup-id killall dunst && dunst
