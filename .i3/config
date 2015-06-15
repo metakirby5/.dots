@@ -135,7 +135,7 @@ bindsym $mod+t exec urxvtc
 # Network manager
 bindsym $mod+c exec urxvtc -e nmtui
 # File browser
-bindsym $mod+e exec urxvtc -e ranger
+bindsym $mod+e exec urxvtc -depth 0 -e ranger
 # Music player
 bindsym $mod+m exec urxvtc -e ncmpcpp
 
