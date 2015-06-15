@@ -3,6 +3,13 @@ dotfiles
 
 All of my dotfile configs.
 
+## TODO
+
+- Screenshot to imgur
+- Most recently used in dmenu first
+- Customize ncmpcpp
+- move to lemonbar
+
 ## Dependencies
 
 - urxvt
