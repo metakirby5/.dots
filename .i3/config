@@ -3,7 +3,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpaper          /usr/share/backgrounds/ethan/nitori.png
+set $wallpaper          /usr/share/backgrounds/ethan/station.png
 set $cFocusBG           #3FCFEE
 set $cFocusFG           #FFFFFF
 set $cFocusIN           #88DEF1
