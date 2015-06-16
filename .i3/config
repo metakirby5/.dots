@@ -66,6 +66,7 @@ exec --no-startup-id lightsOn
 # exec --no-startup-id nm-applet
 exec --no-startup-id xflux -z 92129
 exec --no-startup-id dropbox start
+exec --no-startup-id ibus-daemon -xdr
 
 exec_always --no-startup-id killall dunst && dunst
 exec_always --no-startup-id feh --bg-fill $wallpaper
@@ -159,7 +160,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc $brightPct
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
 
 # Change focus
-bindsym $mod+space focus mode_toggle
+bindsym $mod+backslash focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
@@ -170,7 +171,7 @@ bindsym $mod+$right focus right
 bindsym $mod+minus scratchpad show
 
 # Move focused window
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+backslash floating toggle
 
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
