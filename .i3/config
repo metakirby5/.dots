@@ -134,7 +134,7 @@ bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dme
 bindsym $mod+t exec urxvtc
 # Network manager
 bindsym $mod+c exec urxvtc -e nmtui
-# File browser
+# File browser - need to disable transparency for image previews
 bindsym $mod+e exec urxvtc -depth 0 -e ranger
 # Music player
 bindsym $mod+m exec urxvtc -e ncmpcpp
