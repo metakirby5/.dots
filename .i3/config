@@ -39,6 +39,8 @@ set $dmY                1700
 set $dmHeight           100
 
 # Settings
+set $termd              urxvt256cd
+set $termc              urxvt256cc
 set $dashName           1:★
 set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct             5
@@ -55,7 +57,7 @@ set $right              l
 ## SESSION
 
 # Autostart
-exec --no-startup-id urxvtd -q -o -f
+exec --no-startup-id $termd -q -o -f
 exec --no-startup-id mpd
 
 exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
@@ -72,13 +74,13 @@ exec_always --no-startup-id killall dunst && dunst
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Terminal on scratch
-for_window [title="^urxvtc_scratchpad$"] move scratchpad
-bindsym $mod+equal [title="^urxvtc_scratchpad$"] scratchpad show
-exec urxvtc -name urxvtc_scratchpad
+for_window [title="^term_scratchpad$"] move scratchpad
+bindsym $mod+equal [title="^term_scratchpad$"] scratchpad show
+exec $termc -name term_scratchpad
 
 # Dash
 # exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
-# exec urxvtc -e ncmpcpp
+# exec $termc -e ncmpcpp
 # exec firefox -P "i3"
 
 ## SETTINGS
@@ -131,14 +133,14 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exit
 
 # Executables
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='urxvt' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
-bindsym $mod+t exec urxvtc
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='$termc' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+t exec $termc
 # Network manager
-bindsym $mod+c exec urxvtc -e nmtui
+bindsym $mod+c exec $termc -e nmtui
 # File browser - need to disable transparency for image previews
-bindsym $mod+e exec urxvtc -depth 0 -e ranger
+bindsym $mod+e exec $termc -depth 0 -e ranger
 # Music player
-bindsym $mod+m exec urxvtc -e ncmpcpp
+bindsym $mod+m exec $termc -e ncmpcpp
 
 # Screenshots to clipboard
 bindsym Print             exec escrotum -C

@@ -14,7 +14,7 @@ All of my dotfile configs.
 
 ## Dependencies
 
-- urxvt
+- rxvt-unicode-256color
 - Airblader/i3-gaps
 - chjj/compton
 - melek/dmenu2
