@@ -127,7 +127,7 @@ bar {
 
 # Tasks
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exit
