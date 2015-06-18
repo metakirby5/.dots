@@ -83,6 +83,9 @@ exec $termc -name term_scratchpad
 # exec $termc -e ncmpcpp
 # exec firefox -P "i3"
 
+# Start on workspace 1
+exec i3-msg 'workspace "11:one"'
+
 ## SETTINGS
 
 font pango:$fontName $fontSize
@@ -130,7 +133,8 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exit
+bindsym $mod+Escape exec gnome-screensaver-command -l
+bindsym $mod+Shift+Escape exit
 
 # Executables
 bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='$termc' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
