@@ -34,7 +34,7 @@ mpd_music_dir = "~/Music"
 #
 #mpd_connection_timeout = "5"
 #
-#mpd_crossfade_time = "5"
+mpd_crossfade_time = "5"
 #
 mpd_communication_mode = "notifications" # (polling/notifications)
 #
