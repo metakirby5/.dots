@@ -53,7 +53,6 @@ set fileformats=unix,dos,mac   " open files from mac/dos
 set hidden                     " hide abandoned buffers
 set exrc                       " open local config files
 set nojoinspaces               " don't add white space when I don't tell you to
-set noswapfile                 " no intermediate files used when saving
 set autowrite                  " write before make
 set mouse=a                    " allow mouse usage
 set ttymouse=xterm2            " urxvt scrolling
@@ -93,6 +92,7 @@ set omnifunc=syntaxcomplete#Complete
 "set visualbell         " screen flashes instead of error bell
 "set confirm            " shows dialog when exiting without saving
 "set nowrap             " turns off word wrapping
+"set noswapfile         " no intermediate files used when saving
 "set autoread           " automatically read ext. file changes
 
 " **************************************
