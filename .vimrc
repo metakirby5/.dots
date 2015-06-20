@@ -401,11 +401,11 @@ noremap <silent> <leader>f mzgggqG'z
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
 
-" ,\ - Toggle textwidth
-noremap <silent> <leader>\ :let &tw = (&tw ? 0 : 78)<cr>
+" ,| - Toggle textwidth
+noremap <silent> <leader>\| :let &tw = (&tw ? 0 : 78)<cr>
 
-" ,c - Toggle over 78 char highlighting
-noremap <silent> <leader>c :let &cc = (&cc ? 0 : 78)<cr>
+" ,\ - Toggle over 78 char highlighting
+noremap <silent> <leader>\ :let &cc = (&cc ? 0 : 78)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 " au BufRead,BufWrite * if ! &bin |
