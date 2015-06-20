@@ -331,6 +331,8 @@ inoremap <silent> <C-Left> <esc>:tabprevious<cr>
 inoremap <silent> <C-Right> <esc>:tabnext<cr>
 
 " ^shift[left / right] - Move tabs
+noremap <silent> mT :tabmove -1<cr>
+noremap <silent> mt :tabmove +1<cr>
 noremap <silent> <C-S-Left> :tabmove -1<cr>
 noremap <silent> <C-S-Right> :tabmove +1<cr>
 inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
