@@ -202,8 +202,8 @@ inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
 
 " Preserve selection when (de)indenting in visual mode
-vnoremap > ><CR>gv
-vnoremap < <<CR>gv
+vnoremap > ><cr>gv
+vnoremap < <<cr>gv
 
 " 0 - First non-blank character
 noremap 0 ^
@@ -213,16 +213,16 @@ noremap <leader>0 0
 " === Buffers
 
 " ^[up / down] - Switch to prev/next buffer
-noremap <silent> <C-down> :bn<CR>
-noremap <silent> <C-up> :bN<CR>
+noremap <silent> <C-down> :bn<cr>
+noremap <silent> <C-up> :bN<cr>
 inoremap <silent> <C-down> <esc>:bn<cr>
 inoremap <silent> <C-up> <esc>:bN<cr>
 
 " ,bl - List all buffers
-noremap <leader>bl :buffers<CR>
+noremap <leader>bl :buffers<cr>
 
 " ,bs - Switch to buffer by name
-noremap <leader>bs :buffers<CR>:buffer<space>
+noremap <leader>bs :buffers<cr>:buffer<space>
 
 " ,bd - Close the current buffer
 noremap <leader>bd :bd<cr>
@@ -396,7 +396,7 @@ set linebreak
 au Filetype python,c,cpp,java,sh,ruby setlocal tw=78 | setlocal cc=78
 
 " ,f (normal mode) - Reformat all
-noremap <silent> <leader>f mzgggqG'z
+noremap <silent> <leader>f mzgggqG`z
 
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
@@ -411,7 +411,7 @@ noremap <silent> <leader>\ :let &cc = (&cc ? 0 : 78)<cr>
 " au BufRead,BufWrite * if ! &bin |
 "             \exe "normal mz" |
 "             \silent! %s/\s\+$//ge |
-"             \exe "normal 'z" |
+"             \exe "normal `z" |
 "             \endif
 
 " ,/m - Remove Windows' ^M
@@ -471,7 +471,7 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 " === Make
 
 " ,m - Make and go to first error
-nnoremap <leader>m :silent make\|redraw!\|cc<CR>
+nnoremap <leader>m :silent make\|redraw!\|cc<cr>
 
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
@@ -480,9 +480,28 @@ set efm+=\ (%l)\ error:\ %m
 " * Shortcuts
 " **************************************
 
+" === Required functions
+
+function! StoreSearch()
+  let g:ps = getreg('/', 1)
+  let g:ps_t = getregtype('/')
+endfunction
+
+function! RestoreSearch()
+  if !(exists('g:ps') && exists('g:ps_t'))
+    return
+  endif
+
+  call setreg('/', g:ps, g:ps_t)
+endfunction
+
 " Swap ; and :
 " noremap ; :
 " noremap : ;
+
+" Swap ' and `
+noremap ' `
+noremap ` '
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -519,7 +538,7 @@ noremap <leader>p :setlocal paste!<cr>
 noremap <silent> <leader><cr> :noh<cr>
 
 " ,= - Quick retab of everything
-noremap <silent> <leader>= mzgg=G<esc>:retab<cr>'z
+noremap <silent> <leader>= mzgg=G<esc>:retab<cr>`z
 
 " ^[jk] - Move line of text
 nnoremap <silent> <C-j> mz:m+<cr>`z
@@ -535,6 +554,7 @@ nnoremap <silent> <leader>O O<esc>cc<esc>
 
 " ,dd - Delete current line contents
 nnoremap <silent> <leader>dd cc<esc>
+vnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<cr>:call RestoreSearch()<cr>
 
 " ,n - Splits a line at the cursor, then moves to column 78
 nnoremap <silent> <leader>n i<cr><esc>78l
@@ -555,23 +575,10 @@ au FileType tex                   let b:comment_leader = '% '
 au FileType mail                  let b:comment_leader = '> '
 au FileType vim                   let b:comment_leader = '" '
 
-function! StoreSearch()
-  let g:ps = getreg('/', 1)
-  let g:ps_t = getregtype('/')
-endfunction
-
-function! RestoreSearch()
-  if !(exists('g:ps') && exists('g:ps_t'))
-    return
-  endif
-
-  call setreg('/', g:ps, g:ps_t)
-endfunction
-
-noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
-noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>
-vnoremap <silent> <leader>// :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
-vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>:call RestoreSearch()<cr>gv
+noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
+noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
+vnoremap <silent> <leader>// :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
 
 " == ORD STUFF ==
 " " File header function
@@ -591,7 +598,7 @@ vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-
 " endfunction
 "
 " " ,ih - Insert file header
-" nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>'z8<cr>A
+" nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>`z8<cr>A
 "
 " " Method header function
 " function MethodHeader()
@@ -624,10 +631,10 @@ vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-
 " endfunction
 "
 " " ,im - Insert method header
-" nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>'z<cr>A
+" nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>`z<cr>A
 
 " ===Automatic actions on file open
 
 " == ORD STUFF ==
 " Automatically insert file header in *.{c,cpp,h,s}
-" au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR'z8\<cr>A"
+" au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR`z8\<cr>A"
