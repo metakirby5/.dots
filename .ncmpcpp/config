@@ -18,7 +18,7 @@ visualizer_look = "x│"
 # Delays #####################################################################
 
 playlist_disable_highlight_delay = "0"
-message_delay_time = "7"
+message_delay_time = "2"
 
 # Song format #################################################################
 
@@ -201,7 +201,7 @@ user_interface = "alternative"
 #
 #default_tag_editor_pattern = "%n - %t"
 #
-#header_visibility = "yes"
+header_visibility = "no"
 #
 #statusbar_visibility = "yes"
 #
