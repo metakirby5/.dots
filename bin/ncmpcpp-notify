@@ -2,8 +2,8 @@
 # Sends a notify-osd notification with informatin from mpc -f
 # Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
 
-FMT_SUMMARY="[%artist% - %album%]|[%artist%]|[%album%]|[%file%]"
-FMT_BODY="[%title%]"
+FMT_SUMMARY="[[%title%]|[%file%]]"
+FMT_BODY="[%artist% - %album%]|[%artist%]|[%album%]"
 
 mpc_format() {
   args=("$@")
