@@ -54,37 +54,40 @@ set $down               j
 set $left               h
 set $right              l
 
+# Shortcuts
+set $nsi                --no-startup-id
+
 ## SESSION
 
 # Autostart
-exec --no-startup-id $termd -q -o -f
-exec --no-startup-id mpd
+exec $nsi $termd -q -o -f
+exec $nsi mpd
 
-exec --no-startup-id compton -bcCG -l -30 -t -30 -r 20
-exec --no-startup-id /usr/libexec/gnome-settings-daemon
-exec --no-startup-id gnome-screensaver
-exec --no-startup-id lightsOn
+exec $nsi compton -bcCG -l -30 -t -30 -r 20
+exec $nsi /usr/libexec/gnome-settings-daemon
+exec $nsi gnome-screensaver
+exec $nsi lightsOn
 
-# exec --no-startup-id nm-applet
-exec --no-startup-id xflux -z 92129
-exec --no-startup-id dropbox start
-exec --no-startup-id ibus-daemon -xdr
+# exec $nsi nm-applet
+exec $nsi xflux -z 92129
+exec $nsi dropbox start
+exec $nsi ibus-daemon -xdr
 
-exec_always --no-startup-id killall dunst && dunst
-exec_always --no-startup-id feh --bg-fill $wallpaper
+exec_always $nsi killall dunst && dunst
+exec_always $nsi feh --bg-fill $wallpaper
 
 # Terminal on scratch
 for_window [title="^term_scratchpad$"] move scratchpad
 bindsym $mod+equal [title="^term_scratchpad$"] scratchpad show
-exec $termc -name term_scratchpad
+exec $nsi $termc -name term_scratchpad
 
 # Dash
-# exec --no-startup-id i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
+# exec $nsi i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
 # exec $termc -e ncmpcpp
 # exec firefox -P "i3"
 
 # Start on workspace 1
-exec i3-msg 'workspace "11:one"'
+exec $nsi i3-msg 'workspace "11:one"'
 
 ## SETTINGS
 
@@ -133,37 +136,37 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Escape exec gnome-screensaver-command -l
+bindsym $mod+Escape exec $nsi gnome-screensaver-command -l
 bindsym $mod+Shift+Escape exit
 
 # Executables
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --term='$termc' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
-bindsym $mod+t exec $termc
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$termc' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+t exec $nsi $termc
 # Network manager
-bindsym $mod+c exec $termc -e nmtui
+bindsym $mod+c exec $nsi $termc -e nmtui
 # File browser - need to disable transparency for image previews
-bindsym $mod+e exec $termc -depth 0 -e ranger
+bindsym $mod+e exec $nsi $termc -depth 0 -e ranger
 # Music player
-bindsym $mod+m exec $termc -e ncmpcpp
+bindsym $mod+m exec $nsi $termc -e ncmpcpp
 
 # Screenshots to clipboard
-bindsym Print             exec escrotum -C
-bindsym Shift+Print       exec escrotum -Cs
+bindsym Print             exec $nsi escrotum -C
+bindsym Shift+Print       exec $nsi escrotum -Cs
 
 # Media controls
-bindsym $mod+Home         exec --no-startup-id mpc toggle
-bindsym $mod+End          exec --no-startup-id mpc stop
-bindsym $mod+Page_Up      exec --no-startup-id mpc prev
-bindsym $mod+Page_Down    exec --no-startup-id mpc next
+bindsym $mod+Home         exec $nsi mpc toggle
+bindsym $mod+End          exec $nsi mpc stop
+bindsym $mod+Page_Up      exec $nsi mpc prev
+bindsym $mod+Page_Down    exec $nsi mpc next
 
 # Volume controls
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volPct%- && ogg123 $volChangeSound
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master $volPct%+ && ogg123 $volChangeSound
-bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && ogg123 $volChangeSound
+bindsym XF86AudioLowerVolume exec $nsi amixer set Master $volPct%- && ogg123 $volChangeSound
+bindsym XF86AudioRaiseVolume exec $nsi amixer set Master $volPct%+ && ogg123 $volChangeSound
+bindsym XF86AudioMute exec $nsi amixer set Master toggle && ogg123 $volChangeSound
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc $brightPct
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $brightPct
+bindsym XF86MonBrightnessUp exec $nsi xbacklight -inc $brightPct
+bindsym XF86MonBrightnessDown exec $nsi xbacklight -dec $brightPct
 
 # Change focus
 bindsym $mod+backslash focus mode_toggle
