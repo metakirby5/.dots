@@ -136,7 +136,7 @@
     startup_notification = false
 
     # dmenu path.
-    dmenu = dmenu -i -p dunst -fn tewi -nf \"#AAAAAA\" -nb \"#444444\" -sf \"#FFFFFF\" -sb \"#3FCFEE\" -x 0 -w 3200 -y 1700 -h 100
+    dmenu = dmenu -i -p dunst -fn tewi -x 0 -w 3200 -y 1700 -h 100
 
     # Browser for opening urls in context menu.
     browser = google-chrome -new-tab
