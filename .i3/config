@@ -3,7 +3,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpaper          /usr/share/backgrounds/ethan/station.png
+set $wallpapers         /usr/share/backgrounds/in_rotation/*
 set $cFocusBG           #3FCFEE
 set $cFocusFG           #FFFFFF
 set $cFocusIN           #88DEF1
@@ -74,7 +74,7 @@ exec $nsi dropbox start
 exec $nsi ibus-daemon -xdr
 
 exec_always $nsi killall dunst && dunst
-exec_always $nsi feh --bg-fill $wallpaper
+exec_always $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
 for_window [title="^term_scratchpad$"] move scratchpad
