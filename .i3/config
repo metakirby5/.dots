@@ -135,7 +135,7 @@ bar {
 
 # Tasks
 bindsym $mod+f fullscreen toggle
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Escape exec $nsi gnome-screensaver-command -l
