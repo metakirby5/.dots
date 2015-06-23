@@ -28,7 +28,9 @@ TEXT
   }"},
 
   # Wireless
-  {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#4CAF50"},
+  {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#${exec\
+    nmcli r | awk 'BEGIN{f=-1}NR==1{for(i=1;i<=NF;i++)if($i ~ /^WIFI$/)f=i}NR>1{print $f}' | grep enabled >/dev/null && echo '4CAF50' || echo '265828'\
+  }"},
 
   # Running processes
   {"full_text": " » ${exec\
