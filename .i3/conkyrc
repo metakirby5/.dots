@@ -10,13 +10,38 @@ override_utf8_locale          yes
 
 TEXT
 ,[
+  # CPU temp. / percent
   {"full_text": " ❤ $acpitemp°C @ $cpu% ","color": "\#F44336"},
+
+  # Battery percent
   {"full_text": " ⌼ ${battery_percent BAT1}% ","color":"\#FF9800"},
-  # janky as heck
-  {"full_text": " ♪ $if_mpd_playing${exec mpc | grep playing >/dev/null && echo '▶ '}${exec mpc | grep paused >/dev/null && echo '‖ '}$mpd_elapsed / $mpd_length @ $endif${exec amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1} ", "color":"\#${exec amixer get Master | grep '\[on\]' >/dev/null && echo 'FFEB3B' || echo '807A4E'}"},
+
+  # Music playing/paused, volume
+  {"full_text": " ♪ $if_mpd_playing${exec\
+    mpc | grep playing >/dev/null && echo '▶' ||\
+    mpc | grep paused >/dev/null && echo '‖' ||\
+    echo '?'\
+  } $endif${exec\
+    amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1\
+  } ", "color":"\#${exec\
+    amixer get Master | grep '\[on\]' >/dev/null && echo 'FFEB3B' || echo '807A4E'\
+  }"},
+
+  # Wireless
   {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#4CAF50"},
-  {"full_text": " » ${exec dropbox running || echo 'dbx '}${exec ps cax | grep xflux >/dev/null && echo 'flx '}", "color":"\#2196F3"},
-  {"full_text": " ${time %a %b %d %H:%M} ", "color":"\#5C6BC0"},
-  {"full_text": " ${exec echo $USER@$(hostname)} ", "color":"\#AB47BC"}${exec ibus engine >/dev/null && echo ",
-  {\"full_text\": \" $(ibus engine | sed -r 's/:+/ /g') \", \"color\":\"#FFFFFF\"}"}
+
+  # Running processes
+  {"full_text": " » ${exec\
+    dropbox running || echo 'dbx '\
+  }${exec\
+    ps cax | grep xflux >/dev/null && echo 'flx '\
+  }", "color":"\#2196F3"},
+
+  # Keyboard layout
+  ${exec ibus engine >/dev/null && echo "\
+    {\"full_text\": \" Ͳ $(ibus engine | sed -r 's/:+/ /g') \", \"color\":\"#5C6BC0\"},\
+  "}
+
+  # Date/time
+  {"full_text": " ${time %a %b %d %H:%M} ", "color":"\#AB47BC"}
 ]
