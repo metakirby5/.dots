@@ -37,7 +37,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   call vundle#end()
 
-  noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
+  noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
 endif
 
 filetype plugin indent on
