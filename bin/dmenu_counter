@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# Counts how many times a dmenu entry has been run and
+# reorders accordingly. Executes demnu as provided by
+# argv.
+
+import sys
+import json
+from subprocess import Popen, PIPE
+from collections import defaultdict
+
+COUNTER_FILE = os.path.expanduser('~/.dmenu_counter.json')
+
+# Check the args
+if not len(sys.argv) > 1:
+  sys.stderr.write("No dmenu provided!\n")
+  sys.exit(1)
+
+counter = defaultdict(int)
+
+# Try to load existing dictionary
+try:
+  with open(COUNTER_FILE, 'r') as f:
+    counter.update(json.load(f))
+
+# Does not exist - proceed with an empty dict
+except IOError:
+  pass
+
+# Add stdin items to dict
+for line in sys.stdin:
+  line = line.rstrip('\n')
+  if line not in counter:
+    counter[line] = 0
+
+# Get a list of sorted items
+items = [k for k, v in sorted(
+  counter.iteritems(),
+  # Sort decreasing val, then increasing key
+  key=lambda x: (-x[1], x[0]),
+)]
+
+# Open up whatever was passed in as args
+dmenu = Popen(sys.argv[1:], stdin=PIPE, stdout=PIPE)
+selected = dmenu.communicate('\n'.join(items))[0].rstrip('\n')
+
+# Record the results
+if selected:
+  counter[selected] += 1
+with open(COUNTER_FILE, 'w') as f:
+  json.dump(counter, f)
+
+# Output our selection
+print(selected)
