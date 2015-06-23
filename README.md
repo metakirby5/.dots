@@ -14,6 +14,11 @@ All of my dotfile configs.
 
 ## Dependencies
 
+### Fonts
+- Source Code Pro
+- tewi
+
+### Packages
 - rxvt-unicode-256color
 - Airblader/i3-gaps
 - chjj/compton
@@ -23,11 +28,15 @@ All of my dotfile configs.
 - feh
 - conky
 - mpd
+- mpc
+- mpv
 - ncmpcpp
 - ranger
 - Roger/escrotum
 - dropbox
 - nmtui
+- xflux
+- ibus
 
 ## Installation
 

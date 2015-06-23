@@ -37,7 +37,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   call vundle#end()
 
-  noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
+  noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
 endif
 
 filetype plugin indent on
@@ -270,7 +270,7 @@ noremap <leader>s <C-w>s
 noremap <leader>v <C-w>v
 
 " ,e - Equalize splits
-noremap <leader>e <C-w>=
+noremap <leader>= <C-w>=
 
 " ,[hjkl] - Switch to split
 noremap <leader>j <C-W>j
@@ -538,7 +538,7 @@ noremap <leader>p :setlocal paste!<cr>
 noremap <silent> <leader><cr> :noh<cr>
 
 " ,= - Quick retab of everything
-noremap <silent> <leader>= mzgg=G<esc>:retab<cr>`z
+" noremap <silent> <leader>= mzgg=G<esc>:retab<cr>`z
 
 " ^[jk] - Move line of text
 nnoremap <silent> <C-j> mz:m+<cr>`z
