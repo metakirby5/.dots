@@ -18,8 +18,8 @@ TEXT
 
   # Music playing/paused, volume
   {"full_text": " ♪ $if_mpd_playing${exec\
-    mpc | grep playing >/dev/null && echo '▶' ||\
-    mpc | grep paused >/dev/null && echo '‖' ||\
+    (mpc | grep playing >/dev/null && echo '▶') ||\
+    (mpc | grep paused >/dev/null && echo '‖') ||\
     echo '?'\
   } $endif${exec\
     amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1\
