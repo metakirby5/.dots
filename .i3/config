@@ -19,14 +19,14 @@ set $cUrgentIN          #F44336
 set $cBarBG             #2D2D2D
 set $cBarFG             #DEDEDE
 set $fontName           tewi
-set $fontSize           24
+set $fontSize           8
 set $border             7
 set $gapsInner          50
 set $gapsOuter          0
 
 # Bar
 set $barFontName        tewi
-set $barFontSize        24
+set $barFontSize        8
 set $barSeparator       <
 
 # dmenu
@@ -39,6 +39,7 @@ set $dmY                1700
 set $dmHeight           100
 
 # Settings
+set $dpi                276
 set $termd              urxvt256cd
 set $termc              urxvt256cc
 set $dashName           1:★
@@ -60,6 +61,7 @@ set $nsi                --no-startup-id
 ## SESSION
 
 # Autostart
+exec $nsi xrandr --dpi $dpi
 exec $nsi $termd -q -o -f
 exec $nsi mpd
 
