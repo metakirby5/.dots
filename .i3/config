@@ -77,8 +77,8 @@ exec_always $nsi killall dunst && dunst
 exec_always $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
-for_window [title="^term_scratchpad$"] move scratchpad
-bindsym $mod+equal [title="^term_scratchpad$"] scratchpad show
+for_window [instance="^term_scratchpad$"] move scratchpad
+bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
 exec $nsi $termc -name term_scratchpad
 
 # Dash
