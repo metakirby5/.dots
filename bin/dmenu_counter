@@ -66,7 +66,7 @@ selected = dmenu_proc.communicate('\n'.join(items))[0].split('\n')[0]
 if selected:
   counter[selected] += 1
 with open(counter_file, 'w') as f:
-  json.dump(counter, f, indent=4)
+  json.dump(counter, f, indent=2)
 
 # Output our selection
 print(selected)
