@@ -4,12 +4,24 @@ out_to_x                      no
 update_interval               1
 update_interval_on_battery    5
 total_run_times               0
+
 short_units                   yes
+pad_percents                  2
+use_spacer                    left
 
 override_utf8_locale          yes
 
 TEXT
 ,[
+  # Window title
+  # https://maxammann.github.io/2015/03/07/conky-window-title/
+  {"full_text": "${exec\
+    xprop -id \
+    $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') |\
+    awk '/_NET_WM_NAME/{$1=$2="";print}' | tr -s ' ' |\
+    awk '{print substr($0, 3, length($0) - 3)}'\
+  } ","color": "\#FFFFFF"},
+
   # CPU temp. / percent
   {"full_text": " ❤ $acpitemp°C @ $cpu% ","color": "\#F44336"},
 
