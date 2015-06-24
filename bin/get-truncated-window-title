@@ -1,0 +1,15 @@
+#!/bin/bash
+# https://maxammann.github.io/2015/03/07/conky-window-title/
+
+xprop -id \
+$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/ {print $NF}') |\
+grep '_NET_WM_NAME' | cut -d\  -f3- |\
+awk -v len=40 '
+  {
+    if (length($0)+2 > len)
+      print substr($0, 2, len-2) "…"
+    else
+      print substr($0, 2, length($0)-2)
+  }
+'
+
