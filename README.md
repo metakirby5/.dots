@@ -5,8 +5,9 @@ All of my dotfile configs.
 
 ## TODO
 
+- Switch to rofi
+- Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur
-- Most recently used in dmenu first
 - Customize ncmpcpp
 - Customize ranger
 - Move all configs to .config for consistency

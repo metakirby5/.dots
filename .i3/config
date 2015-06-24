@@ -58,6 +58,11 @@ set $right              l
 # Shortcuts
 set $nsi                --no-startup-id
 
+## WINDOW RULES
+
+# Popups
+for_window [window_role="pop-up|task_dialog"] floating enable
+
 ## SESSION
 
 # Autostart
@@ -81,7 +86,8 @@ exec_always $nsi feh -zr --bg-fill $wallpapers
 # Terminal on scratch
 for_window [instance="^term_scratchpad$"] move scratchpad
 bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
-exec $nsi $termc -name term_scratchpad
+# Wait for $termd to start
+exec $nsi until pidof $termd;do :;done && $termc -name term_scratchpad
 
 # Dash
 # exec $nsi i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
