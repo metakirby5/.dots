@@ -42,10 +42,22 @@ set $dmHeight           100
 set $dpi                276
 set $termd              urxvt256cd
 set $termc              urxvt256cc
-set $dashName           1:★
 set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct             5
 set $brightPct          10
+
+# Workspaces
+set $wDash              1:★
+set $w1                 11:one
+set $w2                 12:two
+set $w3                 13:three
+set $w4                 14:four
+set $w5                 15:five
+set $w6                 16:six
+set $w7                 17:seven
+set $w8                 18:eight
+set $w9                 19:nine
+set $w10                20:ten
 
 # Keys
 set $mod                Mod4
@@ -69,14 +81,13 @@ exec $nsi compton -bcCG -l -30 -t -30 -r 20
 exec $nsi /usr/libexec/gnome-settings-daemon
 exec $nsi gnome-screensaver
 exec $nsi lightsOn
+exec $nsi dunst
 
 # exec $nsi nm-applet
 exec $nsi xflux -z 92129
 exec $nsi dropbox start
 exec $nsi ibus-daemon -xdr
-
-exec_always $nsi killall dunst && dunst
-exec_always $nsi feh -zr --bg-fill $wallpapers
+exec $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
 for_window [instance="^term_scratchpad$"] move scratchpad
@@ -85,12 +96,15 @@ bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
 exec $nsi until pidof $termd;do :;done && $termc -name term_scratchpad
 
 # Dash
-# exec $nsi i3-msg 'workspace "$dashName"; append_layout ~/.i3/layouts/dash.json'
+# exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
 # exec $termc -e ncmpcpp
 # exec firefox -P "i3"
 
 # Start on workspace 1
-exec $nsi i3-msg 'workspace "11:one"'
+exec $nsi i3-msg 'workspace "$w1"'
+
+# Restart i3 to fix bugged cursor
+exec $nsi sleep 1 && i3-msg 'restart'
 
 ## SETTINGS
 
@@ -219,28 +233,28 @@ bindsym $mod+n split h
 bindsym $mod+v split v
 
 # Switch to workspace
-bindsym $mod+grave workspace        "$dashName"
-bindsym $mod+1 workspace            "11:one"
-bindsym $mod+2 workspace            "12:two"
-bindsym $mod+3 workspace            "13:three"
-bindsym $mod+4 workspace            "14:four"
-bindsym $mod+5 workspace            "15:five"
-bindsym $mod+6 workspace            "16:six"
-bindsym $mod+7 workspace            "17:seven"
-bindsym $mod+8 workspace            "18:eight"
-bindsym $mod+9 workspace            "19:nine"
-bindsym $mod+0 workspace            "20:ten"
+bindsym $mod+grave workspace        "$wDash"
+bindsym $mod+1 workspace            "$w1"
+bindsym $mod+2 workspace            "$w2"
+bindsym $mod+3 workspace            "$w3"
+bindsym $mod+4 workspace            "$w4"
+bindsym $mod+5 workspace            "$w5"
+bindsym $mod+6 workspace            "$w6"
+bindsym $mod+7 workspace            "$w7"
+bindsym $mod+8 workspace            "$w8"
+bindsym $mod+9 workspace            "$w9"
+bindsym $mod+0 workspace            "$w10"
 
 # Move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace        "$dashName"
-bindsym $mod+Shift+1 move container to workspace            "11:one"
-bindsym $mod+Shift+2 move container to workspace            "12:two"
-bindsym $mod+Shift+3 move container to workspace            "13:three"
-bindsym $mod+Shift+4 move container to workspace            "14:four"
-bindsym $mod+Shift+5 move container to workspace            "15:five"
-bindsym $mod+Shift+6 move container to workspace            "16:six"
-bindsym $mod+Shift+7 move container to workspace            "17:seven"
-bindsym $mod+Shift+8 move container to workspace            "18:eight"
-bindsym $mod+Shift+9 move container to workspace            "19:nine"
-bindsym $mod+Shift+0 move container to workspace            "20:ten"
+bindsym $mod+Shift+grave move container to workspace        "$wDash"
+bindsym $mod+Shift+1 move container to workspace            "$w1"
+bindsym $mod+Shift+2 move container to workspace            "$w2"
+bindsym $mod+Shift+3 move container to workspace            "$w3"
+bindsym $mod+Shift+4 move container to workspace            "$w4"
+bindsym $mod+Shift+5 move container to workspace            "$w5"
+bindsym $mod+Shift+6 move container to workspace            "$w6"
+bindsym $mod+Shift+7 move container to workspace            "$w7"
+bindsym $mod+Shift+8 move container to workspace            "$w8"
+bindsym $mod+Shift+9 move container to workspace            "$w9"
+bindsym $mod+Shift+0 move container to workspace            "$w10"
 
