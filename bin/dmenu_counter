@@ -55,15 +55,15 @@ items = [k for k, v in sorted(
   key=lambda x: (-x[1], x[0]),
 )]
 
-# Open up whatever was passed in as args
-dmenu = Popen(sys.argv[1:], stdin=PIPE, stdout=PIPE)
-selected = dmenu.communicate('\n'.join(items))[0].rstrip('\n')
+# Open up dmenu and get its output
+dmenu_proc = Popen(dmenu, stdin=PIPE, stdout=PIPE)
+selected = dmenu_proc.communicate('\n'.join(items))[0].split('\n')[0]
 
 # Record the results
 if selected:
   counter[selected] += 1
 with open(counter_file, 'w') as f:
-  json.dump(counter, f)
+  json.dump(counter, f, indent=4)
 
 # Output our selection
 print(selected)
