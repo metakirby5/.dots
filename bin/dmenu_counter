@@ -1,25 +1,41 @@
 #!/usr/bin/env python
-# Counts how many times a dmenu entry has been run and
-# reorders accordingly. Executes demnu as provided by
-# argv.
+description = """
+Counts how many times a dmenu entry has been run and
+reorders accordingly. Executes demnu as provided by
+the remaining arguments.
+"""
 
+import os
 import sys
 import json
+import argparse
 from subprocess import Popen, PIPE
 from collections import defaultdict
 
-COUNTER_FILE = os.path.expanduser('~/.dmenu_counter.json')
+# Get dmenu and counter_file
+parser = argparse.ArgumentParser(description=description,
+    usage="%s [-h] [-counter COUNTER] [dmenu ...]" % sys.argv[0])
+parser.add_argument('-counter',
+    help="""
+    the file to use for counting the number of times
+    a program has executed. Uses ~/.dmenu_counter.json
+    by default.
+    """,
+    type=str,
+    default='~/.dmenu_counter.json')
+args, dmenu = parser.parse_known_args()
 
-# Check the args
-if not len(sys.argv) > 1:
-  sys.stderr.write("No dmenu provided!\n")
-  sys.exit(1)
+counter_file = os.path.expanduser(args.counter)
+
+# Check if we have a dmenu
+if not len(dmenu):
+  parser.error("No dmenu provided!")
 
 counter = defaultdict(int)
 
 # Try to load existing dictionary
 try:
-  with open(COUNTER_FILE, 'r') as f:
+  with open(counter_file, 'r') as f:
     counter.update(json.load(f))
 
 # Does not exist - proceed with an empty dict
@@ -46,7 +62,7 @@ selected = dmenu.communicate('\n'.join(items))[0].rstrip('\n')
 # Record the results
 if selected:
   counter[selected] += 1
-with open(COUNTER_FILE, 'w') as f:
+with open(counter_file, 'w') as f:
   json.dump(counter, f)
 
 # Output our selection
