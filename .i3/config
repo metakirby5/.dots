@@ -30,7 +30,7 @@ set $barFontSize        8
 set $barSeparator       <
 
 # dmenu
-set $dmHistory          ~/.dmenu_history
+set $dmCounter          ~/.dmenu_counter.json
 set $dmFontName         tewi
 set $dmPrompt           λ
 set $dmX                0
@@ -142,7 +142,7 @@ bindsym $mod+Escape exec $nsi gnome-screensaver-command -l
 bindsym $mod+Shift+Escape exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$termc' --dmenu='dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -hist $dmHistory'
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$termc' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $termc
 # Network manager
 bindsym $mod+c exec $nsi $termc -e nmtui
@@ -150,6 +150,8 @@ bindsym $mod+c exec $nsi $termc -e nmtui
 bindsym $mod+e exec $nsi $termc -depth 0 -e ranger
 # Music player
 bindsym $mod+m exec $nsi $termc -e ncmpcpp
+# Display currently playing song
+bindsym $mod+Shift+m exec $nsi ncmpcpp-notify
 
 # Screenshots to clipboard
 bindsym Print             exec $nsi escrotum -C
