@@ -20,7 +20,7 @@ TEXT
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#F44336"},
 
   # Battery percent
-  {"full_text": "⌼ ${battery_percent BAT1}%", "color": "\#FF9800"},
+  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#FF9800"},
 
   # Music playing/paused, volume
   {"full_text": "♪ $if_mpd_playing$mpd_status @ $endif${exec\
