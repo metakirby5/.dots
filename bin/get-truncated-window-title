@@ -3,13 +3,14 @@
 
 xprop -id \
 $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/ {print $NF}') |\
-grep '_NET_WM_NAME' | cut -d\  -f3- |\
-awk -v len=40 '
-  {
-    if (length($0)-2 > len)
-      print substr($0, 2, len-1) "…"
+awk -v pref=30 -v len=40 '
+  /_NET_WM_NAME/ {
+    win_name = substr($0, pref)
+    win_name = substr(win_name, 0, length(win_name)-1)
+    if (length(win_name) > len)
+      print substr(win_name, 0, len-1) "…"
     else
-      print substr($0, 2, length($0)-2)
+      print win_name
   }
 '
 
