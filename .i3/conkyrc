@@ -20,42 +20,56 @@ TEXT
     $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') |\
     awk '/_NET_WM_NAME/{$1=$2="";print}' | tr -s ' ' |\
     awk '{print substr($0, 3, length($0) - 3)}'\
-  } ","color": "\#FFFFFF"},
+  }","color": "\#FFFFFF"},
 
   # CPU temp. / percent
-  {"full_text": " ❤ $acpitemp°C @ $cpu% ","color": "\#F44336"},
+  {"full_text": "❤$acpitemp°C @ $cpu%","color": "\#F44336"},
 
   # Battery percent
-  {"full_text": " ⌼ ${battery_percent BAT1}% ","color":"\#FF9800"},
+  {"full_text": "⌼ ${battery_percent BAT1}%","color":"\#FF9800"},
 
   # Music playing/paused, volume
-  {"full_text": " ♪ $if_mpd_playing${exec\
+  {"full_text": "♪ $if_mpd_playing${exec\
     (mpc | grep playing >/dev/null && echo '▶') ||\
     (mpc | grep paused >/dev/null && echo '‖') ||\
     echo '?'\
   } $endif${exec\
     amixer get Master | awk -F"[][]" '/%/ { print $2 }' | tail -n1\
-  } ", "color":"\#${exec\
-    amixer get Master | grep '\[on\]' >/dev/null && echo 'FFEB3B' || echo '807A4E'\
+  }", "color":"\#${exec\
+    amixer get Master |\
+    grep '\[on\]' >/dev/null && echo 'FFEB3B' || echo '807A4E'\
   }"},
 
   # Wireless
-  {"full_text": " ☇ ${wireless_essid wlp1s0} ","color":"\#${exec\
-    nmcli r | awk 'BEGIN{f=-1}NR==1{for(i=1;i<=NF;i++)if($i ~ /^WIFI$/)f=i}NR>1{print $f}' | grep enabled >/dev/null && echo '4CAF50' || echo '265828'\
+  {"full_text": "☇ ${wireless_essid wlp1s0}","color":"\#${exec\
+    nmcli r | awk '
+      BEGIN {
+        f = -1
+      }
+      NR == 1 {
+        for (i=1; i<=NF; i++)
+          if($i ~ /^WIFI$/)
+            f=i
+      }
+      NR > 1 {
+        print $f
+      }
+    ' | grep enabled >/dev/null && echo '4CAF50' || echo '265828'\
   }"},
 
   # Running processes
-  {"full_text": " » ${exec\
-    dropbox running || echo 'dbx '\
+  {"full_text": "»${exec\
+    dropbox running || echo ' dbx'\
   }${exec\
-    ps cax | grep xflux >/dev/null && echo 'flx '\
-  }", "color":"\#2196F3"},
+    pgrep xflux >/dev/null && echo ' flx'\
+  }","color":"\#2196F3"},
 
   # Keyboard layout
   ${exec ibus engine >/dev/null && echo "\
-    {\"full_text\": \" Ͳ $(ibus engine | sed -r 's/:+/ /g') \", \"color\":\"#5C6BC0\"},\
+    {\"full_text\": \"Ͳ $(ibus engine | sed -r 's/:+/ /g')\",
+    \"color\":\"#5C6BC0\"},\
   "}
 
   # Date/time
-  {"full_text": " ${time %a %b %d %H:%M} ", "color":"\#AB47BC"}
+  {"full_text": "${time %a %b %d %H:%M}", "color":"\#AB47BC"}
 ]
