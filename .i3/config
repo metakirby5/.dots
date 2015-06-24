@@ -58,11 +58,6 @@ set $right              l
 # Shortcuts
 set $nsi                --no-startup-id
 
-## WINDOW RULES
-
-# Popups
-for_window [window_role="pop-up|task_dialog"] floating enable
-
 ## SESSION
 
 # Autostart
@@ -136,6 +131,11 @@ bar {
     inactive_workspace $cBarBG $cUnfocusBG $cUnfocusFG
   }
 }
+
+## WINDOW RULES
+
+# Popups
+for_window [window_role="pop-up|task_dialog"] floating enable
 
 ## KEYS
 
