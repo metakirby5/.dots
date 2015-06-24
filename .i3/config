@@ -79,21 +79,21 @@ exec $nsi mpd
 
 exec $nsi compton -bcCG -l -30 -t -30 -r 20
 exec $nsi /usr/libexec/gnome-settings-daemon
-exec $nsi gnome-screensaver
-exec $nsi lightsOn
+# exec $nsi gnome-screensaver
+# exec $nsi lightsOn
 exec $nsi dunst
 
 # exec $nsi nm-applet
 exec $nsi xflux -z 92129
 exec $nsi dropbox start
-exec $nsi ibus-daemon -xdr
+# exec $nsi ibus-daemon -xdr
 exec $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
 for_window [instance="^term_scratchpad$"] move scratchpad
 bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
 # Wait for $termd to start
-exec $nsi until pidof $termd;do :;done && $termc -name term_scratchpad
+exec $nsi until pidof $termd;do :;done && sleep 1 && $termc -name term_scratchpad
 
 # Dash
 # exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
