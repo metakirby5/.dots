@@ -515,6 +515,10 @@ noremap ?? ?\c
 " <f5> - Reload file
 noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 
+" ,y - Yank to clipboard
+noremap <leader>y "+y
+vnoremap <leader>y "+y
+
 " ^p - Paste from register 0 (not overwritten by dels)
 noremap <C-p> "0p
 
