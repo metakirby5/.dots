@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 description = """
 Counts how many times a dmenu entry has been run and
-reorders accordingly. Executes demnu as provided by
+reorders accordingly. Executes dmenu as provided by
 the remaining arguments.
 """
 
-import os
 import sys
 import json
 import argparse
@@ -14,7 +13,11 @@ from collections import defaultdict
 
 # Get dmenu and counter_file
 parser = argparse.ArgumentParser(description=description,
-    usage="%s [-h] [-counter COUNTER] [dmenu ...]" % sys.argv[0])
+    usage="%(prog)s [--help] [-counter COUNTER] dmenu ...",
+    add_help=False)
+parser.add_argument('--help',
+    help="show this help message and exit",
+    action='help')
 parser.add_argument('-counter',
     help="""
     the file to use for counting the number of times
@@ -25,7 +28,7 @@ parser.add_argument('-counter',
     default='~/.dmenu_counter.json')
 args, dmenu = parser.parse_known_args()
 
-counter_file = os.path.expanduser(args.counter)
+counter_file = args.counter
 
 # Check if we have a dmenu
 if not len(dmenu):
