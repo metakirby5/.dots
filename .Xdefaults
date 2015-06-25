@@ -9,38 +9,64 @@ URxvt.internalBorder: 30
 URxvt*font: xft:Source Code Pro:pixelsize=30
 URxvt*boldFont: xft:Source Code Pro:bold:pixelsize=30
 
-! color scheme:
+! color scheme: https://github.com/vypr/dottie/blob/master/.Xresources
 
 URxvt*depth: 32
-URxvt*background: #2D2D2D
-URxvt*foreground: #DEDEDE
 
-URxvt*colorUL: #86a2b0
+! --- special colors ---
+
+*background: #272727
+*foreground: #fafafa
+
+! --- standard colors ---
 
 ! black
-URxvt*color0  : #2E3436
-URxvt*color8  : #555753
+*color0: #393939
+
+! bright_black
+*color8: #5b5b5b
+
 ! red
-URxvt*color1  : #CC0000
-URxvt*color9  : #EF2929
+*color1: #f42d6c
+
+! bright_red
+*color9: #fa9fbb
+
 ! green
-URxvt*color2  : #4E9A06
-URxvt*color10 : #8AE234
+*color2: #6cf42d
+
+! bright_green
+*color10: #bbfa9f
+
 ! yellow
-URxvt*color3  : #C4A000
-URxvt*color11 : #FCE94F
+*color3: #f4b52d
+
+! bright_yellow
+*color11: #fadd9f
+
 ! blue
-URxvt*color4  : #3465A4
-URxvt*color12 : #729FCF
+*color4: #2d8af4
+
+! bright_blue
+*color12: #9ec9fa
+
 ! magenta
-URxvt*color5  : #75507B
-URxvt*color13 : #AD7FA8
+*color5: #b52df4
+
+! bright_magenta
+*color13: #dd9ffa
+
 ! cyan
-URxvt*color6  : #06989A
-URxvt*color14 : #34E2E2
+*color6: #2df4b5
+
+! bright_cyan
+*color14: #9ffadd
+
 ! white
-URxvt*color7  : #D3D7CF
-URxvt*color15 : #EEEEEC
+*color7: #d8d8d8
+
+! bright_white
+*color15: #ffffff
 
 ! scrolling options and cursor style:
 

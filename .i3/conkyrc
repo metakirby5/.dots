@@ -14,32 +14,32 @@ override_utf8_locale          yes
 TEXT
 ,[
   # Window title
-  {"full_text": "${exec get-truncated-window-title}", "color": "\#FFFFFF"},
+  {"full_text": "${exec get-truncated-window-title}", "color": "\#ffffff"},
 
   # CPU temp. / percent
-  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#F44336"},
+  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#f42d6c"},
 
   # Battery percent
-  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#FF9800"},
+  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#f4b52d"},
 
   # Music playing/paused, volume
   {"full_text": "♪ $if_mpd_playing$mpd_status @ $endif${exec\
     amixer get Master | awk -v FS="[][]" '/%/ {print $2}' | tail -n1\
   }", "color": "\#${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo 'FFEB3B' || echo '807A4E'\
+    grep '\[on\]' >/dev/null && echo '6cf42d' || echo '000000'\
   }"},
 
   # Wireless
-  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\#4CAF50"},
+  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\#2df4b5"},
 
   # Running processes
   {"full_text": "»${exec\
     dropbox running || echo ' dbx'\
   }${exec\
     pgrep xflux >/dev/null && echo ' flx'\
-  }","color":"\#2196F3"},
+  }","color":"\#2d8af4"},
 
   # Date/time
-  {"full_text": "${time %a %b %d %H:%M}", "color":"\#AB47BC"}
+  {"full_text": "${time %a %b %d %H:%M}", "color":"\#b52df4"}
 ]

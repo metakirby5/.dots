@@ -16,8 +16,8 @@ set $cUnfocusIN         #555555
 set $cUrgentBG          #C62828
 set $cUrgentFG          #FFFFFF
 set $cUrgentIN          #F44336
-set $cBarBG             #2D2D2D
-set $cBarFG             #DEDEDE
+set $cBarBG             #272727
+set $cBarFG             #fafafa
 set $fontName           tewi
 set $fontSize           8
 set $border             7
@@ -77,10 +77,11 @@ exec $nsi xrandr --dpi $dpi
 exec $nsi $termd -q -o -f
 exec $nsi mpd
 
+# TODO remove the killall after prototyping
 exec_always $nsi killall compton && compton -b --config ~/.config/compton.conf
 exec $nsi /usr/libexec/gnome-settings-daemon
 # exec $nsi gnome-screensaver
-# exec $nsi lightsOn
+exec $nsi lightsOn
 exec $nsi dunst
 
 # exec $nsi nm-applet
