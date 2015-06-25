@@ -5,6 +5,6 @@ TMPTHUMB="${TMPBG%.png}-thumb.png"
 
 scrot -t 5 "$TMPBG"
 convert "$TMPTHUMB" -scale 2000% "$TMPBG"
-i3lock -u -i "$TMPBG"
+i3lock -udI 30 -i "$TMPBG"
 rm "$TMPBG" "$TMPTHUMB"
 
