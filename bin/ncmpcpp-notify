@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Sends a notify-osd notification with informatin from mpc -f
 # Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
 

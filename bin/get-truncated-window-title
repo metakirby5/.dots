@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # https://maxammann.github.io/2015/03/07/conky-window-title/
 
 xprop -id \
