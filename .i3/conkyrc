@@ -27,7 +27,7 @@ TEXT
     amixer get Master | awk -v FS="[][]" '/%/ {print $2}' | tail -n1\
   }", "color": "\#${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo '6cf42d' || echo '000000'\
+    grep '\[on\]' >/dev/null && echo '6cf42d' || echo '367A16'\
   }"},
 
   # Wireless
