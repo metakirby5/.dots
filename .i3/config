@@ -78,7 +78,7 @@ exec $nsi $termd -q -o -f
 exec $nsi mpd
 
 # TODO remove the killall after prototyping
-exec_always $nsi killall compton; compton -b --config ~/.config/compton.conf
+exec_always $nsi killall compton; compton --config ~/.config/compton.conf
 exec $nsi /usr/libexec/gnome-settings-daemon
 exec $nsi feh -zr --bg-fill $wallpapers
 exec $nsi xautolock
