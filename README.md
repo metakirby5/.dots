@@ -5,6 +5,7 @@ All of my dotfile configs.
 
 ## TODO
 
+- Configure compton
 - Switch to rofi
 - Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur

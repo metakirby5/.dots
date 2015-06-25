@@ -77,7 +77,7 @@ exec $nsi xrandr --dpi $dpi
 exec $nsi $termd -q -o -f
 exec $nsi mpd
 
-exec $nsi compton -bcCG -l -30 -t -30 -r 20
+exec_always $nsi killall compton && compton -b --config ~/.config/compton.conf
 exec $nsi /usr/libexec/gnome-settings-daemon
 # exec $nsi gnome-screensaver
 # exec $nsi lightsOn
