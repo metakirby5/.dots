@@ -6,8 +6,7 @@ All of my dotfile configs.
 ## TODO
 
 - Configure compton (dunst opacity 1)
-- GTK+ theme?
-- Switch to rofi
+- Switch to rofi (with xrdb?)
 - Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur
 - Customize ncmpcpp
@@ -24,6 +23,8 @@ All of my dotfile configs.
 ### Packages
 - rxvt-unicode-256color
 - Airblader/i3-gaps
+- i3lock
+- xautolock
 - chjj/compton
 - melek/dmenu2
 - enkore/j4-dmenu-desktop
@@ -39,7 +40,6 @@ All of my dotfile configs.
 - dropbox
 - nmtui
 - xflux
-- ibus
 
 ## Installation
 

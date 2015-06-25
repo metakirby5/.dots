@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+TMPBG="/tmp/i3plock.png"
+TMPTHUMB="${TMPBG%.png}-thumb.png"
+
+scrot -t 5 "$TMPBG"
+convert "$TMPTHUMB" -scale 2000% "$TMPBG"
+i3lock -u -i "$TMPBG"
+rm "$TMPBG" "$TMPTHUMB"
+

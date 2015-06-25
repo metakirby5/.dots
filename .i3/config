@@ -78,9 +78,9 @@ exec $nsi $termd -q -o -f
 exec $nsi mpd
 
 # TODO remove the killall after prototyping
-exec_always $nsi killall compton && compton -b --config ~/.config/compton.conf
+exec_always $nsi killall compton; compton -b --config ~/.config/compton.conf
 exec $nsi /usr/libexec/gnome-settings-daemon
-# exec $nsi gnome-screensaver
+exec $nsi xautolock
 exec $nsi lightsOn
 exec $nsi dunst
 
@@ -159,7 +159,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Escape exec $nsi gnome-screensaver-command -l
+bindsym $mod+Escape xautolock -locknow
 bindsym $mod+Shift+Escape exit
 
 # Executables
