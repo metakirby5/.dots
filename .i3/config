@@ -85,7 +85,6 @@ exec $nsi xautolock
 exec $nsi lightsOn
 exec $nsi dunst
 
-# exec $nsi nm-applet
 exec $nsi xflux -z 92129
 exec $nsi dropbox start
 # exec $nsi ibus-daemon -xdr
@@ -173,6 +172,8 @@ bindsym $mod+e exec $nsi $termc -depth 0 -e ranger
 bindsym $mod+m exec $nsi $termc -e ncmpcpp
 # Display currently playing song
 bindsym $mod+Shift+m exec $nsi ncmpcpp-notify
+# Next wallpaper
+bindsym $mod+Shift+w exec $nsi feh -zr --bg-fill $wallpapers
 
 # Screenshots to clipboard
 bindsym Print             exec $nsi escrotum -C

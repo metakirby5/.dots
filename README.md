@@ -5,7 +5,7 @@ All of my dotfile configs.
 
 ## TODO
 
-- Configure compton (dunst opacity 1)
+- Configure compton
 - Switch to rofi (with xrdb?)
 - Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur
