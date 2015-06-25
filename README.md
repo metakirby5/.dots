@@ -5,7 +5,7 @@ All of my dotfile configs.
 
 ## TODO
 
-- Configure compton
+- Configure compton (dunst opacity 1)
 - GTK+ theme?
 - Switch to rofi
 - Look at i3 on archwiki, j4tools, i3-extras
