@@ -11,6 +11,7 @@ All of my dotfile configs.
 - Customize ncmpcpp
 - Customize ranger
 - Move all configs to .config for consistency
+- Colorscheme generator
 - move to lemonbar
 
 ## Dependencies
