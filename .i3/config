@@ -67,15 +67,21 @@ set $right              l
 
 # Shortcuts
 set $nsi                --no-startup-id
+set $xwi                xwininfo -tree -root | grep
 
 ## SESSION
 
 exec $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
-for_window [instance="^term_scratchpad$"] move scratchpad
-bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
-exec $nsi $term -name term_scratchpad
+set $spT scratchpad_term
+for_window [instance="^$spT$"] move scratchpad
+bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT) && i3-msg '[instance="^$spT$"] scratchpad show'
+
+# Music on scratch
+set $spM scratchpad_music
+for_window [instance="^$spM$"] move scratchpad
+bindsym $mod+m exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[instance="^$spM$"] scratchpad show'
 
 # Dash
 # exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
@@ -149,12 +155,10 @@ bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter 
 bindsym $mod+t exec $nsi $term
 # Network manager
 bindsym $mod+c exec $nsi $term -e nmtui
-# File browser - need to disable transparency for image previews
-bindsym $mod+e exec $nsi $term -depth 0 -e ranger
-# Music player
-bindsym $mod+m exec $nsi $term -e ncmpcpp
+# File browser
+bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
-bindsym $mod+Shift+m exec $nsi ncmpcpp-notify
+bindsym $mod+Shift+m exec $nsi mpc-notify
 # Next wallpaper
 bindsym $mod+Shift+w exec $nsi feh -zr --bg-fill $wallpapers
 
