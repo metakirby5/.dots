@@ -123,8 +123,9 @@ bar {
   colors {
     statusline $cBarFG
     background $cBarBG
-    focused_workspace $cBarBG $cFocusBG $cFocusFG
-    inactive_workspace $cBarBG $cUnfocusBG $cUnfocusFG
+    focused_workspace   $cBarBG   $cFocusBG     $cFocusFG
+    inactive_workspace  $cBarBG   $cUnfocusBG   $cUnfocusFG
+    urgent_workspace    $cBarBG   $cUrgentBG    $cUrgentFG
   }
 }
 
