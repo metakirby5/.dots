@@ -14,18 +14,11 @@ DPMS_STANDBY=420
 DPMS_SUSPEND=480
 DPMS_OFF=600
 
-# Resources
-RESOURCES=(
-  "~/.Xresources"
-)
-
 ## CONFIG
 
 xrandr --dpi $DPI &
 
-for resource in "${RESOURCES[@]}"; do
-  [ -f "$resource" ] && xrdb -merge "$resource" &
-done
+reload-xresources
 
 xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 

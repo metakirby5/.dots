@@ -83,11 +83,6 @@ set $spM scratchpad_music
 for_window [instance="^$spM$"] move scratchpad
 bindsym $mod+m exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[instance="^$spM$"] scratchpad show'
 
-# Dash
-# exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
-# exec $term -e ncmpcpp
-# exec firefox -P "i3"
-
 # Start on workspace 1
 exec $nsi i3-msg 'workspace "$w1"'
 
