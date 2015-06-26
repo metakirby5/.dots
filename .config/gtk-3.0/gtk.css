@@ -1,5 +1,3 @@
-// Make frames square so they get properly bordered in i3
-
 .window-frame, .window-frame:backdrop {
     box-shadow: 0 0 0 black;
     border-style: none;
