@@ -78,8 +78,7 @@ exec $nsi $termd -q -o -f
 exec $nsi mpd
 
 exec $nsi feh -zr --bg-fill $wallpapers
-# TODO remove killall
-exec_always $nsi killall compton; compton
+exec $nsi compton
 exec $nsi /usr/libexec/gnome-settings-daemon
 exec $nsi xautolock
 exec $nsi lightsOn
