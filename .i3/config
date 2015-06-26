@@ -39,9 +39,7 @@ set $dmY                1700
 set $dmHeight           100
 
 # Settings
-set $dpi                276
-set $termd              urxvt256cd
-set $termc              urxvt256cc
+set $term               urxvt256cc
 set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct             5
 set $brightPct          10
@@ -72,31 +70,16 @@ set $nsi                --no-startup-id
 
 ## SESSION
 
-# Autostart
-exec $nsi xrandr --dpi $dpi
-exec $nsi $termd -q -o -f
-exec $nsi mpd
-
 exec $nsi feh -zr --bg-fill $wallpapers
-exec $nsi compton
-exec $nsi /usr/libexec/gnome-settings-daemon
-exec $nsi xautolock
-exec $nsi lightsOn
-exec $nsi dunst
-
-exec $nsi xflux -z 92129
-exec $nsi dropbox start
-# exec $nsi ibus-daemon -xdr
 
 # Terminal on scratch
 for_window [instance="^term_scratchpad$"] move scratchpad
 bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
-# Wait for $termd to start
-exec $nsi until pidof $termd;do :;done && sleep 1 && $termc -name term_scratchpad
+exec $nsi $term -name term_scratchpad
 
 # Dash
 # exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
-# exec $termc -e ncmpcpp
+# exec $term -e ncmpcpp
 # exec firefox -P "i3"
 
 # Start on workspace 1
@@ -161,14 +144,14 @@ bindsym $mod+Escape exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$termc' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
-bindsym $mod+t exec $nsi $termc
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
+bindsym $mod+t exec $nsi $term
 # Network manager
-bindsym $mod+c exec $nsi $termc -e nmtui
+bindsym $mod+c exec $nsi $term -e nmtui
 # File browser - need to disable transparency for image previews
-bindsym $mod+e exec $nsi $termc -depth 0 -e ranger
+bindsym $mod+e exec $nsi $term -depth 0 -e ranger
 # Music player
-bindsym $mod+m exec $nsi $termc -e ncmpcpp
+bindsym $mod+m exec $nsi $term -e ncmpcpp
 # Display currently playing song
 bindsym $mod+Shift+m exec $nsi ncmpcpp-notify
 # Next wallpaper
