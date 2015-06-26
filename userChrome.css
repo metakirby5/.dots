@@ -61,8 +61,7 @@
     background-color: #444444 !important;
     background-image: none !important;
     box-shadow: unset !important;
-    padding: 5px !important;
-    color: white !important;
+    border: none !important;
 }
 
 .urlbar-history-dropmarker,
