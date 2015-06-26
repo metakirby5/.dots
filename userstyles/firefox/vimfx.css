@@ -1,0 +1,22 @@
+/* AGENT_SHEET */
+
+div > .VimFxHintMarker {
+  /* linkhint boxes */
+  opacity: 0.8 !important;
+  background: #2D2D2D !important;
+  border-radius: 0 !important;
+  border: 2px solid #777777 !important;
+}
+
+div > .VimFxHintMarker span {
+  /* linkhint text */
+  color: #FFFFFF !important;
+  font-family: tewi !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  text-shadow: none !important;
+}
+
+div > .VimFxHintMarker > .VimFxCharMatch {
+  color: #3FCFEE !important;
+}
