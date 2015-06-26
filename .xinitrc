@@ -21,25 +21,25 @@ RESOURCES=(
 
 ## CONFIG
 
-xrandr --dpi $DPI
+xrandr --dpi $DPI &
 
 for resource in "${RESOURCES[@]}"; do
-  [ -f "$resource" ] && xrdb -merge "$resource"
+  [ -f "$resource" ] && xrdb -merge "$resource" &
 done
 
-xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER
+xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 ## AUTOSTART
 
-urxvt256cd -q -o -f
-mpd
-compton
-/usr/libexec/gnome-settings-daemon
-xautolock
-lightsOn
-dunst
+urxvt256cd -q -o -f &
+mpd &
+compton &
+/usr/libexec/gnome-settings-daemon &
+xautolock &
+lightsOn &
+dunst &
 
-xflux -z $ZIPCODE
-dropbox start
-# ibus-daemon -xdr
+xflux -z $ZIPCODE &
+dropbox start &
+# ibus-daemon -xdr &
 
