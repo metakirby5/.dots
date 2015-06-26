@@ -1,4 +1,4 @@
-gtk-theme-name="Numix-Blue"
-gtk-icon-theme-name="Numix-Circle"
-gtk-font-name="tewi 8"
-gtk-cursor-theme-name="Adwaita"
+gtk-theme-name = "Numix-Blue"
+gtk-icon-theme-name = "Numix-Circle"
+gtk-font-name = "tewi 8"
+gtk-cursor-theme-name = "Adwaita"
