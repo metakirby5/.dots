@@ -43,3 +43,6 @@ xflux -z $ZIPCODE &
 dropbox start &
 # ibus-daemon -xdr &
 
+## LET'S DO THIS
+i3
+

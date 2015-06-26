@@ -70,15 +70,12 @@ set $nsi                --no-startup-id
 
 ## SESSION
 
-# TODO temporary workaround until we figure out this xinitrc thing...
-exec $nsi _startup_i3
 exec $nsi feh -zr --bg-fill $wallpapers
 
 # Terminal on scratch
 for_window [instance="^term_scratchpad$"] move scratchpad
 bindsym $mod+equal [instance="^term_scratchpad$"] scratchpad show
-# TODO temporary workaround until we figure out this xinitrc thing...
-exec $nsi until pidof urxvt256cd;do :;done && sleep 1 && $term -name term_scratchpad
+exec $nsi $term -name term_scratchpad
 
 # Dash
 # exec $nsi i3-msg 'workspace "$wDash"; append_layout ~/.i3/layouts/dash.json'
