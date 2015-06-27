@@ -5,7 +5,6 @@ All of my dotfile configs.
 
 ## TODO
 
-- Switch to rofi (with xrdb?)
 - Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur
 - Customize ncmpcpp
