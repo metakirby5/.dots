@@ -146,7 +146,7 @@ bindsym $mod+Escape exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape exit
 
 # Executables
-#bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
 bindsym $mod+c exec $nsi $term -e nmtui
