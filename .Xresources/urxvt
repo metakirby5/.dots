@@ -1,5 +1,45 @@
 ! vim: ft=xdefaults
 
+! Fonts
+URxvt*font:      xft:Source Code Pro:pixelsize=30
+URxvt*boldFont:  xft:Source Code Pro:bold:pixelsize=30
+
+! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
+URxvt*background:  #272727
+URxvt*foreground:  #fafafa
+
+! Black
+URxvt*color0:      #393939
+URxvt*color8:      #5b5b5b
+
+! Red
+URxvt*color1:      #f42d6c
+URxvt*color9:      #fa9fbb
+
+! Green
+URxvt*color2:      #6cf42d
+URxvt*color10:     #bbfa9f
+
+! Yellow
+URxvt*color3:      #f4b52d
+URxvt*color11:     #fadd9f
+
+! Blue
+URxvt*color4:      #2d8af4
+URxvt*color12:     #9ec9fa
+
+! Magenta
+URxvt*color5:      #b52df4
+URxvt*color13:     #dd9ffa
+
+! Cyan
+URxvt*color6:      #2df4b5
+URxvt*color14:     #9ffadd
+
+! White
+URxvt*color7:      #d8d8d8
+URxvt*color15:     #ffffff
+
 ! Appearance
 URxvt*depth:            32
 URxvt*saveLines:        12000

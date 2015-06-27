@@ -1,6 +1,0 @@
-! vim: ft=xdefaults
-
-! Fonts
-*font:      xft:Source Code Pro:pixelsize=30
-*boldFont:  xft:Source Code Pro:bold:pixelsize=30
-
