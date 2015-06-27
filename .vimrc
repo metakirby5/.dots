@@ -128,25 +128,26 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: 1 | .vimrc [vim] [+]        s/tcroq1 | *78 |  52 - 099/523 - 17%
-set statusline=                     " initialize
-set statusline+=\ %2n               " buffer number
-set statusline+=\ \|\               " separator
-set statusline+=%f                  " relative path
-set statusline+=\                   " separator
-set statusline+=%y                  " filetype
-set statusline+=%{ExtModified()}    " externally modified?
-set statusline+=%m                  " modified flag
-set statusline+=%=                  " left/right separator
-set statusline+=%{FDMShort()}       " fold method
-set statusline+=/%{&fo}             " format options
-set statusline+=\ \|\               " separator
-set statusline+=%{Has78Char()}      " 78 char highlighting
-set statusline+=%2{TextWidth()}     " text width/paste mode
-set statusline+=\ \|\               " separator
+" example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
+set statusline=\                          " initialize
+set statusline+=%n                        " buffer number
+set statusline+=\ \|\                     " separator
+set statusline+=%f                        " relative path
+set statusline+=\                         " space
+set statusline+=%y                        " filetype
+set statusline+=%{ExtModified()}          " externally modified?
+set statusline+=%m                        " modified flag
+set statusline+=%r                        " read-only flag
+set statusline+=%=                        " left/right separator
+" set statusline+=%{FDMShort()}             " fold method
+" set statusline+=/                         " separator
+" set statusline+=%{&fo}                    " format options
+" set statusline+=\ \|\                     " separator
+set statusline+=%{Has78Char()}            " 78 char highlighting
+set statusline+=%{TextWidth()}            " text width/paste mode
+set statusline+=\ \|\                     " separator
 
-" char# - curline/totline - file%
-set statusline+=%20(\ %2c\ -\ %3l/%3L\ -\ %P\ %)
+set statusline+=%2c\ -\ %3l/%L\ -\ %P\    " char# - curline/totline - file%
 
 " Returns '[!]' if file externally modified since last read/write
 " :e to get rid of this warning
