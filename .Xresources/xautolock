@@ -1,0 +1,7 @@
+! vim: ft=xdefaults
+
+Xautolock.time:       5
+Xautolock.locker:     i3plock
+Xautolock.notify:     30
+Xautolock.notifier:   notify-send -a "xautolock" "Locking" "Locking in 30 seconds..."
+

@@ -1,0 +1,16 @@
+! vim: ft=xdefaults
+
+! Appearance
+URxvt*depth:            32
+URxvt*saveLines:        12000
+URxvt*internalBorder:   30
+URxvt*urgentOnBell:     true
+URxvt*scrollBar:        false
+URxvt*cursorBlink:      true
+
+! Clickable links
+URxvt*url-launcher:     google-chrome
+URxvt*matcher.button:   1
+
+URxvt*perl-ext-common:  default,matcher
+

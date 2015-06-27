@@ -1,0 +1,38 @@
+! vim: ft=xdefaults
+
+! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
+*background:  #272727
+*foreground:  #fafafa
+
+! Black
+*color0:      #393939
+*color8:      #5b5b5b
+
+! Red
+*color1:      #f42d6c
+*color9:      #fa9fbb
+
+! Green
+*color2:      #6cf42d
+*color10:     #bbfa9f
+
+! Yellow
+*color3:      #f4b52d
+*color11:     #fadd9f
+
+! Blue
+*color4:      #2d8af4
+*color12:     #9ec9fa
+
+! Magenta
+*color5:      #b52df4
+*color13:     #dd9ffa
+
+! Cyan
+*color6:      #2df4b5
+*color14:     #9ffadd
+
+! White
+*color7:      #d8d8d8
+*color15:     #ffffff
+
