@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-XRESOURCES="$HOME/.Xresources"
-
-for resource in `ls $XRESOURCES/*`; do
-  xrdb -merge "$resource" &
-done
-

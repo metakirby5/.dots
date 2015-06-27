@@ -146,7 +146,7 @@ bindsym $mod+Escape exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
+#bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
 bindsym $mod+c exec $nsi $term -e nmtui
@@ -208,13 +208,13 @@ bindsym $mod+Shift+g      gaps inner all minus  5
 bindsym $mod+Control+g    gaps inner all set    $gapsInner
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+b layout toggle split
+bindsym $mod+u layout stacking
+bindsym $mod+i layout tabbed
+bindsym $mod+o layout toggle split
 
 # Splits
-bindsym $mod+n split h
-bindsym $mod+v split v
+bindsym $mod+p split h
+bindsym $mod+Shift+p split v
 
 # Switch to workspace
 bindsym $mod+grave workspace        "$wDash"

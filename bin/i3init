@@ -7,6 +7,7 @@ ZIPCODE=92129
 
 # System
 DPI=276
+XRESOURCES=$HOME/.Xresources
 
 # Screensaver
 SCREENSAVER=360
@@ -17,9 +18,7 @@ DPMS_OFF=600
 ## CONFIG
 
 xrandr --dpi $DPI &
-
-reload-xresources
-
+xrdb -merge "$XRESOURCES" &
 xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 ## AUTOSTART
