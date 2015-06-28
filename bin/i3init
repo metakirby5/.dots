@@ -35,6 +35,7 @@ compton &
 /usr/libexec/gnome-settings-daemon &
 xautolock &
 dunst &
+caffeine &
 
 xflux -z $ZIPCODE &
 dropbox start &
