@@ -17,8 +17,8 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-__mk5_top_connector='┌'
-__mk5_bot_connector='└'
+__mk5_top_connector='┌ '
+__mk5_bot_connector='└ '
 __mk5_usr_pchar='»'
 __mk5_root_pchar='#'
 __mk5_sepchar='+'
@@ -147,13 +147,13 @@ $__mk5_b_blue$__mk5_sepchar "
   fi
 
   PS1="\
-$__mk5_b_blue$__mk5_top_connector \
+$__mk5_b_blue$__mk5_top_connector\
 $__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
 $virtualenv_info\
 $git_info\
 $colorpwd\
 \n\
-$__mk5_b_blue$__mk5_bot_connector \
+$__mk5_b_blue$__mk5_bot_connector\
 $pcharcolor$pchar \
 $__mk5_normal"
 }
