@@ -38,7 +38,7 @@ chromium_flash_detection=1
 minitube_detection=1
 
 # Names of programs which, when running, you wish to delay the screensaver.
-delay_progs=() # For example ('ardour2' 'gmpc')
+delay_progs=('mpv') # For example ('ardour2' 'gmpc')
 
 
 # YOU SHOULD NOT NEED TO MODIFY ANYTHING BELOW THIS LINE
@@ -58,6 +58,8 @@ elif [ `pgrep -l gnome-screensav | grep -wc gnome-screensav` -ge 1 ];then
     screensaver=gnome-screensav
 elif [ `pgrep -l kscreensaver | grep -wc kscreensaver` -ge 1 ];then
     screensaver=kscreensaver
+elif [ `pgrep -l xautolock | grep -wc xautolock` -ge 1 ];then
+    screensaver=xautolock
 else
     screensaver=None
     echo "No screensaver detected"     
@@ -195,6 +197,9 @@ delayScreensaver()
         qdbus org.freedesktop.ScreenSaver /ScreenSaver SimulateUserActivity > /dev/null
     fi
 
+    # wiggle mouse just in case
+    xdotool mousemove --sync    9999  9999  \
+            mousemove restore
 
     #Check if DPMS is on. If it is, deactivate and reactivate again. If it is not, do nothing.
     dpmsStatus=`xset -q | grep -ce 'DPMS is Enabled'`

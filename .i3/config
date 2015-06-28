@@ -16,11 +16,11 @@ set $cUnfocusIN         #555555
 set $cUrgentBG          #C62828
 set $cUrgentFG          #FFFFFF
 set $cUrgentIN          #F44336
-set $cBarBG             #272727
-set $cBarFG             #fafafa
+set $cMainBG            #272727
+set $cMainFG            #fafafa
 set $fontName           tewi
 set $fontSize           8
-set $border             7
+set $border             3
 set $gapsInner          50
 set $gapsOuter          0
 
@@ -94,13 +94,17 @@ exec $nsi sleep 1 && i3-msg 'restart'
 font pango:$fontName $fontSize
 floating_modifier $mod
 focus_follows_mouse no
+mouse_warping none
 
 # Gaps
-for_window [class="^.*"] border pixel $border
+new_window pixel $border
 gaps inner $gapsInner
 gaps outer $gapsOuter
 
 # Colors
+
+client.background       $cMainBG
+
 # class                 border        backgr.       text          indicator
 client.focused          $cFocusBG     $cFocusBG     $cFocusFG     $cFocusIN
 client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $cSubFocusIN
@@ -122,11 +126,11 @@ bar {
   separator_symbol "$barSeparator"
   status_command ~/.i3/bin/conky-wrapper
   colors {
-    statusline $cBarFG
-    background $cBarBG
-    focused_workspace   $cBarBG   $cFocusBG     $cFocusFG
-    inactive_workspace  $cBarBG   $cUnfocusBG   $cUnfocusFG
-    urgent_workspace    $cBarBG   $cUrgentBG    $cUrgentFG
+    statusline $cMainFG
+    background $cMainBG
+    focused_workspace   $cMainBG  $cFocusBG     $cFocusFG
+    inactive_workspace  $cMainBG  $cUnfocusBG   $cUnfocusFG
+    urgent_workspace    $cMainBG  $cUrgentBG    $cUrgentFG
   }
 }
 
