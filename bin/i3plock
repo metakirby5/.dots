@@ -6,7 +6,7 @@ TMPBG="/tmp/i3plock.png"
 orig_backlight="$(xbacklight -get)"
 xbacklight -set 0
 scrot "$TMPBG"
-mogrify -scale 5% -scale 2000% "$TMPBG"
+mogrify -sample 5% -sample 2000% "$TMPBG"
 i3lock -ui "$TMPBG"
 rm "$TMPBG"
 xbacklight -set "$orig_backlight"
