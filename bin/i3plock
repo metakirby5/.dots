@@ -3,8 +3,12 @@
 TMPBG="/tmp/i3plock.png"
 TMPTHUMB="${TMPBG%.png}-thumb.png"
 
+# Dim until the lockscreen is up
+orig_backlight="$(xbacklight -get)"
+xbacklight -set 0
 scrot -t 5 "$TMPBG"
 convert "$TMPTHUMB" -scale 2000% "$TMPBG"
-i3lock -udI 30 -i "$TMPBG"
+i3lock -ui "$TMPBG"
 rm "$TMPBG" "$TMPTHUMB"
+xbacklight -set "$orig_backlight"
 
