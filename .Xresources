@@ -62,6 +62,3 @@ URxvt.perl-ext-common:  default,matcher
 Xautolock.time:         5
 Xautolock.locker:       i3plock
 
-Xautolock.corners:      000-
-Xautolock.cornersize:   10
-

@@ -34,6 +34,7 @@ mpd &
 compton &
 /usr/libexec/gnome-settings-daemon &
 xautolock &
+lightsOn &
 dunst &
 
 xflux -z $ZIPCODE &
