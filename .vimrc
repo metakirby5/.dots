@@ -442,6 +442,10 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 set smarttab            " remove spaces grouped as tabs
 set autoindent          " copy indent from previous line
+set smartindent         " adjust indentation for curly braces, etc.
+
+" Fix for hash comments
+inoremap # X#
 
 " Defaults
 set expandtab
