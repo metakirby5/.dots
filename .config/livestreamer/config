@@ -1,2 +1,4 @@
 player=mpv
+player-passthrough=hls,http,rtmp
 default-stream=ultra,high,mid,low
+

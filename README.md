@@ -7,10 +7,10 @@ All of my dotfile configs.
 
 - Look at i3 on archwiki, j4tools, i3-extras
 - Screenshot to imgur
-- Customize ncmpcpp
-- Customize ranger
 - Move all configs to .config for consistency
 - Colorscheme generator
+- Customize ncmpcpp
+- Customize ranger
 - move to lemonbar
 
 ## Dependencies
