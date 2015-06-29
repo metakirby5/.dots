@@ -44,7 +44,6 @@ URxvt.color7:      #d8d8d8
 URxvt.color15:     #ffffff
 
 ! Appearance
-URxvt.depth:            32
 URxvt.saveLines:        12000
 URxvt.internalBorder:   30
 URxvt.urgentOnBell:     true

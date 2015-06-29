@@ -6,7 +6,6 @@ All of my dotfile configs.
 ## TODO
 
 - Look at i3 on archwiki, j4tools, i3-extras
-- Screenshot to imgur
 - Move all configs to .config for consistency
 - Colorscheme generator
 - Customize ncmpcpp
@@ -35,7 +34,8 @@ All of my dotfile configs.
 - mpv
 - ncmpcpp
 - ranger
-- Roger/escrotum
+- scrot
+- jomo/imgur-screenshot
 - dropbox
 - nmtui
 - xflux

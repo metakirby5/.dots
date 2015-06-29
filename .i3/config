@@ -162,8 +162,12 @@ bindsym $mod+Shift+m exec $nsi mpc-notify
 bindsym $mod+Shift+w exec $nsi feh -zr --bg-fill $wallpapers
 
 # Screenshots to clipboard
-bindsym Print             exec $nsi escrotum -C
-bindsym Shift+Print       exec $nsi escrotum -Cs
+set $_scrot               scrot "$HOME/Pictures/Screenshots/%m-%d-%y_%T.png"
+set $_scrot-clip-notify   'xclip -sel c -t image/png $f && notify-send -a "scrot" "Screenshot on clipboard" "$f"'
+set $_scrot-cancel        notify-send -a "scrot" "Error" "Screenshot failed."
+bindsym --release Print         exec $nsi $_scrot -e $_scrot-clip-notify || $_scrot-cancel
+bindsym --release Shift+Print   exec $nsi $_scrot -se $_scrot-clip-notify || $_scrot-cancel
+bindsym --release Control+Print exec $nsi imgur-screenshot
 
 # Media controls
 bindsym $mod+Home         exec $nsi mpc toggle
