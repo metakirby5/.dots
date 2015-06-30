@@ -23,13 +23,7 @@ xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 ## AUTOSTART
 
-start_urxvt256c() {
-  urxvt256cd -q -o -f
-  urxvt256cc -name scratchpad_term
-  urxvt256cc -name scratchpad_music -e ncmpcpp
-}
-
-start_urxvt256c &
+urxvt256cd -q -o -f &
 mpd &
 compton &
 /usr/libexec/gnome-settings-daemon &
