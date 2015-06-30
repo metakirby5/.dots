@@ -20,7 +20,7 @@ set $cMainBG            #272727
 set $cMainFG            #fafafa
 set $fontName           tewi
 set $fontSize           8
-set $border             3
+set $border             7
 set $gapsInner          50
 set $gapsOuter          0
 
@@ -86,9 +86,6 @@ bindsym $mod+m exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[
 # Start on workspace 1
 exec $nsi i3-msg 'workspace "$w1"'
 
-# Restart i3 to fix bugged cursor
-exec $nsi sleep 1 && i3-msg 'restart'
-
 ## SETTINGS
 
 font pango:$fontName $fontSize
@@ -97,8 +94,10 @@ focus_follows_mouse no
 mouse_warping none
 workspace_auto_back_and_forth yes
 
+# Borders
+for_window [class=".*"] border pixel $border
+
 # Gaps
-new_window pixel $border
 gaps inner $gapsInner
 gaps outer $gapsOuter
 
