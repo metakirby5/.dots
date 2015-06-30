@@ -7,7 +7,7 @@
     background-attachment: fixed;
     background-position: left bottom; 
   }
-  :root > * {
+  #newtab-window > * {
     display: none !important;
   }
 }
