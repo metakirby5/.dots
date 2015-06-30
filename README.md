@@ -11,7 +11,8 @@ All of my dotfile configs.
 - Lock on laptop lid close
 - Customize ncmpcpp
 - Customize ranger
-- move to lemonbar/candybar?
+- move to lemonbar/candybar/i3blocks?
+- move to termite
 
 ## Dependencies
 

@@ -37,11 +37,16 @@
 #identity-box, .urlbar-history-dropmarker,
 #urlbar-go-button, #urlbar-reload-button, #urlbar-stop-button,
 #nav-bar > :not(#nav-bar-customization-target),
-#nav-bar-customization-target > :not(#urlbar-container) {
+#nav-bar-customization-target > :not(#urlbar-container),
+.chromeclass-toolbar-additional {
     display: none !important;
 }
 
 /* Tabs */
+
+#TabsToolbar {
+    margin: 0 !important;
+}
 
 .arrowscrollbox-scrollbox {
     padding: 0 !important;
@@ -64,6 +69,10 @@
 
 .tabbrowser-tab[selected=true] {
     background-color: #444444 !important;
+}
+
+.tab-content {
+    min-height: 32px !important;
 }
 
 .arrowscrollbox-overflow-start-indicator,
