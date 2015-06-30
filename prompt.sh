@@ -39,7 +39,7 @@ function __mk5_git_pwd {
     echo "${gitpath##*/}${thePWD##$gitpath}"
   else
     # Replace home with ~
-    echo "$thePWD" | sed "s|^$HOME|~|"
+    pwd | sed "s|^$HOME|~|"
   fi
 }
 
