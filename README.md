@@ -11,7 +11,7 @@ All of my dotfile configs.
 - Lock on laptop lid close
 - Customize ncmpcpp
 - Customize ranger
-- move to lemonbar
+- move to lemonbar/candybar?
 
 ## Dependencies
 

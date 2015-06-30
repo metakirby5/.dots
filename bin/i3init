@@ -23,14 +23,19 @@ xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 ## AUTOSTART
 
+# Gnome
+/usr/libexec/gnome-settings-daemon &
+/usr/libexec/polkit-gnome-authentication-agent-1 &
+
+# Desktop
 urxvt256cd -q -o -f &
 mpd &
 compton &
-/usr/libexec/gnome-settings-daemon &
 xautolock &
 dunst &
 caffeine &
 
+# User
 xflux -z $ZIPCODE &
 dropbox start &
 # ibus-daemon -xdr &
