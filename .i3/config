@@ -33,9 +33,6 @@ set $barSeparator       <
 set $dmCounter          ~/.dmenu_counter.json
 set $dmFontName         tewi
 set $dmPrompt           λ
-set $dmX                0
-set $dmWidth            3200
-set $dmY                1700
 set $dmHeight           100
 
 # Settings
@@ -150,7 +147,7 @@ bindsym $mod+Escape exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -x $dmX -w $dmWidth -y $dmY -h $dmHeight -counter $dmCounter'
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -f -t -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -b -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
 bindsym $mod+c exec $nsi $term -e nmtui
