@@ -20,8 +20,17 @@
     color: white !important;
     border: none !important;
     background: transparent !important;
+    margin-left: 5px !important;
+    margin-right: 0 !important;
     padding-left: 10px !important;
+    padding-right: 5px !important;
     text-align: center !important;
+}
+
+/* Hide urlbar placeholder text */
+*|*.textbox-input::-moz-placeholder,
+*|*.textbox-input:hover::-moz-placeholder {
+    display: none !important;
 }
 
 #back-button, #forward-button,
