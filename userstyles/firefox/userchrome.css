@@ -33,6 +33,15 @@
     display: none !important;
 }
 
+/* Remember password, etc... */
+#notification-popup-box {
+    border-image: none !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
 #back-button, #forward-button,
 #identity-box, .urlbar-history-dropmarker,
 #urlbar-go-button, #urlbar-reload-button, #urlbar-stop-button,
