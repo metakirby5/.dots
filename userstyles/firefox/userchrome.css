@@ -54,22 +54,22 @@
 /* Tabs */
 
 #TabsToolbar {
-    margin: 0 !important;
+    border: none !important;
+    background-color: #2D2D2D !important;
+    transition: 0.2s !important;;
 }
 
 .arrowscrollbox-scrollbox {
     padding: 0 !important;
 }
 
-#tabbrowser-tabs {
-    background-color: #2D2D2D !important;
-}
-
 .tabbrowser-tab {
-    background: transparent !important;
+    max-height: none !important;
     font-size: 12px !important;
-    color: white !important;
+    background: transparent !important;
+    opacity: 1 !important;
     border: none !important;
+    color: white !important;
 }
 
 .tabbrowser-tab:hover {
@@ -82,6 +82,10 @@
 
 .tab-content {
     min-height: 32px !important;
+}
+
+.tabbrowser-arrowscrollbox scrollbar {
+    display: none !important;
 }
 
 .arrowscrollbox-overflow-start-indicator,
@@ -107,6 +111,16 @@
 #alltabs-button,
 #new-tab-button, .tabs-newtab-button,
 .tab-background-start, .tab-background-end, .tab-icon {
+    display: none !important;
+}
+
+/* Tree Style Tab Addon */
+
+.treestyletab-splitter {
+    display: none !important;
+}
+
+#treestyletab-tabbar-resizer-box {
     display: none !important;
 }
 
