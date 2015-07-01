@@ -116,10 +116,8 @@
 
 /* Tree Style Tab Addon */
 
-.treestyletab-splitter {
-    display: none !important;
-}
-
+.treestyletab-splitter,
+.treestyletab-tabbar-toggler,
 #treestyletab-tabbar-resizer-box {
     display: none !important;
 }
