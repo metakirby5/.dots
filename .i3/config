@@ -43,16 +43,16 @@ set $brightPct          10
 
 # Workspaces
 set $wDash              1:★
-set $w1                 11:one
-set $w2                 12:two
-set $w3                 13:three
-set $w4                 14:four
-set $w5                 15:five
-set $w6                 16:six
-set $w7                 17:seven
-set $w8                 18:eight
-set $w9                 19:nine
-set $w10                20:ten
+set $w1                 11:一
+set $w2                 12:二
+set $w3                 13:三
+set $w4                 14:四
+set $w5                 15:五
+set $w6                 16:六
+set $w7                 17:七
+set $w8                 18:八
+set $w9                 19:九
+set $w10                20:十
 
 # Keys
 set $mod                Mod4
