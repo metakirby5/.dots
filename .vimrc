@@ -43,6 +43,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   call vundle#end()
 
+  let g:AutoPairsCenterLine = 0
   noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
 else
   " Fallbacks...
