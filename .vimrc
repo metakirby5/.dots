@@ -34,7 +34,6 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   Plugin 'tpope/vim-sleuth'               " Autodetect indentation
   Plugin 'hynek/vim-python-pep8-indent'   " Fix for python indent
-  Plugin 'jiangmiao/auto-pairs'           " Add matching braces
 
   Plugin 'The-NERD-tree'                  " File explorer
   Plugin 'jistr/vim-nerdtree-tabs'        " NERD-tree persistence through tabs
@@ -43,16 +42,12 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   call vundle#end()
 
-  let g:AutoPairsCenterLine = 0
   noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
 else
   " Fallbacks...
 
   " Fix for hash comments
   " inoremap # X#
-
-  " Auto-insert matching curly brace
-  inoremap {<cr> {<cr>}<C-o>O
 endif
 
 " **************************************
@@ -580,6 +575,9 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 " **************************************
 " * Macros
 " **************************************
+
+" Auto-insert matching curly brace
+inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
 let b:comment_leader = '# '       " Default comment is #
