@@ -30,17 +30,26 @@ set rtp+=~/.vim/bundle/Vundle.vim
 if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
-  Plugin 'gmarik/Vundle.vim'        " Bundle manager
-  Plugin 'ScrollColors'             " Scroll through colorschemes
-  Plugin 'The-NERD-tree'            " File explorer
-  Plugin 'jistr/vim-nerdtree-tabs'  " NERD-tree persistence through tabs
+  Plugin 'gmarik/Vundle.vim'              " Bundle manager
+
+  Plugin 'tpope/vim-sleuth'               " Autodetect indentation
+  Plugin 'hynek/vim-python-pep8-indent'   " Fix for python indent
+  Plugin 'jiangmiao/auto-pairs'           " Add matching braces
+
+  Plugin 'The-NERD-tree'                  " File explorer
+  Plugin 'jistr/vim-nerdtree-tabs'        " NERD-tree persistence through tabs
+
+  Plugin 'ScrollColors'                   " Scroll through colorschemes
 
   call vundle#end()
 
   noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
-endif
+else
+  " Fallbacks...
 
-filetype plugin indent on
+  " Auto-insert matching curly brace
+  inoremap {<cr> {<cr>}<C-o>O
+endif
 
 " **************************************
 " * Variables
@@ -440,9 +449,9 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 "    tabstop: The width of a tab.
 " shiftwidth: The width of an auto-inserted tab.
 
+filetype plugin indent on
 set smarttab            " remove spaces grouped as tabs
 set autoindent          " copy indent from previous line
-set smartindent         " adjust indentation for curly braces, etc.
 
 " Fix for hash comments
 inoremap # X#
@@ -570,9 +579,6 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 " **************************************
 " * Macros
 " **************************************
-
-" Auto-insert matching curly brace
-inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
 let b:comment_leader = '# '       " Default comment is #
