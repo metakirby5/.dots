@@ -47,6 +47,9 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 else
   " Fallbacks...
 
+  " Fix for hash comments
+  " inoremap # X#
+
   " Auto-insert matching curly brace
   inoremap {<cr> {<cr>}<C-o>O
 endif
@@ -452,9 +455,6 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 filetype plugin indent on
 set smarttab            " remove spaces grouped as tabs
 set autoindent          " copy indent from previous line
-
-" Fix for hash comments
-inoremap # X#
 
 " Defaults
 set expandtab
