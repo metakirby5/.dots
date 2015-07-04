@@ -98,7 +98,7 @@
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
-    sticky_history = yes
+    sticky_history = no
 
     # Maximum amount of notifications kept in history
     history_length = 20
@@ -136,10 +136,10 @@
     startup_notification = false
 
     # dmenu path.
-    dmenu = dmenu -i -p dunst -fn tewi -x 0 -w 3200 -y 1700 -h 100
+    dmenu = dmenu -i -f -t -p dunst -fn tewi -b -h 100
 
     # Browser for opening urls in context menu.
-    browser = google-chrome -new-tab
+    browser = google-chrome
 
     # Align icons left/right/off
     icon_position = left

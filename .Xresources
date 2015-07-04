@@ -20,8 +20,8 @@ URxvt.color1:      #aa4e60
 URxvt.color9:      #f79bad
 
 ! Green
-URxvt.color2:      #c15e9a
-URxvt.color10:     #ffabe7
+URxvt.color2:      #463d99
+URxvt.color10:     #938ae6
 
 ! Yellow
 URxvt.color3:      #d27072
@@ -32,8 +32,8 @@ URxvt.color4:      #5b52b1
 URxvt.color12:     #a89ffe
 
 ! Magenta
-URxvt.color5:      #463d99
-URxvt.color13:     #938ae6
+URxvt.color5:      #c15e9a
+URxvt.color13:     #ffabe7
 
 ! Cyan
 URxvt.color6:      #7a7bc4
