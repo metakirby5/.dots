@@ -20,14 +20,14 @@ TEXT
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#aa4e60"},
 
   # Battery percent
-  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#c15e9a"},
+  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#d27072"},
 
   # Music playing/paused, volume
   {"full_text": "♪ $if_mpd_playing$mpd_status @ $endif${exec\
     amixer get Master | awk -v FS="[][]" '/%/ {print $2}' | tail -n1\
   }", "color": "\#${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo 'd27072' || echo '530000'\
+    grep '\[on\]' >/dev/null && echo 'c15e9a' || echo '602f4d'\
   }"},
 
   # Wireless
