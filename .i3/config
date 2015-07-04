@@ -27,6 +27,7 @@ set $gapsOuter          0
 # Bar
 set $barFontName        tewi
 set $barFontSize        8
+set $cBarSeparator      #888888
 set $barSeparator       <
 
 # dmenu
@@ -40,19 +41,20 @@ set $term               urxvt256cc
 set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct             5
 set $brightPct          10
+set $movePx             20
 
 # Workspaces
-set $wDash              1:★
-set $w1                 11:一
-set $w2                 12:二
-set $w3                 13:三
-set $w4                 14:四
-set $w5                 15:五
-set $w6                 16:六
-set $w7                 17:七
-set $w8                 18:八
-set $w9                 19:九
-set $w10                20:十
+set $wDash              number 0:★
+set $w1                 number 1:一
+set $w2                 number 2:二
+set $w3                 number 3:三
+set $w4                 number 4:四
+set $w5                 number 5:五
+set $w6                 number 6:六
+set $w7                 number 7:七
+set $w8                 number 8:八
+set $w9                 number 9:九
+set $w10                number 10:十
 
 # Keys
 set $mod                Mod4
@@ -124,9 +126,11 @@ bar {
   separator_symbol "$barSeparator"
   status_command ~/.i3/bin/conky-wrapper
   colors {
-    statusline $cMainFG
-    background $cMainBG
+    background  $cMainBG
+    statusline  $cMainFG
+    separator   $cBarSeparator
     focused_workspace   $cMainBG  $cFocusBG     $cFocusFG
+    active_workspace    $cMainBG  $cFocusIN     $cFocusFG
     inactive_workspace  $cMainBG  $cUnfocusBG   $cUnfocusFG
     urgent_workspace    $cMainBG  $cUrgentBG    $cUrgentFG
   }
@@ -151,13 +155,13 @@ bindsym $mod+Shift+Escape exit
 bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -f -t -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -b -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
-bindsym $mod+c exec $nsi $term -e nmtui
+bindsym $mod+n exec $nsi $term -e nmtui
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
 bindsym $mod+Shift+m exec $nsi mpc-notify
 # Next wallpaper
-bindsym $mod+Shift+w exec $nsi feh -zr --bg-fill $wallpapers
+bindsym $mod+Control+w exec $nsi feh -zr --bg-fill $wallpapers
 
 # Screenshots to clipboard
 set $_scrot               scrot "$HOME/Pictures/Screenshots/%m-%d-%y_%T.png"
@@ -183,30 +187,115 @@ bindsym XF86MonBrightnessUp exec $nsi xbacklight -inc $brightPct
 bindsym XF86MonBrightnessDown exec $nsi xbacklight -dec $brightPct
 
 # Change focus
-bindsym $mod+backslash focus mode_toggle
-bindsym $mod+a focus parent
-bindsym $mod+z focus child
+bindsym $mod+backslash      focus mode_toggle
+bindsym $mod+a              focus parent
+bindsym $mod+z              focus child
 
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-bindsym $mod+minus scratchpad show
+bindsym $mod+$left          focus left
+bindsym $mod+$down          focus down
+bindsym $mod+$up            focus up
+bindsym $mod+$right         focus right
+bindsym $mod+minus          scratchpad show
 
 # Move focused window
-bindsym $mod+Shift+backslash floating toggle
+bindsym $mod+Shift+backslash    floating toggle
+bindsym $mod+c                  move position center
 
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+$left        move left       $movePx px
+bindsym $mod+Shift+$down        move down       $movePx px
+bindsym $mod+Shift+$up          move up         $movePx px
+bindsym $mod+Shift+$right       move right      $movePx px
+bindsym $mod+Shift+minus        move scratchpad
+
+
+# Outputs mode
+set $_outmode outputs
+mode "$_outmode" {
+  # Duplicate some controls
+    # Change focus
+    bindsym $mod+backslash      focus mode_toggle
+    bindsym $mod+a              focus parent
+    bindsym $mod+z              focus child
+
+    bindsym $mod+$left          focus left
+    bindsym $mod+$down          focus down
+    bindsym $mod+$up            focus up
+    bindsym $mod+$right         focus right
+    bindsym $mod+minus          scratchpad show
+
+    # Move focused window
+    bindsym $mod+Shift+backslash    floating toggle
+    bindsym $mod+c                  move position center
+
+    bindsym $mod+Shift+$left        move left       $movePx px
+    bindsym $mod+Shift+$down        move down       $movePx px
+    bindsym $mod+Shift+$up          move up         $movePx px
+    bindsym $mod+Shift+$right       move right      $movePx px
+    bindsym $mod+Shift+minus        move scratchpad
+
+    # Switch to workspace
+    bindsym $mod+w              workspace back_and_forth
+    bindsym $mod+bracketleft    workspace prev_on_output
+    bindsym $mod+bracketright   workspace next_on_output
+
+    bindsym $mod+grave workspace  $wDash
+    bindsym $mod+1 workspace      $w1
+    bindsym $mod+2 workspace      $w2
+    bindsym $mod+3 workspace      $w3
+    bindsym $mod+4 workspace      $w4
+    bindsym $mod+5 workspace      $w5
+    bindsym $mod+6 workspace      $w6
+    bindsym $mod+7 workspace      $w7
+    bindsym $mod+8 workspace      $w8
+    bindsym $mod+9 workspace      $w9
+    bindsym $mod+0 workspace      $w10
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
+    bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
+    bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
+
+    bindsym $mod+Shift+grave move container to workspace $wDash; workspace $wDash
+    bindsym $mod+Shift+1 move container to workspace $w1; workspace $w1
+    bindsym $mod+Shift+2 move container to workspace $w2; workspace $w2
+    bindsym $mod+Shift+3 move container to workspace $w3; workspace $w3
+    bindsym $mod+Shift+4 move container to workspace $w4; workspace $w4
+    bindsym $mod+Shift+5 move container to workspace $w5; workspace $w5
+    bindsym $mod+Shift+6 move container to workspace $w6; workspace $w6
+    bindsym $mod+Shift+7 move container to workspace $w7; workspace $w7
+    bindsym $mod+Shift+8 move container to workspace $w8; workspace $w8
+    bindsym $mod+Shift+9 move container to workspace $w9; workspace $w9
+    bindsym $mod+Shift+0 move container to workspace $w10; workspace $w10
+
+  # Focus
+  bindsym $left             focus output left
+  bindsym $right            focus output right
+  bindsym $up               focus output up
+  bindsym $down             focus output down
+
+  # Move container
+  bindsym Shift+$left       move container to output left
+  bindsym Shift+$right      move container to output right
+  bindsym Shift+$up         move container to output up
+  bindsym Shift+$down       move container to output down
+
+  # Move workspace
+  bindsym Control+$left     move container to output left
+  bindsym Control+$right    move container to output right
+  bindsym Control+$up       move container to output up
+  bindsym Control+$down     move container to output down
+
+  # Return to default mode
+  bindsym Escape            mode "default"
+  bindsym $mod+y            mode "default"
+}
+bindsym $mod+y mode "$_outmode"
 
 # Resize focused windows
-bindsym $mod+Control+$left       resize shrink width 1 px or 1 ppt
-bindsym $mod+Control+$down       resize grow height 1 px or 1 ppt
-bindsym $mod+Control+$up         resize shrink height 1 px or 1 ppt
-bindsym $mod+Control+$right      resize grow width 1 px or 1 ppt
+bindsym $mod+Control+$left      resize shrink width   $movePx px or 1 ppt
+bindsym $mod+Control+$down      resize grow height    $movePx px or 1 ppt
+bindsym $mod+Control+$up        resize shrink height  $movePx px or 1 ppt
+bindsym $mod+Control+$right     resize grow width     $movePx px or 1 ppt
 
 # Gaps
 bindsym $mod+g            gaps inner all plus   5
@@ -223,28 +312,39 @@ bindsym $mod+p split h
 bindsym $mod+Shift+p split v
 
 # Switch to workspace
-bindsym $mod+grave workspace        "$wDash"
-bindsym $mod+1 workspace            "$w1"
-bindsym $mod+2 workspace            "$w2"
-bindsym $mod+3 workspace            "$w3"
-bindsym $mod+4 workspace            "$w4"
-bindsym $mod+5 workspace            "$w5"
-bindsym $mod+6 workspace            "$w6"
-bindsym $mod+7 workspace            "$w7"
-bindsym $mod+8 workspace            "$w8"
-bindsym $mod+9 workspace            "$w9"
-bindsym $mod+0 workspace            "$w10"
+bindsym $mod+w              workspace back_and_forth
+bindsym $mod+bracketleft    workspace prev_on_output
+bindsym $mod+bracketright   workspace next_on_output
+
+bindsym $mod+grave workspace  $wDash
+bindsym $mod+1 workspace      $w1
+bindsym $mod+2 workspace      $w2
+bindsym $mod+3 workspace      $w3
+bindsym $mod+4 workspace      $w4
+bindsym $mod+5 workspace      $w5
+bindsym $mod+6 workspace      $w6
+bindsym $mod+7 workspace      $w7
+bindsym $mod+8 workspace      $w8
+bindsym $mod+9 workspace      $w9
+bindsym $mod+0 workspace      $w10
 
 # Move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace        "$wDash"
-bindsym $mod+Shift+1 move container to workspace            "$w1"
-bindsym $mod+Shift+2 move container to workspace            "$w2"
-bindsym $mod+Shift+3 move container to workspace            "$w3"
-bindsym $mod+Shift+4 move container to workspace            "$w4"
-bindsym $mod+Shift+5 move container to workspace            "$w5"
-bindsym $mod+Shift+6 move container to workspace            "$w6"
-bindsym $mod+Shift+7 move container to workspace            "$w7"
-bindsym $mod+Shift+8 move container to workspace            "$w8"
-bindsym $mod+Shift+9 move container to workspace            "$w9"
-bindsym $mod+Shift+0 move container to workspace            "$w10"
+bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
+
+bindsym $mod+Shift+grave move container to workspace $wDash; workspace $wDash
+bindsym $mod+Shift+1 move container to workspace $w1; workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2; workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3; workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4; workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5; workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6; workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7; workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8; workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9; workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w10; workspace $w10
+
+# Rename workspace
+bindsym $mod+s exec $nsi i3-msg "rename workspace to \"$(dmenu -noinput -f -p 'Rename workspace to' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\""
 
