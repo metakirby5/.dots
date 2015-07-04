@@ -3,10 +3,10 @@
 ## VARIABLES
 
 # Theme
-set $wallpapers         /usr/share/backgrounds/in_rotation/*
-set $cFocusBG           #3FCFEE
+set $wallpapers         /usr/share/backgrounds/in_rotation/horizon.png
+set $cFocusBG           #5b52b1
 set $cFocusFG           #FFFFFF
-set $cFocusIN           #88DEF1
+set $cFocusIN           #a89ffe
 set $cSubFocusBG        #777777
 set $cSubFocusFG        #CCCCCC
 set $cSubFocusIN        #888888
