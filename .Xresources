@@ -4,8 +4,8 @@
 !! URxvt
 
 ! Fonts
-URxvt.font:      xft:Source Code Pro:pixelsize=28
-URxvt.boldFont:  xft:Source Code Pro:bold:pixelsize=28
+URxvt.font:      xft:Source Code Pro:pixelsize=28:antialias=true:hinting=true
+URxvt.boldFont:  xft:Source Code Pro:bold:pixelsize=28:antialias=true:hinting=true
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
 URxvt.background:  #272727

@@ -11,6 +11,7 @@ alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
 alias xopen="xdg-open"
 alias clip="xclip -sel c"
+alias enw='emacs -nw'
 
 # Functions
 
