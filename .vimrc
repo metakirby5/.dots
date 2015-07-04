@@ -136,13 +136,14 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
+" TODO colors
 " example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
 set statusline=\                          " initialize
 set statusline+=%n                        " buffer number
 set statusline+=\ \|\                     " separator
 set statusline+=%f                        " relative path
 set statusline+=\                         " space
-set statusline+=%y                        " filetype
+" set statusline+=%y                        " filetype
 set statusline+=%{ExtModified()}          " externally modified?
 set statusline+=%m                        " modified flag
 set statusline+=%r                        " read-only flag
@@ -151,6 +152,8 @@ set statusline+=%=                        " left/right separator
 " set statusline+=/                         " separator
 " set statusline+=%{&fo}                    " format options
 " set statusline+=\ \|\                     " separator
+set statusline+=%{&syntax}                " syntax
+set statusline+=\ \|\                     " separator
 set statusline+=%{Has78Char()}            " 78 char highlighting
 set statusline+=%{TextWidth()}            " text width/paste mode
 set statusline+=\ \|\                     " separator

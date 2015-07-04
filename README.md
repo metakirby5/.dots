@@ -7,6 +7,7 @@ All of my dotfile configs.
 
 - Look at i3 on archwiki, j4tools, i3-extras
 - Move all configs to .config for consistency
+- vimrc colors
 - Colorscheme generator
 - Lock on laptop lid close
 - Customize ncmpcpp
