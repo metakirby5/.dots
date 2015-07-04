@@ -114,7 +114,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 7
+    separator_height = 0
 
     # Padding between text and separator.
     padding = 30
@@ -148,7 +148,7 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 7
+    width = 0
     color = "#444444"
 
 [shortcuts]
