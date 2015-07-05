@@ -80,7 +80,7 @@ bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT) && i3-msg '[instanc
 # Music on scratch
 set $spM scratchpad_music
 for_window [instance="^$spM$"] move scratchpad
-bindsym $mod+m exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[instance="^$spM$"] scratchpad show'
+bindsym $mod+backslash exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[instance="^$spM$"] scratchpad show'
 
 # Start on workspace 1
 exec $nsi i3-msg 'workspace "$w1"'
@@ -159,7 +159,7 @@ bindsym $mod+n exec $nsi $term -e nmtui
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
-bindsym $mod+Shift+m exec $nsi mpc-notify
+bindsym $mod+Shift+backslash exec $nsi mpc-notify
 # Next wallpaper
 bindsym $mod+Control+w exec $nsi feh -zr --bg-fill $wallpapers
 
@@ -187,7 +187,7 @@ bindsym XF86MonBrightnessUp exec $nsi xbacklight -inc $brightPct
 bindsym XF86MonBrightnessDown exec $nsi xbacklight -dec $brightPct
 
 # Change focus
-bindsym $mod+backslash      focus mode_toggle
+bindsym $mod+space          focus mode_toggle
 bindsym $mod+a              focus parent
 bindsym $mod+z              focus child
 
@@ -198,7 +198,7 @@ bindsym $mod+$right         focus right
 bindsym $mod+minus          scratchpad show
 
 # Move focused window
-bindsym $mod+Shift+backslash    floating toggle
+bindsym $mod+Shift+space        floating toggle
 bindsym $mod+c                  move position center
 
 bindsym $mod+Shift+$left        move left       $movePx px
@@ -348,3 +348,6 @@ bindsym $mod+Shift+0 move container to workspace $w10; workspace $w10
 # Rename workspace
 bindsym $mod+s exec $nsi i3-msg "rename workspace to \"$(dmenu -noinput -f -p 'Rename workspace to' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\""
 
+# Marks
+bindsym $mod+m exec $nsi i3-msg "mark \"$(dmenu -noinput -f -p 'Mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\""
+bindsym $mod+apostrophe exec $nsi i3-msg "[con_mark=\"$(dmenu -noinput -f -p 'Go to mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\"] focus"
