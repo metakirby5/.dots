@@ -5,17 +5,17 @@
 # Theme
 set $wallpapers         /usr/share/backgrounds/in_rotation/horizon.png
 set $cFocusBG           #5b52b1
-set $cFocusFG           #FFFFFF
+set $cFocusFG           #ffffff
 set $cFocusIN           #a89ffe
 set $cSubFocusBG        #777777
-set $cSubFocusFG        #CCCCCC
+set $cSubFocusFG        #cccccc
 set $cSubFocusIN        #888888
 set $cUnfocusBG         #444444
-set $cUnfocusFG         #AAAAAA
+set $cUnfocusFG         #aaaaaa
 set $cUnfocusIN         #555555
-set $cUrgentBG          #C62828
-set $cUrgentFG          #FFFFFF
-set $cUrgentIN          #F44336
+set $cUrgentBG          #aa4e60
+set $cUrgentFG          #ffffff
+set $cUrgentIN          #f79bad
 set $cMainBG            #272727
 set $cMainFG            #fafafa
 set $fontName           tewi
