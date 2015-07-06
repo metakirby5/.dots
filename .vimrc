@@ -32,12 +32,14 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   Plugin 'gmarik/Vundle.vim'              " Bundle manager
 
+  " Indentation
   Plugin 'tpope/vim-sleuth'               " Autodetect indentation
   Plugin 'hynek/vim-python-pep8-indent'   " Fix for python indent
 
+  " Addons
+  Plugin 'airblade/vim-gitgutter'         " Git gutter
   Plugin 'The-NERD-tree'                  " File explorer
   Plugin 'jistr/vim-nerdtree-tabs'        " NERD-tree persistence through tabs
-
   Plugin 'ScrollColors'                   " Scroll through colorschemes
 
   call vundle#end()
