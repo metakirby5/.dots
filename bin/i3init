@@ -36,7 +36,7 @@ dunst &
 caffeine &
 
 # User
-xflux -z $ZIPCODE &
+xflux -l 35.7 -g 139.5 &
 dropbox start &
 # ibus-daemon -xdr &
 
