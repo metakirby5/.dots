@@ -29,6 +29,7 @@ All of my dotfile configs.
 - chjj/compton
 - melek/dmenu2
 - enkore/j4-dmenu-desktop
+- jq
 - dunst
 - feh
 - conky
