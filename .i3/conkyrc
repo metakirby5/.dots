@@ -17,10 +17,10 @@ TEXT
   {"full_text": "${exec get-truncated-window-title}", "color": "\#ffffff"},
 
   # CPU temp. / percent
-  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#aa4e60"},
+  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#d27072"},
 
   # Battery percent
-  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#d27072"},
+  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#aa4e60"},
 
   # Music playing/paused, volume
   {"full_text": "♪ $if_mpd_playing$mpd_status @ $endif${exec\
@@ -31,15 +31,15 @@ TEXT
   }"},
 
   # Wireless
-  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\#7a7bc4"},
+  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\#A17FBA"},
 
   # Running processes
   {"full_text": "»${exec\
     dropbox running || echo ' dbx'\
   }${exec\
     pgrep xflux >/dev/null && echo ' flx'\
-  }","color":"\#5b52b1"},
+  }","color":"\#7a7bc4"},
 
   # Date/time
-  {"full_text": "${time %a %b %d %H:%M}", "color":"\#463d99"}
+  {"full_text": "${time %a %b %d %H:%M}", "color":"\#5b52b1"}
 ]
