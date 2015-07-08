@@ -5,7 +5,7 @@ export CLASSPATH='*':'.'
 
 # Aliases
 alias resource='source ~/.bashrc'
-alias reload-xresources='xrdb -merge ~/.Xresources'
+alias reload-xresources='xrdb ~/.Xresources'
 
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
