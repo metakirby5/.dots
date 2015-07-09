@@ -20,7 +20,18 @@ TEXT
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#d27072"},
 
   # Battery percent
-  {"full_text": "⌼ ${battery_time BAT1} @ ${battery_percent BAT1}%", "color": "\#aa4e60"},
+  {"full_text": "⌼ ${exec\
+    upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
+    awk -F: '/time/ {
+      gsub(/^ +/, "", $2);
+      print $2;
+    }'\
+  } @ ${battery_percent BAT1}%", "color": "\#${exec\
+    upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
+    awk '/state/ {
+      print $2 == "charging" ? "FEDBAD" : "aa4e60";
+    }'\
+  }"},
 
   # Music playing/paused, volume
   {"full_text": "♪ $if_mpd_playing$mpd_status @ $endif${exec\
