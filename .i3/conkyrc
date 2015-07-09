@@ -35,6 +35,8 @@ TEXT
 
   # Running processes
   {"full_text": "»${exec\
+    e=$(ibus engine); echo " ${e##*:}"
+  }${exec\
     dropbox running || echo ' dbx'\
   }${exec\
     pgrep xflux >/dev/null && echo ' flx'\

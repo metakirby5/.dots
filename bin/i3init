@@ -38,7 +38,7 @@ caffeine &
 # User
 xflux -l 35.7 -g 139.5 &
 dropbox start &
-# ibus-daemon -xdr &
+ibus-daemon -xdr &
 
 ## LET'S DO THIS
 i3
