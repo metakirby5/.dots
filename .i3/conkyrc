@@ -20,14 +20,7 @@ TEXT
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#d27072"},
 
   # Battery percent
-  {"full_text": "⌼ ${exec\
-    upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
-    awk -F: '/time/ {
-      s = match($1, /empty/) ? "↓" : "↑";
-      gsub(/^ +|ou|ute/, "", $2);
-      print $2 " " s " ";
-    }'\
-  }${battery_percent BAT1}%", "color": "\#${exec\
+  {"full_text": "⌼ ${exec get-battery-status}", "color": "\#${exec\
     upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
     awk '/state/ {
       print match($2, /^d/) ? "aa4e60" : "fedbad";
