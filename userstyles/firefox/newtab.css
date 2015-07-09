@@ -10,7 +10,7 @@
   #newtab-window::before {
     position: fixed;
     right: 0;
-    top: 10%;
+    margin: 1em;
     font-size: 5em;
     color: white;
     text-shadow: 2px 2px #333333;
