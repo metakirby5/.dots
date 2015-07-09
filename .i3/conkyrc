@@ -38,7 +38,7 @@ TEXT
       print s;
     }'\
   } ${exec\
-    amixer get Master | awk -v FS="[][]" '/%/ {print $2}' | tail -n1\
+    amixer get Master | awk -F[][] '/%/ {print $2}' | tail -n1\
   }", "color": "\#${exec\
     amixer get Master |\
     grep '\[on\]' >/dev/null && echo 'c15e9a' || echo '602f4d'\
