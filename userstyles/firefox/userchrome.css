@@ -42,6 +42,16 @@
     border: 0 !important;
 }
 
+/* Autocomplete result styling */
+.autocomplete-richlistitem:not([current]),
+.autocomplete-richlistitem:not([selected]) {
+    background-color: #333333 !important;
+}
+
+.autocomplete-richlistbox {
+    margin: 0 !important;
+}
+
 #back-button, #forward-button,
 #identity-box, .urlbar-history-dropmarker,
 #urlbar-go-button, #urlbar-reload-button, #urlbar-stop-button,
