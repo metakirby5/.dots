@@ -7,6 +7,15 @@
     background-attachment: fixed;
     background-position: left bottom; 
   }
+  #newtab-window::before {
+    position: fixed;
+    right: 0;
+    top: 10%;
+    font-size: 5em;
+    color: white;
+    text-shadow: 2px 2px #333333;
+    content: "しつれい、かみました。";
+  }
   #newtab-window > * {
     display: none !important;
   }
