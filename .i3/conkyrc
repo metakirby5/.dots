@@ -23,7 +23,7 @@ TEXT
   {"full_text": "⌼ ${exec\
     upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
     awk -F: '/time/ {
-      gsub(/^ +/, "", $2);
+      gsub(/^ +|ou|ute/, "", $2);
       print $2;
     }'\
   } @ ${battery_percent BAT1}%", "color": "\#${exec\
