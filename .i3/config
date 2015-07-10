@@ -333,17 +333,17 @@ bindsym $mod+Shift+w              move container to workspace back_and_forth; wo
 bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
 bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
 
-bindsym $mod+Shift+grave move container to workspace $wDash; workspace $wDash
-bindsym $mod+Shift+1 move container to workspace $w1; workspace $w1
-bindsym $mod+Shift+2 move container to workspace $w2; workspace $w2
-bindsym $mod+Shift+3 move container to workspace $w3; workspace $w3
-bindsym $mod+Shift+4 move container to workspace $w4; workspace $w4
-bindsym $mod+Shift+5 move container to workspace $w5; workspace $w5
-bindsym $mod+Shift+6 move container to workspace $w6; workspace $w6
-bindsym $mod+Shift+7 move container to workspace $w7; workspace $w7
-bindsym $mod+Shift+8 move container to workspace $w8; workspace $w8
-bindsym $mod+Shift+9 move container to workspace $w9; workspace $w9
-bindsym $mod+Shift+0 move container to workspace $w10; workspace $w10
+bindsym $mod+Shift+grave move container to workspace $wDash
+bindsym $mod+Shift+1     move container to workspace $w1
+bindsym $mod+Shift+2     move container to workspace $w2
+bindsym $mod+Shift+3     move container to workspace $w3
+bindsym $mod+Shift+4     move container to workspace $w4
+bindsym $mod+Shift+5     move container to workspace $w5
+bindsym $mod+Shift+6     move container to workspace $w6
+bindsym $mod+Shift+7     move container to workspace $w7
+bindsym $mod+Shift+8     move container to workspace $w8
+bindsym $mod+Shift+9     move container to workspace $w9
+bindsym $mod+Shift+0     move container to workspace $w10
 
 # Rename workspace
 bindsym $mod+s exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput -f -p 'Rename workspace to' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\""
