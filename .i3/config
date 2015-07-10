@@ -350,5 +350,5 @@ bindsym $mod+s exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput -f -p 
 
 # Marks
 set $_get_marks i3-msg -t get_marks | jq '.[]' | cut -c2- | rev | cut -c2- | rev
-bindsym $mod+m exec $nsi i3-msg "mark \\\"$($_get_marks | dmenu -i -f -t -p 'Mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\""
-bindsym $mod+apostrophe exec $nsi i3-msg "[con_mark=\\\"$($_get_marks | dmenu -i -f -t -p 'Go to mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\"] focus"
+bindsym $mod+m exec $nsi i3-msg "mark \\\"$($_get_marks | dmenu -i -f -p 'Mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\""
+bindsym $mod+apostrophe exec $nsi i3-msg "[con_mark=\\\"$($_get_marks | dmenu -i -f -p 'Go to mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\"] focus"
