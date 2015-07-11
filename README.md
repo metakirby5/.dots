@@ -5,8 +5,8 @@ All of my dotfile configs.
 
 ## TODO
 
-- Look at i3 on archwiki, j4tools, i3-extras
 - Move all configs to .config for consistency
+- Look at i3 on archwiki, j4tools, i3-extras
 - vimrc colors
 - Colorscheme generator
 - Lock on laptop lid close
@@ -22,6 +22,7 @@ All of my dotfile configs.
 - tewi
 
 ### Packages
+- metakirby5/whizkers
 - rxvt-unicode-256color
 - Airblader/i3-gaps
 - i3lock
