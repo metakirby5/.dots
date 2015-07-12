@@ -58,14 +58,14 @@
     --toolbarbutton-active-bordercolor: none !important;
     --toolbarbutton-hover-boxshadow: none !important;
     --toolbarbutton-active-boxshadow: none !important;
+    --toolbarbutton-hover-background:  #555555;
+    --toolbarbutton-active-background:  #888888;
     border: none !important;
-    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'invert\'>\
-    <feColorMatrix in='SourceGraphic' type='matrix' values=\
-    '-1 0 0 0 1 \
-    0 -1 0 0 1 \
-    0 0 -1 0 1 \
-    0 0 0 1 0'/></filter></svg>#invert") !important;
+}
 
+/* Downloads button */
+#downloads-indicator-icon {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" height="19" width="14"><path fill="%23fff" d="M14,6 L10,6 L10,0 L4,0 L4,6 L0,6 L7,13 L14,6 L14,6 Z M0,15 L0,17 L14,17 L14,15 L0,15 L0,15 Z" /></svg>') !important;
 }
 
 #back-button, #forward-button,
