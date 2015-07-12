@@ -52,12 +52,28 @@
     margin: 0 !important;
 }
 
+/* Inverted toolbar buttons */
+#nav-bar .toolbarbutton-icon {
+    --toolbarbutton-hover-bordercolor: none !important;
+    --toolbarbutton-active-bordercolor: none !important;
+    --toolbarbutton-hover-boxshadow: none !important;
+    --toolbarbutton-active-boxshadow: none !important;
+    border: none !important;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'invert\'>\
+    <feColorMatrix in='SourceGraphic' type='matrix' values=\
+    '-1 0 0 0 1 \
+    0 -1 0 0 1 \
+    0 0 -1 0 1 \
+    0 0 0 1 0'/></filter></svg>#invert") !important;
+
+}
+
 #back-button, #forward-button,
 #identity-box, .urlbar-history-dropmarker,
 #urlbar-go-button, #urlbar-reload-button, #urlbar-stop-button,
 #nav-bar > :not(#nav-bar-customization-target),
-#nav-bar-customization-target > :not(#urlbar-container),
-.chromeclass-toolbar-additional {
+#nav-bar-customization-target >
+    :not(#urlbar-container):not(#downloads-button) {
     display: none !important;
 }
 
