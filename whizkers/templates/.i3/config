@@ -4,9 +4,9 @@
 
 # Theme
 set $wallpapers         /usr/share/backgrounds/in_rotation/donut.png
-set $cFocusBG           #c8aa6e
+set $cFocusBG           {{ n_primary }}
 set $cFocusFG           #ffffff
-set $cFocusIN           #f0cc84
+set $cFocusIN           {{ b_primary }}
 set $cSubFocusBG        #777777
 set $cSubFocusFG        #cccccc
 set $cSubFocusIN        #888888

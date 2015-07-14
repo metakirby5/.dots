@@ -17,13 +17,13 @@ TEXT
   {"full_text": "${exec get-truncated-window-title}", "color": "\#ffffff"},
 
   # CPU temp. / percent
-  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\#d27b70"},
+  {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\{{ b_red }}"},
 
   # Battery percent
   {"full_text": "⌼ ${exec get-battery-status}", "color": "${exec\
     upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
     awk '/state/ {
-      print match($2, /^d/) ? "#c8aa6e" : "#f0cc84";
+      print match($2, /^d/) ? "{{ n_yellow }}" : "{{ b_yellow }}";
     }'\
   }"},
 
@@ -41,11 +41,11 @@ TEXT
     amixer get Master | awk -F[][] '/%/ {print $2}' | tail -n1\
   }", "color": "${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo '#b9d285' || echo '#96aa6c'\
+    grep '\[on\]' >/dev/null && echo '{{ b_green }}' || echo '{{ n_green }}'\
   }"},
 
   # Wireless
-  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\#8ad279"},
+  {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\{{ b_cyan }}"},
 
   # Running processes
   {"full_text": "»${exec\
@@ -54,8 +54,8 @@ TEXT
     dropbox running || echo ' dbx'\
   }${exec\
     pgrep xflux >/dev/null && echo ' flx'\
-  }","color":"\#8fc0d2"},
+  }","color":"\{{ b_blue }}"},
 
   # Date/time
-  {"full_text": "${time %a %b %d %H:%M}", "color":"\#cbbad2"}
+  {"full_text": "${time %a %b %d %H:%M}", "color":"\{{ b_magenta }}"}
 ]

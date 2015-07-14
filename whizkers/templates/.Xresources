@@ -4,8 +4,8 @@
 !! URxvt
 
 ! Fonts
-URxvt.font:      xft:Source Code Pro:pixelsize=28:antialias=true:hinting=true
-URxvt.boldFont:  xft:Source Code Pro:bold:pixelsize=28:antialias=true:hinting=true
+URxvt.font:      xft:{{ term_font }}:pixelsize=28:antialias=true:hinting=true
+URxvt.boldFont:  xft:{{ term_font }}:bold:pixelsize=28:antialias=true:hinting=true
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
 URxvt.background:  #272727
@@ -16,28 +16,28 @@ URxvt.color0:      #393939
 URxvt.color8:      #5b5b5b
 
 ! Red
-URxvt.color1:      #f42d6c
-URxvt.color9:      #fa9fbb
+URxvt.color1:      {{ n_red }}
+URxvt.color9:      {{ b_red }}
 
 ! Green
-URxvt.color2:      #6cf42d
-URxvt.color10:     #bbfa9f
+URxvt.color2:      {{ n_green }}
+URxvt.color10:     {{ b_green }}
 
 ! Yellow
-URxvt.color3:      #f4b52d
-URxvt.color11:     #fadd9f
+URxvt.color3:      {{ n_yellow }}
+URxvt.color11:     {{ b_yellow }}
 
 ! Blue
-URxvt.color4:      #2d8af4
-URxvt.color12:     #9ec9fa
+URxvt.color4:      {{ n_blue }}
+URxvt.color12:     {{ b_blue }}
 
 ! Magenta
-URxvt.color5:      #b52df4
-URxvt.color13:     #dd9ffa
+URxvt.color5:      {{ n_magenta }}
+URxvt.color13:     {{ b_magenta }}
 
 ! Cyan
-URxvt.color6:      #2df4b5
-URxvt.color14:     #9ffadd
+URxvt.color6:      {{ n_cyan }}
+URxvt.color14:     {{ b_cyan }}
 
 ! White
 URxvt.color7:      #d8d8d8
