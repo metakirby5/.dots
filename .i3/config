@@ -3,7 +3,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpapers         /usr/share/backgrounds/in_rotation/horizon.png
+set $wallpapers         /usr/share/backgrounds/in_rotation/donut.png
 set $cFocusBG           #5b52b1
 set $cFocusFG           #ffffff
 set $cFocusIN           #a89ffe
