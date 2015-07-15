@@ -7,7 +7,7 @@
   br = branch
   co = checkout
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.config/git/gitignore_global
 [push]
   default = simple
 [merge]
