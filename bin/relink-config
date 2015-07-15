@@ -11,7 +11,12 @@ TO_LINK=(
   [home]=~
 )
 
-### PROGRAM
+# Files to ignore
+IGNORE=(
+  *.swp
+)
+
+### SCRIPT
 
 # Set newline delimiter in for loops
 IFS=$'\n'
@@ -37,15 +42,20 @@ for key in "${!TO_LINK[@]}"; do
   # Print summary
   echo
   echo "LINKING: $dir -> ${TO_LINK[$key]}"
-  for src in $(find $dir); do
+  for src in `find $dir`; do
+
+    # Skip things in ignore
+    skip=false
+    for pat in "${IGNORE[@]}"; do
+      [[ "$src" == $pat ]] && skip=true
+    done
+    [ "$skip" = true ] && continue
 
     # Attach the value to the filename
     dest="${TO_LINK[$key]%%/}/${src##$dir}"
 
     # Skip directories
-    if [ -d "$dest" ]; then
-      continue
-    fi
+    [ -d "$dest" ] && continue
 
     echo "  $src ->"
     echo "    $dest"
@@ -65,15 +75,20 @@ for key in "${!TO_LINK[@]}"; do
   esac
 
   # Do the linking
-  for src in $(find $dir); do
+  for src in `find $dir`; do
+
+    # Skip things in ignore
+    skip=false
+    for pat in "${IGNORE[@]}"; do
+      [[ "$src" == $pat ]] && skip=true
+    done
+    [ "$skip" = true ] && continue
 
     # Attach the value to the filename
     dest="${TO_LINK[$key]%%/}/${src##$dir}"
 
     # Skip directories
-    if [ -d "$dest" ]; then
-      continue
-    fi
+    [ -d "$dest" ] && continue
 
     # Extract the directory name
     dest_dir="$(dirname $dest)"
