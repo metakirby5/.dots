@@ -47,6 +47,7 @@ All of my dotfile configs.
 ## Installation
 - Install all dependencies.
 - Add `.../dotfiles/bin` to your `PATH`.
+- Ensure you are using `i3init` to start i3.
 - Add `source .../dotfiles/shell/[FILENAME].sh` for the appropriate files.
   For example, for bash:
 
