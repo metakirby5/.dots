@@ -5,15 +5,14 @@ All of my dotfile configs.
 
 ## TODO
 
-- Move all configs to .config for consistency
+- vimrc statusline colors
 - Look at i3 on archwiki, j4tools, i3-extras
-- vimrc colors
 - Colorscheme generator
 - Lock on laptop lid close
 - Customize ncmpcpp
 - Customize ranger
 - move to lemonbar/candybar/i3blocks?
-- move to termite
+- move to termite?
 
 ## Dependencies
 
