@@ -3,7 +3,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpapers         /usr/share/backgrounds/in_rotation/donut.png
+set $wallpapers         {{ wallpapers }}
 set $cFocusBG           {{ n_primary }}
 set $cFocusFG           #ffffff
 set $cFocusIN           {{ b_primary }}
@@ -32,7 +32,7 @@ set $barSeparator       <
 
 # dmenu
 set $dmCounter          ~/.dmenu_counter.json
-set $dmFontName         tewi
+set $dmFontName         tewi:pixelsize=32
 set $dmPrompt           λ
 set $dmHeight           100
 

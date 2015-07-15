@@ -23,7 +23,7 @@ TEXT
   {"full_text": "⌼ ${exec get-battery-status}", "color": "${exec\
     upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
     awk '/state/ {
-      print match($2, /^d/) ? "{{ n_yellow }}" : "{{ b_yellow }}";
+      print match($2, /^d/) ? "{{ b_yellow }}" : "{{ n_yellow }}";
     }'\
   }"},
 
@@ -41,7 +41,7 @@ TEXT
     amixer get Master | awk -F[][] '/%/ {print $2}' | tail -n1\
   }", "color": "${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo '{{ b_green }}' || echo '{{ n_green }}'\
+    grep '\[on\]' >/dev/null && echo '{{ b_green }}' || echo '{{ d_green }}'\
   }"},
 
   # Wireless
