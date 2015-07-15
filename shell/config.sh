@@ -6,7 +6,6 @@ export CLASSPATH='*':'.'
 # Aliases
 alias resource='source ~/.bashrc'
 alias reload-xresources='xrdb ~/.Xresources'
-alias reload-desktop='whizkers && reload-xresources && i3-msg "restart"'
 
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"

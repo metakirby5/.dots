@@ -88,7 +88,7 @@ for key in "${!TO_LINK[@]}"; do
     dest="${TO_LINK[$key]%%/}/${src##$dir}"
 
     # Skip directories
-    [ -d "$dest" ] && continue
+    [ -d "$src" ] && continue
 
     # Extract the directory name
     dest_dir="$(dirname $dest)"
@@ -96,7 +96,7 @@ for key in "${!TO_LINK[@]}"; do
     cd "$dest_dir"
 
     # Remove and link
-    rm "$dest"
+    rm "$dest" 2>/dev/null
     ln -s "$src"
   done
 done

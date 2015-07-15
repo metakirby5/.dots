@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if ! yes | relink-config >/dev/null; then
+  echo 'relink-config FAILED'
+  exit 1
+fi
+
+if [ "$#" -eq 0 ]; then
+  whizkers $(whizkers -l |\
+    dmenu -i -f -p 'Whizkers Scheme' -fn 'tewi:pixelsize=32' -b -h 100)
+else
+  whizkers "$@"
+fi
+
+[ "$?" -ne 0 ] && exit 1
+
+xrdb ~/.Xresources
+i3-msg 'restart'
+exit 0
+
