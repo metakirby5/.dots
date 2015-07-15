@@ -124,7 +124,7 @@ bar {
   strip_workspace_numbers yes
   font pango:$barFontName $barFontSize
   separator_symbol "$barSeparator"
-  status_command ~/.i3/bin/conky-wrapper
+  status_command ~/.config/i3/conky-wrapper
   colors {
     background  $cMainBG
     statusline  $cMainFG
