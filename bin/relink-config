@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### CONFIG
+
 # Base directory to link from
 BASE_DIR=~/dotfiles
 
@@ -8,6 +10,11 @@ declare -A TO_LINK
 TO_LINK=(
   [home]=~
 )
+
+### PROGRAM
+
+# Set newline delimiter in for loops
+IFS=$'\n'
 
 # Check for directory existence
 if [ ! -d "$BASE_DIR" ]; then
@@ -47,7 +54,7 @@ for key in "${!TO_LINK[@]}"; do
 
   # Ask for confirmation
   read -r -p "  Are you sure? [y/N] " response
-  case $response in
+  case "$response" in
     [yY][eE][sS]|[yY]) 
       echo "  Proceeding..."
       ;;
@@ -70,11 +77,11 @@ for key in "${!TO_LINK[@]}"; do
 
     # Extract the directory name
     dest_dir="$(dirname $dest)"
-    mkdir -p $dest_dir
-    cd $dest_dir
+    mkdir -p "$dest_dir"
+    cd "$dest_dir"
 
     # Remove and link
-    rm $dest
-    ln -s $src
+    rm "$dest"
+    ln -s "$src"
   done
 done
