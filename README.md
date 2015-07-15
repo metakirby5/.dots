@@ -45,5 +45,18 @@ All of my dotfile configs.
 - xflux
 
 ## Installation
+- Install all dependencies.
+- Add `.../dotfiles/bin` to your `PATH`.
+- Add `source .../dotfiles/shell/[FILENAME].sh` for the appropriate files.
+  For example, for bash:
+  ```bash
+  source ~/dotfiles/shell/config.sh
+  source ~/dotfiles/shell/prompt.sh
+  source ~/dotfiles/shell/ls_colors.sh
+  ```
+- Install *Stylish* for Chrome/Firefox and install the relevant userstyles.
+- Run `wzk` and choose a colorscheme.
+  Alternatively, manually run `relink-config`, `whizkers`, `xrdb`,
+  and restart `i3`.
+- Be nice, eat rice.
 
-Coming soon TM.
