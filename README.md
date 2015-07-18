@@ -5,7 +5,6 @@ All of my dotfile configs.
 
 ## TODO
 
-- vimrc statusline colors
 - Look at i3 on archwiki, j4tools, i3-extras
 - Colorscheme generator
 - Lock on laptop lid close

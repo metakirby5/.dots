@@ -138,7 +138,6 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" TODO colors
 " example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
 set statusline=\                          " initialize
 set statusline+=%n                        " buffer number
@@ -149,12 +148,14 @@ set statusline+=\                         " space
 set statusline+=%{ExtModified()}          " externally modified?
 set statusline+=%m                        " modified flag
 set statusline+=%r                        " read-only flag
+set statusline+=\ %#conceal#              " no highlight
 set statusline+=%=                        " left/right separator
+set statusline+=%*\                       " back to statusline highlight
 " set statusline+=%{FDMShort()}             " fold method
 " set statusline+=/                         " separator
 " set statusline+=%{&fo}                    " format options
 " set statusline+=\ \«\                     " separator
-set statusline+=%{&syntax}                " syntax
+set statusline+=%{GetSyntax()}            " syntax
 set statusline+=\ \«\                     " separator
 set statusline+=%{Has78Char()}            " 78 char highlighting
 set statusline+=%{TextWidth()}            " text width/paste mode
@@ -184,6 +185,10 @@ function! FDMShort()
     else
         return &fdm
     endif
+endfunction
+
+function! GetSyntax()
+  return &syntax != '' ? &syntax : 'plaintext'
 endfunction
 
 " Returns '*' if > 78 char highlighting enabled
