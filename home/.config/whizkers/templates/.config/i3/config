@@ -174,15 +174,15 @@ bindsym --release Shift+Print   exec $nsi $_scrot -se $_scrot-clip-notify || $_s
 bindsym --release Control+Print exec $nsi imgur-screenshot
 
 # Media controls
-bindsym $mod+Home         exec $nsi mpc toggle
-bindsym $mod+End          exec $nsi mpc stop
+bindsym $mod+Home         exec $nsi mpc toggle && killall -SIGUSR1 conky
+bindsym $mod+End          exec $nsi mpc stop && killall -SIGUSR1 conky
 bindsym $mod+Page_Up      exec $nsi mpc prev
 bindsym $mod+Page_Down    exec $nsi mpc next
 
 # Volume controls
-bindsym XF86AudioLowerVolume exec $nsi amixer set Master $volPct%- && ogg123 $volChangeSound
-bindsym XF86AudioRaiseVolume exec $nsi amixer set Master $volPct%+ && ogg123 $volChangeSound
-bindsym XF86AudioMute exec $nsi amixer set Master toggle && ogg123 $volChangeSound
+bindsym XF86AudioLowerVolume exec $nsi amixer set Master $volPct%- && ogg123 $volChangeSound && killall -SIGUSR1 conky
+bindsym XF86AudioRaiseVolume exec $nsi amixer set Master $volPct%+ && ogg123 $volChangeSound && killall -SIGUSR1 conky
+bindsym XF86AudioMute exec $nsi amixer set Master toggle && ogg123 $volChangeSound && killall -SIGUSR1 conky
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec $nsi xbacklight -inc $brightPct
