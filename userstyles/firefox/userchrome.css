@@ -1,4 +1,5 @@
 /* AGENT_SHEET */
+
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @namespace html url("http://www.w3.org/1999/xhtml");
 
@@ -170,5 +171,21 @@ findbar, .findbar-button {
 }
 
 .findbar-find-previous, .findbar-find-next {
+    display: none !important;
+}
+
+/* Sidebar */
+
+#sidebar-header, #sidebar-search-container {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+}
+
+.sidebar-placesTreechildren {
+    background-color: #444444 !important;
+    color: #FFFFFF !important;
+}
+
+.textbox-search-icons, #sidebar-search-label {
     display: none !important;
 }
