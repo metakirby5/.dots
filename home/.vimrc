@@ -45,6 +45,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#end()
 
   noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
+  let g:gitgutter_map_keys = 0
 else
   " Fallbacks...
 
@@ -292,6 +293,9 @@ if exists('&switchbuf')
 endif
 
 " === Splits
+
+" Get rid of vertical split pipe
+set fillchars+=vert:\ 
 
 " Open new split panes to the right and bottom, instead of left and top
 set splitbelow
