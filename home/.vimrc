@@ -125,9 +125,14 @@ endif
 " * UI
 " **************************************
 
-" Highlight current column
+" Highlights
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=NONE guibg=NONE
+
+hi LineNr ctermfg=darkgrey ctermbg=NONE guibg=NONE
+hi CursorLineNr term=bold cterm=bold ctermfg=grey ctermbg=black guibg=black
+hi CursorLine term=bold cterm=bold ctermbg=black guibg=black
+
+hi ColorColumn ctermbg=black guibg=black
 
 set shortmess+=I              " no splash screen
 
@@ -366,6 +371,9 @@ if exists("+foldenable")
   " Enable fold column
   set foldcolumn=1
   hi FoldColumn ctermbg=NONE guibg=NONE
+
+  " zz - toggle folds
+  noremap zz za
 
   " The mode settings below all start with folds open
 
