@@ -118,21 +118,24 @@ set showmatch           " show match when inserting {}, [], or ()
 
 " Extra options for GUI mode
 if has('gui_running')
-    set guifont=Consolas:h12:cANSI
+    set guifont=Source\ Code\ Pro
 endif
 
 " **************************************
 " * UI
 " **************************************
 
-" Highlights
-set cursorline
+" Highlights/colors
+hi Normal guifg=white guibg=black
 
-hi LineNr ctermfg=darkgrey ctermbg=NONE guibg=NONE
-hi CursorLineNr term=bold cterm=bold ctermfg=grey ctermbg=black guibg=black
-hi CursorLine term=bold cterm=bold ctermbg=black guibg=black
+set cursorline
+hi LineNr ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
+hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
+hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
 
 hi ColorColumn ctermbg=black guibg=black
+
+hi NonText ctermfg=black guifg=black
 
 set shortmess+=I              " no splash screen
 
