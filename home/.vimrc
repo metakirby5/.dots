@@ -130,12 +130,17 @@ set cursorline
 
 hi Normal guifg=white guibg=black
 hi NonText ctermfg=black guifg=black
+
 hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
-hi LineNr ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
+hi LineNr ctermfg=darkgrey ctermbg=none guifg=darkgrey guibg=none
 hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
+
 hi ColorColumn ctermbg=black guibg=black
 hi Folded ctermbg=black guibg=black
 
+hi TabLine term=none cterm=none gui=none ctermfg=white ctermbg=black guifg=white guibg=black
+hi TabLineSel term=bold cterm=bold gui=bold ctermfg=white ctermbg=none guifg=white guibg=none
+hi TabLineFill term=none cterm=none gui=none ctermfg=white ctermbg=black guifg=white guibg=black
 
 set shortmess+=I              " no splash screen
 
@@ -156,7 +161,7 @@ set statusline+=\                         " space
 set statusline+=%{ExtModified()}          " externally modified?
 set statusline+=%m                        " modified flag
 set statusline+=%r                        " read-only flag
-set statusline+=\ %#conceal#              " no highlight
+set statusline+=\ %#CursorLine#           " no highlight
 set statusline+=%=                        " left/right separator
 set statusline+=%*\                       " back to statusline highlight
 " set statusline+=%{FDMShort()}             " fold method
