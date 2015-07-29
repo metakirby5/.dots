@@ -126,16 +126,16 @@ endif
 " **************************************
 
 " Highlights/colors
-hi Normal guifg=white guibg=black
-
 set cursorline
+
+hi Normal guifg=white guibg=black
+hi NonText ctermfg=black guifg=black
+hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
 hi LineNr ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
 hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
-hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
-
 hi ColorColumn ctermbg=black guibg=black
+hi Folded ctermbg=black guibg=black
 
-hi NonText ctermfg=black guifg=black
 
 set shortmess+=I              " no splash screen
 
