@@ -106,7 +106,7 @@ alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{%a}{ - %b}}
 now_playing_prefix = "$b"
 now_playing_suffix = "$/b"
 
-selected_item_prefix = "$6* "
+selected_item_prefix = "$6"
 selected_item_suffix = "$9"
 
 song_window_title_format = "{%a - }{%t}|{%f}"
