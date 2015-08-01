@@ -5,13 +5,10 @@ All of my dotfile configs.
 
 ## TODO
 
-- Look at i3 on archwiki, j4tools, i3-extras
-- Colorscheme generator
-- Lock on laptop lid close
-- Customize ncmpcpp
-- Customize ranger
 - move to lemonbar/candybar/i3blocks?
 - move to termite?
+- Lock on laptop lid close (xss-lock?)
+- Fix Colorscheme generator
 
 ## Dependencies
 

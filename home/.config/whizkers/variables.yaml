@@ -18,3 +18,8 @@ b_cyan: "#9ffadd"
 n_primary: *n_primary
 b_primary: *b_primary
 
+ncmpcpp_primary: "blue"
+ncmpcpp_secondary: "magenta"
+ncmpcpp_primary_n: "5"
+ncmpcpp_secondary_n: "6"
+
