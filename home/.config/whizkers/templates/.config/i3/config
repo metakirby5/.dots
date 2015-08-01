@@ -21,7 +21,7 @@ set $cMainFG            #fafafa
 set $fontName           tewi
 set $fontSize           8
 set $border             7
-set $gapsInner          50
+set $gapsInner          20
 set $gapsOuter          0
 
 # Bar

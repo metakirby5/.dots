@@ -1,0 +1,19 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/chitoge.png"
+
+n_red: "#aa645b"
+b_red: "#d27b70"
+n_green: "#96aa6c"
+b_green: "#b9d285"
+d_green: "#5C6942"
+n_yellow: &n_primary "#c8aa6e"
+b_yellow: &b_primary "#f0cc84"
+n_blue: "#749caa"
+b_blue: "#8fc0d2"
+n_magenta: "#a597aa"
+b_magenta: "#cbbad2"
+n_cyan: "#70aa62"
+b_cyan: "#8ad279"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
