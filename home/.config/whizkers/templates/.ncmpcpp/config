@@ -19,7 +19,7 @@ visualizer_look = "◆│"
 
 # Delays ######################################################################
 
-playlist_disable_highlight_delay = "0"
+playlist_disable_highlight_delay = "2"
 message_delay_time = "2"
 
 # Song format #################################################################
@@ -74,13 +74,13 @@ message_delay_time = "2"
 ## Note: colors can be nested.
 ##
 
-song_list_format = "{%a - %t}|{%f}$R{$3%l$9}"
+song_list_format = "{$<% ncmpcpp_secondary_n %>%a$9 }$<% ncmpcpp_primary_n %>{%t}|{%f}$9"
 
 song_library_format = "{%n. }{%t}|{%f}"
 
 #tag_editor_album_format = "{(%y) }%b"
 
-#song_status_format = "{{%a{ \"%b\"{ (%y)}} - }{%t}}|{%f}"
+song_status_format = "{$<% ncmpcpp_secondary_n %>%a$9 }$<% ncmpcpp_primary_n %>{%t}|{%f}$9"
 
 ##
 ## Note: Below variables are for alternative version of user's interface.
@@ -103,8 +103,8 @@ alternative_header_first_line_format = "$b$1$aqqu$/a$9 $<% ncmpcpp_primary_n %>{
 
 alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{%a}{ - %b}}|{%D}$9"
 
-now_playing_prefix = "$b$<% ncmpcpp_primary_n %>"
-now_playing_suffix = "$9$/b"
+now_playing_prefix = "$b"
+now_playing_suffix = "$/b"
 
 selected_item_prefix = "$6* "
 selected_item_suffix = "$9"
@@ -147,7 +147,7 @@ song_window_title_format = "{%a - }{%t}|{%f}"
 ##   not available.
 ##
 
-song_columns_list_format = "(7f)[green]{l} (50)[]{t|f} (25)[<% ncmpcpp_primary %>]{aE} (25)[<% ncmpcpp_secondary %>]{bE}"
+song_columns_list_format = "(50)[]{t|f} (25)[<% ncmpcpp_primary %>]{aE} (25)[<% ncmpcpp_secondary %>]{bE}"
 
 # UI/Misc #####################################################################
 
@@ -158,12 +158,14 @@ jump_to_now_playing_song_at_start = "yes"
 
 mouse_support = "yes"
 centered_cursor = "yes"
+autocenter_mode = "yes"
 
 enable_window_title = "yes"
-user_interface = "alternative"
+user_interface = "classic" # (classic/alternative)
 header_text_scrolling = "yes"
 header_visibility = "no"
-progressbar_look = "██▁"
+statusbar_visibility = "no"
+progressbar_look = "━─"
 clock_display_seconds = "no"
 display_volume_level = "yes"
 
@@ -195,9 +197,9 @@ screen_switcher_mode = "sequence: 2 -> 3"
 startup_screen = "2"
 
 # classic/columns
-playlist_display_mode = "columns"
-browser_display_mode = "columns"
-search_engine_display_mode = "columns"
+playlist_display_mode = "classic"
+browser_display_mode = "classic"
+search_engine_display_mode = "classic"
 playlist_editor_display_mode = "classic"
 
 default_find_mode = "wrapped" # (wrapped/normal)
@@ -211,11 +213,13 @@ allow_physical_directories_deletion = "no"
 # Colors definitions ##########################################################
 
 colors_enabled = "yes"
+discard_colors_if_item_is_selected = "yes"
 
 main_window_color = "white"
-main_window_highlight_color = "<% ncmpcpp_secondary %>"
+main_window_highlight_color = "<% ncmpcpp_primary %>"
 
-progressbar_color = "<% ncmpcpp_primary %>"
+progressbar_color = "<% ncmpcpp_secondary %>"
+statusbar_color = "<% ncmpcpp_secondary %>"
 visualizer_color = "<% ncmpcpp_primary %>"
 
 <%={{ }}=%>
