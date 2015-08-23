@@ -13,8 +13,7 @@
     # message.
     allow_markup = yes
 
-    # The format of the message.  Possible variables are:
-    #   %a  appname
+    # The format of the message.  Possible variables are: #   %a  appname
     #   %s  summary
     #   %b  body
     #   %i  iconname (including its path)
@@ -64,7 +63,7 @@
     # the top and down respectevly.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "0x5-75+75"
+    geometry = "0x5-100+100"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -149,7 +148,7 @@
 
 [frame]
     width = 0
-    color = "#444444"
+    color = "{{ n_black }}"
 
 [shortcuts]
 
@@ -175,13 +174,13 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#444444"
-    foreground = "#FFFFFF"
+    background = "{{ n_black }}"
+    foreground = "{{ n_white }}"
     timeout = 7
 
 [urgency_normal]
-    background = "#2D2D2D"
-    foreground = "#FFFFFF"
+    background = "{{ b_black }}"
+    foreground = "{{ b_white }}"
     timeout = 10
 
 [urgency_critical]

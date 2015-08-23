@@ -16,5 +16,6 @@ fi
 
 xrdb ~/.Xresources
 i3-msg 'restart'
+killall dunst; dunst
 exit 0
 
