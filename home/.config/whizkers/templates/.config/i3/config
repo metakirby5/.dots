@@ -10,9 +10,9 @@ set $cFocusIN           {{ b_primary }}
 set $cSubFocusBG        {{ n_black }}
 set $cSubFocusFG        {{ n_white }}
 set $cSubFocusIN        {{ b_black }}
-set $cUnfocusBG         {{ bgc }}
+set $cUnfocusBG         {{ n_black }}
 set $cUnfocusFG         {{ n_white }}
-set $cUnfocusIN         {{ n_black }}
+set $cUnfocusIN         {{ b_black }}
 set $cUrgentBG          #aa4e60
 set $cUrgentFG          #ffffff
 set $cUrgentIN          #f79bad
