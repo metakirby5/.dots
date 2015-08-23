@@ -41,7 +41,7 @@ TEXT
     amixer get Master | awk -F[][] '/%/ {print $2}' | tail -n1\
   }", "color": "${exec\
     amixer get Master |\
-    grep '\[on\]' >/dev/null && echo '{{ b_green }}' || echo '{{ d_green }}'\
+    grep '\[on\]' >/dev/null && echo '{{ b_green }}' || echo '{{ b_black }}'\
   }"},
 
   # Wireless
