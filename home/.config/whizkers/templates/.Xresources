@@ -8,12 +8,12 @@ URxvt.font:      xft:{{ term_font }}:pixelsize=28:antialias=true:hinting=true
 URxvt.boldFont:  xft:{{ term_font }}:bold:pixelsize=28:antialias=true:hinting=true
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
-URxvt.background:  #272727
-URxvt.foreground:  #fafafa
+URxvt.background:  {{ bgc }}
+URxvt.foreground:  {{ fgc }}
 
 ! Black
-URxvt.color0:      #393939
-URxvt.color8:      #5b5b5b
+URxvt.color0:      {{ n_black }}
+URxvt.color8:      {{ b_black }}
 
 ! Red
 URxvt.color1:      {{ n_red }}
@@ -40,8 +40,8 @@ URxvt.color6:      {{ n_cyan }}
 URxvt.color14:     {{ b_cyan }}
 
 ! White
-URxvt.color7:      #d8d8d8
-URxvt.color15:     #ffffff
+URxvt.color7:      {{ n_white }}
+URxvt.color15:     {{ b_white }}
 
 ! Appearance
 URxvt.saveLines:        12000

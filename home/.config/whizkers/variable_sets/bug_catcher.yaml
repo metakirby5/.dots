@@ -1,5 +1,9 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/bug_catcher.png"
 
+bgc: "#392F2E"
+
+n_black: "#463A38"
+b_black: "#604F4D"
 n_red: "#b77174"
 b_red: "#df898d"
 n_green: "#c8c350"

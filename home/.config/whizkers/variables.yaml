@@ -1,6 +1,11 @@
 term_font: "Source Code Pro"
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 
+bgc: "#272727"
+fgc: "#fafafa"
+
+n_black: "#393939"
+b_black: "#5b5b5b"
 n_red: "#f42d6c"
 b_red: "#fa9fbb"
 n_green: "#6cf42d"
@@ -14,6 +19,8 @@ n_magenta: "#b52df4"
 b_magenta: "#dd9ffa"
 n_cyan: "#2df4b5"
 b_cyan: "#9ffadd"
+n_white: "#d8d8d8"
+b_white: "#ffffff"
 
 n_primary: *n_primary
 b_primary: *b_primary
