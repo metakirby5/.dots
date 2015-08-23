@@ -129,9 +129,9 @@ bar {
     background  $cMainBG
     statusline  $cMainFG
     separator   $cBarSeparator
-    focused_workspace   $cMainBG  $cFocusBG     $cFocusFG
+    focused_workspace   $cMainBG  $cSubfocusBG  $cFocusFG
     active_workspace    $cMainBG  $cFocusIN     $cFocusFG
-    inactive_workspace  $cMainBG  $cUnfocusBG   $cUnfocusFG
+    inactive_workspace  $cMainBG  $cMainBG      $cUnfocusFG
     urgent_workspace    $cMainBG  $cUrgentBG    $cUrgentFG
   }
 }
