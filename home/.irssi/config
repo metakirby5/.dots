@@ -321,6 +321,7 @@ statusbar = {
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
 
     window_inact = {
@@ -366,11 +367,15 @@ statusbar = {
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
+
     dccstat = {
+
       items = { dccstat = { }; };
       position = "2";
       placement = "top";
+      disabled = "yes";
     };
   };
 };
@@ -383,4 +388,5 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   "irc/dcc" = { dcc_download_path = "~/dcc"; dcc_autoget = "yes"; };
   "fe-common/core" = { theme = "metakirby5"; };
+  "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };

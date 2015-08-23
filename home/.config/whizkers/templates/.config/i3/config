@@ -7,12 +7,12 @@ set $wallpapers         {{ wallpapers }}
 set $cFocusBG           {{ n_primary }}
 set $cFocusFG           {{ b_white }}
 set $cFocusIN           {{ b_primary }}
-set $cSubFocusBG        {{ b_black }}
+set $cSubFocusBG        {{ n_black }}
 set $cSubFocusFG        {{ n_white }}
-set $cSubFocusIN        {{ b_white }}
-set $cUnfocusBG         {{ n_black }}
+set $cSubFocusIN        {{ b_black }}
+set $cUnfocusBG         {{ bgc }}
 set $cUnfocusFG         {{ n_white }}
-set $cUnfocusIN         {{ b_white }}
+set $cUnfocusIN         {{ n_black }}
 set $cUrgentBG          #aa4e60
 set $cUrgentFG          #ffffff
 set $cUrgentIN          #f79bad
