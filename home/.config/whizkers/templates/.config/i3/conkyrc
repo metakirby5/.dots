@@ -53,6 +53,8 @@ TEXT
   }${exec\
     dropbox running || echo ' dbx'\
   }${exec\
+    pgrep skype >/dev/null && echo ' skp'\
+  }${exec\
     pgrep xflux >/dev/null && echo ' flx'\
   }","color":"\{{ b_blue }}"},
 
