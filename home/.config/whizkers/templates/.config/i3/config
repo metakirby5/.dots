@@ -21,7 +21,7 @@ set $cMainFG            {{ fgc }}
 set $fontName           tewi
 set $fontSize           8
 set $border             7
-set $gapsInner          20
+set $gapsInner          75
 set $gapsOuter          0
 
 # Bar
