@@ -89,8 +89,11 @@
 
 #TabsToolbar {
     border: none !important;
-    background-color: #272727 !important;
     transition: 0.2s !important;;
+}
+
+#tabbrowser-tabs {
+    background-color: #272727 !important;
 }
 
 .arrowscrollbox-scrollbox {

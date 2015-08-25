@@ -1,20 +1,15 @@
 @-moz-document url(about:newtab) {
   #newtab-window {
     background-color: #444444 !important;
-    background-image: url("http://i.imgur.com/NaaK4hL.png") !important;
-    background-size: auto 75%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: left bottom; 
   }
   #newtab-window::before {
     position: fixed;
     right: 0;
     margin: 1em;
     font-size: 5em;
-    color: white;
+    color: #fafafa;
     text-shadow: 2px 2px #333333;
-    content: "失礼、噛みました。";
+    content: "ようこそ。";
   }
   #newtab-window > * {
     display: none !important;
