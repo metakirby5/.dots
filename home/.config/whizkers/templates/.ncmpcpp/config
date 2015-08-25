@@ -165,7 +165,7 @@ user_interface = "classic" # (classic/alternative)
 header_text_scrolling = "yes"
 header_visibility = "no"
 statusbar_visibility = "no"
-progressbar_look = "▁▖ "
+progressbar_look = "▁▖▁"
 clock_display_seconds = "no"
 display_volume_level = "yes"
 
