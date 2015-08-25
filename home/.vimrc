@@ -502,6 +502,13 @@ au Syntax asm setlocal shiftwidth=8
 " * Misc
 " **************************************
 
+" **************************************
+" * Syntax
+" **************************************
+
+" Markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
 " Check if file modified periodically
 " set updatetime=1000
 " au CursorHold * checktime
