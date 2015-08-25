@@ -143,6 +143,9 @@ hi TabLine term=none cterm=none gui=none ctermfg=white ctermbg=black guifg=white
 hi TabLineSel term=bold cterm=bold gui=bold ctermfg=white ctermbg=none guifg=white guibg=none
 hi TabLineFill term=none cterm=none gui=none ctermfg=white ctermbg=black guifg=white guibg=black
 
+hi StatusLine term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
+hi StatusLineMid term=none cterm=none gui=none ctermfg=white ctermbg=none guifg=white guibg=none
+
 set shortmess+=I              " no splash screen
 
 set scrolloff=5               " keep at least 5 lines above/below
@@ -153,7 +156,7 @@ set ls=2
 
 " Statusline
 " example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
-set statusline=\                          " initialize
+set statusline=\ \                        " initialize w/ spaces
 set statusline+=%n                        " buffer number
 set statusline+=\ \»\                     " separator
 set statusline+=%f                        " relative path
@@ -162,9 +165,9 @@ set statusline+=\                         " space
 set statusline+=%{ExtModified()}          " externally modified?
 set statusline+=%m                        " modified flag
 set statusline+=%r                        " read-only flag
-set statusline+=\ %#CursorLine#           " no highlight
+set statusline+=\ \ %#StatusLineMid#      " no highlight
 set statusline+=%=                        " left/right separator
-set statusline+=%*\                       " back to statusline highlight
+set statusline+=%*\ \                     " statusline highlight
 " set statusline+=%{FDMShort()}             " fold method
 " set statusline+=/                         " separator
 " set statusline+=%{&fo}                    " format options
@@ -175,7 +178,7 @@ set statusline+=%{Has78Char()}            " 78 char highlighting
 set statusline+=%{TextWidth()}            " text width/paste mode
 set statusline+=\ \«\                     " separator
 
-set statusline+=%2c\ -\ %3l/%L\ -\ %P\    " char# - curline/totline - file%
+set statusline+=%2c\ -\ %3l/%L\ -\ %P\ \  " char# - curline/totline - file%
 
 " Returns '[!]' if file externally modified since last read/write
 " :e to get rid of this warning
