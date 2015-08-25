@@ -6,6 +6,7 @@
 ! Fonts
 URxvt.font:      xft:{{ term_font }}:pixelsize=28:antialias=true:hinting=true
 URxvt.boldFont:  xft:{{ term_font }}:bold:pixelsize=28:antialias=true:hinting=true
+URxvt.letterSpace: -1
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
 URxvt.background:  {{ bgc }}
