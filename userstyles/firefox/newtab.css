@@ -4,12 +4,12 @@
   }
   #newtab-window::before {
     position: fixed;
-    right: 0;
-    margin: 1em;
-    font-size: 5em;
+    right: 0.25em;
+    bottom: 0;
+    margin: 0;
+    font-size: 10em;
     color: #fafafa;
-    text-shadow: 2px 2px #333333;
-    content: "ようこそ。";
+    content: "花火";
   }
   #newtab-window > * {
     display: none !important;
