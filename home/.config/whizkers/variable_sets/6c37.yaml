@@ -1,0 +1,30 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/"
+
+bgc: "#202025"
+fgc: "#b8b8c8"
+
+n_black: "#353540"
+b_black: "#545466"
+n_red: "#8c5760"
+b_red: "#b26f7a"
+n_green: "#7b8c58"
+b_green: "#9db270"
+n_yellow: "#8c6e43"
+b_yellow: "#b28c55"
+n_blue: &n_primary "#58698c"
+b_blue: &b_primary "#7086b2"
+n_magenta: "#7b5e7d"
+b_magenta: "#9c77b2"
+n_cyan: "#66808c"
+b_cyan: "#82a2b2"
+n_white: "#8c8b8b"
+b_white: "#b8b8c8"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "blue"
+ncmpcpp_secondary: "red"
+ncmpcpp_primary_n: "5"
+ncmpcpp_secondary_n: "2"
+
