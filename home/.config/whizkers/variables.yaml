@@ -1,5 +1,7 @@
 term_font: "Source Code Pro"
 wallpapers: "/usr/share/backgrounds/in_rotation/"
+inner_gap_size: 75
+border_size: 7
 
 bgc: "#272727"
 fgc: "#fafafa"

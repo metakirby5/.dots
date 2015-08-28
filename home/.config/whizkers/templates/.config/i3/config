@@ -20,8 +20,8 @@ set $cMainBG            {{ bgc }}
 set $cMainFG            {{ fgc }}
 set $fontName           tewi
 set $fontSize           8
-set $border             7
-set $gapsInner          75
+set $border             {{ border_size }}
+set $gapsInner          {{ inner_gap_size }}
 set $gapsOuter          0
 
 # Bar
