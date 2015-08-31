@@ -1,6 +1,4 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/japan/odaiba.jpg"
-inner_gap_size: 50
-border_size: 20
 
 bgc: "#202025"
 fgc: "#b8b8c8"
