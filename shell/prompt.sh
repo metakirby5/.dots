@@ -17,8 +17,8 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-__mk5_top_connector='┌ '
-__mk5_bot_connector='└ '
+#__mk5_top_connector='┌ '
+#__mk5_bot_connector='└ '
 __mk5_usr_pchar='»'
 __mk5_root_pchar='#'
 __mk5_sepchar='+'
@@ -31,7 +31,7 @@ __mk5_hostname=$(hostname|cut -d . -f 1)
 
 function __mk5_git_pwd {
   # Get git path
-  local thePWD=$(readlink -f "$PWD")
+  local thePWD=$(pwd -P)
   local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
 
   if [[ "$gitpath" ]]; then
@@ -50,17 +50,17 @@ function __mk5_git_branch {
 }
 
 function __mk5_git_dirty {
-  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l)"
+  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l | awk '{print $1}')"
 }
 
 function __mk5_git_incoming {
   echo "$(git log ..origin/$(__mk5_git_branch) 2>/dev/null \
-    | grep '^commit' | wc -l)"
+    | grep '^commit' | wc -l | awk '{print $1}')"
 }
 
 function __mk5_git_behindmaster {
   echo "$(git log ..master 2>/dev/null \
-    | grep '^commit' | wc -l)"
+    | grep '^commit' | wc -l | awk '{print $1}')"
 }
 
 function __mk5_git_outgoing {
@@ -73,7 +73,7 @@ function __mk5_git_outgoing {
   # Otherwise, compare wih remote branch; echo # commits ahead
   else
     echo "$(git log origin/$(__mk5_git_branch).. 2>/dev/null \
-      | grep '^commit' | wc -l)"
+      | grep '^commit' | wc -l | awk '{print $1}')"
   fi
 }
 
@@ -130,7 +130,7 @@ $__mk5_b_purple$__mk5_sepchar "
   local colorpwd="$__mk5_green$(__mk5_git_pwd) "
   local virtualenv_info
   if [[ "$VIRTUAL_ENV" ]]; then
-    local thePWD=$(readlink -f "$PWD")
+    local thePWD=$(pwd -P)
     local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
     local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
 
