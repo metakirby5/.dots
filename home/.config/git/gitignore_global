@@ -8,3 +8,5 @@ tester_files
 .nfs*
 *.out
 *.pyc
+.DS_STORE
+.idea
