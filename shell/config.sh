@@ -4,7 +4,7 @@ export EDITOR=$VISUAL
 export CLASSPATH='*':'.'
 
 # Aliases
-alias resource='source ~/.bashrc'
+alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
 alias reload-xresources='xrdb ~/.Xresources'
 
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
