@@ -1,0 +1,52 @@
+config defaultToCurrentScreen true
+config secondsBeforeRepeat 0.3
+config secondsBetweenRepeat 0.03
+config modalEscapeKey esc
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config focusCheckWidthMax 10000
+
+alias pct   5%
+
+# Binds
+bind ':alt hint
+bind r:alt relaunch
+
+# Focus
+bind h:alt focus left
+bind j:alt focus down
+bind k:alt focus up
+bind l:alt focus right
+bind u:alt focus behind
+
+# Nudge
+bind h:alt;shift nudge -${pct} +0
+bind j:alt;shift nudge +0 +${pct} 
+bind k:alt;shift nudge +0 -${pct} 
+bind l:alt;shift nudge +${pct} +0
+
+# Resize
+bind f:alt move screenOriginX;screenOriginY screenSizeX;screenSizeY
+bind h:alt;ctrl resize -${pct} +0
+bind j:alt;ctrl resize +0 +${pct}
+bind k:alt;ctrl resize +0 -${pct}
+bind l:alt;ctrl resize +${pct} +0
+bind h:alt;ctrl;shift resize +${pct} +0 bottom-right
+bind j:alt;ctrl;shift resize +0 -${pct} bottom-right
+bind k:alt;ctrl;shift resize +0 +${pct} bottom-right
+bind l:alt;ctrl;shift resize -${pct} +0 bottom-right
+
+# Push
+bind h:alt;cmd  push left  bar-resize:screenSizeX/3
+bind j:alt;cmd  push down  bar-resize:screenSizeY/2
+bind k:alt;cmd  push up    bar-resize:screenSizeY/2
+bind l:alt;cmd  push right bar-resize:screenSizeX/3
+
+# Throw
+bind h:alt;cmd;shift  throw left
+bind j:alt;cmd;shift  throw down
+bind k:alt;cmd;shift  throw up
+bind l:alt;cmd;shift  throw right
+bind 1:alt;cmd;shift  throw 0
+bind 2:alt;cmd;shift  throw 1
+bind 3:alt;cmd;shift  throw 2
