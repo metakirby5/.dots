@@ -4,7 +4,7 @@ config secondsBetweenRepeat 0.03
 config modalEscapeKey esc
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
-config focusCheckWidthMax 10000
+config focusCheckWidthMax 2000
 
 alias pct   5%
 
