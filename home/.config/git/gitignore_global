@@ -3,8 +3,6 @@
 *.sw*
 *~
 a.out
-core
-tester_files
 .nfs*
 *.out
 *.pyc
