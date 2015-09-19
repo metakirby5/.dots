@@ -99,27 +99,32 @@ function __mk5_set_prompt {
 
   # Git stuff
   local git_info
-  if [[ "$(__mk5_git_branch)" ]]; then
-    git_info=$(__mk5_git_branch)
+  local git_branch=$(__mk5_git_branch)
+  if [[ "$git_branch" ]]; then
+    git_info=$git_branch
 
-    if false && [[ "$(__mk5_git_dirty)" != 0 ]]; then
+    local git_dirty=$(__mk5_git_dirty)
+    if [[ "$git_dirty" != 0 ]]; then
       git_info="$git_info \
-$__mk5_b_yellow$__mk5_dirty_char$(__mk5_git_dirty)"
+$__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
-    if false && [[ "$(__mk5_git_incoming)" != 0 ]]; then
+    local git_incoming=$(__mk5_git_incoming)
+    if [[ "$git_incoming" != 0 ]]; then
       git_info="$git_info \
-$__mk5_b_red$__mk5_incoming_char$(__mk5_git_incoming)"
+$__mk5_b_red$__mk5_incoming_char$git_incoming"
     fi
 
-    if false && [[ "$(__mk5_git_behindmaster)" != 0 ]]; then
+    local git_behindmaster=$(__mk5_git_behindmaster)
+    if [[ "$git_behindmaster" != 0 ]]; then
       git_info="$git_info \
-$__mk5_b_green$__mk5_behindmaster_char$(__mk5_git_behindmaster)"
+$__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
     fi
 
-    if false && [[ "$(__mk5_git_outgoing)" != 0 ]]; then
+    local git_outgoing=$(__mk5_git_outgoing)
+    if [[ "$git_outgoing" != 0 ]]; then
       git_info="$git_info \
-$__mk5_b_blue$__mk5_outgoing_char$(__mk5_git_outgoing)"
+$__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     fi
 
     git_info="$__mk5_purple$git_info \
