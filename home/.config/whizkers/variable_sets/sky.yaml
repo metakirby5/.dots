@@ -1,9 +1,9 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/skywallpapers/"
 
-bgc: "#39302E"
+bgc: "#202025"
 
-n_black: "#463A38"
-b_black: "#604F4D"
+n_black: "#353540"
+b_black: "#545466"
 n_red: "#b77174"
 b_red: "#df898d"
 n_green: "#c8c350"
