@@ -21,8 +21,8 @@ bind u:alt focus behind
 
 # Nudge
 bind h:alt;shift nudge -${pct} +0
-bind j:alt;shift nudge +0 +${pct} 
-bind k:alt;shift nudge +0 -${pct} 
+bind j:alt;shift nudge +0 +${pct}
+bind k:alt;shift nudge +0 -${pct}
 bind l:alt;shift nudge +${pct} +0
 
 # Resize
@@ -37,10 +37,10 @@ bind k:alt;ctrl;shift resize +0 +${pct} bottom-right
 bind l:alt;ctrl;shift resize -${pct} +0 bottom-right
 
 # Push
-bind h:alt;cmd  push left  bar-resize:screenSizeX/3
+bind h:alt;cmd  push left  bar-resize:screenSizeX/2
 bind j:alt;cmd  push down  bar-resize:screenSizeY/2
 bind k:alt;cmd  push up    bar-resize:screenSizeY/2
-bind l:alt;cmd  push right bar-resize:screenSizeX/3
+bind l:alt;cmd  push right bar-resize:screenSizeX/2
 
 # Throw
 bind h:alt;cmd;shift  throw left
