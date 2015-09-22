@@ -375,6 +375,7 @@ statusbar = {
       items = { dccstat = { }; };
       position = "2";
       placement = "top";
+      disabled = "yes";
     };
   };
 };
