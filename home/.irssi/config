@@ -375,7 +375,6 @@ statusbar = {
       items = { dccstat = { }; };
       position = "2";
       placement = "top";
-      disabled = "yes";
     };
   };
 };
@@ -386,7 +385,11 @@ settings = {
     nick = "metakirby5";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "irc/dcc" = { dcc_download_path = "~/dcc"; dcc_autoget = "yes"; };
+  "irc/dcc" = {
+    dcc_download_path = "~/dcc";
+    dcc_autoget = "yes";
+    dcc_autoaccept_lowports = "yes";
+  };
   "fe-common/core" = { theme = "metakirby5"; };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };
