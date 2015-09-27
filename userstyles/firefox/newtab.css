@@ -1,6 +1,6 @@
 @-moz-document url(about:newtab) {
   #newtab-window {
-    background-color: #444444 !important;
+    background-color: #202025 !important;
   }
   #newtab-window::before {
     position: fixed;
@@ -8,8 +8,8 @@
     bottom: 0;
     margin: 0;
     font-size: 10em;
-    color: #fafafa;
-    content: "花火";
+    color: #353540;
+    content: "物語";
   }
   #newtab-window > * {
     display: none !important;
