@@ -157,7 +157,9 @@ bindsym $mod+Shift+Escape   exit
 bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -f -t -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -b -h $dmHeight -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
-bindsym $mod+n exec $nsi $term -e nmtui
+set $nmtui floating_nmtui
+for_window [instance="^$nmtui$"] floating enable
+bindsym $mod+n exec $nsi ($xwi $nmtui || $term -name $nmtui -e nmtui) && i3-msg '[instance="^$nmtui$"] focus'
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
