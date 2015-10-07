@@ -48,7 +48,7 @@ TEXT
   {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\{{ b_cyan }}"},
 
   # Running processes
-  {"full_text": "${exec\
+  {"full_text": "✳${exec\
     e=$(ibus engine); echo " ${e##*:}"
   }${exec\
     dropbox running || echo ' dbx'\
