@@ -7,7 +7,7 @@ fi
 
 if [ "$#" -eq 0 ]; then
   whizkers $(whizkers -l |\
-    dmenu -i -f -p 'Whizkers Scheme' -fn 'tewi:pixelsize=32' -b -h 100)
+    dmenu -i -f -p 'Whizkers Scheme' -fn 'Calibri:pixelsize=32' -b -h 100)
 else
   whizkers "$@"
 fi

@@ -20,7 +20,7 @@ TEXT
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\{{ b_red }}"},
 
   # Battery percent
-  {"full_text": "⌼ ${exec get-battery-status}", "color": "${exec\
+  {"full_text": "⚡ ${exec get-battery-status}", "color": "${exec\
     upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
     awk '/state/ {
       print match($2, /^d/) ? "{{ b_yellow }}" : "{{ n_yellow }}";
@@ -48,7 +48,7 @@ TEXT
   {"full_text": "☇ ${wireless_essid wlp1s0}", "color": "\{{ b_cyan }}"},
 
   # Running processes
-  {"full_text": "»${exec\
+  {"full_text": "${exec\
     e=$(ibus engine); echo " ${e##*:}"
   }${exec\
     dropbox running || echo ' dbx'\

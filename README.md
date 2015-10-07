@@ -2,6 +2,7 @@ dotfiles
 ========
 
 All of my dotfile configs.
+Also has some Mac stuff.
 
 ## TODO
 
@@ -14,7 +15,7 @@ All of my dotfile configs.
 
 ### Fonts
 - Source Code Pro
-- tewi
+- Calibri
 
 ### Packages
 - metakirby5/whizkers
@@ -39,6 +40,9 @@ All of my dotfile configs.
 - dropbox
 - nmtui
 - xflux
+
+## Mac
+- Slate (soon to be replaced by phoenix or something?)
 
 ## Installation
 - Install all dependencies.

@@ -18,21 +18,21 @@ set $cUrgentFG          #ffffff
 set $cUrgentIN          #f79bad
 set $cMainBG            {{ bgc }}
 set $cMainFG            {{ fgc }}
-set $fontName           tewi
+set $fontName           {{ font }}
 set $fontSize           8
 set $border             {{ border_size }}
 set $gapsInner          {{ inner_gap_size }}
 set $gapsOuter          0
 
 # Bar
-set $barFontName        tewi
+set $barFontName        {{ font }}
 set $barFontSize        8
-set $cBarSeparator      #888888
-set $barSeparator       <
+set $cBarSeparator      {{ n_primary }}
+set $barSeparator       ・
 
 # dmenu
 set $dmCounter          ~/.dmenu_counter.json
-set $dmFontName         tewi:pixelsize=32
+set $dmFontName         {{ font }}:pixelsize=32
 set $dmPrompt           λ
 set $dmHeight           100
 
