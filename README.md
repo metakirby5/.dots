@@ -6,7 +6,7 @@ Also has some Mac stuff.
 
 ## TODO
 
-- move to lemonbar/candybar/i3blocks?
+- move to lemonbar/candybar/i3blocks? OR tint2?
 - move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix Colorscheme generator
