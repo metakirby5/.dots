@@ -119,7 +119,7 @@
 }
 
 .tab-content > :not(.tab-label) {
-    height: 10px !important;
+    height: 15px !important;
     width: auto !important;
 }
 
