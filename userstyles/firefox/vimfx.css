@@ -14,6 +14,7 @@ div > .VimFxHintMarker span {
   font-family: Calibri, sans-serif !important;
   font-weight: normal !important;
   font-size: 12px !important;
+  letter-spacing: 1px !important;
   text-shadow: none !important;
 }
 
