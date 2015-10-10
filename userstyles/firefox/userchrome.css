@@ -15,7 +15,8 @@
     background-image: none !important;
     box-shadow: unset !important;
     border: none !important;
-    height: 1.5em !important;
+    height: auto !important;
+    font-size: 0.9rem !important;
 }
 
 #urlbar {
@@ -93,10 +94,13 @@
 #TabsToolbar {
     border: none !important;
     transition: 0.2s !important;
+    height: 25px !important;
 }
 
 #tabbrowser-tabs {
     background-color: #353540 !important;
+    height: 25px !important;
+    min-height: 25px !important;
 }
 
 .arrowscrollbox-scrollbox {
@@ -105,10 +109,22 @@
 
 .tabbrowser-tab {
     max-height: none !important;
-    font-size: 12px !important;
     opacity: 1 !important;
     border: none !important;
     color: white !important;
+}
+
+.tab-content {
+    min-height: 25px !important;
+}
+
+.tab-content > :not(.tab-label) {
+    height: 10px !important;
+    width: auto !important;
+}
+
+.tab-label {
+    font-size: 0.8rem !important;
 }
 
 /* Make tabs in the background pop out */
@@ -134,10 +150,6 @@
 
 .tabbrowser-tab[selected=true] .tab-stack {
     background-color: #545466 !important;
-}
-
-.tab-content {
-    min-height: 32px !important;
 }
 
 .arrowscrollbox-overflow-start-indicator,
@@ -200,3 +212,4 @@ findbar, .findbar-button {
 .textbox-search-icons, #sidebar-search-label {
     display: none !important;
 }
+
