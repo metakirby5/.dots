@@ -55,7 +55,7 @@ URxvt.cursorBlink:      true
 URxvt.url-launcher:     google-chrome
 URxvt.matcher.button:   1
 
-URxvt.perl-ext-common:  default,matcher
+URxvt.perl-ext-common:  default,matcher,confirm-paste
 
 !! Xautolock
 
