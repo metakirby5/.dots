@@ -10,7 +10,7 @@ alias pct   5%
 
 # Binds
 bind ':alt hint
-bind r:alt relaunch
+bind r:alt;shift relaunch
 
 # Focus
 bind h:alt focus left
