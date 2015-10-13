@@ -56,13 +56,13 @@ ghp-publish() {
 }
 
 # Get rid of already-merged branches
+# http://stackoverflow.com/questions/17983068/git-delete-local-branches-after-deleting-them-on-remote
 git-clean-branches() {
-  git checkout master && \
-    git pull && \
-    git branch --merged master | \
-    grep -v "\* master$" | \
-    xargs -n 1 git branch -d && \
-    git pull --prune
+    git branch --merged | \
+    grep -v "\*" | \
+    grep -v "master" | \
+    grep -v "develop" | \
+    xargs -n 1 git branch -d
 }
 
 # Get rid of .orig files from merge conflicts
