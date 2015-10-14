@@ -1,0 +1,25 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/sena_sitting.jpg"
+
+n_black: "#353540"
+b_black: "#545466"
+n_red: "#aa706b"
+b_red: "#d28a84"
+n_green: "#aaaa76"
+b_green: "#d2d291"
+n_yellow: "#c8b8a1"
+b_yellow: "#f0dcc1"
+n_blue: "#87aaa6"
+b_blue: "#a6d2cd"
+n_magenta: &n_primary "#7cb6c8"
+b_magenta: &b_primary "#94daf0"
+n_cyan: "#82aa88"
+b_cyan: "#a0d2a8"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "magenta"
+ncmpcpp_secondary: "blue"
+ncmpcpp_primary_n: "6"
+ncmpcpp_secondary_n: "5"
+

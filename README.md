@@ -10,6 +10,7 @@ Also has some Mac stuff.
 - move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix Colorscheme generator
+- Fix whizkers files to allow light colorschemes
 
 ## Dependencies
 
