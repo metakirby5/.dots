@@ -1,3 +1,4 @@
+# COnfigs
 config defaultToCurrentScreen true
 config secondsBeforeRepeat 0.3
 config secondsBetweenRepeat 0.03
@@ -6,11 +7,25 @@ config nudgePercentOf screenSize
 config resizePercentOf screenSize
 config focusCheckWidthMax 2000
 
-alias pct   5%
+# Shortcuts
+alias screenSize      screenSizeX;screenSizeY
+alias screenOrigin    screenOriginX;screenOriginY
+alias windowSize      windowSizeX;windowSizeY
+
+alias screenCenterX   screenOriginX+(screenSizeX-newWindowSizeX)/2
+alias screenCenterY   screenOriginY+(screenSizeY-newWindowSizeY)/2
+alias screenCenter    ${screenCenterX};${screenCenterY}
+
+alias constrainedWindowSizeX   min({windowSizeX,screenSizeX})
+alias constrainedWindowSizeY   min({windowSizeY,screenSizeY})
+alias constrainedWindowSize    ${constrainedWindowSizeX};${constrainedWindowSizeY}
+
+# Config variables
+alias pct             5%
 
 # Binds
 bind ':alt hint
-bind r:alt relaunch
+bind r:alt;shift relaunch
 
 # Focus
 bind h:alt focus left
@@ -26,7 +41,7 @@ bind k:alt;shift nudge +0 -${pct}
 bind l:alt;shift nudge +${pct} +0
 
 # Resize
-bind f:alt move screenOriginX;screenOriginY screenSizeX;screenSizeY
+bind f:alt move ${screenOrigin} ${screenSize}
 bind h:alt;ctrl resize -${pct} +0
 bind j:alt;ctrl resize +0 +${pct}
 bind k:alt;ctrl resize +0 -${pct}
@@ -43,10 +58,10 @@ bind k:alt;cmd  push up    bar-resize:screenSizeY/2
 bind l:alt;cmd  push right bar-resize:screenSizeX/2
 
 # Throw
-bind h:alt;cmd;shift  throw left
-bind j:alt;cmd;shift  throw down
-bind k:alt;cmd;shift  throw up
-bind l:alt;cmd;shift  throw right
-bind 1:alt;cmd;shift  throw 0
-bind 2:alt;cmd;shift  throw 1
-bind 3:alt;cmd;shift  throw 2
+bind h:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} left
+bind j:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} down
+bind k:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} up
+bind l:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} right
+bind 1:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} 0
+bind 2:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} 1
+bind 3:alt;cmd;shift  move ${screenCenter} ${constrainedWindowSize} 2
