@@ -1,4 +1,4 @@
-# COnfigs
+# Configs
 config defaultToCurrentScreen true
 config secondsBeforeRepeat 0.3
 config secondsBetweenRepeat 0.03
