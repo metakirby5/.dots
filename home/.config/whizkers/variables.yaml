@@ -1,5 +1,7 @@
 font: "Calibri"
 term_font: "Source Code Pro"
+term_pixelsize: "28"
+term_letterspace: "-1"
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 7
