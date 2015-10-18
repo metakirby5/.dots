@@ -106,8 +106,8 @@ alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{%a}{ - %b}}
 now_playing_prefix = "$b"
 now_playing_suffix = "$/b"
 
-selected_item_prefix = "$6"
-selected_item_suffix = "$9"
+selected_item_prefix = "$<% ncmpcpp_primary_n %>$r"
+selected_item_suffix = "$/r$9"
 
 song_window_title_format = "{%a - }{%t}|{%f}"
 
@@ -161,7 +161,7 @@ centered_cursor = "yes"
 autocenter_mode = "yes"
 
 enable_window_title = "yes"
-user_interface = "classic" # (classic/alternative)
+user_interface = "alternative" # (classic/alternative)
 header_text_scrolling = "yes"
 header_visibility = "no"
 statusbar_visibility = "no"
