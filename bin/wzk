@@ -1,4 +1,6 @@
 #!/bin/bash
+# Runs whizkers with environment variable support, asks for a theme using
+# dmenu, and reloads the desktop.
 
 if ! yes | relink-config >/dev/null; then
   echo 'relink-config FAILED'
@@ -6,16 +8,16 @@ if ! yes | relink-config >/dev/null; then
 fi
 
 if [ "$#" -eq 0 ]; then
-  whizkers $(whizkers -l |\
+  whizkers -e $(whizkers -l |\
     dmenu -i -f -p 'Whizkers Scheme' -fn 'Calibri:pixelsize=32' -b -h 100)
 else
-  whizkers "$@"
+  whizkers -e "$@"
 fi
 
 [ "$?" -ne 0 ] && exit 1
 
-xrdb ~/.Xresources
-i3-msg 'restart'
-killall dunst; dunst
+xrdb ~/.Xresources &>/dev/null &
+i3-msg 'restart' &>/dev/null &
+killall dunst &>/dev/null; dunst &>/dev/null &
 exit 0
 
