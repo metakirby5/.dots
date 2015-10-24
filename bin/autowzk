@@ -2,22 +2,46 @@
 # Runs colorz2 on an image file to get 6 colors, then stuffs those colors
 # through wzk.
 
-if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
-  echo 'Please provide one image file.'
-  exit 1
-fi
+# TODO: handle n_primary, b_primary
 
-read -r -d '' template << EOM
+# http://stackoverflow.com/a/13221491
+exists() {
+  if [ "$2" != in ]; then
+    echo "Incorrect usage."
+    echo "Correct usage: exists {key} in {array}"
+    return
+  fi
+  eval '[ ${'$3'[$1]+muahaha} ]'
+}
+
+usage() {
+  echo "USAGE: autowzk [image file] (primary color) (secondary color)"
+  echo "Available colors: red, green, yellow, blue, magenta, cyan"
+  echo "Defaults: primary=red, secondary=green"
+  exit 1
+}
+
+declare -A COLORS
+COLORS=(
+  [red]=2
+  [green]=3
+  [yellow]=4
+  [blue]=5
+  [magenta]=6
+  [cyan]=7
+)
+
+read -r -d '' TEMPLATE << EOM
 wallpapers: "%s"
 
-n_red: &n_primary "%s"
-b_red: &b_primary "%s"
+n_red: "%s"
+b_red: "%s"
 n_green: "%s"
 b_green: "%s"
 n_yellow: "%s"
 b_yellow: "%s"
-n_blue: "%s"
-b_blue: "%s"
+n_blue: &n_primary "%s"
+b_blue: &b_primary "%s"
 n_magenta: "%s"
 b_magenta: "%s"
 n_cyan: "%s"
@@ -26,15 +50,38 @@ b_cyan: "%s"
 n_primary: *n_primary
 b_primary: *b_primary
 
-ncmpcpp_primary: "red"
-ncmpcpp_secondary: "green"
-ncmpcpp_primary_n: "2"
-ncmpcpp_secondary_n: "3"
+ncmpcpp_primary: "%%s"
+ncmpcpp_secondary: "%%s"
+ncmpcpp_primary_n: "%%s"
+ncmpcpp_secondary_n: "%%s"
 EOM
 
-colors="$(colorz2 --no-preview -n 6 "$1")"
+# Sanity checks
+[ "$#" -lt 1 ] || [ "$#" -gt 3 ] && usage
+[ ! -f "$1" ] && usage
+
+# Setting defaults
+img="$1"
+
+if [ -z "$2" ]; then
+  primary="red"
+else
+  exists "$2" in COLORS 2>/dev/null && primary="$2" || usage
+fi
+
+if [ -z "$3" ]; then
+  secondary="red"
+else
+  exists "$3" in COLORS 2>/dev/null && secondary="$3" || usage
+fi
+
+echo "Using primary=$primary, secondary=$secondary..."
+
+colors="$(colorz2 --no-preview -n 6 "$img")"
 [ "${PIPESTATUS[0]}" -ne 0 ] && exit 1
 
-yaml="$(echo "$colors" | xargs printf "$template" "$(readlink -f "$1")")"
+yaml="$(echo "$colors" | xargs printf "$TEMPLATE" "$(readlink -f "$img")")"
+yaml="$(printf "$yaml" "$primary"            "$secondary" \
+                       "${COLORS[$primary]}" "${COLORS[$secondary]}" )"
 
 wzk <(echo "$yaml")
