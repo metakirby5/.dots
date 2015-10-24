@@ -16,19 +16,20 @@ exists() {
 
 usage() {
   echo "USAGE: autowzk [image file] (primary color) (secondary color)"
-  echo "Available colors: red, green, yellow, blue, magenta, cyan"
-  echo "Defaults: primary=red, secondary=green"
+  echo "Available colors: 2 (red),  3 (green),   4 (yellow),"
+  echo "                  5 (blue), 6 (magenta), 7 (cyan)"
+  echo "Defaults: primary=2, secondary=3"
   exit 1
 }
 
 declare -A COLORS
 COLORS=(
-  [red]=2
-  [green]=3
-  [yellow]=4
-  [blue]=5
-  [magenta]=6
-  [cyan]=7
+  [2]=red
+  [3]=green
+  [4]=yellow
+  [5]=blue
+  [6]=magenta
+  [7]=cyan
 )
 
 read -r -d '' TEMPLATE << EOM
@@ -64,13 +65,15 @@ EOM
 img="$1"
 
 if [ -z "$2" ]; then
-  primary="red"
+  # Default
+  primary="2"
 else
   exists "$2" in COLORS 2>/dev/null && primary="$2" || usage
 fi
 
 if [ -z "$3" ]; then
-  secondary="red"
+  # Default
+  secondary="3"
 else
   exists "$3" in COLORS 2>/dev/null && secondary="$3" || usage
 fi
@@ -81,7 +84,7 @@ colors="$(colorz2 --no-preview -n 6 "$img")"
 [ "${PIPESTATUS[0]}" -ne 0 ] && exit 1
 
 yaml="$(echo "$colors" | xargs printf "$TEMPLATE" "$(readlink -f "$img")")"
-yaml="$(printf "$yaml" "$primary"            "$secondary" \
-                       "${COLORS[$primary]}" "${COLORS[$secondary]}" )"
+yaml="$(printf "$yaml" "${COLORS[$primary]}" "${COLORS[$secondary]}" \
+                       "$primary"            "$secondary" )"
 
 wzk <(echo "$yaml")
