@@ -1,0 +1,40 @@
+#!/bin/bash
+# Runs colorz2 on an image file to get 6 colors, then stuffs those colors
+# through wzk.
+
+if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
+  echo 'Please provide one image file.'
+  exit 1
+fi
+
+read -r -d '' template << EOM
+wallpapers: "%s"
+
+n_red: &n_primary "%s"
+b_red: &b_primary "%s"
+n_green: "%s"
+b_green: "%s"
+n_yellow: "%s"
+b_yellow: "%s"
+n_blue: "%s"
+b_blue: "%s"
+n_magenta: "%s"
+b_magenta: "%s"
+n_cyan: "%s"
+b_cyan: "%s"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "red"
+ncmpcpp_secondary: "green"
+ncmpcpp_primary_n: "2"
+ncmpcpp_secondary_n: "3"
+EOM
+
+colors="$(colorz2 --no-preview -n 6 "$1")"
+[ "${PIPESTATUS[0]}" -ne 0 ] && exit 1
+
+yaml="$(echo "$colors" | xargs printf "$template" "$(readlink -f "$1")")"
+
+wzk <(echo "$yaml")

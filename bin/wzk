@@ -2,7 +2,9 @@
 # Runs whizkers with environment variable support, asks for a theme using
 # dmenu, and reloads the desktop.
 
-if ! yes | relink-config >/dev/null; then
+yes 2>/dev/null | relink-config >/dev/null
+
+if [ "$?" -ne 0 ]; then
   echo 'relink-config FAILED'
   exit 1
 fi

@@ -1,9 +1,9 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/flooded.jpg"
 
-n_red: "#b57970"
-b_red: "#dd9388"
-n_green: &n_primary "#63c1c8"
-b_green: &b_primary "#76e7f0"
+n_red: &n_primary "#b57970"
+b_red: &b_primary "#dd9388"
+n_green: "#63c1c8"
+b_green: "#76e7f0"
 n_yellow: "#bfc7c8"
 b_yellow: "#e5eef0"
 n_blue: "#2685b0"
@@ -16,8 +16,8 @@ b_cyan: "#5dbee6"
 n_primary: *n_primary
 b_primary: *b_primary
 
-ncmpcpp_primary: "green"
-ncmpcpp_secondary: "blue"
-ncmpcpp_primary_n: "3"
-ncmpcpp_secondary_n: "5"
+ncmpcpp_primary: "red"
+ncmpcpp_secondary: "green"
+ncmpcpp_primary_n: "2"
+ncmpcpp_secondary_n: "3"
 
