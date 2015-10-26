@@ -15,8 +15,10 @@ Also has some Mac stuff.
 ## Dependencies
 
 ### Fonts
-- Source Code Pro
 - Calibri
+- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
+- [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
+- [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
 
 ### Packages
 - metakirby5/whizkers

@@ -4,8 +4,8 @@
 !! URxvt
 
 ! Fonts
-URxvt.font:      xft:{{ term_font }}:pixelsize={{ term_pixelsize }}:antialias=true:hinting=true
-URxvt.boldFont:  xft:{{ term_font }}:bold:pixelsize={{ term_pixelsize }}:antialias=true:hinting=true
+URxvt.font:      {{ #term_fonts }}xft:{{ . }}:pixelsize={{ term_pixelsize }}:antialias=true:hinting=true,{{ /term_fonts }}
+URxvt.boldFont:  {{ #term_fonts }}xft:{{ . }}:bold:pixelsize={{ term_pixelsize }}:antialias=true:hinting=true,{{ /term_fonts }}
 URxvt.letterSpace: {{ term_letterspace }}
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources

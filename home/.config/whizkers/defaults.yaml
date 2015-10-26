@@ -1,5 +1,8 @@
 font: "Calibri"
-term_font: "Source Code Pro"
+term_fonts:
+  - "Source Code Pro"
+  - "M+ 1p"
+  - "Baekmuk Gulim"
 term_pixelsize: "28"
 term_letterspace: "-1"
 wallpapers: "/usr/share/backgrounds/in_rotation/"
