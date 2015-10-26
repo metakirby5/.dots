@@ -29,7 +29,7 @@ xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 # Desktop
 urxvt256cd -q -o -f &
-mpd &
+type mopidy && mopidy || mpd &
 compton &
 xautolock &
 dunst &

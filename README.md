@@ -33,7 +33,7 @@ Also has some Mac stuff.
 - dunst
 - feh
 - conky
-- mpd
+- mopidy (or mpd)
 - mpc
 - mpv
 - ncmpcpp

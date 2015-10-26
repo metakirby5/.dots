@@ -98,7 +98,7 @@ chatnets = {
   };
   Rizon = {
     type = "IRC";
-    autosendcmd = "/^msg NickServ IDENTIFY {{ IRSSI_IDENTIFY }}; wait 2000; /^join rice";
+    autosendcmd = "/^msg NickServ IDENTIFY {{ WZK_ENV_IRSSI_IDENTIFY }}; wait 2000; /^join rice";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
