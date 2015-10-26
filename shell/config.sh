@@ -12,6 +12,7 @@ alias vty="variety >/dev/null"
 alias xopen="xdg-open"
 alias clip="xclip -sel c"
 alias enw='emacs -nw'
+alias less='less -R'
 
 # Functions
 
