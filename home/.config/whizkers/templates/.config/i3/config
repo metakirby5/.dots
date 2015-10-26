@@ -175,6 +175,9 @@ bindsym --release Print         exec $nsi $_scrot -e $_scrot-clip-notify || $_sc
 bindsym --release Shift+Print   exec $nsi $_scrot -se $_scrot-clip-notify || $_scrot-cancel
 bindsym --release Control+Print exec $nsi imgur-screenshot
 
+# Screen recorder
+bindsym $mod+x            exec $nsi pgrep -x screencast && pkill ffmpeg || screencast
+
 # Media controls
 bindsym $mod+Home         exec $nsi mpc toggle && killall -SIGUSR1 conky
 bindsym $mod+End          exec $nsi mpc stop && killall -SIGUSR1 conky
