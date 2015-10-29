@@ -6,10 +6,10 @@ Also has some Mac stuff.
 
 ## TODO
 
-- move to lemonbar/candybar/i3blocks? OR tint2?
-- move to termite?
+- Make dmenu styling universal
+- Move to lemonbar/candybar/i3blocks? OR tint2?
+- Move to termite?
 - Lock on laptop lid close (xss-lock?)
-- Fix Colorscheme generator
 - Fix whizkers files to allow light colorschemes
 
 ## Dependencies

@@ -1,3 +1,4 @@
+# Fonts
 font: "Calibri"
 term_fonts:
   - "Source Code Pro"
@@ -5,10 +6,13 @@ term_fonts:
   - "Baekmuk Gulim"
 term_pixelsize: "28"
 term_letterspace: "-1"
+
+# WM
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 7
 
+# Colors
 bgc: "#272727"
 fgc: "#fafafa"
 
