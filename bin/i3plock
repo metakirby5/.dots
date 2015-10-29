@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Pixellated lockscreen.
 
 TMPBG="/tmp/i3plock.png"
 

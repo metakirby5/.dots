@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Get the battery percent, along with the charging status and time.
 
 upower -i /org/freedesktop/UPower/devices/battery_BAT1 |\
 awk -F: '/time/ {

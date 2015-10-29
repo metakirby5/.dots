@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Get the currently focused window's title, truncated to 40 characters.
 # https://maxammann.github.io/2015/03/07/conky-window-title/
 
 xprop -id \

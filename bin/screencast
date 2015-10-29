@@ -6,6 +6,8 @@
 # Description:  Records a window or the desktop and converts the video to webm format.
 # Requires:     ffmpeg, xwininfo, libnotify, keybind in your WM to "killall ffmpeg"
 # Useage:       $ sh screencast -h|--help
+#
+# TODO support uploading to teknik.io
 
 MODE="desktop"                  # Default "desktop" ["window"|"desktop"]
 MARGIN=0                       # Margin in window mode (px)

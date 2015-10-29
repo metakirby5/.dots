@@ -1,5 +1,5 @@
 #!/bin/bash
-# Uploads a file to teknik.io
+# Uploads a file to teknik.io.
 
 usage() {
   echo "USAGE: up2teknik [file]"

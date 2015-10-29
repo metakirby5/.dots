@@ -2,8 +2,6 @@
 # Runs colorz2 on an image file to get 6 colors, then stuffs those colors
 # through wzk.
 
-# TODO: handle n_primary, b_primary
-
 # http://stackoverflow.com/a/13221491
 exists() {
   if [ "$2" != in ]; then
