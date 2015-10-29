@@ -10,5 +10,5 @@ usage() {
 [ "$#" -ne 1 ] && usage
 [ ! -e "$1" ] || [ -d "$1" ] && usage
 
-curl -sf -F file="@$1" https://api.teknik.io/upload/post |\
+curl -sfF file="@$1" https://api.teknik.io/upload/post |\
   jq .[0].results.file.url | tr -d '"'

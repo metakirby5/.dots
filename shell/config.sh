@@ -7,7 +7,7 @@ export CLASSPATH='*':'.'
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
 alias reload-xresources='xrdb ~/.Xresources'
 
-alias up2ixio="curl -F 'f:1=<-' ix.io"
+alias up2ixio="curl -sfF 'f:1=<-' ix.io"
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias vty="variety >/dev/null"
 alias xopen="xdg-open"
