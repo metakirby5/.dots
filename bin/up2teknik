@@ -1,0 +1,14 @@
+#!/bin/bash
+# Uploads a file to teknik.io
+
+usage() {
+  echo "USAGE: up2teknik [file]"
+  exit 1
+}
+
+# Sanity checks
+[ "$#" -ne 1 ] && usage
+[ ! -f "$1" ] && usage
+
+curl -sf -F file="@$1" https://api.teknik.io/upload/post |\
+  jq .[0].results.file.url | tr -d '"'

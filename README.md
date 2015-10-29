@@ -39,7 +39,6 @@ Also has some Mac stuff.
 - ncmpcpp
 - ranger
 - scrot
-- jomo/imgur-screenshot
 - dropbox
 - nmtui
 - xflux

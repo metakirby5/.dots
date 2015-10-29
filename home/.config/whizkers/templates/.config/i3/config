@@ -170,10 +170,12 @@ bindsym $mod+Control+w exec $nsi feh -zr --bg-fill $wallpapers
 # Screenshots to clipboard
 set $_scrot               scrot "$HOME/Pictures/Screenshots/%m-%d-%y_%T.png"
 set $_scrot-clip-notify   'xclip -sel c -t image/png $f && notify-send -a "scrot" "Screenshot on clipboard" "$f"'
+set $_scrot-up2teknik     'url="$$(up2teknik $f)" && echo "$$url" | xclip -sel c && notify-send -a "up2teknik" "Screenshot uploaded and url on clipboard" "$$url"'
 set $_scrot-cancel        notify-send -a "scrot" "Error" "Screenshot failed."
-bindsym --release Print         exec $nsi $_scrot -e $_scrot-clip-notify || $_scrot-cancel
-bindsym --release Shift+Print   exec $nsi $_scrot -se $_scrot-clip-notify || $_scrot-cancel
-bindsym --release Control+Print exec $nsi imgur-screenshot
+bindsym --release Print                 exec $nsi $_scrot -e $_scrot-clip-notify || $_scrot-cancel
+bindsym --release Shift+Print           exec $nsi $_scrot -se $_scrot-clip-notify || $_scrot-cancel
+bindsym --release Control+Print         exec $nsi $_scrot -e $_scrot-up2teknik || $_scrot-cancel
+bindsym --release Shift+Control+Print   exec $nsi $_scrot -se $_scrot-up2teknik || $_scrot-cancel
 
 # Screen recorder
 bindsym $mod+x            exec $nsi pgrep -x screencast && pkill ffmpeg || screencast
