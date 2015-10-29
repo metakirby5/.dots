@@ -14,6 +14,7 @@ alias xopen="xdg-open"
 alias clip="xclip -sel c"
 alias enw='emacs -nw'
 alias less='less -R'
+alias ls='ls -h --color=auto'
 
 # Functions
 
