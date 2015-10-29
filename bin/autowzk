@@ -57,7 +57,7 @@ EOM
 
 # Sanity checks
 [ "$#" -lt 1 ] || [ "$#" -gt 3 ] && usage
-[ ! -f "$1" ] && usage
+[ ! -e "$1" ] || [ -d "$1" ] && usage
 
 # Setting defaults
 img="$1"
