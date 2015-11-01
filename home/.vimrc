@@ -475,7 +475,7 @@ noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " endif
 
 " **************************************
-" * Indentation
+" * Indentation / Syntax
 " **************************************
 "  expandtab: Expand tabs into spaces.
 "    tabstop: The width of a tab.
@@ -493,6 +493,11 @@ set shiftwidth=2
 " Define tab settings for filetypes via:
 " au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
 
+" Markdown - 4 char wide tabs
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au Syntax markdown setlocal tabstop=4
+au Syntax markdown setlocal shiftwidth=4
+
 " Assembly - 8 char wide tabs, no expansion
 au Syntax asm setlocal noexpandtab
 au Syntax asm setlocal tabstop=8
@@ -501,13 +506,6 @@ au Syntax asm setlocal shiftwidth=8
 " **************************************
 " * Misc
 " **************************************
-
-" **************************************
-" * Syntax
-" **************************************
-
-" Markdown
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " Check if file modified periodically
 " set updatetime=1000
