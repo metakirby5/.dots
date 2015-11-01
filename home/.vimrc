@@ -57,19 +57,20 @@ endif
 " * Variables
 " **************************************
 
-set nu                         " line numbering on
-set noerrorbells               " turns off annoying bell sounds for errors
-set backspace=2                " backspace over everything
-set fileformats=unix,dos,mac   " open files from mac/dos
-set hidden                     " hide abandoned buffers
-set exrc                       " open local config files
-set nojoinspaces               " don't add white space when I don't tell you to
-set autowrite                  " write before make
-set mouse=a                    " allow mouse usage
-set ttymouse=xterm2            " urxvt scrolling
-set hlsearch                   " highlights all search hits
-set ignorecase                 " search without regards to case
-set smartcase                  " search with smart casing
+set nu                        " line numbering on
+set noerrorbells              " turns off annoying bell sounds for errors
+set novisualbell              " no screen flashes
+set backspace=2               " backspace over everything
+set fileformats=unix,dos,mac  " open files from mac/dos
+set hidden                    " hide abandoned buffers
+set exrc                      " open local config files
+set nojoinspaces              " don't add white space when I don't tell you to
+set autowrite                 " write before make
+set mouse=a                   " allow mouse usage
+set ttymouse=xterm2           " urxvt scrolling
+set hlsearch                  " highlights all search hits
+set ignorecase                " search without regards to case
+set smartcase                 " search with smart casing
 
 " Persistent undo
 if exists('&undodir')
@@ -100,7 +101,6 @@ set omnifunc=syntaxcomplete#Complete
 " Set these to your preference
 "set ve=all             " place cursor anywhere in any mode
 "set incsearch          " highlight as you search
-"set visualbell         " screen flashes instead of error bell
 "set confirm            " shows dialog when exiting without saving
 "set nowrap             " turns off word wrapping
 "set noswapfile         " no intermediate files used when saving
