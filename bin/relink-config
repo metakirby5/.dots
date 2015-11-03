@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Relinks configs from source folders to a destination folder.
 
 ### CONFIG

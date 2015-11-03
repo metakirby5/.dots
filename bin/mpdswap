@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Swaps between mpd and mopidy.
 
 if pgrep -x mpd &>/dev/null; then

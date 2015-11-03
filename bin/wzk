@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Runs whizkers with environment variable support, asks for a theme using
 # dmenu, and reloads the desktop.
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Uploads a file to teknik.io.
 # Requires jq.
 

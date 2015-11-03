@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Runs colorz2 on an image file to get 6 colors, then stuffs those colors
 # through wzk.
 
