@@ -3,7 +3,7 @@
 ## VARIABLES
 
 # Theme
-set $wallpapers         {{ wallpapers }}
+set $wallpapers         "{{ wallpapers }}"
 set $cFocusBG           {{ n_primary }}
 set $cFocusFG           {{ b_white }}
 set $cFocusIN           {{ b_primary }}
