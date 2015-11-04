@@ -3,6 +3,7 @@
 # Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
 
 ALBUM_ART="$(mktemp).png"
+ALBUM_ART_WIDTH="250"
 FMT_SUMMARY="[[%title%]|[%file%]]"
 FMT_BODY="[[%artist% - ]&%album%]|[%artist%]|[%album%]"
 
@@ -15,7 +16,7 @@ mpc_format() {
 yes |\
   ffmpeg -i "${XDG_MUSIC_DIR%%/}/$(mpc current --format '%file%')"\
   "$ALBUM_ART" 2>/dev/null &&\
-  convert "$ALBUM_ART" -resize 250x250 "$ALBUM_ART"
+  convert "$ALBUM_ART" -resize "$ALBUM_ART_WIDTH" "$ALBUM_ART"
 
 # Gotta use nasty evals to get around the quotes...
 notify-send \
