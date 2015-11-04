@@ -21,6 +21,7 @@ Also has some Mac stuff.
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
 
 ### Packages
+- metakirby5/bash-scripts
 - metakirby5/whizkers
 - rxvt-unicode-256color
 - Airblader/i3-gaps
