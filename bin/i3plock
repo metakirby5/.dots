@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Pixellated lockscreen.
 
-TMPBG="/tmp/i3plock.png"
+TMPBG="$(mktemp).png"
 
 scrot "$TMPBG"
 mogrify -sample 5% -sample 2000% "$TMPBG"
