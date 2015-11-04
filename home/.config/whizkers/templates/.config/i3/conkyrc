@@ -14,7 +14,10 @@ override_utf8_locale          yes
 TEXT
 ,[
   # Window title
-  {"full_text": "${exec get-truncated-window-title}", "color": "\#ffffff"},
+  {"full_text": "${exec\
+    get-truncated-window-title |\
+    sed 's/"/\\"/g' \
+  }", "color": "\#ffffff"},
 
   # CPU temp. / percent
   {"full_text": "❤$acpitemp°C @ $cpu%", "color": "\{{ b_red }}"},
