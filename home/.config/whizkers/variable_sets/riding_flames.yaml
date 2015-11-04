@@ -1,0 +1,23 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/riding_flames.png"
+
+n_red: "#b44428"
+b_red: "#e65633"
+n_green: "#6bb2bb"
+b_green: "#87e1ed"
+n_yellow: "#c5b181"
+b_yellow: "#f7dda1"
+n_blue: "#4172ab"
+b_blue: "#5493dd"
+n_magenta: "#6583ab"
+b_magenta: "#82a9dd"
+n_cyan: &n_primary "#3a98c5"
+b_cyan: &b_primary "#48bef7"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "cyan"
+ncmpcpp_secondary: "yellow"
+ncmpcpp_primary_n: "7"
+ncmpcpp_secondary_n: "4"
+
