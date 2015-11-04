@@ -27,7 +27,7 @@ __mk5_incoming_char='v'
 __mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
-__mk5_hostname=$(hostname|cut -d . -f 1)
+__mk5_hostname=${HOSTNAME%%.*}
 
 function __mk5_git_pwd {
   # Get git path
