@@ -9,7 +9,7 @@ alias reload-xresources='xrdb ~/.Xresources'
 
 alias up2ixio="curl -sfF 'f:1=<-' ix.io"
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
-alias nowplaying-path="echo \
+alias mpc-path="echo \
   \"${XDG_MUSIC_DIR%%/}/$(mpc current --format '%file%')\""
 alias vty="variety >/dev/null"
 alias xopen="xdg-open"
