@@ -2,6 +2,7 @@
 # Sends a notify-osd notification with information from mpc -f.
 # Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
 
+ALBUM_ART="/tmp/album.png"
 FMT_SUMMARY="[[%title%]|[%file%]]"
 FMT_BODY="[[%artist% - ]&%album%]|[%artist%]|[%album%]"
 
@@ -10,9 +11,16 @@ mpc_format() {
   mpc -f "${args[0]}" current
 }
 
+# Get album art
+yes |\
+  ffmpeg -i "${XDG_MUSIC_DIR%%/}/$(mpc current --format '%file%')"\
+  "$ALBUM_ART" 2>/dev/null &&\
+  convert "$ALBUM_ART" -resize 250x250 "$ALBUM_ART"
+
 # Gotta use nasty evals to get around the quotes...
 notify-send \
+  -a "ncmpcpp" \
+  -i "$ALBUM_ART" \
   "$(eval 'mpc_format "$FMT_SUMMARY"')" \
   "$(eval 'mpc_format "$FMT_BODY"')" \
-  -a "ncmpcpp" \
   -h string:synchronous:ncmpcpp
