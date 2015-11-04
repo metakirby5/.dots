@@ -543,8 +543,8 @@ function! RestoreSearch()
 endfunction
 
 " Swap ; and :
-" noremap ; :
-" noremap : ;
+noremap ; :
+noremap : ;
 
 " Swap ' and `
 noremap ' `
