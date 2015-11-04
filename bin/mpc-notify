@@ -2,7 +2,7 @@
 # Sends a notify-osd notification with information from mpc -f.
 # Adapted from https://bbs.archlinux.org/viewtopic.php?pid=684807#p684807
 
-ALBUM_ART="/tmp/album.png"
+ALBUM_ART="$(mktemp).png"
 FMT_SUMMARY="[[%title%]|[%file%]]"
 FMT_BODY="[[%artist% - ]&%album%]|[%artist%]|[%album%]"
 
