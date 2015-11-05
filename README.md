@@ -30,8 +30,11 @@ Also has some Mac stuff.
 - chjj/compton
 - melek/dmenu2
 - enkore/j4-dmenu-desktop
+- ffmpeg
+- imagemagick
 - jq
 - dunst
+- notify-send
 - feh
 - conky
 - mpd and/or mopidy
