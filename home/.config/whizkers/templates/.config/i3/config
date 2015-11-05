@@ -27,7 +27,7 @@ set $gapsOuter          0
 # Bar
 set $barFontName        {{ font }}
 set $barFontSize        8
-set $cBarSeparator      {{ n_primary }}
+set $cBarSeparator      {{ b_black }}
 set $barSeparator       ・
 
 # dmenu
