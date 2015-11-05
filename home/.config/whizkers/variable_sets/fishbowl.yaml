@@ -1,0 +1,23 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/fishbowl.jpg"
+
+n_red: "#c37a81"
+b_red: "#f599a2"
+n_green: "#a9c4a1"
+b_green: "#d4f6ca"
+n_yellow: "#bac0c2"
+b_yellow: "#e9f1f4"
+n_blue: &n_primary "#3f91c0"
+b_blue: &b_primary "#4fb6f2"
+n_magenta: "#6aacc5"
+b_magenta: "#84d7f7"
+n_cyan: "#8dbbc4"
+b_cyan: "#b0eaf6"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "blue"
+ncmpcpp_secondary: "cyan"
+ncmpcpp_primary_n: "5"
+ncmpcpp_secondary_n: "7"
+
