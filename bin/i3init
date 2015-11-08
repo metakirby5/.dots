@@ -34,7 +34,7 @@ mpd &
 compton &
 xautolock &
 dunst &
-caffeine &
+lightsOn &
 
 # User
 xflux -l 35.7 -g 139.5 &

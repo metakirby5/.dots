@@ -62,5 +62,5 @@ TEXT
   }","color":"\{{ b_blue }}"},
 
   # Date/time
-  {"full_text": "${time %a %b %d %H:%M}", "color":"\{{ b_magenta }}"}
+  {"full_text": "${time %a %b %d %H:%M} ", "color":"\{{ b_magenta }}"}
 ]
