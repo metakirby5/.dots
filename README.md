@@ -6,7 +6,6 @@ Also has some Mac stuff.
 
 ## TODO
 
-- Make dmenu styling universal
 - Move to lemonbar/candybar/i3blocks? OR tint2?
 - Move to termite?
 - Lock on laptop lid close (xss-lock?)
