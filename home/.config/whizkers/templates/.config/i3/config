@@ -32,9 +32,8 @@ set $barSeparator       ・
 
 # dmenu
 set $dmCounter          ~/.dmenu_counter.json
-set $dmFontName         {{ font }}:pixelsize=32
+set $dmFlags            {{ dmenu_flags }}
 set $dmPrompt           λ
-set $dmHeight           100
 
 # Settings
 set $term               urxvt256cc
@@ -154,7 +153,7 @@ bindsym $mod+Escape         exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape   exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu -i -f -t -p "$dmPrompt" -fn "$dmFontName" -nf "$cUnfocusFG" -nb "$cUnfocusBG" -sf "$cFocusFG" -sb "$cFocusBG" -b -h $dmHeight -counter $dmCounter'
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu $dmFlags -t -p "$dmPrompt" -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
 # Network manager
 set $nmtui floating_nmtui
@@ -355,9 +354,9 @@ bindsym $mod+Shift+9     move container to workspace $w9
 bindsym $mod+Shift+0     move container to workspace $w10
 
 # Rename workspace
-bindsym $mod+s exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput -f -p 'Rename workspace to' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\""
+bindsym $mod+s exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput $dmFlags -p 'Rename workspace to')\\\""
 
 # Marks
 set $_get_marks i3-msg -t get_marks | jq '.[]' | cut -c2- | rev | cut -c2- | rev
-bindsym $mod+m exec $nsi i3-msg "mark \\\"$($_get_marks | dmenu -i -f -p 'Mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\""
-bindsym $mod+apostrophe exec $nsi i3-msg "[con_mark=\\\"$($_get_marks | dmenu -i -f -p 'Go to mark' -fn '$dmFontName' -nf '$cUnfocusFG' -nb '$cUnfocusBG' -sf '$cFocusFG' -sb '$cFocusBG' -b -h 100)\\\"] focus"
+bindsym $mod+m exec $nsi i3-msg "mark \\\"$($_get_marks | dmenu $dmFlags -p 'Mark')\\\""
+bindsym $mod+apostrophe exec $nsi i3-msg "[con_mark=\\\"$($_get_marks | dmenu $dmFlags -t -p 'Go to mark')\\\"] focus"
