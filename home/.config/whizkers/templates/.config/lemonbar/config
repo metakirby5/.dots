@@ -121,7 +121,7 @@ class Bar:
         self.window_updater = WindowUpdater(i3_conn, [self])
 
         self.procs = [
-            Process(target=self.interval_updater.main),
+#             Process(target=self.interval_updater.main),
             Process(target=i3_conn.main),
         ]
 
@@ -146,11 +146,11 @@ class Bar:
 
             workspace_update = self.workspace_updater.query()
             if workspace_update:
-                bar += '%{l}' + S_NORMAL + '  ' + \
+                bar += '%{c}' + S_NORMAL + '  ' + \
                     workspace_update + '  ' + S_TRANSPARENT
 
-#             print(bar)
-            print '%s: %s' % (self.window_updater, window_update)
+            print(bar)
+#             print '%s: %s' % (self.window_updater, window_update)
 
             # Need this to fix buffering problem
             stdout.flush()
