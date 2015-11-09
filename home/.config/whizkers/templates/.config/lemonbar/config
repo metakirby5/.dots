@@ -5,13 +5,19 @@
 
 from ipdb import set_trace
 
+import logging
 import i3ipc
-from sys import stdout, exit
+from colorlog import ColoredFormatter
+from sys import stdout, stderr, exit
 from time import sleep
 from multiprocessing import Process
 
 import json
 from subprocess import check_output
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.NullHandler())
 
 ENCODING = 'utf-8'
 
@@ -86,6 +92,7 @@ class WorkspaceUpdater(I3Updater):
 
             spaces_text.append(current)
         self.spaces_str = ('  '.join(spaces_text)).encode(ENCODING)
+        logger.debug('built wks: %s' % self.spaces_str)
 
     def query(self):
         return self.spaces_str
@@ -107,6 +114,7 @@ class WindowUpdater(I3Updater):
         self.title = (name[:MAX_TITLE_LEN] + (
             u'…' if len(name) > MAX_TITLE_LEN else ''
         )).encode(ENCODING)
+        logger.debug('built win: %s' % self.title)
 
     def query(self):
         return self.title
@@ -155,6 +163,13 @@ class Bar:
 
 
 if __name__ == '__main__':
+    # Set up logging
+    ch = logging.StreamHandler(stderr)
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(ColoredFormatter(
+        "[%(asctime)s] %(log_color)s%(message)s"))
+    logger.addHandler(ch)
+
     Bar().start()
     try:
         while True:
