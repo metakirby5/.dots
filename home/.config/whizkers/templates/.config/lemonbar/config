@@ -26,41 +26,51 @@ C_TRANSPARENT   = '#00000000'
 S_NORMAL        = "%%{B%s}%%{F%s}" % (C_BG, C_FG)
 S_TRANSPARENT   = "%%{B%s}%%{F%s}" % (C_TRANSPARENT, C_TRANSPARENT)
 
+MIN_INTERVAL  = 1
 MAX_TITLE_LEN = 80
 
-# TODO: WorkspaceManager <-(callback)- Bar.print
 
+class Updater(object):
+    def __init__(self, observers=[]):
+        self.observers = observers
 
-class Manager(object):
-    def __init__(self, callbacks=[]):
-        self.callbacks = callbacks
+    def register_observers(self, func):
+        self.observers.append(func)
 
-    def register(self, func):
-        self.callbacks.append(func)
-
-    def notify(self):
-        for callback in self.callbacks:
-            callback()
+    def notify_observers(self):
+        for observer in self.observers:
+            observer.notify()
 
     def query(self):
         raise NotImplementedError
 
 
-class I3Manager(Manager):
-    def __init__(self, conn, callbacks=[]):
-        super(I3Manager, self).__init__(callbacks)
+class IntervalUpdater(Updater):
+    def __init__(self, interval, observers=[]):
+        super(IntervalUpdater, self).__init__(observers)
+        self.interval = interval
+
+    def main(self):
+        while True:
+            sleep(self.interval)
+            self.notify_observers()
+
+
+class I3Updater(Updater):
+    def __init__(self, conn, observers=[]):
+        super(I3Updater, self).__init__(observers)
         self.conn = conn
 
 
-class WorkspaceManager(I3Manager):
-    def __init__(self, conn, callbacks=[]):
-        super(WorkspaceManager, self).__init__(conn, callbacks)
+class WorkspaceUpdater(I3Updater):
+    def __init__(self, conn, observers=[]):
+        super(WorkspaceUpdater, self).__init__(conn, observers)
         self.build()
         conn.on('workspace', self.on_workspace)
 
     def on_workspace(self, ipc, e):
         self.build()
-        self.notify()
+        self.notify_observers()
 
     def build(self):
         spaces_text = []
@@ -81,16 +91,16 @@ class WorkspaceManager(I3Manager):
         return self.spaces_str
 
 
-class WindowManager(I3Manager):
-    def __init__(self, conn, callbacks=[]):
-        super(WindowManager, self).__init__(conn, callbacks)
+class WindowUpdater(I3Updater):
+    def __init__(self, conn, observers=[]):
+        super(WindowUpdater, self).__init__(conn, observers)
         self.build()
         conn.on('window', self.on_change)
         conn.on('workspace::focus', self.on_change)
 
     def on_change(self, ipc, e):
         self.build()
-        self.notify()
+        self.notify_observers()
 
     def build(self):
         name = self.conn.get_tree().find_focused().name
@@ -106,11 +116,13 @@ class Bar:
         self.mutex = Lock()
         i3_conn = i3ipc.Connection()
 
-        self.workspace_manager = WorkspaceManager(i3_conn, [self.output])
-        self.window_manager = WindowManager(i3_conn, [self.output])
+        self.interval_updater = IntervalUpdater(MIN_INTERVAL, [self])
+        self.workspace_updater = WorkspaceUpdater(i3_conn, [self])
+        self.window_updater = WindowUpdater(i3_conn, [self])
 
         self.procs = [
-            Process(target=i3_conn.main)
+            Process(target=self.interval_updater.main),
+            Process(target=i3_conn.main),
         ]
 
     def start(self):
@@ -120,16 +132,25 @@ class Bar:
 
         self.output()
 
+    def notify(self):
+        self.output()
+
     def output(self):
         with self.mutex:
             bar = S_TRANSPARENT
-            if self.window_manager.query():
+
+            window_update = self.window_updater.query()
+            if window_update:
                 bar += '%{l}' + S_NORMAL + '  ' + \
-                    self.window_manager.query() + '  ' + S_TRANSPARENT
-            if self.workspace_manager.query():
-                bar += '%{c}' + S_NORMAL + '  ' + \
-                    self.workspace_manager.query() + '  ' + S_TRANSPARENT
-            print(bar)
+                    window_update + '  ' + S_TRANSPARENT
+
+            workspace_update = self.workspace_updater.query()
+            if workspace_update:
+                bar += '%{l}' + S_NORMAL + '  ' + \
+                    workspace_update + '  ' + S_TRANSPARENT
+
+#             print(bar)
+            print '%s: %s' % (self.window_updater, window_update)
 
             # Need this to fix buffering problem
             stdout.flush()
@@ -139,7 +160,7 @@ if __name__ == '__main__':
     Bar().start()
     try:
         while True:
-            sleep(0.1)
+            sleep(1)
     except KeyboardInterrupt:
         exit()
 
