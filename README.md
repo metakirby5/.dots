@@ -24,6 +24,8 @@ Also has some Mac stuff.
 - metakirby5/whizkers
 - rxvt-unicode-256color
 - Airblader/i3-gaps
+- krypt-n/bar
+- acrisci/i3ipc-python
 - i3lock
 - xautolock
 - chjj/compton

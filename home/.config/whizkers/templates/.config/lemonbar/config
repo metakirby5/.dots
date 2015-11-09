@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# bar_conf | lemonbar -bd -g x70++20 -u 5 -f "Calibri-9" -f "M+ 1p-9"
+
+import i3ipc
+import json
+from sys import stdout
+from time import sleep
+from threading import Thread, active_count as active_threads
+from subprocess import check_output
+
+C_BG        = '#88272727'
+C_FG        = '#fffafafa'
+C_URGENT    = '#ffff0000'
+
+# TODO: WorkspaceManager <-(callback)- Bar.print
+
+
+class Manager(object):
+    def __init__(self, callbacks=[]):
+        self.callbacks = callbacks
+
+    def register(self, func):
+        self.callbacks.append(func)
+
+    def notify(self):
+        for callback in self.callbacks:
+            callback()
+
+    def query(self):
+        raise NotImplementedError
+
+
+class I3Manager(Manager):
+    def __init__(self, conn, callbacks=[]):
+        super(I3Manager, self).__init__(callbacks)
+        self.conn = conn
+
+
+class WorkspaceManager(I3Manager):
+    def __init__(self, conn, callbacks=[]):
+        super(WorkspaceManager, self).__init__(conn, callbacks)
+        self.build()
+        conn.on('workspace::focus', self.on_workspace)
+
+    def on_workspace(self, ipc, e):
+        self.build()
+        self.notify()
+
+    def build(self):
+        spaces_text = []
+        for space in self.conn.get_workspaces():
+            current = space['name'].partition(':')[-1] \
+                if ':' in space['name'] \
+                else space['name']
+
+            if space['visible']:
+                current = '%%{+u}%s%%{-u}' % (current)
+            if space['urgent']:
+                current = '%%{F%s}%s%%{F-}' % (C_URGENT, current)
+
+            spaces_text.append(current)
+        self.spaces_str = ('  %s  ' %
+                           '  '.join(spaces_text)).encode('utf-8')
+
+    def query(self):
+        return self.spaces_str
+
+class Bar:
+    def __init__(self):
+        i3_conn = i3ipc.Connection()
+
+        self.workspace_manager = WorkspaceManager(i3_conn, [self.output])
+
+        self.threads = [
+            Thread(target=i3_conn.main)
+        ]
+
+    def start(self):
+        for thread in self.threads:
+            thread.daemon = True
+            thread.start()
+
+        self.output()
+
+    def output(self):
+        print("%{{c}}{spaces}".format(
+                  spaces=self.workspace_manager.query(),
+              ))
+        stdout.flush()
+
+
+if __name__ == '__main__':
+    Bar().start()
+    while active_threads():
+        sleep(0.1)
+

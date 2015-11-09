@@ -4,14 +4,19 @@ term_fonts:
   - "Source Code Pro"
   - "M+ 1p"
   - "Baekmuk Gulim"
-pixelsize: "28"
-term_letterspace: "-1"
+pixelsize: 28
+term_letterspace: -1
 
 # WM
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 7
 dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ n_white }}" -nb "{{ n_black }}" -sf "{{ b_white }}" -sb "{{ n_primary }}" -b -h 100'
+
+# Bar
+bar_offset: 10
+bar_height: 70
+bar_total: 60 # Hard-coded b/c conky is weird...
 dunst_geometry: "0x5-75+75"
 
 # Colors

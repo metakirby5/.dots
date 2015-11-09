@@ -1,0 +1,9 @@
+own_window        yes
+own_window_class  Transparent Conky
+own_window_type   panel
+minimum_size      0 {{ bar_total }}
+alignment         bm
+update_interval   9999999999
+update_interval_on_battery 9999999999
+
+TEXT
