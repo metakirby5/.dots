@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -* coding: utf-8 -*-
-# bar_conf | lemonbar -bd -g x70++20 -u 5 -f "Calibri-9" -f "M+ 1p-9"
+# bar_conf | lemonbar -bd -g 3120x70+40+20 -u 5 -f "Calibri-9" -f "M+ 1p-9"
 # TODO split into modules... this is a clusterfck
 
 from ipdb import set_trace
@@ -30,8 +30,8 @@ C_TRANSPARENT   = '#00000000'
 # C_FG        = '{{ fgc }}'
 # C_URGENT    = '{{ b_red }}'
 
-S_NORMAL        = "%%{B%s}%%{F%s}" % (C_BG, C_FG)
-S_TRANSPARENT   = "%%{B%s}%%{F%s}" % (C_TRANSPARENT, C_TRANSPARENT)
+S_NORMAL        = '%%{B%s}%%{F%s}' % (C_BG, C_FG)
+S_TRANSPARENT   = '%%{B%s}%%{F%s}' % (C_TRANSPARENT, C_TRANSPARENT)
 
 MIN_INTERVAL  = 1
 MAX_TITLE_LEN = 80
@@ -98,7 +98,9 @@ class WorkspaceUpdater(I3Updater):
             if space['visible']:
                 current = '%%{+u}%s%%{-u}' % (current)
             if space['urgent']:
-                current = '%%{F%s}%s%%{F-}' % (C_URGENT, current)
+                current = '%%{B%s}%s%%{B-}' % (C_URGENT, current)
+            current = '%%{A:i3-msg workspace "%s":}%s%%{A}' % (
+                space['name'], current)
 
             spaces_text.append(current)
         self.spaces_str = ('  '.join(spaces_text)).encode(ENCODING)
@@ -182,7 +184,7 @@ if __name__ == '__main__':
     ch = logging.StreamHandler(stderr)
     ch.setLevel(logging.DEBUG)
     ch.setFormatter(ColoredFormatter(
-        "[%(asctime)s] %(log_color)s%(message)s"))
+        '[%(asctime)s] %(log_color)s%(message)s'))
     logger.addHandler(ch)
 
     Bar().start()
