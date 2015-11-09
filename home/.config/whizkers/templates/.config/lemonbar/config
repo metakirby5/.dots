@@ -100,7 +100,7 @@ class WorkspaceUpdater(I3Updater):
             if space['urgent']:
                 current = '%%{B%s}%s%%{B-}' % (C_URGENT, current)
             current = '%%{A:i3-msg workspace "%s":}%s%%{A}' % (
-                space['name'], current)
+                space['name'].replace(':', '\\:'), current)
 
             spaces_text.append(current)
         self.spaces_str = ('  '.join(spaces_text)).encode(ENCODING)
