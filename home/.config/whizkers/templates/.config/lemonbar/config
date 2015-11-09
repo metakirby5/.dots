@@ -10,7 +10,8 @@ import i3ipc
 from colorlog import ColoredFormatter
 from sys import stdout, stderr, exit
 from time import sleep
-from multiprocessing import Process
+from datetime import datetime
+from threading import Thread
 
 import json
 from subprocess import check_output
@@ -51,15 +52,24 @@ class Updater(object):
         raise NotImplementedError
 
 
-class IntervalUpdater(Updater):
+class DatetimeUpdater(Updater):
     def __init__(self, interval, observers=[]):
-        super(IntervalUpdater, self).__init__(observers)
+        super(DatetimeUpdater, self).__init__(observers)
         self.interval = interval
+        self.build()
 
     def main(self):
         while True:
             sleep(self.interval)
+            self.build()
             self.notify_observers()
+
+    def build(self):
+        self.time = datetime.now().strftime('%a %b %d %H:%M')
+        logger.debug('built dtm: %s' % self.time)
+
+    def query(self):
+        return self.time
 
 
 class I3Updater(Updater):
@@ -123,19 +133,19 @@ class Bar:
     def __init__(self):
         i3_conn = i3ipc.Connection()
 
-        self.interval_updater = IntervalUpdater(MIN_INTERVAL, [self])
+        self.datetime_updater = DatetimeUpdater(MIN_INTERVAL, [self])
         self.workspace_updater = WorkspaceUpdater(i3_conn, [self])
         self.window_updater = WindowUpdater(i3_conn, [self])
 
-        self.procs = [
-#             Process(target=self.interval_updater.main),
-            Process(target=i3_conn.main),
+        self.threads = [
+            Thread(target=self.datetime_updater.main),
+            Thread(target=i3_conn.main),
         ]
 
     def start(self):
-        for proc in self.procs:
-            proc.daemon = True
-            proc.start()
+        for thread in self.threads:
+            thread.daemon = True
+            thread.start()
 
         self.output()
 
@@ -155,8 +165,13 @@ class Bar:
             bar += '%{c}' + S_NORMAL + '  ' + \
                 workspace_update + '  ' + S_TRANSPARENT
 
+        datetime_update = self.datetime_updater.query()
+        if datetime_update:
+            bar += '%{r}' + S_NORMAL + '  ' + \
+                datetime_update + '  ' + S_TRANSPARENT
+
         print(bar)
-#         print '%s: %s' % (self.window_updater, window_update)
+        logger.debug('emit: %s / %s' % (window_update, workspace_update))
 
         # Need this to fix buffering problem
         stdout.flush()
