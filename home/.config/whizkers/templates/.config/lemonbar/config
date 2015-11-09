@@ -1,5 +1,8 @@
 #!/usr/bin/env python
+# -* coding: utf-8 -*-
 # bar_conf | lemonbar -bd -g x70++20 -u 5 -f "Calibri-9" -f "M+ 1p-9"
+
+from ipdb import set_trace
 
 import i3ipc
 import json
@@ -8,9 +11,20 @@ from time import sleep
 from threading import Thread, active_count as active_threads
 from subprocess import check_output
 
-C_BG        = '#ff272727'
-C_FG        = '#fffafafa'
-C_URGENT    = '#ffff0000'
+ENCODING = 'utf-8'
+
+C_BG            = '#ff272727'
+C_FG            = '#fffafafa'
+C_URGENT        = '#ffff0000'
+C_TRANSPARENT   = '#00000000'
+# C_BG        = '{{ n_black }}'
+# C_FG        = '{{ fgc }}'
+# C_URGENT    = '{{ b_red }}'
+
+S_NORMAL        = "%%{B%s}%%{F%s}" % (C_BG, C_FG)
+S_TRANSPARENT   = "%%{B%s}%%{F%s}" % (C_TRANSPARENT, C_TRANSPARENT)
+
+MAX_TITLE_LEN = 80
 
 # TODO: WorkspaceManager <-(callback)- Bar.print
 
@@ -40,7 +54,7 @@ class WorkspaceManager(I3Manager):
     def __init__(self, conn, callbacks=[]):
         super(WorkspaceManager, self).__init__(conn, callbacks)
         self.build()
-        conn.on('workspace::focus', self.on_workspace)
+        conn.on('workspace', self.on_workspace)
 
     def on_workspace(self, ipc, e):
         self.build()
@@ -59,17 +73,38 @@ class WorkspaceManager(I3Manager):
                 current = '%%{F%s}%s%%{F-}' % (C_URGENT, current)
 
             spaces_text.append(current)
-        self.spaces_str = ('  %s  ' %
-                           '  '.join(spaces_text)).encode('utf-8')
+        self.spaces_str = ('  '.join(spaces_text)).encode(ENCODING)
 
     def query(self):
         return self.spaces_str
+
+
+class WindowManager(I3Manager):
+    def __init__(self, conn, callbacks=[]):
+        super(WindowManager, self).__init__(conn, callbacks)
+        self.build()
+        conn.on('window', self.on_change)
+        conn.on('workspace::focus', self.on_change)
+
+    def on_change(self, ipc, e):
+        self.build()
+        self.notify()
+
+    def build(self):
+        name = self.conn.get_tree().find_focused().name
+        self.title = (name[:MAX_TITLE_LEN] + (
+            u'…' if len(name) > MAX_TITLE_LEN else ''
+        )).encode(ENCODING)
+
+    def query(self):
+        return self.title
 
 class Bar:
     def __init__(self):
         i3_conn = i3ipc.Connection()
 
         self.workspace_manager = WorkspaceManager(i3_conn, [self.output])
+        self.window_manager = WindowManager(i3_conn, [self.output])
 
         self.threads = [
             Thread(target=i3_conn.main)
@@ -83,14 +118,15 @@ class Bar:
         self.output()
 
     def output(self):
-        print(("%%{B%(bgc)s}%%{F%(fgc)s}%%{c}" +
-               "%(spaces)s" +
-               "%%{F-}%%{B-}") %
-              {
-                  'bgc': C_BG,
-                  'fgc': C_FG,
-                  'spaces': self.workspace_manager.query(),
-              })
+        bar = S_TRANSPARENT
+        if self.window_manager.query():
+            bar += '%{l}' + S_NORMAL + '  ' + \
+                self.window_manager.query() + '  ' + S_TRANSPARENT
+        if self.workspace_manager.query():
+            bar += '%{c}' + S_NORMAL + '  ' + \
+                self.workspace_manager.query() + '  ' + S_TRANSPARENT
+        print(bar)
+
         # Need this to fix buffering problem
         stdout.flush()
 
