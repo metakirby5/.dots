@@ -8,7 +8,7 @@ from ipdb import set_trace
 import i3ipc
 from sys import stdout, exit
 from time import sleep
-from multiprocessing import Process, Lock
+from multiprocessing import Process
 
 import json
 from subprocess import check_output
@@ -113,7 +113,6 @@ class WindowUpdater(I3Updater):
 
 class Bar:
     def __init__(self):
-        self.mutex = Lock()
         i3_conn = i3ipc.Connection()
 
         self.interval_updater = IntervalUpdater(MIN_INTERVAL, [self])
@@ -136,24 +135,23 @@ class Bar:
         self.output()
 
     def output(self):
-        with self.mutex:
-            bar = S_TRANSPARENT
+        bar = S_TRANSPARENT
 
-            window_update = self.window_updater.query()
-            if window_update:
-                bar += '%{l}' + S_NORMAL + '  ' + \
-                    window_update + '  ' + S_TRANSPARENT
+        window_update = self.window_updater.query()
+        if window_update:
+            bar += '%{l}' + S_NORMAL + '  ' + \
+                window_update + '  ' + S_TRANSPARENT
 
-            workspace_update = self.workspace_updater.query()
-            if workspace_update:
-                bar += '%{c}' + S_NORMAL + '  ' + \
-                    workspace_update + '  ' + S_TRANSPARENT
+        workspace_update = self.workspace_updater.query()
+        if workspace_update:
+            bar += '%{c}' + S_NORMAL + '  ' + \
+                workspace_update + '  ' + S_TRANSPARENT
 
-            print(bar)
-#             print '%s: %s' % (self.window_updater, window_update)
+        print(bar)
+#         print '%s: %s' % (self.window_updater, window_update)
 
-            # Need this to fix buffering problem
-            stdout.flush()
+        # Need this to fix buffering problem
+        stdout.flush()
 
 
 if __name__ == '__main__':
