@@ -2,12 +2,12 @@
 # ./emit | lemonbar -bd -g 3120x70+40+20 -u 5 -f "Calibri-9" -f "M+ 1p-9" | sh
 import logging
 import i3ipc
+import blocks
+import constants
 from colorlog import ColoredFormatter
 from sys import stdout, stderr, exit
 from threading import Thread
 from time import sleep
-import lemonpyblocks as lpb
-from lemonpyblocks import clock as lpbclock, i3 as lpbi3
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -17,9 +17,9 @@ class Bar:
     def __init__(self):
         i3_conn = i3ipc.Connection()
 
-        self.datetime_updater = lpbclock.DatetimeUpdater([self])
-        self.workspace_updater = lpbi3.WorkspaceUpdater(i3_conn, [self])
-        self.window_updater = lpbi3.WindowUpdater(i3_conn, [self])
+        self.datetime_updater = blocks.DatetimeBlock([self])
+        self.workspace_updater = blocks.WorkspaceBlock(i3_conn, [self])
+        self.window_updater = blocks.TitleBlock(i3_conn, [self])
 
         self.threads = [
             Thread(target=self.datetime_updater.main),
@@ -37,22 +37,22 @@ class Bar:
         self.output()
 
     def output(self):
-        bar = lpb.colors.S_TRANSPARENT
+        bar = constants.S_TRANSPARENT
 
         window_update = self.window_updater.query()
         if window_update:
-            bar += '%{l}' + lpb.colors.S_NORMAL + '  ' + \
-                window_update + '  ' + lpb.colors.S_TRANSPARENT
+            bar += '%{l}' + constants.S_NORMAL + '  ' + \
+                window_update + '  ' + constants.S_TRANSPARENT
 
         workspace_update = self.workspace_updater.query()
         if workspace_update:
-            bar += '%{c}' + lpb.colors.S_NORMAL + '  ' + \
-                workspace_update + '  ' + lpb.colors.S_TRANSPARENT
+            bar += '%{c}' + constants.S_NORMAL + '  ' + \
+                workspace_update + '  ' + constants.S_TRANSPARENT
 
         datetime_update = self.datetime_updater.query()
         if datetime_update:
-            bar += '%{r}' + lpb.colors.S_NORMAL + '  ' + \
-                datetime_update + '  ' + lpb.colors.S_TRANSPARENT
+            bar += '%{r}' + constants.S_NORMAL + '  ' + \
+                datetime_update + '  ' + constants.S_TRANSPARENT
 
         print(bar)
 
@@ -62,13 +62,13 @@ class Bar:
 
 if __name__ == '__main__':
     # Set up logging
-    lbp_logger = logging.getLogger(lpb.__name__)
     ch = logging.StreamHandler(stderr)
     ch.setLevel(logging.DEBUG)
     ch.setFormatter(ColoredFormatter(
         '[%(asctime)s] %(log_color)s%(message)s'))
-    logger.addHandler(ch)
-    lbp_logger.addHandler(ch)
+
+    for l in [logger, logging.getLogger(blocks.__name__)]:
+        l.addHandler(ch)
 
     Bar().start()
     try:
