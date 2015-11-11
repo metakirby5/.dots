@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# ./emit | lemonbar -bd -g 3120x70+40+20 -u 5 -f "Calibri-9" -f "M+ 1p-9" | sh
+# ./emit | lemonbar -bd -g 3120x+40+40 -u 5 -f "Calibri-10" -f "M+ 1p-10" | sh
 import logging
 import i3ipc
 import blocks
@@ -37,22 +37,22 @@ class Bar:
         self.output()
 
     def output(self):
-        bar = constants.S_TRANSPARENT
+        bar = constants.S_NORMAL
 
         window_update = self.window_updater.query()
         if window_update:
             bar += '%{l}' + constants.S_NORMAL + '  ' + \
-                window_update + '  ' + constants.S_TRANSPARENT
+                window_update + '  ' + constants.S_NORMAL
 
         workspace_update = self.workspace_updater.query()
         if workspace_update:
-            bar += '%{c}' + constants.S_NORMAL + '  ' + \
-                workspace_update + '  ' + constants.S_TRANSPARENT
+            bar += '%{c}' + constants.S_NORMAL + \
+                workspace_update + constants.S_NORMAL
 
         datetime_update = self.datetime_updater.query()
         if datetime_update:
             bar += '%{r}' + constants.S_NORMAL + '  ' + \
-                datetime_update + '  ' + constants.S_TRANSPARENT
+                datetime_update + '  ' + constants.S_NORMAL
 
         print(bar)
 
