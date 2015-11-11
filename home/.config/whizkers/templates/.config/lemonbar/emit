@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# ./emit | lemonbar -bd -g 3120x+40+40 -u 5 -f "Calibri-10" -f "M+ 1p-10" | sh
+# ./emit | lemonbar -bd -g 3120x+40+40 -u 2 -f "Calibri-10" -f "M+ 1p-10" | sh
 import logging
 import i3ipc
 import blocks
