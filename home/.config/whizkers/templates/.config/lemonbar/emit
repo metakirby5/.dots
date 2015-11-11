@@ -17,12 +17,12 @@ class Bar:
     def __init__(self):
         i3_conn = i3ipc.Connection()
 
-        self.datetime_updater = blocks.DatetimeBlock([self])
+        self.stats_updater = blocks.StatsBlock([self])
         self.workspace_updater = blocks.WorkspaceBlock(i3_conn, [self])
         self.window_updater = blocks.TitleBlock(i3_conn, [self])
 
         self.threads = [
-            Thread(target=self.datetime_updater.main),
+            Thread(target=self.stats_updater.main),
             Thread(target=i3_conn.main),
         ]
 
@@ -49,10 +49,10 @@ class Bar:
             bar += '%{c}' + constants.S_NORMAL + \
                 workspace_update + constants.S_NORMAL
 
-        datetime_update = self.datetime_updater.query()
-        if datetime_update:
+        stats_update = self.stats_updater.query()
+        if stats_update:
             bar += '%{r}' + constants.S_NORMAL + '  ' + \
-                datetime_update + '  ' + constants.S_NORMAL
+                stats_update + '  ' + constants.S_NORMAL
 
         print(bar)
 

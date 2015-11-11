@@ -1,9 +1,11 @@
 # -* coding: utf-8 -*-
 import logging
+import re
 import i3ipc
 import constants
 from time import sleep
 from datetime import datetime
+from subprocess import check_output, CalledProcessError
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -68,13 +70,25 @@ class I3Block(Block):
         self.notify_observers()
 
 
-class DatetimeBlock(TickBlock):
+class StatsBlock(TickBlock):
     def update(self):
-        self.time = datetime.now().strftime(constants.TIME_FMT)
-        logger.debug('built dtm: %s' % self.time)
+        # FIXME THE QUICK N DIRTY
+        try:
+            wireless = re.search('"(.*)"', check_output('iwgetid')).group(1)
+        except CalledProcessError:
+            wireless = '-'
+
+        self.stats = '  ・  '.join([
+            'BAT %s' % check_output('get-battery-status').strip(),
+            'SND %s' % re.search('\[(.*%)\]',
+                      check_output(['amixer', 'get', 'Master'])).group(1),
+            'NET %s' % wireless,
+            datetime.now().strftime(constants.TIME_FMT),
+        ])
+        logger.debug('built stats: %s' % self.stats)
 
     def query(self):
-        return self.time
+        return self.stats
 
 
 class WorkspaceBlock(I3Block):
