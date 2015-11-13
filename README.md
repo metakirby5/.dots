@@ -14,9 +14,8 @@ Also has some Mac stuff.
 ## Dependencies
 
 ### Fonts
-- Calibri
-- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 - [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
+- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
 
 ### Packages

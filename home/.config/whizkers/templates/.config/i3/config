@@ -24,12 +24,6 @@ set $border             {{ border_size }}
 set $gapsInner          {{ inner_gap_size }}
 set $gapsOuter          0
 
-# Bar
-set $barFontName        {{ font }}
-set $barFontSize        8
-set $cBarSeparator      {{ b_black }}
-set $barSeparator       ・
-
 # dmenu
 set $dmCounter          ~/.dmenu_counter.json
 set $dmFlags            {{ dmenu_flags }}
@@ -110,30 +104,6 @@ client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $cSubFocusIN
 client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
 client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
-
-# Bar
-# https://github.com/ivyl/i3-config/blob/master/conkyrc
-# bindsym $mod+b bar hidden_state toggle
-bar {
-#   mode hide
-#   hidden_state show
-#   modifier $mod2
-  tray_output none
-  position top
-  strip_workspace_numbers yes
-  font pango:$barFontName $barFontSize
-  separator_symbol "$barSeparator"
-  status_command ~/.config/i3/conky-wrapper
-  colors {
-    background  $cMainBG
-    statusline  $cMainFG
-    separator   $cBarSeparator
-    focused_workspace   $cMainBG  $cSubfocusBG  $cFocusFG
-    active_workspace    $cMainBG  $cFocusIN     $cFocusFG
-    inactive_workspace  $cMainBG  $cMainBG      $cUnfocusFG
-    urgent_workspace    $cMainBG  $cUrgentBG    $cUrgentFG
-  }
-}
 
 ## WINDOW RULES
 
