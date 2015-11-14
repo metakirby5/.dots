@@ -156,9 +156,9 @@ bindsym $mod+Page_Up      exec $nsi mpc prev
 bindsym $mod+Page_Down    exec $nsi mpc next
 
 # Volume controls
-bindsym XF86AudioLowerVolume exec $nsi amixer set Master $volPct%- && ogg123 $volChangeSound && killall -SIGUSR1 conky
-bindsym XF86AudioRaiseVolume exec $nsi amixer set Master $volPct%+ && ogg123 $volChangeSound && killall -SIGUSR1 conky
-bindsym XF86AudioMute exec $nsi amixer set Master toggle && ogg123 $volChangeSound && killall -SIGUSR1 conky
+bindsym XF86AudioLowerVolume exec $nsi amixer set Master $volPct%-
+bindsym XF86AudioRaiseVolume exec $nsi amixer set Master $volPct%+
+bindsym XF86AudioMute exec $nsi amixer set Master toggle
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec $nsi xbacklight -inc $brightPct
