@@ -42,8 +42,8 @@ dropbox start &
 ibus-daemon -xdr &
 
 ## LET'S DO THIS
-i3
 ~/.config/lemonbar/emit 2>/dev/null |\
   lemonbar -u 2 -f "M+ 1p-7" |\
   sh &>/dev/null &
+i3
 
