@@ -1,8 +1,8 @@
 @-moz-document url(about:newtab) {
-  #newtab-window {
+  body {
     background-color: #202025 !important;
   }
-  #newtab-window::before {
+  body::before {
     position: fixed;
     right: 0.25em;
     bottom: 0;
@@ -11,7 +11,7 @@
     color: #353540;
     content: "物語";
   }
-  #newtab-window > * {
+  body > * {
     display: none !important;
   }
 }
