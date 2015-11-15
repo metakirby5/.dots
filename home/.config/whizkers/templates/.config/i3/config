@@ -65,6 +65,11 @@ set $xwi                xwininfo -tree -root | grep
 
 exec_always $nsi feh -zr --bg-fill $wallpapers
 
+# lemonbar
+bar {
+  i3bar_command startbar
+}
+
 # Terminal on scratch
 set $spT scratchpad_term
 for_window [instance="^$spT$"] move scratchpad
@@ -104,11 +109,6 @@ client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $cSubFocusIN
 client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
 client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
-
-# lemonbar
-bar {
-  i3_bar_command startbar
-}
 
 ## WINDOW RULES
 
@@ -155,8 +155,8 @@ bindsym --release Shift+Control+Print   exec $nsi $_scrot -se $_scrot-up2teknik 
 bindsym $mod+x            exec $nsi pgrep -x screencast && pkill ffmpeg || screencast
 
 # Media controls
-bindsym $mod+Home         exec $nsi mpc toggle && killall -SIGUSR1 conky
-bindsym $mod+End          exec $nsi mpc stop && killall -SIGUSR1 conky
+bindsym $mod+Home         exec $nsi mpc toggle
+bindsym $mod+End          exec $nsi mpc stop
 bindsym $mod+Page_Up      exec $nsi mpc prev
 bindsym $mod+Page_Down    exec $nsi mpc next
 
