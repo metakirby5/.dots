@@ -14,6 +14,9 @@ border_size: 7
 dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ n_white }}" -nb "{{ n_black }}" -sf "{{ b_white }}" -sb "{{ n_primary }}" -b -h 100'
 dunst_geometry: "0x5-75+75"
 
+bar_font: "M+ 1p-7"
+bar_underline: 2
+
 # Bar
 bar_height: 70
 

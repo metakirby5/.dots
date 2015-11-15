@@ -105,6 +105,11 @@ client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
 client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 
+# lemonbar
+bar {
+  i3_bar_command startbar
+}
+
 ## WINDOW RULES
 
 # Popups
