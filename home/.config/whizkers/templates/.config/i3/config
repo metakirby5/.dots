@@ -115,8 +115,8 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 # Popups
 for_window [window_role="pop-up|task_dialog"] floating enable
 
-# Feh
-for_window [class="feh"] floating enable
+# File viewers
+for_window [class="feh|mpv"] floating enable
 
 ## KEYS
 

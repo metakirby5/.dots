@@ -4,19 +4,25 @@ export EDITOR=$VISUAL
 export CLASSPATH='*':'.'
 
 # Aliases
-alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
-alias reload-xresources='xrdb ~/.Xresources'
-
+## Tools
 alias up2ixio="curl -sfF 'f:1=<-' ix.io"
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
 alias mpc-path='echo \
   "${XDG_MUSIC_DIR%%/}/$(mpc current --format "%file%")"'
+
+## Shortcuts
+alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
+alias reload-xresources='xrdb ~/.Xresources'
 alias vty="variety >/dev/null"
 alias xopen="xdg-open"
 alias clip="xclip -sel c"
 alias enw='emacs -nw'
+
+## Prefs
 alias less='less -R'
 alias ls='ls -h --color=auto'
+alias mpv='mpv --autofit-larger=90%x90%'
+alias feh='feh -.'
 
 # Functions
 
