@@ -115,6 +115,9 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 # Popups
 for_window [window_role="pop-up|task_dialog"] floating enable
 
+# Feh
+for_window [class="feh"] floating enable
+
 ## KEYS
 
 # Tasks
