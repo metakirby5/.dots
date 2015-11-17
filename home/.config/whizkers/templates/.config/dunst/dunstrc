@@ -148,7 +148,7 @@
 
 [frame]
     width = 0
-    color = "{{ n_black }}"
+    color = "{{ bgc }}"
 
 [shortcuts]
 
@@ -179,8 +179,8 @@
     timeout = 7
 
 [urgency_normal]
-    background = "{{ b_black }}"
-    foreground = "{{ b_white }}"
+    background = "{{ bgc }}"
+    foreground = "{{ fgc }}"
     timeout = 10
 
 [urgency_critical]
