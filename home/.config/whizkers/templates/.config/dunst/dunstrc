@@ -41,7 +41,7 @@
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
-    show_age_threshold = 60
+    show_age_threshold = -1
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
@@ -93,7 +93,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = mouse
+    follow = keyboard
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.

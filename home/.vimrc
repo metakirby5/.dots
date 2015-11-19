@@ -618,13 +618,14 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
-let b:comment_leader = '# '       " Default comment is #
-au FileType c,cpp,java,scala      let b:comment_leader = '// '
-au FileType zsh,sh,ruby,python    let b:comment_leader = '# '
-au FileType conf,fstab            let b:comment_leader = '# '
-au FileType tex                   let b:comment_leader = '% '
-au FileType mail                  let b:comment_leader = '> '
-au FileType vim                   let b:comment_leader = '" '
+au BufNewFile,BufFilePre,BufRead *    let b:comment_leader = '# '
+au FileType c,cpp,java,scala          let b:comment_leader = '// '
+au FileType javascript                let b:comment_leader = '// '
+au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
+au FileType conf,fstab                let b:comment_leader = '# '
+au FileType tex                       let b:comment_leader = '% '
+au FileType mail                      let b:comment_leader = '> '
+au FileType vim                       let b:comment_leader = '" '
 
 noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
 noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
