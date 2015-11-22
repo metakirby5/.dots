@@ -34,7 +34,7 @@ Also has some Mac stuff.
 - ffmpeg
 - imagemagick
 - jq
-- dunst
+- dunst + dunstify
 - notify-send
 - feh
 - conky
