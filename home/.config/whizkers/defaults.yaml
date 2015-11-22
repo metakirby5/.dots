@@ -20,6 +20,7 @@ bar_font: "M+ 1p-7"
 bar_underline: 2
 
 # Colors
+# TODO: remove hash so that we can prepend alphas in lemonbar
 bgc: "#272727"
 fgc: "#fafafa"
 

@@ -6,7 +6,7 @@ Also has some Mac stuff.
 
 ## TODO
 
-- Move to lemonbar/candybar/i3blocks? OR tint2?
+- Remove hash from color variables (see default.yaml)
 - Move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
@@ -14,14 +14,19 @@ Also has some Mac stuff.
 ## Dependencies
 
 ### Fonts
+
 - Calibri
 - [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 - [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
 
 ### Packages
+
+## Linux
+
 - metakirby5/bash-scripts
 - metakirby5/whizkers
+- metakirby5/lemonblocks
 - rxvt-unicode-256color
 - Airblader/i3-gaps
 - krypt-n/bar
@@ -49,9 +54,11 @@ Also has some Mac stuff.
 - xflux
 
 ## Mac
+
 - Slate (soon to be replaced by phoenix or something?)
 
 ## Installation
+
 - Install all dependencies.
 - Add `.../dotfiles/bin` to your `PATH`.
 - Ensure you are using `i3init` to start i3.

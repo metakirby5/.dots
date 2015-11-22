@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 killall lemonbar 2>/dev/null
-~/.config/lemonbar/emit 2>/dev/null |\
-  lemonbar -u {{ bar_underline }} -f "{{ bar_font }}" |\
+emit-lemonblocks 2>/dev/null |\
+  lemonbar -B "{{ bgc }}" -F "{{ fgc }}" -u {{ bar_underline }} \
+	-f "{{ bar_font }}" |\
   sh &>/dev/null &
 
