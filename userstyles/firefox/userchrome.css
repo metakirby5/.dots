@@ -109,6 +109,7 @@
 
 .tabbrowser-tab {
     max-height: none !important;
+    min-width: 0px !important;
     opacity: 1 !important;
     border: none !important;
     color: white !important;
