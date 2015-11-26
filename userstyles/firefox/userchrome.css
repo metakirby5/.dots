@@ -113,6 +113,11 @@
     opacity: 1 !important;
     border: none !important;
     color: white !important;
+    text-align: center !important;
+}
+
+.tabbrowser-tab:not([pinned]) .tab-icon-image {
+    display: none !important;
 }
 
 .tab-content {
