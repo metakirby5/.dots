@@ -6,7 +6,7 @@ emit-lemonblocks \
   -F "{{ fgc }}" \
   -U "{{ fgc }}" \
   --urgent "{{ b_red }}" \
-  --accent "{{ n_primary}}" \
+  --accent "{{ n_primary }}" \
   2>/dev/null |\
   lemonbar -u {{ bar_underline }} -f "{{ bar_font }}" |\
   sh &>/dev/null &
