@@ -63,5 +63,5 @@ Xautolock.time:         5
 Xautolock.locker:       i3plock
 
 Xautolock.corners:      000-
-Xautolock.cornersize:   100
+Xautolock.cornersize:   200
 
