@@ -1,0 +1,39 @@
+# Fonts
+font: "PixelMPlus12"
+term_fonts:
+  - "PixelMPlus12"
+  - "M+ 1p"
+  - "Baekmuk Gulim"
+term_letterspace: 2
+term_bold: false
+bar_fonts:
+  - "PixelMPlus12-7"
+  - "M+ 1p-7"
+
+wallpapers: "/usr/share/backgrounds/in_rotation/books.jpg"
+
+bgc: "#202025"
+
+n_black: "#353540"
+b_black: "#545466"
+n_red: "#b77174"
+b_red: "#df898d"
+n_green: "#c8c350"
+b_green: "#f0ea60"
+n_yellow: "#c8a585"
+b_yellow: "#f0c69f"
+n_blue: "#677caa"
+b_blue: "#7f99d2"
+n_magenta: "#aa7595"
+b_magenta: "#d290b8"
+n_cyan: &n_primary "#81b0c8"
+b_cyan: &b_primary "#9ad3f0"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "cyan"
+ncmpcpp_secondary: "blue"
+ncmpcpp_primary_n: "7"
+ncmpcpp_secondary_n: "5"
+

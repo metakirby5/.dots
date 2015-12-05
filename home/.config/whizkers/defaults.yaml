@@ -6,6 +6,7 @@ term_fonts:
   - "Baekmuk Gulim"
 pixelsize: 28
 term_letterspace: -1
+term_bold: true
 
 # WM
 wallpapers: "/usr/share/backgrounds/in_rotation/"
@@ -18,7 +19,6 @@ dunst_geometry: "0x5-75+75"
 bar_height: 70
 bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
 bar_fonts:
-  - "PixelMPlus12-7"
   - "M+ 1p-7"
 bar_underline: 2
 
