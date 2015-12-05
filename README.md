@@ -16,7 +16,7 @@ Also has some Mac stuff.
 ### Fonts
 
 - Calibri
-- [PixelMplus12](https://osdn.jp/projects/mix-mplus-ipa/releases/58930)
+- [PixelMPlus12](https://osdn.jp/projects/mix-mplus-ipa/releases/58930)
 - [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 - [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
