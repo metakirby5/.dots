@@ -17,7 +17,9 @@ dunst_geometry: "0x5-75+75"
 # Bar
 bar_height: 70
 bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
-bar_font: "M+ 1p-7"
+bar_fonts:
+  - "PixelMPlus12-7"
+  - "M+ 1p-7"
 bar_underline: 2
 
 # Colors
