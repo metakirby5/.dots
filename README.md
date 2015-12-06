@@ -6,7 +6,6 @@ Also has some Mac stuff.
 
 ## TODO
 
-- Remove hash from color variables (see default.yaml)
 - Move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes

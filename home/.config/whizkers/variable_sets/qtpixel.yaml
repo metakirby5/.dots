@@ -10,7 +10,9 @@ bar_fonts:
   - "PixelMPlus12-7"
   - "M+ 1p-7"
 
+# WM
 wallpapers: "/usr/share/backgrounds/in_rotation/books.jpg"
+border_size: 2
 
 bgc: "#303037"
 
