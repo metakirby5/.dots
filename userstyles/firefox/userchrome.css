@@ -11,7 +11,8 @@
 /* Globals */
 
 * {
-    font-family: 'PixelMPlus12', sans-serif !important;;
+    font-family: 'PixelMPlus12', sans-serif !important;
+    font-weight: normal !important;
 }
 
 /* Nav/URL bar */
