@@ -8,6 +8,12 @@
     display: none !important;
 }
 
+/* Globals */
+
+* {
+    font-family: 'PixelMPlus12', sans-serif !important;;
+}
+
 /* Nav/URL bar */
 
 #nav-bar {
