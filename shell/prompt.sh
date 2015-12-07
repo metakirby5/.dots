@@ -19,7 +19,7 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 #__mk5_top_connector='┌ '
 #__mk5_bot_connector='└ '
-__mk5_usr_pchar='»'
+__mk5_usr_pchar='>'
 __mk5_root_pchar='#'
 __mk5_sepchar='+'
 __mk5_dirty_char='*'

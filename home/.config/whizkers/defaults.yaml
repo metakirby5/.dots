@@ -1,4 +1,5 @@
 # Fonts
+use_bold: true
 font: "Calibri"
 term_fonts:
   - "Source Code Pro"
@@ -17,11 +18,11 @@ dunst_geometry: "0x5-75+75"
 # Bar
 bar_height: 70
 bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
-bar_font: "M+ 1p-7"
+bar_fonts:
+  - "M+ 1p-7"
 bar_underline: 2
 
 # Colors
-# TODO: remove hash so that we can prepend alphas in lemonbar
 bgc: "#272727"
 fgc: "#fafafa"
 

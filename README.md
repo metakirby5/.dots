@@ -6,7 +6,6 @@ Also has some Mac stuff.
 
 ## TODO
 
-- Remove hash from color variables (see default.yaml)
 - Move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
@@ -16,6 +15,7 @@ Also has some Mac stuff.
 ### Fonts
 
 - Calibri
+- [PixelMPlus12](https://osdn.jp/projects/mix-mplus-ipa/releases/58930)
 - [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 - [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
