@@ -6,12 +6,14 @@
 
   body::before {
     position: fixed;
-    right: 0.2em;
-    bottom: 0.2em;
+    pointer-events: none;
+    margin: 0.2em;
+    right: 0;
+    bottom: 0;
     font-family: 'PixelMPlus12', sans-serif;
     font-size: 10em;
     color: #353540;
-    content: "物語";
+    content: "ネット";
   }
 
   body > * {
