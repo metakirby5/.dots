@@ -7,7 +7,8 @@
   body::before {
     position: fixed;
     right: 0.2em;
-    bottom: 0;
+    bottom: 0.2em;
+    font-family: 'PixelMPlus12', sans-serif;
     font-size: 10em;
     color: #353540;
     content: "物語";
