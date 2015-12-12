@@ -1,0 +1,17 @@
+# Fonts
+use_bold: false
+font: "PixelMPlus12"
+term_fonts:
+  - "PixelMPlus12"
+  - "M+ 1p"
+  - "Baekmuk Gulim"
+term_letterspace: 2
+bar_fonts:
+  - "PixelMPlus12-7"
+  - "M+ 1p-7"
+  - "Baekmuk Gulim-7"
+bar_font_offset: -5
+
+# WM
+border_size: 2
+
