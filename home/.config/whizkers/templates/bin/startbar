@@ -9,6 +9,7 @@ emit-lemonblocks \
   --accent "{{ n_primary }}" \
   2>/dev/null |\
   lemonbar -u {{ bar_underline }} -g x{{ bar_height }} \
-	{{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} |\
+	  {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
+	  -o {{ bar_font_offset }} |\
   bash >/dev/null &
 

@@ -12,14 +12,16 @@ term_letterspace: -1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 2
-dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ n_white }}" -nb "{{ n_black }}" -sf "{{ b_white }}" -sb "{{ n_primary }}" -b -h 100'
+dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ n_white }}" -nb "{{ n_black }}" -sf "{{ b_white }}" -sb "{{ n_primary }}" -h {{ bar_height }}'
 dunst_geometry: "0x5-75+75"
 
 # Bar
-bar_height: 70
-bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
+bar_height: 50
+bar_bgc: "#ff{` '{{ bgc }}'.lstrip('#')  `}"
 bar_fonts:
   - "M+ 1p-7"
+  - "Baekmuk Gulim"
+bar_font_offset: 0
 bar_underline: 2
 
 # Colors
