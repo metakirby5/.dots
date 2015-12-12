@@ -1,0 +1,23 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/homura.png"
+
+n_red: "#aa5171"
+b_red: "#dc6892"
+n_green: "#9589aa"
+b_green: "#c0b1dc"
+n_yellow: "#a795a6"
+b_yellow: "#d9c1d7"
+n_blue: "#7e7eaa"
+b_blue: "#a3a3dc"
+n_magenta: "#a97c92"
+b_magenta: "#dba0bd"
+n_cyan: &n_primary "#646baa"
+b_cyan: &b_primary "#818adc"
+
+n_primary: *n_primary
+b_primary: *b_primary
+
+ncmpcpp_primary: "cyan"
+ncmpcpp_secondary: "blue"
+ncmpcpp_primary_n: "7"
+ncmpcpp_secondary_n: "5"
+

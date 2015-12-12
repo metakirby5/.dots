@@ -21,7 +21,7 @@ bar_bgc: "#ff{` '{{ bgc }}'.lstrip('#')  `}"
 bar_fonts:
   - "M+ 1p-7"
   - "Baekmuk Gulim"
-bar_font_offset: 0
+bar_font_offset: -5
 bar_underline: 2
 
 # Colors
