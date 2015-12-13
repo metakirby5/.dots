@@ -16,17 +16,19 @@ DPMS_STANDBY=720
 DPMS_SUSPEND=840
 DPMS_OFF=960
 
-## CONFIG
-
-xrandr --dpi $DPI &
-xrdb -merge "$XRESOURCES" &
-xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
-
 ## AUTOSTART
 
 # Gnome
 /usr/libexec/gnome-settings-daemon &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
+
+# Janky sleep to ensure gnome settings are overwritten
+sleep 0.5
+
+# Config
+xrandr --dpi $DPI &
+xrdb -merge "$XRESOURCES" &
+xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 
 # Desktop
 urxvt256cd -q -o -f &
