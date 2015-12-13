@@ -1,7 +1,9 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/homura.png"
 
-bgc: "#272737"
+bgc: "#101015"
 
+n_black: "#202025"
+b_black: "#303035"
 n_red: "#aa5171"
 b_red: "#dc6892"
 n_green: "#9589aa"
