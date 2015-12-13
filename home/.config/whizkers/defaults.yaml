@@ -15,7 +15,7 @@ term_letterspace: -1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 2
-dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ n_white }}" -nb "{{ n_black }}" -sf "{{ b_white }}" -sb "{{ n_primary }}" -h {{ bar_height }}'
+dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ fgc }}" -nb "{{ bgc }}" -sf "{{ fgc }}" -sb "{{ n_primary }}" -h {{ bar_height }}'
 dunst_geometry: "0x5-75+75"
 
 # Bar
