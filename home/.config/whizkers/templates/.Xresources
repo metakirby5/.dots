@@ -65,3 +65,11 @@ Xautolock.locker:       i3plock
 Xautolock.corners:      000-
 Xautolock.cornersize:   200
 
+!! Xft
+
+Xft.antialias:          1
+Xft.dpi:                {{ xft_dpi }}
+Xft.hinting:            1
+Xft.hintstyle:          hintmedium
+Xft.rgba:               none
+
