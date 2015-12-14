@@ -9,6 +9,7 @@ URxvt.boldFont:  {{ #term_fonts }}xft:{{ . }}{{ #use_bold }}:bold{{ /use_bold }}
 URxvt.letterSpace: {{ term_letterspace }}
 
 ! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
+URxvt.borderColor:  {{ bgc }}
 URxvt.background:  {{ bgc }}
 URxvt.foreground:  {{ fgc }}
 
