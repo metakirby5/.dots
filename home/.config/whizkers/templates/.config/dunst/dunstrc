@@ -113,7 +113,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 0
+    separator_height = {{ border_size }}
 
     # Padding between text and separator.
     padding = 30
@@ -127,7 +127,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = auto
+    separator_color = frame
 
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
@@ -147,8 +147,8 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 0
-    color = "{{ bgc }}"
+    width = {{ border_size }}
+    color = "{{ n_primary }}"
 
 [shortcuts]
 
