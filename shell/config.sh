@@ -12,6 +12,7 @@ alias mpc-path='echo \
 
 ## Shortcuts
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
+alias resource-tmux='tmux source-file ~/.tmux.conf'
 alias reload-xresources='xrdb ~/.Xresources'
 alias vty="variety >/dev/null"
 alias xopen="xdg-open"
