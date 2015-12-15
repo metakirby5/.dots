@@ -251,11 +251,11 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^[j / k] - Switch to next/prev buffer
-noremap <silent> <C-j> :bn<cr>
-noremap <silent> <C-k> :bN<cr>
-inoremap <silent> <C-j> <esc>:bn<cr>
-inoremap <silent> <C-k> <esc>:bN<cr>
+" ^[down / up] - Switch to next/prev buffer
+noremap <silent> <C-down> :bn<cr>
+noremap <silent> <C-up> :bN<cr>
+inoremap <silent> <C-down> <esc>:bn<cr>
+inoremap <silent> <C-up> <esc>:bN<cr>
 
 " ,bl - List all buffers
 noremap <leader>bl :buffers<cr>
@@ -320,19 +320,17 @@ noremap <leader>k <C-W>k
 noremap <leader>h <C-W>h
 noremap <leader>l <C-W>l
 
-" ,[hjkl] - Move split
+" ,[HJKL] - Move split
 noremap <leader>J <C-W>J
 noremap <leader>K <C-W>K
 noremap <leader>H <C-W>H
 noremap <leader>L <C-W>L
 
-" ,[up/down] - Resize height
-noremap <silent> <leader><up> :resize +5<cr>
-noremap <silent> <leader><down> :resize -5<cr>
-
-" ,[left/right] - Resize width
-noremap <silent> <leader><right> :vertical resize +5<cr>
-noremap <silent> <leader><left> :vertical resize -5<cr>
+" ^[hjkl] - Resize split
+noremap <silent> <c-j> :resize +1<cr>
+noremap <silent> <c-k> :resize -1<cr>
+noremap <silent> <c-l> :vertical resize +1<cr>
+noremap <silent> <c-h> :vertical resize -1<cr>
 
 " === Tabs
 
@@ -362,11 +360,11 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-" ^[h / l] or ^[left / right] - Switch tabs
-noremap <silent> <C-h> :tabprevious<cr>
-noremap <silent> <C-l> :tabnext<cr>
-inoremap <silent> <C-h> <esc>:tabprevious<cr>
-inoremap <silent> <C-l> <esc>:tabnext<cr>
+" ^[p / n] or ^[left / right] - Switch tabs
+noremap <silent> <C-p> :tabprevious<cr>
+noremap <silent> <C-n> :tabnext<cr>
+inoremap <silent> <C-p> <esc>:tabprevious<cr>
+inoremap <silent> <C-n> <esc>:tabnext<cr>
 noremap <silent> <C-Left> :tabprevious<cr>
 noremap <silent> <C-Right> :tabnext<cr>
 inoremap <silent> <C-Left> <esc>:tabprevious<cr>
@@ -569,12 +567,6 @@ noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 noremap <leader>y "+y
 vnoremap <leader>y "+y
 
-" ^p - Paste from register 0 (not overwritten by dels)
-noremap <C-p> "0p
-
-" ,^P - Same as ^p, but paste before this line
-noremap <leader><C-P> "0P
-
 " shift-<tab> - Omni complete (not really useful in C)
 inoremap <S-tab> <C-x><C-o>
 
@@ -590,17 +582,6 @@ noremap <leader>p :setlocal paste!<cr>
 
 " ,<cr> - Disable highlight
 noremap <silent> <leader><cr> :noh<cr>
-
-" ,= - Quick retab of everything
-" noremap <silent> <leader>= mzgg=G<esc>:retab<cr>`z
-
-" ^[jk] - Move line of text
-" nnoremap <silent> <C-j> mz:m+<cr>`z
-" nnoremap <silent> <C-k> mz:m-2<cr>`z
-" inoremap <silent> <C-j> <esc>mz:m+<cr>`za
-" inoremap <silent> <C-k> <esc>mz:m-2<cr>`za
-" vnoremap <silent> <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-" vnoremap <silent> <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " ,[oO] - Create newlines in normal mode
 nnoremap <silent> <leader>o o<esc>cc<esc>
