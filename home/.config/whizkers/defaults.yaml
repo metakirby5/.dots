@@ -20,7 +20,7 @@ dunst_geometry: "0x5-75+75"
 
 # Bar
 bar_height: 50
-bar_bgc: "#ff{` '{{ bgc }}'.lstrip('#')  `}"
+bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
 bar_fonts:
   - "M+ 1p-7"
   - "Baekmuk Gulim"
