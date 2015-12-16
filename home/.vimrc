@@ -251,11 +251,11 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^[[ / ]] - Switch to next/prev buffer
-noremap <silent> <C-]> :bn<cr>
-noremap <silent> <C-[> :bN<cr>
-inoremap <silent> <C-]> <esc>:bn<cr>
-inoremap <silent> <C-[> <esc>:bN<cr>
+" ^[down / up] - Switch to next/prev buffer
+noremap <silent> <C-down> :bn<cr>
+noremap <silent> <C-up> :bN<cr>
+inoremap <silent> <C-down> <esc>:bn<cr>
+inoremap <silent> <C-up> <esc>:bN<cr>
 
 " ,bl - List all buffers
 noremap <leader>bl :buffers<cr>
