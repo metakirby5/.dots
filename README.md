@@ -6,6 +6,7 @@ Also has some Mac stuff.
 
 ## TODO
 
+- Whizkers color dicts (primary -> brightblue, 1, etc...)
 - Move to termite?
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
