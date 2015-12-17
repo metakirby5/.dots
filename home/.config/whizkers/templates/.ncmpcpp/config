@@ -147,7 +147,7 @@ song_window_title_format = "{%a - }{%t}|{%f}"
 ##   not available.
 ##
 
-song_columns_list_format = "(50)[]{t|f} (25)[<% ncmpcpp_primary %>]{aE} (25)[<% ncmpcpp_secondary %>]{bE}"
+song_columns_list_format = "(50)[]{t|f} (25)[<% text_primary %>]{aE} (25)[<% text_secondary %>]{bE}"
 
 # UI/Misc #####################################################################
 
@@ -216,11 +216,11 @@ colors_enabled = "yes"
 discard_colors_if_item_is_selected = "yes"
 
 main_window_color = "white"
-main_window_highlight_color = "<% ncmpcpp_primary %>"
+main_window_highlight_color = "<% text_primary %>"
 
-progressbar_color = "<% ncmpcpp_secondary %>"
-statusbar_color = "<% ncmpcpp_secondary %>"
-visualizer_color = "<% ncmpcpp_primary %>"
+progressbar_color = "<% text_secondary %>"
+statusbar_color = "<% text_secondary %>"
+visualizer_color = "<% text_primary %>"
 
 <%={{ }}=%>
 

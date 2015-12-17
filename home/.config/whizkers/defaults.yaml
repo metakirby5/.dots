@@ -96,8 +96,8 @@ b_white:    "{` {{ colors }}['white']['bold'] `}"
 n_primary:  "{` {{ colors }}[{{ colors }}['primary']]['normal'] `}"
 b_primary:  "{` {{ colors }}[{{ colors }}['primary']]['bold'] `}"
 
-ncmpcpp_primary:      "{` {{ colors }}['primary'] `}"
-ncmpcpp_secondary:    "{` {{ colors }}['secondary'] `}"
+text_primary:         "{` {{ colors }}['primary'] `}"
+text_secondary:       "{` {{ colors }}['secondary'] `}"
 ncmpcpp_primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] + 1 `}"
 ncmpcpp_secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] + 1 `}"
 
