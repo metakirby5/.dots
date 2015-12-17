@@ -2,12 +2,12 @@
 xft_dpi: 276
 
 # Fonts
-use_bold: true
 font: "Calibri"
 term_fonts:
   - "Source Code Pro"
   - "M+ 1p"
   - "Baekmuk Gulim"
+use_bold: true
 pixelsize: 28
 term_letterspace: -1
 
@@ -15,44 +15,89 @@ term_letterspace: -1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 40
 border_size: 2
-dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{{ fgc }}" -nb "{{ bgc }}" -sf "{{ fgc }}" -sb "{{ n_primary }}" -h {{ bar_height }}'
+dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{` {{ colors }}["foreground"] `}" -nb "{` {{ colors }}["background"] `}" -sf "{` {{ colors }}["foreground"] `}" -sb "{` {{ colors }}[{{ colors }}["primary"]]["normal"] `}" -h {{ bar_height }}'
 dunst_geometry: "0x5-75+75"
 
 # Bar
 bar_height: 50
-bar_bgc: "#aa{` '{{ bgc }}'.lstrip('#')  `}"
+bar_bgc: "#aa{` {{ colors }}['background'].lstrip('#')  `}"
 bar_fonts:
   - "M+ 1p-7"
-  - "Baekmuk Gulim"
+  - "Baekmuk Gulim-7"
 bar_font_offset: -5
 bar_underline: 2
 
 # Colors
-bgc: "#272727"
-fgc: "#fafafa"
 
-n_black: "#393939"
-b_black: "#5b5b5b"
-n_red: "#f42d6c"
-b_red: "#fa9fbb"
-n_green: "#6cf42d"
-b_green: "#bbfa9f"
-n_yellow: "#f4b52d"
-b_yellow: "#fadd9f"
-n_blue: &n_primary "#2d8af4"
-b_blue: &b_primary "#9ec9fa"
-n_magenta: "#b52df4"
-b_magenta: "#dd9ffa"
-n_cyan: "#2df4b5"
-b_cyan: "#9ffadd"
-n_white: "#d8d8d8"
-b_white: "#ffffff"
+colors:
+  primary:      "blue"
+  secondary:    "magenta"
+  background:   "#272727"
+  foreground:   "#fafafa"
+  black:
+    normal:     "#393939"
+    bold:       "#5b5b5b"
+  red:
+    normal:     "#f42d6c"
+    bold:       "#fa9fbb"
+  green:
+    normal:     "#6cf42d"
+    bold:       "#bbfa9f"
+  yellow:
+    normal:     "#f4b52d"
+    bold:       "#fadd9f"
+  blue:
+    normal:     "#2d8af4"
+    bold:       "#9ec9fa"
+  magenta:
+    normal:     "#b52df4"
+    bold:       "#dd9ffa"
+  cyan:
+    normal:     "#2df4b5"
+    bold:       "#9ffadd"
+  white:
+    normal:     "#d8d8d8"
+    bold:       "#ffffff"
 
-n_primary: *n_primary
-b_primary: *b_primary
+# Utility
 
-ncmpcpp_primary: "blue"
-ncmpcpp_secondary: "magenta"
-ncmpcpp_primary_n: "5"
-ncmpcpp_secondary_n: "6"
+colornumbers:
+  black:    0
+  red:      1
+  green:    2
+  yellow:   3
+  blue:     4
+  magenta:  5
+  cyan:     6
+  white:    7
+
+# Convenience
+
+bgc:        "{` {{ colors }}['background'] `}"
+fgc:        "{` {{ colors }}['foreground'] `}"
+
+n_black:    "{` {{ colors }}['black']['normal'] `}"
+b_black:    "{` {{ colors }}['black']['bold'] `}"
+n_red:      "{` {{ colors }}['red']['normal'] `}"
+b_red:      "{` {{ colors }}['red']['bold'] `}"
+n_green:    "{` {{ colors }}['green']['normal'] `}"
+b_green:    "{` {{ colors }}['green']['bold'] `}"
+n_yellow:   "{` {{ colors }}['yellow']['normal'] `}"
+b_yellow:   "{` {{ colors }}['yellow']['bold'] `}"
+n_blue:     "{` {{ colors }}['blue']['normal'] `}"
+b_blue:     "{` {{ colors }}['blue']['bold'] `}"
+n_magenta:  "{` {{ colors }}['magenta']['normal'] `}"
+b_magenta:  "{` {{ colors }}['magenta']['bold'] `}"
+n_cyan:     "{` {{ colors }}['cyan']['normal'] `}"
+b_cyan:     "{` {{ colors }}['cyan']['bold'] `}"
+n_white:    "{` {{ colors }}['white']['normal'] `}"
+b_white:    "{` {{ colors }}['white']['bold'] `}"
+
+n_primary:  "{` {{ colors }}[{{ colors }}['primary']]['normal'] `}"
+b_primary:  "{` {{ colors }}[{{ colors }}['primary']]['bold'] `}"
+
+ncmpcpp_primary:      "{` {{ colors }}['primary'] `}"
+ncmpcpp_secondary:    "{` {{ colors }}['secondary'] `}"
+ncmpcpp_primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] + 1 `}"
+ncmpcpp_secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] + 1 `}"
 

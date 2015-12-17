@@ -1,27 +1,28 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/books.jpg"
 
-bgc: "#303037"
-
-n_black: "#353540"
-b_black: "#545466"
-n_red: "#b77174"
-b_red: "#df898d"
-n_green: "#c8c350"
-b_green: "#f0ea60"
-n_yellow: "#c8a585"
-b_yellow: "#f0c69f"
-n_blue: "#677caa"
-b_blue: "#7f99d2"
-n_magenta: "#aa7595"
-b_magenta: "#d290b8"
-n_cyan: &n_primary "#81b0c8"
-b_cyan: &b_primary "#9ad3f0"
-
-n_primary: *n_primary
-b_primary: *b_primary
-
-ncmpcpp_primary: "cyan"
-ncmpcpp_secondary: "blue"
-ncmpcpp_primary_n: "7"
-ncmpcpp_secondary_n: "5"
+colors:
+  primary:      "cyan"
+  secondary:    "blue"
+  background:   "#303037"
+  black:
+    normal:     "#353540"
+    bold:       "#545466"
+  red:
+    normal:     "#b77174"
+    bold:       "#df898d"
+  green:
+    normal:     "#c8c350"
+    bold:       "#f0ea60"
+  yellow:
+    normal:     "#c8a585"
+    bold:       "#f0c69f"
+  blue:
+    normal:     "#677caa"
+    bold:       "#7f99d2"
+  magenta:
+    normal:     "#aa7595"
+    bold:       "#d290b8"
+  cyan:
+    normal:     "#81b0c8"
+    bold:       "#9ad3f0"
 
