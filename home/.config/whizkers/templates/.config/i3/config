@@ -234,8 +234,8 @@ mode "$_outmode" {
 
     # Move focused container to workspace
     bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
-    bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
-    bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
+    bindsym $mod+Shift+p              move container to workspace prev_on_output; workspace prev_on_output
+    bindsym $mod+Shift+n              move container to workspace next_on_output; workspace next_on_output
 
     bindsym $mod+Shift+grave move container to workspace $wDash; workspace $wDash
     bindsym $mod+Shift+1 move container to workspace $w1; workspace $w1
@@ -262,10 +262,10 @@ mode "$_outmode" {
   bindsym Shift+$down       move container to output down
 
   # Move workspace
-  bindsym Control+$left     move container to output left
-  bindsym Control+$right    move container to output right
-  bindsym Control+$up       move container to output up
-  bindsym Control+$down     move container to output down
+  bindsym Control+$left     move workspace to output left
+  bindsym Control+$right    move workspace to output right
+  bindsym Control+$up       move workspace to output up
+  bindsym Control+$down     move workspace to output down
 
   # Return to default mode
   bindsym Escape            mode "default"
@@ -295,8 +295,8 @@ bindsym $mod+s split v
 
 # Switch to workspace
 bindsym $mod+w              workspace back_and_forth
-bindsym $mod+bracketleft    workspace prev_on_output
-bindsym $mod+bracketright   workspace next_on_output
+bindsym $mod+p              workspace prev_on_output
+bindsym $mod+n              workspace next_on_output
 
 bindsym $mod+grave workspace  $wDash
 bindsym $mod+1 workspace      $w1
@@ -312,8 +312,8 @@ bindsym $mod+0 workspace      $w10
 
 # Move focused container to workspace
 bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
-bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Shift+p              move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+n              move container to workspace next_on_output; workspace next_on_output
 
 bindsym $mod+Shift+grave move container to workspace $wDash
 bindsym $mod+Shift+1     move container to workspace $w1
