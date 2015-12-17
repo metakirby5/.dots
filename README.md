@@ -27,6 +27,7 @@ Also has some Mac stuff.
 - metakirby5/whizkers
 - metakirby5/lemonblocks
 - rxvt-unicode-256color
+- tmux
 - Airblader/i3-gaps
 - krypt-n/bar
 - acrisci/i3ipc-python
