@@ -166,7 +166,7 @@
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1".
-    history = mod4+comma
+    history = mod4+slash
 
     # Context menu.
     context = mod4+period

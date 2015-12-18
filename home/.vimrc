@@ -145,7 +145,7 @@ hi TabLineFill term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=w
 
 hi StatusLine term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
 hi StatusLineMid term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=NONE guifg=white guibg=NONE
-hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=black ctermbg=NONE guifg=black guibg=NONE
+hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=darkgrey ctermbg=black guifg=darkgrey guibg=black
 
 hi VertSplit term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
 

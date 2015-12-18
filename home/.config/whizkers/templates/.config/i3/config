@@ -133,10 +133,6 @@ bindsym $mod+Shift+Escape   exit
 # Executables
 bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu $dmFlags -t -p "$dmPrompt" -counter $dmCounter'
 bindsym $mod+t exec $nsi $term
-# Network manager
-set $nmtui floating_nmtui
-for_window [instance="^$nmtui$"] floating enable
-bindsym $mod+n exec $nsi ($xwi $nmtui || $term -name $nmtui -e nmtui) && i3-msg '[instance="^$nmtui$"] focus'
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
@@ -221,8 +217,8 @@ mode "$_outmode" {
 
     # Switch to workspace
     bindsym $mod+w              workspace back_and_forth
-    bindsym $mod+bracketleft    workspace prev_on_output
-    bindsym $mod+bracketright   workspace next_on_output
+    bindsym $mod+p              workspace prev_on_output
+    bindsym $mod+n              workspace next_on_output
 
     bindsym $mod+grave workspace  $wDash
     bindsym $mod+1 workspace      $w1
@@ -294,8 +290,8 @@ bindsym $mod+i layout tabbed
 bindsym $mod+o layout toggle split
 
 # Splits
-bindsym $mod+p split h
-bindsym $mod+Shift+p split v
+bindsym $mod+v split h
+bindsym $mod+s split v
 
 # Switch to workspace
 bindsym $mod+w              workspace back_and_forth
@@ -332,7 +328,7 @@ bindsym $mod+Shift+9     move container to workspace $w9
 bindsym $mod+Shift+0     move container to workspace $w10
 
 # Rename workspace
-bindsym $mod+s exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput $dmFlags -p 'Rename workspace to')\\\""
+bindsym $mod+comma exec $nsi i3-msg "rename workspace to \\\"$(dmenu -noinput $dmFlags -p 'Rename workspace to')\\\""
 
 # Marks
 set $_get_marks i3-msg -t get_marks | jq '.[]' | cut -c2- | rev | cut -c2- | rev
