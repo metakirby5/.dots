@@ -144,7 +144,6 @@ hi TabLineSel term=bold cterm=bold gui=bold ctermfg=white ctermbg=NONE guifg=whi
 hi TabLineFill term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
 
 hi StatusLine term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
-hi StatusLineMid term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=NONE guifg=white guibg=NONE
 hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=darkgrey ctermbg=black guifg=darkgrey guibg=black
 
 hi VertSplit term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
@@ -158,35 +157,26 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
-set statusline=\ \                        " initialize w/ spaces
-set statusline+=%n                        " buffer number
-set statusline+=\ %<»\                    " separator
-set statusline+=%f                        " relative path
-set statusline+=\                         " space
-" set statusline+=%y                        " filetype
-set statusline+=%{ExtModified()}          " externally modified?
-set statusline+=%m                        " modified flag
-set statusline+=%r                        " read-only flag
-set statusline+=\ \ %#StatusLineMid#      " no highlight
-set statusline+=%=                        " left/right separator
-set statusline+=%*\ \                     " statusline highlight
-" set statusline+=%{FDMShort()}             " fold method
-" set statusline+=/                         " separator
-" set statusline+=%{&fo}                    " format options
-" set statusline+=\ \«\                     " separator
-set statusline+=%{GetSyntax()}            " syntax
-set statusline+=\ \«\                     " separator
-set statusline+=%{Has78Char()}            " 78 char highlighting
-set statusline+=%{TextWidth()}            " text width/paste mode
-set statusline+=\ \«\                     " separator
+" 1 » .vimrc                                  vim « 78 « 48 - 177/667 - 24%
+set statusline=\                              " initialize w/ space
+set statusline+=%n                            " buffer number
+set statusline+=\ %<»                         " separator
+set statusline+=\ %f                          " relative path
+set statusline+=%(\ [%{ExtModified()}%M%R]%)  " flags
+set statusline+=\ %#Normal#                   " no highlight
+set statusline+=%=                            " left/right separator
+set statusline+=%*                            " statusline highlight
+set statusline+=\ %{GetSyntax()}              " syntax
+set statusline+=\ «                           " separator
+set statusline+=\ %{Has78Char()}              " 78 char highlighting
+set statusline+=%{TextWidth()}                " text width/paste mode
+set statusline+=\ «                           " separator
+set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\      " char# - curline/totline - file%
 
-set statusline+=%2c\ -\ %3l/%L\ -\ %P\ \  " char# - curline/totline - file%
-
-" Returns '[!]' if file externally modified since last read/write
+" Returns '!' if file externally modified since last read/write
 " :e to get rid of this warning
 function! ExtModified()
-    return (exists('b:modified')) ? '[!]' : ''
+    return (exists('b:modified')) ? '!' : ''
 endfunction
 
 au FileChangedShellPost * let b:modified = 1
