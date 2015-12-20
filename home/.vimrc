@@ -161,7 +161,7 @@ set ls=2
 " example: 1 | .vimrc [vim] [+]                    *78 | 52 -  99/523 - 17%
 set statusline=\ \                        " initialize w/ spaces
 set statusline+=%n                        " buffer number
-set statusline+=\ \»\                     " separator
+set statusline+=\ %<»\                    " separator
 set statusline+=%f                        " relative path
 set statusline+=\                         " space
 " set statusline+=%y                        " filetype
