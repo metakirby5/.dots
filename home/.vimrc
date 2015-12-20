@@ -130,6 +130,7 @@ endif
 set cursorline
 
 hi Normal guifg=white guibg=black
+hi Search ctermfg=white guifg=white
 hi NonText ctermfg=black guifg=black
 
 hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
