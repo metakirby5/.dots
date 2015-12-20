@@ -21,7 +21,7 @@ alias tetris='bastet'
 
 ## Prefs
 alias less='less -R'
-alias ls='ls -h --color=auto'
+alias ls='ls -xh --color=auto'
 alias mpv='mpv --autofit-larger=90%x90%'
 alias feh='feh -.'
 
