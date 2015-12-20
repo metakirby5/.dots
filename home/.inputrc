@@ -1,0 +1,14 @@
+# General
+set bell-style visible
+set colored-stats on
+set completion-ignore-case on
+set completion-query-items 0
+set mark-symlinked-directories on
+set match-hidden-files off
+set page-completions on
+set print-completions-horizontally on
+
+# Keymaps
+set editing-mode vi
+set keymap vi
+
