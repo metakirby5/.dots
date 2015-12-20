@@ -162,17 +162,17 @@ set ls=2
 " 1 » .vimrc                                  vim « 78 « 48 - 177/667 - 24%
 set statusline=\                              " initialize w/ space
 set statusline+=%n                            " buffer number
-set statusline+=\ %<»                         " separator
+set statusline+=\ %#Normal#%<\ %*             " separator
 set statusline+=\ %f                          " relative path
 set statusline+=%(\ [%{ExtModified()}%M%R]%)  " flags
 set statusline+=\ %#Normal#                   " no highlight
 set statusline+=%=                            " left/right separator
 set statusline+=%*                            " statusline highlight
 set statusline+=\ %{GetSyntax()}              " syntax
-set statusline+=\ «                           " separator
+set statusline+=\ %#Normal#%<\ %*             " separator
 set statusline+=\ %{Has78Char()}              " 78 char highlighting
 set statusline+=%{TextWidth()}                " text width/paste mode
-set statusline+=\ «                           " separator
+set statusline+=\ %#Normal#%<\ %*             " separator
 set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\      " char# - curline/totline - file%
 
 " Returns '!' if file externally modified since last read/write
