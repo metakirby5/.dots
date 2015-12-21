@@ -75,11 +75,6 @@ set $spT scratchpad_term
 for_window [instance="^$spT$"] move scratchpad
 bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT -e tmux new-session -ADs scratch) && i3-msg '[instance="^$spT$"] scratchpad show'
 
-# Music on scratch
-set $spM scratchpad_music
-for_window [instance="^$spM$"] move scratchpad
-bindsym $mod+backslash exec $nsi ($xwi $spM || $term -name $spM -e ncmpcpp) && i3-msg '[instance="^$spM$"] scratchpad show'
-
 # Default workspaces
 workspace "1:一" output eDP1
 
@@ -136,7 +131,7 @@ bindsym $mod+t exec $nsi $term -e tmux
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
-bindsym $mod+Shift+backslash exec $nsi mpc-notify
+bindsym $mod+backslash exec $nsi mpc-notify
 # Next wallpaper
 bindsym $mod+Control+w exec $nsi feh -zr --bg-fill $wallpapers
 
