@@ -34,33 +34,33 @@ bar_underline: 0
 
 colors:
   primary:      "blue"
-  secondary:    "magenta"
+  secondary:    "red"
   background:   "#272727"
   foreground:   "#fafafa"
   black:
-    normal:     "#393939"
-    bold:       "#5b5b5b"
+    normal:     "#353540"
+    bold:       "#545466"
   red:
-    normal:     "#f42d6c"
-    bold:       "#fa9fbb"
+    normal:     "#aa706b"
+    bold:       "#d28a84"
   green:
-    normal:     "#6cf42d"
-    bold:       "#bbfa9f"
+    normal:     "#aaaa76"
+    bold:       "#d2d291"
   yellow:
-    normal:     "#f4b52d"
-    bold:       "#fadd9f"
+    normal:     "#c8b8a1"
+    bold:       "#f0dcc1"
   blue:
-    normal:     "#2d8af4"
-    bold:       "#9ec9fa"
+    normal:     "#87aaa6"
+    bold:       "#a6d2cd"
   magenta:
-    normal:     "#b52df4"
-    bold:       "#dd9ffa"
+    normal:     "#7cb6c8"
+    bold:       "#94daf0"
   cyan:
-    normal:     "#2df4b5"
-    bold:       "#9ffadd"
+    normal:     "#82aa88"
+    bold:       "#a0d2a8"
   white:
     normal:     "#d8d8d8"
-    bold:       "#ffffff"
+    bold:       "#eaeaea"
 
 # Utility
 
