@@ -15,7 +15,7 @@ term_letterspace: -1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 20
 border_size: 2
-dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{` {{ colors }}["foreground"] `}" -nb "{` {{ colors }}["background"] `}" -sf "{` {{ colors }}["foreground"] `}" -sb "{` {{ colors }}[{{ colors }}["primary"]]["normal"] `}" -h {{ bar_height }}'
+dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{` {{ colors }}["foreground"] `}" -nb "{` {{ colors }}["background"] `}" -sf "{` {{ colors }}["foreground"] `}" -sb "{` {{ colors }}[{{ colors }}["primary"]]["normal"] `}" -h {` {{ bar_height }} + {{ inner_gap_size }} `}'
 dunst_geometry: "0x5-75+75"
 
 # Bar
