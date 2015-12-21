@@ -1,0 +1,32 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/cozycat.jpg"
+
+colors:
+  primary:      "red"
+  secondary:    "green"
+  background:   "#302625"
+  foreground:   "#f0eac8"
+  black:
+    normal:     "#353540"
+    bold:       "#545466"
+  red:
+    normal:     "#aa5654"
+    bold:       "#dc6f6c"
+  green:
+    normal:     "#c7bd98"
+    bold:       "#f9ecbe"
+  yellow:
+    normal:     "#c5a86c"
+    bold:       "#f7d287"
+  blue:
+    normal:     "#aa988c"
+    bold:       "#dcc4b5"
+  magenta:
+    normal:     "#aa837b"
+    bold:       "#dca99f"
+  cyan:
+    normal:     "#c7c5a8"
+    bold:       "#f9f6d2"
+  white:
+    normal:     "#d8d8d8"
+    bold:       "#eaeaea"
+
