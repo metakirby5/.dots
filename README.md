@@ -6,6 +6,7 @@ Also has some Mac stuff.
 
 ## TODO
 
+- Lemonbar styling - make it like tmux
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
 
