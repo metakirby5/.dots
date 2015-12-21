@@ -13,7 +13,7 @@ term_letterspace: -1
 
 # WM
 wallpapers: "/usr/share/backgrounds/in_rotation/"
-inner_gap_size: 20
+inner_gap_size: 40
 border_size: 2
 dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{` {{ colors }}["foreground"] `}" -nb "{` {{ colors }}["background"] `}" -sf "{` {{ colors }}["foreground"] `}" -sb "{` {{ colors }}[{{ colors }}["primary"]]["normal"] `}" -h {{ bar_height }}'
 dunst_geometry: "0x5-75+75"

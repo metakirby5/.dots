@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
 killall lemonbar 2>/dev/null
-while pgrep conky &>/dev/null; do
-  killall conky 2>/dev/null
-done
-conky -a tm -c ~/.config/lemonbar/conkyrc &
 emit-lemonblocks \
   -B "{{ bar_block_bgc }}" \
   -A "{{ n_primary }}" \
@@ -15,10 +11,7 @@ emit-lemonblocks \
     -F "{{ fgc }}" \
     -B "{{ bar_bgc }}" \
     -u {{ bar_underline }} \
-    -d -g \
-    $(($(xdpyinfo | grep dimensions | awk '{split($2,a,"x");print a[1]}') - \
-    {{ inner_gap_size }} * 2))\
-x{{ bar_height }}+{{ inner_gap_size }}+{{ inner_gap_size }} \
+    -g x{{ bar_height }} \
     {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
     -o {{ bar_font_offset }} |\
   bash >/dev/null &
