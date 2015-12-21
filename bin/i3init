@@ -39,7 +39,7 @@ dunst &
 lightsOn &
 
 # User
-xflux -l 35.7 -g 139.5 &
+xflux -z 92129 &
 dropbox start &
 ibus-daemon -xdr &
 
