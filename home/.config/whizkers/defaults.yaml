@@ -20,14 +20,14 @@ dunst_geometry: "0x5-75+75"
 
 # Bar
 bar_height: 50
-bar_bgc: "#aa{` {{ colors }}['background'].lstrip('#')  `}"
+bar_bgc: "#00{` {{ colors }}['background'].lstrip('#')  `}"
 bar_block_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
+bar_underline_color: "#88{` {{ colors }}['foreground'].lstrip('#') `}"
 bar_fonts:
   - "M+ 1p-7"
   - "Baekmuk Gulim-7"
 bar_font_offset: -5
-bar_underline: 5
-bar_underline_color: "{` {{ colors }}['black']['bold'] `}"
+bar_underline: 0
 
 # Colors
 
