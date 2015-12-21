@@ -21,7 +21,7 @@ dunst_geometry: "0x5-75+75"
 # Bar
 bar_height: 50
 bar_conky_height: "{` {{ bar_height }} + {{ inner_gap_size }} `}"
-bar_bgc: "#dd{` {{ colors }}['background'].lstrip('#')  `}"
+bar_bgc: "#00{` {{ colors }}['background'].lstrip('#')  `}"
 bar_block_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
 bar_underline_color: "#88{` {{ colors }}['foreground'].lstrip('#') `}"
 bar_fonts:
