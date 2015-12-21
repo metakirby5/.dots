@@ -2,14 +2,17 @@
 
 killall lemonbar 2>/dev/null
 emit-lemonblocks \
-  -B "{{ bar_bgc }}" \
-  -F "{{ fgc }}" \
-  -U "{{ fgc }}" \
-  --urgent "{{ n_secondary }}" \
-  --accent "{{ n_primary }}" \
+  -B "{{ bar_block_bgc }}" \
+  -A "{{ n_primary }}" \
+  -U "{{ n_secondary }}" \
+  -L "{{ bar_underline_color }}" \
   2>/dev/null |\
-  lemonbar -u {{ bar_underline }} -g x{{ bar_height }} \
-	  {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
-	  -o {{ bar_font_offset }} |\
+  lemonbar \
+    -F "{{ fgc }}" \
+    -B "{{ bar_bgc }}" \
+    -u {{ bar_underline }} \
+    -g x{{ bar_height }} \
+    {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
+    -o {{ bar_font_offset }} |\
   bash >/dev/null &
 

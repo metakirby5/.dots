@@ -1,5 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/homura.png"
 
+bar_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
+
 colors:
   primary:      "cyan"
   secondary:    "blue"
