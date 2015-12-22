@@ -37,6 +37,7 @@ compton &
 xautolock &
 dunst &
 lightsOn &
+mpc-notify-daemon &
 
 # User
 xflux -z 92129 &

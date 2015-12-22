@@ -153,7 +153,7 @@ song_columns_list_format = "(50)[]{t|f} (25)[<% text_primary %>]{aE} (25)[<% tex
 
 show_hidden_files_in_local_browser = "no"
 display_screens_numbers_on_start = "no"
-execute_on_song_change = "mpc-notify"
+#execute_on_song_change = "mpc-notify"
 jump_to_now_playing_song_at_start = "yes"
 
 mouse_support = "yes"
