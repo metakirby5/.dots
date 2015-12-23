@@ -13,6 +13,3 @@ use_bold: false
 term_letterspace: 2
 bar_font_offset: -5
 
-# WM
-border_size: 2
-
