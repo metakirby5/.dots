@@ -2,7 +2,7 @@ wallpapers: "/usr/share/backgrounds/in_rotation/homura.png"
 
 colors:
   primary:      "cyan"
-  secondary:    "blue"
+  secondary:    "magenta"
   background:   "#101015"
   black:
     normal:     "#202025"
