@@ -129,22 +129,25 @@ endif
 " Highlights/colors
 set cursorline
 
-hi Normal guifg=white guibg=black
-hi Search ctermfg=white guifg=white
-hi NonText ctermfg=black guifg=black
+hi Normal   guifg=white guibg=black
+hi Search   ctermfg=white guifg=white
+hi NonText  ctermfg=black guifg=black
 
-hi CursorLine term=bold cterm=bold gui=bold ctermbg=black guibg=black
-hi LineNr ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
+hi CursorLine   term=bold cterm=bold gui=bold ctermbg=black guibg=black
+hi LineNr       ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
 hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
 
-hi ColorColumn ctermbg=black guibg=black
-hi Folded ctermbg=black guibg=black
+hi Todo  cterm=reverse gui=reverse ctermfg=Yellow ctermbg=Black guifg=Yellow guibg=Black
+hi Error cterm=reverse gui=reverse ctermfg=Red    ctermbg=Black guifg=Red    guibg=Black
 
-hi TabLine term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
-hi TabLineSel term=bold cterm=bold gui=bold ctermfg=white ctermbg=NONE guifg=white guibg=NONE
-hi TabLineFill term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+hi ColorColumn  ctermbg=black guibg=black
+hi Folded       ctermbg=black guibg=black
 
-hi StatusLine term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
+hi TabLine      term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+hi TabLineSel   term=bold cterm=bold gui=bold ctermfg=white ctermbg=NONE guifg=white guibg=NONE
+hi TabLineFill  term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+
+hi StatusLine   term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
 hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=darkgrey ctermbg=black guifg=darkgrey guibg=black
 
 hi VertSplit term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
