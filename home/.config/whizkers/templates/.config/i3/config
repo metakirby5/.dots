@@ -146,7 +146,7 @@ bindsym --release Control+Print         exec $nsi $_scrot -e $_scrot-up2teknik |
 bindsym --release Shift+Control+Print   exec $nsi $_scrot -se $_scrot-up2teknik || $_scrot-cancel
 
 # Screen recorder
-bindsym $mod+x            exec $nsi pgrep -x screencast && pkill ffmpeg || screencast
+bindsym $mod+x            exec $nsi ps aux | grep screencast && pkill ffmpeg || screencast
 
 # Media controls
 bindsym $mod+Home         exec $nsi mpc toggle
