@@ -1,0 +1,14 @@
+# Fonts
+font: "Calibri"
+term_fonts:
+  - "Source Code Pro"
+  - "M+ 1p"
+  - "Baekmuk Gulim"
+bar_fonts:
+  - "M+ 1p-7"
+  - "Baekmuk Gulim-7"
+
+use_bold: true
+term_letterspace: -1
+bar_font_offset: 0
+

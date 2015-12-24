@@ -2,14 +2,14 @@
 xft_dpi: 276
 
 # Fonts
-font: "Calibri"
+font: "PixelMPlus12"
 term_fonts:
-  - "Source Code Pro"
+  - "PixelMPlus12"
   - "M+ 1p"
   - "Baekmuk Gulim"
-use_bold: true
+use_bold: false
 pixelsize: 28
-term_letterspace: -1
+term_letterspace: 2
 
 # WM
 wallpapers: "/usr/share/backgrounds/in_rotation/"
@@ -25,6 +25,7 @@ bar_bgc: "#00{` {{ colors }}['background'].lstrip('#')  `}"
 bar_block_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
 bar_underline_color: "#88{` {{ colors }}['foreground'].lstrip('#') `}"
 bar_fonts:
+  - "PixelMPlus12-7"
   - "M+ 1p-7"
   - "Baekmuk Gulim-7"
 bar_font_offset: -5
