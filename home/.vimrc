@@ -596,7 +596,10 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 inoremap {<cr> {<cr>}<C-o>O
 
 " ,// and ,?? - Comment/uncomment blocks of code
-au BufNewFile,BufFilePre,BufRead *    let b:comment_leader = '# '
+au BufNewFile,BufFilePre,BufRead *    if !exists ('b:comment_leader') |
+                                 \    let b:comment_leader = '# ' |
+                                 \    endif
+
 au FileType c,cpp,java,scala          let b:comment_leader = '// '
 au FileType javascript                let b:comment_leader = '// '
 au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
