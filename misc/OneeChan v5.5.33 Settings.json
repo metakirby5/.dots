@@ -18,7 +18,7 @@
   "Show Middle Ad": true,
   "Show Bottom Ad": true,
   "Reduce Ad Opacity": false,
-  "Show Navigation Links": false,
+  "Show Navigation Links": true,
   "Show Top Links": true,
   "Show Bottom Links": true,
   "Show Previous/Next buttons": false,
