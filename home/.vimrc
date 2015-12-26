@@ -30,27 +30,55 @@ set rtp+=~/.vim/bundle/Vundle.vim
 if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
-  Plugin 'gmarik/Vundle.vim'              " Bundle manager
+  Plugin 'gmarik/Vundle.vim'                " Bundle manager
+
+  " General
+  Plugin 'tomtom/tcomment_vim'              " Toggle comments
+  Plugin 'tpope/vim-surround'               " Surround with...
 
   " Indentation
-  Plugin 'tpope/vim-sleuth'               " Autodetect indentation
-  Plugin 'hynek/vim-python-pep8-indent'   " Fix for python indent
+  Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
+  Plugin 'hynek/vim-python-pep8-indent'     " Fix for python indent
+
+  " Text objects
+  Plugin 'kana/vim-textobj-user'            " User-defined text objects
+  Plugin 'bkad/CamelCaseMotion'             " CamelCase
+  Plugin 'michaeljsmith/vim-indent-object'  " Python indentation levels
+  Plugin 'nelstrom/vim-textobj-rubyblock'   " Ruby end blocsk
 
   " Addons
-  Plugin 'airblade/vim-gitgutter'         " Git gutter
-  Plugin 'The-NERD-tree'                  " File explorer
-  Plugin 'jistr/vim-nerdtree-tabs'        " NERD-tree persistence through tabs
-  Plugin 'ScrollColors'                   " Scroll through colorschemes
+  Plugin 'airblade/vim-gitgutter'           " Git gutter
+  Plugin 'The-NERD-tree'                    " File explorer
+  Plugin 'jistr/vim-nerdtree-tabs'          " NERD-tree persistence through tabs
+  Plugin 'ScrollColors'                     " Scroll through colorschemes
 
   call vundle#end()
 
-  noremap <silent> <leader>e :NERDTreeTabsToggle<cr>
+  noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
   let g:gitgutter_map_keys = 0
 else
   " Fallbacks...
 
   " Fix for hash comments
   " inoremap # X#
+
+  " tcomment fallback
+  au BufNewFile,BufFilePre,BufRead *    if !exists ('b:comment_leader') |
+                                   \    let b:comment_leader = '# ' |
+                                   \    endif
+
+  au FileType c,cpp,java,scala          let b:comment_leader = '// '
+  au FileType javascript                let b:comment_leader = '// '
+  au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
+  au FileType conf,fstab                let b:comment_leader = '# '
+  au FileType tex                       let b:comment_leader = '% '
+  au FileType mail                      let b:comment_leader = '> '
+  au FileType vim                       let b:comment_leader = '" '
+
+  noremap <silent> <leader>g> :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
+  noremap <silent> <leader>g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
+  vnoremap <silent> <leader>g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+  vnoremap <silent> <leader>g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
 endif
 
 " **************************************
@@ -245,11 +273,9 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^[down / up] - Switch to next/prev buffer
-noremap <silent> <C-down> :bn<cr>
-noremap <silent> <C-up> :bN<cr>
-inoremap <silent> <C-down> <esc>:bn<cr>
-inoremap <silent> <C-up> <esc>:bN<cr>
+" ^b[p/n] - Switch to next/prev buffer
+noremap <leader>bn :bn<cr>
+noremap <leader>bp :bN<cr>
 
 " ,bl - List all buffers
 noremap <leader>bl :buffers<cr>
@@ -594,24 +620,6 @@ nnoremap <silent> <leader>n i<cr><esc>78l
 
 " Auto-insert matching curly brace
 inoremap {<cr> {<cr>}<C-o>O
-
-" ,// and ,?? - Comment/uncomment blocks of code
-au BufNewFile,BufFilePre,BufRead *    if !exists ('b:comment_leader') |
-                                 \    let b:comment_leader = '# ' |
-                                 \    endif
-
-au FileType c,cpp,java,scala          let b:comment_leader = '// '
-au FileType javascript                let b:comment_leader = '// '
-au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
-au FileType conf,fstab                let b:comment_leader = '# '
-au FileType tex                       let b:comment_leader = '% '
-au FileType mail                      let b:comment_leader = '> '
-au FileType vim                       let b:comment_leader = '" '
-
-noremap <silent> <leader>// :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
-noremap <silent> <leader>?? :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-vnoremap <silent> <leader>// :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-vnoremap <silent> <leader>?? :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
 
 " == ORD STUFF ==
 " " File header function
