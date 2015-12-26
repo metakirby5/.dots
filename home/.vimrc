@@ -42,7 +42,6 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   " Text objects
   Plugin 'kana/vim-textobj-user'            " User-defined text objects
-  Plugin 'bkad/CamelCaseMotion'             " CamelCase
   Plugin 'michaeljsmith/vim-indent-object'  " Python indentation levels
   Plugin 'nelstrom/vim-textobj-rubyblock'   " Ruby end blocsk
 
@@ -190,20 +189,21 @@ set ls=2
 
 " Statusline
 " 1 » .vimrc                                  vim « 78 « 48 - 177/667 - 24%
-set statusline=\                              " initialize w/ space
-set statusline+=%n                            " buffer number
-set statusline+=\ %#Normal#%<\ %*             " separator
-set statusline+=\ %f                          " relative path
-set statusline+=%(\ [%{ExtModified()}%M%R]%)  " flags
-set statusline+=\ %#Normal#                   " no highlight
-set statusline+=%=                            " left/right separator
-set statusline+=%*                            " statusline highlight
-set statusline+=\ %{GetSyntax()}              " syntax
-set statusline+=\ %#Normal#%<\ %*             " separator
-set statusline+=\ %{Has78Char()}              " 78 char highlighting
-set statusline+=%{TextWidth()}                " text width/paste mode
-set statusline+=\ %#Normal#%<\ %*             " separator
-set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\      " char# - curline/totline - file%
+set statusline=\                                " initialize w/ space
+set statusline+=%n                              " buffer number
+set statusline+=\ %#Normal#%<\ %*               " separator
+set statusline+=\ %f                            " relative path
+set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
+set statusline+=\ %#Normal#                     " no highlight
+set statusline+=%=                              " left/right separator
+set statusline+=%*                              " statusline highlight
+set statusline+=%(\ %{GetVe()}\ %#Normal#\ %*%) " virtualedit
+set statusline+=\ %{GetSyntax()}                " syntax
+set statusline+=\ %#Normal#\ %*                 " separator
+set statusline+=\ %{Has78Char()}                " 78 char highlighting
+set statusline+=%{TextWidth()}                  " text width/paste mode
+set statusline+=\ %#Normal#\ %*                 " separator
+set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\        " char# - curline/totline - file%
 
 " Returns '!' if file externally modified since last read/write
 " :e to get rid of this warning
@@ -229,13 +229,18 @@ function! FDMShort()
     endif
 endfunction
 
+" Returns 've' if virtualedit is not off
+function! GetVe()
+  return &ve == '' ? '' : 've'
+endfunction
+
 function! GetSyntax()
   return &syntax != '' ? &syntax : 'plaintext'
 endfunction
 
 " Returns '*' if > 78 char highlighting enabled
 function! Has78Char()
-  if exists("+colorcolumn")
+  if exists('+colorcolumn')
     return (&colorcolumn) ? '*' : ''
   else
     return 'X'
@@ -261,6 +266,9 @@ noremap <silent> <down> gj
 noremap <silent> <up> gk
 inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
+
+" Toggle virtualedit
+noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
 
 " Preserve selection when (de)indenting in visual mode
 vnoremap > ><cr>gv
