@@ -62,9 +62,9 @@ else
   " inoremap # X#
 
   " tcomment fallback
-  au BufNewFile,BufFilePre,BufRead *    if !exists ('b:comment_leader') |
-                                   \    let b:comment_leader = '# ' |
-                                   \    endif
+  au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
+                                   \   let b:comment_leader = '# ' |
+                                   \ endif
 
   au FileType c,cpp,java,scala          let b:comment_leader = '// '
   au FileType javascript                let b:comment_leader = '// '
@@ -110,16 +110,16 @@ endif
 
 " Autocomplete menus
 if has("wildmenu")
-    set wildignore+=*.a,*.o
-    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-    set wildignore+=.DS_Store,.git,.hg,.svn
-    set wildignore+=*~,*.swp,*.tmp
-    set wildmenu
-    if has("wildignorecase")
-      set wildignorecase
-    endif
-    set wildmode=longest:full,full
-    set wildcharm=<tab>
+  set wildignore+=*.a,*.o
+  set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+  set wildignore+=.DS_Store,.git,.hg,.svn
+  set wildignore+=*~,*.swp,*.tmp
+  set wildmenu
+  if has("wildignorecase")
+    set wildignorecase
+  endif
+  set wildmode=longest:full,full
+  set wildcharm=<tab>
 endif
 
 " Autocomplete text
@@ -145,9 +145,9 @@ syntax on
 set showmatch           " show match when inserting {}, [], or ()
 
 " Extra options for GUI mode
-if has('gui_running')
-    set guifont=Source\ Code\ Pro
-endif
+" if has('gui_running')
+"   set guifont=Source\ Code\ Pro
+" endif
 
 " **************************************
 " * UI
@@ -188,7 +188,7 @@ set sidescrolloff=5           " keep at least 5 lines left/right
 set ls=2
 
 " Statusline
-" 1 » .vimrc                                  vim « 78 « 48 - 177/667 - 24%
+" 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
 set statusline=\                                " initialize w/ space
 set statusline+=%n                              " buffer number
 set statusline+=\ %#Normal#%<\ %*               " separator
@@ -200,7 +200,7 @@ set statusline+=%*                              " statusline highlight
 set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
 set statusline+=\ %{GetSyntax()}                " syntax
 set statusline+=\ %#Normal#\ %*                 " separator
-set statusline+=\ %{Has78Char()}                " 78 char highlighting
+set statusline+=\ %{TextWrapOn()}               " 78 char highlighting
 set statusline+=%{TextWidth()}                  " text width/paste mode
 set statusline+=\ %#Normal#\ %*                 " separator
 set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\        " char# - curline/totline - file%
@@ -208,43 +208,39 @@ set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\        " char# - curline/totline - file
 " Returns '!' if file externally modified since last read/write
 " :e to get rid of this warning
 function! ExtModified()
-    return (exists('b:modified')) ? '!' : ''
+  return (exists('b:modified')) ? '!' : ''
 endfunction
 
 au FileChangedShellPost * let b:modified = 1
 au BufRead,BufWrite * if exists('b:modified') |
-            \ unlet b:modified |
-            \ endif
+                    \   unlet b:modified |
+                    \ endif
 
 " Returns a shortened form of &fdm
 function! FDMShort()
-    if &fdm == 'manual'
-        return 'm'
-    elseif &fdm == 'syntax'
-        return 's'
-    elseif &fdm == 'indent'
-        return 'i'
-    else
-        return &fdm
-    endif
+  if &fdm == 'manual'
+    return 'm'
+  elseif &fdm == 'syntax'
+    return 's'
+  elseif &fdm == 'indent'
+    return 'i'
+  else
+    return &fdm
+  endif
 endfunction
 
 " Returns 've' if virtualedit is not off
 function! GetVe()
-  return &ve == '' ? '' : 've'
+  return (&ve == '') ? '' : 've'
 endfunction
 
 function! GetSyntax()
-  return &syntax != '' ? &syntax : 'plaintext'
+  return (&syntax != '') ? &syntax : 'plaintext'
 endfunction
 
-" Returns '*' if > 78 char highlighting enabled
-function! Has78Char()
-  if exists('+colorcolumn')
-    return (&colorcolumn) ? '*' : ''
-  else
-    return 'X'
-  endif
+" Returns '*' if text wrap on
+function! TextWrapOn()
+  return  (!empty(matchstr(&fo, '.*t.*'))) ? '*' : ''
 endfunction
 
 " Returns &tw if paste mode is disabled
@@ -299,16 +295,16 @@ noremap <leader>ba :1,1000 bd!<cr>
 
 " Close all empty buffers
 function! DeleteEmptyBuffers()
-    let [i, n; empty] = [1, bufnr('$')]
-    while i <= n
-        if bufloaded(i) && bufname(i) == '' && getbufline(i, 1, 2) == ['']
-            call add(empty, i)
-        endif
-        let i += 1
-    endwhile
-    if len(empty) > 0
-        exe 'bdelete' join(empty)
+  let [i, n; empty] = [1, bufnr('$')]
+  while i <= n
+    if bufloaded(i) && bufname(i) == '' && getbufline(i, 1, 2) == ['']
+      call add(empty, i)
     endif
+    let i += 1
+  endwhile
+  if len(empty) > 0
+    exe 'bdelete' join(empty)
+  endif
 endfunction
 
 " ,be - Close all empty buffers
@@ -440,10 +436,9 @@ endif
 " === On exit
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+               \   exe "normal! g`\"" |
+               \ endif
 
 " Remember info about open buffers on close
 " set viminfo^=%
@@ -458,13 +453,13 @@ au BufReadPost *
 "   q - Enable formatting with 'gq'
 "   w - End lines unless there is whitespace at the end
 "   1 - Break lines before one-letter words
-au BufNewFile,BufRead * setlocal formatoptions=tcroqw1
+au BufNewFile,BufRead * setlocal fo=croqw1
 
 " Line break only at breaking characters
 set linebreak
 
-" Highlight column / textwidth 78 for some filetypes
-au Filetype python,c,cpp,java,sh,ruby setlocal tw=78 | setlocal cc=78
+" Highlight column / text wrap 78 for some filetypes
+au Filetype python,c,cpp,java,sh,ruby setlocal fo+=t | setlocal cc=78
 
 " ,f (normal mode) - Reformat all
 noremap <silent> <leader>f mzgggqG`z
@@ -472,35 +467,43 @@ noremap <silent> <leader>f mzgggqG`z
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
 
-" ,| - Toggle textwidth
-noremap <silent> <leader>\| :let &tw = (&tw ? 0 : 78)<cr>
+" ,| - Toggle text wrap
+function! ToggleTextWrap()
+  if !empty(matchstr(&fo, '.*t.*'))
+    setlocal fo-=t
+  else
+    setlocal fo+=t
+  endif
+endfunction
+
+noremap <silent> <leader>\| :call ToggleTextWrap()<cr>
 
 " ,\ - Toggle over 78 char highlighting
 noremap <silent> <leader>\ :let &cc = (&cc ? 0 : 78)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 " au BufRead,BufWrite * if ! &bin |
-"             \exe "normal mz" |
-"             \silent! %s/\s\+$//ge |
-"             \exe "normal `z" |
-"             \endif
+"                     \   exe "normal mz" |
+"                     \   silent! %s/\s\+$//ge |
+"                     \   exe "normal `z" |
+"                     \ endif
 
 " ,/m - Remove Windows' ^M
 noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " " Spellcheck
 " if v:version >= 700
-"     " ,/ss - Toggle spellcheck
-"     noremap <leader>/ss :setlocal spell!<cr>
+"   " ,/ss - Toggle spellcheck
+"   noremap <leader>/ss :setlocal spell!<cr>
 "
-"     " More spellcheck shortcuts
-"     noremap <leader>/sn ]s
-"     noremap <leader>/sp [s
-"     noremap <leader>/sa zg
-"     noremap <leader>/s? z=
+"   " More spellcheck shortcuts
+"   noremap <leader>/sn ]s
+"   noremap <leader>/sp [s
+"   noremap <leader>/sa zg
+"   noremap <leader>/s? z=
 "
-"     " Enable spell check for text files
-"     " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+"   " Enable spell check for text files
+"   " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
 " endif
 
 " **************************************
