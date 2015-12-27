@@ -3,11 +3,11 @@
 #VimFxMarkersContainer .marker {
   /* linkhint boxes */
   opacity: 0.8 !important;
-  background: #2D2D2D !important;
+  background: #3e5059 !important;
   border-radius: 0 !important;
-  border: 2px solid #777777 !important;
-  color: #FFFFFF !important;
-  font-family: "Calibri", sans-serif !important;
+  border: 2px solid #4e6069 !important;
+  color: white !important;
+  font-family: "PixelMPlus12", sans-serif !important;
   font-weight: normal !important;
   font-size: 12px !important;
   letter-spacing: 1px !important;
@@ -15,5 +15,6 @@
 }
 
 #VimFxMarkersContainer .marker-char--matched {
-  color: #3FCFEE !important;
+  color: #99736e !important;
 }
+

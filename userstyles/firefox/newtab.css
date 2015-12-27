@@ -1,6 +1,6 @@
 @-moz-document url(about:newtab) {
   body {
-    background-color: #202025 !important;
+    background-color: #3e5059 !important;
     height: 0 !important;
   }
 
@@ -12,7 +12,7 @@
     bottom: 0;
     font-family: 'PixelMPlus12', sans-serif;
     font-size: 10em;
-    color: #353540;
+    color: #99736e;
     content: "ネット";
   }
 
@@ -20,3 +20,4 @@
     display: none !important;
   }
 }
+
