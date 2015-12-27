@@ -53,9 +53,13 @@
 }
 
 /* Autocomplete result styling */
-.autocomplete-richlistitem:not([current]),
-.autocomplete-richlistitem:not([selected]) {
-    background-color: #545466 !important;
+.autocomplete-richlistitem {
+    background-color: #99736e !important;
+}
+
+.autocomplete-richlistitem[current],
+.autocomplete-richlistitem[selected] {
+    background-color: #4e6069 !important;
 }
 
 .autocomplete-richlistbox {
