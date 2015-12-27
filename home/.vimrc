@@ -197,7 +197,7 @@ set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
 set statusline+=\ %#Normal#                     " no highlight
 set statusline+=%=                              " left/right separator
 set statusline+=%*                              " statusline highlight
-set statusline+=%(\ %{GetVe()}\ %#Normal#\ %*%) " virtualedit
+set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
 set statusline+=\ %{GetSyntax()}                " syntax
 set statusline+=\ %#Normal#\ %*                 " separator
 set statusline+=\ %{Has78Char()}                " 78 char highlighting
