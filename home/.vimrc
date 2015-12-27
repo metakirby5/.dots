@@ -249,7 +249,27 @@ function! TextWidth()
     return (!&paste) ? &tw : 'P'
 endfunction
 
-" set ruler          " default ruler
+" Toggle minimal UI
+let g:minimal = 0
+function! ToggleMinimalUI()
+  if !g:minimal
+    let g:minimal = 1
+    set noshowmode
+    set noruler
+    set showtabline=1
+    set nonu
+    set ls=0
+  else
+    let g:minimal = 0
+    set showmode
+    set ruler
+    set showtabline=2
+    set nu
+    set ls=2
+  endif
+endfunction
+
+command Minimal call ToggleMinimalUI()
 
 " **************************************
 " * Navigation
