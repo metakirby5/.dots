@@ -6,7 +6,7 @@ wallpapers: "/usr/share/backgrounds/in_rotation/ilya77.png"
 colors:
   primary:      "red"
   secondary:    "blue"
-  background:   "#475359"
+  background:   "#3e5059"
   foreground:   "#f0eae6"
   black:
     normal:     "#4e6069"
