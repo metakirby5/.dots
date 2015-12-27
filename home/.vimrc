@@ -157,7 +157,7 @@ set showmatch           " show match when inserting {}, [], or ()
 set cursorline
 
 hi Normal   guifg=white guibg=black
-hi Search   ctermfg=white guifg=white
+hi Search   ctermfg=black guifg=black
 hi NonText  ctermfg=black guifg=black
 
 hi CursorLine   term=bold cterm=bold gui=bold ctermbg=black guibg=black
@@ -200,7 +200,7 @@ set statusline+=%*                              " statusline highlight
 set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
 set statusline+=\ %{GetSyntax()}                " syntax
 set statusline+=\ %#Normal#\ %*                 " separator
-set statusline+=\ %{TextWrapOn()}               " 78 char highlighting
+set statusline+=\ %{TextWrapOn()}               " text wrap
 set statusline+=%{TextWidth()}                  " text width/paste mode
 set statusline+=\ %#Normal#\ %*                 " separator
 set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\        " char# - curline/totline - file%
@@ -458,7 +458,10 @@ au BufNewFile,BufRead * setlocal fo=croqw1
 " Line break only at breaking characters
 set linebreak
 
-" Highlight column / text wrap 78 for some filetypes
+" Default textwidth: 78
+set tw=78
+
+" Highlight column / text wrap for some filetypes
 au Filetype python,c,cpp,java,sh,ruby setlocal fo+=t | setlocal cc=78
 
 " ,f (normal mode) - Reformat all
