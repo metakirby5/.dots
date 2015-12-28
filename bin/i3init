@@ -36,8 +36,11 @@ mpd &
 compton &
 xautolock &
 dunst &
-lightsOn &
-mpc-notify-daemon &
+
+# Scripts
+running="$(ps aux)"
+echo "$running" | grep lightsOn || lightsOn &
+echo "$running" | grep mpc-notify-daemon || mpc-notify-daemon &
 
 # User
 xflux -z 92129 &
