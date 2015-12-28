@@ -39,8 +39,8 @@ dunst &
 
 # Scripts
 running="$(ps aux)"
-echo "$running" | grep lightsOn || lightsOn &
-echo "$running" | grep mpc-notify-daemon || mpc-notify-daemon &
+echo "$running" | grep 'lightsOn' || lightsOn &
+echo "$running" | grep 'mpc-notify-daemon' || mpc-notify-daemon &
 
 # User
 xflux -z 92129 &
