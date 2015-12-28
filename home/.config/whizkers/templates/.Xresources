@@ -8,7 +8,7 @@ URxvt.font:      {{ #term_fonts }}xft:{{ . }}:pixelsize={{ pixelsize }}:antialia
 URxvt.boldFont:  {{ #term_fonts }}xft:{{ . }}{{ #use_bold }}:bold{{ /use_bold }}:pixelsize={{ pixelsize }}:antialias=true:hinting=true,{{ /term_fonts }}
 URxvt.letterSpace: {{ term_letterspace }}
 
-! Colors: https://github.com/vypr/dottie/blob/master/.Xresources
+! Colors
 URxvt.borderColor:  {{ bgc }}
 URxvt.background:  {{ bgc }}
 URxvt.foreground:  {{ fgc }}
