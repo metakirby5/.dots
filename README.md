@@ -52,6 +52,7 @@ Also has some Mac stuff.
 - dropbox
 - nmtui
 - xflux
+- unclutter
 
 ## Mac
 

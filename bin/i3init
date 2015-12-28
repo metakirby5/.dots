@@ -46,6 +46,7 @@ echo "$running" | grep 'mpc-notify-daemon' || mpc-notify-daemon &
 xflux -z 92129 &
 dropbox start &
 ibus-daemon -xdr &
+unclutter &
 
 ## LET'S DO THIS
 i3
