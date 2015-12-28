@@ -15,7 +15,7 @@ visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "Visualizer"
 visualizer_in_stereo = "no"
 visualizer_type = "wave"
-visualizer_look = "◆│"
+visualizer_look = "◆▋"
 
 # Delays ######################################################################
 
@@ -99,9 +99,9 @@ song_status_format = "{$<% ncmpcpp_secondary_n %>%a$9 }$<% ncmpcpp_primary_n %>{
 ## with reversed colors.
 ##
 
-alternative_header_first_line_format = "$b$1$aqqu$/a$9 $<% ncmpcpp_primary_n %>{%t}|{%f}$9 $1$atqq$/a$9$/b"
+alternative_header_first_line_format = "$b$1$9 $<% ncmpcpp_primary_n %>{%t}|{%f}$9 $1$9$/b"
 
-alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{%a}{ - %b}}|{%D}$9"
+alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{$b%a$/b}{ - %b}}|{%D}$9"
 
 now_playing_prefix = "$b"
 now_playing_suffix = "$/b"
@@ -165,7 +165,7 @@ user_interface = "alternative" # (classic/alternative)
 header_text_scrolling = "yes"
 header_visibility = "no"
 statusbar_visibility = "no"
-progressbar_look = "▁▖▁"
+progressbar_look = "── "
 clock_display_seconds = "no"
 display_volume_level = "yes"
 
@@ -218,8 +218,11 @@ discard_colors_if_item_is_selected = "yes"
 main_window_color = "white"
 main_window_highlight_color = "<% text_primary %>"
 
+header_window_color = "<% text_primary %>"
+
 progressbar_color = "<% text_secondary %>"
 statusbar_color = "<% text_secondary %>"
+
 visualizer_color = "<% text_primary %>"
 
 <%={{ }}=%>
