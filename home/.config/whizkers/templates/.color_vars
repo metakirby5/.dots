@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export PRIMARY_N={{ primary_n }}
+export SECONDARY_N={{ secondary_n }}
+

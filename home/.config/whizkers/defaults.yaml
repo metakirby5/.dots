@@ -104,6 +104,8 @@ b_secondary:  "{` {{ colors }}[{{ colors }}['secondary']]['bold'] `}"
 
 text_primary:         "{` {{ colors }}['primary'] `}"
 text_secondary:       "{` {{ colors }}['secondary'] `}"
+primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] `}"
+secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] `}"
 ncmpcpp_primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] + 1 `}"
 ncmpcpp_secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] + 1 `}"
 
