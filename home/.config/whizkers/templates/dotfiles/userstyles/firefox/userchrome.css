@@ -18,7 +18,7 @@
 /* Nav/URL bar */
 
 #nav-bar {
-    background-color: #99736e !important;
+    background-color: {{ n_primary }} !important;
     background-image: none !important;
     box-shadow: unset !important;
     border: none !important;
@@ -54,12 +54,12 @@
 
 /* Autocomplete result styling */
 .autocomplete-richlistitem {
-    background-color: #99736e !important;
+    background-color: {{ n_primary }} !important;
 }
 
 .autocomplete-richlistitem[current],
 .autocomplete-richlistitem[selected] {
-    background-color: #4e6069 !important;
+    background-color: {{ n_secondary }} !important;
 }
 
 .autocomplete-richlistbox {
@@ -109,7 +109,7 @@
 }
 
 #tabbrowser-tabs {
-    background-color: #3e5059 !important;
+    background-color: {{ bgc }} !important;
     height: 25px !important;
     min-height: 25px !important;
 }
@@ -146,13 +146,12 @@
 
 /* Make tabs in the background pop out */
 
-
 .tab-stack {
     /*
     margin-top: 7px !important;
     margin-left: 7px !important;
     */
-    background-color: #3e5059 !important;
+    background-color: {{ bgc }} !important;
 }
 
 /*
@@ -162,11 +161,11 @@
 */
 
 .tabbrowser-tab:hover .tab-stack {
-    background-color: #4e6069 !important;
+    background-color: {{ n_black }} !important;
 }
 
 .tabbrowser-tab[selected=true] .tab-stack {
-    background-color: #99736e !important;
+    background-color: {{ n_primary }} !important;
 }
 
 .arrowscrollbox-overflow-start-indicator,
@@ -202,7 +201,7 @@
 /* Find bar */
 
 findbar, .findbar-button {
-    background-color: #545466 !important;
+    background-color: {{ bgc }} !important;
     color: white !important;
 }
 
@@ -217,13 +216,13 @@ findbar, .findbar-button {
 /* Sidebar */
 
 #sidebar-header, #sidebar-search-container {
-    background-color: #353540 !important;
-    color: #FFFFFF !important;
+    background-color: {{ n_black }} !important;
+    color: white !important;
 }
 
 .sidebar-placesTreechildren {
-    background-color: #545466 !important;
-    color: #FFFFFF !important;
+    background-color: {{ bgc }} !important;
+    color: white !important;
 }
 
 .textbox-search-icons, #sidebar-search-label {

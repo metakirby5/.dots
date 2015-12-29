@@ -2,7 +2,7 @@
 
 #VimFxMarkersContainer .marker {
   /* linkhint boxes */
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   background: #3e5059 !important;
   border-radius: 0 !important;
   border: 2px solid #4e6069 !important;

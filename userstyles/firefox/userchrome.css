@@ -59,7 +59,7 @@
 
 .autocomplete-richlistitem[current],
 .autocomplete-richlistitem[selected] {
-    background-color: #4e6069 !important;
+    background-color: #7c9fa6 !important;
 }
 
 .autocomplete-richlistbox {
@@ -146,7 +146,6 @@
 
 /* Make tabs in the background pop out */
 
-
 .tab-stack {
     /*
     margin-top: 7px !important;
@@ -202,7 +201,7 @@
 /* Find bar */
 
 findbar, .findbar-button {
-    background-color: #545466 !important;
+    background-color: #3e5059 !important;
     color: white !important;
 }
 
@@ -217,13 +216,13 @@ findbar, .findbar-button {
 /* Sidebar */
 
 #sidebar-header, #sidebar-search-container {
-    background-color: #353540 !important;
-    color: #FFFFFF !important;
+    background-color: #4e6069 !important;
+    color: white !important;
 }
 
 .sidebar-placesTreechildren {
-    background-color: #545466 !important;
-    color: #FFFFFF !important;
+    background-color: #3e5059 !important;
+    color: white !important;
 }
 
 .textbox-search-icons, #sidebar-search-label {
