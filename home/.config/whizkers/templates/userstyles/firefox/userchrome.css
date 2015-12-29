@@ -18,7 +18,7 @@
 /* Nav/URL bar */
 
 #nav-bar {
-    background-color: {{ n_primary }} !important;
+    background-color: {{ n_black }} !important;
     background-image: none !important;
     box-shadow: unset !important;
     border: none !important;
@@ -59,7 +59,7 @@
 
 /* Autocomplete result styling */
 .autocomplete-richlistitem {
-    background-color: {{ n_primary }} !important;
+    background-color: {{ n_black }} !important;
 }
 
 .autocomplete-richlistitem[current],
@@ -169,11 +169,11 @@
 }
 
 .tabbrowser-tab:hover .tab-stack {
-    background-color: {{ n_black }} !important;
+    background-color: {{ n_primary }} !important;
 }
 
 .tabbrowser-tab[selected=true] .tab-stack {
-    background-color: {{ n_primary }} !important;
+    background-color: {{ n_black }} !important;
 }
 
 .arrowscrollbox-overflow-start-indicator,
@@ -224,7 +224,7 @@ findbar, .findbar-button {
 /* Sidebar */
 
 #sidebar-header, #sidebar-search-container {
-    background-color: {{ n_black }} !important;
+    background-color: {{ n_primary }} !important;
     color: white !important;
 }
 
