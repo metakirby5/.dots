@@ -6,13 +6,13 @@
  
   scrollbar[orient="vertical"]{background:z !important;-moz-appearance:none!important;min-width:9px!important;max-width:9px!important;}
   scrollbar[orient="vertical"]:hover{-moz-appearance:none!important;}
-  scrollbar thumb[orient="vertical"]{background:var({{ bgc }})!important;-moz-appearance:none!important;min-height:25px!important;min-width:9px!important;max-width:9px!important;border:0px!important;opacity:0.87;}
-  scrollbar thumb[orient="vertical"]:hover{background:var({{ bgc }})!important;border:0px!important;opacity:1;}
+  scrollbar thumb[orient="vertical"]{background:{{ bgc }}!important;-moz-appearance:none!important;min-height:25px!important;min-width:9px!important;max-width:9px!important;border:0px!important;opacity:0.87;}
+  scrollbar thumb[orient="vertical"]:hover{background:{{ bgc }}!important;border:0px!important;opacity:1;}
   
   scrollbar[orient="horizontal"]{background:transparent !important;-moz-appearance:none!important;background-color:transparent!important;opacity:.75!important;min-height:9px!important;max-height:9px!important;}
   scrollbar[orient="horizontal"]:hover{-moz-appearance:none!important;background-color:transparent!important;min-height:9px!important;max-height:9px!important}
-  scrollbar thumb[orient="horizontal"]{background:var({{ bgc }})!important;-moz-appearance:none!important;min-height:25px!important;max-height:8px!important;border:0px!important;margin-left:0px!important;opacity:0.87;}
-  scrollbar thumb[orient="horizontal"]:hover{background:var({{ bgc }})!important;border:0px!important;opacity:1;}
+  scrollbar thumb[orient="horizontal"]{background:{{ bgc }}!important;-moz-appearance:none!important;min-height:25px!important;max-height:8px!important;border:0px!important;margin-left:0px!important;opacity:0.87;}
+  scrollbar thumb[orient="horizontal"]:hover{background:{{ bgc }}!important;border:0px!important;opacity:1;}
 
 scrollcorner{opacity:0!important}
 scrollbar scrollcorner:hover{background:transparent!important}
@@ -24,4 +24,4 @@ body::-webkit-scrollbar{width:12.5px!important;}
 ::-webkit-scrollbar-track{background:transparent!important;}
 body::-webkit-scrollbar-track{background: transparent !important;}
 
-::-webkit-scrollbar-thumb{background-color:var({{ bgc }})!important;background:transparent;min-height:50px;}
+::-webkit-scrollbar-thumb{background-color:{{ bgc }}!important;background:transparent;min-height:50px;}
