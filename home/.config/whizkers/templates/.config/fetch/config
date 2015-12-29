@@ -4,21 +4,21 @@ PRIMARY_N={{ primary_n }}
 SECONDARY_N={{ secondary_n }}
 
 read -d '' INFO <<"EOF"
-	declare -A info=(
-		["1:OS"]="$(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
-		["2:Kernel"]="$(uname -r)"
-		["3:Uptime"]="$(uptime -p | sed 's/ou\|ute//g')"
-		["4:Shell"]="$SHELL"
-		["5:Window Manager"]="$(wmctrl -m | awk '/^Name:/{ print $2}')"
-		["6:CPU"]="$(cat /proc/cpuinfo |\
-			awk -F: '/^model name/ { print $2; exit }')"
-		["7:Speed"]="$(lscpu |\
-			awk -F: '/^CPU MHz:/ { print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
-		["8:Memory"]="$(free -m | awk '/^Mem:/ { print $3 "/" $2 " MB" }')"
-		["9:Font"]="$(xrdb -q | awk -F: '/font/{ print $3; exit }')"
-		["10:Song"]="$(mpc current)"
-		["11:Waifu"]="Black Rock Shooter"
-	)
+  declare -A info=(
+    ["1:OS"]="$(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
+    ["2:Kernel"]="$(uname -r)"
+    ["3:Uptime"]="$(uptime -p | sed 's/ou\|ute//g')"
+    ["4:Shell"]="$SHELL"
+    ["5:Window Manager"]="$(wmctrl -m | awk '/^Name:/{ print $2}')"
+    ["6:CPU"]="$(cat /proc/cpuinfo |\
+      awk -F: '/^model name/ { print $2; exit }')"
+    ["7:Speed"]="$(lscpu |\
+      awk -F: '/^CPU MHz:/ { print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
+    ["8:Memory"]="$(free -m | awk '/^Mem:/ { print $3 "/" $2 " MB" }')"
+    ["9:Font"]="$(xrdb -q | awk -F: '/font/{ print $3; exit }')"
+    ["10:Song"]="$(mpc current)"
+    ["11:Waifu"]="Black Rock Shooter"
+  )
 EOF
 
 # vim: ft=sh
