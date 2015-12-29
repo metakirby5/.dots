@@ -548,6 +548,9 @@ set shiftwidth=2
 " Define tab settings for filetypes via:
 " au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
 
+" sh - expand tabs
+au Syntax sh setlocal expandtab
+
 " Markdown - 4 char wide tabs
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 au Syntax markdown setlocal tabstop=4
