@@ -1,3 +1,6 @@
+export CHARHEIGHT=31
+export CHARWIDTH=14
 export PRIMARY_N={{ primary_n }}
 export SECONDARY_N={{ secondary_n }}
 
+# vim: ft=sh
