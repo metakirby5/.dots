@@ -1,0 +1,20 @@
+/* AGENT_SHEET */
+
+#VimFxMarkersContainer .marker {
+  /* linkhint boxes */
+  opacity: 0.8 !important;
+  background: #3e5059 !important;
+  border-radius: 0 !important;
+  border: 2px solid #4e6069 !important;
+  color: white !important;
+  font-family: "PixelMPlus12", sans-serif !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+  text-shadow: none !important;
+}
+
+#VimFxMarkersContainer .marker-char--matched {
+  color: #99736e !important;
+}
+
