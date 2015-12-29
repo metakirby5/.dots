@@ -21,7 +21,6 @@ __mk5_b_white="\[\e[1;37m\]"
 #__mk5_bot_connector='└ '
 __mk5_usr_pchar='>'
 __mk5_root_pchar='#'
-__mk5_sepchar='+'
 __mk5_dirty_char='*'
 __mk5_incoming_char='v'
 __mk5_behindmaster_char='>'
@@ -127,8 +126,7 @@ $__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
 $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     fi
 
-    git_info="$__mk5_purple$git_info \
-$__mk5_b_purple$__mk5_sepchar "
+    git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
   # Virtualenv stuff
@@ -146,14 +144,13 @@ $__mk5_b_purple$__mk5_sepchar "
 
     # Otherwise, just print out the virtualenv info separately
     else
-      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/} \
-$__mk5_b_blue$__mk5_sepchar "
+      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
     fi
   fi
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
-$__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
+$__mk5_cyan$USER$__mk5_b_cyan in \
 $virtualenv_info\
 $git_info\
 $colorpwd\

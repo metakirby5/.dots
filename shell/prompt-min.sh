@@ -19,9 +19,8 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 #__mk5_top_connector='┌ '
 #__mk5_bot_connector='└ '
-__mk5_usr_pchar='»'
+__mk5_usr_pchar='>'
 __mk5_root_pchar='#'
-__mk5_sepchar='+'
 __mk5_dirty_char='*'
 __mk5_incoming_char='v'
 __mk5_behindmaster_char='>'
@@ -75,15 +74,14 @@ function __mk5_set_prompt {
   if [[ "$git_branch" ]]; then
     git_info=$git_branch
 
-    git_info="$__mk5_purple$git_info \
-$__mk5_b_purple$__mk5_sepchar "
+    git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
   local colorpwd="$__mk5_green$(__mk5_git_pwd) "
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
-$__mk5_cyan$USER@$__mk5_hostname $__mk5_b_cyan$__mk5_sepchar \
+$__mk5_cyan$USER$__mk5_b_cyan in \
 $git_info\
 $colorpwd\
 \n\
