@@ -1,0 +1,32 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/ilya47.png"
+
+colors:
+  primary:      "blue"
+  secondary:    "red"
+  background:   "#152030"
+  foreground:   "#ecf0ff"
+  black:
+    normal:     "#202c3f"
+    bold:       "#202c3f"
+  red:
+    normal:     "#fb9fb1"
+    bold:       "#fb9fb1"
+  green:
+    normal:     "#acc267"
+    bold:       "#acc267"
+  yellow:
+    normal:     "#ecd5b1"
+    bold:       "#ecd5b1"
+  blue:
+    normal:     "#6fb2df"
+    bold:       "#6fb2df"
+  magenta:
+    normal:     "#e1a3ee"
+    bold:       "#e1a3ee"
+  cyan:
+    normal:     "#8cf5ed"
+    bold:       "#8cf5ed"
+  white:
+    normal:     "#e0f0fc"
+    bold:       "#e0f0fc"
+
