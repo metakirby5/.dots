@@ -1,9 +1,9 @@
-CHARHEIGHT=31
-CHARWIDTH=15
-PRIMARY_N={{ primary_n }}
-SECONDARY_N={{ secondary_n }}
+FETCH_CHARHEIGHT=31
+FETCH_CHARWIDTH=15
+FETCH_PRIMARY_N={{ primary_n }}
+FETCH_SECONDARY_N={{ secondary_n }}
 
-read -d '' INFO <<"EOF"
+read -d '' FETCH_INFO <<"EOF"
   declare -A info=(
     ["1:OS"]="$(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
     ["2:Kernel"]="$(uname -r)"
