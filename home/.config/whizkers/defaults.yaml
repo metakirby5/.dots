@@ -34,6 +34,7 @@ bar_underline: 0
 # Colors
 
 colors:
+  name:         "untitled"
   primary:      "blue"
   secondary:    "red"
   background:   "#272727"
@@ -76,6 +77,8 @@ colornumbers:
   white:    7
 
 # Convenience
+
+scheme_name: "{` {{ colors }}['name'] `}"
 
 bgc:        "{` {{ colors }}['background'] `}"
 fgc:        "{` {{ colors }}['foreground'] `}"

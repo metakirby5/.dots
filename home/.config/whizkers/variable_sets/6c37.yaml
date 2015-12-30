@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/monochrome_sakura.jpg"
 
 colors:
+  name:         "6c37"
   primary:      "blue"
   secondary:    "red"
   background:   "#202025"

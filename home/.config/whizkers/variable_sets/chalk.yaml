@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/ilya47.png"
 
 colors:
+  name:         "chalk"
   primary:      "blue"
   secondary:    "red"
   background:   "#152030"

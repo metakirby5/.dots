@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/cozycat.jpg"
 
 colors:
+  name:         "cozycat"
   primary:      "red"
   secondary:    "green"
   background:   "#302625"

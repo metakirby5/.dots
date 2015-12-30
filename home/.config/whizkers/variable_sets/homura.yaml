@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/homura.png"
 
 colors:
+  name:         "homura"
   primary:      "cyan"
   secondary:    "magenta"
   background:   "#101015"

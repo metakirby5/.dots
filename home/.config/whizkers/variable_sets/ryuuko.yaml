@@ -4,6 +4,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/godlike.jpg"
 
 colors:
+  name:         "ryuuko"
   primary:      "red"
   secondary:    "blue"
   background:   "#3e5059"

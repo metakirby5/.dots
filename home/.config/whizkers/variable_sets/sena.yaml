@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/sena_sitting.jpg"
 
 colors:
+  name:         "sena"
   primary:      "magenta"
   secondary:    "blue"
   black:

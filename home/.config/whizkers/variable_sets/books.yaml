@@ -1,6 +1,7 @@
 wallpapers: "/usr/share/backgrounds/in_rotation/books.jpg"
 
 colors:
+  name:         "books"
   primary:      "cyan"
   secondary:    "blue"
   background:   "#303037"
