@@ -23,6 +23,7 @@
     box-shadow: unset !important;
     border: none !important;
     height: auto !important;
+    z-index: 10 !important;
     font-size: 0.9rem !important;
 }
 
@@ -162,6 +163,7 @@
     margin-top: 5px !important;
     margin-left: 5px !important;
     background-color: {{ bgc }} !important;
+    transition: all 0.5s !important;
 }
 
 .tabbrowser-tab:last-child .tab-stack {
