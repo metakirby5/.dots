@@ -72,7 +72,7 @@
 .autocomplete-richlistitem:not([selected]) .ac-url-text,
 .autocomplete-richlistitem:not([current]) .ac-action-text,
 .autocomplete-richlistitem:not([selected]) .ac-action-text {
-    color: {{ bgc }} !important;
+    color: {{ n_white }} !important;
 }
 
 .autocomplete-richlistbox {
@@ -159,22 +159,28 @@
 
 /* Make tabs in the background pop out */
 
-.tab-stack {
+.tabbrowser-tab {
     margin-top: 5px !important;
-    margin-left: 5px !important;
+    /* margin-left: 5px !important; */
     background-color: {{ bgc }} !important;
+    /* border: 2px solid {{ bgc }} !important; */
+    /* border-radius: 5px 5px 0 0 !important; */
     transition: all 0.5s !important;
 }
 
-.tabbrowser-tab:last-child .tab-stack {
+.tabbrowser-tab:first-child {
+    margin-left: 5px !important;
+}
+
+.tabbrowser-tab:last-child {
     margin-right: 5px !important;
 }
 
-.tabbrowser-tab:hover .tab-stack {
+.tabbrowser-tab:hover {
     background-color: {{ n_primary }} !important;
 }
 
-.tabbrowser-tab[selected=true] .tab-stack {
+.tabbrowser-tab[selected=true] {
     background-color: {{ n_black }} !important;
 }
 
