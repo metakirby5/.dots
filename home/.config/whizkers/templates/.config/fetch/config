@@ -17,8 +17,6 @@ read -d '' FETCH_INFO <<"EOF"
     ["9:Speed"]="$(lscpu |\\
       awk -F: '/^CPU MHz:/{ print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
     ["10:Memory"]="$(free -m | awk '/^Mem:/{ print $3 "/" $2 " MB" }')"
-    ["11:Song"]="$(mpc current)"
-    ["12:Waifu"]="Black Rock Shooter"
     ["13:Color Scheme"]="{{ scheme_name }}"
   )
 EOF
