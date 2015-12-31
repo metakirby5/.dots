@@ -3,22 +3,20 @@ FETCH_CHARWIDTH=15
 FETCH_PRIMARY_N={{ primary_n }}
 FETCH_SECONDARY_N={{ secondary_n }}
 
-read -d '' FETCH_INFO <<"EOF"
-  declare -A info=(
-    ["1:OS"]="$(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
-    ["2:Kernel"]="$(uname -r)"
-    ["3:Uptime"]="$(uptime -p | sed 's/ou\\|ute//g')"
-    ["4:Shell"]="$(basename "$SHELL")"
-    ["5:Window Manager"]="$(wmctrl -m | awk '/^Name:/{ print $2}')"
-    ["6:Font"]="$(xrdb -q | awk -F: '/font/{ print $3; exit }')"
-    ["7:Resolution"]="$(xdpyinfo | awk '/dimensions:/{ print $2 }')"
-    ["8:CPU"]="$(cat /proc/cpuinfo |\\
-      awk -F: '/^model name/{ gsub(/^\\s+/, "", $2); print $2; exit }')"
-    ["9:Speed"]="$(lscpu |\\
-      awk -F: '/^CPU MHz:/{ print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
-    ["10:Memory"]="$(free -m | awk '/^Mem:/{ print $3 "/" $2 " MB" }')"
-    ["13:Color Scheme"]="{{ scheme_name }}"
-  )
-EOF
+FETCH_INFO=(
+  "OS: $(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
+  "Kernel: $(uname -r)"
+  "Uptime: $(uptime -p | sed 's/ou\|ute//g')"
+  "Shell: $(basename "$SHELL")"
+  "Window Manager: $(wmctrl -m | awk '/^Name:/{ print $2}')"
+  "Font: $(xrdb -q | awk -F: '/font/{ print $3; exit }')"
+  "Resolution: $(xdpyinfo | awk '/dimensions:/{ print $2 }')"
+  "CPU: $(cat /proc/cpuinfo |\
+    awk -F: '/^model name/{ gsub(/^\s+/, "", $2); print $2; exit }')"
+  "Speed: $(lscpu |\
+    awk -F: '/^CPU MHz:/{ print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
+  "Memory: $(free -m | awk '/^Mem:/{ print $3 "/" $2 " MB" }')"
+  "Color Scheme: {{ scheme_name }}"
+)
 
 # vim: ft=sh
