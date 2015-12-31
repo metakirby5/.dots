@@ -103,7 +103,7 @@ alternative_header_first_line_format = "$b$1$9 $<% ncmpcpp_primary_n %>{%t}|{%f}
 
 alternative_header_second_line_format = "$<% ncmpcpp_secondary_n %>{{$b%a$/b}{ - %b}}|{%D}$9"
 
-now_playing_prefix = "$b"
+now_playing_prefix = "$b$<% ncmpcpp_primary_n %>> "
 now_playing_suffix = "$/b"
 
 selected_item_prefix = "$<% ncmpcpp_primary_n %>$r"
