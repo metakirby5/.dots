@@ -73,6 +73,8 @@ Also has some Mac stuff.
   ```
 
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles.
+  - Ensure your profile is called `profile` so the templates in
+  `~/.mozilla/firefox/profile` can render properly.
 - Run `wzk` and choose a colorscheme.
   Alternatively, manually run `relink-config`, `whizkers`, `xrdb`,
   and restart `i3`.
