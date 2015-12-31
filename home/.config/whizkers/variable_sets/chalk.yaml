@@ -4,7 +4,7 @@ colors:
   name:         "chalk"
   primary:      "blue"
   secondary:    "red"
-  background:   "#152030"
+  background:   "#15202b"
   foreground:   "#ecf0ff"
   black:
     normal:     "#202c3f"
