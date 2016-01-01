@@ -113,15 +113,6 @@ chatnets = {
 };
 
 channels = (
-  { name = "#lobby"; chatnet = "EsperNet"; autojoin = "No"; },
-  { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#gamesurge"; chatnet = "GameSurge"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
-  { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
-  { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
-  { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
-  { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
   { name = "#rice"; chatnet = "Rizon"; autojoin = "No"; }
 );
 
@@ -374,7 +365,6 @@ statusbar = {
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
-      disabled = "yes";
     };
 
     dccstat = {
@@ -398,6 +388,6 @@ settings = {
     dcc_autoget = "yes";
     dcc_autoaccept_lowports = "yes";
   };
-  "fe-common/core" = { theme = "metakirby5"; };
+  "fe-common/core" = { theme = "fullsalvo"; };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };
