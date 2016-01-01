@@ -122,6 +122,7 @@ bindsym $mod+Shift+q        kill
 bindsym $mod+Shift+u        exec $nsi whizkers && reload-xresources
 bindsym $mod+Shift+c        reload
 bindsym $mod+Shift+r        restart
+bindsym $mod+Shift+o        open
 bindsym $mod+Escape         exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape   exit
 
