@@ -304,14 +304,12 @@ statusbar = {
     window = {
 
       type = "window";
-      placement = "bottom";
+      placement = "top";
       position = "1";
       visible = "active";
 
       items = {
         barstart = { priority = "100"; };
-        time = { };
-        user = { };
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
@@ -319,7 +317,6 @@ statusbar = {
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
-      disabled = "yes";
     };
 
     window_inact = {
@@ -365,6 +362,7 @@ statusbar = {
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
 
     dccstat = {
