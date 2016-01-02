@@ -393,3 +393,6 @@ settings = {
   };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };
+hilights = (
+  { text = "metakirby5"; nick = "yes"; word = "yes"; },
+);
