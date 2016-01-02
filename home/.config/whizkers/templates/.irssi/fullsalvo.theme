@@ -69,11 +69,11 @@ abstracts = {
   ########### messages #################################
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%b$0%N $1 %K│ %|%N";
+  msgnick = "%K$0%N $1 %K│ %|%N";
 
   # $0 = nick mode, $1 = nick
   ownmsgnick = "{msgnick $0 $1}";
-  ownnick = "%g$*%n";
+  ownnick = "{{ irssi_primary_n }}$*%n";
 
   # public message in channel, $0 = nick mode, $1 = nick
   pubmsgnick = "{msgnick $0 $1}";
@@ -144,13 +144,11 @@ abstracts = {
   netjoin = "        %Knjoin %G> %b\"$*\"%n";
 
   # /names list
-  #names_prefix = "%K░▒▓ ";
   names_users = "%K┌┄┄ users in $1 ";
   names_nick = "%_$2$0%_%n$1- ";
   names_nick_op = "{names_nick $* %R}";
   names_nick_halfop = "{names_nick $* %C}";
   names_nick_voice = "{names_nick $* %K}";
-  #names_users = "%K░▒▓ %n$1";
   names_prefix = "%K│ %n$1";
   names_channel = "%b$*%n";
 
@@ -174,20 +172,20 @@ abstracts = {
 
   # default background for all statusbars. You can also give
   # the default foreground color for statusbar items.
-  sb_background = "%4%k";
+  sb_background = "%k";
 
   # background for prompt / input line
-  sb_prompt_bg = "%n";
+  sb_prompt_bg = "{{ irssi_primary_b }}";
 
   # text at the beginning of statusbars.
-  sbstart = "▓▒░ ";
+  sbstart = "┄┄─ ";
   # text at the end of statusbars.
-  sbend = " ░▒▓";
+  sbend = " ─┄┄";
 
-  topicsbstart = "▓▒░ ";
-  topicsbend = " ░▒▓";
+  topicsbstart = "┄┄─ ";
+  topicsbend = " ─┄┄";
 
-  prompt = " %B$*%n ";
+  prompt = " %B$* > %n";
 
   sb = " %K$* ";
   # sbmode = " %k░ %g%g+%n$* %K░";
@@ -250,7 +248,6 @@ formats = {
     msg_private_query = "{privmsgnick $[-11]0}$2";
     new_topic = "        %ctopic %K= %|%B'$2' %non %b$1%n%K[set by {nick %y$0}]";
 
-    #endofnames = "%K░▒▓ %mtotal: {hilight $2} ops, {hilight $3} halfops, {hilight $4} voices, {hilight $5} normal%n";
     endofnames = "%K└┄┄ %mtotal: {hilight $2} ops, {hilight $3} halfops, {hilight $4} voices, {hilight $5} normal%n";
   };
   "fe-common/irc" = {

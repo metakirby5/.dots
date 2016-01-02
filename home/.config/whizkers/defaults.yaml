@@ -76,6 +76,40 @@ colornumbers:
   cyan:     6
   white:    7
 
+irssi_colors:
+  black:
+    normal: '%k'
+    bold:   '%K'
+    bg:     '%0'
+  red:
+    normal: '%r'
+    bold:   '%R'
+    bg:     '%1'
+  green:
+    normal: '%g'
+    bold:   '%G'
+    bg:     '%2'
+  yellow:
+    normal: '%y'
+    bold:   '%Y'
+    bg:     '%3'
+  blue:
+    normal: '%b'
+    bold:   '%B'
+    bg:     '%4'
+  magenta:
+    normal: '%m'
+    bold:   '%M'
+    bg:     '%5'
+  cyan:
+    normal: '%c'
+    bold:   '%C'
+    bg:     '%6'
+  white:
+    normal: '%w'
+    bold:   '%W'
+    bg:     '%7'
+
 # Convenience
 
 scheme_name: "{` {{ colors }}['name'] `}"
@@ -109,6 +143,14 @@ text_primary:         "{` {{ colors }}['primary'] `}"
 text_secondary:       "{` {{ colors }}['secondary'] `}"
 primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] `}"
 secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] `}"
+
 ncmpcpp_primary_n:    "{` {{ colornumbers }}[{{ colors }}['primary']] + 1 `}"
 ncmpcpp_secondary_n:  "{` {{ colornumbers }}[{{ colors }}['secondary']] + 1 `}"
+
+irssi_primary_n:    "{` {{ irssi_colors }}[{{ colors }}['primary']]['normal'] `}"
+irssi_primary_b:    "{` {{ irssi_colors }}[{{ colors }}['primary']]['bold'] `}"
+irssi_primary_bg:   "{` {{ irssi_colors }}[{{ colors }}['primary']]['bg'] `}"
+irssi_secondary_n:  "{` {{ irssi_colors }}[{{ colors }}['secondary']]['normal'] `}"
+irssi_secondary_b:  "{` {{ irssi_colors }}[{{ colors }}['secondary']]['bold'] `}"
+irssi_secondary_bg: "{` {{ irssi_colors }}[{{ colors }}['secondary']]['bg'] `}"
 
