@@ -38,9 +38,9 @@ xautolock &
 dunst &
 
 # Scripts
-running="$(ps aux)"
-echo "$running" | grep 'lightsOn' || lightsOn &
-echo "$running" | grep 'mpc-notify-daemon' || mpc-notify-daemon &
+lightsOn &
+mpc-notify-daemon &
+notify-listener &
 
 # User
 xflux -z 92129 &
