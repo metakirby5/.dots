@@ -386,6 +386,10 @@ settings = {
     dcc_autoget = "yes";
     dcc_autoaccept_lowports = "yes";
   };
-  "fe-common/core" = { theme = "fullsalvo"; };
+  "fe-common/core" = {
+    theme = "fullsalvo";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
+  };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };
