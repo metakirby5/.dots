@@ -46,6 +46,7 @@ aliases = {
   C = "CLEAR";
   WL = "WINDOW LIST";
   WG = "WINDOW GOTO";
+  WS = "WINDOW SHOW";
   WC = "WINDOW CLOSE";
   WI = "WHOIS";
   SB = "SCROLLBACK";
@@ -97,8 +98,7 @@ statusbar = {
     prompt = "{prompt $[.15]itemname}";
     prompt_empty = "{prompt $winname}";
 
-    topic = " $topic";
-    topic_empty = " Irssi v$J - http://www.irssi.org";
+    topic = " ┄ $topic";
 
     lag = "{sb lag $0-}";
     act = "{sb [$0-]}";
@@ -107,11 +107,23 @@ statusbar = {
 
   default = {
 
+    topic = {
+      disabled = "yes";
+    };
+
+    dccstat = {
+
+      items = { dccstat = { }; };
+      position = "1";
+      placement = "top";
+      disabled = "yes";
+    };
+
     window = {
 
       type = "window";
       placement = "top";
-      position = "1";
+      position = "10";
       visible = "active";
 
       items = {
@@ -120,7 +132,8 @@ statusbar = {
         window_empty = { };
         lag = { priority = "-1"; };
         act = { priority = "10"; };
-        away = { priority = "10"; alignment = "right"; };
+        away = { priority = "20"; alignment = "right"; };
+        topic = { priority = "-1"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -154,30 +167,6 @@ statusbar = {
         prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
-    };
-
-    topic = {
-
-      type = "root";
-      placement = "top";
-      position = "1";
-      visible = "always";
-
-      items = {
-        topicbarstart = { priority = "100"; };
-        topic = { };
-        topic_empty = { };
-        topicbarend = { priority = "100"; alignment = "right"; };
-      };
-      disabled = "yes";
-    };
-
-    dccstat = {
-
-      items = { dccstat = { }; };
-      position = "2";
-      placement = "top";
-      disabled = "yes";
     };
   };
 };
