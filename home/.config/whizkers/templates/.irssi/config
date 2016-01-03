@@ -85,6 +85,9 @@ statusbar = {
     barstart = "{sbstart}";
     barend = "{sbend}";
 
+    ibarstart = "{ibstart}";
+    ibarend = "{ibend}";
+
     topicbarstart = "{topicsbstart}";
     topicbarend = "{topicsbend}";
 
@@ -133,7 +136,7 @@ statusbar = {
         lag = { priority = "-1"; };
         act = { priority = "10"; };
         away = { priority = "20"; alignment = "right"; };
-        topic = { priority = "-1"; alignment = "right"; };
+        topic = { priority = "-10"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -142,16 +145,17 @@ statusbar = {
     window_inact = {
 
       type = "window";
-      placement = "bottom";
+      placement = "top";
       position = "1";
       visible = "inactive";
 
       items = {
-        barstart = { priority = "100"; };
+        ibarstart = { priority = "100"; };
         window = { };
         window_empty = { };
+        topic = { priority = "-10"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
-        barend = { priority = "100"; alignment = "right"; };
+        ibarend = { priority = "100"; alignment = "right"; };
       };
     };
 

@@ -170,16 +170,15 @@ abstracts = {
 
   ######## statusbar/topicbar ############################
 
-  # default background for all statusbars. You can also give
-  # the default foreground color for statusbar items.
   sb_background = "{{ irssi_secondary_b }}";
   sb = " $*";
   sbstart = "┄┄─";
   sbend = " ─┄┄";
+  ibstart = "%K┄┄─";
+  ibend = "%K ─┄┄";
   topicsbstart = "┄┄─ ";
   topicsbend = " ─┄┄";
 
-  # background for prompt / input line
   sb_prompt_bg = "{{ irssi_primary_b }}";
   prompt = " $* > ";
 
