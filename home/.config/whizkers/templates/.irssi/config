@@ -138,7 +138,7 @@ statusbar = {
         window_empty = { };
         lag = { priority = "-1"; };
         act = { priority = "10"; };
-        topic = { priority = "-100"; alignment = "right"; };
+        topic = { priority = "-100"; alignment = "left"; };
         away = { priority = "20"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
