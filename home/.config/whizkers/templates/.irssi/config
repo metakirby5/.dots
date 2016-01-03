@@ -135,8 +135,8 @@ statusbar = {
         window_empty = { };
         lag = { priority = "-1"; };
         act = { priority = "10"; };
+        topic = { priority = "-100"; alignment = "right"; };
         away = { priority = "20"; alignment = "right"; };
-        topic = { priority = "-10"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -153,7 +153,7 @@ statusbar = {
         ibarstart = { priority = "100"; };
         window = { };
         window_empty = { };
-        topic = { priority = "-10"; alignment = "right"; };
+        topic = { priority = "-100"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         ibarend = { priority = "100"; alignment = "right"; };
       };
