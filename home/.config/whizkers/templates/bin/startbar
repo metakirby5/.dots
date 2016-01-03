@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-killall lemonbar 2>/dev/null
+killall lemonbar iwevent pactl 2>/dev/null
 emit-lemonblocks \
   -B "{{ bar_block_bgc }}" \
   -A "{{ n_primary }}" \
