@@ -182,7 +182,7 @@ abstracts = {
   prompt = " $* > ";
 
   sbmode = " %g%g+%n$*";
-  sbaway = "{{ irssi_primary_b }}away";
+  sbaway = " ─ {{ irssi_primary_b }}$0";
   sbservertag = "$0";
   sbnickmode = "$0";
 

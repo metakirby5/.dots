@@ -96,7 +96,7 @@ statusbar = {
 
     time = "{sb $Z}";
     user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
-    away = "{sb {sbaway $A}}";
+    away = "{sbaway $A}";
 
     window = "{sb $itemname}";
     window_empty = "{sb {sbservertag $tag}}";
