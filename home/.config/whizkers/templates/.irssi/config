@@ -180,11 +180,12 @@ statusbar = {
     };
   };
 };
+
 settings = {
   core = {
-    real_name = "Ethan";
-    user_name = "metakirby5";
-    nick = "metakirby5";
+    real_name = "{{ realname }}";
+    user_name = "{{ username }}";
+    nick = "{{ username }}";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "irc/dcc" = {
@@ -200,6 +201,7 @@ settings = {
   };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };
+
 hilights = (
-  { text = "metakirby5"; nick = "yes"; word = "yes"; },
+  { text = "{{ username }}"; nick = "yes"; word = "yes"; },
 );
