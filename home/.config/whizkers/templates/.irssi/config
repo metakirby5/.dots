@@ -284,6 +284,7 @@ statusbar = {
 
     time = "{sb $Z}";
     user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+    away = "{sb {sbaway $A}}";
 
     window = "{sb $winref:$tag/$itemname{sbmode $M}}";
     window_empty = "{sb $winref{sbservertag $tag}}";
@@ -314,6 +315,7 @@ statusbar = {
         window_empty = { };
         lag = { priority = "-1"; };
         act = { priority = "10"; };
+        away = { priority = "10"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };

@@ -184,8 +184,8 @@ abstracts = {
   topicsbstart = "┄┄─ ";
   topicsbend = " ─┄┄";
 
-  # sbmode = " %k░ %g%g+%n$* %K░";
-  sbmode = "";
+  sbmode = " ┄ %g%g+%n$* {{ irssi_secondary_b }}┄";
+  # sbmode = "";
   sbaway = " %g/* zZzZ */%n";
   sbservertag = ":%R$0%n";
   sbnickmode = "$0";
@@ -203,7 +203,7 @@ abstracts = {
   # ',' separator
   sb_act_sep = " ";
   # normal text
-  sb_act_text = "%K%9$*%n";
+  sb_act_text = "$*";
   # public message
   sb_act_msg = "%Y%9$*%n";
   # hilight
