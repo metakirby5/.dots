@@ -172,9 +172,9 @@ abstracts = {
 
   sb_background = "{{ irssi_secondary_b }}";
   sb_window_inact_bg = "%K";
-  sb = " $*";
-  sbstart = "┄┄─";
-  sbend = " ─┄┄";
+  sb = "─ $* ";
+  sbstart = "┄";
+  sbend = " ─┄";
   topicsbstart = "┄┄─ ";
   topicsbend = " ─┄┄";
 

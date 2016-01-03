@@ -104,7 +104,7 @@ statusbar = {
     prompt = "{prompt $[.15]itemname}";
     prompt_empty = "{prompt $winname}";
 
-    topic = " ┄ $topic";
+    topic = "{sb $topic}";
 
     lag = "{sb lag $0-}";
     act = "{sb [$0-]}";
