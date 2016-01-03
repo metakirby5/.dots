@@ -390,6 +390,7 @@ settings = {
     theme = "fullsalvo";
     bell_beeps = "yes";
     beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
+    autolog = "yes";
   };
   "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
 };

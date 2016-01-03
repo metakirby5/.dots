@@ -77,7 +77,7 @@ abstracts = {
 
   # public message in channel, $0 = nick mode, $1 = nick
   pubmsgnick = "{msgnick $0 $1}";
-  pubnick = "%N$*%n";
+  pubnick = "{{ irssi_secondary_n }}$*%n";
 
   # public highlighted message in channel
   pubmsghinick = "{msgnick $0 $1}%y";
@@ -172,22 +172,18 @@ abstracts = {
 
   # default background for all statusbars. You can also give
   # the default foreground color for statusbar items.
-  sb_background = "%k";
+  sb_background = "{{ irssi_secondary_b }}";
+  sb = " $* ";
+  sbstart = "┄┄─ ";
+  sbend = " ─┄┄";
 
   # background for prompt / input line
   sb_prompt_bg = "{{ irssi_primary_b }}";
-
-  # text at the beginning of statusbars.
-  sbstart = "┄┄─ ";
-  # text at the end of statusbars.
-  sbend = " ─┄┄";
+  prompt = " $* > ";
 
   topicsbstart = "┄┄─ ";
   topicsbend = " ─┄┄";
 
-  prompt = " %B$* > %n";
-
-  sb = " %K$* ";
   # sbmode = " %k░ %g%g+%n$* %K░";
   sbmode = "";
   sbaway = " %g/* zZzZ */%n";
@@ -232,7 +228,7 @@ formats = {
     nick_changed = "%K{channick $[-13]0} %G>%n {channick $1}";
     your_nick_changed = "%K          you %G>%n {channick $1}";
 
-    pubmsg = "{pubmsgnick $2 {pubnick \00313$[-11]0}}$1";
+    pubmsg = "{pubmsgnick $2 {pubnick $[-11]0}}$1";
 
     own_msg = "{ownmsgnick $2 {ownnick $[-11]0}}$1";
     own_msg_channel = "{ownmsgnick $3 {ownnick $[-11]0}{msgchannel $1}}$2";
@@ -279,8 +275,4 @@ formats = {
   "Irssi::Script::ichat" = {
     ichat_timestamp = "%Y>%K>      $1 %y>%n";
   };
-};
-settings = {
-  core = { real_name = "Unknown"; user_name = "metakirby5"; nick = "metakirby5"; };
-  "fe-text" = { actlist_sort = "refnum"; };
 };
