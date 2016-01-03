@@ -171,11 +171,10 @@ abstracts = {
   ######## statusbar/topicbar ############################
 
   sb_background = "{{ irssi_secondary_b }}";
+  sb_window_inact_bg = "%K";
   sb = " $*";
   sbstart = "┄┄─";
   sbend = " ─┄┄";
-  ibstart = "%K┄┄─";
-  ibend = "%K ─┄┄";
   topicsbstart = "┄┄─ ";
   topicsbend = " ─┄┄";
 

@@ -91,9 +91,6 @@ statusbar = {
     barstart = "{sbstart}";
     barend = "{sbend}";
 
-    ibarstart = "{ibstart}";
-    ibarend = "{ibend}";
-
     topicbarstart = "{topicsbstart}";
     topicbarend = "{topicsbend}";
 
@@ -156,12 +153,12 @@ statusbar = {
       visible = "inactive";
 
       items = {
-        ibarstart = { priority = "100"; };
+        barstart = { priority = "100"; };
         window = { };
         window_empty = { };
         topic = { priority = "-100"; alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
-        ibarend = { priority = "100"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
       };
     };
 
