@@ -35,32 +35,24 @@ channels = (
 aliases = {
   ATAG = "WINDOW SERVER";
   ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
-  B = "BAN";
-  BACK = "AWAY";
-  BANS = "BAN";
-  BYE = "QUIT";
-  C = "CLEAR";
-  CALC = "EXEC - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
-  CHAT = "DCC CHAT";
+  CALC = "EXEC - if command -v bc >/dev/null 2>&1\\; then printf '%s = ' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
   CUBES = "SCRIPT EXEC Irssi::active_win->print(\"%_bases\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { join '', map { \"%x0\\${_}0\\$_\" } '0'..'9','A'..'F' }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print(\"%_cubes\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { my \\$y = \\$_*6 \\; join '', map { my \\$x = \\$_ \\; map { \"%x\\$x\\$_\\$x\\$_\" } @{['0'..'9','A'..'Z']}[\\$y .. \\$y+5] } 1..6 }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) for 0..5 \\; Irssi::active_win->print(\"%_grays\", MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print( do { join '', map { \"%x7\\${_}7\\$_\" } 'A'..'X' }, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; Irssi::active_win->print(\"%_mIRC extended colours\", MSGLEVEL_CLIENTCRAP) \\; my \\$x \\; \\$x .= sprintf \"\00399,%02d%02d\",\\$_,\\$_ for 0..15 \\; Irssi::active_win->print(\\$x, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) \\; for my \\$z (0..6) { my \\$x \\; \\$x .= sprintf \"\00399,%02d%02d\",\\$_,\\$_ for 16+(\\$z*12)..16+(\\$z*12)+11 \\; Irssi::active_win->print(\\$x, MSGLEVEL_NEVER | MSGLEVEL_CLIENTCRAP) }";
-  DATE = "TIME";
-  DEHIGHLIGHT = "DEHILIGHT";
-  DESCRIBE = "ACTION";
-  DHL = "DEHILIGHT";
-  EXEMPTLIST = "MODE $C +e";
-  EXIT = "QUIT";
-  GOTO = "SCROLLBACK GOTO";
-  HIGHLIGHT = "HILIGHT";
-  HL = "HILIGHT";
-  HOST = "USERHOST";
-  INVITELIST = "MODE $C +I";
+
   J = "JOIN";
   K = "KICK";
-  KB = "KICKBAN";
-  KN = "KNOCKOUT";
-  LAST = "LASTLOG";
-  LEAVE = "PART";
   M = "MSG";
+  C = "CLEAR";
+  CHAT = "DCC CHAT";
+  LAST = "LASTLOG";
+  DATE = "TIME";
+  EXIT = "QUIT";
+
+  HIGHLIGHT = "HILIGHT";
+  HL = "HILIGHT";
+  DEHIGHLIGHT = "DEHILIGHT";
+  DHL = "DEHILIGHT";
+
+  LEAVE = "PART";
   MUB = "UNBAN *";
   N = "NAMES";
   NMSG = "^MSG";
