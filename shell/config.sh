@@ -25,6 +25,9 @@ alias ls='ls -xh --color=auto'
 alias mpv='mpv --autofit-larger=90%x90%'
 alias feh='feh -.'
 
+# Don't give literal * unless we ask for it
+shopt -s nullglob
+
 # Functions
 
 # Detect filetype and extract
