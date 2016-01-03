@@ -53,6 +53,7 @@ aliases = {
   CHAT = "DCC CHAT";
   LAST = "LASTLOG";
   DATE = "TIME";
+  BACK = "AWAY";
   EXIT = "QUIT";
 
   HIGHLIGHT = "HILIGHT";
