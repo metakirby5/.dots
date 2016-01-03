@@ -6,7 +6,7 @@ info_eol = "false";
 
 # these characters are automatically replaced with specified color
 # (dark grey by default)
-replaces = { "[]" = "%b$*%n"; };
+replaces = { "[]" = "{{ irssi_primary_n }}$*%n"; };
 
 abstracts = {
 
@@ -69,7 +69,7 @@ abstracts = {
   ########### messages #################################
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%K$0%N $1 %K│ %|%N";
+  msgnick = "%K$0 $1 %K│ %|%N";
 
   # $0 = nick mode, $1 = nick
   ownmsgnick = "{msgnick $0 $1}";
@@ -173,21 +173,19 @@ abstracts = {
   # default background for all statusbars. You can also give
   # the default foreground color for statusbar items.
   sb_background = "{{ irssi_secondary_b }}";
-  sb = " $* ";
-  sbstart = "┄┄─ ";
+  sb = " $*";
+  sbstart = "┄┄─";
   sbend = " ─┄┄";
+  topicsbstart = "┄┄─ ";
+  topicsbend = " ─┄┄";
 
   # background for prompt / input line
   sb_prompt_bg = "{{ irssi_primary_b }}";
   prompt = " $* > ";
 
-  topicsbstart = "┄┄─ ";
-  topicsbend = " ─┄┄";
-
-  sbmode = " ┄ %g%g+%n$* {{ irssi_secondary_b }}┄";
-  # sbmode = "";
-  sbaway = " %g/* zZzZ */%n";
-  sbservertag = ":%R$0%n";
+  sbmode = " %g%g+%n$*";
+  sbaway = "{{ irssi_primary_b }}away";
+  sbservertag = "$0";
   sbnickmode = "$0";
 
   # Usercount

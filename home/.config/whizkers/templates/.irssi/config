@@ -1,29 +1,7 @@
 servers = (
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { address = "irc.esper.net"; chatnet = "EsperNet"; port = "6667"; },
   {
     address = "chat.freenode.net";
     chatnet = "Freenode";
-    port = "6667";
-  },
-  {
-    address = "irc.gamesurge.net";
-    chatnet = "GameSurge";
-    port = "6667";
-  },
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  {
-    address = "irc.ircsource.net";
-    chatnet = "IRCSource";
-    port = "6667";
-  },
-  { address = "irc.netfuze.net"; chatnet = "NetFuze"; port = "6667"; },
-  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
-  {
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
     port = "6667";
   },
   {
@@ -32,80 +10,18 @@ servers = (
     port = "6667";
     autoconnect = "Yes";
   },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
-  {
-    address = "irc.undernet.org";
-    chatnet = "Undernet";
-    port = "6667";
-  }
 );
 
 chatnets = {
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "20";
-    max_whois = "30";
-  };
-  EFNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  EsperNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
   Freenode = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
   };
-  GameSurge = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  IRCnet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  IRCSource = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  NetFuze = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
   Rizon = {
     type = "IRC";
     autosendcmd = "/^msg NickServ IDENTIFY {{ WZK_ENV_IRSSI_IDENTIFY }}; wait 2000; /^join rice";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  SILC = { type = "SILC"; };
-  Undernet = {
-    type = "IRC";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -286,8 +202,8 @@ statusbar = {
     user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
     away = "{sb {sbaway $A}}";
 
-    window = "{sb $winref:$tag/$itemname{sbmode $M}}";
-    window_empty = "{sb $winref{sbservertag $tag}}";
+    window = "{sb $itemname}";
+    window_empty = "{sb {sbservertag $tag}}";
 
     prompt = "{prompt $[.15]itemname}";
     prompt_empty = "{prompt $winname}";
@@ -295,8 +211,8 @@ statusbar = {
     topic = " $topic";
     topic_empty = " Irssi v$J - http://www.irssi.org";
 
-    lag = "{sb Lag: $0-}";
-    act = "{sb Act: $0-}";
+    lag = "{sb lag $0-}";
+    act = "{sb [$0-]}";
     more = "-- more --";
   };
 
