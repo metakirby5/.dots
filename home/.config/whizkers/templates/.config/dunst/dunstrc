@@ -135,7 +135,7 @@
     startup_notification = false
 
     # dmenu path.
-    dmenu = dmenu {{ dmenu_flags }} -t -p dunst
+    dmenu = dmenu {{ dunst_dmenu_flags }} -t -p dunst
 
     # Browser for opening urls in context menu.
     browser = google-chrome

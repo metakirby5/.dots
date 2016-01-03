@@ -20,6 +20,7 @@ wallpapers: "/usr/share/backgrounds/in_rotation/"
 inner_gap_size: 15
 border_size: 5
 dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf "{` {{ colors }}["foreground"] `}" -nb "{` {{ colors }}["background"] `}" -sf "{` {{ colors }}["foreground"] `}" -sb "{` {{ colors }}[{{ colors }}["primary"]]["normal"] `}" -h {{ bar_height }}'
+dunst_dmenu_flags: '-i -f -fn "{{ font }}:pixelsize={{ pixelsize }}" -nf {` {{ colors }}["foreground"] `} -nb {` {{ colors }}["background"] `} -sf {` {{ colors }}["foreground"] `} -sb {` {{ colors }}[{{ colors }}["primary"]]["normal"] `} -h {{ bar_height }}'
 dunst_geometry: "0x5-50+{` {{ bar_height }} + 50 `}"
 
 # Bar
