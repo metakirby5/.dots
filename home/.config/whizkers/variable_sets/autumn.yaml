@@ -1,0 +1,32 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/autumn.jpg"
+
+colors:
+  name:         "autumn"
+  primary:      "red"
+  secondary:    "yellow"
+  background:   "#1a1a1a"
+  foreground:   "#cccccc"
+  black:
+    normal:     "#333333"
+    bold:       "#4d4d4d"  
+  red:
+    normal:     "#aa7c69"
+    bold:       "#dca087"
+  green:
+    normal:     "#aa897b"
+    bold:       "#dcb19f"
+  yellow:
+    normal:     "#aa948a"
+    bold:       "#dcbfb2"
+  blue:
+    normal:     "#aca69c"
+    bold:       "#ded6c9"
+  magenta:
+    normal:     "#9ea8a7"
+    bold:       "#cddad8"
+  cyan:
+    normal:     "#85a1a9"
+    bold:       "#acd0db"
+  white:
+    normal:     "#cbcbcb"
+    bold:       "#ffffff"

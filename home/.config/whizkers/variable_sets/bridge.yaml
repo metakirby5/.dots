@@ -1,0 +1,32 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/smoking.jpg"
+
+colors:
+  name:         "bridge"
+  primary:      "red"
+  secondary:    "blue"
+  background:   "#293436"
+  foreground:   "#dbdcde"
+  black:
+    normal:     "#2f3b3b"
+    bold:       "#646a6d"
+  red:
+    normal:     "#aa937e"
+    bold:       "#dcbea3"
+  green:
+    normal:     "#ac896a"
+    bold:       "#deb088"
+  yellow:
+    normal:     "#aa9f94"
+    bold:       "#dccdbf"
+  blue:
+    normal:     "#c4a279"
+    bold:       "#f6cb97"
+  magenta:
+    normal:     "#a7aaa9"
+    bold:       "#d8dcda"
+  cyan:
+    normal:     "#93a5a9"
+    bold:       "#bed5db"
+  white:
+    normal:     "#bcc0bf"
+    bold:       "#ede3ca"

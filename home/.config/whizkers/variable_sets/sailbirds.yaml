@@ -1,0 +1,24 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/dog_camera.jpg"
+
+colors:
+  name:         "sailbirds"
+  primary:      "red"
+  secondary:    "blue"
+  red:
+    normal:     "#bdbdb3"
+    bold:       "#efefe2"
+  green:
+    normal:     "#a0aaa5"
+    bold:       "#cfdcd5"
+  yellow:
+    normal:     "#8ba3a9"
+    bold:       "#b4d3db"
+  blue:
+    normal:     "#7c9caa"
+    bold:       "#a0c9dc"
+  magenta:
+    normal:     "#7094aa"
+    bold:       "#90bfdc"
+  cyan:
+    normal:     "#6585aa"
+    bold:       "#82acdc"

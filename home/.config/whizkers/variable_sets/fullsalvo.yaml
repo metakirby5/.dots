@@ -1,0 +1,32 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/Kuvshinov Ilya - 113.png"
+
+colors:
+  name:         "fullsalvo"
+  primary:      "blue"
+  secondary:    "white"
+  background:   "#2e2e2e"
+  foreground:   "#eeeeee"
+  black:
+    normal:     "#4b4b4b"
+    bold:       "#5f5f5f"
+  red:
+    normal:     "#a06e6e"
+    bold:       "#d88383"
+  green:
+    normal:     "#969b6a"
+    bold:       "#b5bd6a"
+  yellow:
+    normal:     "#ded997"
+    bold:       "#fafbb9"
+  blue:
+    normal:     "#71899d"
+    bold:       "#8da7be"
+  magenta:
+    normal:     "#8a7e8f"
+    bold:       "#b49dbb"
+  cyan:
+    normal:     "#b2cccd"
+    bold:       "#d6fff8"
+  white:
+    normal:     "#9eb2cb"
+    bold:       "#cae5ff"
