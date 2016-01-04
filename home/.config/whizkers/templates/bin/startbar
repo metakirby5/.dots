@@ -6,7 +6,7 @@ emit-lemonblocks \
   -A "{{ n_primary }}" \
   -U "{{ n_secondary }}" \
   -L "{{ bar_underline_color }}" \
-  2>/dev/null |\
+  2>/dev/null | tee ~/.lemonlog |\
   lemonbar \
     -F "{{ fgc }}" \
     -B "{{ bar_bgc }}" \
