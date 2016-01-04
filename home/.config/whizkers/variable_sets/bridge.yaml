@@ -5,7 +5,7 @@ wallpapers:     "/usr/share/backgrounds/in_rotation/smoking.jpg"
 colors:
   name:         "bridge"
   primary:      "red"
-  secondary:    "blue"
+  secondary:    "magenta"
   background:   "#293436"
   foreground:   "#dbdcde"
   black:
