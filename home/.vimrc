@@ -578,6 +578,13 @@ nnoremap <leader>m :silent make\|redraw!\|cc<cr>
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
 
+" Upload to ix.io
+" http://stackoverflow.com/a/2585673
+function Up2ixio() range
+  echo system('echo '.shellescape(join(getline(a:firstline, a:lastline), "\r")).'| curl -sfF "f:1=<-" ix.io | xclip -sel c')
+endfunction
+com -range=% -nargs=0 Up2ixio :<line1>,<line2>call Up2ixio()
+
 " **************************************
 " * Shortcuts
 " **************************************
