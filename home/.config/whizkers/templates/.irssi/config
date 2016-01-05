@@ -8,8 +8,14 @@ servers = (
     address = "irc.rizon.net";
     chatnet = "Rizon";
     port = "6667";
-    autoconnect = "Yes";
   },
+  {
+    address = "rizonbnc.us.rizon.net";
+    chatnet = "Rizon";
+    port = "1234";
+    password = "{{ username }}:{{ WZK_ENV_RIZON_BNC_PASS }}";
+    autoconnect = "Yes";
+  }
 );
 
 chatnets = {
@@ -21,7 +27,6 @@ chatnets = {
   };
   Rizon = {
     type = "IRC";
-    autosendcmd = "/^msg NickServ IDENTIFY {{ WZK_ENV_IRSSI_IDENTIFY }}; wait 2000; /^join rice";
     max_kicks = "1";
     max_msgs = "1";
     max_whois = "1";
@@ -29,7 +34,11 @@ chatnets = {
 };
 
 channels = (
-  { name = "#rice"; chatnet = "Rizon"; autojoin = "No"; }
+  {
+    name = "#rice";
+    chatnet = "Rizon";
+    autojoin = "Yes";
+  }
 );
 
 aliases = {
@@ -182,7 +191,7 @@ settings = {
   core = {
     real_name = "{{ realname }}";
     user_name = "{{ username }}";
-    nick = "{{ username }}";
+    nick = "{{ username }}_y2p";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "irc/dcc" = {
@@ -196,9 +205,15 @@ settings = {
     beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
     autolog = "yes";
   };
-  "perl/core/scripts" = { dccstat_hide_sbar_when_inactive = "yes"; };
+  "perl/core/scripts" = {
+    dccstat_hide_sbar_when_inactive = "yes";
+  };
 };
 
 hilights = (
-  { text = "{{ username }}"; nick = "yes"; word = "yes"; },
+  {
+    text = "{{ username }}";
+    nick = "yes";
+    word = "yes";
+  },
 );
