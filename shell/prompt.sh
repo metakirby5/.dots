@@ -27,7 +27,7 @@ __mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
 __mk5_hostname=${HOSTNAME%%.*}
-__mk5_home="$(readlink "$HOME")"
+__mk5_home="$(readlink -F "$HOME")"
 
 function __mk5_git_pwd {
   # Get git path
