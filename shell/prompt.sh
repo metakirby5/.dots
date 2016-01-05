@@ -27,6 +27,7 @@ __mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
 __mk5_hostname=${HOSTNAME%%.*}
+__mk5_home="$(readlink "$HOME")"
 
 function __mk5_git_pwd {
   # Get git path
@@ -38,7 +39,7 @@ function __mk5_git_pwd {
     echo "${gitpath##*/}${thePWD##$gitpath}"
   else
     # Replace home with ~
-    pwd | sed "s|^$HOME|~|"
+    pwd | sed "s|^$__mk5_home|~|"
   fi
 }
 
