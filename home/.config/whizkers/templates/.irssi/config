@@ -191,7 +191,7 @@ settings = {
   core = {
     real_name = "{{ realname }}";
     user_name = "{{ username }}";
-    nick = "{{ username }}_y2p";
+    nick = "{{ username }}_irssi";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "irc/dcc" = {
