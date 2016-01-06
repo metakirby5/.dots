@@ -36,6 +36,7 @@ mpd &
 compton &
 xautolock &
 dunst &
+devmon &
 
 # Scripts
 lightsOn &

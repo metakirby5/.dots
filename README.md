@@ -55,6 +55,7 @@ Also has some Mac stuff.
 - unclutter
 - actionless/oomox
 - gtk-reload (from neeasade/autotheme.sh)
+- devmon
 
 ## Mac
 
