@@ -1,4 +1,4 @@
-gtk-theme-name = "Numix-Blue"
-gtk-icon-theme-name = "Numix-Circle"
-gtk-font-name = "Calibri"
-gtk-cursor-theme-name = "Adwaita"
+gtk-theme-name = "{{ gtk_theme }}"
+gtk-icon-theme-name = "{{ gtk_icon_theme }}"
+gtk-font-name = "{{ font }}"
+gtk-cursor-theme-name = "{{ gtk_cursor_theme }}"

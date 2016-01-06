@@ -53,6 +53,8 @@ Also has some Mac stuff.
 - nmtui
 - xflux
 - unclutter
+- actionless/oomox
+- gtk-reload (from neeasade/autotheme.sh)
 
 ## Mac
 
