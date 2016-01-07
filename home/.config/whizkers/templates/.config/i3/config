@@ -108,6 +108,7 @@ client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 ## WINDOW RULES
 
 # Popups
+for_window [instance="^I3-FLOAT$"] floating enable
 for_window [window_role="pop-up|task_dialog"] floating enable
 
 # File viewers
