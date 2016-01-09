@@ -60,11 +60,11 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
   let g:gitgutter_map_keys = 0
-  nmap <leader>nn <Plug>GitGutterNextHunk
-  nmap <leader>np <Plug>GitGutterPrevHunk
-  nmap <Leader>na <Plug>GitGutterStageHunk
-  nmap <Leader>nu <Plug>GitGutterRevertHunk
-  nmap <Leader>nv <Plug>GitGutterPreviewHunk
+  nmap <leader>gn <Plug>GitGutterNextHunk
+  nmap <leader>gp <Plug>GitGutterPrevHunk
+  nmap <leader>ga <Plug>GitGutterStageHunk
+  nmap <leader>gu <Plug>GitGutterRevertHunk
+  nmap <leader>gv <Plug>GitGutterPreviewHunk
 else
   " Fallbacks...
 
