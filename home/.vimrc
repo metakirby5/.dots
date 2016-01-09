@@ -45,7 +45,12 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'michaeljsmith/vim-indent-object'  " Python indentation levels
   Plugin 'nelstrom/vim-textobj-rubyblock'   " Ruby end blocsk
 
+  " Syntax
+  Plugin 'digitaltoad/vim-jade'             " Jade
+  Plugin 'wavded/vim-stylus'                " Stylus
+
   " Addons
+  Plugin 'mattn/emmet-vim'                  " Emmet
   Plugin 'airblade/vim-gitgutter'           " Git gutter
   Plugin 'The-NERD-tree'                    " File explorer
   Plugin 'jistr/vim-nerdtree-tabs'          " NERD-tree persistence through tabs
@@ -55,6 +60,11 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
   let g:gitgutter_map_keys = 0
+  nmap <leader>hn <Plug>GitGutterNextHunk
+  nmap <leader>hp <Plug>GitGutterPrevHunk
+  nmap <Leader>ha <Plug>GitGutterStageHunk
+  nmap <Leader>hu <Plug>GitGutterRevertHunk
+  nmap <Leader>hv <Plug>GitGutterPreviewHunk
 else
   " Fallbacks...
 
