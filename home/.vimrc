@@ -60,11 +60,11 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
   let g:gitgutter_map_keys = 0
-  nmap <leader>hn <Plug>GitGutterNextHunk
-  nmap <leader>hp <Plug>GitGutterPrevHunk
-  nmap <Leader>ha <Plug>GitGutterStageHunk
-  nmap <Leader>hu <Plug>GitGutterRevertHunk
-  nmap <Leader>hv <Plug>GitGutterPreviewHunk
+  nmap <leader>nn <Plug>GitGutterNextHunk
+  nmap <leader>np <Plug>GitGutterPrevHunk
+  nmap <Leader>na <Plug>GitGutterStageHunk
+  nmap <Leader>nu <Plug>GitGutterRevertHunk
+  nmap <Leader>nv <Plug>GitGutterPreviewHunk
 else
   " Fallbacks...
 
@@ -661,9 +661,6 @@ nnoremap <silent> <leader>O O<esc>cc<esc>
 " ,dd - Delete current line contents
 nnoremap <silent> <leader>dd cc<esc>
 vnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<cr>:call RestoreSearch()<cr>
-
-" ,n - Splits a line at the cursor, then moves to column 78
-nnoremap <silent> <leader>n i<cr><esc>78l
 
 " **************************************
 " * Macros
