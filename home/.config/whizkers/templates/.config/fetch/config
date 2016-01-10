@@ -5,17 +5,11 @@ FETCH_SECONDARY_N={{ secondary_n }}
 
 FETCH_INFO=(
   "OS: $(cat /etc/*ease | awk -F= '/^NAME=/{ print $2 }')"
-  "Kernel: $(uname -r)"
   "Uptime: $(uptime -p | sed 's/ou\|ute//g')"
   "Shell: $(basename "$SHELL")"
   "Window Manager: $(wmctrl -m | awk '/^Name:/{ print $2}')"
   "Font: $(xrdb -q | awk -F: '/font/{ print $3; exit }')"
   "Resolution: $(xdpyinfo | awk '/dimensions:/{ print $2 }')"
-  "CPU: $(cat /proc/cpuinfo |\
-    awk -F: '/^model name/{ gsub(/^\s+/, "", $2); print $2; exit }')"
-  "Speed: $(lscpu |\
-    awk -F: '/^CPU MHz:/{ print "scale=1;" $2 "/ 1000" }' | bc -l)GHz"
-  "Memory: $(free -m | awk '/^Mem:/{ print $3 "/" $2 " MB" }')"
   "Color Scheme: {{ scheme_name }}"
 )
 
