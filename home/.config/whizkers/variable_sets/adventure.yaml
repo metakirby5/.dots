@@ -1,0 +1,25 @@
+wallpapers: "/usr/share/backgrounds/in_rotation/adventure.jpg"
+
+colors:
+  name:         "adventure"
+  primary:      "yellow"
+  secondary:    "blue"
+  red:
+    normal:     "#b16749"
+    bold:       "#e3845d"
+  green:
+    normal:     "#9aa4a2"
+    bold:       "#c8d6d3"
+  yellow:
+    normal:     "#b7a77d"
+    bold:       "#e9d49f"
+  blue:
+    normal:     "#709ab2"
+    bold:       "#8fc5e4"
+  magenta:
+    normal:     "#508baf"
+    bold:       "#66b2e1"
+  cyan:
+    normal:     "#9abac5"
+    bold:       "#c1e9f7"
+
