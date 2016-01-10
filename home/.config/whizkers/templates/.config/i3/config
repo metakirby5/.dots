@@ -70,6 +70,7 @@ set $xwi                xwininfo -tree -root | grep
 
 ## SESSION
 
+exec_always $nsi i3-focus-last
 exec_always $nsi feh -zr --bg-fill $wallpapers
 
 # lemonbar
@@ -131,8 +132,8 @@ for_window [class="feh|mpv"] floating enable
 # Tasks
 set $_update_configs        whizkers && reload-xresources
 bindsym $mod+f              fullscreen toggle
+bindsym $mod+Tab            exec $nsi i3-focus-last --switch
 bindsym $mod+Shift+q        kill
-bindsym $mod+Shift+u        exec $nsi whizkers && reload-xresources
 bindsym $mod+Shift+c        reload
 bindsym $mod+Shift+r        restart
 bindsym $mod+Shift+o        open
