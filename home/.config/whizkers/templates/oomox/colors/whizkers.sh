@@ -5,7 +5,7 @@
  SEL_FG={{ fgc_nohash }}
  TXT_BG={{ n_black_nohash }}
  TXT_FG={{ fgc_nohash }}
-MENU_BG={{ n_white_nohash }}
-MENU_FG={{ n_black_nohash }}
+MENU_BG={{ bgc_nohash }}
+MENU_FG={{ fgc_nohash }}
  BTN_BG={{ b_black_nohash }}
  BTN_FG={{ fgc_nohash }}
