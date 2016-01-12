@@ -94,7 +94,7 @@ endif
 " * Variables
 " **************************************
 
-set nu                        " line numbering on
+set rnu                       " relative line numbering on
 set noerrorbells              " turns off annoying bell sounds for errors
 set novisualbell              " no screen flashes
 set backspace=2               " backspace over everything
@@ -267,14 +267,14 @@ function! ToggleMinimalUI()
     set noshowmode
     set noruler
     set showtabline=1
-    set nonu
+    set nornu
     set ls=0
   else
     let g:minimal = 0
     set showmode
     set ruler
     set showtabline=2
-    set nu
+    set rnu
     set ls=2
   endif
 endfunction
@@ -292,6 +292,23 @@ noremap <silent> <down> gj
 noremap <silent> <up> gk
 inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
+
+" Toggle relative line numbers
+function! NumberToggle()
+  if(&rnu == 1)
+    set nornu
+    set nu
+  else
+    set nonu
+    set rnu
+  endif
+endfunction
+
+nnoremap <silent> <leader>n :call NumberToggle()<cr>
+
+" Auto relative line numbers on insert mode
+au InsertEnter * set nornu | set nu
+au InsertLeave * set nonu | set rnu
 
 " Toggle virtualedit
 noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
@@ -483,7 +500,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
 "   q - Enable formatting with 'gq'
 "   w - End lines unless there is whitespace at the end
 "   1 - Break lines before one-letter words
-au BufNewFile,BufRead * setlocal fo=croqw1
+au BufNewFile,BufRead * setlocal fo=tcroqw1
 
 " Line break only at breaking characters
 set linebreak
@@ -491,28 +508,29 @@ set linebreak
 " Default textwidth: 78
 set tw=78
 
-" Highlight column / text wrap for some filetypes
-au Filetype python,c,cpp,java,sh,ruby setlocal fo+=t | setlocal cc=78
+" Colorcolumn when textwidth on
+au BufNewFile,BufRead * if !empty(matchstr(&fo, '.*t.*')) |
+                      \   setlocal cc=+1 |
+                      \ endif
+
+" ,\ - Toggle text wrap & color column
+function! ToggleTextWrap()
+  if empty(matchstr(&fo, '.*t.*'))
+    setlocal fo+=t
+    setlocal cc=+1
+  else
+    setlocal fo-=t
+    setlocal cc=0
+  endif
+endfunction
+
+noremap <silent> <leader>\ :call ToggleTextWrap()<cr>
 
 " ,f (normal mode) - Reformat all
 noremap <silent> <leader>f mzgggqG`z
 
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
-
-" ,| - Toggle text wrap
-function! ToggleTextWrap()
-  if !empty(matchstr(&fo, '.*t.*'))
-    setlocal fo-=t
-  else
-    setlocal fo+=t
-  endif
-endfunction
-
-noremap <silent> <leader>\| :call ToggleTextWrap()<cr>
-
-" ,\ - Toggle over 78 char highlighting
-noremap <silent> <leader>\ :let &cc = (&cc ? 0 : 78)<cr>
 
 " Removes any trailing whitespace in the file upon closing
 " au BufRead,BufWrite * if ! &bin |
