@@ -144,7 +144,7 @@ set omnifunc=syntaxcomplete#Complete
 "set autoread           " automatically read ext. file changes
 
 " **************************************
-" * Theme
+" * UI
 " **************************************
 
 " Set color scheme
@@ -153,15 +153,6 @@ silent! colorscheme peachpuff
 " Syntax highlighting
 syntax on
 set showmatch           " show match when inserting {}, [], or ()
-
-" Extra options for GUI mode
-" if has('gui_running')
-"   set guifont=Source\ Code\ Pro
-" endif
-
-" **************************************
-" * UI
-" **************************************
 
 " Highlights/colors
 set cursorline
@@ -324,7 +315,7 @@ noremap <leader>0 0
 
 " === Buffers
 
-" ^b[p/n] - Switch to next/prev buffer
+" ,b[p/n] - Switch to next/prev buffer
 noremap <leader>bn :bn<cr>
 noremap <leader>bp :bN<cr>
 
@@ -487,9 +478,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
                \   exe "normal! g`\"" |
                \ endif
 
-" Remember info about open buffers on close
-" set viminfo^=%
-
 " **************************************
 " * Style
 " **************************************
@@ -532,30 +520,20 @@ noremap <silent> <leader>f mzgggqG`z
 " ,f (visual mode) - Reflow selection
 vnoremap <silent> <leader>f Jgqq
 
-" Removes any trailing whitespace in the file upon closing
-" au BufRead,BufWrite * if ! &bin |
-"                     \   exe "normal mz" |
-"                     \   silent! %s/\s\+$//ge |
-"                     \   exe "normal `z" |
-"                     \ endif
+" Spellcheck
+if v:version >= 700
+  " ,/ss - Toggle spellcheck
+  noremap <leader>cc :setlocal spell!<cr>
 
-" ,/m - Remove Windows' ^M
-noremap <leader>/m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+  " More spellcheck shortcuts
+  noremap <leader>cn ]s
+  noremap <leader>cp [s
+  noremap <leader>ca zg
+  noremap <leader>cw z=
 
-" " Spellcheck
-" if v:version >= 700
-"   " ,/ss - Toggle spellcheck
-"   noremap <leader>/ss :setlocal spell!<cr>
-"
-"   " More spellcheck shortcuts
-"   noremap <leader>/sn ]s
-"   noremap <leader>/sp [s
-"   noremap <leader>/sa zg
-"   noremap <leader>/s? z=
-"
-"   " Enable spell check for text files
-"   " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
-" endif
+  " Enable spell check for text files
+  au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+endif
 
 " **************************************
 " * Indentation / Syntax
@@ -659,18 +637,11 @@ vnoremap <leader>y "+y
 " shift-<tab> - Omni complete (not really useful in C)
 inoremap <S-tab> <C-x><C-o>
 
-" ^\ - Save
-noremap <C-\> :w<cr>
-inoremap <C-\> <esc>:w<cr>
-
-" ,q - Quit
-noremap <leader>q :q<cr>
-
 " ,p - Toggle paste mode
 noremap <leader>p :setlocal paste!<cr>
 
-" ,<cr> - Disable highlight
-noremap <silent> <leader><cr> :noh<cr>
+" ,/ - Disable highlight
+noremap <silent> <leader>/ :noh<cr>
 
 " ,[oO] - Create newlines in normal mode
 nnoremap <silent> <leader>o o<esc>cc<esc>
