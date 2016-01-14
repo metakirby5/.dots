@@ -9,6 +9,6 @@ set page-completions on
 set print-completions-horizontally on
 
 # Keymaps
-set editing-mode vi
-set keymap vi
+# set editing-mode vi
+# set keymap vi
 

@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-killall lemonbar iwevent pactl 2>/dev/null
+barpid="$(\
+	ps aux | grep emit-lemonblocks | grep -v grep | awk '{ print $2 }' \
+)"
+
+[[ ! -z "$barpid" ]] && echo "$barpid" | xargs kill
+
 emit-lemonblocks \
   -B "{{ bar_block_bgc }}" \
   -A "{{ n_primary }}" \
