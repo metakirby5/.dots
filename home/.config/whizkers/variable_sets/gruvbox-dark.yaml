@@ -3,7 +3,7 @@
 wallpapers:     "/usr/share/backgrounds/in_rotation/ilya26.png"
 
 colors:
-  name:         "gruvbox"
+  name:         "gruvbox-dark"
   primary:      "blue"
   secondary:    "cyan"
   background:   "#282828"
