@@ -1,0 +1,34 @@
+# https://github.com/morhetz/gruvbox
+
+wallpapers:     "/usr/share/backgrounds/in_rotation/ilya26.png"
+
+colors:
+  name:         "gruvbox"
+  primary:      "blue"
+  secondary:    "cyan"
+  background:   "#282828"
+  foreground:   "#ebdbb2"
+  black:
+    normal:     "#3c3836"
+    bold:       "#504945"
+  red:
+    normal:     "#cc241d"
+    bold:       "#fb4934"
+  green:
+    normal:     "#98971a"
+    bold:       "#b8bb26"
+  yellow:
+    normal:     "#d78821"
+    bold:       "#fabd2f"
+  blue:
+    normal:     "#458588"
+    bold:       "#83a598"
+  magenta:
+    normal:     "#b16286"
+    bold:       "#d3869b"
+  cyan:
+    normal:     "#689d6a"
+    bold:       "#8ec07c"
+  white:
+    normal:     "#bdae93"
+    bold:       "#d5c4a1"
