@@ -31,7 +31,7 @@ Also has some Mac stuff.
 - Airblader/i3-gaps
 - krypt-n/bar
 - acrisci/i3ipc-python
-- i3lock
+- eBrnd/i3lock-color
 - xautolock
 - chjj/compton
 - melek/dmenu2
