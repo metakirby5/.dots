@@ -12,7 +12,7 @@ mogrify \
 	-fill white -gravity center -annotate +0+180 "locked" \
 	"$TMPBG"
 killall -SIGUSR1 dunst # pause dunst
-i3lock -ni "$TMPBG" \
+i3lock -ndi "$TMPBG" \
 	--ringvercolor={{ n_black_nohash}}ff \
 	--insidevercolor={{ n_black_nohash }}ff \
 	--ringwrongcolor={{ n_red_nohash}}ff \
