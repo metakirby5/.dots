@@ -22,7 +22,7 @@ DPMS_OFF=960
 /usr/libexec/gnome-settings-daemon &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 
-# Janky sleep to ensure gnome settings are overwritten
+# Wait for gnome-settings-daemon
 sleep 0.5
 
 # Config
@@ -33,7 +33,6 @@ xset dpms $DPMS_STANDBY $DPMS_SUSPEND $DPMS_OFF s $SCREENSAVER &
 # Desktop
 urxvt256cd -q -o -f &
 mpd &
-mpdscribble &
 compton &
 xautolock &
 dunst &
@@ -41,7 +40,6 @@ devmon &
 
 # Scripts
 lightsOn &
-mpc-notify-daemon &
 notify-listener &
 
 # User
@@ -49,6 +47,11 @@ xflux -z 92129 &
 dropbox start &
 ibus-daemon -xdr &
 unclutter &
+
+# Wait for mpd
+sleep 0.5
+mpdscribble &
+mpc-notify-daemon &
 
 ## LET'S DO THIS
 i3
