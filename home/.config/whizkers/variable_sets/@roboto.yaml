@@ -1,10 +1,10 @@
-font: "Calibri"
+font: "Roboto"
 term_fonts:
-  - "Source Code Pro"
+  - "Roboto Mono"
   - "M+ 1p"
   - "Baekmuk Gulim"
 bar_fonts:
-  - "Calibri-7"
+  - "Roboto-7"
   - "M+ 1p-7"
   - "Baekmuk Gulim-7"
 
