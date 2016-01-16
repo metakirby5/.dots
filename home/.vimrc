@@ -532,7 +532,7 @@ if v:version >= 700
   noremap <leader>cw z=
 
   " Enable spell check for text files
-  au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+  " au BufNewFile,BufRead *.txt setlocal spell spelllang=en
 endif
 
 " **************************************
