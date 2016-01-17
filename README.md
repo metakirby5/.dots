@@ -79,8 +79,8 @@ Also has some Mac stuff.
   source ~/dotfiles/shell/ls_colors.sh
   ```
 
-  - Ensure your profile is called `profile` so the templates in
-  `~/.mozilla/firefox/profile` can render properly.
+- Ensure your profile is called `profile` so the templates in
+`~/.mozilla/firefox/profile` can render properly.
 - Run `wzk` and choose a colorscheme.
   Alternatively, manually run `relink-config`, `whizkers`, `xrdb`,
   and restart `i3`.
