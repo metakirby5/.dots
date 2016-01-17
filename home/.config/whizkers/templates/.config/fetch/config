@@ -1,5 +1,5 @@
-FETCH_CHARHEIGHT=31
-FETCH_CHARWIDTH=15
+FETCH_CHARHEIGHT={{ charheight }}
+FETCH_CHARWIDTH={{ charwidth }}
 FETCH_PRIMARY_N={{ primary_n }}
 FETCH_SECONDARY_N={{ secondary_n }}
 

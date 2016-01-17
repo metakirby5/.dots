@@ -13,6 +13,8 @@ term_fonts:
   - "Baekmuk Gulim"
 use_bold: false
 pixelsize: 28
+charheight: 31
+charwidth: 15
 term_letterspace: 2
 
 # WM

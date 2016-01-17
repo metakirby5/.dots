@@ -8,6 +8,8 @@ bar_fonts:
   - "M+ 1p-7"
   - "Baekmuk Gulim-7"
 
+charheight: 33
+charwidth: 16
 term_letterspace: -1
 bar_font_offset: 0
 
