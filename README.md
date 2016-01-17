@@ -21,7 +21,7 @@ Also has some Mac stuff.
 
 ### Packages
 
-## Linux
+#### Linux
 
 - metakirby5/bash-scripts
 - metakirby5/whizkers
@@ -57,9 +57,13 @@ Also has some Mac stuff.
 - gtk-reload (from neeasade/autotheme.sh)
 - devmon
 
-## Mac
+#### Mac
 
 - Slate (soon to be replaced by phoenix or something?)
+
+### Chrome Theme
+
+[Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj)
 
 ## Installation
 
