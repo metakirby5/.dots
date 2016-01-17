@@ -1,0 +1,28 @@
+{
+   "manifest_version": 2,
+   "version": "1",
+   "name": "Whizkers",
+
+   "theme": {
+      "images": {
+         "theme_frame": "images/theme_frame.png",
+         "theme_toolbar": "images/theme_toolbar.png"
+      },
+
+      "colors": {
+         "ntp_background": {{ chrome_bgc }},
+         "ntp_text": {{ chrome_fgc }},
+
+         "tab_background_text": {{ chrome_bgc }},
+         "tab_text": {{ chrome_bgc }},
+
+         "bookmark_text": {{ chrome_bgc }}
+      },
+
+      "tints": {
+         "frame_inactive": [0.5, 0.5, 0.5],
+         "frame_incognito": [0.5, 0.5, 0.5],
+         "frame_incognito_inactive": [0.5, 0.5, 0.5]
+      }
+   }
+}
