@@ -30,7 +30,7 @@ shopt -s nullglob
 # Functions
 
 up2ixio() {
-  command curl -sfF 'f:1=<-' ix.io
+  command curl -sfF 'f:1=<-' ix.io | xargs echo -n
 }
 
 # Detect filetype and extract
