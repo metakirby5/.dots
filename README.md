@@ -64,6 +64,7 @@ Also has some Mac stuff.
 ### Chrome Theme
 
 [Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj)
+or the one found in `~/.whizkers_output/chrome_theme/`.
 
 ## Installation
 
