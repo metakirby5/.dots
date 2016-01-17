@@ -75,6 +75,33 @@ colors:
     normal:     "#d8d8d8"
     bold:       "#eaeaea"
 
+# Chrome
+
+chrome_bgc: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['background'].lstrip('#').decode('hex')) `}"
+chrome_fgc: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['foreground'].lstrip('#').decode('hex')) `}"
+
+chrome_n_black: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['black']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_black: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['black']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_red: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['red']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_red: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['red']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_green: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['green']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_green: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['green']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_yellow: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['yellow']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_yellow: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['yellow']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_blue: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['blue']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_blue: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['blue']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_magenta: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['magenta']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_magenta: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['magenta']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_cyan: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['cyan']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_cyan: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['cyan']['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_white: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['white']['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_white: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}['white']['bold'].lstrip('#').decode('hex')) `}"
+
+chrome_n_primary: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}[{{ colors }}['primary']]['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_primary: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}[{{ colors }}['primary']]['bold'].lstrip('#').decode('hex')) `}"
+chrome_n_secondary: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}[{{ colors }}['secondary']]['normal'].lstrip('#').decode('hex')) `}"
+chrome_b_secondary: "{` '[%s, %s, %s]' % tuple(ord(c) for c in {{ colors }}[{{ colors }}['secondary']]['bold'].lstrip('#').decode('hex')) `}"
+
 # Utility
 
 colornumbers:
