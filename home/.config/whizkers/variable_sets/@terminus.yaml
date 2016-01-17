@@ -1,0 +1,16 @@
+font: "Terminus"
+term_fonts:
+  - "Terminus"
+  - "M+ 1p"
+  - "Baekmuk Gulim"
+bar_fonts:
+  - "Terminus-10"
+  - "M+ 1p-7"
+  - "Baekmuk Gulim-7"
+
+pixelsize: 32
+charheight: 32
+charwidth: 16
+term_letterspace: 0
+bar_font_offset: -2
+
