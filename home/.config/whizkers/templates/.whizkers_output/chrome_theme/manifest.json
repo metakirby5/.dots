@@ -10,13 +10,13 @@
       },
 
       "colors": {
-         "ntp_background": {{ chrome_bgc }},
-         "ntp_text": {{ chrome_fgc }},
-
+         "toolbar": {{ chrome_fgc }},
+         "bookmark_text": {{ chrome_bgc }},
          "tab_background_text": {{ chrome_bgc }},
          "tab_text": {{ chrome_bgc }},
 
-         "bookmark_text": {{ chrome_bgc }}
+         "ntp_background": {{ chrome_bgc }},
+         "ntp_text": {{ chrome_fgc }}
       },
 
       "tints": {
