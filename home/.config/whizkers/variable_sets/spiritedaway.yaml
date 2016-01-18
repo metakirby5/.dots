@@ -9,8 +9,8 @@ colors:
   secondary:    "magenta"
   background:   "#464543"
   black:
-    normal:     "#3c3b39"
-    bold:       "#44413c"
+    normal:     "#5c5b59"
+    bold:       "#64615c"
   red:
     normal:     "#b5845d"
     bold:       "#e7a876"
