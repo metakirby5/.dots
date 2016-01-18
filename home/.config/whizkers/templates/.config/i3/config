@@ -131,6 +131,7 @@ for_window [class="feh|mpv"] floating enable
 
 # Tasks
 set $_update_configs        whizkers && reload-xresources
+bindsym $mod+b              sticky toggle
 bindsym $mod+f              fullscreen toggle
 bindsym $mod+Tab            exec $nsi i3-focus-last --switch
 bindsym $mod+Shift+q        kill
