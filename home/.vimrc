@@ -94,7 +94,7 @@ endif
 " * Variables
 " **************************************
 
-set rnu                       " relative line numbering on
+set nu                        " line numbering on
 set noerrorbells              " turns off annoying bell sounds for errors
 set novisualbell              " no screen flashes
 set backspace=2               " backspace over everything
@@ -296,10 +296,6 @@ function! NumberToggle()
 endfunction
 
 nnoremap <silent> <leader>n :call NumberToggle()<cr>
-
-" Auto relative line numbers on insert mode
-au InsertEnter * set nornu | set nu
-au InsertLeave * set nonu | set rnu
 
 " Toggle virtualedit
 noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
