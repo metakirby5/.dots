@@ -6,23 +6,28 @@
    "theme": {
       "images": {
          "theme_frame": "images/theme_frame.png",
+         "theme_frame_incognito": "images/theme_frame.png",
+         "theme_frame_inactive": "images/theme_frame_inactive.png",
+         "theme_frame_incognito_inactive": "images/theme_frame_inactive.png",
+         "theme_tab_background": "images/theme_tab_background.png",
+         "theme_tab_background_incognito": "images/theme_tab_background.png",
          "theme_toolbar": "images/theme_toolbar.png"
       },
 
       "colors": {
-         "toolbar": {{ chrome_fgc }},
-         "bookmark_text": {{ chrome_bgc }},
-         "tab_background_text": {{ chrome_bgc }},
-         "tab_text": {{ chrome_bgc }},
+         "toolbar": {{ chrome_b_white }},
+         "bookmark_text": {{ chrome_n_black }},
+         "tab_background_text": {{ chrome_n_black }},
+         "tab_text": {{ chrome_n_black }},
 
          "ntp_background": {{ chrome_bgc }},
          "ntp_text": {{ chrome_fgc }}
       },
 
       "tints": {
-         "frame_inactive": [0.5, 0.5, 0.5],
-         "frame_incognito": [0.5, 0.5, 0.5],
-         "frame_incognito_inactive": [0.5, 0.5, 0.5]
+         "frame_inactive": [-1.0, -1.0, -1.0],
+         "frame_incognito": [-1.0, -1.0, -1.0],
+         "frame_incognito_inactive": [-1.0, -1.0, -1.0]
       }
    }
 }
