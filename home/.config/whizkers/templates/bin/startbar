@@ -17,6 +17,7 @@ emit-lemonblocks \
     -B "{{ bar_bgc }}" \
     -u {{ bar_underline }} \
     -g x{{ bar_height }} \
+    {{ #bar_on_bottom }} -b {{ /bar_on_bottom }} \
     {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
     -o {{ bar_font_offset }} |\
   bash >/dev/null &

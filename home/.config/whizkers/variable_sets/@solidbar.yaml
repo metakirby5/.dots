@@ -1,0 +1,4 @@
+inner_gap_size: 50
+bar_height: 70
+bar_bgc: "#ff{` {{ colors }}['black']['normal'].lstrip('#')  `}"
+bar_block_bgc: "#ff{` {{ colors }}['black']['bold'].lstrip('#')  `}"
