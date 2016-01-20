@@ -7,8 +7,8 @@ colors:
   background:   "#1c1b28"
   foreground:   "#fefefe"
   black:
-    normal:     "#20202f"
-    bold:       "#252537"
+    normal:     "#262336"
+    bold:       "#332f48"
   red:
     normal:     "#aa6a49"
     bold:       "#dc895e"
