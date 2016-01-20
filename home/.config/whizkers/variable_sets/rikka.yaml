@@ -1,0 +1,32 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/rikka_umbrella.png"
+
+colors:
+  name:         "rikka"
+  primary:      "magenta"
+  secondary:    "green"
+  background:   "#1c1b28"
+  foreground:   "#fefefe"
+  black:
+    normal:     "#20202f"
+    bold:       "#252537"
+  red:
+    normal:     "#aa6a49"
+    bold:       "#dc895e"
+  green:
+    normal:     "#9db7c5"
+    bold:       "#c4e5f7"
+  yellow:
+    normal:     "#ad855a"
+    bold:       "#dfab74"
+  blue:
+    normal:     "#5073ac"
+    bold:       "#6794de"
+  magenta:
+    normal:     "#7e6ea9"
+    bold:       "#a38edb"
+  cyan:
+    normal:     "#a7929c"
+    bold:       "#d9bdca"
+  white:
+    normal:     "#dad7d0"
+    bold:       "#f5f1ec"
