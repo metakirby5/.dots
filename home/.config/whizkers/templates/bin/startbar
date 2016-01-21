@@ -5,6 +5,7 @@ barpid="$(\
 )"
 
 [[ ! -z "$barpid" ]] && echo "$barpid" | xargs kill
+killall iwevent pactl
 
 emit-lemonblocks \
   -B "{{ bar_block_bgc }}" \

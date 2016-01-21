@@ -1,0 +1,30 @@
+colors:
+  name:         "rikka"
+  primary:      "red"
+  secondary:    "white"
+  background:   "#151720"
+  black:
+    normal:     "#29294b"
+    bold:       "#383b5f"
+  red:
+    normal:     "#b25164"
+    bold:       "#e46b84"
+  green:
+    normal:     "#526181"
+    bold:       "#6880b5"
+  yellow:
+    normal:     "#779ebe"
+    bold:       "#9fb8cd"
+  blue:
+    normal:     "#344167"
+    bold:       "#4e5c84"
+  magenta:
+    normal:     "#5b3645"
+    bold:       "#7b4d5f"
+  cyan:
+    normal:     "#446aaa"
+    bold:       "#5889dc"
+  white:
+    normal:     "#c4c0c0"
+    bold:       "#f6f0f0"
+
