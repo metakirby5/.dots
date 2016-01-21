@@ -14,7 +14,12 @@ emit-lemonblocks \
   -L "{{ bar_underline_color }}" \
   2>/dev/null | tee ~/.lemonlog |\
   lemonbar -a 256 \
+    {{ #bar_black_fgc }}
+    -F "{{ n_black }}" \
+    {{ /bar_black_fgc }}
+    {{ ^bar_black_fgc }}
     -F "{{ fgc }}" \
+    {{ /bar_black_fgc }}
     -B "{{ bar_bgc }}" \
     -u {{ bar_underline }} \
     -g x{{ bar_height }} \
