@@ -10,7 +10,7 @@
     margin: 0.2em;
     right: 0;
     bottom: 0;
-    font-family: 'PixelMPlus12', sans-serif;
+    font-family: '{{ font }}', sans-serif;
     font-size: 10em;
     color: {{ n_primary }};
     content: "ネット";

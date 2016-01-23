@@ -11,7 +11,7 @@
 /* Globals */
 
 * {
-    font-family: 'PixelMPlus12', sans-serif !important;
+    font-family: '{{ font }}', sans-serif !important;
     font-weight: normal !important;
 }
 
