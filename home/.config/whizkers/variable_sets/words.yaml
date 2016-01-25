@@ -1,0 +1,24 @@
+wallpapers:     "/usr/share/backgrounds/in_rotation/ilya56.png"
+
+colors:
+  name:         "words"
+  primary:      "red"
+  secondary:    "blue"
+  red:
+    normal:     "#de1e7e"
+    bold:       "#de1e7e"
+  green:
+    normal:     "#1ce7ea"
+    bold:       "#1ce7ea"
+  yellow:
+    normal:     "#c0ffee"
+    bold:       "#c0ffee"
+  blue:
+    normal:     "#10aded"
+    bold:       "#10aded"
+  magenta:
+    normal:     "#facade"
+    bold:       "#facade"
+  cyan:
+    normal:     "#0ddbee"
+    bold:       "#0ddbee"
