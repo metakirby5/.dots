@@ -3,7 +3,7 @@ wallpapers:     "/usr/share/backgrounds/in_rotation/ilya56.png"
 colors:
   name:         "words"
   primary:      "red"
-  secondary:    "blue"
+  secondary:    "green"
   red:
     normal:     "#de1e7e"
     bold:       "#de1e7e"
