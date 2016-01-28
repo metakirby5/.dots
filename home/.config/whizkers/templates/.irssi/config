@@ -3,6 +3,7 @@ servers = (
     address = "chat.freenode.net";
     chatnet = "Freenode";
     port = "6667";
+    autoconnect = "Yes";
   },
   {
     address = "irc.rizon.net";
@@ -34,6 +35,11 @@ chatnets = {
 };
 
 channels = (
+  {
+    name = "#ucsd";
+    chatnet = "Freenode";
+    autojoin = "Yes";
+  },
   {
     name = "#rice";
     chatnet = "Rizon";
