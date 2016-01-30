@@ -4,8 +4,8 @@ wallpapers:     "/usr/share/backgrounds/in_rotation/dog_camera.jpg"
 
 colors:
   name:         "sailbirds"
-  primary:      "red"
-  secondary:    "blue"
+  primary:      "blue"
+  secondary:    "red"
   red:
     normal:     "#bdbdb3"
     bold:       "#efefe2"
