@@ -3,6 +3,7 @@ servers = (
     address = "chat.freenode.net";
     chatnet = "Freenode";
     port = "6667";
+    password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
     autoconnect = "Yes";
   },
   {
@@ -14,7 +15,7 @@ servers = (
     address = "rizonbnc.us.rizon.net";
     chatnet = "Rizon";
     port = "1234";
-    password = "{{ username }}:{{ WZK_ENV_RIZON_BNC_PASS }}";
+    password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
     autoconnect = "Yes";
   }
 );
@@ -197,7 +198,7 @@ settings = {
   core = {
     real_name = "{{ realname }}";
     user_name = "{{ username }}";
-    nick = "{{ username }}`";
+    nick = "{{ username }}";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "irc/dcc" = {
