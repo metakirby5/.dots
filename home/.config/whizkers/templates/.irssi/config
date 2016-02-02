@@ -1,21 +1,29 @@
 servers = (
   {
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
-    autoconnect = "Yes";
-  },
-  {
     address = "irc.rizon.net";
     chatnet = "Rizon";
     port = "6667";
   },
   {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "6667";
+    password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
+  },
+  {
     address = "rizonbnc.us.rizon.net";
     chatnet = "Rizon";
-    port = "1234";
+    port = "+12345";
     password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
+    use_ssl = "ON";
+    autoconnect = "Yes";
+  },
+  {
+    address = "seven.evils.in";
+    chatnet = "Freenode";
+    port = "7777";
+    password = "{{ username }}:{{ WZK_ENV_IRC_PASS }}";
+    use_ssl = "ON";
     autoconnect = "Yes";
   }
 );
