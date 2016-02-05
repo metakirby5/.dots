@@ -1,0 +1,34 @@
+# https://github.com/onodera-punpun/dotfiles/blob/master/xresources
+
+wallpapers:     "/usr/share/backgrounds/in_rotation/blurcart.jpg"
+
+colors:
+  name:         "punpun"
+  primary:      "blue"
+  secondary:    "green"
+  background:   "#344042"
+  foreground:   "#E8DFD6"
+  black:
+    normal:     "#37413F"
+    bold:       "#4B5755"
+  red:
+    normal:     "#F99595"
+    bold:       "#F3D5C9"
+  green:
+    normal:     "#7CBF9E"
+    bold:       "#A2D9B1"
+  yellow:
+    normal:     "#E5C078"
+    bold:       "#F9D48C"
+  blue:
+    normal:     "#7BBAC7"
+    bold:       "#DFF0EB"
+  magenta:
+    normal:     "#FF5879"
+    bold:       "#FF99A1"
+  cyan:
+    normal:     "#62BDB3"
+    bold:       "#9ED9D8"
+  white:
+    normal:     "#F2F1B9"
+    bold:       "#F6F6C9"
