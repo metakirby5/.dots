@@ -158,7 +158,7 @@ set showmatch           " show match when inserting {}, [], or ()
 set cursorline
 
 hi Normal   guifg=white guibg=black
-hi Visual   ctermfg=black guifg=black
+hi Visual   ctermbg=black guibg=black
 hi Search   ctermfg=black guifg=black
 hi NonText  ctermfg=black guifg=black
 
