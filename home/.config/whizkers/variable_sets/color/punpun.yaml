@@ -9,7 +9,7 @@ colors:
   background:   "#344042"
   foreground:   "#E8DFD6"
   black:
-    normal:     "#37413F"
+    normal:     "#374147"
     bold:       "#4B5755"
   red:
     normal:     "#F99595"
@@ -22,7 +22,7 @@ colors:
     bold:       "#F9D48C"
   blue:
     normal:     "#7BBAC7"
-    bold:       "#DFF0EB"
+    bold:       "#aFd0ce"
   magenta:
     normal:     "#FF5879"
     bold:       "#FF99A1"

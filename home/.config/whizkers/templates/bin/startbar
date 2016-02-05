@@ -18,7 +18,12 @@ emit-lemonblocks \
     -F "{{ n_black }}" \
     {{ /bar_black_fgc }}
     {{ ^bar_black_fgc }}
+    {{ #bar_white_fgc }}
+    -F "{{ b_white }}" \
+    {{ /bar_white_fgc }}
+    {{ ^bar_white_fgc }}
     -F "{{ fgc }}" \
+    {{ /bar_white_fgc }}
     {{ /bar_black_fgc }}
     -B "{{ bar_bgc }}" \
     -u {{ bar_underline }} \
