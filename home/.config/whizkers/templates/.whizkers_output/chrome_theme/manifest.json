@@ -15,10 +15,10 @@
       },
 
       "colors": {
-         "toolbar": {{ chrome_b_white }},
-         "bookmark_text": {{ chrome_n_black }},
-         "tab_background_text": {{ chrome_n_black }},
-         "tab_text": {{ chrome_n_black }},
+         "toolbar": {{ chrome_fgc }},
+         "bookmark_text": {{ chrome_bgc }},
+         "tab_background_text": {{ chrome_bgc }},
+         "tab_text": {{ chrome_bgc }},
 
          "ntp_background": {{ chrome_bgc }},
          "ntp_text": {{ chrome_fgc }}
