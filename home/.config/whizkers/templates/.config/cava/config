@@ -72,7 +72,7 @@ method = pulse
 
 # supported colors are: red, green, yellow, magenta, cyan, white, blue, black.
 ; background = black
-foreground = {{ n_primary }}
+foreground = {{ text_primary }}
 
 
 [smoothing]
