@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Start my i3 session.
-
-## VARIABLES
-
+## VARIABLES 
 # Personal
 ZIPCODE=92129
 
@@ -39,6 +37,7 @@ dunst &
 devmon &
 
 # Scripts
+bat-notify-daemon &
 lightsOn &
 notify-listener &
 
