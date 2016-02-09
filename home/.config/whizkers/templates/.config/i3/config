@@ -80,7 +80,7 @@ bar {
 
 # Terminal on scratch
 set $spT scratchpad_term
-for_window [instance="^$spT$"] move scratchpad, sticky enable
+for_window [instance="^$spT$"] move scratchpad
 bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT -e tmux new-session -ADs scratch) && i3-msg '[instance="^$spT$"] scratchpad show'
 
 # Default workspaces
