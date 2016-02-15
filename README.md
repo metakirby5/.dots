@@ -30,6 +30,7 @@ Also has some Mac stuff.
 - tmux
 - Airblader/i3-gaps
 - krypt-n/bar
+- gstk/siji
 - acrisci/i3ipc-python
 - eBrnd/i3lock-color
 - xautolock

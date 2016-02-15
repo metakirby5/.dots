@@ -43,6 +43,7 @@ bar_fonts:
   - "PixelMPlus12-7"
   - "M+ 1p-7"
   - "Baekmuk Gulim-7"
+bar_icons: "-wuncon-siji-medium-r-normal--*-225-*-*-c-*-iso10646-1"
 bar_font_offset: -5
 bar_underline: 0
 
