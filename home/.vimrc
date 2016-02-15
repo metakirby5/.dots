@@ -37,7 +37,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'tpope/vim-surround'               " Surround with...
 
   " Indentation
-  Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
+  " Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
   Plugin 'hynek/vim-python-pep8-indent'     " Fix for python indent
 
   " Text objects
