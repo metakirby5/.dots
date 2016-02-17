@@ -9,7 +9,7 @@ colors:
   background:   "#344042"
   foreground:   "#E8DFD6"
   black:
-    normal:     "#374147"
+    normal:     "#3a444a"
     bold:       "#4B5755"
   red:
     normal:     "#F99595"
