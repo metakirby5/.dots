@@ -30,7 +30,7 @@ emit-lemonblocks \
     -g x{{ bar_height }} \
     {{ #bar_on_bottom }} -b {{ /bar_on_bottom }} \
     {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
-    -f "{{ bar_icons }}" \
-    -o {{ bar_font_offset }} |\
+    -o {{ bar_font_offset }} \
+    -f "{{ bar_icons }}" |\
   bash >/dev/null &
 
