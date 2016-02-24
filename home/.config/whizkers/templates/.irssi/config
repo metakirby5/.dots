@@ -53,6 +53,11 @@ channels = (
     name = "#rice";
     chatnet = "Rizon";
     autojoin = "Yes";
+  },
+  {
+    name = "#tomoko";
+    chatnet = "Rizon";
+    autojoin = "Yes";
   }
 );
 
