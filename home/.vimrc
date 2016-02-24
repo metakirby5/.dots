@@ -444,7 +444,7 @@ if exists("+foldenable")
   set foldenable
 
   " Enable fold column
-  set foldcolumn=1
+  " set foldcolumn=1
   hi FoldColumn ctermbg=NONE guibg=NONE
 
   " zz - toggle folds
