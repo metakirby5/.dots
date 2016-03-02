@@ -4,7 +4,6 @@
 *~
 a.out
 .nfs*
-*.out
 *.pyc
 .DS_STORE
 .idea
