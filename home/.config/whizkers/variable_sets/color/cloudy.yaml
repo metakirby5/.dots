@@ -4,7 +4,7 @@ wallpapers:     "/usr/share/backgrounds/in_rotation/rain_blur.jpg"
 
 colors:
   name:         "cloudy"
-  primary:      "red"
+  primary:      "blue"
   secondary:    "green"
   background:   "#273941"
   foreground:   "#c0c5ce"
