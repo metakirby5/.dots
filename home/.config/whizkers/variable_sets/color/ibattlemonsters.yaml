@@ -1,0 +1,32 @@
+# https://www.reddit.com/r/ManjaroLinux/comments/49nh86/memory_leak/d13jfcg
+
+colors:
+  name:         "ibattlemonsters"
+  primary:      "blue"
+  secondary:    "green"
+  background:   "#2c2f33"
+  foreground:   "#f0f0f0"
+  black:
+    normal:       "#394952"
+    bold:         "#70838c"
+  red:
+    normal:       "#99736e"
+    bold:         "#99736e"
+  green:
+    normal:       "#78a090"
+    bold:         "#78a090"
+  yellow:
+    normal:       "#bfb7a1"
+    bold:         "#bfb7a1"
+  blue:
+    normal:       "#7c9fa6"
+    bold:         "#7c9fa6"
+  magenta:
+    normal:       "#BF9C86"
+    bold:         "#BF9C86"
+  cyan:
+    normal:       "#99BFBA"
+    bold:         "#99BFBA"
+  white:
+    normal:       "#f0f0f0"
+    bold:         "#f0f0f0"

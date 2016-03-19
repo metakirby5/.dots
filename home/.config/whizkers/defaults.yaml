@@ -35,9 +35,9 @@ bar_height: 50
 bar_on_bottom: false
 bar_conky_height: "{` {{ bar_height }} + {{ inner_gap_size }} `}"
 bar_black_fgc: false
-bar_white_fgc: false
-bar_bgc: "#00{` {{ colors }}['background'].lstrip('#')  `}"
-bar_block_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
+bar_white_fgc: true
+bar_bgc: "#20000000"
+bar_block_bgc: "#30000000"
 bar_underline_color: "#88{` {{ colors }}['foreground'].lstrip('#') `}"
 bar_fonts:
   - "PixelMPlus12-7"

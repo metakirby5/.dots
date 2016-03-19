@@ -1,0 +1,34 @@
+# https://github.com/tudurom/dotfiles/blob/master/x/.xres/colors/cloudy
+
+wallpapers:     "/usr/share/backgrounds/in_rotation/rain_blur.jpg"
+
+colors:
+  name:         "cloudy"
+  primary:      "red"
+  secondary:    "green"
+  background:   "#273941"
+  foreground:   "#c0c5ce"
+  black:
+    normal:       "#273941"
+    bold:         "#456472"
+  red:
+    normal:       "#a66363"
+    bold:         "#c27171"
+  green:
+    normal:       "#63a690"
+    bold:         "#6dc2a3"
+  yellow:
+    normal:       "#a6a663"
+    bold:         "#bfc271"
+  blue:
+    normal:       "#6385a6"
+    bold:         "#719bc2"
+  orange:
+    normal:       "#BF9C86"
+    bold:         "#BF9C86"
+  cyan:
+    normal:       "#63a69b"
+    bold:         "#71c2af"
+  white:
+    normal:       "#c0c5ce"
+    bold:         "#eff1f5"
