@@ -640,6 +640,9 @@ noremap <leader>p :setlocal paste!<cr>
 " ,/ - Disable highlight
 noremap <silent> <leader>/ :noh<cr>
 
+" K - split line
+noremap <silent> K i<cr><esc>
+
 " ,[oO] - Create newlines in normal mode
 nnoremap <silent> <leader>o o<esc>cc<esc>
 nnoremap <silent> <leader>O O<esc>cc<esc>
