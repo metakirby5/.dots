@@ -70,7 +70,7 @@ set $xwi                xwininfo -tree -root | grep
 
 ## SESSION
 
-exec_always $nsi i3-focus-last
+exec $nsi i3-focus-last
 exec_always $nsi feh -zr --bg-fill $wallpapers
 
 # lemonbar
