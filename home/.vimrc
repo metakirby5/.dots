@@ -48,6 +48,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   " Syntax
   Plugin 'digitaltoad/vim-jade'             " Jade
   Plugin 'wavded/vim-stylus'                " Stylus
+  Plugin 'derekwyatt/vim-scala'             " Scala
 
   " Addons
   Plugin 'mattn/emmet-vim'                  " Emmet
