@@ -55,6 +55,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
 
   " Addons
   Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
+  Plugin 'osyo-manga/vim-over'              " Preview as replacing (TODO)
   Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
   Plugin 'Konfekt/FastFold'                 " Faster folder
   Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
@@ -134,7 +135,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   endfunction
 
   " Unite
-  nmap <silent> <leader>x :Unite file<cr>
+  nnoremap <silent> <leader>x :Unite file<cr>
 
   " Git Gutter
   let g:gitgutter_map_keys = 0
