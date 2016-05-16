@@ -72,7 +72,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   au VimEnter,Colorscheme *
         \ :hi IndentGuidesEven
         \ ctermbg=black guibg=black
-  noremap <silent> <Leader>i <Plug>IndentGuidesToggle
+  nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
   " Syntastic
   let g:syntastic_always_populate_loc_list = 1
@@ -87,31 +87,31 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   " Neocomplete
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
-  inoremap <expr><tab>  pumvisible() ?
-        \                 "\<c-n>" :
-        \                 neosnippet#jumpable() ?
-        \                   "\<Plug>(neosnippet_jump)" :
-        \                   "\<tab>"
-  inoremap <expr><cr>   pumvisible() ?
-        \                 neosnippet#expandable() ?
-        \                   "\<Plug>(neosnippet_expand)" :
-        \                   "\<c-y>" :
-        \                 "\<cr>"
-  inoremap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
-  inoremap <expr><bs>     g:neocomplete#smart_close_popup()."\<c-h>"
+  imap <expr><tab>  pumvisible() ?
+        \             "\<c-n>" :
+        \             neosnippet#jumpable() ?
+        \               "\<Plug>(neosnippet_jump)" :
+        \               "\<tab>"
+  imap <expr><cr>   pumvisible() ?
+        \             neosnippet#expandable() ?
+        \               "\<Plug>(neosnippet_expand)" :
+        \               "\<c-y>" :
+        \             "\<cr>"
+  imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
+  imap <expr><bs>     g:neocomplete#smart_close_popup()."\<c-h>"
 
   " Incsearch
   set hlsearch
   let g:incsearch#auto_nohlsearch = 1
   let g:incsearch#is_stay = 1
-  noremap /  <Plug>(incsearch-forward)
-  noremap ?  <Plug>(incsearch-backward)
-  noremap n  <Plug>(incsearch-nohl-n)
-  noremap N  <Plug>(incsearch-nohl-N)
-  noremap *  <Plug>(incsearch-nohl-*)
-  noremap #  <Plug>(incsearch-nohl-#)
-  noremap g* <Plug>(incsearch-nohl-g*)
-  noremap g# <Plug>(incsearch-nohl-g#)
+  map /  <Plug>(incsearch-forward)
+  map ?  <Plug>(incsearch-backward)
+  map n  <Plug>(incsearch-nohl-n)
+  map N  <Plug>(incsearch-nohl-N)
+  map *  <Plug>(incsearch-nohl-*)
+  map #  <Plug>(incsearch-nohl-#)
+  map g* <Plug>(incsearch-nohl-g*)
+  map g# <Plug>(incsearch-nohl-g#)
 
   " Multiple cursors
   let g:multi_cursor_use_default_mapping=0
@@ -132,15 +132,15 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   endfunction
 
   " Unite
-  nnoremap <silent> <leader>x :Unite file<cr>
+  nmap <silent> <leader>x :Unite file<cr>
 
   " Git Gutter
   let g:gitgutter_map_keys = 0
-  nnoremap <leader>gn <Plug>GitGutterNextHunk
-  nnoremap <leader>gp <Plug>GitGutterPrevHunk
-  nnoremap <leader>ga <Plug>GitGutterStageHunk
-  nnoremap <leader>gu <Plug>GitGutterRevertHunk
-  nnoremap <leader>gv <Plug>GitGutterPreviewHunk
+  nmap <leader>gn <Plug>GitGutterNextHunk
+  nmap <leader>gp <Plug>GitGutterPrevHunk
+  nmap <leader>ga <Plug>GitGutterStageHunk
+  nmap <leader>gu <Plug>GitGutterRevertHunk
+  nmap <leader>gv <Plug>GitGutterPreviewHunk
 
 else
 
