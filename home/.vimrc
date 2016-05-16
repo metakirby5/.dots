@@ -56,6 +56,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   " Addons
   Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
   Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
+  Plugin 'Konfekt/FastFold'                 " Faster folder
   Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
   " Plugin 'mattn/emmet-vim'                  " Emmet
@@ -550,7 +551,7 @@ if exists("+foldenable")
   noremap <leader>zs :set foldmethod=syntax<cr>zR
 
   " Use syntax mode by default
-  " set foldmethod=syntax
+  set foldmethod=syntax
 
   " Unfold everything at start
   set foldlevel=99
