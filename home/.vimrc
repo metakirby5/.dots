@@ -37,86 +37,119 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'tpope/vim-surround'               " Surround with...
 
   " Indentation
-  " Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
-  Plugin 'hynek/vim-python-pep8-indent'     " Fix for python indent
+  Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
+  Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides
 
   " Text objects
   Plugin 'kana/vim-textobj-user'            " User-defined text objects
-  Plugin 'michaeljsmith/vim-indent-object'  " Python indentation levels
-  Plugin 'nelstrom/vim-textobj-rubyblock'   " Ruby end blocsk
+  Plugin 'kana/vim-textobj-indent'          " Indentation levels
 
   " Syntax
-  Plugin 'digitaltoad/vim-jade'             " Jade
-  Plugin 'wavded/vim-stylus'                " Stylus
-  Plugin 'derekwyatt/vim-scala'             " Scala
+  Plugin 'sheerun/vim-polyglot'             " Language packs
+  Plugin 'scrooloose/syntastic'             " Syntax checker
 
-  " Completers
-  Plugin 'Valloric/YouCompleteMe'           " Autocomplete
-  Plugin 'SirVer/ultisnips'                 " Snippets engine
-  Plugin 'honza/vim-snippets'               " Snippets
+  " Popup completers
+  Plugin 'Shougo/neocomplete'               " Autocomplete
+  Plugin 'Shougo/neosnippet'                " Snippets engine
+  Plugin 'Shougo/neosnippet-snippets'       " Snippets
 
   " Addons
-  Plugin 'mattn/emmet-vim'                  " Emmet
+  Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
+  Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
+  Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
-  Plugin 'The-NERD-tree'                    " File explorer
-  Plugin 'jistr/vim-nerdtree-tabs'          " NERD-tree persistence through tabs
-  Plugin 'ScrollColors'                     " Scroll through colorschemes
+  " Plugin 'mattn/emmet-vim'                  " Emmet
 
   call vundle#end()
 
-  noremap <silent> <leader>x :NERDTreeTabsToggle<cr>
+  " Indent guides
+  let g:indent_guides_start_level = 2
+  let g:indent_guides_guide_size = 1
+  let g:indent_guides_auto_colors = 0
+  au VimEnter,Colorscheme *
+        \ :hi IndentGuidesOdd
+        \ ctermbg=black guibg=black
+  au VimEnter,Colorscheme *
+        \ :hi IndentGuidesEven
+        \ ctermbg=black guibg=black
+  noremap <silent> <Leader>i <Plug>IndentGuidesToggle
 
-  " Git gutter settings
+  " Syntastic
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 0
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_error_symbol = 'x'
+  let g:syntastic_warning_symbol = '!'
+  let g:syntastic_style_error_symbol = 'S'
+  let g:syntastic_style_warning_symbol = 's'
+
+  " Neocomplete
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  inoremap <expr><tab>  pumvisible() ?
+        \                 "\<c-n>" :
+        \                 neosnippet#jumpable() ?
+        \                   "\<Plug>(neosnippet_jump)" :
+        \                   "\<tab>"
+  inoremap <expr><cr>   pumvisible() ?
+        \                 neosnippet#expandable() ?
+        \                   "\<Plug>(neosnippet_expand)" :
+        \                   "\<c-y>" :
+        \                 "\<cr>"
+  inoremap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
+  inoremap <expr><bs>     g:neocomplete#smart_close_popup()."\<c-h>"
+
+  " Incsearch
+  set hlsearch
+  let g:incsearch#auto_nohlsearch = 1
+  let g:incsearch#is_stay = 1
+  noremap /  <Plug>(incsearch-forward)
+  noremap ?  <Plug>(incsearch-backward)
+  noremap n  <Plug>(incsearch-nohl-n)
+  noremap N  <Plug>(incsearch-nohl-N)
+  noremap *  <Plug>(incsearch-nohl-*)
+  noremap #  <Plug>(incsearch-nohl-#)
+  noremap g* <Plug>(incsearch-nohl-g*)
+  noremap g# <Plug>(incsearch-nohl-g#)
+
+  " Multiple cursors
+  let g:multi_cursor_use_default_mapping=0
+  let g:multi_cursor_next_key='<C-d>'
+  let g:multi_cursor_prev_key='<C-u>'
+  let g:multi_cursor_skip_key='<C-x>'
+  let g:multi_cursor_quit_key='<Esc>'
+  " Fix for autocomplete
+  function! Multiple_cursors_before()
+    if exists(':NeoCompleteLock') == 2
+      NeoCompleteLock
+    endif
+  endfunction
+  function! Multiple_cursors_after()
+    if exists(':NeoCompleteUnlock') == 2
+      NeoCompleteUnlock
+    endif
+  endfunction
+
+  " Unite
+  nnoremap <silent> <leader>x :Unite file<cr>
+
+  " Git Gutter
   let g:gitgutter_map_keys = 0
-  nmap <leader>gn <Plug>GitGutterNextHunk
-  nmap <leader>gp <Plug>GitGutterPrevHunk
-  nmap <leader>ga <Plug>GitGutterStageHunk
-  nmap <leader>gu <Plug>GitGutterRevertHunk
-  nmap <leader>gv <Plug>GitGutterPreviewHunk
-
-  " Some weird YCM copypasta
-  let g:UltiSnipsExpandTrigger       ="<c-tab>"
-  let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-  " Enable tabbing through list of results
-  function! g:UltiSnips_Complete()
-      call UltiSnips#ExpandSnippet()
-      if g:ulti_expand_res == 0
-          if pumvisible()
-              return "\<C-n>"
-          else
-              call UltiSnips#JumpForwards()
-              if g:ulti_jump_forwards_res == 0
-                 return "\<TAB>"
-              endif
-          endif
-      endif
-      return ""
-  endfunction
-
-  au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-  " Expand snippet or return
-  let g:ulti_expand_res = 0
-  function! Ulti_ExpandOrEnter()
-      call UltiSnips#ExpandSnippet()
-      if g:ulti_expand_res
-          return ''
-      else
-          return "\<return>"
-  endfunction
-
-  " Set <space> as primary trigger
-  inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+  nnoremap <leader>gn <Plug>GitGutterNextHunk
+  nnoremap <leader>gp <Plug>GitGutterPrevHunk
+  nnoremap <leader>ga <Plug>GitGutterStageHunk
+  nnoremap <leader>gu <Plug>GitGutterRevertHunk
+  nnoremap <leader>gv <Plug>GitGutterPreviewHunk
 
 else
+
   " Fallbacks...
 
   " Fix for hash comments
   " inoremap # X#
 
-  " tcomment fallback
+  " tcomment
   au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
                                    \   let b:comment_leader = '# ' |
                                    \ endif
@@ -133,6 +166,17 @@ else
   noremap <silent> g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
   vnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
   vnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+
+  " Autocomplete
+  set omnifunc=syntaxcomplete#Complete
+  inoremap <S-tab> <C-x><C-o>
+
+  " Search
+  noremap N Nzz
+  noremap n nzz
+  noremap // /\c
+  noremap ?? ?\c
+
 endif
 
 " **************************************
@@ -153,6 +197,7 @@ set ttymouse=xterm2           " urxvt scrolling
 set hlsearch                  " highlights all search hits
 set ignorecase                " search without regards to case
 set smartcase                 " search with smart casing
+set timeoutlen=1000 ttimeoutlen=0   " No escape key delay
 
 " Persistent undo
 if exists('&undodir')
@@ -176,9 +221,6 @@ if has("wildmenu")
   set wildmode=longest:full,full
   set wildcharm=<tab>
 endif
-
-" Autocomplete text
-set omnifunc=syntaxcomplete#Complete
 
 " Set these to your preference
 "set ve=all             " place cursor anywhere in any mode
@@ -507,7 +549,7 @@ if exists("+foldenable")
   noremap <leader>zs :set foldmethod=syntax<cr>zR
 
   " Use syntax mode by default
-  set foldmethod=syntax
+  " set foldmethod=syntax
 
   " Unfold everything at start
   set foldlevel=99
@@ -660,24 +702,12 @@ noremap : ;
 noremap ' `
 noremap ` '
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-noremap N Nzz
-noremap n nzz
-
-" // ?? - Quick case insensitive search
-noremap // /\c
-noremap ?? ?\c
-
 " <f5> - Reload file
 noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 
 " ,y - Yank to clipboard
 noremap <leader>y "+y
 vnoremap <leader>y "+y
-
-" shift-<tab> - Omni complete (not really useful in C)
-inoremap <S-tab> <C-x><C-o>
 
 " ,p - Toggle paste mode
 noremap <leader>p :setlocal paste!<cr>
