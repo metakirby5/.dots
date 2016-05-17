@@ -90,6 +90,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   " Neocomplete
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
+  set completeopt-=preview
   imap <expr><tab>  pumvisible() ?
         \             "\<c-n>" :
         \             neosnippet#jumpable() ?
