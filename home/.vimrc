@@ -91,18 +91,18 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
   set completeopt-=preview
-  imap <expr><tab>  pumvisible() ?
-        \             "\<c-n>" :
-        \             neosnippet#jumpable() ?
-        \               "\<Plug>(neosnippet_jump)" :
-        \               "\<tab>"
-  imap <expr><cr>   pumvisible() ?
-        \             neosnippet#expandable() ?
-        \               "\<Plug>(neosnippet_expand)" :
-        \               "\<c-y>" :
-        \             "\<cr>"
+  imap <expr><tab>    pumvisible() ?
+        \               "\<c-n>" :
+        \               neosnippet#jumpable() ?
+        \                 "\<Plug>(neosnippet_jump)" :
+        \                 "\<tab>"
+  imap <expr><cr>     pumvisible() ?
+        \               neosnippet#expandable() ?
+        \                 "\<Plug>(neosnippet_expand)" :
+        \                 "\<c-y>" :
+        \               "\<cr>"
+  imap <expr><bs>     neocomplete#smart_close_popup() . "\<bs>"
   imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
-  imap <expr><bs>     g:neocomplete#smart_close_popup()."\<c-h>"
 
   " Incsearch
   set hlsearch
