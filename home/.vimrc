@@ -350,14 +350,14 @@ function! ToggleMinimalUI()
     set noshowmode
     set noruler
     set showtabline=1
-    set nornu
+    set nonu
     set ls=0
   else
     let g:minimal = 0
     set showmode
     set ruler
     set showtabline=2
-    set rnu
+    set nu
     set ls=2
   endif
 endfunction
