@@ -6,8 +6,7 @@ export CLASSPATH='*':'.'
 # Aliases
 ## Tools
 alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
-alias mpc-path='echo \
-  "${XDG_MUSIC_DIR%%/}/$(mpc current --format "%file%")"'
+alias mpc-path='echo "${XDG_MUSIC_DIR%%/}/$(mpc current --format %file%)"'
 
 ## Shortcuts
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
