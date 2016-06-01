@@ -1,0 +1,16 @@
+{
+ "env": {
+  "CASE_SENSITIVE_COMPLETIONS": false,
+  "MOUSE_SUPPORT": true,
+  "PROMPT": "{CYAN}{user}{INTENSE_CYAN} in {GREEN}{cwd}{branch_color}{curr_branch}\n{BLUE}>>> {NO_COLOR}",
+  "TITLE": "{current_job}",
+  "VI_MODE": true
+ },
+ "foreign_shells": [
+  {
+   "shell": "bash"
+  }
+ ],
+ "xontribs": [
+ ]
+}
