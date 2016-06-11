@@ -48,13 +48,18 @@ Window::fallTo = (dir) ->
     when SOUTH then tScreen.y + tScreen.height
     when EAST then tScreen.x + tScreen.width
     when WEST then tScreen.x
-  edgeOf = (win) ->
-    oFrame = win.frame()
+  edgeOf = (f) ->
     switch dir
-      when NORTH then oFrame.y + oFrame.height
-      when SOUTH then oFrame.y
-      when EAST then oFrame.x
-      when WEST then oFrame.x + oFrame.width
+      when NORTH then f.y + f.height
+      when SOUTH then f.y
+      when EAST then f.x
+      when WEST then f.x + f.width
+  catchable = (f) ->
+    switch dir
+      when NORTH, SOUTH
+        tFrame.x < f.x + f.width and tFrame.x + tFrame.width > f.x
+      when EAST, WEST
+        tFrame.y < f.y + f.height and tFrame.y + tFrame.height > f.y
   fallable = (a, b) ->
     switch dir
       when NORTH, WEST then a - 1 > b
@@ -62,9 +67,10 @@ Window::fallTo = (dir) ->
 
   # Find the closest window we can fall to
   for win in windows
-    edge = edgeOf win
+    f = win.frame()
+    edge = edgeOf f
     # If I can fall to it and it can fall to closest so far
-    if fallable(myEdge, edge) and fallable(edge, closest)
+    if catchable(f) and fallable(myEdge, edge) and fallable(edge, closest)
       closest = edge
 
   # Set our frame
