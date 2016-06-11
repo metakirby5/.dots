@@ -278,6 +278,10 @@ set shortmess+=I              " no splash screen
 set scrolloff=5               " keep at least 5 lines above/below
 set sidescrolloff=5           " keep at least 5 lines left/right
 
+" Title
+set title
+set titlestring=%f
+
 " Alawys show status line
 set ls=2
 
