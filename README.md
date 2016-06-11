@@ -3,9 +3,11 @@ dotfiles
 
 All of my dotfile configs.
 Also has some Mac stuff.
+Someday I'll rewrite this.
 
 ## TODO
 
+- Rewrite README
 - Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
 
@@ -60,7 +62,9 @@ Also has some Mac stuff.
 
 #### Mac
 
-- Slate (soon to be replaced by phoenix or something?)
+- brew
+- dmarcotte/easy-move-resize
+- saitoha/mouseterm-plus
 
 ### Chrome Theme
 
