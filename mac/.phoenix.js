@@ -3,7 +3,9 @@
 # Constants
 MOD = ['cmd', 'alt']
 GRAV_MOD = ['cmd', 'alt', 'shift']
-SIZE_MOD = ['cmd', 'ctrl']
+# SIZE_MOD = ['cmd', 'ctrl']
+CF_MOD = ['cmd', 'ctrl']
+MOVE_MOD = ['ctrl', 'alt', 'cmd']
 UNIT = 50
 FACTOR = 2
 GAP = 10
@@ -46,12 +48,13 @@ Window::windowsTo = (dir) ->
     when WEST then @windowsToWest()
 
 Window::closestTo = (dir) ->
+  f = edgeOf @frame(), dir
   closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir
   for win in @windowsTo dir
-    next = edgeOf win.frame(), opposite dir
-    if closer dir, next, closest
+    next = edgeOf win.frame(), (opposite dir)
+    if (closer dir, f, next) and  (closer dir, next, closest)
       closest = next
-  next
+  closest
 
 # Handlers
 keys = []
@@ -67,30 +70,67 @@ keys.push Phoenix.bind 'j', MOD, -> fw().focusClosestWindowInSouth()
 keys.push Phoenix.bind 'k', MOD, -> fw().focusClosestWindowInNorth()
 keys.push Phoenix.bind 'l', MOD, -> fw().focusClosestWindowInEast()
 
+# Move
+Window::move = (dx, dy) ->
+  tFrame = @frame()
+  tFrame.x+= dx
+  tFrame.y += dy
+  @setFrame tFrame
+
+keys.push Phoenix.bind 'h', MOVE_MOD, -> fw().move -UNIT, 0
+keys.push Phoenix.bind 'j', MOVE_MOD, -> fw().move 0, UNIT
+keys.push Phoenix.bind 'k', MOVE_MOD, -> fw().move 0, -UNIT
+keys.push Phoenix.bind 'l', MOVE_MOD, -> fw().move UNIT, 0
+
 # Size
 Window::resize = (dx, dy) ->
   tFrame = @frame()
   tFrame.width += dx
   tFrame.height += dy
-  @setFrame(tFrame)
+  @setFrame tFrame
 
-keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize(-UNIT, 0)
-keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize(0, UNIT)
-keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize(0, -UNIT)
-keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize(UNIT, 0)
+# keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize -UNIT, 0
+# keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize 0, UNIT
+# keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize 0, -UNIT
+# keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize UNIT, 0
+keys.push Phoenix.bind 'f', MOD, -> fw().maximize()
 
-# Cut / Fill
+# Cut
 Window::scale = (fx, fy) ->
   tFrame = @frame()
   tFrame.width *= fx
   tFrame.height *= fy
-  @setFrame(tFrame)
+  @setFrame tFrame
 
-# Window::fill = () ->
-#   for dir in [NORTH, SOUTH, EAST, WEST]
+# Fill
+Window::vFill = (gap = 0) ->
+  tFrame = @frame()
+  tFrame.y = (@closestTo NORTH) + gap
+  tFrame.height = (@closestTo SOUTH) - tFrame.y - gap
+  @setFrame tFrame
+
+Window::hFill = (gap = 0) ->
+  tFrame = @frame()
+  tFrame.x = (@closestTo WEST) + gap
+  tFrame.width = (@closestTo EAST) - tFrame.x - gap
+  @setFrame tFrame
+
+Window::fill = (gap = 0) ->
+  tFrame = @frame()
+  tFrame.x = (@closestTo WEST) + gap
+  tFrame.width = (@closestTo EAST) - tFrame.x - gap
+  tFrame.y = (@closestTo NORTH) + gap
+  tFrame.height = (@closestTo SOUTH) - tFrame.y - gap
+  @setFrame tFrame
+
+keys.push Phoenix.bind 'h', CF_MOD, -> fw().scale (1 / 2), 1
+keys.push Phoenix.bind 'j', CF_MOD, -> fw().vFill GAP
+keys.push Phoenix.bind 'k', CF_MOD, -> fw().scale 1, (1 / 2)
+keys.push Phoenix.bind 'l', CF_MOD, -> fw().hFill GAP
+keys.push Phoenix.bind 'f', CF_MOD, -> fw().fill GAP
 
 # Gravity
-Window::fallTo = (dir) ->
+Window::fallTo = (dir, gap) ->
   tFrame = @frame()
   catchable = (f) ->
     switch dir
@@ -105,12 +145,12 @@ Window::fallTo = (dir) ->
 
   # Find the closest window we can fall to
   myEdge = edgeOf tFrame, dir
-  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir, -GAP
+  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir, -gap
   for win in @windowsTo dir
     f = win.frame()
-    edge = edgeOf f, (opposite dir), GAP
+    edge = edgeOf f, (opposite dir), gap
     # If I can fall to it and it can fall to closest so far
-    if catchable(f) and fallable(myEdge, edge) and fallable(edge, closest)
+    if (catchable f) and (fallable myEdge, edge) and (fallable edge, closest)
       closest = edge
 
   # Set our frame
@@ -122,7 +162,7 @@ Window::fallTo = (dir) ->
 
   @setFrame(tFrame)
 
-keys.push Phoenix.bind 'h', GRAV_MOD, -> fw().fallTo(WEST)
-keys.push Phoenix.bind 'j', GRAV_MOD, -> fw().fallTo(SOUTH)
-keys.push Phoenix.bind 'k', GRAV_MOD, -> fw().fallTo(NORTH)
-keys.push Phoenix.bind 'l', GRAV_MOD, -> fw().fallTo(EAST)
+keys.push Phoenix.bind 'h', GRAV_MOD, -> fw().fallTo WEST, GAP
+keys.push Phoenix.bind 'j', GRAV_MOD, -> fw().fallTo SOUTH, GAP
+keys.push Phoenix.bind 'k', GRAV_MOD, -> fw().fallTo NORTH, GAP
+keys.push Phoenix.bind 'l', GRAV_MOD, -> fw().fallTo EAST, GAP
