@@ -1,5 +1,5 @@
 bash
-beeftornado/rmtree/brew-rmtree
+brew-rmtree
 coreutils
 fasd
 git
@@ -9,10 +9,8 @@ irssi
 macvim
 mpv
 node
-homebrew/python/numpy
+numpy
 p7zip
-python
-python3
 ranger
 rlwrap
 stow
