@@ -189,7 +189,8 @@ endif
 
 set nu                        " line numbering on
 set noerrorbells              " turns off annoying bell sounds for errors
-set novisualbell              " no screen flashes
+set visualbell                " disable bell part 1
+set t_vb=                     " disable bell part 2
 set backspace=2               " backspace over everything
 set fileformats=unix,dos,mac  " open files from mac/dos
 set hidden                    " hide abandoned buffers
