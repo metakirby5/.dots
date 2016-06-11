@@ -3,6 +3,9 @@
 # Constants
 MOD = ['cmd', 'alt']
 GRAV_MOD = ['cmd', 'alt', 'shift']
+SIZE_MOD = ['cmd', 'ctrl']
+UNIT = 50
+GAP = 10
 APPS = {
   Terminal: 't'
 }
@@ -23,11 +26,23 @@ events = []
 for app, key of APPS
   keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
 
-# Directional
+# Select
 keys.push Phoenix.bind 'h', MOD, -> fw().focusClosestWindowInWest()
 keys.push Phoenix.bind 'j', MOD, -> fw().focusClosestWindowInSouth()
 keys.push Phoenix.bind 'k', MOD, -> fw().focusClosestWindowInNorth()
 keys.push Phoenix.bind 'l', MOD, -> fw().focusClosestWindowInEast()
+
+# Size
+Window::resize = (dx, dy) ->
+  tFrame = @frame()
+  tFrame.width += dx
+  tFrame.height += dy
+  @setFrame(tFrame)
+
+keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize(-UNIT, 0)
+keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize(0, UNIT)
+keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize(0, -UNIT)
+keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize(UNIT, 0)
 
 # Gravity
 Window::fallTo = (dir) ->
@@ -44,16 +59,16 @@ Window::fallTo = (dir) ->
     when WEST then tFrame.x
   tScreen = Screen.mainScreen().visibleFrameInRectangle()
   closest = switch dir
-    when NORTH then tScreen.y
-    when SOUTH then tScreen.y + tScreen.height
-    when EAST then tScreen.x + tScreen.width
-    when WEST then tScreen.x
+    when NORTH then tScreen.y + GAP
+    when SOUTH then tScreen.y + tScreen.height - GAP
+    when EAST then tScreen.x + tScreen.width - GAP
+    when WEST then tScreen.x + GAP
   edgeOf = (f) ->
     switch dir
-      when NORTH then f.y + f.height
-      when SOUTH then f.y
-      when EAST then f.x
-      when WEST then f.x + f.width
+      when NORTH then f.y + f.height + GAP
+      when SOUTH then f.y - GAP
+      when EAST then f.x - GAP
+      when WEST then f.x + f.width + GAP
   catchable = (f) ->
     switch dir
       when NORTH, SOUTH
