@@ -1,0 +1,5 @@
+dropbox
+easysimbl
+google-chrome
+phoenix
+steam
