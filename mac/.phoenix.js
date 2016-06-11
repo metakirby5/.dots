@@ -5,6 +5,7 @@ MOD = ['cmd', 'alt']
 GRAV_MOD = ['cmd', 'alt', 'shift']
 SIZE_MOD = ['cmd', 'ctrl']
 UNIT = 50
+FACTOR = 2
 GAP = 10
 APPS = {
   Terminal: 't'
@@ -15,8 +16,51 @@ SOUTH = 'SOUTH'
 EAST = 'EAST'
 WEST = 'WEST'
 
-# Aliases
+# Helpers
 fw = Window.focusedWindow
+
+opposite = (dir) ->
+  switch dir
+    when NORTH then SOUTH
+    when SOUTH then NORTH
+    when EAST then WEST
+    when WEST then EAST
+
+closer = (dir, a, b) ->
+  switch dir
+    when NORTH, WEST then a > b
+    when SOUTH, EAST then a < b
+
+Screen::edgeTo = (dir) ->
+  f = @visibleFrameInRectangle()
+  switch dir
+    when NORTH then f.y + GAP
+    when SOUTH then f.y + f.height - GAP
+    when EAST then f.x + f.width - GAP
+    when WEST then f.x + GAP
+
+Window::windowsTo = (dir) ->
+  switch dir
+    when NORTH then @windowsToNorth()
+    when SOUTH then @windowsToSouth()
+    when EAST then @windowsToEast()
+    when WEST then @windowsToWest()
+
+Window::closestTo = (dir) ->
+  closest = Screen.mainScreen().edgeTo(dir)
+  for win in @windowsTo dir
+    next = win.edgeTo dir
+    if closer dir, next, closest
+      closest = next
+  next
+
+Window::edgeTo = (dir) ->
+  f = @frame()
+  switch dir
+    when NORTH then f.y + f.height + GAP
+    when SOUTH then f.y - GAP
+    when EAST then f.x - GAP
+    when WEST then f.x + f.width + GAP
 
 # Handlers
 keys = []
@@ -44,31 +88,19 @@ keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize(0, UNIT)
 keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize(0, -UNIT)
 keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize(UNIT, 0)
 
+# Cut / Fill
+Window::scale = (fx, fy) ->
+  tFrame = @frame()
+  tFrame.width *= fx
+  tFrame.height *= fy
+  @setFrame(tFrame)
+
+# Window::fill = () ->
+#   for dir in [NORTH, SOUTH, EAST, WEST]
+
 # Gravity
 Window::fallTo = (dir) ->
-  windows = switch dir
-    when NORTH then @windowsToNorth()
-    when SOUTH then @windowsToSouth()
-    when EAST then @windowsToEast()
-    when WEST then @windowsToWest()
   tFrame = @frame()
-  myEdge = switch dir
-    when NORTH then tFrame.y
-    when SOUTH then tFrame.y + tFrame.height
-    when EAST then tFrame.x + tFrame.width
-    when WEST then tFrame.x
-  tScreen = Screen.mainScreen().visibleFrameInRectangle()
-  closest = switch dir
-    when NORTH then tScreen.y + GAP
-    when SOUTH then tScreen.y + tScreen.height - GAP
-    when EAST then tScreen.x + tScreen.width - GAP
-    when WEST then tScreen.x + GAP
-  edgeOf = (f) ->
-    switch dir
-      when NORTH then f.y + f.height + GAP
-      when SOUTH then f.y - GAP
-      when EAST then f.x - GAP
-      when WEST then f.x + f.width + GAP
   catchable = (f) ->
     switch dir
       when NORTH, SOUTH
@@ -81,9 +113,11 @@ Window::fallTo = (dir) ->
       when SOUTH, EAST then a + 1 < b
 
   # Find the closest window we can fall to
-  for win in windows
+  myEdge = @edgeTo(opposite dir)
+  closest = Screen.mainScreen().edgeTo dir
+  for win in @windowsTo dir
     f = win.frame()
-    edge = edgeOf f
+    edge = win.edgeTo dir
     # If I can fall to it and it can fall to closest so far
     if catchable(f) and fallable(myEdge, edge) and fallable(edge, closest)
       closest = edge
