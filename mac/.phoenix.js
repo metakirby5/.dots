@@ -31,13 +31,12 @@ closer = (dir, a, b) ->
     when NORTH, WEST then a > b
     when SOUTH, EAST then a < b
 
-Screen::edgeTo = (dir) ->
-  f = @visibleFrameInRectangle()
+edgeOf = (f, dir, gap = 0) ->
   switch dir
-    when NORTH then f.y + GAP
-    when SOUTH then f.y + f.height - GAP
-    when EAST then f.x + f.width - GAP
-    when WEST then f.x + GAP
+    when SOUTH then f.y + f.height + gap
+    when NORTH then f.y - gap
+    when EAST then f.x + f.width + gap
+    when WEST then f.x - gap
 
 Window::windowsTo = (dir) ->
   switch dir
@@ -47,20 +46,12 @@ Window::windowsTo = (dir) ->
     when WEST then @windowsToWest()
 
 Window::closestTo = (dir) ->
-  closest = Screen.mainScreen().edgeTo(dir)
+  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir
   for win in @windowsTo dir
-    next = win.edgeTo dir
+    next = edgeOf win.frame(), opposite dir
     if closer dir, next, closest
       closest = next
   next
-
-Window::edgeTo = (dir) ->
-  f = @frame()
-  switch dir
-    when NORTH then f.y + f.height + GAP
-    when SOUTH then f.y - GAP
-    when EAST then f.x - GAP
-    when WEST then f.x + f.width + GAP
 
 # Handlers
 keys = []
@@ -113,11 +104,11 @@ Window::fallTo = (dir) ->
       when SOUTH, EAST then a + 1 < b
 
   # Find the closest window we can fall to
-  myEdge = @edgeTo(opposite dir)
-  closest = Screen.mainScreen().edgeTo dir
+  myEdge = edgeOf tFrame, dir
+  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir, -GAP
   for win in @windowsTo dir
     f = win.frame()
-    edge = win.edgeTo dir
+    edge = edgeOf f, (opposite dir), GAP
     # If I can fall to it and it can fall to closest so far
     if catchable(f) and fallable(myEdge, edge) and fallable(edge, closest)
       closest = edge
