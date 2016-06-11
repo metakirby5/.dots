@@ -13,7 +13,7 @@ up2ixio() {
 }
 
 transfer() {
-  if [ $# -eq 0 ]; then
+  if [ "$#" -eq 0 ]; then
     echo "No arguments specified. Usage:
     transfer [file]
     cat [file] | transfer [url]"
@@ -75,7 +75,7 @@ clean-pyc() {
 pip-diff() {
   local reqs='requirements.txt'
 
-  if [[ ! -f $reqs ]]; then
+  if [ ! -f "$reqs" ]; then
       echo "ERROR: $reqs not found."
       return
   fi
@@ -87,7 +87,7 @@ pip-diff() {
 pip-sync() {
   local reqs='requirements.txt'
 
-  if [[ ! -f $reqs ]]; then
+  if [ ! -f "$reqs" ]; then
       echo "ERROR: $reqs not found."
       return
   fi
@@ -98,7 +98,7 @@ pip-sync() {
 
 # Compile and run a Java class
 javar() {
-    if [[ ! $1 ]]; then
+    if [ ! "$1" ]; then
         echo 'Usage: javar [class name]'
         echo 'Example for a file named "Test.java":'
         echo '    $ javar Test'

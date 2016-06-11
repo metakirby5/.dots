@@ -1,6 +1,5 @@
-__mk5_normal="\[\e[0m\]"
-
 # Line colors
+__mk5_normal="\[\e[0m\]"
 __mk5_red="\[\e[0;31m\]"
 __mk5_green="\[\e[0;32m\]"
 __mk5_yellow="\[\e[0;33m\]"
@@ -26,15 +25,15 @@ __mk5_incoming_char='v'
 __mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
-__mk5_hostname=${HOSTNAME%%.*}
+__mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
 
 function __mk5_git_pwd {
   # Get git path
-  local thePWD=$(pwd -P)
+  local thePWD="$(pwd -P)"
   local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
 
-  if [[ "$gitpath" ]]; then
+  if [ "$gitpath" ]; then
     # Strip git path
     echo "${gitpath##*/}${thePWD##$gitpath}"
   else
@@ -65,9 +64,9 @@ function __mk5_git_behindmaster {
 
 function __mk5_git_outgoing {
   # Check if branch exists on remote; if so, echo !
-  local branch_exists=$(git branch -r 2>/dev/null \
-    | grep "^ *origin/$(__mk5_git_branch)\$")
-  if [[ ! $branch_exists ]]; then
+  local branch_exists="$(git branch -r 2>/dev/null \
+    | grep "^ *origin/$(__mk5_git_branch)\$")"
+  if [ ! "$branch_exists" ]; then
     echo '!'
 
   # Otherwise, compare wih remote branch; echo # commits ahead
@@ -79,11 +78,11 @@ function __mk5_git_outgoing {
 
 function __mk5_set_prompt {
   # Grab status code first
-  local last_status=$?
+  local last_status="$?"
 
   # Status color
   local pcharcolor
-  if [[ $last_status == 0 ]]; then
+  if [ "$last_status" -eq 0 ]; then
     pcharcolor="$__mk5_b_green"
   else
     pcharcolor="$__mk5_b_red"
@@ -91,7 +90,7 @@ function __mk5_set_prompt {
 
   # Use $ or # for prompt
   local pchar
-  if [[ $EUID -eq 0 ]]; then
+  if [ "$EUID" -eq 0 ]; then
     pchar="$__mk5_root_pchar"
   else
     pchar="$__mk5_usr_pchar"
@@ -99,30 +98,30 @@ function __mk5_set_prompt {
 
   # Git stuff
   local git_info
-  local git_branch=$(__mk5_git_branch)
-  if [[ "$git_branch" ]]; then
-    git_info=$git_branch
+  local git_branch="$(__mk5_git_branch)"
+  if [ "$git_branch" ]; then
+    git_info="$git_branch"
 
-    local git_dirty=$(__mk5_git_dirty)
-    if [[ "$git_dirty" != 0 ]]; then
+    local git_dirty="$(__mk5_git_dirty)"
+    if [ "$git_dirty" -ne 0 ]; then
       git_info="$git_info \
 $__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
-    local git_incoming=$(__mk5_git_incoming)
-    if [[ "$git_incoming" != 0 ]]; then
+    local git_incoming="$(__mk5_git_incoming)"
+    if [ "$git_incoming" -ne 0 ]; then
       git_info="$git_info \
 $__mk5_b_red$__mk5_incoming_char$git_incoming"
     fi
 
-    local git_behindmaster=$(__mk5_git_behindmaster)
-    if [[ "$git_behindmaster" != 0 ]]; then
+    local git_behindmaster="$(__mk5_git_behindmaster)"
+    if [ "$git_behindmaster" -ne 0 ]; then
       git_info="$git_info \
 $__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
     fi
 
-    local git_outgoing=$(__mk5_git_outgoing)
-    if [[ "$git_outgoing" != 0 ]]; then
+    local git_outgoing="$(__mk5_git_outgoing)"
+    if [ "$git_outgoing" -ne 0 ]; then
       git_info="$git_info \
 $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     fi
@@ -133,14 +132,14 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
   # Virtualenv stuff
   local colorpwd="$__mk5_green$(__mk5_git_pwd) "
   local virtualenv_info
-  if [[ "$VIRTUAL_ENV" ]]; then
-    local thePWD=$(pwd -P)
+  if [ "$VIRTUAL_ENV" ]; then
+    local thePWD="$(pwd -P)"
     local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
     local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
 
     # If we're in a git repo and the directory matches the current env
     # project path, make it blue
-    if [[ "$envpath" && "$gitpath" == "$envpath" ]]; then
+    if [ "$envpath" -a "$gitpath" -eq "$envpath" ]; then
       colorpwd="$__mk5_blue${gitpath##*/}$__mk5_green${thePWD##$gitpath} "
 
     # Otherwise, just print out the virtualenv info separately
