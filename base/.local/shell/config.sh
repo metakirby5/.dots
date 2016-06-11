@@ -3,25 +3,6 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 export CLASSPATH='*':'.'
 
-# Aliases
-## Tools
-alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
-alias mpc-path='echo "${XDG_MUSIC_DIR%%/}/$(mpc current --format %file%)"'
-
-## Shortcuts
-alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
-alias reload-xresources='xrdb ~/.Xresources'
-alias vty="variety >/dev/null"
-alias xopen="xdg-open"
-alias clip="xclip -sel c"
-alias enw='emacs -nw'
-alias tetris='bastet'
-
-## Prefs
-alias less='less -R'
-alias mpv='mpv --autofit-larger=90%x90%'
-alias feh='feh -.'
-
 # Don't give literal * unless we ask for it
 shopt -s nullglob
 
@@ -50,56 +31,6 @@ transfer() {
 
   cat $tmpfile
   rm -f $tmpfile
-}
-
-# Detect filetype and extract
-extract () {
-  if [ -f "$1" ] ; then
-    case "$1" in
-      *.tar.bz2) tar xvjf "$1" ;;
-      *.tar.gz) tar xvzf "$1" ;;
-      *.bz2) bunzip2 "$1" ;;
-      *.rar) unrar x "$1" ;;
-      *.gz) gunzip "$1" ;;
-      *.tar) tar xvf "$1" ;;
-      *.tbz2) tar xvjf "$1" ;;
-      *.tgz) tar xvzf "$1" ;;
-      *.zip) unzip "$1" ;;
-      *.Z) uncompress "$1" ;;
-      *.7z) 7z x "$1" ;;
-      *) echo "don't know how to extract \"$1\"..." ;;
-    esac
-  else
-    echo "\"$1\" is not a valid file!"
-  fi
-}
-
-# Moves the current wallpaper to $1
-variety-mv() {
-  mv "$(variety --get | grep '/')" "$1" && variety --next
-}
-
-# Add aliases for mv and nsfw
-variety() {
-  if [[ "$#" -eq 0 ]]; then
-    command variety
-  else
-    case "$1" in
-      nsfw)
-        variety-mv "/home/echan/Pictures/Wallpapers/Desktop/NSFW/"
-        ;;
-      mv)
-        if [[ $# -eq 2 ]]; then
-          variety-mv "$2"
-        else
-          echo "Please provide a destination."
-        fi
-        ;;
-      *)
-        command variety "$@"
-        ;;
-    esac
-  fi
 }
 
 # Publish to github-pages
