@@ -82,7 +82,7 @@ function __mk5_set_prompt {
 
   # Status color
   local pcharcolor
-  if [ "$last_status" -eq 0 ]; then
+  if [ "$last_status" == 0 ]; then
     pcharcolor="$__mk5_b_green"
   else
     pcharcolor="$__mk5_b_red"
@@ -90,7 +90,7 @@ function __mk5_set_prompt {
 
   # Use $ or # for prompt
   local pchar
-  if [ "$EUID" -eq 0 ]; then
+  if [ "$EUID" == 0 ]; then
     pchar="$__mk5_root_pchar"
   else
     pchar="$__mk5_usr_pchar"
@@ -103,25 +103,25 @@ function __mk5_set_prompt {
     git_info="$git_branch"
 
     local git_dirty="$(__mk5_git_dirty)"
-    if [ "$git_dirty" -ne 0 ]; then
+    if [ "$git_dirty" != 0 ]; then
       git_info="$git_info \
 $__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
     local git_incoming="$(__mk5_git_incoming)"
-    if [ "$git_incoming" -ne 0 ]; then
+    if [ "$git_incoming" != 0 ]; then
       git_info="$git_info \
 $__mk5_b_red$__mk5_incoming_char$git_incoming"
     fi
 
     local git_behindmaster="$(__mk5_git_behindmaster)"
-    if [ "$git_behindmaster" -ne 0 ]; then
+    if [ "$git_behindmaster" != 0 ]; then
       git_info="$git_info \
 $__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
     fi
 
     local git_outgoing="$(__mk5_git_outgoing)"
-    if [ "$git_outgoing" -ne 0 ]; then
+    if [ "$git_outgoing" == 0 ]; then
       git_info="$git_info \
 $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     fi
