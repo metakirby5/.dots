@@ -9,8 +9,8 @@ irssi
 macvim
 mpv
 node
-numpy
 p7zip
+pygame
 ranger
 rlwrap
 stow
