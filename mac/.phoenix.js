@@ -181,7 +181,7 @@ class ChainWindow
 fw = Window.focusedWindow
 cw = (gap = GAP, unit = UNIT) ->
   win = fw()
-  new ChainWindow(fw, gap, unit) if fw?
+  new ChainWindow(win, gap, unit) if win?
 
 # Handlers
 keys = []
