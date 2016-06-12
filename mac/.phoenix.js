@@ -1,32 +1,33 @@
 #!/usr/bin/env coffee -p
 
-# Preferences
-Phoenix.set
-  openAtLogin: true
-
 # Constants
-MOD = ['cmd', 'alt']
-MOVE_MOD = ['cmd', 'alt', 'shift']
-SIZE_MOD = ['cmd', 'ctrl']
-GRAV_MOD = ['ctrl', 'alt', 'cmd']
-UNIT = 50
-FACTOR = 2
-GAP = 10
-APPS =
-  Terminal: 't'
-
 NORTH = 'NORTH'
 SOUTH = 'SOUTH'
 EAST = 'EAST'
 WEST = 'WEST'
 
-# Handlers
-keys = []
-events = []
+# Preferences
+Phoenix.set
+  openAtLogin: true
+
+UNIT = 50
+FACTOR = 2
+GAP = 10
+APPS =
+  t: 'Terminal'
+
+# Keys
+MOD = ['cmd', 'alt']
+MOVE_MOD = ['cmd', 'alt', 'shift']
+SIZE_MOD = ['cmd', 'ctrl']
+POUR_MOD = ['cmd', 'alt', 'ctrl']
+DIRS =
+  h: WEST
+  j: SOUTH
+  k: NORTH
+  l: EAST
 
 # Helpers
-fw = Window.focusedWindow
-
 opposite = (dir) ->
   switch dir
     when NORTH then SOUTH
@@ -39,6 +40,7 @@ closer = (dir, a, b, fallthru = 0) ->
     when NORTH, WEST then a - fallthru > b
     when SOUTH, EAST then a + fallthru < b
 
+# Recthangle methods
 catchable = (f, dir, g) ->
   switch dir
     when NORTH, SOUTH
@@ -53,111 +55,166 @@ edgeOf = (f, dir, gap = 0) ->
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
 
-Window::move = (dx, dy) ->
-  f = @frame()
-  f.x += dx
-  f.y += dy
-  @setFrame f
-
-Window::scale = (fx, fy) ->
-  f = @frame()
-  f.width *= fx
-  f.height *= fy
-  @setFrame f
-
-Window::resize = (dx, dy) ->
-  f = @frame()
-  f.width += dx
-  f.height += dy
-  @setFrame f
-
-Window::windowsTo = (dir) ->
+# Window methods
+Window::focusIn = (dir) ->
   switch dir
-    when NORTH then @windowsToNorth()
-    when SOUTH then @windowsToSouth()
-    when EAST then @windowsToEast()
-    when WEST then @windowsToWest()
+    when NORTH then @focusClosestWindowInNorth()
+    when SOUTH then @focusClosestWindowInSouth()
+    when EAST then @focusClosestWindowInEast()
+    when WEST then @focusClosestWindowInWest()
 
-Window::closestTo = (dir, fallthru = 0, onlyCatch = false) ->
-  f = @frame()
-  e = edgeOf f, dir
-  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir
-  for win in @windowsTo dir
-    nf = win.frame()
-    ne = edgeOf nf, (opposite dir)
-    if (closer dir, e, ne, fallthru) and
-       (closer dir, ne, closest, fallthru) and
-       (not onlyCatch or catchable f, dir, nf)
-      closest = ne
-  closest
+# Window chaining
+class ChainWindow
+  constructor: (@win, @gap = 0, @unit = 1) ->
+    @f = @win.frame()
 
-Window::vFill = (gap = 0) ->
-  f = @frame()
-  f.y = (@closestTo NORTH) + gap
-  f.height = (@closestTo SOUTH) - f.y - gap
-  @setFrame f
+  set: ->
+    @win.setFrame @f
 
-Window::hFill = (gap = 0) ->
-  f = @frame()
-  f.x = (@closestTo WEST) + gap
-  f.width = (@closestTo EAST) - f.x - gap
-  @setFrame f
+  _windowsIn: (dir) ->
+    switch dir
+      when NORTH then @win.windowsToNorth()
+      when SOUTH then @win.windowsToSouth()
+      when EAST then @win.windowsToEast()
+      when WEST then @win.windowsToWest()
 
-Window::fill = (gap = 0) ->
-  f = @frame()
-  f.x = (@closestTo WEST) + gap
-  f.width = (@closestTo EAST) - f.x - gap
-  f.y = (@closestTo NORTH) + gap
-  f.height = (@closestTo SOUTH) - f.y - gap
-  @setFrame f
+  _deltaIn: (dir) ->
+    switch dir
+      when NORTH then [0, -UNIT]
+      when SOUTH then [0,  UNIT]
+      when EAST then  [ UNIT, 0]
+      when WEST then  [-UNIT, 0]
 
-Window::fallTo = (dir, gap) ->
-  f = @frame()
-  closest = @closestTo dir, gap, true
-  switch dir
-    when SOUTH then f.y = closest - f.height - gap
-    when NORTH then f.y = closest + gap
-    when EAST then f.x = closest - f.width - gap
-    when WEST then f.x = closest + gap
-  @setFrame f
+  _closestIn: (dir, useFallthru = false, onlyCatch = false) ->
+    scr = Screen.mainScreen()
+    e = edgeOf @f, dir
+    closest = edgeOf scr.visibleFrameInRectangle(), dir
+    for win in scr.visibleWindows()
+      if not @win.isEqual(win)
+        nf = win.frame()
+        ne = edgeOf nf, (opposite dir)
+        if (closer dir, e, ne, if useFallthru then @gap else 0) and
+           (closer dir, ne, closest, if useFallthru then @gap else 0) and
+           (not onlyCatch or catchable @f, dir, nf)
+          closest = ne
+    closest
+
+  move: (dx, dy) ->
+    @f.x += dx
+    @f.y += dy
+    this
+
+  moveTo: (x, y) ->
+    @f.x = x
+    @f.y = y
+    this
+
+  moveIn: (dir) ->
+    @move (@_deltaIn dir)...
+    this
+
+  size: (dx, dy) ->
+    @f.width += dx
+    @f.height += dy
+    this
+
+  sizeTo: (width, height) ->
+    @f.width = width
+    @f.height = height
+    this
+
+  sizeIn: (dir) ->
+    @size (@_deltaIn dir)...
+    this
+
+  scale: (fx, fy) ->
+    @f.width *= fx
+    @f.height *= fy
+    this
+
+  squashIn: (dir, factor = Infinity) ->
+    switch dir
+      when NORTH, SOUTH then @f.height /= factor
+      when EAST, WEST then @f.width /= factor
+    switch dir
+      when SOUTH then @f.y += @f.height * (factor - 1)
+      when EAST then @f.x += @f.width * (factor - 1)
+    this
+
+  vFill: ->
+    @f.y = (@_closestIn NORTH) + @gap
+    @f.height = (@_closestIn SOUTH) - @f.y - @gap
+    this
+
+  hFill: ->
+    @f.x = (@_closestIn WEST) + @gap
+    @f.width = (@_closestIn EAST) - @f.x - @gap
+    this
+
+  fill: ->
+    @vFill()
+    @hFill()
+    this
+
+  fallIn: (dir) ->
+    closest = @_closestIn dir, true, true
+    switch dir
+      when SOUTH then @f.y = closest - @f.height - @gap
+      when NORTH then @f.y = closest + @gap
+      when EAST then @f.x = closest - @f.width - @gap
+      when WEST then @f.x = closest + @gap
+    this
+
+  pourIn: (dir) ->
+    @squashIn dir
+    @fallIn dir
+    @fill()
+    this
+
+# Shortcuts
+fw = Window.focusedWindow
+cw = (gap = GAP, unit = UNIT) ->
+  new ChainWindow(Window.focusedWindow(), gap, unit)
+
+# Handlers
+keys = []
+events = []
+
+# Phoenix
+keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
 
 # Apps
-for app, key of APPS
+for key, app of APPS
   keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
 
 # Spaces
 # TODO
 
-# Select
-keys.push Phoenix.bind 'h', MOD, -> fw().focusClosestWindowInWest()
-keys.push Phoenix.bind 'j', MOD, -> fw().focusClosestWindowInSouth()
-keys.push Phoenix.bind 'k', MOD, -> fw().focusClosestWindowInNorth()
-keys.push Phoenix.bind 'l', MOD, -> fw().focusClosestWindowInEast()
+# Directionals
+DIR_MODS = [
+  [
+    # Select
+    MOD,
+    (dir) -> fw().focusIn(dir)
+  ],
+  [
+    # Fall
+    MOVE_MOD,
+    (dir) -> cw().fallIn(dir).set()
+  ],
+  [
+    # Squash
+    SIZE_MOD,
+    (dir) -> cw().squashIn(dir, 2).set()
+  ],
+  [
+    # Pour
+    POUR_MOD,
+    (dir) -> cw().pourIn(dir).set()
+  ],
+]
 
-keys.push Phoenix.bind 'h', MOVE_MOD, -> fw().move -UNIT, 0
-keys.push Phoenix.bind 'j', MOVE_MOD, -> fw().move 0, UNIT
-keys.push Phoenix.bind 'k', MOVE_MOD, -> fw().move 0, -UNIT
-keys.push Phoenix.bind 'l', MOVE_MOD, -> fw().move UNIT, 0
-
-keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize -UNIT, 0
-keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize 0, UNIT
-keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize 0, -UNIT
-keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize UNIT, 0
-keys.push Phoenix.bind 'f', MOD, -> fw().fill GAP
-
-keys.push Phoenix.bind 'h', GRAV_MOD, ->
-  f = fw()
-  f.fallTo WEST, GAP
-  f.fill GAP
-keys.push Phoenix.bind 'j', GRAV_MOD, ->
-  f = fw()
-  f.fallTo SOUTH, GAP
-  f.fill GAP
-keys.push Phoenix.bind 'k', GRAV_MOD, ->
-  f = fw()
-  f.fallTo NORTH, GAP
-  f.fill GAP
-keys.push Phoenix.bind 'l', GRAV_MOD, ->
-  f = fw()
-  f.fallTo EAST, GAP
-  f.fill GAP
+for [mod, action] in DIR_MODS
+  for key, dir of DIRS
+    do (key, mod, action, dir) ->
+      keys.push Phoenix.bind key, mod, -> action(dir)
