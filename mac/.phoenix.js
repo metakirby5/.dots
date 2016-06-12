@@ -1,10 +1,14 @@
 #!/usr/bin/env coffee -p
 
+# Preferences
+Phoenix.set
+  openAtLogin: true
+
 # Constants
 MOD = ['cmd', 'alt']
-GRAV_MOD = ['cmd', 'alt', 'shift']
+MOVE_MOD = ['cmd', 'alt', 'shift']
 SIZE_MOD = ['cmd', 'ctrl']
-MOVE_MOD = ['ctrl', 'alt', 'cmd']
+GRAV_MOD = ['ctrl', 'alt', 'cmd']
 UNIT = 50
 FACTOR = 2
 GAP = 10
@@ -30,10 +34,17 @@ opposite = (dir) ->
     when EAST then WEST
     when WEST then EAST
 
-closer = (dir, a, b) ->
+closer = (dir, a, b, fallthru = 0) ->
   switch dir
-    when NORTH, WEST then a > b
-    when SOUTH, EAST then a < b
+    when NORTH, WEST then a - fallthru > b
+    when SOUTH, EAST then a + fallthru < b
+
+catchable = (f, dir, g) ->
+  switch dir
+    when NORTH, SOUTH
+      f.x < g.x + g.width and f.x + f.width > g.x
+    when EAST, WEST
+      f.y < g.y + g.height and f.y + f.height > g.y
 
 edgeOf = (f, dir, gap = 0) ->
   switch dir
@@ -43,22 +54,22 @@ edgeOf = (f, dir, gap = 0) ->
     when WEST then f.x - gap
 
 Window::move = (dx, dy) ->
-  tFrame = @frame()
-  tFrame.x+= dx
-  tFrame.y += dy
-  @setFrame tFrame
+  f = @frame()
+  f.x += dx
+  f.y += dy
+  @setFrame f
 
 Window::scale = (fx, fy) ->
-  tFrame = @frame()
-  tFrame.width *= fx
-  tFrame.height *= fy
-  @setFrame tFrame
+  f = @frame()
+  f.width *= fx
+  f.height *= fy
+  @setFrame f
 
 Window::resize = (dx, dy) ->
-  tFrame = @frame()
-  tFrame.width += dx
-  tFrame.height += dy
-  @setFrame tFrame
+  f = @frame()
+  f.width += dx
+  f.height += dy
+  @setFrame f
 
 Window::windowsTo = (dir) ->
   switch dir
@@ -67,66 +78,48 @@ Window::windowsTo = (dir) ->
     when EAST then @windowsToEast()
     when WEST then @windowsToWest()
 
-Window::closestTo = (dir) ->
-  f = edgeOf @frame(), dir
+Window::closestTo = (dir, fallthru = 0, onlyCatch = false) ->
+  f = @frame()
+  e = edgeOf f, dir
   closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir
   for win in @windowsTo dir
-    next = edgeOf win.frame(), (opposite dir)
-    if (closer dir, f, next) and  (closer dir, next, closest)
-      closest = next
+    nf = win.frame()
+    ne = edgeOf nf, (opposite dir)
+    if (closer dir, e, ne, fallthru) and
+       (closer dir, ne, closest, fallthru) and
+       (not onlyCatch or catchable f, dir, nf)
+      closest = ne
   closest
 
 Window::vFill = (gap = 0) ->
-  tFrame = @frame()
-  tFrame.y = (@closestTo NORTH) + gap
-  tFrame.height = (@closestTo SOUTH) - tFrame.y - gap
-  @setFrame tFrame
+  f = @frame()
+  f.y = (@closestTo NORTH) + gap
+  f.height = (@closestTo SOUTH) - f.y - gap
+  @setFrame f
 
 Window::hFill = (gap = 0) ->
-  tFrame = @frame()
-  tFrame.x = (@closestTo WEST) + gap
-  tFrame.width = (@closestTo EAST) - tFrame.x - gap
-  @setFrame tFrame
+  f = @frame()
+  f.x = (@closestTo WEST) + gap
+  f.width = (@closestTo EAST) - f.x - gap
+  @setFrame f
 
 Window::fill = (gap = 0) ->
-  tFrame = @frame()
-  tFrame.x = (@closestTo WEST) + gap
-  tFrame.width = (@closestTo EAST) - tFrame.x - gap
-  tFrame.y = (@closestTo NORTH) + gap
-  tFrame.height = (@closestTo SOUTH) - tFrame.y - gap
-  @setFrame tFrame
+  f = @frame()
+  f.x = (@closestTo WEST) + gap
+  f.width = (@closestTo EAST) - f.x - gap
+  f.y = (@closestTo NORTH) + gap
+  f.height = (@closestTo SOUTH) - f.y - gap
+  @setFrame f
 
 Window::fallTo = (dir, gap) ->
-  tFrame = @frame()
-  catchable = (f) ->
-    switch dir
-      when NORTH, SOUTH
-        tFrame.x < f.x + f.width and tFrame.x + tFrame.width > f.x
-      when EAST, WEST
-        tFrame.y < f.y + f.height and tFrame.y + tFrame.height > f.y
-  fallable = (a, b) ->
-    switch dir
-      when NORTH, WEST then a - 1 > b
-      when SOUTH, EAST then a + 1 < b
-
-  # Find the closest window we can fall to
-  myEdge = edgeOf tFrame, dir
-  closest = edgeOf Screen.mainScreen().visibleFrameInRectangle(), dir, -gap
-  for win in @windowsTo dir
-    f = win.frame()
-    edge = edgeOf f, (opposite dir), gap
-    # If I can fall to it and it can fall to closest so far
-    if (catchable f) and (fallable myEdge, edge) and (fallable edge, closest)
-      closest = edge
-
-  # Set our frame
+  f = @frame()
+  closest = @closestTo dir, gap, true
   switch dir
-    when NORTH then tFrame.y = closest
-    when SOUTH then tFrame.y = closest - tFrame.height
-    when EAST then tFrame.x = closest - tFrame.width
-    when WEST then tFrame.x = closest
-
-  @setFrame(tFrame)
+    when SOUTH then f.y = closest - f.height - gap
+    when NORTH then f.y = closest + gap
+    when EAST then f.x = closest - f.width - gap
+    when WEST then f.x = closest + gap
+  @setFrame f
 
 # Apps
 for app, key of APPS
@@ -150,10 +143,21 @@ keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize -UNIT, 0
 keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize 0, UNIT
 keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize 0, -UNIT
 keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize UNIT, 0
-keys.push Phoenix.bind 'f', MOD, -> fw().maximize()
+keys.push Phoenix.bind 'f', MOD, -> fw().fill GAP
 
-# TODO fill after fallTo
-keys.push Phoenix.bind 'h', GRAV_MOD, -> fw().fallTo WEST, GAP
-keys.push Phoenix.bind 'j', GRAV_MOD, -> fw().fallTo SOUTH, GAP
-keys.push Phoenix.bind 'k', GRAV_MOD, -> fw().fallTo NORTH, GAP
-keys.push Phoenix.bind 'l', GRAV_MOD, -> fw().fallTo EAST, GAP
+keys.push Phoenix.bind 'h', GRAV_MOD, ->
+  f = fw()
+  f.fallTo WEST, GAP
+  f.fill GAP
+keys.push Phoenix.bind 'j', GRAV_MOD, ->
+  f = fw()
+  f.fallTo SOUTH, GAP
+  f.fill GAP
+keys.push Phoenix.bind 'k', GRAV_MOD, ->
+  f = fw()
+  f.fallTo NORTH, GAP
+  f.fill GAP
+keys.push Phoenix.bind 'l', GRAV_MOD, ->
+  f = fw()
+  f.fallTo EAST, GAP
+  f.fill GAP
