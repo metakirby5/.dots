@@ -135,16 +135,21 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
   if [ "$VIRTUAL_ENV" ]; then
     local envpath="$(cat $VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME \
       2>/dev/null)"
-    [ "$gitpath" ] && envpath="$gitbase${envpath##$gitpath}"
-    case "$mypwd" in
-      "$envpath"*)
-        suffix="${mypwd##$envpath}"
-        pwdcolor="$__mk5_blue"
-        ;;
-      *)
-        virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
-        ;;
-    esac
+
+    if [ ! "$envpath" ]; then
+      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
+    else
+      [ "$gitpath" ] && envpath="$gitbase${envpath##$gitpath}"
+      case "$mypwd" in
+        "$envpath"*)
+          suffix="${mypwd##$envpath}"
+          pwdcolor="$__mk5_blue"
+          ;;
+        *)
+          virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
+          ;;
+      esac
+    fi
   fi
 
   # Shorten $HOME
