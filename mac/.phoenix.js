@@ -180,7 +180,8 @@ class ChainWindow
 # Shortcuts
 fw = Window.focusedWindow
 cw = (gap = GAP, unit = UNIT) ->
-  new ChainWindow(Window.focusedWindow(), gap, unit)
+  win = fw()
+  new ChainWindow(fw, gap, unit) if fw?
 
 # Handlers
 keys = []
@@ -188,7 +189,7 @@ events = []
 
 # Special
 keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
-keys.push Phoenix.bind 'f', MOD, -> cw().maximize().set()
+keys.push Phoenix.bind 'f', MOD, -> cw()?.maximize().set()
 
 # Apps
 for key, app of APPS
@@ -202,22 +203,22 @@ DIR_MODS = [
   [
     # Select
     MOD,
-    (dir) -> fw().focusIn(dir)
+    (dir) -> fw()?.focusIn(dir)
   ],
   [
     # Fall
     MOVE_MOD,
-    (dir) -> cw().fallIn(dir).set()
+    (dir) -> cw()?.fallIn(dir).set()
   ],
   [
     # Squash
     SIZE_MOD,
-    (dir) -> cw().squashIn(dir, 2).set()
+    (dir) -> cw()?.squashIn(dir, 2).set()
   ],
   [
     # Pour
     POUR_MOD,
-    (dir) -> cw().pourIn(dir).set()
+    (dir) -> cw()?.pourIn(dir).set()
   ],
 ]
 
