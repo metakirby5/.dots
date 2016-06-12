@@ -160,4 +160,4 @@ $pcharcolor$pchar \
 $__mk5_normal"
 }
 
-PROMPT_COMMAND="__mk5_set_prompt; $PROMPT_COMMAND"
+PROMPT_COMMAND=__mk5_set_prompt
