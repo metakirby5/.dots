@@ -67,6 +67,7 @@ Window::focusIn = (dir) ->
 class ChainWindow
   constructor: (@win, @gap = 0, @unit = 1) ->
     @f = @win.frame()
+    @scr = Screen.mainScreen()
 
   set: ->
     @win.setFrame @f
@@ -86,10 +87,9 @@ class ChainWindow
       when WEST then  [-UNIT, 0]
 
   _closestIn: (dir, useFallthru = false, onlyCatch = false) ->
-    scr = Screen.mainScreen()
     e = edgeOf @f, dir
-    closest = edgeOf scr.visibleFrameInRectangle(), dir
-    for win in scr.visibleWindows()
+    closest = edgeOf @scr.visibleFrameInRectangle(), dir
+    for win in @scr.visibleWindows()
       if not @win.isEqual(win)
         nf = win.frame()
         ne = edgeOf nf, (opposite dir)
@@ -121,6 +121,12 @@ class ChainWindow
   sizeTo: (width, height) ->
     @f.width = width
     @f.height = height
+    this
+
+  maximize: ->
+    f = @scr.visibleFrameInRectangle()
+    @moveTo f.x + @gap, f.y + @gap
+    @sizeTo f.width - 2 * @gap, f.height - 2 * @gap
     this
 
   sizeIn: (dir) ->
@@ -180,8 +186,9 @@ cw = (gap = GAP, unit = UNIT) ->
 keys = []
 events = []
 
-# Phoenix
+# Special
 keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
+keys.push Phoenix.bind 'f', MOD, -> cw().maximize().set()
 
 # Apps
 for key, app of APPS
