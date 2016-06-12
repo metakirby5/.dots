@@ -28,20 +28,6 @@ __mk5_outgoing_char='^'
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
 
-function __mk5_git_pwd {
-  # Get git path
-  local thePWD="$(pwd -P)"
-  local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
-
-  if [ "$gitpath" ]; then
-    # Strip git path
-    echo "${gitpath##*/}${thePWD##$gitpath}"
-  else
-    # Replace home with ~
-    pwd | sed "s|^$__mk5_home|~|"
-  fi
-}
-
 function __mk5_git_branch {
   echo $(git symbolic-ref HEAD 2>/dev/null || \
          git rev-parse --short HEAD 2>/dev/null) \
@@ -121,7 +107,7 @@ $__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
     fi
 
     local git_outgoing="$(__mk5_git_outgoing)"
-    if [ "$git_outgoing" == 0 ]; then
+    if [ "$git_outgoing" != 0 ]; then
       git_info="$git_info \
 $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     fi
@@ -129,31 +115,50 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
-  # Virtualenv stuff
-  local colorpwd="$__mk5_green$(__mk5_git_pwd) "
+  # pwd stuff
+  local mypwd="$(pwd -P)"
+
+  # Replace git path
+  local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
+  local gitbase
+  if [ "$gitpath" ]; then
+    gitbase="$(basename "$gitpath")"
+    mypwd="$gitbase${mypwd##$gitpath}"
+  fi
+
+  # Colorize
+  local suffix
+  local pwdcolor="$__mk5_green"
+
+  # Virtualenv = blue
   local virtualenv_info
   if [ "$VIRTUAL_ENV" ]; then
-    local thePWD="$(pwd -P)"
-    local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
-    local envpath="$(cat $VIRTUAL_ENV/.project 2>/dev/null)"
-
-    # If we're in a git repo and the directory matches the current env
-    # project path, make it blue
-    if [ "$envpath" -a "$gitpath" == "$envpath" ]; then
-      colorpwd="$__mk5_blue${gitpath##*/}$__mk5_green${thePWD##$gitpath} "
-
-    # Otherwise, just print out the virtualenv info separately
-    else
-      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
-    fi
+    local envpath="$(cat $VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME \
+      2>/dev/null)"
+    [ "$gitpath" ] && envpath="$gitbase${envpath##$gitpath}"
+    case "$mypwd" in
+      "$envpath"*)
+        suffix="${mypwd##$envpath}"
+        pwdcolor="$__mk5_blue"
+        ;;
+      *)
+        virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
+        ;;
+    esac
   fi
+
+  # Shorten $HOME
+  mypwd="$(echo "$mypwd" | sed "s|^$__mk5_home|~|")"
+
+  # Apply color
+  mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
 $__mk5_cyan$USER$__mk5_b_cyan in \
 $virtualenv_info\
 $git_info\
-$colorpwd\
+$mypwd\
 \n\
 $__mk5_b_blue$__mk5_bot_connector\
 $pcharcolor$pchar \
