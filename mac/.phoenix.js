@@ -3,8 +3,7 @@
 # Constants
 MOD = ['cmd', 'alt']
 GRAV_MOD = ['cmd', 'alt', 'shift']
-# SIZE_MOD = ['cmd', 'ctrl']
-CF_MOD = ['cmd', 'ctrl']
+SIZE_MOD = ['cmd', 'ctrl']
 MOVE_MOD = ['ctrl', 'alt', 'cmd']
 UNIT = 50
 FACTOR = 2
@@ -43,6 +42,24 @@ edgeOf = (f, dir, gap = 0) ->
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
 
+Window::move = (dx, dy) ->
+  tFrame = @frame()
+  tFrame.x+= dx
+  tFrame.y += dy
+  @setFrame tFrame
+
+Window::scale = (fx, fy) ->
+  tFrame = @frame()
+  tFrame.width *= fx
+  tFrame.height *= fy
+  @setFrame tFrame
+
+Window::resize = (dx, dy) ->
+  tFrame = @frame()
+  tFrame.width += dx
+  tFrame.height += dy
+  @setFrame tFrame
+
 Window::windowsTo = (dir) ->
   switch dir
     when NORTH then @windowsToNorth()
@@ -59,49 +76,6 @@ Window::closestTo = (dir) ->
       closest = next
   closest
 
-# Apps
-for app, key of APPS
-  keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
-
-# Select
-keys.push Phoenix.bind 'h', MOD, -> fw().focusClosestWindowInWest()
-keys.push Phoenix.bind 'j', MOD, -> fw().focusClosestWindowInSouth()
-keys.push Phoenix.bind 'k', MOD, -> fw().focusClosestWindowInNorth()
-keys.push Phoenix.bind 'l', MOD, -> fw().focusClosestWindowInEast()
-
-# Move
-Window::move = (dx, dy) ->
-  tFrame = @frame()
-  tFrame.x+= dx
-  tFrame.y += dy
-  @setFrame tFrame
-
-keys.push Phoenix.bind 'h', MOVE_MOD, -> fw().move -UNIT, 0
-keys.push Phoenix.bind 'j', MOVE_MOD, -> fw().move 0, UNIT
-keys.push Phoenix.bind 'k', MOVE_MOD, -> fw().move 0, -UNIT
-keys.push Phoenix.bind 'l', MOVE_MOD, -> fw().move UNIT, 0
-
-# Size
-Window::resize = (dx, dy) ->
-  tFrame = @frame()
-  tFrame.width += dx
-  tFrame.height += dy
-  @setFrame tFrame
-
-# keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize -UNIT, 0
-# keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize 0, UNIT
-# keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize 0, -UNIT
-# keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize UNIT, 0
-keys.push Phoenix.bind 'f', MOD, -> fw().maximize()
-
-# Cut
-Window::scale = (fx, fy) ->
-  tFrame = @frame()
-  tFrame.width *= fx
-  tFrame.height *= fy
-  @setFrame tFrame
-
-# Fill
 Window::vFill = (gap = 0) ->
   tFrame = @frame()
   tFrame.y = (@closestTo NORTH) + gap
@@ -122,13 +96,6 @@ Window::fill = (gap = 0) ->
   tFrame.height = (@closestTo SOUTH) - tFrame.y - gap
   @setFrame tFrame
 
-keys.push Phoenix.bind 'h', CF_MOD, -> fw().scale (1 / 2), 1
-keys.push Phoenix.bind 'j', CF_MOD, -> fw().vFill GAP
-keys.push Phoenix.bind 'k', CF_MOD, -> fw().scale 1, (1 / 2)
-keys.push Phoenix.bind 'l', CF_MOD, -> fw().hFill GAP
-keys.push Phoenix.bind 'f', CF_MOD, -> fw().fill GAP
-
-# Gravity
 Window::fallTo = (dir, gap) ->
   tFrame = @frame()
   catchable = (f) ->
@@ -161,6 +128,31 @@ Window::fallTo = (dir, gap) ->
 
   @setFrame(tFrame)
 
+# Apps
+for app, key of APPS
+  keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
+
+# Spaces
+# TODO
+
+# Select
+keys.push Phoenix.bind 'h', MOD, -> fw().focusClosestWindowInWest()
+keys.push Phoenix.bind 'j', MOD, -> fw().focusClosestWindowInSouth()
+keys.push Phoenix.bind 'k', MOD, -> fw().focusClosestWindowInNorth()
+keys.push Phoenix.bind 'l', MOD, -> fw().focusClosestWindowInEast()
+
+keys.push Phoenix.bind 'h', MOVE_MOD, -> fw().move -UNIT, 0
+keys.push Phoenix.bind 'j', MOVE_MOD, -> fw().move 0, UNIT
+keys.push Phoenix.bind 'k', MOVE_MOD, -> fw().move 0, -UNIT
+keys.push Phoenix.bind 'l', MOVE_MOD, -> fw().move UNIT, 0
+
+keys.push Phoenix.bind 'h', SIZE_MOD, -> fw().resize -UNIT, 0
+keys.push Phoenix.bind 'j', SIZE_MOD, -> fw().resize 0, UNIT
+keys.push Phoenix.bind 'k', SIZE_MOD, -> fw().resize 0, -UNIT
+keys.push Phoenix.bind 'l', SIZE_MOD, -> fw().resize UNIT, 0
+keys.push Phoenix.bind 'f', MOD, -> fw().maximize()
+
+# TODO fill after fallTo
 keys.push Phoenix.bind 'h', GRAV_MOD, -> fw().fallTo WEST, GAP
 keys.push Phoenix.bind 'j', GRAV_MOD, -> fw().fallTo SOUTH, GAP
 keys.push Phoenix.bind 'k', GRAV_MOD, -> fw().fallTo NORTH, GAP
