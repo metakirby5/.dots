@@ -139,7 +139,7 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
 
     # If we're in a git repo and the directory matches the current env
     # project path, make it blue
-    if [ "$envpath" -a "$gitpath" -eq "$envpath" ]; then
+    if [ "$envpath" -a "$gitpath" == "$envpath" ]; then
       colorpwd="$__mk5_blue${gitpath##*/}$__mk5_green${thePWD##$gitpath} "
 
     # Otherwise, just print out the virtualenv info separately
