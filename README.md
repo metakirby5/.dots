@@ -64,7 +64,6 @@ Someday I'll rewrite this.
 
 - brew
 - dmarcotte/easy-move-resize
-- saitoha/mouseterm-plus
 
 ### Chrome Theme
 

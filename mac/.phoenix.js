@@ -9,14 +9,17 @@ MOVE_MOD = ['ctrl', 'alt', 'cmd']
 UNIT = 50
 FACTOR = 2
 GAP = 10
-APPS = {
+APPS =
   Terminal: 't'
-}
 
 NORTH = 'NORTH'
 SOUTH = 'SOUTH'
 EAST = 'EAST'
 WEST = 'WEST'
+
+# Handlers
+keys = []
+events = []
 
 # Helpers
 fw = Window.focusedWindow
@@ -56,11 +59,7 @@ Window::closestTo = (dir) ->
       closest = next
   closest
 
-# Handlers
-keys = []
-events = []
-
-# Keybinds
+# Apps
 for app, key of APPS
   keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
 
