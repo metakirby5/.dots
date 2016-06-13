@@ -43,7 +43,7 @@ closer = (dir, a, b, fallthru = 0) ->
     when NORTH, WEST then a - fallthru > b
     when SOUTH, EAST then a + fallthru < b
 
-# Recthangle methods
+# Rectangle methods
 catchable = (f, dir, g) ->
   switch dir
     when NORTH, SOUTH
