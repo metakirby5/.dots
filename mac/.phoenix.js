@@ -157,13 +157,13 @@ class ChainWindow
     this
 
   vFill: ->
-    @f.y = (@_closestIn NORTH) + @gap
-    @f.height = (@_closestIn SOUTH) - @f.y - @gap
+    @f.y = (@_closestIn NORTH, false, true) + @gap
+    @f.height = (@_closestIn SOUTH, false, true) - @f.y - @gap
     this
 
   hFill: ->
-    @f.x = (@_closestIn WEST) + @gap
-    @f.width = (@_closestIn EAST) - @f.x - @gap
+    @f.x = (@_closestIn WEST, false, true) + @gap
+    @f.width = (@_closestIn EAST, false, true) - @f.x - @gap
     this
 
   fill: ->
