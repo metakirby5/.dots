@@ -26,6 +26,9 @@ DIRS =
   j: SOUTH
   k: NORTH
   l: EAST
+OFFSETS =
+  n: 1
+  p: -1
 
 # Helpers
 opposite = (dir) ->
@@ -54,6 +57,12 @@ edgeOf = (f, dir, gap = 0) ->
     when NORTH then f.y - gap
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
+
+# Space methods
+Space::getIdx = ->
+  that = this
+  (_.find (Space.spaces().map (s, i) -> [i, s]),
+          ([i, s]) -> that.isEqual s)[0]
 
 # Window methods
 Window::focusIn = (dir) ->
@@ -196,7 +205,28 @@ for key, app of APPS
   keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
 
 # Spaces
-# TODO
+SPACE_MODS = [
+  [
+    # Move
+    MOVE_MOD,
+    (num) ->
+      w = fw()
+      if w?
+        Space.spaces()[num]?.addWindows([w])
+        Space.activeSpace().removeWindows([w])
+  ],
+]
+
+for [mod, action] in SPACE_MODS
+  for num in [1..10]
+    do (num, mod, action) ->
+      s = '' + num
+      keys.push Phoenix.bind (s.substr s.length - 1), mod, -> action (num - 1)
+  for key, offset of OFFSETS
+    do (key, mod, action, offset) ->
+      keys.push Phoenix.bind key, mod, ->
+        idx = Space.activeSpace().getIdx()
+        action (idx + offset)
 
 # Directionals
 DIR_MODS = [
@@ -225,4 +255,4 @@ DIR_MODS = [
 for [mod, action] in DIR_MODS
   for key, dir of DIRS
     do (key, mod, action, dir) ->
-      keys.push Phoenix.bind key, mod, -> action(dir)
+      keys.push Phoenix.bind key, mod, -> action dir
