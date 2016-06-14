@@ -1,10 +1,15 @@
 # Path
-export PATH=$PATH:\
-$HOME/.local/bin:\
-$HOME/code/bash-scripts
+for p in \
+    ~/.local/bin \
+    ~/code/bash-scripts; do
+  [ -d "$p" ] && PATH="$PATH:$p"
+done
+export PATH
 
 # Configs
-for rc in ~/.local/shell/config.sh ~/.creds.sh; do
+for rc in \
+    ~/.local/shell/config.sh \
+    ~/.creds.sh; do
   [ "$rc" ] && source "$rc"
 done
 
@@ -16,14 +21,20 @@ for f in \
 done
 
 # fasd
-eval "$(fasd --init auto)"
-alias v='f -e vim'       # quick opening files with vim
-alias o='a -e open'      # quick opening files with open
-_fasd_bash_hook_cmd_complete v o
+if which fasd &>/dev/null; then
+  eval "$(fasd --init auto)"
+  alias v='f -e vim'       # quick opening files with vim
+  alias o='a -e open'      # quick opening files with open
+  _fasd_bash_hook_cmd_complete v o
+fi
 
 # hub
-alias git='hub'
+if which hub &>/dev/null; then
+  alias git='hub'
+fi
 
 # virtualenvwrapper
-export PROJECT_HOME=~/code
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+if which virtualenvwrapper &>/dev/null; then
+  export PROJECT_HOME=~/code
+  source /usr/local/bin/virtualenvwrapper_lazy.sh
+fi
