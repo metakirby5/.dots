@@ -254,7 +254,7 @@ for [mod, action] in SPACE_MODS
   for key, offset of OFFSETS
     do (key, mod, action, offset) ->
       keys.push Phoenix.bind key, mod, ->
-        idx = Space.activeSpace().getIdx()
+        idx = Space.activeSpace().idx()
         action (idx + offset)
 
 # Directionals
