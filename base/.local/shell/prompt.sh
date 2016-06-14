@@ -35,7 +35,8 @@ function __mk5_git_branch {
 }
 
 function __mk5_git_dirty {
-  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l | awk '{print $1}')"
+  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l |\
+    awk '{print $1}')"
 }
 
 function __mk5_git_incoming {
