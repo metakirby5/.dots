@@ -43,6 +43,13 @@ closer = (dir, a, b, fallthru = 0) ->
     when NORTH, WEST then a - fallthru > b
     when SOUTH, EAST then a + fallthru < b
 
+deltaIn = (dir) ->
+  switch dir
+    when NORTH then [0, -UNIT]
+    when SOUTH then [0,  UNIT]
+    when EAST then  [ UNIT, 0]
+    when WEST then  [-UNIT, 0]
+
 # Rectangle methods
 catchable = (f, dir, g) ->
   switch dir
@@ -82,34 +89,27 @@ Window::focusIn = (dir) ->
 class ChainWindow
   constructor: (@win, @gap = 0, @unit = 1) ->
     @f = @win.frame()
-    @_updateScr(@win.screen())
+    @updateScr @win.screen()
 
   set: ->
     @win.setFrame @f
 
-  _updateScr: (scr) ->
+  updateScr: (scr) ->
     @scr = scr
     @sf = scr.visibleFrameInRectangle()
 
-  _windowsIn: (dir) ->
+  windowsIn: (dir) ->
     switch dir
       when NORTH then @win.windowsToNorth()
       when SOUTH then @win.windowsToSouth()
       when EAST then @win.windowsToEast()
       when WEST then @win.windowsToWest()
 
-  _deltaIn: (dir) ->
-    switch dir
-      when NORTH then [0, -UNIT]
-      when SOUTH then [0,  UNIT]
-      when EAST then  [ UNIT, 0]
-      when WEST then  [-UNIT, 0]
-
-  _closestIn: (dir, useFallthru = false, onlyCatch = false) ->
+  closestIn: (dir, useFallthru = false, onlyCatch = false) ->
     e = edgeOf @f, dir
     closest = edgeOf @scr.visibleFrameInRectangle(), dir
     for win in @scr.visibleWindows()
-      if not @win.isEqual(win)
+      if not @win.isEqual win
         nf = win.frame()
         ne = edgeOf nf, (opposite dir)
         if (closer dir, e, ne, if useFallthru then @gap else 0) and
@@ -129,7 +129,7 @@ class ChainWindow
     this
 
   moveIn: (dir) ->
-    @move (@_deltaIn dir)...
+    @move (deltaIn dir)...
     this
 
   size: (dx, dy) ->
@@ -143,7 +143,7 @@ class ChainWindow
     this
 
   sizeIn: (dir) ->
-    @size (@_deltaIn dir)...
+    @size (deltaIn dir)...
     this
 
   scale: (fx, fy) ->
@@ -161,13 +161,13 @@ class ChainWindow
     this
 
   vFill: ->
-    @f.y = (@_closestIn NORTH, false, true) + @gap
-    @f.height = (@_closestIn SOUTH, false, true) - @f.y - @gap
+    @f.y = (@closestIn NORTH, false, true) + @gap
+    @f.height = (@closestIn SOUTH, false, true) - @f.y - @gap
     this
 
   hFill: ->
-    @f.x = (@_closestIn WEST, false, true) + @gap
-    @f.width = (@_closestIn EAST, false, true) - @f.x - @gap
+    @f.x = (@closestIn WEST, false, true) + @gap
+    @f.width = (@closestIn EAST, false, true) - @f.x - @gap
     this
 
   fill: ->
@@ -176,7 +176,7 @@ class ChainWindow
     this
 
   fallIn: (dir) ->
-    closest = @_closestIn dir, true, true
+    closest = @closestIn dir, true, true
     switch dir
       when SOUTH then @f.y = closest - @f.height - @gap
       when NORTH then @f.y = closest + @gap
@@ -195,12 +195,14 @@ class ChainWindow
     if space?
       space.addWindows [@win]
       Space.activeSpace().removeWindows [@win]
-    @_updateScr space.screen()
+    @updateScr space.screen()
     this
 
   constrain: ->
-    @f.width = Math.min @f.width, @sf.height
-    @f.height = Math.min @f.height, @sf.height
+    @f.width = Math.min @f.width, @sf.width - 2 * @gap
+    @f.height = Math.min @f.height, @sf.height - 2 * @gap
+    @f.x = @sf.x + Math.min @f.x, @sf.width - (@f.width + @gap)
+    @f.y = @sf.y + Math.min @f.y, @sf.height - (@f.height + @gap)
     this
 
   center: ->
@@ -237,7 +239,7 @@ SPACE_MODS = [
   [
     # Move
     MOVE_MOD,
-    (num) -> cw()?.setSpace(num).constrain().center().set()
+    (num) -> cw()?.setSpace(num).constrain().set()
   ],
 ]
 
@@ -281,4 +283,5 @@ for [mod, action] in DIR_MODS
     do (key, mod, action, dir) ->
       keys.push Phoenix.bind key, mod, -> action dir
 
+# Notify upon load of config
 Phoenix.notify 'Config loaded.'
