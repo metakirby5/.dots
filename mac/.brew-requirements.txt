@@ -1,16 +1,19 @@
 bash
-brew-rmtree
+beeftornado/rmtree/brew-rmtree
 coreutils
 fasd
+gcc
 git
 htop
 hub
 irssi
-macvim
+macvim --with-lua --with-override-system-vim
 mpv
 node
-numpy
+homebrew/python/numpy
 p7zip
+python
+python3
 ranger
 rlwrap
 stow
