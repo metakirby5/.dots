@@ -66,13 +66,13 @@ edgeOf = (f, dir, gap = 0) ->
     when WEST then f.x - gap
 
 # Screen methods
-Screen::getIdx = ->
+Screen::idx = ->
   that = this
   (_.find (Screen.screens().map (s, i) -> [i, s]),
           ([i, s]) -> that.isEqual s)[0]
 
 # Space methods
-Space::getIdx = ->
+Space::idx = ->
   that = this
   (_.find (Space.spaces().map (s, i) -> [i, s]),
           ([i, s]) -> that.isEqual s)[0]
@@ -95,8 +95,10 @@ class ChainWindow
     @win.setFrame @f
 
   updateScr: (scr) ->
+    @prevScr = if @scr? then @scr else scr
+    @prevSf = @prevScr.visibleFrameInRectangle()
     @scr = scr
-    @sf = scr.visibleFrameInRectangle()
+    @sf = @scr.visibleFrameInRectangle()
 
   windowsIn: (dir) ->
     switch dir
@@ -191,18 +193,19 @@ class ChainWindow
     this
 
   setSpace: (num) ->
-    space = Space.spaces()[num]
-    if space?
-      space.addWindows [@win]
-      Space.activeSpace().removeWindows [@win]
-    @updateScr space.screen()
+    next = Space.spaces()[num]
+    if next?
+      next.addWindows [@win]
+      for prev in @win.spaces()
+        prev.removeWindows [@win] if not prev.isEqual(next)
+      @updateScr next.screen()
     this
 
   constrain: ->
     @f.width = Math.min @f.width, @sf.width - 2 * @gap
     @f.height = Math.min @f.height, @sf.height - 2 * @gap
-    @f.x = @sf.x + Math.min @f.x, @sf.width - (@f.width + @gap)
-    @f.y = @sf.y + Math.min @f.y, @sf.height - (@f.height + @gap)
+    @f.x = @sf.x + Math.min @f.x - @prevSf.x, @sf.width - (@f.width + @gap)
+    @f.y = @sf.y + Math.min @f.y - @prevSf.y, @sf.height - (@f.height + @gap)
     this
 
   center: ->
