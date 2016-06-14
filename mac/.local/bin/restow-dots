@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cd ~/.dots
+stow -R base mac
