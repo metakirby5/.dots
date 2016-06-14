@@ -270,11 +270,6 @@ DIR_MODS = [
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
-    # Squash
-    SIZE_MOD,
-    (dir) -> cw()?.squashIn(dir, 2).set()
-  ],
-  [
     # Pour
     POUR_MOD,
     (dir) -> cw()?.pourIn(dir).set()
