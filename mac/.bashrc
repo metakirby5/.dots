@@ -4,7 +4,7 @@ $HOME/.local/bin:\
 $HOME/code/bash-scripts
 
 # Configs
-for rc in ~/.local/config.sh ~/.creds.sh; do
+for rc in ~/.local/shell/config.sh ~/.creds.sh; do
   [ "$rc" ] && source "$rc"
 done
 
