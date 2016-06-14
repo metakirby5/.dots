@@ -10,7 +10,7 @@ WEST = 'WEST'
 Phoenix.set
   openAtLogin: true
 
-UNIT = 50
+UNIT = 100
 FACTOR = 2
 GAP = 10
 APPS =
@@ -262,9 +262,9 @@ DIR_MODS = [
     (dir) -> fw()?.focusIn(dir)
   ],
   [
-    # Fall
+    # Move
     MOVE_MOD,
-    (dir) -> cw()?.fallIn(dir).set()
+    (dir) -> cw()?.moveIn(dir).set()
   ],
   [
     # Squash
@@ -282,6 +282,18 @@ for [mod, action] in DIR_MODS
   for key, dir of DIRS
     do (key, mod, action, dir) ->
       keys.push Phoenix.bind key, mod, -> action dir
+
+# SIZE_MOD is a special case
+for key, dir of DIRS
+  action = switch dir
+    # Squash
+    when NORTH, WEST then (dir) -> cw()?.squashIn(dir, 2).set()
+    # Grow
+    when SOUTH, EAST then (dir) -> cw()?.sizeIn(dir).set()
+
+  do (key, action, dir) ->
+    keys.push Phoenix.bind key, SIZE_MOD, -> action dir
+
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
