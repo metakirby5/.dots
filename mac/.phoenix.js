@@ -58,6 +58,12 @@ edgeOf = (f, dir, gap = 0) ->
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
 
+# Screen methods
+Screen::getIdx = ->
+  that = this
+  (_.find (Screen.screens().map (s, i) -> [i, s]),
+          ([i, s]) -> that.isEqual s)[0]
+
 # Space methods
 Space::getIdx = ->
   that = this
@@ -76,10 +82,14 @@ Window::focusIn = (dir) ->
 class ChainWindow
   constructor: (@win, @gap = 0, @unit = 1) ->
     @f = @win.frame()
-    @scr = Screen.mainScreen()
+    @_updateScr(@win.screen())
 
   set: ->
     @win.setFrame @f
+
+  _updateScr: (scr) ->
+    @scr = scr
+    @sf = scr.visibleFrameInRectangle()
 
   _windowsIn: (dir) ->
     switch dir
@@ -132,12 +142,6 @@ class ChainWindow
     @f.height = height
     this
 
-  maximize: ->
-    f = @scr.visibleFrameInRectangle()
-    @moveTo f.x + @gap, f.y + @gap
-    @sizeTo f.width - 2 * @gap, f.height - 2 * @gap
-    this
-
   sizeIn: (dir) ->
     @size (@_deltaIn dir)...
     this
@@ -186,6 +190,29 @@ class ChainWindow
     @fill()
     this
 
+  setSpace: (num) ->
+    space = Space.spaces()[num]
+    if space?
+      space.addWindows [@win]
+      Space.activeSpace().removeWindows [@win]
+    @_updateScr space.screen()
+    this
+
+  constrain: ->
+    @f.width = Math.min @f.width, @sf.height
+    @f.height = Math.min @f.height, @sf.height
+    this
+
+  center: ->
+    @f.x = @sf.x + (@sf.width - @f.width) / 2
+    @f.y = @sf.y + (@sf.height - @f.height) / 2
+    this
+
+  maximize: ->
+    @moveTo @sf.x + @gap, @sf.y + @gap
+    @sizeTo @sf.width - 2 * @gap, @sf.height - 2 * @gap
+    this
+
 # Shortcuts
 fw = Window.focusedWindow
 cw = (gap = GAP, unit = UNIT) ->
@@ -199,6 +226,7 @@ events = []
 # Special
 keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
 keys.push Phoenix.bind 'f', MOD, -> cw()?.maximize().set()
+keys.push Phoenix.bind 'c', MOD, -> cw()?.center().set()
 
 # Apps
 for key, app of APPS
@@ -209,11 +237,7 @@ SPACE_MODS = [
   [
     # Move
     MOVE_MOD,
-    (num) ->
-      w = fw()
-      if w?
-        Space.spaces()[num]?.addWindows([w])
-        Space.activeSpace().removeWindows([w])
+    (num) -> cw()?.setSpace(num).constrain().center().set()
   ],
 ]
 
@@ -256,3 +280,5 @@ for [mod, action] in DIR_MODS
   for key, dir of DIRS
     do (key, mod, action, dir) ->
       keys.push Phoenix.bind key, mod, -> action dir
+
+Phoenix.notify 'Config loaded.'
