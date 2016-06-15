@@ -34,7 +34,8 @@ if which hub &>/dev/null; then
 fi
 
 # virtualenvwrapper
-if which virtualenvwrapper &>/dev/null; then
+VIRTUALENVWRAPPER_SH=/usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -f "$VIRTUALENVWRAPPER_SH" ]; then
   export PROJECT_HOME=~/code
-  source /usr/local/bin/virtualenvwrapper_lazy.sh
+  source "$VIRTUALENVWRAPPER_SH"
 fi
