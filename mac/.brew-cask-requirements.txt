@@ -1,5 +1,0 @@
-dropbox
-easy-move-plus-resize
-google-chrome
-phoenix
-steam
