@@ -190,10 +190,10 @@ class ChainWindow
       when HORIZONTAL then @f.width *= factor
 
     # Move if needed
-    fraction = switch dirOrAxis
-      when NORTH, SOUTH         then 0
-      when EAST, WEST           then 1 - factor
-      when VERTICAL, HORIZONTAL then (1 - factor) / 2
+    fraction = switch coeff dirOrAxis
+      when -1 then 0
+      when  1 then 1 - factor
+      when  0 then (1 - factor) / 2
     switch axis
       when VERTICAL then @f.y += g.height * fraction
       when HORIZONTAL then @f.x += g.width * fraction
@@ -201,11 +201,15 @@ class ChainWindow
 
   fill: (axis) ->
     if not axis? or axis is VERTICAL
-      @f.y = (@closestIn NORTH, false, true) + @gap
-      @f.height = (@closestIn SOUTH, false, true) - @f.y - @gap
+      y = (@closestIn NORTH, false, true) + @gap
+      height = (@closestIn SOUTH, false, true) - y - @gap
+      @f.y = y
+      @f.height = height
     if not axis? or axis is HORIZONTAL
-      @f.x = (@closestIn WEST, false, true) + @gap
-      @f.width = (@closestIn EAST, false, true) - @f.x - @gap
+      x = (@closestIn WEST, false, true) + @gap
+      width = (@closestIn EAST, false, true) - x - @gap
+      @f.x = x
+      @f.width = width
     this
 
   fallIn: (dir) ->
