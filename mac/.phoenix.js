@@ -134,7 +134,7 @@ class ChainWindow
       when EAST then @win.windowsToEast()
       when WEST then @win.windowsToWest()
 
-  closestIn: (dir, useFallthru = false, onlyCatch = false) ->
+  closestIn: (dir, useFallthru = false, onlyCatch = true) ->
     e = edgeOf @f, dir
     closest = edgeOf @scr.visibleFrameInRectangle(), dir
     for win in @scr.visibleWindows()
@@ -142,7 +142,7 @@ class ChainWindow
         nf = win.frame()
         ne = edgeOf nf, (oppositeOf dir)
         if (isCloser dir, e, ne, if useFallthru then @gap else 0) and
-           (isCloser dir, ne, closest, if useFallthru then @gap else 0) and
+           (isCloser dir, ne, closest) and
            (not onlyCatch or catchable @f, dir, nf)
           closest = ne
     closest
@@ -161,12 +161,12 @@ class ChainWindow
     @move (deltaIn dir)...
     this
 
-  moveEdgeTo: (dir, c) ->
+  moveEdgeTo: (dir, c, gap = 0) ->
     switch dir
-      when WEST then @f.x = c
-      when EAST then @f.x = c - @f.width
-      when NORTH then @f.y = c
-      when SOUTH then @f.y = c - @f.height
+      when SOUTH then @f.y = c - @f.height - gap
+      when NORTH then @f.y = c + gap
+      when EAST then @f.x = c - @f.width - gap
+      when WEST then @f.x = c + gap
 
   size: (dx, dy, center = false) ->
     @move -dx / 2, -dy / 2 if center
@@ -186,24 +186,19 @@ class ChainWindow
 
   fill: (axis) ->
     if not axis? or axis is VERTICAL
-      y = (@closestIn NORTH, false, true) + @gap
-      height = (@closestIn SOUTH, false, true) - y - @gap
+      y = (@closestIn NORTH, false) + @gap
+      height = (@closestIn SOUTH, false) - y - @gap
       @f.y = y
       @f.height = height
     if not axis? or axis is HORIZONTAL
-      x = (@closestIn WEST, false, true) + @gap
-      width = (@closestIn EAST, false, true) - x - @gap
+      x = (@closestIn WEST, false) + @gap
+      width = (@closestIn EAST, false) - x - @gap
       @f.x = x
       @f.width = width
     this
 
   fallIn: (dir) ->
-    closest = @closestIn dir, true, true
-    switch dir
-      when SOUTH then @f.y = closest - @f.height - @gap
-      when NORTH then @f.y = closest + @gap
-      when EAST then @f.x = closest - @f.width - @gap
-      when WEST then @f.x = closest + @gap
+    @moveEdgeTo dir, (@closestIn dir, true), @gap
     this
 
   pourIn: (dir) ->
