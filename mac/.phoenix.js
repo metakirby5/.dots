@@ -67,9 +67,9 @@ coeff = (dir) ->
     when SOUTH, EAST then  1
     when VERTICAL, HORIZONTAL then 0
 
-isCloser = (dir, a, b, fallthru = 0) ->
+isCloser = (dir, a, b) ->
   c = coeff dir
-  fallthru + a * c < b * c
+  a * c < b * c
 
 deltaIn = (dir) ->
   c = coeff dir
@@ -134,14 +134,14 @@ class ChainWindow
       when EAST then @win.windowsToEast()
       when WEST then @win.windowsToWest()
 
-  closestIn: (dir, useFallthru = false, onlyCatch = true) ->
-    e = edgeOf @f, dir
+  closestIn: (dir, skipFrame = false, onlyCatch = true) ->
+    e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @scr.visibleFrameInRectangle(), dir
     for win in @scr.visibleWindows()
       if not @win.isEqual win
         nf = win.frame()
         ne = edgeOf nf, (oppositeOf dir)
-        if (isCloser dir, e, ne, if useFallthru then @gap else 0) and
+        if (isCloser dir, e, ne) and
            (isCloser dir, ne, closest) and
            (not onlyCatch or catchable @f, dir, nf)
           closest = ne
@@ -161,12 +161,12 @@ class ChainWindow
     @move (deltaIn dir)...
     this
 
-  moveEdgeTo: (dir, c, gap = 0) ->
+  moveEdgeTo: (dir, c) ->
     switch dir
-      when SOUTH then @f.y = c - @f.height - gap
-      when NORTH then @f.y = c + gap
-      when EAST then @f.x = c - @f.width - gap
-      when WEST then @f.x = c + gap
+      when SOUTH then @f.y = c - @f.height - @gap
+      when NORTH then @f.y = c + @gap
+      when EAST then @f.x = c - @f.width - @gap
+      when WEST then @f.x = c + @gap
 
   size: (dx, dy, center = false) ->
     @move -dx / 2, -dy / 2 if center
@@ -184,27 +184,27 @@ class ChainWindow
     @size (deltaIn dir)..., center
     this
 
-  fill: (axis) ->
+  fill: (axis, skipFrame = false) ->
     if not axis? or axis is VERTICAL
-      y = (@closestIn NORTH, false) + @gap
-      height = (@closestIn SOUTH, false) - y - @gap
+      y = (@closestIn NORTH, skipFrame) + @gap
+      height = (@closestIn SOUTH, skipFrame) - y - @gap
       @f.y = y
       @f.height = height
     if not axis? or axis is HORIZONTAL
-      x = (@closestIn WEST, false) + @gap
-      width = (@closestIn EAST, false) - x - @gap
+      x = (@closestIn WEST, skipFrame) + @gap
+      width = (@closestIn EAST, skipFrame) - x - @gap
       @f.x = x
       @f.width = width
     this
 
   fallIn: (dir) ->
-    @moveEdgeTo dir, (@closestIn dir, true), @gap
+    @moveEdgeTo dir, (@closestIn dir, true)
     this
 
   pourIn: (dir) ->
     g = _.extend {}, @f
     @sizeTo @unit, @unit, true
-    @moveEdgeTo dir, (edgeOf g, dir)
+    @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
     @fill()
     this
