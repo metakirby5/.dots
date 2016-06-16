@@ -83,6 +83,10 @@ function __mk5_set_prompt {
     pchar="$__mk5_usr_pchar"
   fi
 
+  # Display hostname if ssh'd
+  local hostname
+  [ "$SSH_TTY" ] && hostname="$__mk5_b_purple@$__mk5_purple$__mk5_hostname"
+
   # Git stuff
   local git_info
   local git_branch="$(__mk5_git_branch)"
@@ -161,7 +165,7 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
-$__mk5_cyan$USER$__mk5_b_cyan in \
+$__mk5_cyan$USER$hostname$__mk5_b_cyan in \
 $virtualenv_info\
 $git_info\
 $mypwd\
