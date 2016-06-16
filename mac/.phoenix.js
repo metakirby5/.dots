@@ -1,10 +1,18 @@
 #!/usr/bin/env coffee -p
 
-# Constants
+# Cardinal directions
 NORTH = 'NORTH'
 SOUTH = 'SOUTH'
 EAST = 'EAST'
 WEST = 'WEST'
+DIR = 'DIR'
+DIRS = [NORTH, SOUTH, EAST, WEST]
+
+# Axes
+VERTICAL = 'VERTICAL'
+HORIZONTAL = 'HORIZONTAL'
+AXIS = 'AXIS'
+AXES = [VERTICAL, HORIZONTAL]
 
 # Preferences
 Phoenix.set
@@ -21,41 +29,60 @@ MOD = ['cmd', 'alt']
 MOVE_MOD = ['cmd', 'alt', 'shift']
 SIZE_MOD = ['cmd', 'ctrl']
 POUR_MOD = ['cmd', 'alt', 'ctrl']
-DIRS =
+DIR_KEYS =
   h: WEST
   j: SOUTH
   k: NORTH
   l: EAST
-OFFSETS =
-  n: 1
+OFFSET_KEYS =
+  n:  1
   p: -1
 
 # Helpers
-opposite = (dir) ->
-  switch dir
+identify = (x) ->
+  if x in DIRS
+    DIR
+  else if x in AXES
+    AXIS
+  else
+    undefined
+
+oppositeOf = (dirOrAxis) ->
+  switch dirOrAxis
     when NORTH then SOUTH
     when SOUTH then NORTH
     when EAST then WEST
     when WEST then EAST
+    when VERTICAL then HORIZONTAL
+    when HORIZONTAL then VERTICAL
 
-closer = (dir, a, b, fallthru = 0) ->
+axisOf = (dirOrAxis) ->
+  switch dirOrAxis
+    when NORTH, SOUTH, VERTICAL then VERTICAL
+    when EAST, WEST, HORIZONTAL then HORIZONTAL
+
+coeff = (dir) ->
   switch dir
-    when NORTH, WEST then a - fallthru > b
-    when SOUTH, EAST then a + fallthru < b
+    when NORTH, WEST then -1
+    when SOUTH, EAST then  1
+    when VERTICAL, HORIZONTAL then 0
+
+isCloser = (dir, a, b, fallthru = 0) ->
+  c = coeff dir
+  fallthru + a * c < b * c
 
 deltaIn = (dir) ->
-  switch dir
-    when NORTH then [0, -UNIT]
-    when SOUTH then [0,  UNIT]
-    when EAST then  [ UNIT, 0]
-    when WEST then  [-UNIT, 0]
+  c = coeff dir
+  switch axisOf dir
+    when VERTICAL then    [0, UNIT * c]
+    when HORIZONTAL then  [UNIT * c, 0]
 
 # Rectangle methods
 catchable = (f, dir, g) ->
-  switch dir
-    when NORTH, SOUTH
+  switch axisOf dir
+    when VERTICAL
       f.x < g.x + g.width and f.x + f.width > g.x
-    when EAST, WEST
+    when HORIZONTAL
       f.y < g.y + g.height and f.y + f.height > g.y
 
 edgeOf = (f, dir, gap = 0) ->
@@ -113,9 +140,9 @@ class ChainWindow
     for win in @scr.visibleWindows()
       if not @win.isEqual win
         nf = win.frame()
-        ne = edgeOf nf, (opposite dir)
-        if (closer dir, e, ne, if useFallthru then @gap else 0) and
-           (closer dir, ne, closest, if useFallthru then @gap else 0) and
+        ne = edgeOf nf, (oppositeOf dir)
+        if (isCloser dir, e, ne, if useFallthru then @gap else 0) and
+           (isCloser dir, ne, closest, if useFallthru then @gap else 0) and
            (not onlyCatch or catchable @f, dir, nf)
           closest = ne
     closest
@@ -153,28 +180,32 @@ class ChainWindow
     @f.height *= fy
     this
 
-  squashIn: (dir, factor = Infinity) ->
-    switch dir
-      when NORTH, SOUTH then @f.height /= factor
-      when EAST, WEST then @f.width /= factor
-    switch dir
-      when SOUTH then @f.y += @f.height * (factor - 1)
-      when EAST then @f.x += @f.width * (factor - 1)
+  squashIn: (dirOrAxis, factor = 0) ->
+    axis = axisOf dirOrAxis
+    g = _.extend {}, @f
+
+    # Change size
+    switch axis
+      when VERTICAL   then @f.height *= factor
+      when HORIZONTAL then @f.width *= factor
+
+    # Move if needed
+    fraction = switch dirOrAxis
+      when NORTH, SOUTH         then 0
+      when EAST, WEST           then 1 - factor
+      when VERTICAL, HORIZONTAL then (1 - factor) / 2
+    switch axis
+      when VERTICAL then @f.y += g.height * fraction
+      when HORIZONTAL then @f.x += g.width * fraction
     this
 
-  vFill: ->
-    @f.y = (@closestIn NORTH, false, true) + @gap
-    @f.height = (@closestIn SOUTH, false, true) - @f.y - @gap
-    this
-
-  hFill: ->
-    @f.x = (@closestIn WEST, false, true) + @gap
-    @f.width = (@closestIn EAST, false, true) - @f.x - @gap
-    this
-
-  fill: ->
-    @vFill()
-    @hFill()
+  fill: (axis) ->
+    if not axis? or axis is VERTICAL
+      @f.y = (@closestIn NORTH, false, true) + @gap
+      @f.height = (@closestIn SOUTH, false, true) - @f.y - @gap
+    if not axis? or axis is HORIZONTAL
+      @f.x = (@closestIn WEST, false, true) + @gap
+      @f.width = (@closestIn EAST, false, true) - @f.x - @gap
     this
 
   fallIn: (dir) ->
@@ -188,6 +219,7 @@ class ChainWindow
 
   pourIn: (dir) ->
     @squashIn dir
+    @squashIn oppositeOf axisOf dir
     @fallIn dir
     @fill()
     this
@@ -251,7 +283,7 @@ for [mod, action] in SPACE_MODS
     do (num, mod, action) ->
       s = '' + num
       keys.push Phoenix.bind (s.substr s.length - 1), mod, -> action (num - 1)
-  for key, offset of OFFSETS
+  for key, offset of OFFSET_KEYS
     do (key, mod, action, offset) ->
       keys.push Phoenix.bind key, mod, ->
         idx = Space.activeSpace().idx()
@@ -270,6 +302,11 @@ DIR_MODS = [
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
+    # Size
+    SIZE_MOD,
+    (dir) -> cw()?.sizeIn(dir).set()
+  ],
+  [
     # Pour
     POUR_MOD,
     (dir) -> cw()?.pourIn(dir).set()
@@ -277,21 +314,9 @@ DIR_MODS = [
 ]
 
 for [mod, action] in DIR_MODS
-  for key, dir of DIRS
+  for key, dir of DIR_KEYS
     do (key, mod, action, dir) ->
       keys.push Phoenix.bind key, mod, -> action dir
-
-# SIZE_MOD is a special case
-for key, dir of DIRS
-  action = switch dir
-    # Squash
-    when NORTH, WEST then (dir) -> cw()?.squashIn(dir, 2).set()
-    # Grow
-    when SOUTH, EAST then (dir) -> cw()?.sizeIn(dir).set()
-
-  do (key, action, dir) ->
-    keys.push Phoenix.bind key, SIZE_MOD, -> action dir
-
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
