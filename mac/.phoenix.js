@@ -161,42 +161,27 @@ class ChainWindow
     @move (deltaIn dir)...
     this
 
-  size: (dx, dy) ->
+  moveEdgeTo: (dir, c) ->
+    switch dir
+      when WEST then @f.x = c
+      when EAST then @f.x = c - @f.width
+      when NORTH then @f.y = c
+      when SOUTH then @f.y = c - @f.height
+
+  size: (dx, dy, center = false) ->
+    @move -dx / 2, -dy / 2 if center
     @f.width += dx
     @f.height += dy
     this
 
-  sizeTo: (width, height) ->
+  sizeTo: (width, height, center = false) ->
+    @move (@f.width - width) / 2, (@f.height - height) / 2 if center
     @f.width = width
     @f.height = height
     this
 
-  sizeIn: (dir) ->
-    @size (deltaIn dir)...
-    this
-
-  scale: (fx, fy) ->
-    @f.width *= fx
-    @f.height *= fy
-    this
-
-  squashIn: (dirOrAxis, factor = 0) ->
-    axis = axisOf dirOrAxis
-    g = _.extend {}, @f
-
-    # Change size
-    switch axis
-      when VERTICAL   then @f.height *= factor
-      when HORIZONTAL then @f.width *= factor
-
-    # Move if needed
-    fraction = switch coeff dirOrAxis
-      when -1 then 0
-      when  1 then 1 - factor
-      when  0 then (1 - factor) / 2
-    switch axis
-      when VERTICAL then @f.y += g.height * fraction
-      when HORIZONTAL then @f.x += g.width * fraction
+  sizeIn: (dir, center = false) ->
+    @size (deltaIn dir)..., center
     this
 
   fill: (axis) ->
@@ -222,8 +207,9 @@ class ChainWindow
     this
 
   pourIn: (dir) ->
-    @squashIn dir
-    @squashIn oppositeOf axisOf dir
+    g = _.extend {}, @f
+    @sizeTo @unit, @unit, true
+    @moveEdgeTo dir, (edgeOf g, dir)
     @fallIn dir
     @fill()
     this
