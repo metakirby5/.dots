@@ -136,7 +136,7 @@ class ChainWindow
 
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
-    closest = edgeOf @scr.visibleFrameInRectangle(), dir
+    closest = edgeOf @sf, dir
     for win in @scr.visibleWindows()
       if not @win.isEqual win
         nf = win.frame()
