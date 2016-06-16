@@ -85,7 +85,7 @@ function __mk5_set_prompt {
 
   # Display hostname if ssh'd
   local hostname
-  [ "$SSH_TTY" ] && hostname="$__mk5_b_purple@$__mk5_purple$__mk5_hostname"
+  [ "$SSH_TTY" ] && hostname="$__mk5_b_blue@$__mk5_blue$__mk5_hostname"
 
   # Git stuff
   local git_info
