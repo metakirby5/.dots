@@ -99,24 +99,6 @@ function __mk5_set_prompt {
 $__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
-    local git_incoming="$(__mk5_git_incoming)"
-    if [ "$git_incoming" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_red$__mk5_incoming_char$git_incoming"
-    fi
-
-    local git_behindmaster="$(__mk5_git_behindmaster)"
-    if [ "$git_behindmaster" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_green$__mk5_behindmaster_char$git_behindmaster"
-    fi
-
-    local git_outgoing="$(__mk5_git_outgoing)"
-    if [ "$git_outgoing" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
-    fi
-
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
