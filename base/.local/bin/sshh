@@ -1,0 +1,64 @@
+#/bin/bash
+# Original @ yudai/sshh, modified by metakirby5.
+# Will either copy the SSH from a tmux pane or run $SHELL.
+# -i flag to display info.
+
+window_index="$(tmux display-message -p '#{window_index}')"
+pane_index="$(tmux display-message -p '#{pane_index}')"
+
+run=true
+if [ "$1" == "-i" ]; then
+  run=false
+  shift
+fi
+
+if [ -n "$1" ]; then
+    w=$(echo "$1" | awk -F ',' '{ print $1 }')
+    p=$(echo "$1" | awk -F ',' '{ print $2 }')
+
+    if [ -n "$w" ]; then
+        window_index=$w
+    fi
+    if [ -n "$p" ]; then
+        pane_index=$p
+    fi
+fi
+
+pane_list="$(tmux list-panes -s -F '#{window_index},#{pane_index} #{pane_pid}')"
+# Non 0 if given session doesn't exist
+if [ $? != 0 ]; then
+    exit 1
+fi
+
+target_pane=$(echo "$pane_list" | grep "$window_index,$pane_index")
+if [ $? != 0 ]; then
+    echo "Pane #$pane_index of Window #$window_index not found." >&2
+    exit 2
+fi
+
+pane_pid=$(echo "$target_pane" | awk '{ print $2 }')
+
+IFS=$'\n'
+child_cmd=''
+find_ssh() {
+    cur_cmd=$(ps $1 | tail -n 1 | awk '{for(i=5;i<NF;i++) printf("%s ",$i); print $NF}')
+    if [ $(echo "$cur_cmd" | awk '{ print $1 }') = 'ssh' ]; then
+        [ "$run" == true ] && eval "exec $cur_cmd"
+    else
+        for child_pid in $(pgrep -P $1); do
+            find_ssh "$child_pid"
+        done
+    fi
+}
+find_ssh "$pane_pid"
+
+# Reach here only when there is no running command
+[ "$run" == true ] && eval "$SHELL -i"
+
+if [ "$child_cmd" ]; then
+    echo "$child_cmd"
+    exit 0
+else
+    echo "No running command at Pane #$pane_index of Window #$window_index" >&2
+    exit 5
+fi
