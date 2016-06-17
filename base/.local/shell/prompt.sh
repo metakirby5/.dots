@@ -99,6 +99,12 @@ function __mk5_set_prompt {
 $__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
+    local git_outgoing="$(__mk5_git_outgoing)"
+    if [ "$git_outgoing" != 0 ]; then
+      git_info="$git_info \
+$__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
+    fi
+
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
