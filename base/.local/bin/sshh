@@ -53,7 +53,7 @@ find_ssh() {
 find_ssh "$pane_pid"
 
 # Reach here only when there is no running command
-[ "$run" == true ] && eval "$SHELL -i"
+[ "$run" == true ] && eval "$SHELL -l"
 
 if [ "$child_cmd" ]; then
     echo "$child_cmd"
