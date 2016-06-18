@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Assumes a file with the name of the directory in ~/.dots is located
+# in ~/.local/stowed, for each stowed dotfile set.
+
+cd ~/.dots
+stow -R $(ls ~/.local/stowed)
