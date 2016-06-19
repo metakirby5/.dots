@@ -3,24 +3,24 @@
 
 All of my dotfile configs.
 
-## Dependencies
+![Mac preview](previews/mac.png)
 
-### Fonts
+Here's what you'll need...
 
-- Calibri
-- [PixelMPlus12](https://osdn.jp/projects/mix-mplus-ipa/releases/58930)
-- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
-- [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
-- [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
+## Packages
 
-### Packages
+### All platforms
 
-All systems will need:
 - GNU Stow
 - metakirby5/whizkers
 - metakirby5/bash-scripts (somewhat optional)
 
-#### Linux
+### Mac
+
+- brew
+- Everything in `mac/.Brewfile`
+
+### Linux
 
 - metakirby5/lemonblocks
 - rxvt-unicode-256color
@@ -55,16 +55,33 @@ All systems will need:
 - gtk-reload (from neeasade/autotheme.sh)
 - devmon
 
-#### Mac
+## Fonts
 
-- brew (most dependencies are in ~/.Brewfile)
+### Mac
 
-### Chrome Theme
+- Pre-installed fonts.
+
+### Linux
+
+- Calibri
+- [PixelMPlus12](https://osdn.jp/projects/mix-mplus-ipa/releases/58930)
+- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
+- [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
+- [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
+
+## Chrome Theme
+
+### Mac
+
+The pre-installed theme.
+
+### Linux
+
+The one rendered in `~/.whizkers_output/chrome_theme/`.
+
+### Other
 
 [Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj)
-or the one found in `~/.whizkers_output/chrome_theme/`.
-
-For Mac, I use the system theme.
 
 ## Installation
 
@@ -77,6 +94,17 @@ For Mac, I use the system theme.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
+
+### Mac
+
+- Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
+- Install `brew` from [brew.sh](http://brew.sh/).
+- Install `stow` using `brew`.
+- `cd ~/.dots`
+- `stow base mac`
+- `brew bundle --global`
+- Install `whizkers` via `pip` and use it to choose a colorscheme.
+- Tweak whatever settings you want in Preferences.app.
 
 ### Linux
 
@@ -93,17 +121,6 @@ For Mac, I use the system theme.
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles
   from `~/.whizkers_output/userstyles`.
 - Set up oomox and use the file in `~/.whizkers_output/oomox.sh`.
-
-### Mac
-
-- Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
-- Install `brew` from [brew.sh](http://brew.sh/).
-- Install `stow` using `brew`.
-- `cd ~/.dots`
-- `stow base mac`
-- `brew bundle --global`
-- Install `whizkers` via `pip` and use it to choose a colorscheme.
-- Tweak whatever settings you want in Preferences.app.
 
 ## TODO
 
