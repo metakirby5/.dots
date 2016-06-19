@@ -109,7 +109,7 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
   fi
 
   # pwd stuff
-  local mypwd="$(pwd -P)"
+  local mypwd="$(pwd)"
 
   # Replace git path
   local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
