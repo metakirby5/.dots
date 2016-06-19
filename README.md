@@ -3,10 +3,6 @@
 
 All of my dotfile configs.
 
-## TODO
-
-- Fix whizkers files to allow light colorschemes
-
 ## Dependencies
 
 ### Fonts
@@ -20,7 +16,7 @@ All of my dotfile configs.
 ### Packages
 
 All systems will need:
-- GNU stow
+- GNU Stow
 - metakirby5/whizkers
 - metakirby5/bash-scripts (somewhat optional)
 
@@ -68,6 +64,8 @@ All systems will need:
 [Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj)
 or the one found in `~/.whizkers_output/chrome_theme/`.
 
+For Mac, I use the system theme.
+
 ## Installation
 
 ### All platforms
@@ -77,13 +75,13 @@ or the one found in `~/.whizkers_output/chrome_theme/`.
   (`~/.bashrc` or `~/.bash_profile`)
 - Follow platform-specific instructions.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
-  home directory and symlink the `.vimrc`.
+  home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
 
 ### Linux
 
 - Install all the dependencies you need with your favorite package
-  manager..
+  manager. You really need `stow` and `whizkers`.
 - `cd ~/.dots`
 - `stow base linux`
 - If you are using i3:
@@ -98,10 +96,15 @@ or the one found in `~/.whizkers_output/chrome_theme/`.
 
 ### Mac
 
-- Import the Terminal.app profile in `misc/terminal/Japanesque.terminal`.
+- Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
+- Install `brew` from [brew.sh](http://brew.sh/).
+- Install `stow` using `brew`.
 - `cd ~/.dots`
 - `stow base mac`
-- Install brew from [brew.sh](http://brew.sh/).
 - `brew bundle --global`
-- Manually install `whizkers` and use it to choose a colorscheme.
+- Install `whizkers` via `pip` and use it to choose a colorscheme.
 - Tweak whatever settings you want in Preferences.app.
+
+## TODO
+
+- Fix whizkers files to allow light colorschemes
