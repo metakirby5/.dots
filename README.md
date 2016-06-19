@@ -1,14 +1,10 @@
-dotfiles
-========
+.dots
+=====
 
 All of my dotfile configs.
-Also has some Mac stuff.
-Someday I'll rewrite this.
 
 ## TODO
 
-- Rewrite README
-- Lock on laptop lid close (xss-lock?)
 - Fix whizkers files to allow light colorschemes
 
 ## Dependencies
@@ -23,10 +19,13 @@ Someday I'll rewrite this.
 
 ### Packages
 
+All systems will need:
+- GNU stow
+- metakirby5/whizkers
+- metakirby5/bash-scripts (somewhat optional)
+
 #### Linux
 
-- metakirby5/bash-scripts
-- metakirby5/whizkers
 - metakirby5/lemonblocks
 - rxvt-unicode-256color
 - tmux
@@ -62,8 +61,7 @@ Someday I'll rewrite this.
 
 #### Mac
 
-- brew
-- dmarcotte/easy-move-resize
+- brew (most dependencies are in ~/.Brewfile)
 
 ### Chrome Theme
 
@@ -72,25 +70,38 @@ or the one found in `~/.whizkers_output/chrome_theme/`.
 
 ## Installation
 
-- Install all dependencies.
-- Add `.../dotfiles/bin` to your `PATH`.
-- Ensure you are using `i3init` to start i3.
-- Add `source .../dotfiles/shell/[FILENAME].sh` for the appropriate files.
-  For example, for bash:
+### All platforms
 
-  ```bash
-  source ~/dotfiles/shell/config.sh
-  source ~/dotfiles/shell/prompt.sh
-  source ~/dotfiles/shell/ls_colors.sh
-  ```
+- Clone this repo into `~/.dots`.
+- Add `source ~/.posixrc` to the appropriate files
+  (`~/.bashrc` or `~/.bash_profile`)
+- Follow platform-specific instructions.
+- If you want, copy over `misc/root_bashrc.sh` to your root's
+  home directory and symlink the `.vimrc`.
+- Reboot.
 
+### Linux
+
+- Install all the dependencies you need with your favorite package
+  manager..
+- `cd ~/.dots`
+- `stow base linux`
+- If you are using i3:
+  - `stow i3`
+  - Ensure you are using `i3init` to start i3.
 - Ensure your profile is called `profile` so the templates in
   `~/.mozilla/firefox/profile` can render properly.
-- Run `wzk` and choose a colorscheme.
-  Alternatively, manually run `relink-config`, `whizkers`, `xrdb`,
-  and restart `i3`.
+- Use `whizkers` and choose a colorscheme.
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles
   from `~/.whizkers_output/userstyles`.
 - Set up oomox and use the file in `~/.whizkers_output/oomox.sh`.
-- Be nice, eat rice.
 
+### Mac
+
+- Import the Terminal.app profile in `misc/terminal/Japanesque.terminal`.
+- `cd ~/.dots`
+- `stow base mac`
+- Install brew from [brew.sh](http://brew.sh/).
+- `brew bundle --global`
+- Manually install `whizkers` and use it to choose a colorscheme.
+- Tweak whatever settings you want in Preferences.app.
