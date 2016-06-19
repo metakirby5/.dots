@@ -1,7 +1,7 @@
 .dots
 =====
 
-All of my dotfile configs.
+All of my dotfiles, for Mac and Linux.
 
 ![Mac preview](http://i.imgur.com/0KnCv9l.png)
 
