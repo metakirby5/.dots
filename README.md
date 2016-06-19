@@ -1,13 +1,13 @@
 .dots
 =====
 
-All of my dotfiles, for Mac and Linux.
+All of my dotfiles.
 
 ![Mac preview](http://i.imgur.com/0KnCv9l.png)
 
 Here's what you'll need...
 
-## Packages
+## Software
 
 ### All platforms
 
