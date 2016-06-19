@@ -3,7 +3,7 @@
 
 All of my dotfile configs.
 
-![Mac preview](previews/mac.png)
+![Mac preview](http://i.imgur.com/0KnCv9l.png)
 
 Here's what you'll need...
 
