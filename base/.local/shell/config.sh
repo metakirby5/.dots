@@ -18,6 +18,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # http://stackoverflow.com/a/246128
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-for f in $dir/{aliases,functions}/* $dir/prompt.sh; do
+for f in $dir/{aliases,functions,vendor}/* $dir/prompt.sh; do
   source "$f"
 done
