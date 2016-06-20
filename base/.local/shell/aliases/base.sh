@@ -8,6 +8,8 @@ alias enw='emacs -nw'
 alias unstow='stow -D'
 alias restow='stow -R'
 alias tetris='bastet'
+alias ll='ls -l'
+alias la='ls -la'
 
 # Prefs
 alias less='less -R'
