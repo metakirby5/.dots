@@ -18,6 +18,7 @@ brew 'irssi'
 brew 'python3'
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
 brew 'mpv', args: ['with-bundle']
+brew 'neofetch'
 brew 'node'
 brew 'p7zip'
 brew 'ranger'
