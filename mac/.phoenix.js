@@ -184,17 +184,19 @@ class ChainWindow
     @size (deltaIn dir)..., center
     this
 
-  fill: (axis, skipFrame = false) ->
-    if not axis? or axis is VERTICAL
-      y = (@closestIn NORTH, skipFrame) + @gap
-      height = (@closestIn SOUTH, skipFrame) - y - @gap
-      @f.y = y
-      @f.height = height
-    if not axis? or axis is HORIZONTAL
-      x = (@closestIn WEST, skipFrame) + @gap
-      width = (@closestIn EAST, skipFrame) - x - @gap
-      @f.x = x
-      @f.width = width
+  fill: (axes, skipFrame = false) ->
+    for axis in axes
+      switch axis
+        when VERTICAL
+          y = (@closestIn NORTH, skipFrame) + @gap
+          height = (@closestIn SOUTH, skipFrame) - y - @gap
+          @f.y = y
+          @f.height = height
+        when HORIZONTAL
+          x = (@closestIn WEST, skipFrame) + @gap
+          width = (@closestIn EAST, skipFrame) - x - @gap
+          @f.x = x
+          @f.width = width
     this
 
   fallIn: (dir) ->
@@ -206,7 +208,7 @@ class ChainWindow
     @sizeTo @unit, @unit, true
     @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
-    @fill()
+    @fill [(oppositeOf axisOf dir), (axisOf dir)]
     this
 
   setSpace: (num) ->
