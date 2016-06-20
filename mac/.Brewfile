@@ -11,6 +11,7 @@ brew 'fasd'
 brew 'python'
 brew 'git'
 brew 'gcc'
+brew 'gnu-sed', args: ['with-default-names']
 brew 'htop'
 brew 'hub'
 brew 'irssi'

@@ -116,7 +116,7 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
   local gitbase
   if [ "$gitpath" ]; then
     gitbase="$(basename "$gitpath")"
-    mypwd="$gitbase${mypwd##$gitpath}"
+    mypwd="$gitbase$(sed "s|^$gitpath||i" <<< "$mypwd")"
   fi
 
   # Colorize
