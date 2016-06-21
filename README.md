@@ -19,6 +19,7 @@ Here's what you'll need...
 
 - brew
 - Everything in `mac/.Brewfile`
+- rgrove/textual-sulaco
 
 ### Linux
 
