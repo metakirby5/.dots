@@ -669,6 +669,10 @@ au Syntax asm setlocal shiftwidth=8
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
             \ | diffthis | wincmd p | diffthis
 
+" ,r - Run using filetype
+xnoremap <expr> <leader>r
+      \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<CR>"
+
 " === Make
 
 " ,m - Make and go to first error
