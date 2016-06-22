@@ -3,4 +3,5 @@
 # in ~/.local/stowed, for each stowed dotfile set.
 
 cd ~/.dots
-stow -R $(ls ~/.local/stowed)
+stow -R $(ls ~/.local/stowed) \
+  --ignore '.DS_Store'
