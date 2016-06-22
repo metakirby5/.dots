@@ -28,28 +28,28 @@ __mk5_outgoing_char='^'
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
 
-function __mk5_git_branch {
+__mk5_git_branch() {
   echo $(git symbolic-ref HEAD 2>/dev/null || \
          git rev-parse --short HEAD 2>/dev/null) \
        | sed "s|^refs/heads/||"
 }
 
-function __mk5_git_dirty {
+__mk5_git_dirty() {
   echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l |\
     awk '{print $1}')"
 }
 
-function __mk5_git_incoming {
+__mk5_git_incoming() {
   echo "$(git log ..origin/$(__mk5_git_branch) 2>/dev/null \
     | grep '^commit' | wc -l | awk '{print $1}')"
 }
 
-function __mk5_git_behindmaster {
+__mk5_git_behindmaster() {
   echo "$(git log ..master 2>/dev/null \
     | grep '^commit' | wc -l | awk '{print $1}')"
 }
 
-function __mk5_git_outgoing {
+__mk5_git_outgoing() {
   # Check if branch exists on remote; if so, echo !
   local branch_exists="$(git branch -r 2>/dev/null \
     | grep "^ *origin/$(__mk5_git_branch)\$")"
@@ -63,7 +63,7 @@ function __mk5_git_outgoing {
   fi
 }
 
-function __mk5_set_prompt {
+__mk5_set_prompt() {
   # Grab status code first
   local last_status="$?"
 

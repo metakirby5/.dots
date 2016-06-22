@@ -1,3 +1,7 @@
+pb () {
+  curl -F "c=@${1:--}" https://ptpb.pw/
+}
+
 up2ixio() {
   command curl -sfF 'f:1=<-' ix.io | xargs echo -n
 }

@@ -90,7 +90,7 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 
 - Clone this repo into `~/.dots`.
 - Add `source ~/.posixrc` to the appropriate files
-  (`~/.bashrc` or `~/.bash_profile`)
+  (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
