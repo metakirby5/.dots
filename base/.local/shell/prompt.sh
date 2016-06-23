@@ -29,38 +29,16 @@ __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
 
 __mk5_git_branch() {
-  echo $(git symbolic-ref HEAD 2>/dev/null || \
-         git rev-parse --short HEAD 2>/dev/null) \
-       | sed "s|^refs/heads/||"
+  git rev-parse --abbrev-ref HEAD 2>/dev/null
 }
 
 __mk5_git_dirty() {
-  echo "$(git status -s --ignore-submodules=dirty 2>/dev/null | wc -l |\
-    awk '{print $1}')"
-}
-
-__mk5_git_incoming() {
-  echo "$(git log ..origin/$(__mk5_git_branch) 2>/dev/null \
-    | grep '^commit' | wc -l | awk '{print $1}')"
-}
-
-__mk5_git_behindmaster() {
-  echo "$(git log ..master 2>/dev/null \
-    | grep '^commit' | wc -l | awk '{print $1}')"
+  git status -s --ignore-submodules=dirty 2>/dev/null | wc -l |\
+    awk '{print $1}'
 }
 
 __mk5_git_outgoing() {
-  # Check if branch exists on remote; if so, echo !
-  local branch_exists="$(git branch -r 2>/dev/null \
-    | grep "^ *origin/$(__mk5_git_branch)\$")"
-  if [ ! "$branch_exists" ]; then
-    echo '!'
-
-  # Otherwise, compare wih remote branch; echo # commits ahead
-  else
-    echo "$(git log origin/$(__mk5_git_branch).. 2>/dev/null \
-      | grep '^commit' | wc -l | awk '{print $1}')"
-  fi
+  git rev-list --left-only --count ...@{u} 2>/dev/null || echo '!'
 }
 
 __mk5_set_prompt() {
