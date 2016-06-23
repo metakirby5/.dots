@@ -16,13 +16,9 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-#__mk5_top_connector='┌ '
-#__mk5_bot_connector='└ '
 __mk5_usr_pchar='>'
 __mk5_root_pchar='#'
 __mk5_dirty_char='*'
-__mk5_incoming_char='v'
-__mk5_behindmaster_char='>'
 __mk5_outgoing_char='^'
 
 __mk5_hostname="${HOSTNAME%%.*}"
@@ -33,8 +29,7 @@ __mk5_git_branch() {
 }
 
 __mk5_git_dirty() {
-  git status -s --ignore-submodules=dirty 2>/dev/null | wc -l |\
-    awk '{print $1}'
+  git status --porcelain 2>/dev/null | wc -l | awk '{print $1}'
 }
 
 __mk5_git_outgoing() {
