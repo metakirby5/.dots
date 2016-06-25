@@ -14,6 +14,7 @@ Here's what you'll need...
 - GNU Stow
 - metakirby5/whizkers
 - metakirby5/bash-scripts (somewhat optional)
+- Packages from language-specific managers (`~/.pipfile`, `~/.npmfile`, etc.)
 
 ### Mac
 
@@ -92,9 +93,15 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 - Add `source ~/.posixrc` to the appropriate files
   (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
+- Install packages from language-specific managers.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
+
+### Language-specific package managers
+
+- Python: `xargs pip install < ~/.pipfile`
+- Node: `xargs npm install -g < ~/.npmfile`
 
 ### Mac
 
@@ -122,6 +129,10 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles
   from `~/.whizkers_output/userstyles`.
 - Set up oomox and use the file in `~/.whizkers_output/oomox.sh`.
+
+## Maintenance
+
+- Regularly `dump-leaves` to export dependencies.
 
 ## TODO
 

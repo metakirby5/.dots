@@ -1,7 +1,7 @@
 virtualenvwrapper
-whizkers
 ipython
+whizkers
 numpy
-wsgiref
 pip-autoremove
+wsgiref
 pipdeptree
