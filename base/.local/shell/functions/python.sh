@@ -1,3 +1,10 @@
+# Bundles up only leaf pip dependencies.
+# Requires pipdeptree.
+pip-leaves() {
+  pipdeptree --freeze -w silence | grep -o '^[^ =]\+'
+  echo 'pipdeptree'
+}
+
 # Cleans all *.pyc files recursively in the current directory
 clean-pyc() {
   find . -name '*.pyc' -delete
