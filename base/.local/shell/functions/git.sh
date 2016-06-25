@@ -24,3 +24,9 @@ git-clean-branches() {
 git-clean-orig() {
     git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
 }
+
+# Update the .gitignore with all currently untracked files
+git-update-gitignore() {
+  touch .gitignore
+  git status --porcelain | grep '^??' | cut -c4- >> .gitignore
+}
