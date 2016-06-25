@@ -1,7 +1,12 @@
 # Urgent bell when task finishes
 remind() {
-    eval "${@}"
+    eval "$@"
     echo -e "\a"
+}
+
+remind-say() {
+    remind "$@"
+    say -- "Finished $@."
 }
 
 # Try to record all dependencies in their respective files
