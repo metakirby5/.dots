@@ -22,6 +22,7 @@ brew 'mpv', args: ['with-bundle']
 brew 'neofetch'
 brew 'node'
 brew 'p7zip'
+brew 'poppler'
 brew 'ranger'
 brew 'reattach-to-user-namespace'
 brew 'rlwrap'
