@@ -1,10 +1,17 @@
 # General
 set bell-style visible
-set colored-stats on
+
+# Completion behavior
 set completion-ignore-case on
+set skip-completed-text on
+set match-hidden-files off
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+
+# Completion display
+set colored-stats on
 set completion-query-items 0
 set mark-symlinked-directories on
-set match-hidden-files off
 set page-completions on
 set print-completions-horizontally on
 
