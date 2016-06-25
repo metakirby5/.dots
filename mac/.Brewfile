@@ -5,17 +5,18 @@ tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/python'
 tap 'homebrew/services'
+brew 'git'
 brew 'asciinema'
 brew 'bash'
 brew 'coreutils'
 brew 'fasd'
 brew 'python'
-brew 'git'
 brew 'gcc'
 brew 'gnu-sed', args: ['with-default-names']
 brew 'htop'
 brew 'hub'
 brew 'irssi'
+brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'python3'
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
 brew 'mpv', args: ['with-bundle']
