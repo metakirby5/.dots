@@ -94,13 +94,14 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
   (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
 - Install packages from language-specific managers.
+  - You can also try using `install-leaves` instead.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
 
 ### Language-specific package managers
 
-- Python: `xargs pip install < ~/.pipfile`
+- Python: `xargs pip install --upgrade < ~/.pipfile`
 - Node: `xargs npm install -g < ~/.npmfile`
 
 ### Mac
