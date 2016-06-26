@@ -19,8 +19,16 @@ dump-leaves() {
     )
 
     for m in "${!MANAGERS[@]}"; do
-        echo "Dumping $m..."
+        echo "Dumping $m to ${MANAGERS[$m]}..."
         leaves="$(${m}-leaves 2>/dev/null)"
         [ "$leaves" ] && echo "$leaves" > "${MANAGERS[$m]}"
     done
+}
+
+# Assumes a file with the name of the directory in $DOTS is located
+# in $LOCAL/stowed, for each stowed dotfile set.
+restow-dots() {
+    cd "$DOTS"
+    stow -R $(ls "$LOCAL/stowed") \
+      --ignore '.DS_Store'
 }
