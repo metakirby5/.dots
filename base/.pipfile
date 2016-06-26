@@ -1,7 +1,9 @@
+humanize
 ipython
 numpy
 pip-autoremove
 pipdeptree
+requests
 virtualenvwrapper
 whizkers
 wsgiref

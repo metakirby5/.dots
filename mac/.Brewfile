@@ -16,6 +16,7 @@ brew 'gnu-sed', args: ['with-default-names']
 brew 'htop'
 brew 'hub'
 brew 'irssi'
+brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'python3'
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
