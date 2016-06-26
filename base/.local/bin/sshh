@@ -53,7 +53,13 @@ find_ssh() {
 find_ssh "$pane_pid"
 
 # Reach here only when there is no running command
-[ "$run" == true ] && eval "$SHELL -l"
+if [ "$run" == true ]; then
+  if which reattach-to-user-namespace &>/dev/null; then
+    eval "reattach-to-user-namespace -l \"$SHELL\""
+  else
+    eval "$SHELL -l"
+  fi
+fi
 
 if [ "$child_cmd" ]; then
     echo "$child_cmd"
