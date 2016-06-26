@@ -138,4 +138,4 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 
 ## TODO
 
-- Fix whizkers files to allow light colorschemes
+- [ ] Fix whizkers files to allow light colorschemes
