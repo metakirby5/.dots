@@ -9,8 +9,7 @@ export PATH
 # Configs
 for rc in \
     ~/.local/shell/config.sh \
-    ~/.local/shell/local.sh \
-    ~/.creds.sh; do
+    ~/.local/shell/local.sh; do
   [ -f "$rc" ] && source "$rc"
 done
 
