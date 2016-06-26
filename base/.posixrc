@@ -1,7 +1,7 @@
 # Path
 for p in \
     ~/.local/bin \
-    ~/code/bash-scripts; do
+    ~/code/scripts; do
   [ -d "$p" ] && PATH="$PATH:$p"
 done
 export PATH
