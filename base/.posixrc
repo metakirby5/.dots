@@ -1,15 +1,24 @@
-# Path
+# Globals
+export DOTS=~/.dots
+export LOCAL=~/.local
+export WORKSPACE=~/code
+export MY_SCRIPTS="$WORKSPACE/scripts"
+
+# Pull in local defs
+LOCAL_CONF="$LOCAL/shell/local.sh"
+[ -f "$LOCAL_CONF" ] && source "$LOCAL_CONF"
+
+# Paths
 for p in \
-    ~/.local/bin \
-    ~/code/scripts; do
+    "$LOCAL/bin" \
+    "$MY_SCRIPTS"; do
   [ -d "$p" ] && PATH="$PATH:$p"
 done
 export PATH
 
 # Configs
 for rc in \
-    ~/.local/shell/config.sh \
-    ~/.local/shell/local.sh; do
+    "$LOCAL/shell/config.sh"; do
   [ -f "$rc" ] && source "$rc"
 done
 

@@ -132,6 +132,7 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 
 ## Maintenance
 
+- Regularly pull and `restow-dots` to keep up-to-date.
 - Regularly `dump-leaves` to export dependencies.
 
 ## TODO
