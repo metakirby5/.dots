@@ -23,6 +23,7 @@ FACTOR = 2
 GAP = 10
 APPS =
   t: 'Terminal'
+  e: 'Finder'
 
 # Keys
 MOD = ['cmd', 'alt']
@@ -254,7 +255,8 @@ keys.push Phoenix.bind 'c', MOD, -> cw()?.center().set()
 
 # Apps
 for key, app of APPS
-  keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
+  do (key, app) ->
+    keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
 
 # Spaces
 SPACE_MODS = [
