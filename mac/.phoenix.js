@@ -121,6 +121,11 @@ class ChainWindow
 
   set: ->
     @win.setFrame @f
+    this
+
+  focus: ->
+    @win.focus()
+    this
 
   updateScr: (scr) ->
     @prevScr = if @scr? then @scr else scr
@@ -263,7 +268,7 @@ SPACE_MODS = [
   [
     # Move
     MOVE_MOD,
-    (num) -> cw()?.setSpace(num).constrain().set()
+    (num) -> cw()?.setSpace(num).constrain().set().focus()
   ],
 ]
 
