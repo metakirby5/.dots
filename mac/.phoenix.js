@@ -233,6 +233,26 @@ class ChainWindow
     @f.y = @sf.y + Math.min @f.y - @prevSf.y, @sf.height - (@f.height + @gap)
     this
 
+  reproportion: ->
+    # Translate to true origin
+    @f.x -= @prevSf.x
+    @f.y -= @prevSf.y
+
+    # Scale x
+    xFactor = @sf.width / @prevSf.width
+    @f.x *= xFactor
+    @f.width *= xFactor
+
+    # Scale y
+    yFactor = @sf.height / @prevSf.height
+    @f.y *= yFactor
+    @f.height *= yFactor
+
+    # Translate to new screen origin
+    @f.x += @sf.x
+    @f.y += @sf.y
+    this
+
   center: ->
     @f.x = @sf.x + (@sf.width - @f.width) / 2
     @f.y = @sf.y + (@sf.height - @f.height) / 2
@@ -268,7 +288,7 @@ SPACE_MODS = [
   [
     # Move
     MOVE_MOD,
-    (num) -> cw()?.setSpace(num).constrain().set().focus()
+    (num) -> cw()?.setSpace(num).reproportion().set().focus()
   ],
 ]
 
