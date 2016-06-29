@@ -173,6 +173,7 @@ class ChainWindow
       when NORTH then @f.y = c + @gap
       when EAST then @f.x = c - @f.width - @gap
       when WEST then @f.x = c + @gap
+    this
 
   size: (dx, dy, center = false) ->
     @move -dx / 2, -dy / 2 if center
@@ -189,6 +190,17 @@ class ChainWindow
   sizeIn: (dir, center = false) ->
     @size (deltaIn dir)..., center
     this
+
+  growIn: (dir, c) ->
+    switch dir
+      when SOUTH then @f.height += c
+      when NORTH then @f.y -= (@f.height += c)
+      when EAST then @f.width += c
+      when WEST then @f.x -= (@f.width += c)
+    this
+
+  # TODO: tile-like resizing
+  # adjustIn: (dir) ->
 
   fill: (axes, skipFrame = false) ->
     for axis in axes
