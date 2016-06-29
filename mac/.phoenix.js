@@ -72,11 +72,11 @@ isCloser = (dir, a, b) ->
   c = coeff dir
   a * c < b * c
 
-deltaIn = (dir) ->
+deltaIn = (dir, unit = 1) ->
   c = coeff dir
   switch axisOf dir
-    when VERTICAL then    [0, UNIT * c]
-    when HORIZONTAL then  [UNIT * c, 0]
+    when VERTICAL then    [0, unit * c]
+    when HORIZONTAL then  [unit * c, 0]
 
 # Rectangle methods
 catchable = (f, dir, g) ->
@@ -164,7 +164,7 @@ class ChainWindow
     this
 
   moveIn: (dir) ->
-    @move (deltaIn dir)...
+    @move (deltaIn dir, @unit)...
     this
 
   moveEdgeTo: (dir, c) ->
@@ -188,7 +188,7 @@ class ChainWindow
     this
 
   sizeIn: (dir, center = false) ->
-    @size (deltaIn dir)..., center
+    @size (deltaIn dir, @unit)..., center
     this
 
   growIn: (dir, c) ->
@@ -200,7 +200,8 @@ class ChainWindow
     this
 
   # TODO: tile-like resizing
-  # adjustIn: (dir) ->
+  adjustIn: (dir, c) ->
+    e = edgeOf @f, dir
 
   fill: (axes, skipFrame = false) ->
     for axis in axes
