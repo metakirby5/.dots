@@ -119,6 +119,7 @@ class ChainWindow
   constructor: (@win, @gap = 0, @unit = 1, @tolerance = 0) ->
     @f = @win.frame()
     @updateScr @win.screen()
+    @dropSize = @gap + @tolerance
 
   set: ->
     @win.setFrame @f
@@ -240,7 +241,7 @@ class ChainWindow
 
   pourIn: (dir) ->
     g = _.extend {}, @f
-    @sizeTo @tolerance, @tolerance, true
+    @sizeTo @dropSize, @dropSize, true
     @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
     @fill [(oppositeOf axisOf dir), (axisOf dir)]
