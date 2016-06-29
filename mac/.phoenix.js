@@ -18,6 +18,7 @@ AXES = [VERTICAL, HORIZONTAL]
 Phoenix.set
   openAtLogin: true
 
+TOLERANCE = 10
 UNIT = 100
 FACTOR = 2
 GAP = 10
@@ -115,7 +116,7 @@ Window::focusIn = (dir) ->
 
 # Window chaining
 class ChainWindow
-  constructor: (@win, @gap = 0, @unit = 1) ->
+  constructor: (@win, @gap = 0, @unit = 1, @tolerance = 0) ->
     @f = @win.frame()
     @updateScr @win.screen()
 
@@ -191,17 +192,32 @@ class ChainWindow
     @size (deltaIn dir, @unit)..., center
     this
 
-  growIn: (dir, c) ->
+  extendIn: (dir, amt = @unit) ->
+    switch axisOf dir
+      when VERTICAL then @f.height += amt
+      when HORIZONTAL then @f.width += amt
     switch dir
-      when SOUTH then @f.height += c
-      when NORTH then @f.y -= (@f.height += c)
-      when EAST then @f.width += c
-      when WEST then @f.x -= (@f.width += c)
+      when NORTH then @f.y -= amt
+      when WEST then @f.x -= amt
     this
 
-  # TODO: tile-like resizing
-  adjustIn: (dir, c) ->
-    e = edgeOf @f, dir
+  # TODO fix skew
+  adjustIn: (dir, amt = @unit) ->
+    tStart = edgeOf @f, dir, @gap - @tolerance
+    tEnd = edgeOf @f, dir, @gap + @tolerance
+    for win in @scr.visibleWindows()
+      if not @win.isEqual win
+        nf = win.frame()
+        ne = edgeOf nf, (oppositeOf dir)
+        # If within tolerance, also adjust
+        if (isCloser dir, tStart, ne) and
+           (isCloser dir, ne, tEnd) and
+           (catchable @f, dir, nf)
+          new ChainWindow(win, @gap, @unit, @tolerance)
+            .extendIn((oppositeOf dir), -amt)
+            .set()
+    @extendIn(dir, amt)
+    this
 
   fill: (axes, skipFrame = false) ->
     for axis in axes
@@ -224,7 +240,7 @@ class ChainWindow
 
   pourIn: (dir) ->
     g = _.extend {}, @f
-    @sizeTo @unit, @unit, true
+    @sizeTo @tolerance, @tolerance, true
     @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
     @fill [(oppositeOf axisOf dir), (axisOf dir)]
@@ -278,9 +294,9 @@ class ChainWindow
 
 # Shortcuts
 fw = Window.focusedWindow
-cw = (gap = GAP, unit = UNIT) ->
+cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
   win = fw()
-  new ChainWindow(win, gap, unit) if win?
+  new ChainWindow(win, gap, unit, tolerance) if win?
 
 # Handlers
 keys = []
@@ -329,6 +345,7 @@ DIR_MODS = [
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
+    # TODO adjustIn sensible binds
     # Size
     SIZE_MOD,
     (dir) -> cw()?.sizeIn(dir).set()
