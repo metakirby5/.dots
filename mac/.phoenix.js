@@ -202,8 +202,7 @@ class ChainWindow
       when WEST then @f.x -= amt
     this
 
-  fill: (axes, skipFrame = false) ->
-    axes = [HORIZONTAL, VERTICAL] if not axes?
+  fill: (axes = AXES, skipFrame = false) ->
     for axis in axes
       switch axis
         when VERTICAL
