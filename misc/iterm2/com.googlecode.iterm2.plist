@@ -95,13 +95,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.77692842483520508</real>
+				<real>0.97625195980072021</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.6914818286895752</real>
+				<real>0.93038952350616455</real>
 				<key>Red Component</key>
-				<real>0.24996830523014069</real>
+				<real>0.22349733114242554</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
@@ -173,13 +173,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.60647732019424438</real>
+				<real>0.79848217964172363</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.54072320461273193</real>
+				<real>0.76136624813079834</real>
 				<key>Red Component</key>
-				<real>0.19969084858894348</real>
+				<real>0.18665874004364014</real>
 			</dict>
 			<key>Ansi 7 Color</key>
 			<dict>
@@ -754,13 +754,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1014 197 570 315 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>269 284 606 456 0 0 1680 1027 </string>
+	<string>269 313 606 456 0 0 1680 1027 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>14 429 842 588 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
 	<string>14 565 650 452 0 0 1680 1027 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>962 21 706 996 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>14 18 1650 503 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -867,13 +867,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.77692842483520508</real>
+				<real>0.97625195980072021</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.6914818286895752</real>
+				<real>0.93038952350616455</real>
 				<key>Red Component</key>
-				<real>0.24996830523014069</real>
+				<real>0.22349733114242554</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
@@ -945,13 +945,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.60647732019424438</real>
+				<real>0.79848217964172363</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.54072320461273193</real>
+				<real>0.76136624813079834</real>
 				<key>Red Component</key>
-				<real>0.19969084858894348</real>
+				<real>0.18665874004364014</real>
 			</dict>
 			<key>Ansi 7 Color</key>
 			<dict>
