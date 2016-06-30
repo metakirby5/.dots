@@ -202,25 +202,8 @@ class ChainWindow
       when WEST then @f.x -= amt
     this
 
-  # TODO fix skew
-  adjustIn: (dir, amt = @unit) ->
-    tStart = edgeOf @f, dir, @gap - @tolerance
-    tEnd = edgeOf @f, dir, @gap + @tolerance
-    for win in @scr.visibleWindows()
-      if not @win.isEqual win
-        nf = win.frame()
-        ne = edgeOf nf, (oppositeOf dir)
-        # If within tolerance, also adjust
-        if (isCloser dir, tStart, ne) and
-           (isCloser dir, ne, tEnd) and
-           (catchable @f, dir, nf)
-          new ChainWindow(win, @gap, @unit, @tolerance)
-            .extendIn((oppositeOf dir), -amt)
-            .set()
-    @extendIn(dir, amt)
-    this
-
   fill: (axes, skipFrame = false) ->
+    axes = [HORIZONTAL, VERTICAL] if not axes?
     for axis in axes
       switch axis
         when VERTICAL
@@ -346,7 +329,6 @@ DIR_MODS = [
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
-    # TODO adjustIn sensible binds
     # Size
     SIZE_MOD,
     (dir) -> cw()?.sizeIn(dir).set()
