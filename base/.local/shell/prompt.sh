@@ -58,7 +58,7 @@ __mk5_set_prompt() {
 
   # Display hostname if ssh'd
   local hostname
-  [ "$SSH_TTY" ] && hostname="$__mk5_b_blue@$__mk5_blue$__mk5_hostname"
+  [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
 
   # Git stuff
   local git_info
@@ -126,7 +126,7 @@ $__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
-$__mk5_cyan$USER$hostname$__mk5_b_cyan in \
+$__mk5_blue$USER$hostname$__mk5_b_blue in \
 $virtualenv_info\
 $git_info\
 $mypwd\
