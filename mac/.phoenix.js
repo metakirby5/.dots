@@ -31,6 +31,7 @@ MOD = ['cmd', 'alt']
 MOVE_MOD = ['cmd', 'alt', 'shift']
 SIZE_MOD = ['cmd', 'ctrl']
 POUR_MOD = ['cmd', 'alt', 'ctrl']
+TILE_MOD = ['cmd', 'ctrl', 'shift']
 DIR_KEYS =
   h: WEST
   j: SOUTH
@@ -62,6 +63,11 @@ axisOf = (dirOrAxis) ->
   switch dirOrAxis
     when NORTH, SOUTH, VERTICAL then VERTICAL
     when EAST, WEST, HORIZONTAL then HORIZONTAL
+
+dirsOf = (axis) ->
+  switch axis
+    when VERTICAL then [NORTH, SOUTH]
+    when HORIZONTAL then [EAST, WEST]
 
 coeff = (dir) ->
   switch dir
@@ -189,8 +195,8 @@ class ChainWindow
     @f.height = height
     this
 
-  sizeIn: (dir, center = false) ->
-    @size (deltaIn dir, @unit)..., center
+  sizeIn: (dir, center = false, amt = @unit) ->
+    @size (deltaIn dir, amt)..., center
     this
 
   extendIn: (dir, amt = @unit) ->
@@ -200,6 +206,35 @@ class ChainWindow
     switch dir
       when NORTH then @f.y -= amt
       when WEST then @f.x -= amt
+    this
+
+  # Disclaimer: only works if window covers the entire edge of resize...
+  adjustIn: (dir, amt = @unit) ->
+    # First, resize our window
+    # Reset by filling
+    @sizeTo(@dropSize, @dropSize, true)
+    @fill()
+    # Extend in any direction where there exist windows
+    dirs = _.filter (dirsOf (axisOf dir)), (dir) =>
+      (@windowsIn dir).length
+    switch dirs.length
+      # Sandiwched between two windows: resize from center
+      when 2 then @sizeIn dir, true, amt
+      # On edge: extend in direction of the window
+      when 1 then @extendIn dirs[0], amt * coeff dir
+      # Otherwise, no other windows, so maximize
+      else
+        @maximize()
+    @set()
+
+    # Now, resize all other windows
+    for win in @scr.visibleWindows()
+      if not @win.isEqual win
+        new ChainWindow(win, @gap, @unit, @tolerance)
+          .sizeTo(@dropSize, @dropSize, true)
+          .fill()
+          .set()
+
     this
 
   fill: (axes = AXES, skipFrame = false) ->
@@ -227,6 +262,11 @@ class ChainWindow
     @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
     @fill [(oppositeOf axisOf dir), (axisOf dir)]
+    this
+
+  rePour: ->
+    @sizeTo @dropSize, @dropSize, true
+    @fill()
     this
 
   setSpace: (num) ->
@@ -289,6 +329,7 @@ events = []
 keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
 keys.push Phoenix.bind 'f', MOD, -> cw()?.maximize().set()
 keys.push Phoenix.bind 'c', MOD, -> cw()?.center().set()
+keys.push Phoenix.bind 'a', MOD, -> cw()?.rePour().set()
 
 # Apps
 for key, app of APPS
@@ -336,6 +377,11 @@ DIR_MODS = [
     # Pour
     POUR_MOD,
     (dir) -> cw()?.pourIn(dir).set()
+  ],
+  [
+    # Tile
+    TILE_MOD,
+    (dir) -> cw()?.adjustIn(dir).set()
   ],
 ]
 
