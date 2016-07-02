@@ -137,7 +137,7 @@ class ChainWindow
 
   updateScr: (scr) ->
     @prevScr = if @scr? then @scr else scr
-    @prevSf = @prevScr.visibleFrameInRectangle()
+    @prevSf = @prevScr?.visibleFrameInRectangle()
     @scr = scr
     @sf = @scr.visibleFrameInRectangle()
 
