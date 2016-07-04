@@ -1,8 +1,11 @@
+BeautifulSoup
+fuzzywuzzy
 humanize
 ipython
 numpy
 pip-autoremove
 pipdeptree
+python-Levenshtein
 requests
 virtualenvwrapper
 whizkers
