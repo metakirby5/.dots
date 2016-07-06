@@ -681,6 +681,9 @@ nnoremap <leader>m :silent make\|redraw!\|cc<cr>
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
 
+" No backups for crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
+
 " **************************************
 " * Shortcuts
 " **************************************
