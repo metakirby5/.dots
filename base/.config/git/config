@@ -1,15 +1,22 @@
 [user]
   name = Ethan Chan
   email = metakirby5@gmail.com
+[core]
+  excludesfile = ~/.config/git/gitignore_global
+[push]
+  default = simple
+[log]
+  date = local
+  decorate = short
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
 [alias]
   st = status
   ci = commit
   br = branch
   co = checkout
-[core]
-  excludesfile = ~/.config/git/gitignore_global
-[push]
-  default = simple
-[merge]
-  tool = meld
-  conflictstyle = diff3
+  l = log
+  d = diff
