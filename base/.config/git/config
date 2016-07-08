@@ -20,3 +20,4 @@
   co = checkout
   l = log
   d = diff
+  a = add
