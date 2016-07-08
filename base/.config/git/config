@@ -21,3 +21,4 @@
   l = log
   d = diff
   a = add
+  squash = rebase -i
