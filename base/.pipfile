@@ -1,5 +1,6 @@
 BeautifulSoup
 fuzzywuzzy
+gnureadline
 humanize
 ipython
 numpy
