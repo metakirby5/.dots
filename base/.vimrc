@@ -60,6 +60,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'Konfekt/FastFold'                 " Faster folder
   Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
+  Plugin 'tpope/vim-fugitive'               " Git functions
   " Plugin 'mattn/emmet-vim'                  " Emmet
 
   call vundle#end()
