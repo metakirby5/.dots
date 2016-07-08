@@ -10,13 +10,21 @@ dump-leaves() {
     for m in "${!MANAGERS[@]}"; do
         if which "$m" &>/dev/null; then
             echo "Dumping $m leaves to ${MANAGERS[$m]}..."
-            leaves="$(${m}-leaves 2>/dev/null)"
+            local leaves="$(${m}-leaves 2>/dev/null)"
             [ "$leaves" ] && echo "$leaves" > "${MANAGERS[$m]}" ||\
                 echo "    ${m}-leaves FAILED!"
         else
             echo "$m not found, skipping..."
         fi
     done
+
+    # Specially handle OSX App Store
+    if [ "$(uname)" == "Darwin" ]; then
+        echo "Dumping App Store leaves to ~/.appstorefile..."
+        appstore-leaves > ~/.appstorefile
+    else
+        echo "App Store not found, skipping..."
+    fi
 }
 
 # Try to install all dependencies in their respective files
@@ -48,6 +56,16 @@ Leaf file ${MANAGERS[$m]} not found, skipping...${NORM}"
             echo -e "${YELLOW}$m not found, skipping...${NORM}"
         fi
     done
+
+    # Specially handle OSX App Store
+    if [ "$(uname)" == "Darwin" ]; then
+        echo -e "${YELLOW}Install the following:${NORM}"
+        comm -23 ~/.appstorefile <(appstore-leaves) |\
+            sed 's/^/    /'
+        appstore-leaves > ~/.appstorefile
+    else
+        echo "${YELLOW}App Store not found, skipping${NORM}..."
+    fi
 }
 
 # Urgent bell when task finishes
