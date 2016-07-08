@@ -59,10 +59,15 @@ Leaf file ${MANAGERS[$m]} not found, skipping...${NORM}"
 
     # Specially handle OSX App Store
     if [ "$(uname)" == "Darwin" ]; then
-        echo -e "${YELLOW}Install the following:${NORM}"
-        comm -23 ~/.appstorefile <(appstore-leaves) |\
-            sed 's/^/    /'
-        appstore-leaves > ~/.appstorefile
+        echo
+        local reqs="$(comm -23 ~/.appstorefile <(appstore-leaves) |\
+            sed 's/^/    /')"
+        if [ "$reqs" ]; then
+            echo -e "${YELLOW}For App Store, install the following:${NORM}"
+            echo "$reqs"
+        else
+            echo -e "${GREEN}App Store up to date!${NORM}"
+        fi
     else
         echo "${YELLOW}App Store not found, skipping${NORM}..."
     fi
