@@ -3,7 +3,7 @@
 
 All of my dotfiles.
 
-![OSX preview](https://ptpb.pw/~aesthetique.png)
+![OS X preview](https://ptpb.pw/~aesthetique.png)
 
 Here's what you'll need...
 
@@ -16,7 +16,7 @@ Here's what you'll need...
 - metakirby5/bash-scripts (somewhat optional)
 - Packages from language-specific managers (`~/.pipfile`, `~/.npmfile`, etc.)
 
-### OSX
+### OS X
 
 - brew
 - Everything in `osx/.Brewfile`
@@ -62,7 +62,7 @@ Here's what you'll need...
 
 ## Fonts
 
-### OSX
+### OS X
 
 - Pre-installed fonts.
 
@@ -76,7 +76,7 @@ Here's what you'll need...
 
 ## Chrome Theme
 
-### OSX
+### OS X
 
 The pre-installed theme.
 
@@ -107,7 +107,7 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 - Python: `xargs pip install --upgrade < ~/.pipfile`
 - Node: `xargs npm install -g < ~/.npmfile`
 
-### OSX
+### OS X
 
 - Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
