@@ -758,9 +758,9 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>14 21 1650 996 0 0 1680 1027 </string>
+	<string>980 565 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>860 21 810 996 0 0 1680 1027 </string>
+	<string>860 565 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>14 17 834 435 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1023,7 +1023,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blink Allowed</key>
-			<false/>
+			<true/>
 			<key>Blinking Cursor</key>
 			<true/>
 			<key>Blur</key>
@@ -1035,13 +1035,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96549797058105469</real>
+				<real>0.97254901960784312</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.980701744556427</real>
+				<real>0.98431372549019602</real>
 				<key>Red Component</key>
-				<real>0.98026037216186523</real>
+				<real>0.98431372549019602</real>
 			</dict>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -1056,13 +1056,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96549797058105469</real>
+				<real>0.92156862745098034</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.980701744556427</real>
+				<real>0.93333333333333335</real>
 				<key>Red Component</key>
-				<real>0.98026037216186523</real>
+				<real>0.93333333333333335</real>
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>
@@ -1082,14 +1082,16 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.20856963098049164</real>
+				<real>0.20784313725490197</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.22283002734184265</real>
+				<real>0.22352941176470589</real>
 				<key>Red Component</key>
-				<real>0.20568123459815979</real>
+				<real>0.20784313725490197</real>
 			</dict>
+			<key>Cursor Type</key>
+			<integer>1</integer>
 			<key>Custom Command</key>
 			<string>Yes</string>
 			<key>Custom Directory</key>
@@ -1107,13 +1109,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96549797058105469</real>
+				<real>0.92156862745098034</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.980701744556427</real>
+				<real>0.93333333333333335</real>
 				<key>Red Component</key>
-				<real>0.98026037216186523</real>
+				<real>0.93333333333333335</real>
 			</dict>
 			<key>Guid</key>
 			<string>74EEFB9A-61C3-4730-A698-E5987B1368F5</string>
@@ -1455,13 +1457,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96549797058105469</real>
+				<real>0.92156862745098034</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.980701744556427</real>
+				<real>0.93333333333333335</real>
 				<key>Red Component</key>
-				<real>0.98026037216186523</real>
+				<real>0.93333333333333335</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
@@ -1493,7 +1495,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.05</real>
+			<real>0.050000000000000003</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -1763,7 +1765,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blink Allowed</key>
-			<false/>
+			<true/>
 			<key>Blinking Cursor</key>
 			<true/>
 			<key>Blur</key>
@@ -1832,6 +1834,8 @@
 				<key>Red Component</key>
 				<real>0.20568123459815979</real>
 			</dict>
+			<key>Cursor Type</key>
+			<integer>1</integer>
 			<key>Custom Command</key>
 			<string>Yes</string>
 			<key>Custom Directory</key>
@@ -2235,7 +2239,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.05</real>
+			<real>0.050000000000000003</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -2263,7 +2267,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>B577FDBB-04C6-47AE-BD9A-C07F3BD9BB88</string>
 	<key>NoSyncLastTipTime</key>
-	<real>489483500.852786</real>
+	<real>489656411.08280402</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2279,6 +2283,8 @@
 		<string>0001</string>
 		<string>0002</string>
 		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
 	</array>
 	<key>PointerActions</key>
 	<dict>
@@ -2324,7 +2330,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-06T07:13:46Z</date>
+	<date>2016-07-09T05:52:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
