@@ -20,8 +20,10 @@ Here's what you'll need...
 
 - brew
 - Everything in `mac/.Brewfile`
+- Everything in `mac/.appstorefile`
 - rgrove/textual-sulaco
 - guyht/vimari
+- XVimProject/XVim
 
 ### Linux
 
@@ -115,6 +117,7 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 - `brew bundle --global`
 - Install `whizkers` via `pip` and use it to choose a colorscheme.
 - Tweak whatever settings you want in Preferences.app.
+- Install the apps in `~/.appstorefile`.
 
 ### Linux
 
