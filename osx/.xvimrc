@@ -1,0 +1,38 @@
+" Swap ; and :
+noremap ; :
+noremap : ;
+
+" Swap ' and `
+noremap ' `
+noremap ` '
+
+" Swap 0 and ^
+noremap 0 ^
+noremap ^ 0
+
+" K - split line
+noremap K i<cr><esc>
+
+" Preserve selection when (de)indenting in visual mode
+vnoremap > >gv
+vnoremap < <gv
+
+" ^[p / n] or ^[left / right] - Switch tabs
+noremap <C-p> :tabprevious<cr>
+noremap <C-n> :tabnext<cr>
+inoremap <C-p> <esc>:tabprevious<cr>
+inoremap <C-n> <esc>:tabnext<cr>
+noremap <C-Left> :tabprevious<cr>
+noremap <C-Right> :tabnext<cr>
+inoremap <C-Left> <esc>:tabprevious<cr>
+inoremap <C-Right> <esc>:tabnext<cr>
+
+set nu                        " line numbering on
+set noerrorbells              " turns off annoying bell sounds for errors
+set backspace=2               " backspace over everything
+set hlsearch                  " highlights all search hits
+set ignorecase                " search without regards to case
+set smartcase                 " search with smart casing
+set gdefault                  " default global sub
+set ls=2                      " always show status line
+set clipboard=unnamed         " use system pasteboard

@@ -203,6 +203,7 @@ set ttymouse=xterm2           " urxvt scrolling
 set hlsearch                  " highlights all search hits
 set ignorecase                " search without regards to case
 set smartcase                 " search with smart casing
+set gdefault                  " default global sub
 set timeoutlen=1000 ttimeoutlen=0   " No escape key delay
 
 " Persistent undo
@@ -245,10 +246,10 @@ silent! colorscheme peachpuff
 
 " Syntax highlighting
 syntax on
-set showmatch           " show match when inserting {}, [], or ()
+set showmatch                 " show match when inserting {}, [], or ()
 
 " Highlights/colors
-set cursorline
+set cursorline                " highlight current line
 
 hi Normal   guifg=white guibg=black
 hi Visual   ctermbg=black guibg=black
@@ -399,13 +400,12 @@ nnoremap <silent> <leader>n :call NumberToggle()<cr>
 noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
 
 " Preserve selection when (de)indenting in visual mode
-vnoremap > ><cr>gv
-vnoremap < <<cr>gv
+vnoremap > >gv
+vnoremap < <gv
 
-" 0 - First non-blank character
+" Swap 0 and ^
 noremap 0 ^
-" ,0 - Legacy behavior
-noremap <leader>0 0
+noremap ^ 0
 
 " === Buffers
 
