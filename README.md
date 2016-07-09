@@ -3,7 +3,7 @@
 
 All of my dotfiles.
 
-![OSX preview](http://i.imgur.com/0KnCv9l.png)
+![OSX preview](https://ptpb.pw/~aesthetique.png)
 
 Here's what you'll need...
 
