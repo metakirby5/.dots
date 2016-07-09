@@ -1,6 +1,7 @@
 babel
 castnow
 coffee-script
+gulp
 http-server
 npm
 juliangruber/vipe
