@@ -3,7 +3,7 @@
 
 All of my dotfiles.
 
-![Mac preview](http://i.imgur.com/0KnCv9l.png)
+![OSX preview](http://i.imgur.com/0KnCv9l.png)
 
 Here's what you'll need...
 
@@ -16,11 +16,11 @@ Here's what you'll need...
 - metakirby5/bash-scripts (somewhat optional)
 - Packages from language-specific managers (`~/.pipfile`, `~/.npmfile`, etc.)
 
-### Mac
+### OSX
 
 - brew
-- Everything in `mac/.Brewfile`
-- Everything in `mac/.appstorefile`
+- Everything in `osx/.Brewfile`
+- Everything in `osx/.appstorefile`
 - rgrove/textual-sulaco
 - guyht/vimari
 - XVimProject/XVim
@@ -62,7 +62,7 @@ Here's what you'll need...
 
 ## Fonts
 
-### Mac
+### OSX
 
 - Pre-installed fonts.
 
@@ -76,7 +76,7 @@ Here's what you'll need...
 
 ## Chrome Theme
 
-### Mac
+### OSX
 
 The pre-installed theme.
 
@@ -107,13 +107,13 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 - Python: `xargs pip install --upgrade < ~/.pipfile`
 - Node: `xargs npm install -g < ~/.npmfile`
 
-### Mac
+### OSX
 
 - Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
 - Install `stow` using `brew`.
 - `cd ~/.dots`
-- `stow base mac`
+- `stow base osx`
 - `brew bundle --global`
 - Install `whizkers` via `pip` and use it to choose a colorscheme.
 - Tweak whatever settings you want in Preferences.app.
