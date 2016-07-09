@@ -23,7 +23,7 @@ UNIT = 100
 FACTOR = 2
 GAP = 10
 APPS =
-  t: 'iTerm'
+  t: 'Terminal'
   e: 'Finder'
 
 # Keys
