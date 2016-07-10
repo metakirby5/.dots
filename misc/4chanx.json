@@ -1,6 +1,6 @@
 {
   "version": "1.12.1.4",
-  "date": 1468115442024,
+  "date": 1468116772214,
   "Conf": {
     "JSON Index": true,
     "Use 4chan X Catalog": true,
@@ -179,9 +179,9 @@
     "Shortcut Icons": true,
     "Custom Board Navigation": true,
     "archiveLists": "https://mayhemydg.github.io/archives.json/archives.json",
-    "lastarchivecheck": 1468115016726,
+    "lastarchivecheck": 1468116674644,
     "archiveAutoUpdate": true,
-    "boardnav": "g-title / w-title / a-title / b-title",
+    "boardnav": "g-title / w-title / wg-title / a-title / c-title / b-title",
     "QR.personas": "#options:\"sage\";boards:jp;always",
     "sjisPreview": false,
     "jsWhitelist": "http://s.4cdn.org\nhttps://s.4cdn.org\nhttp://www.google.com\nhttps://www.google.com\nhttps://www.gstatic.com\nhttp://cdn.mathjax.org\nhttps://cdn.mathjax.org\n'self'\n'unsafe-inline'\n'unsafe-eval'",
@@ -266,189 +266,195 @@
     },
     "watchedThreads": {
       "boards": {},
-      "lastChecked": 1468115387639
+      "lastChecked": 1468116524591
     },
     "customTitles": {
       "boards": {}
     },
     "archives": [
       {
-        "boards": [
-          "adv",
-          "f",
-          "hr",
-          "o",
-          "pol",
-          "s4s",
-          "sp",
-          "tg",
-          "trv",
-          "tv",
-          "x"
-        ],
-        "domain": "archive.4plebs.org",
-        "files": [
-          "adv",
-          "f",
-          "hr",
-          "o",
-          "pol",
-          "s4s",
-          "sp",
-          "tg",
-          "trv",
-          "tv",
-          "x"
-        ],
-        "http": true,
-        "https": true,
+        "uid": 3,
         "name": "4plebs",
-        "software": "foolfuuka",
-        "uid": 3
-      },
-      {
-        "boards": [
-          "asp",
-          "c",
-          "e",
-          "n",
-          "news",
-          "out",
-          "p",
-          "toy",
-          "vp",
-          "w",
-          "wg",
-          "wsr"
-        ],
-        "domain": "archive.nyafuu.org",
-        "files": [
-          "asp",
-          "c",
-          "e",
-          "n",
-          "news",
-          "out",
-          "p",
-          "toy",
-          "vp",
-          "w",
-          "wg",
-          "wsr"
-        ],
+        "domain": "archive.4plebs.org",
         "http": true,
         "https": true,
+        "software": "foolfuuka",
+        "boards": [
+          "adv",
+          "f",
+          "hr",
+          "o",
+          "pol",
+          "s4s",
+          "sp",
+          "tg",
+          "trv",
+          "tv",
+          "x"
+        ],
+        "files": [
+          "adv",
+          "f",
+          "hr",
+          "o",
+          "pol",
+          "s4s",
+          "sp",
+          "tg",
+          "trv",
+          "tv",
+          "x"
+        ]
+      },
+      {
+        "uid": 4,
         "name": "Nyafuu Archive",
-        "software": "foolfuuka",
-        "uid": 4
-      },
-      {
-        "boards": [
-          "cgl",
-          "g",
-          "mu"
-        ],
-        "domain": "archive.rebeccablacktech.com",
-        "files": [
-          "cgl",
-          "g",
-          "mu"
-        ],
-        "http": false,
-        "https": true,
-        "name": "Rebecca Black Tech",
-        "software": "fuuka",
-        "uid": 8
-      },
-      {
-        "boards": [
-          "3",
-          "biz",
-          "cgl",
-          "ck",
-          "diy",
-          "fa",
-          "g",
-          "ic",
-          "jp",
-          "lit",
-          "sci",
-          "tg",
-          "vr"
-        ],
-        "domain": "warosu.org",
-        "files": [
-          "3",
-          "biz",
-          "cgl",
-          "ck",
-          "diy",
-          "fa",
-          "g",
-          "ic",
-          "jp",
-          "lit",
-          "sci",
-          "tg",
-          "vr"
-        ],
-        "http": false,
-        "https": true,
-        "name": "warosu",
-        "software": "fuuka",
-        "uid": 10
-      },
-      {
-        "boards": [
-          "a",
-          "aco",
-          "an",
-          "c",
-          "co",
-          "d",
-          "fit",
-          "gif",
-          "his",
-          "int",
-          "k",
-          "m",
-          "mlp",
-          "qa",
-          "r9k",
-          "tg",
-          "trash",
-          "vr",
-          "wsg"
-        ],
-        "domain": "desuarchive.org",
-        "files": [
-          "a",
-          "aco",
-          "an",
-          "c",
-          "co",
-          "d",
-          "fit",
-          "gif",
-          "his",
-          "int",
-          "k",
-          "m",
-          "mlp",
-          "qa",
-          "r9k",
-          "tg",
-          "trash",
-          "vr",
-          "wsg"
-        ],
+        "domain": "archive.nyafuu.org",
         "http": true,
         "https": true,
-        "name": "Desuarchive",
         "software": "foolfuuka",
-        "uid": 23
+        "boards": [
+          "asp",
+          "c",
+          "e",
+          "n",
+          "news",
+          "out",
+          "p",
+          "toy",
+          "vp",
+          "w",
+          "wg",
+          "wsr"
+        ],
+        "files": [
+          "asp",
+          "c",
+          "e",
+          "n",
+          "news",
+          "out",
+          "p",
+          "toy",
+          "vp",
+          "w",
+          "wg",
+          "wsr"
+        ]
       },
       {
+        "uid": 8,
+        "name": "Rebecca Black Tech",
+        "domain": "archive.rebeccablacktech.com",
+        "http": false,
+        "https": true,
+        "software": "fuuka",
+        "boards": [
+          "cgl",
+          "g",
+          "mu"
+        ],
+        "files": [
+          "cgl",
+          "g",
+          "mu"
+        ]
+      },
+      {
+        "uid": 10,
+        "name": "warosu",
+        "domain": "warosu.org",
+        "http": false,
+        "https": true,
+        "software": "fuuka",
+        "boards": [
+          "3",
+          "biz",
+          "cgl",
+          "ck",
+          "diy",
+          "fa",
+          "g",
+          "ic",
+          "jp",
+          "lit",
+          "sci",
+          "tg",
+          "vr"
+        ],
+        "files": [
+          "3",
+          "biz",
+          "cgl",
+          "ck",
+          "diy",
+          "fa",
+          "g",
+          "ic",
+          "jp",
+          "lit",
+          "sci",
+          "tg",
+          "vr"
+        ]
+      },
+      {
+        "uid": 23,
+        "name": "Desuarchive",
+        "domain": "desuarchive.org",
+        "http": true,
+        "https": true,
+        "software": "foolfuuka",
+        "boards": [
+          "a",
+          "aco",
+          "an",
+          "c",
+          "co",
+          "d",
+          "fit",
+          "gif",
+          "his",
+          "int",
+          "k",
+          "m",
+          "mlp",
+          "qa",
+          "r9k",
+          "tg",
+          "trash",
+          "vr",
+          "wsg"
+        ],
+        "files": [
+          "a",
+          "aco",
+          "an",
+          "c",
+          "co",
+          "d",
+          "fit",
+          "gif",
+          "his",
+          "int",
+          "k",
+          "m",
+          "mlp",
+          "qa",
+          "r9k",
+          "tg",
+          "trash",
+          "vr",
+          "wsg"
+        ]
+      },
+      {
+        "uid": 24,
+        "name": "fireden.net",
+        "domain": "boards.fireden.net",
+        "http": false,
+        "https": true,
+        "software": "foolfuuka",
         "boards": [
           "a",
           "cm",
@@ -459,7 +465,6 @@
           "vg",
           "y"
         ],
-        "domain": "boards.fireden.net",
         "files": [
           "a",
           "cm",
@@ -469,29 +474,30 @@
           "v",
           "vg",
           "y"
-        ],
-        "http": false,
-        "https": true,
-        "name": "fireden.net",
-        "software": "foolfuuka",
-        "uid": 24
+        ]
       },
       {
+        "uid": 25,
+        "name": "arch.b4k.co",
+        "domain": "arch.b4k.co",
+        "http": true,
+        "https": true,
+        "software": "foolfuuka",
         "boards": [
           "g",
           "jp",
           "mlp",
           "v"
         ],
-        "domain": "arch.b4k.co",
-        "files": [],
-        "http": true,
-        "https": true,
-        "name": "arch.b4k.co",
-        "software": "foolfuuka",
-        "uid": 25
+        "files": []
       },
       {
+        "uid": 5,
+        "name": "Love is Over",
+        "domain": "archive.loveisover.me",
+        "http": true,
+        "https": false,
+        "software": "foolfuuka",
         "boards": [
           "c",
           "d",
@@ -501,7 +507,6 @@
           "t",
           "u"
         ],
-        "domain": "archive.loveisover.me",
         "files": [
           "c",
           "d",
@@ -510,14 +515,15 @@
           "lgbt",
           "t",
           "u"
-        ],
-        "http": true,
-        "https": false,
-        "name": "Love is Over",
-        "software": "foolfuuka",
-        "uid": 5
+        ]
       },
       {
+        "uid": 28,
+        "name": "bstats",
+        "domain": "archive.b-stats.org",
+        "http": true,
+        "https": true,
+        "software": "foolfuuka",
         "boards": [
           "f",
           "cm",
@@ -528,15 +534,15 @@
           "trash",
           "y"
         ],
-        "domain": "archive.b-stats.org",
-        "files": [],
-        "http": true,
-        "https": true,
-        "name": "bstats",
-        "software": "foolfuuka",
-        "uid": 28
+        "files": []
       },
       {
+        "uid": 29,
+        "name": "Archived.Moe",
+        "domain": "archived.moe",
+        "http": true,
+        "https": false,
+        "software": "foolfuuka",
         "boards": [
           "3",
           "a",
@@ -609,33 +615,33 @@
           "x",
           "y"
         ],
-        "domain": "archived.moe",
         "files": [
           "gd",
           "po",
           "qst"
-        ],
-        "http": true,
-        "https": false,
-        "name": "Archived.Moe",
-        "software": "foolfuuka",
-        "uid": 29
+        ]
       },
       {
-        "boards": [
-          "b"
-        ],
-        "domain": "thebarchive.com",
-        "files": [
-          "b"
-        ],
-        "http": true,
-        "https": false,
+        "uid": 30,
         "name": "TheBArchive.com",
+        "domain": "thebarchive.com",
+        "http": true,
+        "https": false,
         "software": "foolfuuka",
-        "uid": 30
+        "boards": [
+          "b"
+        ],
+        "files": [
+          "b"
+        ]
       },
       {
+        "uid": 31,
+        "name": "Archive Of Sins",
+        "domain": "archiveofsins.com",
+        "http": true,
+        "https": false,
+        "software": "foolfuuka",
         "boards": [
           "h",
           "hc",
@@ -644,7 +650,6 @@
           "s",
           "soc"
         ],
-        "domain": "archiveofsins.com",
         "files": [
           "h",
           "hc",
@@ -652,12 +657,7 @@
           "r",
           "s",
           "soc"
-        ],
-        "http": true,
-        "https": false,
-        "name": "Archive Of Sins",
-        "software": "foolfuuka",
-        "uid": 31
+        ]
       }
     ],
     "selectedArchives": {},
