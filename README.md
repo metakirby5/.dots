@@ -26,6 +26,7 @@ Here's what you'll need...
 
 #### Safari Extensions
 
+- tampermonkey
 - flipxfx/sVim
 - chrisaljoudi/ublock
 - com.searchpreview
