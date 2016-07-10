@@ -13,7 +13,7 @@ Here's what you'll need...
 
 - GNU Stow
 - metakirby5/whizkers
-- metakirby5/bash-scripts (somewhat optional)
+- metakirby5/scripts (somewhat optional)
 - Packages from language-specific managers (`~/.pipfile`, `~/.npmfile`, etc.)
 
 ### OS X
@@ -106,6 +106,7 @@ For OS X, use the system theme.
 - Follow platform-specific instructions.
 - Install packages from language-specific managers.
   - You can also try using `install-leaves` instead.
+- Install browser extensions/themes.
 - If you want, copy over `misc/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
