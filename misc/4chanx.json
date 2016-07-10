@@ -1,6 +1,6 @@
 {
   "version": "1.12.1.4",
-  "date": 1468116772214,
+  "date": 1468127974599,
   "Conf": {
     "JSON Index": true,
     "Use 4chan X Catalog": true,
@@ -107,9 +107,9 @@
     "Auto-load captcha": false,
     "Post on Captcha Completion": false,
     "Captcha Fixes": true,
-    "Use Recaptcha v1": false,
-    "Use Recaptcha v1 in Reports": false,
-    "Force Noscript Captcha": false,
+    "Use Recaptcha v1": true,
+    "Use Recaptcha v1 in Reports": true,
+    "Force Noscript Captcha": true,
     "Pass Link": true,
     "Quote Backlinks": true,
     "OP Backlinks": true,
@@ -122,8 +122,8 @@
     "Resurrect Quotes": true,
     "Remember Your Posts": true,
     "Mark Quotes of You": true,
-    "Highlight Posts Quoting You": false,
-    "Highlight Own Posts": false,
+    "Highlight Posts Quoting You": true,
+    "Highlight Own Posts": true,
     "Mark OP Quotes": true,
     "Mark Cross-thread Quotes": true,
     "Quote Threading": false,
@@ -186,7 +186,7 @@
     "sjisPreview": false,
     "jsWhitelist": "http://s.4cdn.org\nhttps://s.4cdn.org\nhttp://www.google.com\nhttps://www.google.com\nhttps://www.gstatic.com\nhttp://cdn.mathjax.org\nhttps://cdn.mathjax.org\n'self'\n'unsafe-inline'\n'unsafe-eval'",
     "captchaLanguage": "",
-    "time": "%m/%d/%y(%a)%H:%M:%S",
+    "time": "%m/%d/%y %H:%M:%S",
     "backlink": ">>%id",
     "fileInfo": "%l (%p%s, %r%g)",
     "favicon": "ferongr",
@@ -257,16 +257,53 @@
       "lastChecked": 1447152008036
     },
     "lastReadPosts": {
-      "boards": {},
-      "lastChecked": 1468115016705
+      "boards": {
+        "wg": {
+          "6619024": 6619102,
+          "6625780": 6627456,
+          "6627752": 6627799
+        }
+      },
+      "lastChecked": 1468125963046
     },
     "yourPosts": {
-      "boards": {},
-      "lastChecked": 1468115016693
+      "boards": {
+        "wg": {
+          "6627752": {
+            "6627752": true,
+            "6627756": true,
+            "6627761": true,
+            "6627764": true,
+            "6627767": true,
+            "6627770": true,
+            "6627773": true,
+            "6627775": true,
+            "6627778": true,
+            "6627781": true,
+            "6627783": true,
+            "6627784": true,
+            "6627786": true,
+            "6627787": true,
+            "6627788": true,
+            "6627789": true,
+            "6627790": true,
+            "6627791": true,
+            "6627792": true,
+            "6627793": true,
+            "6627794": true,
+            "6627795": true,
+            "6627796": true,
+            "6627797": true,
+            "6627798": true,
+            "6627799": true
+          }
+        }
+      },
+      "lastChecked": 1468125963040
     },
     "watchedThreads": {
       "boards": {},
-      "lastChecked": 1468116524591
+      "lastChecked": 1468127751836
     },
     "customTitles": {
       "boards": {}
