@@ -18,6 +18,7 @@ Here's what you'll need...
 
 ### OS X
 
+- Xcode
 - brew
 - Everything in `osx/.Brewfile`
 - Everything in `osx/.appstorefile`
@@ -118,6 +119,7 @@ For OS X, use the system theme.
 
 ### OS X
 
+- Install Xcode from the App Store.
 - Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
 - Install `stow` using `brew`.
