@@ -22,15 +22,7 @@ Here's what you'll need...
 - Everything in `osx/.Brewfile`
 - Everything in `osx/.appstorefile`
 - rgrove/textual-sulaco
-- XVimProject/XVim
-
-#### Safari Extensions
-
-- tampermonkey
-- flipxfx/sVim
-- chrisaljoudi/ublock
-- com.searchpreview
-- com.sidetree.HoverZoom
+- XVimProject/XVim (hopefully on brew soon)
 
 ### Linux
 
@@ -81,19 +73,28 @@ Here's what you'll need...
 - [M+ 1p](http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/)
 - [Baekmuk Gulim](http://www.freekoreanfont.com/baekmuk-gulim-download/)
 
-## Chrome Theme
+## Browsers
 
-### OS X
+### Userscripts
 
-The pre-installed theme.
+- ccd0/4chan-x
+- nebukazar/StyleChan
 
-### Linux
+### Safari
 
-The one rendered in `~/.whizkers_output/chrome_theme/`.
+- tampermonkey
+- flipxfx/sVim
+- chrisaljoudi/ublock
+- com.searchpreview
+- com.sidetree.HoverZoom
 
-### Other
+### Chrome
 
-[Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj)
+Theme in `~/.whizkers_output/chrome_theme/`.
+
+For OS X, use the system theme.
+
+[Dark Red Dark](https://chrome.google.com/webstore/detail/dark-red-dark/blhnkflbilekjahkjkkjchfkkhgcnfjj) is another option.
 
 ## Installation
 
@@ -150,3 +151,4 @@ The one rendered in `~/.whizkers_output/chrome_theme/`.
 ## TODO
 
 - [ ] Fix whizkers files to allow light colorschemes
+- [ ] Stick XVimProject/XVim on brew
