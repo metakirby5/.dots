@@ -22,8 +22,14 @@ Here's what you'll need...
 - Everything in `osx/.Brewfile`
 - Everything in `osx/.appstorefile`
 - rgrove/textual-sulaco
-- guyht/vimari
 - XVimProject/XVim
+
+#### Safari Extensions
+
+- flipxfx/sVim
+- chrisaljoudi/ublock
+- com.searchpreview
+- com.sidetree.HoverZoom
 
 ### Linux
 
@@ -64,7 +70,7 @@ Here's what you'll need...
 
 ### OS X
 
-- Pre-installed fonts.
+- System fonts.
 
 ### Linux
 
