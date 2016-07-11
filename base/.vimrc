@@ -137,7 +137,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   endfunction
 
   " Unite
-  nnoremap <silent> <leader>x :Unite file<cr>
+  noremap <silent> <leader>x :Unite file<cr>
 
   " Git Gutter
   let g:gitgutter_map_keys = 0
@@ -394,7 +394,7 @@ function! NumberToggle()
   endif
 endfunction
 
-nnoremap <silent> <leader>n :call NumberToggle()<cr>
+noremap <silent> <leader>n :call NumberToggle()<cr>
 
 " Toggle virtualedit
 noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
@@ -677,7 +677,7 @@ xnoremap <expr> <leader>r
 " === Make
 
 " ,m - Make and go to first error
-nnoremap <leader>m :silent make\|redraw!\|cc<cr>
+noremap <leader>m :silent make\|redraw!\|cc<cr>
 
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
@@ -729,11 +729,11 @@ noremap <silent> <leader>/ :noh<cr>
 noremap <silent> K i<cr><esc>
 
 " ,[oO] - Create newlines in normal mode
-nnoremap <silent> <leader>o o<esc>cc<esc>
-nnoremap <silent> <leader>O O<esc>cc<esc>
+noremap <silent> <leader>o o<esc>cc<esc>
+noremap <silent> <leader>O O<esc>cc<esc>
 
 " ,dd - Delete current line contents
-nnoremap <silent> <leader>dd cc<esc>
+noremap <silent> <leader>dd cc<esc>
 vnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<cr>:call RestoreSearch()<cr>
 
 " **************************************
@@ -761,7 +761,7 @@ inoremap {<cr> {<cr>}<C-o>O
 " endfunction
 "
 " " ,ih - Insert file header
-" nnoremap <silent> <leader>ih mz:exe FileHeader()<cr>`z8<cr>A
+" noremap <silent> <leader>ih mz:exe FileHeader()<cr>`z8<cr>A
 "
 " " Method header function
 " function MethodHeader()
@@ -794,7 +794,7 @@ inoremap {<cr> {<cr>}<C-o>O
 " endfunction
 "
 " " ,im - Insert method header
-" nnoremap <silent> <leader>im mz:exe MethodHeader()<cr>`z<cr>A
+" noremap <silent> <leader>im mz:exe MethodHeader()<cr>`z<cr>A
 
 " ===Automatic actions on file open
 
