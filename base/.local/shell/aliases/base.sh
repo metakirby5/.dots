@@ -9,7 +9,7 @@ alias restow='stow -R'
 alias tetris='bastet'
 alias ll='ls -l'
 alias la='ls -la'
-alias aniget='anistrm --program="wget -qbc"'
+alias aniget='anistrm --program="wget -c"'
 
 # Prefs
 alias less='less -R'
