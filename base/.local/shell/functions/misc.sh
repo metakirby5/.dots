@@ -79,6 +79,7 @@ remind() {
     echo -en "\a"
 }
 
+# Urgent bell + say when task finishes
 remind-say() {
     remind "$@"
     say -- "Finished $@."
