@@ -711,6 +711,14 @@ noremap : ;
 noremap ' `
 noremap ` '
 
+" Better tag jumping
+noremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
+noremap <c-w><c-]> <c-w>g<c-]>
+vnoremap <c-w><c-]> <c-w>g<c-]>
+noremap <c-w><c-}> <c-w>g<c-}>
+vnoremap <c-w><c-}> <c-w>g<c-}>
+
 " <f5> - Reload file
 noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 
