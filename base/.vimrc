@@ -494,8 +494,7 @@ noremap <silent> <c-h> :vertical resize -1<cr>
 set tabpagemax=100
 
 " Useful mappings for managing tabs
-noremap <C-t> :tabnew<cr>
-inoremap <C-t> <esc>:tabnew<cr>
+noremap <leader>tn :tabnew<cr>
 noremap <leader>to :tabonly<cr>
 noremap <leader>tw :tabclose<cr>
 noremap <leader>tm :tabmove<Space>
