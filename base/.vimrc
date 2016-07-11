@@ -673,6 +673,12 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 xnoremap <expr> <leader>r
       \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<CR>"
 
+" No backups for crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" Recursive tag search
+set tags=./tags;
+
 " === Make
 
 " ,m - Make and go to first error
@@ -680,9 +686,6 @@ noremap <leader>m :silent make\|redraw!\|cc<cr>
 
 " Set error formats for lint
 set efm+=\ (%l)\ error:\ %m
-
-" No backups for crontab
-autocmd filetype crontab setlocal nobackup nowritebackup
 
 " **************************************
 " * Shortcuts
