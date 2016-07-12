@@ -18,7 +18,6 @@ brew 'gnu-sed', args: ['with-default-names']
 brew 'gnupg'
 brew 'htop'
 brew 'hub'
-brew 'irssi'
 brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'python3'
