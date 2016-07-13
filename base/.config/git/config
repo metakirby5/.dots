@@ -15,19 +15,24 @@
 	branch = auto
 [alias]
 	cl = clone
-	st = status
+	st = status --short
 	ci = commit
 	ca = commit --amend
 	br = branch
+	ba = branch --all
 	co = checkout
 	l  = log
-	d  = diff
+	d  = diff --word-diff
+	dc = diff --word-diff --cached
 	a  = add
-	ai = add -i
-	squash = rebase -i
+	ai = add --interactive
+	s  = stash
 
 	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short
 	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=relative
 	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --patch
 	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --numstat
 	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --graph
+
+	squash = rebase --intetractive
+	aliases = !git config -l | grep alias | cut -c 7-

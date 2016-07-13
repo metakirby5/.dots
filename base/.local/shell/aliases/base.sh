@@ -9,6 +9,7 @@ alias restow='stow -R'
 alias tetris='bastet'
 alias ll='ls -l'
 alias la='ls -la'
+alias findr='find . -regex'
 alias aniget='anistrm --program="wget -c"'
 
 # Prefs
