@@ -1,5 +1,5 @@
 # Tools
-alias flatten-dir="find . -mindepth 2 -type f -exec mv -t . -i '{}' +"
+alias flatten-dir='find . -mindepth 2 -type f -exec mv -t . -i "{}" +'
 
 # Shortcuts
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
@@ -11,6 +11,7 @@ alias ll='ls -l'
 alias la='ls -la'
 alias h='history'
 alias findr='find . -regex'
+alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
 
 # Prefs
