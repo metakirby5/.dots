@@ -1,10 +1,10 @@
 #!/usr/bin/env coffee -p
 
 # Cardinal directions
-NORTH = 'NORTH'
-SOUTH = 'SOUTH'
-EAST = 'EAST'
-WEST = 'WEST'
+NORTH = 'north'
+SOUTH = 'south'
+EAST = 'east'
+WEST = 'west'
 DIR = 'DIR'
 DIRS = [NORTH, SOUTH, EAST, WEST]
 
@@ -103,22 +103,14 @@ edgeOf = (f, dir, gap = 0) ->
 # Screen methods
 Screen::idx = ->
   that = this
-  (_.find (Screen.screens().map (s, i) -> [i, s]),
+  (_.find (Screen.all().map (s, i) -> [i, s]),
           ([i, s]) -> that.isEqual s)[0]
 
 # Space methods
 Space::idx = ->
   that = this
-  (_.find (Space.spaces().map (s, i) -> [i, s]),
+  (_.find (Space.all().map (s, i) -> [i, s]),
           ([i, s]) -> that.isEqual s)[0]
-
-# Window methods
-Window::focusIn = (dir) ->
-  switch dir
-    when NORTH then @focusClosestWindowInNorth()
-    when SOUTH then @focusClosestWindowInSouth()
-    when EAST then @focusClosestWindowInEast()
-    when WEST then @focusClosestWindowInWest()
 
 # Window chaining
 class ChainWindow
@@ -141,17 +133,10 @@ class ChainWindow
     @scr = scr
     @sf = @scr.visibleFrameInRectangle()
 
-  windowsIn: (dir) ->
-    switch dir
-      when NORTH then @win.windowsToNorth()
-      when SOUTH then @win.windowsToSouth()
-      when EAST then @win.windowsToEast()
-      when WEST then @win.windowsToWest()
-
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
-    for win in @scr.visibleWindows()
+    for win in @scr.windows {visible: true}
       if not @win.isEqual win
         nf = win.frame()
         ne = edgeOf nf, (oppositeOf dir)
@@ -216,7 +201,7 @@ class ChainWindow
     @fill()
     # Extend in any direction where there exist windows
     dirs = _.filter (dirsOf (axisOf dir)), (dir) =>
-      (@windowsIn dir).length
+      (@win.neighbors dir).length
     switch dirs.length
       # Sandiwched between two windows: resize from center
       when 2 then @sizeIn dir, true, amt
@@ -228,7 +213,7 @@ class ChainWindow
     @set()
 
     # Now, resize all other windows
-    for win in @scr.visibleWindows()
+    for win in @scr.windows {visible: true}
       if not @win.isEqual win
         new ChainWindow(win, @gap, @unit, @tolerance)
           .sizeTo(@dropSize, @dropSize, true)
@@ -270,7 +255,7 @@ class ChainWindow
     this
 
   setSpace: (num) ->
-    next = Space.spaces()[num]
+    next = Space.all()[num]
     if next?
       next.addWindows [@win]
       for prev in @win.spaces()
@@ -316,25 +301,21 @@ class ChainWindow
     this
 
 # Shortcuts
-fw = Window.focusedWindow
+fw = Window.focused
 cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
   win = fw()
   new ChainWindow(win, gap, unit, tolerance) if win?
 
-# Handlers
-keys = []
-events = []
-
 # Special
-keys.push Phoenix.bind 'r', MOD, -> Phoenix.reload()
-keys.push Phoenix.bind 'f', MOD, -> cw()?.maximize().set()
-keys.push Phoenix.bind 'c', MOD, -> cw()?.center().set()
-keys.push Phoenix.bind 'a', MOD, -> cw()?.rePour().set()
+Key.on 'r', MOD, -> Phoenix.reload()
+Key.on 'f', MOD, -> cw()?.maximize().set()
+Key.on 'c', MOD, -> cw()?.center().set()
+Key.on 'a', MOD, -> cw()?.rePour().set()
 
 # Apps
 for key, app of APPS
   do (key, app) ->
-    keys.push Phoenix.bind key, MOD, -> App.launch(app).focus()
+    Key.on key, MOD, -> App.launch(app).focus()
 
 # Spaces
 SPACE_MODS = [
@@ -349,11 +330,11 @@ for [mod, action] in SPACE_MODS
   for num in [1..10]
     do (num, mod, action) ->
       s = '' + num
-      keys.push Phoenix.bind (s.substr s.length - 1), mod, -> action (num - 1)
+      Key.on (s.substr s.length - 1), mod, -> action (num - 1)
   for key, offset of OFFSET_KEYS
     do (key, mod, action, offset) ->
-      keys.push Phoenix.bind key, mod, ->
-        idx = Space.activeSpace().idx()
+      Key.on key, mod, ->
+        idx = Space.active().idx()
         action (idx + offset)
 
 # Directionals
@@ -361,7 +342,7 @@ DIR_MODS = [
   [
     # Select
     MOD,
-    (dir) -> fw()?.focusIn(dir)
+    (dir) -> fw()?.focusClosestNeighbor(dir)
   ],
   [
     # Move
@@ -388,7 +369,7 @@ DIR_MODS = [
 for [mod, action] in DIR_MODS
   for key, dir of DIR_KEYS
     do (key, mod, action, dir) ->
-      keys.push Phoenix.bind key, mod, -> action dir
+      Key.on key, mod, -> action dir
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
