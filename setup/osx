@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+set -e
+DOTS=~/.dots
+DEPS=~/.local/deps
+
+get_ready() {
+  unset ready
+  while [ "$ready" != y ]; do
+    read -rp "Enter 'y' when you are ready." ready
+  done
+}
+
+cd
+
+if [ ! -d "$DOTS" ]; then
+  echo "Cloning .dots into $DOTS..."
+  git clone git@github.com:metakirby5/.dots.git
+else
+  echo "$DOTS detected."
+fi
+
+echo "Please do the following:"
+echo "    - Install Xcode from the App Store."
+echo "    - Import the Terminal.app profile in \
+misc/terminal/Japanesque.terminal."
+get_ready
+
+echo "Installing brew..."
+/usr/bin/ruby -e "$(curl -fsSL \
+  https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "Installing stow using brew..."
+brew install stow
+
+echo "Stowing base and osx..."
+cd "$DOTS"
+stow base osx
+
+echo "Installing brew dependencies..."
+brew bundle --file=- < "$DEPS/brew"
+
+echo "Changing your shell (sudo required)..."
+sudo echo /usr/local/bin/bash >> /etc/shells
+chsh -s /usr/local/bin/bash
+
+echo "Modifying ~/.bashrc and ~/.bash_profile..."
+cat >> ~/.bashrc <<< 'source ~/.posixrc'
+cat >> ~/.bash_profile <<< 'source ~/.bashrc'
+source ~/.bashrc
+
+echo "Installing other packages..."
+install-leaves
+
+echo "Running whizkers with defaults..."
+whizkers
+
+echo "Setting OS X defaults..."
+yes | osx-set-defaults
+
+echo "Copying over root configs (sudo required)..."
+sudo cp "$DOTS/misc/root_bashrc.sh" /var/root/.bash_profile
+sudo ln -s ~/.vimrc /var/root/.vimrc
+
+echo "Done! For post-install:"
+echo "  - Tweak any other settings (keybinds, etc.) in Preferences.app"
+echo "  - Install the apps in ~/.local/deps/AppStore"
+echo "  - Configure apps (browsers, brew cask-installed, etc.)"

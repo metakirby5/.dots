@@ -14,14 +14,12 @@ Here's what you'll need...
 - GNU Stow
 - metakirby5/whizkers
 - metakirby5/scripts (somewhat optional)
-- Packages from language-specific managers (`~/.pipfile`, `~/.npmfile`, etc.)
+- Packages from relevant managers (`~/.local/deps/*`)
 
 ### OS X
 
 - Xcode
 - brew
-- Everything in `osx/.Brewfile`
-- Everything in `osx/.appstorefile`
 - rgrove/textual-sulaco
 - XVimProject/XVim (hopefully on brew soon)
 
@@ -114,10 +112,14 @@ For OS X, use the system theme.
 
 ### Language-specific package managers
 
-- Python: `xargs pip install --upgrade < ~/.pipfile`
-- Node: `xargs npm install -g < ~/.npmfile`
+- Python: `xargs pip install --upgrade < ~/.local/deps/pip`
+- Node: `xargs npm install -g < ~/.local/deps/npm`
 
 ### OS X
+
+*EXPERIMENTAL:* Run `setup/osx`.
+
+-- or --
 
 - Install Xcode from the App Store.
 - Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
@@ -125,12 +127,13 @@ For OS X, use the system theme.
 - Install `stow` using `brew`.
 - `cd ~/.dots`
 - `stow base osx`
+- `brew bundle --file=- < ~/.local/deps/brew`
+- [Set your shell to `brew`'s `bash`.](https://johndjameson.com/blog/updating-your-shell-with-homebrew/)
 - `source ~/.bashrc`
-- `brew bundle --global`
 - Install `whizkers` via `pip` and use it to choose a colorscheme.
 - `yes | osx-set-defaults`
 - Tweak whatever other settings you want in Preferences.app.
-- Install the apps in `~/.appstorefile`.
+- Install the apps in `~/.local/deps/AppStore`.
 
 ### Linux
 
