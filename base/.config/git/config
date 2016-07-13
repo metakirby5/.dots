@@ -29,9 +29,10 @@
 
 
 	# diff
-	d  = diff --word-diff
-	dl = diff
-	dc = diff --word-diff --cached
+	d   = diff --color-words
+	dl  = diff
+	dc  = diff --color-words --cached
+	dlc = diff --cached
 
 	# add
 	a  = add
