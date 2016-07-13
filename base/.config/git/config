@@ -14,11 +14,20 @@
 	status = auto
 	branch = auto
 [alias]
+	cl = clone
 	st = status
 	ci = commit
+	ca = commit --amend
 	br = branch
 	co = checkout
-	l = log
-	d = diff
-	a = add
+	l  = log
+	d  = diff
+	a  = add
+	ai = add -i
 	squash = rebase -i
+
+	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short
+	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=relative
+	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --patch
+	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --numstat
+	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --graph
