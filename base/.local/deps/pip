@@ -9,5 +9,6 @@ pipdeptree
 python-Levenshtein
 requests
 virtualenvwrapper
+wheel
 whizkers
 wsgiref

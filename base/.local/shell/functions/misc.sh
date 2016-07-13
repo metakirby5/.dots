@@ -1,33 +1,24 @@
-declare -A MANAGERS
-MANAGERS=(
-    [brew]=~/.Brewfile
-    [pip]=~/.pipfile
-    [npm]=~/.npmfile
-)
+DEPS_DIR=~/.local/deps
 
-# Try to record all dependencies in their respective files
+# Try to dump all dependencies to their respective files
 dump-leaves() {
-    for m in "${!MANAGERS[@]}"; do
-        if which "$m" &>/dev/null; then
-            echo "Dumping $m leaves to ${MANAGERS[$m]}..."
+    for dest in "$DEPS_DIR"/*; do
+        local m="$(basename "$dest")"
+
+        if which "$m" &>/dev/null ||\
+                [ "$m" == "AppStore" -a "$(uname)" == "Darwin" ]; then
+            echo "Dumping $m leaves to $dest..."
             local leaves="$(${m}-leaves 2>/dev/null)"
-            [ "$leaves" ] && echo "$leaves" > "${MANAGERS[$m]}" ||\
+            [ "$leaves" ] && echo "$leaves" > "$dest" ||\
                 echo "    ${m}-leaves FAILED!"
+
         else
             echo "$m not found, skipping..."
         fi
     done
-
-    # Specially handle OSX App Store
-    if [ "$(uname)" == "Darwin" ]; then
-        echo "Dumping App Store leaves to ~/.appstorefile..."
-        appstore-leaves > ~/.appstorefile
-    else
-        echo "App Store not found, skipping..."
-    fi
 }
 
-# Try to install all dependencies in their respective files
+# Try to install all dependencies to their respective files
 install-leaves() {
     local NORM="\033[0m"
     local RED="\033[0;31m"
@@ -36,41 +27,31 @@ install-leaves() {
 
     declare -A INSTALLERS
     INSTALLERS=(
-        [brew]="brew bundle --global"
-        [pip]="xargs pip install --upgrade < ${MANAGERS[pip]}"
-        [npm]="xargs npm install -g < ${MANAGERS[npm]}"
+        [AppStore]="cat <(echo 'Install the following...')"
+        [brew]="brew bundle --file=-"
+        [pip]="xargs pip install --upgrade"
+        [npm]="xargs npm install -g"
     )
 
-    for m in "${!INSTALLERS[@]}"; do
+    for src in "$DEPS_DIR"/*; do
         echo
-        if which "$m" &>/dev/null; then
-            if [ -f "${MANAGERS[$m]}" ]; then
-                echo -e "${GREEN}\
-Installing $m leaves with \`${INSTALLERS[$m]}\`...$NORM"
-                eval ${INSTALLERS[$m]}
+        local m="$(basename "$src")"
+        local reqs="$(comm -23 "$src" <(${m}-leaves 2>/dev/null) \
+            | sed 's/^/    /')"
+
+        if which "$m" &>/dev/null ||\
+                [ "$m" == "AppStore" -a "$(uname)" == "Darwin" ]; then
+            if [ "$reqs" ]; then
+                echo -e "${GREEN}Installing $m leaves with \`${INSTALLERS[$m]}\`...$NORM"
+                eval ${INSTALLERS[$m]} <<< "$reqs"
             else
-                echo -e "${RED}\
-Leaf file ${MANAGERS[$m]} not found, skipping...${NORM}"
+                echo -e "${GREEN}$m up to date!$NORM"
             fi
         else
             echo -e "${YELLOW}$m not found, skipping...${NORM}"
         fi
     done
 
-    # Specially handle OSX App Store
-    if [ "$(uname)" == "Darwin" ]; then
-        echo
-        local reqs="$(comm -23 ~/.appstorefile <(appstore-leaves) |\
-            sed 's/^/    /')"
-        if [ "$reqs" ]; then
-            echo -e "${YELLOW}For App Store, install the following:${NORM}"
-            echo "$reqs"
-        else
-            echo -e "${GREEN}App Store up to date!${NORM}"
-        fi
-    else
-        echo "${YELLOW}App Store not found, skipping${NORM}..."
-    fi
 }
 
 # Urgent bell when task finishes
