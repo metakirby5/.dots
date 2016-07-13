@@ -9,3 +9,4 @@ a.out
 .DS_STORE
 .idea
 tags
+.cache
