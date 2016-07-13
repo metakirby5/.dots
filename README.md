@@ -125,7 +125,7 @@ For OS X, use the system theme.
 - Install `stow` using `brew`.
 - `cd ~/.dots`
 - `stow base osx`
-- `source ~/.bash_profile`
+- `source ~/.bashrc`
 - `brew bundle --global`
 - Install `whizkers` via `pip` and use it to choose a colorscheme.
 - `yes | osx-set-defaults`
