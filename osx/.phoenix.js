@@ -136,14 +136,13 @@ class ChainWindow
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
-    for win in @scr.windows {visible: true}
-      if not @win.isEqual win
-        nf = win.frame()
-        ne = edgeOf nf, (oppositeOf dir)
-        if (isCloser dir, e, ne) and
-           (isCloser dir, ne, closest) and
-           (not onlyCatch or catchable @f, dir, nf)
-          closest = ne
+    for win in @win.others {screen: @scr, visible: true}
+      nf = win.frame()
+      ne = edgeOf nf, (oppositeOf dir)
+      if (isCloser dir, e, ne) and
+         (isCloser dir, ne, closest) and
+         (not onlyCatch or catchable @f, dir, nf)
+        closest = ne
     closest
 
   move: (dx, dy) ->
@@ -213,12 +212,11 @@ class ChainWindow
     @set()
 
     # Now, resize all other windows
-    for win in @scr.windows {visible: true}
-      if not @win.isEqual win
-        new ChainWindow(win, @gap, @unit, @tolerance)
-          .sizeTo(@dropSize, @dropSize, true)
-          .fill()
-          .set()
+    for win in @win.others {screen: @scr, visible: true}
+      new ChainWindow(win, @gap, @unit, @tolerance)
+        .sizeTo(@dropSize, @dropSize, true)
+        .fill()
+        .set()
 
     this
 
