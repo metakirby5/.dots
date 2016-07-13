@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Sets some OSX defaults.
+
+declare -A DEFAULTS
+DEFAULTS=(
+  [Enable global key repeat]="-g ApplePressAndHoldEnabled -bool false"
+  [Hide desktop icons]="com.apple.finder CreateDesktop -bool false"
+)
+
+for d in "${!DEFAULTS[@]}"; do
+  read -rp "$d? [y/N] " set
+  case $set in
+    [yY])
+      defaults write ${DEFAULTS[$d]}
+      echo "    Setting written."
+      ;;
+  esac
+done
