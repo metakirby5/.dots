@@ -1,18 +1,121 @@
 #!/usr/bin/env bash
-# Sets some OSX defaults.
+# Sets some OSX El Capitan defaults.
 
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+NORMAL="\033[0m"
+LOG_FILE=~/.local/log/osx-set-defaults
+
+# This covers only most of the first row of the preference pane
+# and hidden settings.
 declare -A DEFAULTS
 DEFAULTS=(
-  [Enable global key repeat]="-g ApplePressAndHoldEnabled -bool false"
-  [Hide desktop icons]="com.apple.finder CreateDesktop -bool false"
+  # Global
+  ["Blue appearance"]="\
+    NSGlobalDomain AppleAquaColorVariant -int 1"
+  ["Black bar and dock"]="\
+    NSGlobalDomain AppleInterfaceStyle -string Dark"
+  ["Don't automatically hide menu bar"]="\
+    NSGlobalDomain '_HIHideMenuBar' -bool false"
+  ["Show scrollbars when scrolling"]="\
+    NSGlobalDomain AppleShowScrollBars -string WhenScrolling"
+  ["Click in scroll bar to jump to next page"]="\
+    NSGlobalDomain AppleScrollerPagingBehavior -int 0"
+  ["Double click titlebar to maximize"]="\
+    NSGlobalDomain AppleActionOnDoubleClick -string Maximize"
+  ["Switch to space with open windows for application on focus"]="\
+    NSGlobalDomain AppleSpacesSwitchOnActivate -bool true"
+  ["24-hour time"]="\
+    NSGlobalDomain AppleICUForce24HourTime -bool true"
+  ["Fast key repeat"]="\
+    NSGlobalDomain KeyRepeat -int 2"
+  ["Quick delay for key repeat"]="\
+    NSGlobalDomain InitialKeyRepeat -int 25"
+  ["Enable global key repeat"]="\
+    NSGlobalDomain ApplePressAndHoldEnabled -bool false"
+  ["Enable tab for all form controls"]="\
+    NSGlobalDomain AppleKeyboardUIMode -int 2"
+  ["Show all file extensions"]="\
+    NSGlobalDomain AppleShowAllExtensions -bool true"
+
+  # com.apple.dock
+  ["No dock magnification"]="\
+    com.apple.dock magnification -bool false"
+  ["Dock on left"]="\
+    com.apple.dock orientation -string left"
+  ["Minimize to dock with scale"]="\
+    com.apple.dock mineffect -string scale"
+  ["Don't minimize to application icon"]="\
+    com.apple.dock 'minimize-to-application' -bool false"
+  ["Animate opening dock applications"]="\
+    com.apple.dock launchanim -bool true"
+  ["Show dock indicators"]="\
+    com.apple.dock 'show-process-indicators' -bool true"
+  ["Autohide dock"]="\
+    com.apple.dock autohide -bool true"
+  ["Don't reorganize spaces in most recently used order"]="\
+    com.apple.dock 'mru-spaces' -bool false"
+  ["Group windows by application"]="\
+    com.apple.dock 'expose-group-apps' -bool true"
+
+  # com.apple.spaces
+  ["Displays have separate spaces"]="\
+    com.apple.spaces 'spans-displays' -bool false"
+
+  # com.apple.dashboard
+  ["Disable dashboard"]="\
+    com.apple.dashboard 'dashboard-enabled-state' -int 1"
+
+  # com.apple.menuextra.clock
+  ["24 hour clock"]="\
+    com.apple.menuextra.clock DateFormat -string 'EEE MM d  H:mm'"
+  ["No flashing time separators"]="\
+    com.apple.menuextra.clock FlashDateSeparators -bool false"
+  ["Digital clock"]="\
+    com.apple.menuextra.clock IsAnalog -bool false"
+
+  # com.apple.screensaver
+  ["Require password on sleep"]="\
+    com.apple.screensaver askForPassword -bool true"
+  ["Require password after 1 minute of sleep"]="\
+    com.apple.screensaver askForPasswordDelay -int 60"
+
+  # com.apple.finder
+  ["Hide desktop icons"]="\
+    com.apple.finder CreateDesktop -bool false"
+  ["Show full path in Finder title"]="\
+    com.apple.finder _FXShowPosixPathInTitle -bool true"
+  ["Search in current folder by default"]="\
+    com.apple.finder FXDefaultSearchScope -string SCcf"
+  ["Set default Finder location to \$HOME (1)"]="\
+    com.apple.finder NewWindowTarget -string PfHm"
+  ["Set default Finder location to \$HOME (2)"]="\
+    com.apple.finder NewWindowTargetPath -string file://${HOME}"
+
+  # com.apple.desktopservices
+  ["Don't write .DS_Store files on USBs"]="\
+    com.apple.desktopservices DSDontWriteUSBStores -bool true"
 )
 
+# Open up the log file
+mkdir -p "$(dirname "$LOG_FILE")"
+date >> "$LOG_FILE"
+
 for d in "${!DEFAULTS[@]}"; do
-  read -rp "$d? [y/N] " set
+  domain="$(awk '{print $1" "$2" "$3}' <<< "${DEFAULTS[$d]}")"
+  val="$(awk '{$1=$2=$3=""; print substr($0, 4)}' <<< "${DEFAULTS[$d]}")"
+  cur="$(defaults read ${DEFAULTS[$d]} 2>/dev/null)"
+  [ ! "$cur" ] && cur="unset"
+  read -rp "$d? ($cur -> $val) [y/N] " set
   case $set in
     [yY])
-      defaults write ${DEFAULTS[$d]}
-      echo "    Setting written."
+      if eval defaults write ${DEFAULTS[$d]}; then
+        echo "    $domain: $cur -> $val" >> "$LOG_FILE"
+        echo -e "    ${GREEN}Setting written.$NORMAL"
+      else
+        echo "    $domain: FAILED" >> "$LOG_FILE"
+        echo -e "    ${RED}Setting failed to be written.$NORMAL"
+      fi
       ;;
   esac
 done

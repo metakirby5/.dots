@@ -125,9 +125,11 @@ For OS X, use the system theme.
 - Install `stow` using `brew`.
 - `cd ~/.dots`
 - `stow base osx`
+- `source ~/.bash_profile`
 - `brew bundle --global`
 - Install `whizkers` via `pip` and use it to choose a colorscheme.
-- Tweak whatever settings you want in Preferences.app.
+- `yes | osx-set-defaults`
+- Tweak whatever other settings you want in Preferences.app.
 - Install the apps in `~/.appstorefile`.
 
 ### Linux
@@ -139,6 +141,7 @@ For OS X, use the system theme.
 - If you are using i3:
   - `stow i3`
   - Ensure you are using `i3init` to start i3.
+- `source ~/.bashrc`
 - Ensure your profile is called `profile` so the templates in
   `~/.mozilla/firefox/profile` can render properly.
 - Use `whizkers` and choose a colorscheme.
