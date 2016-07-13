@@ -46,11 +46,11 @@
 	sa = stash apply
 
 	# log
-	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short
-	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=relative
-	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --patch --color-words
-	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --numstat
-	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s' --decorate --date=short --graph
+	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short
+	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=relative
+	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --patch --color-words
+	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --numstat
+	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --graph
 
 	# new commands
 	squash = rebase interactive
