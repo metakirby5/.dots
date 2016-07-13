@@ -1,6 +1,6 @@
 # Bundles up only leaf npm dependencies.
 npm-leaves() {
-  read -r -d '' SCRIPT << EOF
+  read -rd '' SCRIPT << EOF
     NF >= 2 {
       github = match(\$3, /github\.com\/.*\/.*\.git/)
       if (github) {
