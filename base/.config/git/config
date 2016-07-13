@@ -16,7 +16,7 @@
 [alias]
 	# misc
 	cl = clone
-	st = status --short
+	s  = status --short
 	co = checkout
 
 	# commit
@@ -46,11 +46,11 @@
 	sa = stash apply
 
 	# log
-	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short
-	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=relative
-	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --patch --color-words
-	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --numstat
-	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s %C(magenta)%D' --date=short --graph
+	l  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s% C(magenta)%D' --date=short
+	lr = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s% C(magenta)%D' --date=relative
+	lp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%+C(magenta)%D%n' --date=short --patch --color-words
+	ls = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s% C(magenta)%D' --date=short --numstat
+	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s% C(magenta)%D' --date=short --graph
 
 	# new commands
 	squash = rebase interactive
