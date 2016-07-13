@@ -25,7 +25,9 @@ __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
 
 __mk5_git_branch() {
-  git rev-parse --abbrev-ref HEAD 2>/dev/null
+  local ref="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  [ "$ref" == HEAD ] && ref="$(git rev-parse --short HEAD 2>/dev/null)"
+  echo "$ref"
 }
 
 __mk5_git_dirty() {
