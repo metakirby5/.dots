@@ -54,5 +54,6 @@
 	lg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
 
 	# new commands
+	amend = commit --amend
 	squash = rebase --interactive
 	aliases = !git config -l | grep alias | cut -c 7-
