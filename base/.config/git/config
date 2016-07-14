@@ -4,7 +4,14 @@
 [core]
 	excludesfile = ~/.config/git/gitignore_global
 [push]
-	default = simple
+	default = tracking
+[merge]
+	defaultToUpstream = true
+[rebase]
+	autosquash = true
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always
 [log]
 	date = local
 	decorate = short
