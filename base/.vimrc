@@ -49,6 +49,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
   Plugin 'tpope/vim-fugitive'               " Git functions
+  Plugin 'pbrisbin/vim-mkdir'               " Automatically mkdir
   " Plugin 'scrooloose/syntastic'             " Syntax checker
   " Plugin 'mattn/emmet-vim'                  " Emmet
 
