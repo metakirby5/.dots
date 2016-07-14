@@ -1,0 +1,7 @@
+MARKDOWN = True
+STAMP_WHEN_POSTING = True
+OPEN_BROWSER = True
+
+ALIASES = {
+  'update': 'post -u'
+}
