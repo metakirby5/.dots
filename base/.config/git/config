@@ -12,6 +12,8 @@
 [branch]
 	autosetupmerge = always
 	autosetuprebase = always
+[rerere]
+	enabled = true
 [log]
 	date = local
 	decorate = short
