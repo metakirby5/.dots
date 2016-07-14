@@ -31,36 +31,25 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
   Plugin 'gmarik/Vundle.vim'                " Bundle manager
-
-  " General
   Plugin 'tomtom/tcomment_vim'              " Toggle comments
   Plugin 'tpope/vim-surround'               " Surround with...
-
-  " Indentation
   Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
   Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides
-
-  " Text objects
   Plugin 'kana/vim-textobj-user'            " User-defined text objects
   Plugin 'kana/vim-textobj-indent'          " Indentation levels
-
-  " Syntax
   Plugin 'sheerun/vim-polyglot'             " Language packs
-  " Plugin 'scrooloose/syntastic'             " Syntax checker
-
-  " Popup completers
   Plugin 'Shougo/neocomplete'               " Autocomplete
   Plugin 'Shougo/neosnippet'                " Snippets engine
   Plugin 'Shougo/neosnippet-snippets'       " Snippets
-
-  " Addons
+  Plugin 'justinmk/vim-sneak'               " Two-character f and t
+  Plugin 'osyo-manga/vim-over'              " Better command line
   Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
-  Plugin 'osyo-manga/vim-over'              " Preview as replacing (TODO)
   Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
   Plugin 'Konfekt/FastFold'                 " Faster folder
   Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
   Plugin 'tpope/vim-fugitive'               " Git functions
+  " Plugin 'scrooloose/syntastic'             " Syntax checker
   " Plugin 'mattn/emmet-vim'                  " Emmet
 
   call vundle#end()
@@ -105,6 +94,14 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   imap <expr><bs>     neocomplete#smart_close_popup() . "\<bs>"
   imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
 
+  " Sneak
+  let g:sneak#streak = 1
+  let g:sneak#s_next = 1
+  let g:sneak#use_ic_scs = 1
+
+  " Over
+  noremap <silent> % :OverCommandLine<cr>%s/
+
   " Incsearch
   set hlsearch
   let g:incsearch#auto_nohlsearch = 1
@@ -146,6 +143,10 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   nmap <leader>ga <Plug>GitGutterStageHunk
   nmap <leader>gu <Plug>GitGutterRevertHunk
   nmap <leader>gv <Plug>GitGutterPreviewHunk
+  omap ih <Plug>GitGutterTextObjectInnerPending
+  omap ah <Plug>GitGutterTextObjectOuterPending
+  xmap ih <Plug>GitGutterTextObjectInnerVisual
+  xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 else
 
