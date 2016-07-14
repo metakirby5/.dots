@@ -19,7 +19,8 @@ __mk5_b_white="\[\e[1;37m\]"
 __mk5_usr_pchar='>'
 __mk5_root_pchar='#'
 __mk5_dirty_char='*'
-__mk5_outgoing_char='^'
+__mk5_behind_char='v'
+__mk5_ahead_char='^'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
@@ -34,7 +35,11 @@ __mk5_git_dirty() {
   git status --porcelain 2>/dev/null | wc -l | awk '{print $1}'
 }
 
-__mk5_git_outgoing() {
+__mk5_git_behind() {
+  git rev-list --right-only --count ...@{u} 2>/dev/null || echo '!'
+}
+
+__mk5_git_ahead() {
   git rev-list --left-only --count ...@{u} 2>/dev/null || echo '!'
 }
 
@@ -74,10 +79,16 @@ __mk5_set_prompt() {
 $__mk5_b_yellow$__mk5_dirty_char$git_dirty"
     fi
 
-    local git_outgoing="$(__mk5_git_outgoing)"
-    if [ "$git_outgoing" != 0 ]; then
+    local git_behind="$(__mk5_git_behind)"
+    if [ "$git_behind" != 0 ]; then
       git_info="$git_info \
-$__mk5_b_blue$__mk5_outgoing_char$git_outgoing"
+$__mk5_b_red$__mk5_behind_char$git_behind"
+    fi
+
+    local git_ahead="$(__mk5_git_ahead)"
+    if [ "$git_ahead" != 0 ]; then
+      git_info="$git_info \
+$__mk5_b_blue$__mk5_ahead_char$git_ahead"
     fi
 
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
