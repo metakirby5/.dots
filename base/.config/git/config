@@ -37,6 +37,7 @@
 
 	# add
 	a  = add
+	aa = add --all
 	ai = add --interactive
 
 	# stash
