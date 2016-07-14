@@ -36,7 +36,7 @@ __mk5_git_dirty() {
 }
 
 __mk5_git_behind() {
-  git rev-list --right-only --count ...@{u} 2>/dev/null || echo '!'
+  git rev-list --right-only --count ...@{u} 2>/dev/null || echo '0'
 }
 
 __mk5_git_ahead() {
