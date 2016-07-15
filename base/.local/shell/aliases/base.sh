@@ -3,7 +3,7 @@ alias flatten-dir='find . -mindepth 2 -type f -exec mv -t . -i "{}" +'
 
 # Shortcuts
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
-alias update-conf='pullc && restow-dots && resource && whizkers'
+alias update-conf='pullc && restow-dots && resource && whizkers -e'
 alias unstow='stow -D'
 alias restow='stow -R'
 alias tetris='bastet'
