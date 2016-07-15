@@ -31,7 +31,6 @@
 
 	# commit
 	ci = commit
-	ca = commit --amend
 
 	# branch
 	br = branch
@@ -66,6 +65,7 @@
 	lbp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --patch --color-words
 
 	# new commands
+	fixup = commit --fixup
 	amend = commit --amend
 	squash = rebase --interactive
 	aliases = !git config -l | grep alias | cut -c 7-
