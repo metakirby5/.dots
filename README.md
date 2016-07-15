@@ -20,7 +20,7 @@ Here's what you'll need...
 
 - Xcode
 - brew
-- rgrove/textual-sulaco
+- metakirby5/Spice
 - XVimProject/XVim (hopefully on brew soon)
 
 ### Linux
