@@ -5,8 +5,6 @@ set bell-style visible
 set completion-ignore-case on
 set skip-completed-text on
 set match-hidden-files off
-set show-all-if-ambiguous on
-set show-all-if-unmodified on
 
 # Completion display
 set colored-stats on
