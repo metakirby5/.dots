@@ -10,57 +10,60 @@
 " * Setup
 " **************************************
 
-" get rid of strict vi compatibility
-set nocompatible
-
 " Enable more shortcuts with <space> key (denoted as , in shortcuts)
-let mapleader = " "
-let g:mapleader = " "
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 " Preserve legacy mapping
 noremap <leader><space> <space>
 
-" Set up w:created au to run later
-au VimEnter * au WinEnter * let w:created = 1
+let s:configdir = '.vim'
+if has('nvim')
+  let s:configdir = '.config/nvim'
+endif
 
-" Vundle
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+" Get a copy of plug
+if empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
+  silent call system('mkdir -p ~/' . s:configdir . '/{autoload,bundle,cache,undo,backups,swaps}')
+  silent call system('curl -fLo ~/' . s:configdir . '/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+  execute 'source  ~/' . s:configdir . '/autoload/plug.vim'
+  autocmd VimEnter * PlugInstall
+endif
 
-if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
-  call vundle#begin()
+" Try to load the plugins
+if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
+  call plug#begin('~/' . s:configdir . '/bundle')
 
   " General
-  Plugin 'gmarik/Vundle.vim'                " Bundle manager
-  Plugin 'tpope/vim-repeat'                 " Make repeat work with plugins
-  Plugin 'tomtom/tcomment_vim'              " Toggle comments
-  Plugin 'tpope/vim-surround'               " Surround with...
-  Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
-  Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides
-  Plugin 'kana/vim-textobj-user'            " User-defined text objects
-  Plugin 'kana/vim-textobj-indent'          " Indentation levels
-  Plugin 'sheerun/vim-polyglot'             " Language packs
-  Plugin 'Shougo/neocomplete'               " Autocomplete
-  Plugin 'ludovicchabant/vim-gutentags'     " Auto-generate ctags
-  Plugin 'majutsushi/tagbar'                " Nice tag browser
-  Plugin 'Shougo/neosnippet'                " Snippets engine
-  Plugin 'Shougo/neosnippet-snippets'       " Snippets
-  Plugin 'justinmk/vim-sneak'               " Two-character f and t
-  Plugin 'jiangmiao/auto-pairs'             " Automatically add delimiters
-  Plugin 'osyo-manga/vim-over'              " Better :%s/.../.../
-  Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
-  Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
-  Plugin 'Konfekt/FastFold'                 " Faster folder
-  Plugin 'airblade/vim-gitgutter'           " Git gutter
-  Plugin 'tpope/vim-fugitive'               " Git functions
-  Plugin 'pbrisbin/vim-mkdir'               " Automatically mkdir
-  Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
-  " Plugin 'scrooloose/syntastic'             " Syntax checker
+  Plug 'tpope/vim-repeat'                 " Make repeat work with plugins
+  Plug 'tomtom/tcomment_vim'              " Toggle comments
+  Plug 'tpope/vim-surround'               " Surround with...
+  Plug 'tpope/vim-sleuth'                 " Autodetect indentation
+  Plug 'nathanaelkane/vim-indent-guides'  " Indent guides
+  Plug 'kana/vim-textobj-user'            " User-defined text objects
+        \| Plug 'kana/vim-textobj-indent'          " Indentation levels
+  Plug 'sheerun/vim-polyglot'             " Language packs
+  Plug 'Shougo/neocomplete'               " Autocomplete
+  Plug 'ludovicchabant/vim-gutentags'     " Auto-generate ctags
+  Plug 'majutsushi/tagbar'                " Nice tag browser
+  Plug 'Shougo/neosnippet'                " Snippets engine
+  Plug 'Shougo/neosnippet-snippets'       " Snippets
+  Plug 'justinmk/vim-sneak'               " Two-character f and t
+  Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters
+  Plug 'osyo-manga/vim-over'              " Better :%s/.../.../
+  Plug 'haya14busa/incsearch.vim'         " Highlight all as searching
+  Plug 'terryma/vim-multiple-cursors'     " Multiple cursors
+  Plug 'Konfekt/FastFold'                 " Faster folder
+  Plug 'airblade/vim-gitgutter'           " Git gutter
+  Plug 'tpope/vim-fugitive'               " Git functions
+  Plug 'pbrisbin/vim-mkdir'               " Automatically mkdir
+  Plug 'Shougo/unite.vim'                 " Fuzzy searcher
+  " Plug 'scrooloose/syntastic'             " Syntax checker
 
   " Language-specific
-  Plugin 'mattn/emmet-vim'                  " Emmet
+  Plug 'mattn/emmet-vim'                  " Emmet
 
-  call vundle#end()
+  call plug#end()
 
   " Indent guides
   let g:indent_guides_enable_on_vim_startup = 1
@@ -73,7 +76,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   au VimEnter,Colorscheme *
         \ :hi IndentGuidesEven
         \ ctermbg=black guibg=black
-  nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+  nmap <silent> <leader>i <Plug>IndentGuidesToggle
 
   " Syntastic
   let g:syntastic_always_populate_loc_list = 1
@@ -169,9 +172,8 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   let g:user_emmet_install_global = 0
   autocmd FileType html,css EmmetInstall
 
+" Fallbacks...
 else
-
-  " Fallbacks...
 
   " Fix for hash comments
   " inoremap # X#
@@ -191,8 +193,8 @@ else
 
   noremap <silent> g> :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
   noremap <silent> g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-  vnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-  vnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+  xnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+  xnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
 
   " Autocomplete
   set omnifunc=syntaxcomplete#Complete
@@ -206,7 +208,6 @@ else
 
   " Auto-insert matching curly brace
   inoremap {<cr> {<cr>}<C-o>O
-
 endif
 
 " **************************************
@@ -329,7 +330,12 @@ set statusline+=\ %{TextWrapOn()}               " text wrap
 set statusline+=%{TextWidth()}                  " text width/paste mode
 set statusline+=\ %#Normal#\ %*                 " separator
 set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
-set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
+
+" Tags status
+if exists(':GutentagsUnlock')
+  set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
+endif
+
 set statusline+=\                               " end w/ space
 
 " Returns '!' if file externally modified since last read/write
@@ -396,7 +402,7 @@ function! ToggleMinimalUI()
   endif
 endfunction
 
-command Minimal call ToggleMinimalUI()
+command DistractionsToggle call ToggleMinimalUI()
 
 " **************************************
 " * Navigation
@@ -427,8 +433,8 @@ noremap <silent> <leader>n :call NumberToggle()<cr>
 noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
 
 " Preserve selection when (de)indenting in visual mode
-vnoremap > >gv
-vnoremap < <gv
+xnoremap > >gv
+xnoremap < <gv
 
 " Swap 0 and ^
 noremap 0 ^
@@ -638,7 +644,7 @@ noremap <silent> <leader>\ :call ToggleTextWrap()<cr>
 noremap <silent> <leader>f mzgggqG`z
 
 " ,f (visual mode) - Reflow selection
-vnoremap <silent> <leader>f Jgqq
+xnoremap <silent> <leader>f Jgqq
 
 " Spellcheck
 if v:version >= 700
@@ -771,7 +777,7 @@ noremap <silent> <leader>O O<esc>cc<esc>
 
 " ,dd - Delete current line contents
 noremap <silent> <leader>dd cc<esc>
-vnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<cr>:call RestoreSearch()<cr>
+xnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<cr>:call RestoreSearch()<cr>
 
 " **************************************
 " * Macros
