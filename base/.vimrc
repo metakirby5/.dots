@@ -144,11 +144,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endif
     " }}}
   " }}}
-  " Actions {{{
+  " Operators {{{
+    Plug 'junegunn/vim-easy-align'          " Align with ga {{{
+      xmap ga <Plug>(EasyAlign)
+      nmap ga <Plug>(EasyAlign)
+    " }}}
     Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
       let g:sneak#streak = 1
       let g:sneak#s_next = 1
       let g:sneak#use_ic_scs = 1
+    " }}}
+    Plug 'tommcdo/vim-exchange'             " Swap using cx {{{
     " }}}
     Plug 'tpope/vim-repeat'                 " Make repeat work with plugins {{{
     " }}}
@@ -174,6 +180,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Utility {{{
     Plug 'benekastah/neomake'               " Better make {{{
           \, When(has('nvim'))
+    " }}}
+    Plug 'bronson/vim-visual-star-search'   " Allow * and # on visual {{{
     " }}}
     Plug 'mattn/emmet-vim'                  " Emmet {{{
       let g:user_emmet_leader_key='<c-e>'
