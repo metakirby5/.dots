@@ -8,5 +8,7 @@ a.out
 *.class
 .DS_STORE
 .idea
-tags
 .cache
+tags
+tags.lock
+tags.temp

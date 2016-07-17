@@ -1,13 +1,15 @@
-" ~/.vimrc
+" vimrc / init.vim
 " Ethan Chan
 
 " Best viewed with vim: foldmethod=marker foldlevel=0
 " Use za to toggle the folds
 
 " Setup {{{
-  let s:configdir = '.vim'
+  let s:configdir = '~/.vim'
+  let s:configfile = '~/.vimrc'
   if has('nvim')
-    let s:configdir = '.config/nvim'
+    let s:configdir = '~/.config/nvim'
+    let s:configfile = s:configdir . '/init.vim'
   endif
 
   " Leader
@@ -17,13 +19,13 @@
 " }}}
 " Plugins {{{
   " Setup {{{
-if empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob(s:configdir . '/autoload/plug.vim'))
+  exec '!curl -fLo ' . s:configdir . '/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
+if !empty(glob(s:configdir . '/autoload/plug.vim'))
   command! PU PlugUpdate | PlugUpgrade  " Update and upgrade
   command! PI PlugInstall               " Install
 
@@ -33,7 +35,7 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
     return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
   endfunction
 
-  call plug#begin('~/' . s:configdir . '/bundle')
+  call plug#begin(s:configdir . '/bundle')
   " }}}
   " Completion {{{
     " Engine selection {{{
@@ -357,7 +359,6 @@ endif " }}}
   set nojoinspaces              " don't add white space when I don't tell you to
   set autowrite                 " write before make
   set mouse=a                   " allow mouse usage
-  set ttymouse=xterm2           " urxvt scrolling
   set hlsearch                  " highlights all search hits
   set ignorecase                " search without regards to case
   set smartcase                 " search with smart casing
@@ -764,7 +765,7 @@ endif " }}}
       if !isdirectory($HOME . '/.vim/undo')
         silent call mkdir($HOME . '/.vim/undo', 'p')
       endif
-      set undodir=~/.vim/undo/    " set undo directory
+      set undodir=~/.vim/undo/    " set undo directory (use vim's)
       set undofile                " use an undo file
     endif
   " }}}
@@ -785,7 +786,7 @@ endif " }}}
 " }}}
 " Shortcuts {{{
   " Quickly source vimrc
-  command! Resource source ~/.vimrc
+  exec 'command! Resource source ' . s:configfile
 
   " jj to esc
   inoremap jj <esc>
