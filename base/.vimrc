@@ -42,6 +42,7 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'Shougo/neosnippet'                " Snippets engine
   Plugin 'Shougo/neosnippet-snippets'       " Snippets
   Plugin 'justinmk/vim-sneak'               " Two-character f and t
+  Plugin 'jiangmiao/auto-pairs'             " Automatically add delimiters
   Plugin 'osyo-manga/vim-over'              " Better command line
   Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
   Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
@@ -183,6 +184,9 @@ else
   noremap n nzz
   noremap // /\c
   noremap ?? ?\c
+
+  " Auto-insert matching curly brace
+  inoremap {<cr> {<cr>}<C-o>O
 
 endif
 
@@ -751,9 +755,6 @@ vnoremap <silent> <leader>dd :mz<cr>:call StoreSearch()<cr>`<v`>:s/.*//<cr>:noh<
 " **************************************
 " * Macros
 " **************************************
-
-" Auto-insert matching curly brace
-inoremap {<cr> {<cr>}<C-o>O
 
 " == ORD STUFF ==
 " " File header function
