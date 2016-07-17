@@ -14,6 +14,13 @@ alias findr='find . -regex'
 alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
 
+# Vim with proper colors
+if which nvim &>/dev/null; then
+  alias vim='TERM=xterm256-color nvim'
+else
+  alias vim='TERM=xterm vim'
+fi
+
 # Prefs
 alias less='less -R'
 alias emacs='emacs -nw'
