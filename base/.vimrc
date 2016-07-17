@@ -37,8 +37,82 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
 
   call plug#begin(s:configdir . '/bundle')
   " }}}
+  " Interface {{{
+    Plug 'airblade/vim-gitgutter'           " Git gutter {{{
+      let g:gitgutter_map_keys = 0
+      nmap <leader>gn <Plug>GitGutterNextHunk
+      nmap <leader>gp <Plug>GitGutterPrevHunk
+      nmap <leader>ga <Plug>GitGutterStageHunk
+      nmap <leader>gu <Plug>GitGutterRevertHunk
+      nmap <leader>gs <Plug>GitGutterPreviewHunk
+      omap ih <Plug>GitGutterTextObjectInnerPending
+      omap ah <Plug>GitGutterTextObjectOuterPending
+      xmap ih <Plug>GitGutterTextObjectInnerVisual
+      xmap ah <Plug>GitGutterTextObjectOuterVisual
+    " }}}
+    Plug 'DanielFGray/DistractionFree.vim'  " Enable minimalism {{{
+      " TODO bug Dan about getting this to work
+      let g:distraction_free#toggle_limelight = 1
+      let g:distraction_free#toggle_options = [
+            \ 'list',
+            \ 'ruler',
+            \ 'showtabline',
+            \ 'laststatus',
+            \]
+    " }}}
+    Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
+      set hlsearch
+      let g:incsearch#auto_nohlsearch = 1
+      let g:incsearch#is_stay = 1
+      map /  <Plug>(incsearch-forward)
+      map ?  <Plug>(incsearch-backward)
+      map n  <Plug>(incsearch-nohl-n)
+      map N  <Plug>(incsearch-nohl-N)
+      map *  <Plug>(incsearch-nohl-*)
+      map #  <Plug>(incsearch-nohl-#)
+      map g* <Plug>(incsearch-nohl-g*)
+      map g# <Plug>(incsearch-nohl-g#)
+
+      Plug 'haya14busa/incsearch-fuzzy.vim'   " Fuzzy search {{{
+        map z/ <Plug>(incsearch-fuzzy-/)
+        map z? <Plug>(incsearch-fuzzy-?)
+        map zg/ <Plug>(incsearch-fuzzy-stay)
+      " }}}
+    " }}}
+    Plug 'Konfekt/FastFold'                 " Faster folder {{{
+    " }}}
+    Plug 'mhinz/vim-startify'               " Start screen {{{
+      let g:startify_change_to_vcs_root = 1
+      if has('nvim')
+        let g:startify_custom_header = [
+        \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
+        \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
+        \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
+        \ '']
+      else
+        let g:startify_custom_header = [
+        \ '   ╻ ╻╻┏┳┓',
+        \ '   ┃┏┛┃┃┃┃',
+        \ '   ┗┛ ╹╹ ╹',
+        \ '']
+      endif
+    " }}}
+    Plug 'nathanaelkane/vim-indent-guides'  " Indent guides {{{
+      let g:indent_guides_enable_on_vim_startup = 1
+      let g:indent_guides_start_level = 2
+      let g:indent_guides_guide_size = 1
+      let g:indent_guides_auto_colors = 0
+      au VimEnter,Colorscheme *
+            \ :hi IndentGuidesOdd
+            \ ctermbg=black guibg=black
+      au VimEnter,Colorscheme *
+            \ :hi IndentGuidesEven
+            \ ctermbg=black guibg=black
+      nmap <silent> <leader>i <Plug>IndentGuidesToggle
+    " }}}
+  " }}}
   " Completion {{{
-    " Engine selection {{{
+    " Engine {{{
       if has('nvim')
         Plug 'Shougo/Deoplete.nvim'
         let s:completionEngine = 'deoplete'
@@ -70,204 +144,150 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endif
     " }}}
   " }}}
-  Plug 'airblade/vim-gitgutter'           " Git gutter {{{
-    let g:gitgutter_map_keys = 0
-    nmap <leader>gn <Plug>GitGutterNextHunk
-    nmap <leader>gp <Plug>GitGutterPrevHunk
-    nmap <leader>ga <Plug>GitGutterStageHunk
-    nmap <leader>gu <Plug>GitGutterRevertHunk
-    nmap <leader>gs <Plug>GitGutterPreviewHunk
-    omap ih <Plug>GitGutterTextObjectInnerPending
-    omap ah <Plug>GitGutterTextObjectOuterPending
-    xmap ih <Plug>GitGutterTextObjectInnerVisual
-    xmap ah <Plug>GitGutterTextObjectOuterVisual
-  " }}}
-  Plug 'benekastah/neomake'               " Better make {{{
-        \, When(has('nvim'))
-  " }}}
-  Plug 'DanielFGray/DistractionFree.vim'  " Enable minimalism {{{
-    " TODO bug Dan about getting this to work
-    let g:distraction_free#toggle_limelight = 1
-    let g:distraction_free#toggle_options = [
-          \ 'list',
-          \ 'ruler',
-          \ 'showtabline',
-          \ 'laststatus',
-          \]
-  " }}}
-  Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
-    set hlsearch
-    let g:incsearch#auto_nohlsearch = 1
-    let g:incsearch#is_stay = 1
-    map /  <Plug>(incsearch-forward)
-    map ?  <Plug>(incsearch-backward)
-    map n  <Plug>(incsearch-nohl-n)
-    map N  <Plug>(incsearch-nohl-N)
-    map *  <Plug>(incsearch-nohl-*)
-    map #  <Plug>(incsearch-nohl-#)
-    map g* <Plug>(incsearch-nohl-g*)
-    map g# <Plug>(incsearch-nohl-g#)
-
-    Plug 'haya14busa/incsearch-fuzzy.vim'   " Fuzzy search {{{
-      map z/ <Plug>(incsearch-fuzzy-/)
-      map z? <Plug>(incsearch-fuzzy-?)
-      map zg/ <Plug>(incsearch-fuzzy-stay)
+  " Actions {{{
+    Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
+      let g:sneak#streak = 1
+      let g:sneak#s_next = 1
+      let g:sneak#use_ic_scs = 1
+    " }}}
+    Plug 'tpope/vim-repeat'                 " Make repeat work with plugins {{{
+    " }}}
+    Plug 'tpope/vim-surround'               " Surround with... {{{
     " }}}
   " }}}
-  Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters {{{
-  " }}}
-  Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
-    let g:sneak#streak = 1
-    let g:sneak#s_next = 1
-    let g:sneak#use_ic_scs = 1
-  " }}}
-  Plug 'kana/vim-textobj-user'            " User-defined text objects {{{
-    Plug 'kana/vim-textobj-indent'          " Indentation levels {{{
+  " Text Objects {{{
+    Plug 'glts/vim-textobj-comment'         " Comments {{{
+    " }}}
+    Plug 'kana/vim-textobj-function'        " Functions {{{
+      Plug 'thinca/vim-textobj-function-javascript' " Javascript {{{
+      " }}}
+    " }}}
+    Plug 'kana/vim-textobj-user'            " User-defined {{{
+      Plug 'kana/vim-textobj-indent'          " Indentation levels {{{
+      " }}}
+    " }}}
+    Plug 'reedes/vim-textobj-sentence'      " Better sentences {{{
+    " }}}
+    Plug 'wellle/targets.vim'               " More delimiters {{{
     " }}}
   " }}}
-  Plug 'Konfekt/FastFold'                 " Faster folder {{{
-  " }}}
-  Plug 'ludovicchabant/vim-gutentags'     " Auto-generate ctags {{{
-  " }}}
-  Plug 'mattn/emmet-vim'                  " Emmet {{{
-    let g:user_emmet_leader_key='<c-e>'
-    let g:user_emmet_install_global = 0
-    autocmd FileType html,css EmmetInstall
-  " }}}
-  Plug 'mhinz/vim-startify'               " Start screen {{{
-    let g:startify_change_to_vcs_root = 1
-    if has('nvim')
-      let g:startify_custom_header = [
-      \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
-      \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
-      \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
-      \ '']
-    else
-      let g:startify_custom_header = [
-      \ '   ╻ ╻╻┏┳┓',
-      \ '   ┃┏┛┃┃┃┃',
-      \ '   ┗┛ ╹╹ ╹',
-      \ '']
-    endif
-  " }}}
-  Plug 'nathanaelkane/vim-indent-guides'  " Indent guides {{{
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_auto_colors = 0
-    au VimEnter,Colorscheme *
-          \ :hi IndentGuidesOdd
-          \ ctermbg=black guibg=black
-    au VimEnter,Colorscheme *
-          \ :hi IndentGuidesEven
-          \ ctermbg=black guibg=black
-    nmap <silent> <leader>i <Plug>IndentGuidesToggle
-  " }}}
-  Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
-    nnoremap <silent> % :OverCommandLine<cr>%s/
-    vnoremap <silent> % :OverCommandLine<cr>s/
-  " }}}
-  Plug 'pbrisbin/vim-mkdir'               " Automatically mkdir {{{
-  " }}}
-  Plug 'scrooloose/syntastic'             " Syntax checker {{{
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_error_symbol = 'x'
-    let g:syntastic_warning_symbol = '!'
-    let g:syntastic_style_error_symbol = 'S'
-    let g:syntastic_style_warning_symbol = 's'
-  " }}}
-  Plug 'sheerun/vim-polyglot'             " Language packs {{{
-  " }}}
-  Plug 'Shougo/neosnippet'                " Snippets {{{
-    Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
+  " Utility {{{
+    Plug 'benekastah/neomake'               " Better make {{{
+          \, When(has('nvim'))
+    " }}}
+    Plug 'mattn/emmet-vim'                  " Emmet {{{
+      let g:user_emmet_leader_key='<c-e>'
+      let g:user_emmet_install_global = 0
+      autocmd FileType html,css EmmetInstall
+    " }}}
+    Plug 'scrooloose/syntastic'             " Syntax checker {{{
+      let g:syntastic_always_populate_loc_list = 1
+      let g:syntastic_auto_loc_list = 1
+      let g:syntastic_check_on_open = 0
+      let g:syntastic_check_on_wq = 0
+      let g:syntastic_error_symbol = 'x'
+      let g:syntastic_warning_symbol = '!'
+      let g:syntastic_style_error_symbol = 'S'
+      let g:syntastic_style_warning_symbol = 's'
+    " }}}
+    Plug 'sheerun/vim-polyglot'             " Language packs {{{
+    " }}}
+    Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
+      nnoremap <silent> <bslash> :OverCommandLine<cr>%s/
+      vnoremap <silent> <bslash> :OverCommandLine<cr>s/
+    " }}}
+    Plug 'Shougo/neosnippet'                " Snippets {{{
+      Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
+      " }}}
+    " }}}
+    Plug 'Shougo/vimproc'                   " Asynchronous commands {{{
+          \, When(!has('nvim'), { 'do': 'make' })
+    " }}}
+    Plug 'Shougo/unite.vim'                 " Fuzzy searcher {{{
+      Plug 'Shougo/unite-outline'             " Nice outline view
+      Plug 'Shougo/neomru.vim'                " Index most reecntly used files
+      Plug 'tsukkee/unite-tag'                " Browse tags
+      Plug 'Shougo/neoyank.vim'               " Yank history
+      Plug 'thinca/vim-unite-history'         " Command history
+      Plug 'kopischke/unite-spell-suggest'    " Spellcheck suggestions
+      Plug 'Shougo/unite-help'                " Get help
+      Plug 'Shougo/unite-session'             " Save sessions
+
+      let g:unite_enable_auto_select = 0
+      noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
+      noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
+      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec<cr>
+      noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
+      noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
+      noremap <silent> <leader>]  :Unite -auto-resize -buffer-name=tags     tag<cr>
+      noremap <silent> <leader>u  :Unite -auto-resize -buffer-name=history  history/yank<cr>
+      noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
+      noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
+      noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
+      autocmd FileType unite call s:unite_my_settings()
+
+      function! s:unite_my_settings() " {{{
+        nnoremap <silent><buffer><expr> l unite#smart_map('l', unite#do_action('default'))
+        nmap <buffer> <Esc>     <Plug>(unite_exit)
+        nmap <buffer> f         <Plug>(unite_quick_match_jump)
+        imap <buffer> <tab>     <Plug>(unite_select_next_line)
+        imap <buffer> <s-tab>   <Plug>(unite_select_previous_line)
+        imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+        nmap <buffer> '         <Plug>(unite_quick_match_default_action)
+        imap <buffer> '         <Plug>(unite_quick_match_default_action)
+        nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+        imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+        nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
+        imap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
+        nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+        imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+
+        let unite = unite#get_current_unite()
+        if unite.profile_name ==# 'search'
+          nnoremap <silent><buffer><expr> r     unite#do_action('replace')
+        else
+          nnoremap <silent><buffer><expr> r     unite#do_action('rename')
+        endif
+
+        nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
+      endfunction " }}}
+    " }}}
+    Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
+      let g:multi_cursor_use_default_mapping=0
+      let g:multi_cursor_next_key='<C-c>'
+      let g:multi_cursor_prev_key='<C-u>'
+      let g:multi_cursor_skip_key='<C-x>'
+      let g:multi_cursor_quit_key='<Esc>'
+
+      function! Multiple_cursors_before()
+        if exists(':NeoCompleteLock') == 2
+          NeoCompleteLock
+        endif
+      endfunction
+      function! Multiple_cursors_after()
+        if exists(':NeoCompleteUnlock') == 2
+          NeoCompleteUnlock
+        endif
+      endfunction
+    " }}}
+    Plug 'tomtom/tcomment_vim'              " Toggle comments {{{
+    " }}}
+    Plug 'tpope/vim-fugitive'               " Git functions {{{
+    " }}}
+    Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
+    " }}}
+    Plug 'vim-scripts/BufOnly.vim'          " Delete all buffers but this one {{{
+      noremap <leader>ba :BufOnly<cr>
     " }}}
   " }}}
-  Plug 'Shougo/vimproc'                   " Asynchronous commands {{{
-        \, When(!has('nvim'), { 'do': 'make' })
+  " Automation {{{
+    Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters {{{
+    " }}}
+    Plug 'ludovicchabant/vim-gutentags'     " Auto-generate ctags {{{
+    " }}}
+    Plug 'pbrisbin/vim-mkdir'               " Automatically mkdir {{{
+    " }}}
   " }}}
-  Plug 'Shougo/unite.vim'                 " Fuzzy searcher {{{
-    Plug 'Shougo/unite-outline'             " Nice outline view
-    Plug 'Shougo/neomru.vim'                " Index most reecntly used files
-    Plug 'tsukkee/unite-tag'                " Browse tags
-    Plug 'Shougo/neoyank.vim'               " Yank history
-    Plug 'thinca/vim-unite-history'         " Command history
-    Plug 'kopischke/unite-spell-suggest'    " Spellcheck suggestions
-    Plug 'Shougo/unite-help'                " Get help
-    Plug 'Shougo/unite-session'             " Save sessions
-
-    let g:unite_enable_auto_select = 0
-    noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
-    noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-    noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec<cr>
-    noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
-    noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
-    noremap <silent> <leader>]  :Unite -auto-resize -buffer-name=tags     tag<cr>
-    noremap <silent> <leader>u  :Unite -auto-resize -buffer-name=history  history/yank<cr>
-    noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
-    noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
-    noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
-    autocmd FileType unite call s:unite_my_settings()
-
-    function! s:unite_my_settings() " {{{
-      nnoremap <silent><buffer><expr> l unite#smart_map('l', unite#do_action('default'))
-      nmap <buffer> <Esc>     <Plug>(unite_exit)
-      nmap <buffer> f         <Plug>(unite_quick_match_jump)
-      imap <buffer> <tab>     <Plug>(unite_select_next_line)
-      imap <buffer> <s-tab>   <Plug>(unite_select_previous_line)
-      imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-      nmap <buffer> '         <Plug>(unite_quick_match_default_action)
-      imap <buffer> '         <Plug>(unite_quick_match_default_action)
-      nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-      imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-      nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
-      imap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
-      nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-      imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-
-      let unite = unite#get_current_unite()
-      if unite.profile_name ==# 'search'
-        nnoremap <silent><buffer><expr> r     unite#do_action('replace')
-      else
-        nnoremap <silent><buffer><expr> r     unite#do_action('rename')
-      endif
-
-      nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
-    endfunction " }}}
-  " }}}
-  Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
-    let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_next_key='<C-c>'
-    let g:multi_cursor_prev_key='<C-u>'
-    let g:multi_cursor_skip_key='<C-x>'
-    let g:multi_cursor_quit_key='<Esc>'
-
-    function! Multiple_cursors_before()
-      if exists(':NeoCompleteLock') == 2
-        NeoCompleteLock
-      endif
-    endfunction
-    function! Multiple_cursors_after()
-      if exists(':NeoCompleteUnlock') == 2
-        NeoCompleteUnlock
-      endif
-    endfunction
-  " }}}
-  Plug 'tomtom/tcomment_vim'              " Toggle comments {{{
-  " }}}
-  Plug 'tpope/vim-fugitive'               " Git functions {{{
-  " }}}
-  Plug 'tpope/vim-repeat'                 " Make repeat work with plugins {{{
-  " }}}
-  Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
-  " }}}
-  Plug 'tpope/vim-surround'               " Surround with... {{{
-  " }}}
-  Plug 'vim-scripts/BufOnly.vim'          " Delete all buffers but this one {{{
-    noremap <leader>ba :BufOnly<cr>
-  "}}}
   " Post-hooks {{{
     call plug#end()
 
@@ -671,18 +691,18 @@ endif " }}}
       hi FoldColumn ctermbg=NONE guibg=NONE
 
       " zz - toggle folds
-      nnoremap zz za
+      noremap zz za
 
       " The mode settings below all start with folds open
 
       " ,zm - Manual mode
-      nnoremap zm :set foldmethod=manual<cr>zR
+      noremap zm :set foldmethod=manual<cr>zR
 
       " ,zi - Indent mode
-      nnoremap zi :set foldmethod=indent<cr>zR
+      noremap zi :set foldmethod=indent<cr>zR
 
       " ,zs - Syntax mode
-      nnoremap zs :set foldmethod=syntax<cr>zR
+      noremap zs :set foldmethod=syntax<cr>zR
 
       " Use syntax mode by default
       set foldmethod=syntax
