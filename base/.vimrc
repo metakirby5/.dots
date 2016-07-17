@@ -712,7 +712,7 @@ endif " }}}
     xnoremap <silent> <leader>f Jgqq
 
     " Spellcheck
-    " ,/ss - Toggle spellcheck
+    " ,/cc - Toggle spellcheck
     noremap <leader>cc :setlocal spell!<cr>
 
     " More spellcheck shortcuts
