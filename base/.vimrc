@@ -748,6 +748,7 @@ noremap ` '
 noremap <c-]> g<c-]>
 noremap <c-w><c-]> <c-w>g<c-]>
 noremap <c-w><c-}> <c-w>g<c-}>
+noremap <leader>tt :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " <f5> - Reload file
 noremap <f5> :e<cr>:echo "File Reloaded"<cr>
