@@ -108,7 +108,8 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   let g:sneak#use_ic_scs = 1
 
   " Over
-  noremap <silent> % :OverCommandLine<cr>%s/
+  nnoremap <silent> % :OverCommandLine<cr>%s/
+  vnoremap <silent> % :OverCommandLine<cr>s/
 
   " Incsearch
   set hlsearch
@@ -142,7 +143,14 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   endfunction
 
   " Unite
-  noremap <silent> <leader>x :Unite file<cr>
+  let g:unite_data_directory = '~/.vim/cache/unite'
+  let g:unite_winheight = 100
+  let g:unite_split_rule = 'botright'
+  let g:unite_enable_start_insert = 1
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#filters#sorter_default#use(['sorter_rank'])
+  noremap <silent> <leader>r :Unite -auto-resize -buffer-name=register register<cr>
+  noremap <silent> <leader>x :Unite -auto-resize -buffer-name=files    buffer file<cr>
 
   " Git Gutter
   let g:gitgutter_map_keys = 0
@@ -690,7 +698,7 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 
 " ,r - Run using filetype
 xnoremap <expr> <leader>r
-      \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<CR>"
+      \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<cr>"
 
 " No backups for crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
@@ -725,6 +733,9 @@ function! RestoreSearch()
   call setreg('/', g:ps, g:ps_t)
 endfunction
 
+" jj to esc
+inoremap jj <esc>
+
 " Swap ; and :
 noremap ; :
 noremap : ;
@@ -735,18 +746,14 @@ noremap ` '
 
 " Better tag jumping
 noremap <c-]> g<c-]>
-vnoremap <c-]> g<c-]>
 noremap <c-w><c-]> <c-w>g<c-]>
-vnoremap <c-w><c-]> <c-w>g<c-]>
 noremap <c-w><c-}> <c-w>g<c-}>
-vnoremap <c-w><c-}> <c-w>g<c-}>
 
 " <f5> - Reload file
 noremap <f5> :e<cr>:echo "File Reloaded"<cr>
 
 " ,y - Yank to clipboard
 noremap <leader>y "+y
-vnoremap <leader>y "+y
 
 " ,p - Toggle paste mode
 noremap <leader>p :setlocal paste!<cr>
