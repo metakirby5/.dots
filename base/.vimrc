@@ -1,5 +1,8 @@
-" ~/.vimrc -- vim: foldmethod=marker foldlevel=0
+" ~/.vimrc
 " Ethan Chan
+
+" Best viewed with vim: foldmethod=marker foldlevel=0
+" Use za to toggle the folds
 
 " Setup {{{
   let s:configdir = '.vim'
@@ -32,6 +35,39 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
 
   call plug#begin('~/' . s:configdir . '/bundle')
   " }}}
+  " Completion {{{
+    " Engine selection {{{
+      if has('nvim')
+        Plug 'Shougo/Deoplete.nvim'
+        let s:completionEngine = 'deoplete'
+      elseif has('lua') && (version >= 704 || version == 703 && has('patch885'))
+        Plug 'Shougo/neocomplete.vim'
+        let s:completionEngine = 'neocomplete'
+      elseif has('lua')
+        Plug 'Shougo/neocomplcache.vim'
+        let s:completionEngine = 'neocomplcache'
+      endif
+    " }}}
+    " Settings {{{
+      if exists('s:completionEngine')
+        let g:{s:completionEngine}#enable_at_startup = 1
+        let g:{s:completionEngine}#enable_smart_case = 1
+        set completeopt-=preview
+        imap <expr><tab>    pumvisible() ?
+              \         "\<c-n>" :
+              \         neosnippet#jumpable() ?
+              \           "\<Plug>(neosnippet_jump)" :
+              \           "\<tab>"
+        imap <expr><cr>     pumvisible() ?
+              \         neosnippet#expandable() ?
+              \           "\<Plug>(neosnippet_expand)" :
+              \           "\<c-y>" :
+              \         "\<cr>"
+        imap <expr><bs>     {s:completionEngine}#smart_close_popup() . "\<bs>"
+        imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
+      endif
+    " }}}
+  " }}}
   Plug 'Shougo/vimproc'                   " Asynchronous commands {{{
         \, When(!has('nvim'), { 'do': 'make' })
   " }}}
@@ -45,6 +81,9 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
   Plug 'tpope/vim-surround'               " Surround with... {{{
   " }}}
   Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
+  " }}}
+  Plug 'benekastah/neomake'               " Better make {{{
+        \, When(has('nvim'))
   " }}}
   Plug 'nathanaelkane/vim-indent-guides'  " Indent guides {{{
     let g:indent_guides_enable_on_vim_startup = 1
@@ -60,39 +99,18 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
     nmap <silent> <leader>i <Plug>IndentGuidesToggle
   " }}}
   Plug 'kana/vim-textobj-user'            " User-defined text objects {{{
-  " }}}
-  Plug 'kana/vim-textobj-indent'          " Indentation levels {{{
+    Plug 'kana/vim-textobj-indent'          " Indentation levels {{{
+    " }}}
   " }}}
   Plug 'sheerun/vim-polyglot'             " Language packs {{{
   " }}}
-  Plug 'Shougo/neocomplete'               " Autocomplete {{{ {{{
-  " }}}
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    set completeopt-=preview
-    imap <expr><tab>    pumvisible() ?
-          \         "\<c-n>" :
-          \         neosnippet#jumpable() ?
-          \           "\<Plug>(neosnippet_jump)" :
-          \           "\<tab>"
-    imap <expr><cr>     pumvisible() ?
-          \         neosnippet#expandable() ?
-          \           "\<Plug>(neosnippet_expand)" :
-          \           "\<c-y>" :
-          \         "\<cr>"
-    imap <expr><bs>     neocomplete#smart_close_popup() . "\<bs>"
-    imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
-  " }}}
   Plug 'ludovicchabant/vim-gutentags'     " Auto-generate ctags {{{
   " }}}
-  Plug 'majutsushi/tagbar'                " Nice tag browser {{{
+  Plug 'Shougo/neosnippet'                " Snippets {{{
+    Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
+    " }}}
   " }}}
-  Plug 'Shougo/neosnippet'                " Snippets engine {{{
-  " }}}
-  Plug 'Shougo/neosnippet-snippets'       " Snippets {{{
-  " }}}
-  Plug 'justinmk/vim-sneak'               " Two-character f and t {{{ {{{
-  " }}}
+  Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
     let g:sneak#streak = 1
     let g:sneak#s_next = 1
     let g:sneak#use_ic_scs = 1
@@ -116,7 +134,7 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
     map g* <Plug>(incsearch-nohl-g*)
     map g# <Plug>(incsearch-nohl-g#)
 
-    Plug 'haya14busa/incsearch-fuzzy.vim' " Fuzzy search {{{
+    Plug 'haya14busa/incsearch-fuzzy.vim'   " Fuzzy search {{{
       map z/ <Plug>(incsearch-fuzzy-/)
       map z? <Plug>(incsearch-fuzzy-?)
       map zg/ <Plug>(incsearch-fuzzy-stay)
@@ -180,6 +198,7 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
     noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
     noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
     autocmd FileType unite call s:unite_my_settings()
+
     function! s:unite_my_settings() " {{{
       nnoremap <silent><buffer><expr> l unite#smart_map('l', unite#do_action('default'))
       nmap <buffer> <Esc>     <Plug>(unite_exit)
@@ -206,22 +225,38 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
       nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
     endfunction " }}}
   " }}}
-  " Plug 'scrooloose/syntastic'             " Syntax checker {{{
-  "   let g:syntastic_always_populate_loc_list = 1
-  "   let g:syntastic_auto_loc_list = 1
-  "   let g:syntastic_check_on_open = 0
-  "   let g:syntastic_check_on_wq = 0
-  "   let g:syntastic_error_symbol = 'x'
-  "   let g:syntastic_warning_symbol = '!'
-  "   let g:syntastic_style_error_symbol = 'S'
-  "   let g:syntastic_style_warning_symbol = 's'
+  Plug 'scrooloose/syntastic'             " Syntax checker {{{
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_error_symbol = 'x'
+    let g:syntastic_warning_symbol = '!'
+    let g:syntastic_style_error_symbol = 'S'
+    let g:syntastic_style_warning_symbol = 's'
   " }}}
   Plug 'mattn/emmet-vim'                  " Emmet {{{
     let g:user_emmet_leader_key='<c-e>'
     let g:user_emmet_install_global = 0
     autocmd FileType html,css EmmetInstall
   " }}}
-  " RTP-dependent {{{
+  Plug 'mhinz/vim-startify'               " Start screen {{{
+    let g:startify_change_to_vcs_root = 1
+    if has('nvim')
+      let g:startify_custom_header = [
+      \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
+      \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
+      \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
+      \ '']
+    else
+      let g:startify_custom_header = [
+      \ '   ╻ ╻╻┏┳┓',
+      \ '   ┃┏┛┃┃┃┃',
+      \ '   ┗┛ ╹╹ ╹',
+      \ '']
+    endif
+  " }}}
+  " Post-hooks {{{
     call plug#end()
 
     call unite#filters#sorter_default#use(['sorter_rank'])
@@ -237,79 +272,77 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
   " }}}
   " Fallbacks {{{
 else
-  " Fix for hash comments
-  " inoremap # X#
+  " Autocomplete {{{
+    set omnifunc=syntaxcomplete#Complete
+    inoremap <S-tab> <C-x><C-o>
+  " }}}
+  " Search {{{
+    noremap N Nzz
+    noremap n nzz
+    noremap // /\c
+    noremap ?? ?\c
+  " }}}
+  " Spellcheck {{{
+    noremap <leader>cw z=
+  " }}}
+  " Auto-insert Curlies {{{
+    inoremap {<cr> {<cr>}<C-o>O
+  " }}}
+  " Toggle Comments {{{
+    au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
+                                     \   let b:comment_leader = '# ' |
+                                     \ endif
 
-  " tcomment
-  au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
-                                   \   let b:comment_leader = '# ' |
-                                   \ endif
+    au FileType c,cpp,java,scala          let b:comment_leader = '// '
+    au FileType javascript                let b:comment_leader = '// '
+    au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
+    au FileType conf,fstab                let b:comment_leader = '# '
+    au FileType tex                       let b:comment_leader = '% '
+    au FileType mail                      let b:comment_leader = '> '
+    au FileType vim                       let b:comment_leader = '" '
 
-  au FileType c,cpp,java,scala          let b:comment_leader = '// '
-  au FileType javascript                let b:comment_leader = '// '
-  au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
-  au FileType conf,fstab                let b:comment_leader = '# '
-  au FileType tex                       let b:comment_leader = '% '
-  au FileType mail                      let b:comment_leader = '> '
-  au FileType vim                       let b:comment_leader = '" '
+    function! StoreSearch()
+      let g:ps = getreg('/', 1)
+      let g:ps_t = getregtype('/')
+    endfunction
 
-  function! StoreSearch()
-    let g:ps = getreg('/', 1)
-    let g:ps_t = getregtype('/')
-  endfunction
+    function! RestoreSearch()
+      if !(exists('g:ps') && exists('g:ps_t'))
+        return
+      endif
 
-  function! RestoreSearch()
-    if !(exists('g:ps') && exists('g:ps_t'))
-      return
+      call setreg('/', g:ps, g:ps_t)
+    endfunction
+
+    noremap <silent> g> :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
+    noremap <silent> g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
+    xnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+    xnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+  " }}}
+  " Toggle Distractions {{{
+    let g:minimal = 0
+    function! ToggleDistractions()
+      if !g:minimal
+        let g:minimal = 1
+        set noshowmode
+        set noruler
+        set showtabline=1
+        set nonu
+        set ls=0
+      else
+        let g:minimal = 0
+        set showmode
+        set ruler
+        set showtabline=2
+        set nu
+        set ls=2
+      endif
+    endfunction
+
+    if !exists(':DistractionsToggle')
+      command DistractionsToggle call ToggleDistractions()
     endif
-
-    call setreg('/', g:ps, g:ps_t)
-  endfunction
-
-  noremap <silent> g> :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
-  noremap <silent> g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-  xnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-  xnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
-
-  " Autocomplete
-  set omnifunc=syntaxcomplete#Complete
-  inoremap <S-tab> <C-x><C-o>
-
-  " Search
-  noremap N Nzz
-  noremap n nzz
-  noremap // /\c
-  noremap ?? ?\c
-
-  " Spellcheck
-  noremap <leader>cw z=
-
-  " Auto-insert matching curly brace
-  inoremap {<cr> {<cr>}<C-o>O
-
-  " Toggle minimal UI
-  let g:minimal = 0
-  function! ToggleMinimalUI()
-    if !g:minimal
-      let g:minimal = 1
-      set noshowmode
-      set noruler
-      set showtabline=1
-      set nonu
-      set ls=0
-    else
-      let g:minimal = 0
-      set showmode
-      set ruler
-      set showtabline=2
-      set nu
-      set ls=2
-    endif
-  endfunction
-
-  if !exists(':DistractionsToggle')
-    command DistractionsToggle call ToggleMinimalUI()
-  endif
+  " }}}
 endif " }}}
 " }}}
 " General {{{
@@ -784,7 +817,11 @@ endif " }}}
   noremap <silent> K i<cr><esc>
 
   " ,m - Make and go to first error
-  noremap <leader>m :silent make\|redraw!\|cc<cr>
+  if exists(':Neomake')
+    noremap <leader>m :silent Neomake!\|redraw!\|cc<cr>
+  else
+    noremap <leader>m :silent make\|redraw!\|cc<cr>
+  endif
 " }}}
 " Macros {{{
   " " File header function
