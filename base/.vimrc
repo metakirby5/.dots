@@ -30,7 +30,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   call vundle#begin()
 
+  " General
   Plugin 'gmarik/Vundle.vim'                " Bundle manager
+  Plugin 'tpope/vim-repeat'                 " Make repeat work with plugins
   Plugin 'tomtom/tcomment_vim'              " Toggle comments
   Plugin 'tpope/vim-surround'               " Surround with...
   Plugin 'tpope/vim-sleuth'                 " Autodetect indentation
@@ -39,20 +41,24 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   Plugin 'kana/vim-textobj-indent'          " Indentation levels
   Plugin 'sheerun/vim-polyglot'             " Language packs
   Plugin 'Shougo/neocomplete'               " Autocomplete
+  Plugin 'ludovicchabant/vim-gutentags'     " Auto-generate ctags
+  Plugin 'majutsushi/tagbar'                " Nice tag browser
   Plugin 'Shougo/neosnippet'                " Snippets engine
   Plugin 'Shougo/neosnippet-snippets'       " Snippets
   Plugin 'justinmk/vim-sneak'               " Two-character f and t
   Plugin 'jiangmiao/auto-pairs'             " Automatically add delimiters
-  Plugin 'osyo-manga/vim-over'              " Better command line
+  Plugin 'osyo-manga/vim-over'              " Better :%s/.../.../
   Plugin 'haya14busa/incsearch.vim'         " Highlight all as searching
   Plugin 'terryma/vim-multiple-cursors'     " Multiple cursors
   Plugin 'Konfekt/FastFold'                 " Faster folder
-  Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   Plugin 'airblade/vim-gitgutter'           " Git gutter
   Plugin 'tpope/vim-fugitive'               " Git functions
   Plugin 'pbrisbin/vim-mkdir'               " Automatically mkdir
+  Plugin 'Shougo/unite.vim'                 " Fuzzy searcher
   " Plugin 'scrooloose/syntastic'             " Syntax checker
-  " Plugin 'mattn/emmet-vim'                  " Emmet
+
+  " Language-specific
+  Plugin 'mattn/emmet-vim'                  " Emmet
 
   call vundle#end()
 
@@ -149,6 +155,11 @@ if isdirectory($HOME.'/.vim/bundle/Vundle.vim')
   omap ah <Plug>GitGutterTextObjectOuterPending
   xmap ih <Plug>GitGutterTextObjectInnerVisual
   xmap ah <Plug>GitGutterTextObjectOuterVisual
+
+  " Emmet
+  let g:user_emmet_leader_key='<c-e>'
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css EmmetInstall
 
 else
 
@@ -309,7 +320,9 @@ set statusline+=\ %#Normal#\ %*                 " separator
 set statusline+=\ %{TextWrapOn()}               " text wrap
 set statusline+=%{TextWidth()}                  " text width/paste mode
 set statusline+=\ %#Normal#\ %*                 " separator
-set statusline+=\ %2c\ -\ %3l/%L\ -\ %P\        " char# - curline/totline - file%
+set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
+set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
+set statusline+=\                               " end w/ space
 
 " Returns '!' if file externally modified since last read/write
 " :e to get rid of this warning
