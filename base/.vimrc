@@ -397,7 +397,7 @@ endif " }}}
     hi NonText  ctermfg=black guifg=black
 
     hi CursorLine   term=bold cterm=bold gui=bold ctermbg=black guibg=black
-    hi LineNr       ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
+    hi LineNr       term=NONE cterm=NONE gui=NONE ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
     hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
 
     hi Todo  cterm=reverse gui=reverse ctermfg=yellow ctermbg=black guifg=Yellow guibg=Black
