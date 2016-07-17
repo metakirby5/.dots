@@ -183,10 +183,10 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
     function! s:unite_my_settings() " {{{
       nnoremap <silent><buffer><expr> l unite#smart_map('l', unite#do_action('default'))
       nmap <buffer> <Esc>     <Plug>(unite_exit)
+      nmap <buffer> f         <Plug>(unite_quick_match_jump)
       imap <buffer> <tab>     <Plug>(unite_select_next_line)
       imap <buffer> <s-tab>   <Plug>(unite_select_previous_line)
       imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-      nmap <buffer> x         <Plug>(unite_quick_match_jump)
       nmap <buffer> '         <Plug>(unite_quick_match_default_action)
       imap <buffer> '         <Plug>(unite_quick_match_default_action)
       nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
@@ -224,9 +224,9 @@ if !empty(glob('~/' . s:configdir . '/autoload/plug.vim'))
   " RTP-dependent {{{
     call plug#end()
 
-    call unite#set_profile('files', 'context.smartcase', 1)
     call unite#filters#sorter_default#use(['sorter_rank'])
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#set_profile('files', 'context.smartcase', 1)
     call unite#custom#profile('default', 'context', {
           \   'winheight': 10,
           \   'start_insert': 1,
