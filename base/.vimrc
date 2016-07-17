@@ -168,7 +168,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     nmap <leader>gp <Plug>GitGutterPrevHunk
     nmap <leader>ga <Plug>GitGutterStageHunk
     nmap <leader>gu <Plug>GitGutterRevertHunk
-    nmap <leader>gv <Plug>GitGutterPreviewHunk
+    nmap <leader>gs <Plug>GitGutterPreviewHunk
     omap ih <Plug>GitGutterTextObjectInnerPending
     omap ah <Plug>GitGutterTextObjectOuterPending
     xmap ih <Plug>GitGutterTextObjectInnerVisual
@@ -400,8 +400,8 @@ endif " }}}
     hi LineNr       ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
     hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
 
-    hi Todo  cterm=reverse gui=reverse ctermfg=Yellow ctermbg=Black guifg=Yellow guibg=Black
-    hi Error cterm=reverse gui=reverse ctermfg=Red    ctermbg=Black guifg=Red    guibg=Black
+    hi Todo  cterm=reverse gui=reverse ctermfg=yellow ctermbg=black guifg=Yellow guibg=Black
+    hi Error cterm=reverse gui=reverse ctermfg=red    ctermbg=black guifg=Red    guibg=Black
 
     hi ColorColumn  ctermbg=black guibg=black
     hi Folded       ctermbg=black guibg=black
@@ -413,7 +413,15 @@ endif " }}}
     hi StatusLine   term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
     hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=darkgrey ctermbg=black guifg=darkgrey guibg=black
 
-    hi VertSplit term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+    hi VertSplit    term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+
+    hi Pmenu        term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=blue guifg=black guibg=blue
+    hi PmenuSel     term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=white guifg=black guibg=blue
+    hi PmenuSbar    term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=white guifg=black guibg=white
+    hi PmenuThumb   term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=black guifg=black guibg=black
+
+    hi clear SpellBad
+    hi SpellBad cterm=underline
   " }}}
 " Statusline {{{
   " Utilities {{{
