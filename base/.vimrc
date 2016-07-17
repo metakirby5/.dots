@@ -386,24 +386,24 @@ else
 endif " }}}
 " }}}
 " General {{{
-  set nu                        " line numbering on
-  set noerrorbells              " turns off annoying bell sounds for errors
-  set visualbell                " disable bell part 1
-  set t_vb=                     " disable bell part 2
-  set backspace=2               " backspace over everything
-  set fileformats=unix,dos,mac  " open files from mac/dos
-  set hidden                    " hide abandoned buffers
-  set exrc                      " open local config files
-  set nojoinspaces              " don't add white space when I don't tell you to
-  set autowrite                 " write before make
-  set mouse=a                   " allow mouse usage
-  set hlsearch                  " highlights all search hits
-  set ignorecase                " search without regards to case
-  set smartcase                 " search with smart casing
-  set gdefault                  " default global sub
-  set tags=./tags;              " Recursive tag search
-  set efm+=\ (%l)\ error:\ %m   " Lint error format
-  set timeoutlen=1000 ttimeoutlen=0   " No escape key delay
+  set nu                            " line numbering on
+  set noerrorbells                  " turns off annoying bell sounds for errors
+  set visualbell                    " disable bell part 1
+  set t_vb=                         " disable bell part 2
+  set backspace=2                   " backspace over everything
+  set fileformats=unix,dos,mac      " open files from mac/dos
+  set hidden                        " hide abandoned buffers
+  set exrc                          " open local config files
+  set nojoinspaces                  " don't add white space when I don't tell you to
+  set autowrite                     " write before make
+  set mouse=a                       " allow mouse usage
+  set hlsearch                      " highlights all search hits
+  set ignorecase                    " search without regards to case
+  set smartcase                     " search with smart casing
+  set gdefault                      " default global sub
+  set tags=./tags;                  " Recursive tag search
+  set efm+=\ (%l)\ error:\ %m       " Lint error format
+  set timeoutlen=1000 ttimeoutlen=0 " No escape key delay
 " }}}
 " Interface {{{
   " General {{{
@@ -412,23 +412,16 @@ endif " }}}
 
     " Syntax highlighting
     syntax on
-    set showmatch                 " show match when inserting {}, [], or ()
-
-    set shortmess+=I              " no splash screen
-
-    set scrolloff=5               " keep at least 5 lines above/below
-    set sidescrolloff=5           " keep at least 5 lines left/right
-
-    " Title
-    set title
-    set titlestring=%f
-
-    " Alawys show status line
-    set ls=2
+    set shortmess+=I    " no splash screen
+    set cursorline      " highlight current line
+    set showmatch       " show match when inserting {}, [], or ()
+    set scrolloff=5     " keep at least 5 lines above/below
+    set sidescrolloff=5 " keep at least 5 lines left/right
+    set title           " allow titles
+    set titlestring=%f  " title is the filenam
+    set ls=2            " always show status line
   " }}}
   " Highlights / Colors {{{
-    set cursorline                " highlight current line
-
     hi Normal   guifg=white guibg=black
     hi Visual   ctermbg=black guibg=black
     hi Search   ctermfg=black guifg=black
@@ -461,77 +454,77 @@ endif " }}}
     hi clear SpellBad
     hi SpellBad cterm=underline
   " }}}
-" Statusline {{{
-  " Utilities {{{
-    " Returns '!' if file externally modified since last read/write
-    " :e to get rid of this warning
-    function! ExtModified()
-      return (exists('b:modified')) ? '!' : ''
-    endfunction
+  " Status Line {{{
+    " Utilities {{{
+      " Returns '!' if file externally modified since last read/write
+      " :e to get rid of this warning
+      function! ExtModified()
+        return (exists('b:modified')) ? '!' : ''
+      endfunction
 
-    au FileChangedShellPost * let b:modified = 1
-    au BufRead,BufWrite * if exists('b:modified') |
-                        \   unlet b:modified |
-                        \ endif
+      au FileChangedShellPost * let b:modified = 1
+      au BufRead,BufWrite * if exists('b:modified') |
+                          \   unlet b:modified |
+                          \ endif
 
-    " Returns a shortened form of &fdm
-    function! FDMShort()
-      if &fdm == 'manual'
-        return 'm'
-      elseif &fdm == 'syntax'
-        return 's'
-      elseif &fdm == 'indent'
-        return 'i'
-      else
-        return &fdm
-      endif
-    endfunction
+      " Returns a shortened form of &fdm
+      function! FDMShort()
+        if &fdm == 'manual'
+          return 'm'
+        elseif &fdm == 'syntax'
+          return 's'
+        elseif &fdm == 'indent'
+          return 'i'
+        else
+          return &fdm
+        endif
+      endfunction
 
-    " Returns 've' if virtualedit is not off
-    function! GetVe()
-      return (&ve == '') ? '' : 've'
-    endfunction
+      " Returns 've' if virtualedit is not off
+      function! GetVe()
+        return (&ve == '') ? '' : 've'
+      endfunction
 
-    function! GetSyntax()
-      return (&syntax != '') ? &syntax : 'plaintext'
-    endfunction
+      function! GetSyntax()
+        return (&syntax != '') ? &syntax : 'plaintext'
+      endfunction
 
-    " Returns '*' if text wrap on
-    function! TextWrapOn()
-      return  (!empty(matchstr(&fo, '.*t.*'))) ? '*' : ''
-    endfunction
+      " Returns '*' if text wrap on
+      function! TextWrapOn()
+        return  (!empty(matchstr(&fo, '.*t.*'))) ? '*' : ''
+      endfunction
 
-    " Returns &tw if paste mode is disabled
-    " Otherwise, return 'P'
-    function! TextWidth()
-        return (!&paste) ? &tw : 'P'
-    endfunction
+      " Returns &tw if paste mode is disabled
+      " Otherwise, return 'P'
+      function! TextWidth()
+          return (!&paste) ? &tw : 'P'
+      endfunction
+    " }}}
+
+    " 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
+    set statusline=\                                " initialize w/ space
+    set statusline+=%n                              " buffer number
+    set statusline+=\ %#Normal#%<\ %*               " separator
+    set statusline+=\ %f                            " relative path
+    set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
+    set statusline+=\ %#Normal#                     " no highlight
+    set statusline+=%=                              " left/right separator
+    set statusline+=%*                              " statusline highlight
+    set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
+    set statusline+=\ %{GetSyntax()}                " syntax
+    set statusline+=\ %#Normal#\ %*                 " separator
+    set statusline+=\ %{TextWrapOn()}               " text wrap
+    set statusline+=%{TextWidth()}                  " text width/paste mode
+    set statusline+=\ %#Normal#\ %*                 " separator
+    set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
+
+    " Tags status
+    if exists(':GutentagsUnlock')
+      set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
+    endif
+
+    set statusline+=\                               " end w/ space
   " }}}
-
-  " 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
-  set statusline=\                                " initialize w/ space
-  set statusline+=%n                              " buffer number
-  set statusline+=\ %#Normal#%<\ %*               " separator
-  set statusline+=\ %f                            " relative path
-  set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
-  set statusline+=\ %#Normal#                     " no highlight
-  set statusline+=%=                              " left/right separator
-  set statusline+=%*                              " statusline highlight
-  set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
-  set statusline+=\ %{GetSyntax()}                " syntax
-  set statusline+=\ %#Normal#\ %*                 " separator
-  set statusline+=\ %{TextWrapOn()}               " text wrap
-  set statusline+=%{TextWidth()}                  " text width/paste mode
-  set statusline+=\ %#Normal#\ %*                 " separator
-  set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
-
-  " Tags status
-  if exists(':GutentagsUnlock')
-    set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
-  endif
-
-  set statusline+=\                               " end w/ space
-" }}}
 " }}}
 " Navigation {{{
   " General {{{
@@ -729,12 +722,8 @@ endif " }}}
     "   w - End lines unless there is whitespace at the end
     "   1 - Break lines before one-letter words
     au BufNewFile,BufRead * setlocal fo=tcroqw1
-
-    " Line break only at breaking characters
-    set linebreak
-
-    " Default textwidth: 78
-    set tw=78
+    set linebreak " line break only at breaking characters
+    set tw=78     " default textwidth
 
     " Colorcolumn when textwidth on
     au BufNewFile,BufRead * if !empty(matchstr(&fo, '.*t.*')) |
