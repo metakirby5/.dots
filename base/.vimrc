@@ -85,6 +85,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   Plug 'benekastah/neomake'               " Better make {{{
         \, When(has('nvim'))
   " }}}
+  Plug 'DanielFGray/DistractionFree.vim'  " Enable minimalism {{{
+    " TODO bug Dan about getting this to work
+    let g:distraction_free#toggle_limelight = 1
+    let g:distraction_free#toggle_options = [
+          \ 'list',
+          \ 'ruler',
+          \ 'showtabline',
+          \ 'laststatus',
+          \]
+  " }}}
   Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
     set hlsearch
     let g:incsearch#auto_nohlsearch = 1
