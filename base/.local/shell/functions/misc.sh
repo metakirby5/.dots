@@ -54,6 +54,20 @@ install-leaves() {
 
 }
 
+# cd with smart ... handling
+cd() {
+    local num=0
+    if [ -z "$(tr -d . <<< "$1")" ]; then
+        num="$(wc -c <<< "$1")"
+    fi
+
+    if [ $num -gt 3 ]; then
+        command cd "..$(printf '%0.s/..' $(seq 1 $(($num - 3))))"
+    else
+        command cd $@
+    fi
+}
+
 # Urgent bell when task finishes
 remind() {
     eval "$@"
