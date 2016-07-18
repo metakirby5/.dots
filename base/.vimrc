@@ -35,7 +35,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
   endfunction
 
-  call plug#begin(s:configdir . '/bundle')
+  call plug#begin(s:configdir . '/plugins')
   " }}}
   " Interface {{{
     Plug 'airblade/vim-gitgutter'           " Git gutter {{{
@@ -155,7 +155,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
       let g:sneak#streak = 1
-      let g:sneak#s_next = 1
       let g:sneak#use_ic_scs = 1
     " }}}
     Plug 'tommcdo/vim-exchange'             " Swap using cx {{{
@@ -213,7 +212,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       " }}}
     " }}}
     Plug 'Shougo/vimproc'                   " Asynchronous commands {{{
-          \, When(!has('nvim'), { 'do': 'make' })
+          \, { 'do': 'make' }
     " }}}
     Plug 'Shougo/unite.vim'                 " Fuzzy searcher {{{
       Plug 'Shougo/unite-outline'             " Nice outline view
@@ -302,17 +301,18 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Post-hooks {{{
     call plug#end()
-
-    call unite#filters#sorter_default#use(['sorter_rank'])
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    call unite#set_profile('files', 'context.smartcase', 1)
-    call unite#custom#profile('default', 'context', {
-          \   'winheight': 10,
-          \   'start_insert': 1,
-          \   'prompt_focus': 1,
-          \   'force_redraw': 1,
-          \   'no_empty':     1,
-          \ })
+    " Unite {{{
+      call unite#filters#sorter_default#use(['sorter_rank'])
+      call unite#filters#matcher_default#use(['matcher_fuzzy'])
+      call unite#set_profile('files', 'context.smartcase', 1)
+      call unite#custom#profile('default', 'context', {
+            \   'winheight': 10,
+            \   'start_insert': 1,
+            \   'prompt_focus': 1,
+            \   'force_redraw': 1,
+            \   'no_empty':     1,
+            \ })
+    " }}}
   " }}}
   " Fallbacks {{{
 else
@@ -414,49 +414,128 @@ endif " }}}
     " Set color scheme
     silent! colorscheme peachpuff
 
-    " Syntax highlighting
-    syntax on
+    syntax on           " Syntax highlighting
     set shortmess+=I    " no splash screen
     set cursorline      " highlight current line
     set showmatch       " show match when inserting {}, [], or ()
     set scrolloff=5     " keep at least 5 lines above/below
     set sidescrolloff=5 " keep at least 5 lines left/right
     set title           " allow titles
-    set titlestring=%f  " title is the filenam
+    set titlestring=%f  " title is the filename
     set ls=2            " always show status line
   " }}}
   " Highlights / Colors {{{
-    hi Normal   guifg=white guibg=black
-    hi Visual   ctermbg=black guibg=black
-    hi Search   ctermfg=black guifg=black
-    hi NonText  ctermfg=black guifg=black
+    " Keep colors in visual
+    hi clear Visual | hi Visual 
+          \ term=reverse cterm=reverse gui=reverse
+          \
+          \
 
-    hi CursorLine   term=bold cterm=bold gui=bold ctermbg=black guibg=black
-    hi LineNr       term=NONE cterm=NONE gui=NONE ctermfg=darkgrey ctermbg=NONE guifg=darkgrey guibg=NONE
-    hi CursorLineNr term=bold cterm=bold gui=bold ctermfg=grey ctermbg=black guifg=grey guibg=black
+    " Terms
+    hi clear Search | hi Search
+          \
+          \ ctermfg=black  guifg=black
+          \ ctermbg=yellow guibg=yellow
+    hi clear Todo | hi Todo
+          \ cterm=reverse  gui=reverse
+          \ ctermfg=yellow guifg=yellow
+          \ ctermbg=black  guibg=black
+    hi clear Error | hi Error
+          \ cterm=reverse gui=reverse
+          \ ctermfg=red   guifg=red
+          \ ctermbg=black guibg=black
+    hi clear SpellBad | hi SpellBad
+          \ term=underline cterm=underline gui=underline
+          \ ctermfg=red    guifg=red
+          \
+    hi clear SpellCap | hi SpellCap
+          \ term=underline cterm=underline gui=underline
+          \
+          \
+    hi clear SpellLocal | hi SpellLocal
+          \ term=underline cterm=underline gui=underline
+          \
+          \
+    hi clear SpellRare | hi SpellRare
+          \ term=underline cterm=underline gui=underline
+          \
+          \
 
-    hi Todo  cterm=reverse gui=reverse ctermfg=yellow ctermbg=black guifg=Yellow guibg=Black
-    hi Error cterm=reverse gui=reverse ctermfg=red    ctermbg=black guifg=Red    guibg=Black
+    " Cursor line
+    hi clear LineNr | hi LineNr  
+          \
+          \ ctermfg=darkgrey guifg=darkgrey
+          \
+    hi clear CursorLine | hi CursorLine 
+          \ term=bold     cterm=bold  gui=bold
+          \ ctermbg=black guibg=black
+          \
+    hi clear CursorLineNr | hi CursorLineNr
+          \ term=bold     cterm=bold  gui=bold
+          \ ctermfg=grey  guifg=grey
+          \ ctermbg=black guibg=black
 
-    hi ColorColumn  ctermbg=black guibg=black
-    hi Folded       ctermbg=black guibg=black
+    " Vertial lines
+    hi clear CursorColumn | hi CursorColumn
+          \
+          \
+          \ ctermbg=black guibg=black
+    hi clear ColorColumn | hi ColorColumn
+          \
+          \
+          \ ctermbg=black guibg=black
+    hi clear VertSplit | hi VertSplit
+          \
+          \ ctermfg=white guifg=white
+          \ ctermbg=black guibg=black
 
-    hi TabLine      term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
-    hi TabLineSel   term=bold cterm=bold gui=bold ctermfg=white ctermbg=NONE guifg=white guibg=NONE
-    hi TabLineFill  term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+    " Tabs
+    hi clear TabSel | hi TabLineSel
+          \ term=bold     cterm=bold  gui=bold
+          \ ctermfg=white guifg=white
+          \
+    hi clear TabLine | hi TabLine
+          \
+          \ ctermfg=white guifg=white
+          \ ctermbg=black guibg=black
+    hi clear TabLineFill | hi TabLineFill
+          \
+          \ ctermfg=white guifg=white
+          \ ctermbg=black guibg=black
 
-    hi StatusLine   term=bold cterm=bold gui=bold ctermfg=white ctermbg=black guifg=white guibg=black
-    hi StatusLineNC term=bold cterm=bold gui=bold ctermfg=darkgrey ctermbg=black guifg=darkgrey guibg=black
+    " Status line
+    hi clear StatusLine | hi StatusLine
+          \ term=bold     cterm=bold  gui=bold
+          \ ctermfg=white guifg=white
+          \ ctermbg=black guibg=black
+    hi clear StatusLineNC | hi StatusLineNC
+          \ term=bold        cterm=bold     gui=bold
+          \ ctermfg=darkgrey guifg=darkgrey
+          \ ctermbg=black    guibg=black
 
-    hi VertSplit    term=NONE cterm=NONE gui=NONE ctermfg=white ctermbg=black guifg=white guibg=black
+    " Folds
+    hi clear Folded | hi Folded
+          \
+          \ ctermfg=blue guifg=blue
+          \
 
-    hi Pmenu        term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=blue guifg=black guibg=blue
-    hi PmenuSel     term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=white guifg=black guibg=blue
-    hi PmenuSbar    term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=white guifg=black guibg=white
-    hi PmenuThumb   term=NONE cterm=NONE gui=NONE ctermfg=black ctermbg=black guifg=black guibg=black
-
-    hi clear SpellBad
-    hi SpellBad cterm=underline
+    " Completion menu
+    hi clear Pmenu | hi Pmenu
+          \
+          \ ctermfg=white guifg=black
+          \ ctermbg=black guibg=blue
+    hi clear PmenuSel | hi PmenuSel
+          \ term=bold     cterm=bold  gui=bold
+          \ ctermfg=white guifg=white
+          \ ctermbg=blue  guibg=blue
+    hi clear PmenuSbar | hi PmenuSbar
+          \
+          \
+          \ ctermbg=white guibg=white
+    hi clear PmenuThumb | hi PmenuThumb
+          \
+          \
+          \ ctermbg=blue guibg=blue
   " }}}
   " Status Line {{{
     " Utilities {{{
