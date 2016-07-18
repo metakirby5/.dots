@@ -8,8 +8,8 @@ msgpack-python
 numpy
 pip-autoremove
 pipdeptree
+pushbullet-cli
 python-Levenshtein
-requests
 trollius
 virtualenvwrapper
 wheel
