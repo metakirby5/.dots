@@ -1,13 +1,14 @@
 " vimrc / init.vim
 " Ethan Chan
 
-" Best viewed with vim: foldmethod=marker foldlevel=0
+" Best viewed with vim: syntax=vim foldmethod=marker foldlevel=0
 " Use za to toggle the folds
 
 " Setup {{{
   let s:configdir = '~/.vim'
   let s:configfile = '~/.vimrc'
   if has('nvim')
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     let s:configdir = '~/.config/nvim'
     let s:configfile = s:configdir . '/init.vim'
   endif
@@ -51,7 +52,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap ah <Plug>GitGutterTextObjectOuterVisual
     " }}}
     Plug 'DanielFGray/DistractionFree.vim'  " Enable minimalism {{{
-      " TODO bug Dan about getting this to work
       let g:distraction_free#toggle_limelight = 1
       let g:distraction_free#toggle_options = [
             \ 'list',
