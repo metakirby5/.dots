@@ -29,6 +29,7 @@
 	cl = clone
 	co = checkout
 	ci = commit
+	t = tag
 
 	# status
 	s  = status --short
