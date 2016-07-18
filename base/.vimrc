@@ -114,19 +114,24 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Engine {{{
       if has('nvim')
         Plug 'Shougo/Deoplete.nvim'
-        let s:completionEngine = 'deoplete'
+        let s:completion_engine = 'deoplete'
+        let s:completion_prefix = s:completion_engine . '#'
       elseif has('lua') && (version >= 704 || version == 703 && has('patch885'))
         Plug 'Shougo/neocomplete.vim'
-        let s:completionEngine = 'neocomplete'
+        let s:completion_engine = 'neocomplete'
+        let s:completion_prefix = s:completion_engine . '#'
       elseif has('lua')
         Plug 'Shougo/neocomplcache.vim'
-        let s:completionEngine = 'neocomplcache'
+        let s:completion_engine = 'neocomplcache'
+        let s:completion_prefix = s:completion_engine . '_'
+      else
+        Plug 'ervandew/supertab'
       endif
     " }}}
     " Settings {{{
-      if exists('s:completionEngine')
-        let g:{s:completionEngine}#enable_at_startup = 1
-        let g:{s:completionEngine}#enable_smart_case = 1
+      if exists('s:completion_engine')
+        let g:{s:completion_prefix}enable_at_startup = 1
+        let g:{s:completion_prefix}enable_smart_case = 1
         set completeopt-=preview
         imap <expr><tab>    pumvisible() ?
               \         "\<c-n>" :
@@ -138,7 +143,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \           "\<Plug>(neosnippet_expand)" :
               \           "\<c-y>" :
               \         "\<cr>"
-        imap <expr><bs>     {s:completionEngine}#smart_close_popup() . "\<bs>"
+        imap <expr><bs>     {s:completion_engine}#smart_close_popup() . "\<bs>"
         imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
       endif
     " }}}
@@ -829,7 +834,7 @@ endif " }}}
 " }}}
 " Shortcuts {{{
   " Quickly source vimrc
-  exec 'command! Resource source ' . s:configfile
+  command! Resource source $MYVIMRC
 
   " jj to esc
   inoremap jj <esc>
