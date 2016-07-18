@@ -943,7 +943,7 @@ endif " }}}
   noremap <c-]> g<c-]>
   noremap <c-w><c-]> <c-w>g<c-]>
   noremap <c-w><c-}> <c-w>g<c-}>
-  noremap <leader>tt :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
+  noremap <leader>tt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
 
   " ,y - Yank to clipboard
   noremap <leader>y "+y
