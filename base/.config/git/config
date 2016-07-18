@@ -51,7 +51,7 @@
 	ai = add --interactive
 
 	# stash
-	su = stash
+	su = stash save
 	sl = stash list
 	ss = stash show
 	sp = stash pop
