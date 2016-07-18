@@ -234,7 +234,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:unite_enable_auto_select = 0
       noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
       noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec<cr>
+      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
       noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
       noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
       noremap <silent> <leader>]  :Unite -auto-resize -buffer-name=tags     tag<cr>
