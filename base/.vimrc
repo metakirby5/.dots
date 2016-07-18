@@ -141,14 +141,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         set completeopt-=preview
         imap <expr><tab>    pumvisible() ?
               \         "\<c-n>" :
-              \         neosnippet#jumpable() ?
-              \           "\<Plug>(neosnippet_jump)" :
-              \           "\<tab>"
+              \         "\<tab>"
         imap <expr><cr>     pumvisible() ?
               \         neosnippet#expandable() ?
-              \           "\<Plug>(neosnippet_expand)" :
+              \           neosnippet#mappings#expand_impl() :
               \           "\<c-y>" :
-              \         "\<cr>"
+              \         neosnippet#jumpable() ?
+              \           neosnippet#mappings#jump_impl() :
+              \           "\<cr>"
         imap <expr><bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
         imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
       endif
@@ -193,7 +193,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'bronson/vim-visual-star-search'   " Allow * and # on visual {{{
     " }}}
     Plug 'mattn/emmet-vim'                  " Emmet {{{
-      let g:user_emmet_leader_key='<c-e>'
+      let g:user_emmet_leader_key='<c-m>'
       let g:user_emmet_install_global = 0
       autocmd FileType html,css EmmetInstall
     " }}}
