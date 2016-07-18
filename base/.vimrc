@@ -625,9 +625,9 @@ endif " }}}
     if has('nvim')
       let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     else
-      let &t_SI = "\<Esc>[5 q"
-      let &t_SR = "\<Esc>[3 q"
-      let &t_EI = "\<Esc>[1 q"
+      silent! let &t_SI = "\<Esc>[5 q"
+      silent! let &t_SR = "\<Esc>[3 q"
+      silent! let &t_EI = "\<Esc>[1 q"
     endif
   " }}}
 " }}}
