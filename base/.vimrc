@@ -200,6 +200,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'sheerun/vim-polyglot'             " Language packs {{{
     " }}}
+    Plug 'stgpetrovic/syntastic-async'      " Syntax checker {{{
+          \, When(has('clientserver'))
+      let g:syntastic_always_populate_loc_list = 1
+      let g:syntastic_auto_loc_list = 1
+      let g:syntastic_check_on_open = 0
+      let g:syntastic_check_on_wq = 0
+      let g:syntastic_error_symbol = 'x'
+      let g:syntastic_warning_symbol = '!'
+      let g:syntastic_style_error_symbol = 'S'
+      let g:syntastic_style_warning_symbol = 's'
+    " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
       nnoremap <silent> <bslash> :OverCommandLine<cr>%s/
       vnoremap <silent> <bslash> :OverCommandLine<cr>s/
@@ -262,16 +273,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'pydave/AsyncCommand'              " Asynchronous commands (2) {{{
           \, When(has('clientserver'))
-          \| Plug 'stgpetrovic/syntastic-async'      " Syntax checker {{{
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 0
-        let g:syntastic_check_on_wq = 0
-        let g:syntastic_error_symbol = 'x'
-        let g:syntastic_warning_symbol = '!'
-        let g:syntastic_style_error_symbol = 'S'
-        let g:syntastic_style_warning_symbol = 's'
-      " }}}
     " }}}
     Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
       let g:multi_cursor_use_default_mapping=0
