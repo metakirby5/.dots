@@ -139,7 +139,7 @@ $__mk5_b_blue$__mk5_ahead_char$git_ahead"
 
   PS1="\
 $__mk5_b_blue$__mk5_top_connector\
-$__mk5_blue$USER$hostname$__mk5_b_blue in \
+$__mk5_blue$USER$hostname$__mk5_b_blue, \
 $virtualenv_info\
 $git_info\
 $mypwd\
