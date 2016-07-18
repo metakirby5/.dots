@@ -108,6 +108,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ :hi IndentGuidesEven
             \ ctermbg=black guibg=black
       nmap <silent> <leader>i <Plug>IndentGuidesToggle
+      let g:indent_guides_exclude_filetypes = ['help', 'startify']
     " }}}
   " }}}
   " Completion {{{
