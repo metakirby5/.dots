@@ -18,29 +18,14 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 __mk5_char_usr='>'
 __mk5_char_root='#'
-__mk5_char_dirty='*'
+__mk5_char_unt='?'
+__mk5_char_mod='*'
+__mk5_char_add='+'
 __mk5_char_behind='v'
 __mk5_char_ahead='^'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
-
-__mk5_git_branch() {
-  git symbolic-ref --quiet --short HEAD 2>/dev/null ||\
-    git rev-parse --short HEAD 2>/dev/null
-}
-
-__mk5_git_dirty() {
-  git status --porcelain 2>/dev/null | wc -l | awk '{print $1}'
-}
-
-__mk5_git_behind() {
-  git rev-list --right-only --count ...@{u} 2>/dev/null || echo '0'
-}
-
-__mk5_git_ahead() {
-  git rev-list --left-only --count ...@{u} 2>/dev/null || echo '!'
-}
 
 __mk5_set_prompt() {
   # Grab status code first
@@ -67,12 +52,26 @@ __mk5_set_prompt() {
   [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
 
   # Git stuff
-  local git_info="$(__mk5_git_branch)"
-  if [ "$git_info" ]; then
+  local git_info="$(git symbolic-ref --quiet --short HEAD 2>/dev/null ||\
+    git rev-parse --short HEAD 2>/dev/null)"
 
-    local git_dirty="$(__mk5_git_dirty)"
-    if [ "$git_dirty" != 0 ]; then
-      git_info+=" $__mk5_b_yellow$__mk5_char_dirty$git_dirty"
+  if [ "$git_info" ]; then
+    # local git_revs="$(git rev-list --count ...@{u} 2>/dev/null)"
+    local git_st="$(git status --porcelain)"
+
+    local git_unt="$(grep '^??' <<< "$git_st" | wc -l)"
+    if [ "$git_unt" != 0 ]; then
+      git_info+=" $__mk5_b_red$__mk5_char_unt$git_unt"
+    fi
+
+    local git_mod="$(grep '^.M' <<< "$git_st" | wc -l)"
+    if [ "$git_mod" != 0 ]; then
+      git_info+=" $__mk5_b_yellow$__mk5_char_mod$git_mod"
+    fi
+
+    local git_add="$(grep '^M.' <<< "$git_st" | wc -l)"
+    if [ "$git_add" != 0 ]; then
+      git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
 
     local git_behind="$(__mk5_git_behind)"
