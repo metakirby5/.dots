@@ -113,23 +113,29 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Completion {{{
     " Engine {{{
       if has('nvim')
-        Plug 'Shougo/Deoplete.nvim'
-        let s:completion_engine = 'deoplete'
-        let s:completion_prefix = s:completion_engine . '#'
-      elseif has('lua') && (version >= 704 || version == 703 && has('patch885'))
-        Plug 'Shougo/neocomplete.vim'
-        let s:completion_engine = 'neocomplete'
-        let s:completion_prefix = s:completion_engine . '#'
+        function! DoRemote(arg)
+          UpdateRemotePlugins
+        endfunction
+
+        Plug 'Shougo/Deoplete.nvim', { 'do': function('DoRemote') }
+        let g:completion_engine = 'deoplete'
+        let s:completion_prefix = g:completion_engine . '#'
       elseif has('lua')
-        Plug 'Shougo/neocomplcache.vim'
-        let s:completion_engine = 'neocomplcache'
-        let s:completion_prefix = s:completion_engine . '_'
+        if (version >= 704 || version == 703 && has('patch885'))
+          Plug 'Shougo/neocomplete.vim'
+          let g:completion_engine = 'neocomplete'
+          let s:completion_prefix = g:completion_engine . '#'
+        else
+          Plug 'Shougo/neocomplcache.vim'
+          let g:completion_engine = 'neocomplcache'
+          let s:completion_prefix = g:completion_engine . '_'
+        endif
       else
         Plug 'ervandew/supertab'
       endif
     " }}}
     " Settings {{{
-      if exists('s:completion_engine')
+      if exists('g:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
         set completeopt-=preview
@@ -143,7 +149,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \           "\<Plug>(neosnippet_expand)" :
               \           "\<c-y>" :
               \         "\<cr>"
-        imap <expr><bs>     {s:completion_engine}#smart_close_popup() . "\<bs>"
+        imap <expr><bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
         imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
       endif
     " }}}
