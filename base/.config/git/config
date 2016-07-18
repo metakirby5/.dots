@@ -10,7 +10,6 @@
 [rebase]
 	autosquash = true
 [branch]
-	autosetupmerge = always
 	autosetuprebase = always
 [grep]
 	lineNumber = true
