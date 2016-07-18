@@ -190,10 +190,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Utility {{{
     if has('clientserver') " {{{
       Plug 'pydave/AsyncCommand'              " Asynchronous commands (2) {{{
-            \, When(has('clientserver'))
       " }}}
       Plug 'stgpetrovic/syntastic-async'      " Syntax checker {{{
-            \, When(has('clientserver'))
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 0
