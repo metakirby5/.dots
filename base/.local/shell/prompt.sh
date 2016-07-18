@@ -16,11 +16,11 @@ __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
 # Special characters
-__mk5_usr_pchar='>'
-__mk5_root_pchar='#'
-__mk5_dirty_char='*'
-__mk5_behind_char='v'
-__mk5_ahead_char='^'
+__mk5_char_usr='>'
+__mk5_char_root='#'
+__mk5_char_dirty='*'
+__mk5_char_behind='v'
+__mk5_char_ahead='^'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
@@ -58,9 +58,9 @@ __mk5_set_prompt() {
   # Use $ or # for prompt
   local pchar
   if [ "$EUID" == 0 ]; then
-    pchar="$__mk5_root_pchar"
+    pchar="$__mk5_char_root"
   else
-    pchar="$__mk5_usr_pchar"
+    pchar="$__mk5_char_usr"
   fi
 
   # Display hostname if ssh'd
@@ -68,27 +68,22 @@ __mk5_set_prompt() {
   [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
 
   # Git stuff
-  local git_info
-  local git_branch="$(__mk5_git_branch)"
-  if [ "$git_branch" ]; then
-    git_info="$git_branch"
+  local git_info="$(__mk5_git_branch)"
+  if [ "$git_info" ]; then
 
     local git_dirty="$(__mk5_git_dirty)"
     if [ "$git_dirty" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_yellow$__mk5_dirty_char$git_dirty"
+      git_info+=" $__mk5_b_yellow$__mk5_char_dirty$git_dirty"
     fi
 
     local git_behind="$(__mk5_git_behind)"
     if [ "$git_behind" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_red$__mk5_behind_char$git_behind"
+      git_info+=" $__mk5_b_red$__mk5_char_behind$git_behind"
     fi
 
     local git_ahead="$(__mk5_git_ahead)"
     if [ "$git_ahead" != 0 ]; then
-      git_info="$git_info \
-$__mk5_b_blue$__mk5_ahead_char$git_ahead"
+      git_info+=" $__mk5_b_blue$__mk5_char_ahead$git_ahead"
     fi
 
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
@@ -137,16 +132,16 @@ $__mk5_b_blue$__mk5_ahead_char$git_ahead"
   # Apply color
   mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
 
-  PS1="\
-$__mk5_b_blue$__mk5_top_connector\
-$__mk5_blue$USER$hostname$__mk5_b_blue, \
-$virtualenv_info\
-$git_info\
-$mypwd\
-\n\
-$__mk5_b_blue$__mk5_bot_connector\
-$pcharcolor$pchar \
-$__mk5_normal"
+  PS1=""                   # Clear PS1
+  PS1+="$__mk5_blue$USER"  # User
+  PS1+="$hostname"         # (Hostname)
+  PS1+="$__mk5_b_blue, "   # Separator
+  PS1+="$virtualenv_info"  # (Virtualenv)
+  PS1+="$git_info"         # (Git)
+  PS1+="$mypwd"            # Abbreviated PWD
+  PS1+="\n"                # Newline
+  PS1+="$pcharcolor$pchar" # Prompt
+  PS1+="$__mk5_normal "    # Clear colors
 }
 
 PROMPT_COMMAND=__mk5_set_prompt
