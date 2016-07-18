@@ -59,26 +59,31 @@ __mk5_set_prompt() {
     local git_st="$(git status --porcelain)"
     local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
 
+    # Untracked
     local git_unt="$(grep '^??' <<< "$git_st" | wc -l)"
     if [ "$git_unt" != 0 ]; then
       git_info+=" $__mk5_b_red$__mk5_char_unt$git_unt"
     fi
 
+    # Modified
     local git_mod="$(grep '^.[^ ?]' <<< "$git_st" | wc -l)"
     if [ "$git_mod" != 0 ]; then
       git_info+=" $__mk5_b_yellow$__mk5_char_mod$git_mod"
     fi
 
+    # Staged
     local git_add="$(grep '^[^ ?].' <<< "$git_st" | wc -l)"
     if [ "$git_add" != 0 ]; then
       git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
 
+    # Commits behind upstream
     local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
     if [ "$git_behind" != 0 ]; then
       git_info+=" $__mk5_b_cyan$__mk5_char_behind$git_behind"
     fi
 
+    # Commits ahead of upstream
     local git_ahead="$(awk '{ print $1 }' <<< "$git_rev")"
     if [ "$git_ahead" != 0 ]; then
       git_info+=" $__mk5_b_blue$__mk5_char_ahead$git_ahead"
