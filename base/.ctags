@@ -12,9 +12,9 @@
 --langmap=javascript:+.coffee
 --exclude=node_modules
 
---regex-javascript=/^[ \t]*([A-Za-z0-9_]+)[ \t]*\([^)]*\)[ \t]*{/\1/m,method/
+--regex-javascript=/^[ \t]*([A-Za-z0-9_]+)[ \t]*\([^)]*\)[ \t]*\{/\1/m,method/
 --regex-javascript=/^[ \t]*[A-Za-z0-9_.]+\.([A-Za-z0-9_]+)[ \t]*=/\1/p,property/
---regex-javascript=/function[ \t]+([A-Za-z0-9_]+)[ \t]*\([^)]*\)[ \t]*{/\1/f,function/
+--regex-javascript=/function[ \t]+([A-Za-z0-9_]+)[ \t]*\([^)]*\)[ \t]*\{/\1/f,function/
 
 --regex-javascript=/import[ \t]+([A-Za-z0-9_]+)/\1/r,import/
 --regex-javascript=/class[ \t]+([A-Za-z0-9_]+)/\1/c,class/
