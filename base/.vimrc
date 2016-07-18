@@ -198,7 +198,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:user_emmet_install_global = 0
       autocmd FileType html,css EmmetInstall
     " }}}
-    Plug 'scrooloose/syntastic'             " Syntax checker {{{
+    Plug 'sheerun/vim-polyglot'             " Language packs {{{
+    " }}}
+    Plug 'stgpetrovic/syntastic-async'      " Syntax checker {{{
       let g:syntastic_always_populate_loc_list = 1
       let g:syntastic_auto_loc_list = 1
       let g:syntastic_check_on_open = 0
@@ -207,8 +209,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:syntastic_warning_symbol = '!'
       let g:syntastic_style_error_symbol = 'S'
       let g:syntastic_style_warning_symbol = 's'
-    " }}}
-    Plug 'sheerun/vim-polyglot'             " Language packs {{{
     " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
       nnoremap <silent> <bslash> :OverCommandLine<cr>%s/
@@ -269,6 +269,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
 
         nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
       endfunction " }}}
+    " }}}
+    Plug 'pydave/AsyncCommand'              " Asynchronous commands (2) {{{
     " }}}
     Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
       let g:multi_cursor_use_default_mapping=0
