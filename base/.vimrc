@@ -437,6 +437,12 @@ endif " }}}
           \
           \
 
+    " Matching delimiter color
+    hi clear MatchParen | hi MatchParen
+          \
+          \
+          \ ctermbg=darkgrey guibg=darkgrey
+
     " Terms
     hi clear Search | hi Search
           \
@@ -614,13 +620,13 @@ endif " }}}
 
     set statusline+=\                               " end w/ space
   " }}}
-  " Change Cursor Shape {{{
+  " Cursor Shape {{{
     if has('nvim')
       let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     else
-      let &t_SI = "\<Esc>[6 q"
-      let &t_SR = "\<Esc>[4 q"
-      let &t_EI = "\<Esc>[2 q"
+      let &t_SI = "\<Esc>[5 q"
+      let &t_SR = "\<Esc>[3 q"
+      let &t_EI = "\<Esc>[1 q"
     endif
   " }}}
 " }}}
