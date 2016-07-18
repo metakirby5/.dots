@@ -758,7 +758,7 @@ endif " }}}
     noremap <silent> <leader>te :tabedit <tab>
     noremap <silent> <leader>tn :tabnew<cr>
     noremap <silent> <leader>to :tabonly<cr>
-    noremap <silent> <leader>tw :tabclose<cr>
+    noremap <silent> <leader>td :tabclose<cr>
     noremap <silent> <leader>tm :tabmove<Space>
     noremap <silent> <leader>tb :tab ball<cr>
     noremap <silent> <leader>tl :tabs<cr>
