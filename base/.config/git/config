@@ -65,6 +65,11 @@
 	lg  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
 	lb  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short
 	lbp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --patch --color-words
+	lbs = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --numstat
+
+	# show
+	o  = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short
+	os = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --numstat
 
 	# new commands
 	fixup = commit --fixup
