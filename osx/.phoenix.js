@@ -22,6 +22,13 @@ TOLERANCE = 10
 UNIT = 100
 FACTOR = 2
 GAP = 10
+SNAPS =
+  q:    [-1/2, -1/2]
+  a:    [-1/2, -1  ]
+  z:    [-1/2, 1/2 ]
+  ']':  [1/2,  -1/2]
+  '\'': [1/2,  -1  ]
+  '/':  [1/2,  1/2 ]
 APPS =
   t: 'iTerm'
   e: 'Finder'
@@ -192,6 +199,7 @@ class ChainWindow
       when WEST then @f.x -= amt
     this
 
+  # Tiled resize.
   # Disclaimer: only works if window covers the entire edge of resize...
   adjustIn: (dir, amt = @unit) ->
     # First, resize our window
@@ -261,6 +269,7 @@ class ChainWindow
       @updateScr next.screen()
     this
 
+  # Ensure window fits within the screen
   constrain: ->
     @f.width = Math.min @f.width, @sf.width - 2 * @gap
     @f.height = Math.min @f.height, @sf.height - 2 * @gap
@@ -268,6 +277,8 @@ class ChainWindow
     @f.y = @sf.y + Math.min @f.y - @prevSf.y, @sf.height - (@f.height + @gap)
     this
 
+  # Ensure window frame is proportionally equivalent to its frame on the
+  # previous screen
   reproportion: ->
     # Translate to true origin
     @f.x -= @prevSf.x
@@ -298,6 +309,23 @@ class ChainWindow
     @sizeTo @sf.width - 2 * @gap, @sf.height - 2 * @gap
     this
 
+  # Snap to the sides of the screen
+  # x and y are fractions of the screen, negative or positive
+  snap: (x = null, y = null) ->
+    if x?
+      @f.width = @sf.width * Math.abs(x) - 1.5 * @gap
+      if x < 0
+        @f.x = @sf.x + @gap
+      else
+        @f.x = @sf.x + @sf.width - @f.width - @gap
+    if y?
+      @f.height = @sf.height * Math.abs(y) - 1.5 * @gap
+      if y < 0
+        @f.y = @sf.y + @gap
+      else
+        @f.y = @sf.y + @sf.height - @f.height - @gap
+    this
+
 # Shortcuts
 fw = Window.focused
 cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
@@ -307,7 +335,7 @@ cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
 # Special
 Key.on 'f', MOD, -> cw()?.maximize().set()
 Key.on 'c', MOD, -> cw()?.center().set()
-Key.on 'a', MOD, -> cw()?.rePour().set()
+Key.on 'i', MOD, -> cw()?.rePour().set()
 
 # Apps
 for key, app of APPS
@@ -367,6 +395,11 @@ for [mod, action] in DIR_MODS
   for key, dir of DIR_KEYS
     do (key, mod, action, dir) ->
       Key.on key, mod, -> action dir
+
+# Snaps
+for key, dest of SNAPS
+  do (key, dest) ->
+    Key.on key, MOD, -> cw()?.snap(dest...).set()
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
