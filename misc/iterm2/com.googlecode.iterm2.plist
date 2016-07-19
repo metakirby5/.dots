@@ -932,11 +932,11 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>69</integer>
+	<integer>114</integer>
 	<key>HotkeyCode</key>
-	<integer>14</integer>
+	<integer>15</integer>
 	<key>HotkeyModifiers</key>
-	<integer>1704234</integer>
+	<integer>1573160</integer>
 	<key>JobName</key>
 	<false/>
 	<key>LoadPrefsFromCustomFolder</key>

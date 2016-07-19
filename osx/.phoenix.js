@@ -305,7 +305,6 @@ cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
   new ChainWindow(win, gap, unit, tolerance) if win?
 
 # Special
-Key.on 'r', MOD, -> Phoenix.reload()
 Key.on 'f', MOD, -> cw()?.maximize().set()
 Key.on 'c', MOD, -> cw()?.center().set()
 Key.on 'a', MOD, -> cw()?.rePour().set()
