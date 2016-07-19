@@ -1,8 +1,8 @@
 # Environment variables
-export VISUAL=vim
-export EDITOR=$VISUAL
-export CLASSPATH='*':'.'
-export LS_COLORS='di=01;34:'
+export VISUAL=vim                                   # vim > emacs
+export EDITOR=$VISUAL                               # part 2
+export LS_COLORS='di=01;34:'                        # Folders are blue
+export LESS_TERMCAP_md="$(tput bold; tput setaf 3)" # Yellow headers in less
 
 # Don't give literal * unless we ask for it
 shopt -s nullglob

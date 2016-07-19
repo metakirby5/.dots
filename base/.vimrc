@@ -195,6 +195,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'mattn/emmet-vim'                  " Emmet {{{
       let g:user_emmet_leader_key='<c-m>'
+      let g:user_emmet_install_global = 0
+      autocmd FileType html,css EmmetInstall
     " }}}
     Plug 'sheerun/vim-polyglot'             " Language packs {{{
     " }}}
@@ -233,7 +235,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       autocmd FileType unite call s:unite_my_settings()
 
       function! s:unite_my_settings() " {{{
-        nnoremap <silent><buffer><expr> l unite#smart_map('l', unite#do_action('default'))
         nmap <buffer> <Esc>     <Plug>(unite_exit)
         nmap <buffer> f         <Plug>(unite_quick_match_jump)
         imap <buffer> <tab>     <Plug>(unite_select_next_line)
@@ -241,6 +242,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
         nmap <buffer> '         <Plug>(unite_quick_match_default_action)
         imap <buffer> '         <Plug>(unite_quick_match_default_action)
+        nmap <buffer> <C-a>     <Plug>(unite_choose_action)
+        imap <buffer> <C-a>     <Plug>(unite_choose_action)
         nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
         imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
         nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
@@ -248,14 +251,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
         imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
 
+        nnoremap <silent><buffer><expr> l  unite#smart_map('l' , unite#do_action('default'))
+        nnoremap <silent><buffer><expr> cd unite#smart_map('cd', unite#do_action('lcd'))
+
         let unite = unite#get_current_unite()
         if unite.profile_name ==# 'search'
           nnoremap <silent><buffer><expr> r     unite#do_action('replace')
         else
           nnoremap <silent><buffer><expr> r     unite#do_action('rename')
         endif
-
-        nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
       endfunction " }}}
     " }}}
     Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
