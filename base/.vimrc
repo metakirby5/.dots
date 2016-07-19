@@ -394,39 +394,43 @@ else
 endif " }}}
 " }}}
 " General {{{
-  set nu                            " line numbering on
-  set noerrorbells                  " turns off annoying bell sounds for errors
-  set visualbell                    " disable bell part 1
-  set t_vb=                         " disable bell part 2
-  set backspace=2                   " backspace over everything
-  set fileformats=unix,dos,mac      " open files from mac/dos
-  set hidden                        " hide abandoned buffers
-  set exrc                          " open local config files
-  set nojoinspaces                  " don't add white space when I don't tell you to
-  set autowrite                     " write before make
-  set mouse=a                       " allow mouse usage
-  set hlsearch                      " highlights all search hits
-  set ignorecase                    " search without regards to case
-  set smartcase                     " search with smart casing
-  set gdefault                      " default global sub
-  set tags=./tags;                  " Recursive tag search
-  set efm+=\ (%l)\ error:\ %m       " Lint error format
-  set timeoutlen=1000 ttimeoutlen=0 " No escape key delay
+  set nu                               " line numbering on
+  set noerrorbells                     " turns off annoying bell sounds for errors
+  set visualbell                       " disable bell part 1
+  set t_vb=                            " disable bell part 2
+  set backspace=2                      " backspace over everything
+  set fileformats=unix,dos,mac         " open files from mac/dos
+  set hidden                           " hide abandoned buffers
+  set nojoinspaces                     " don't add white space when I don't tell you to
+  set autowrite                        " write before make
+  set mouse=a                          " allow mouse usage
+  set hlsearch                         " highlights all search hits
+  set ignorecase                       " search without regards to case
+  set smartcase                        " search with smart casing
+  set gdefault                         " default global sub
+  set tags=./tags;                     " recursive tag search
+  set efm+=\ (%l)\ error:\ %m          " lint error format
+  set directory=~/.vim/swaps           " centralized swap files
+  set backupskip=/tmp/*,/private/tmp/* " no backups for tmp files
+  set timeoutlen=1000 ttimeoutlen=0    " no escape key delay
+  set ttyfast                          " assume speedy connection
 " }}}
 " Interface {{{
   " General {{{
     " Set color scheme
     silent! colorscheme peachpuff
 
-    syntax on           " Syntax highlighting
-    set shortmess+=I    " no splash screen
-    set cursorline      " highlight current line
-    set showmatch       " show match when inserting {}, [], or ()
-    set scrolloff=5     " keep at least 5 lines above/below
-    set sidescrolloff=5 " keep at least 5 lines left/right
-    set title           " allow titles
-    set titlestring=%f  " title is the filename
-    set ls=2            " always show status line
+    syntax on                      " Syntax highlighting
+    set shortmess+=I               " no splash screen
+    set cursorline                 " highlight current line
+    set showmatch                  " show match when inserting {}, [], or ()
+    set scrolloff=5                " keep at least 5 lines above/below
+    set sidescrolloff=5            " keep at least 5 lines left/right
+    set title                      " allow titles
+    set titlestring=%f             " title is the filename
+    set ls=2                       " always show status line
+    set lcs=tab:▸\ ,trail:·,nbsp:_ " whitespace characters
+    set list                       " enable whitespace characters
   " }}}
   " Highlights / Colors {{{
     " Keep colors in visual
@@ -899,11 +903,19 @@ endif " }}}
   " }}}
   " Persistent Undo {{{
     if exists('&undodir')
-      if !isdirectory($HOME . '/.vim/undo')
-        silent call mkdir($HOME . '/.vim/undo', 'p')
+      set undodir=~/.vim/undo    " set undo directory
+      set undofile               " use an undo file
+      if !isdirectory(&undodir)
+        silent call mkdir(&undodir, 'p')
       endif
-      set undodir=~/.vim/undo/    " set undo directory (use vim's)
-      set undofile                " use an undo file
+    endif
+  " }}}
+  " File backups {{{
+    if exists('&backupdir')
+      set backupdir=~/.vim/backups  " set backup directory
+      if !isdirectory(&backupdir)
+        silent call mkdir(&backupdir, 'p')
+      endif
     endif
   " }}}
   " Autocomplete Menus {{{
