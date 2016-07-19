@@ -410,8 +410,6 @@ endif " }}}
   set gdefault                         " default global sub
   set tags=./tags;                     " recursive tag search
   set efm+=\ (%l)\ error:\ %m          " lint error format
-  set directory=~/.vim/swaps           " centralized swap files
-  set backupskip=/tmp/*,/private/tmp/* " no backups for tmp files
   set timeoutlen=1000 ttimeoutlen=0    " no escape key delay
   set ttyfast                          " assume speedy connection
 " }}}
@@ -900,6 +898,15 @@ endif " }}}
     " ,r - Run using filetype
     xnoremap <expr> <leader>r
           \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<cr>"
+  " }}}
+  " Centralized swap files {{{
+    if exists('&directory')
+      set directory=~/.vim/swaps           " set swap directory
+      set backupskip=/tmp/*,/private/tmp/* " no backups for tmp files
+      if !isdirectory(&directory)
+        silent call mkdir(&directory, 'p')
+      endif
+    endif
   " }}}
   " Persistent Undo {{{
     if exists('&undodir')
