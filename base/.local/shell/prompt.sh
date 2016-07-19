@@ -21,6 +21,7 @@ __mk5_char_root='#'
 __mk5_char_unt='-'
 __mk5_char_mod='*'
 __mk5_char_add='+'
+__mk5_char_stash='\$'
 __mk5_char_behind='v'
 __mk5_char_ahead='^'
 
@@ -77,10 +78,16 @@ __mk5_set_prompt() {
       git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
 
+    # Stashed
+    local git_stash="$(git stash list | wc -l)"
+    if [ "$git_stash" != 0 ]; then
+      git_info+=" $__mk5_b_cyan$__mk5_char_stash$git_stash"
+    fi
+
     # Commits behind upstream
     local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
     if [ "$git_behind" != 0 ]; then
-      git_info+=" $__mk5_b_cyan$__mk5_char_behind$git_behind"
+      git_info+=" $__mk5_b_red$__mk5_char_behind$git_behind"
     fi
 
     # Commits ahead of upstream
