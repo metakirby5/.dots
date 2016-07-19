@@ -986,7 +986,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 598 1680 429 0 0 1680 1027 </string>
+	<string>212 101 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2026,7 +2026,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/ranger</string>
+			<string>~/.local/bin/env-ranger</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -2772,7 +2772,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/ranger</string>
+			<string>~/.local/bin/env-ranger</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>

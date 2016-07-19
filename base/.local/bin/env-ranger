@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+PATH="$(cat /etc/paths | tr '\n' ':')$PATH"
+source ~/.bashrc 2>/dev/null && ranger
