@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DEPS_DIR=~/.local/deps
 
 # Try to dump all dependencies to their respective files
@@ -66,6 +68,13 @@ cd() {
     else
         command cd $@
     fi
+}
+
+# Touch with script shebang
+touchx() {
+    [ ! "$1" ] && return 1
+    cat <<< "${2:-#!/usr/bin/env bash}" > "$1"
+    chmod +x "$1"
 }
 
 # Urgent bell when task finishes
