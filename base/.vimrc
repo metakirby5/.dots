@@ -293,7 +293,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Automation {{{
     Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters {{{
       let g:AutoPairsShortcutToggle = ''
-      let g:AutoPairsShortcutFastWrap = ''
+      let g:AutoPairsShortcutFastWrap = '<c-s>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0
       let g:AutoPairsMultilineClose = 0
