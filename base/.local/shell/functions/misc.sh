@@ -66,7 +66,7 @@ cd() {
     if [ $num -gt 3 ]; then
         command cd "..$(printf '%0.s/..' $(seq 1 $(($num - 3))))"
     else
-        command cd $@
+        command cd "$@"
     fi
 }
 
