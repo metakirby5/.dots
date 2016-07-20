@@ -971,11 +971,7 @@ endif " }}}
   noremap <silent> K i<cr><esc>
 
   " ,m - Make and go to first error
-  if exists(':Neomake')
-    noremap <silent> <leader>m <esc>:silent Neomake!\|redraw!\|cc<cr>
-  else
-    noremap <silent> <leader>m <esc>:silent make\|redraw!\|cc<cr>
-  endif
+  noremap <silent> <leader>m <esc>:silent make\|redraw!\|cc<cr>
 " }}}
 " Macros {{{
   " " File header function
