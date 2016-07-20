@@ -420,7 +420,6 @@ endif " }}}
 
     syntax on                      " Syntax highlighting
     set shortmess+=I               " no splash screen
-    set cursorline                 " highlight current line
     set showmatch                  " show match when inserting {}, [], or ()
     set scrolloff=5                " keep at least 5 lines above/below
     set sidescrolloff=5            " keep at least 5 lines left/right
@@ -429,6 +428,7 @@ endif " }}}
     set ls=2                       " always show status line
     set lcs=tab:▸\ ,trail:·,nbsp:_ " whitespace characters
     set list                       " enable whitespace characters
+    let loaded_matchparen = 0      " this is slow
   " }}}
   " Highlights / Colors {{{
     " Keep colors in visual
@@ -474,7 +474,7 @@ endif " }}}
           \
 
     " Cursor line
-    hi clear LineNr | hi LineNr  
+    hi clear LineNr | hi LineNr
           \
           \ ctermfg=darkgrey guifg=darkgrey
           \
