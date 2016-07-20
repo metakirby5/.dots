@@ -402,7 +402,7 @@ endif " }}}
   set t_vb=                            " disable bell part 2
   set backspace=2                      " backspace over everything
   set fileformats=unix,dos,mac         " open files from mac/dos
-  set hidden                           " hide abandoned buffers
+  set hidden                           " don't bug me about abandoning buffers
   set nojoinspaces                     " don't add white space when I don't tell you to
   set autowrite                        " write before make
   set mouse=a                          " allow mouse usage
@@ -711,7 +711,6 @@ endif " }}}
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
       set switchbuf=useopen,usetab,newtab
-      set stal=2
     endif
   " }}}
   " Splits {{{
@@ -748,8 +747,8 @@ endif " }}}
     noremap <leader>l :vertical resize +1<cr>
   " }}}
   " Tabs {{{
-    " Change maximum number of tabs
-    set tabpagemax=100
+    set showtabline=1  " only show tab line if 2+ tabs
+    set tabpagemax=100 " Change maximum number of tabs
 
     " Useful mappings for managing tabs
     noremap <silent> <leader>te :tabedit <tab>
