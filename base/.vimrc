@@ -227,7 +227,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
       noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
       noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
-      noremap <silent> <leader>]  :Unite -auto-resize -buffer-name=tags     tag<cr>
+      noremap <silent> <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
       noremap <silent> <leader>u  :Unite -auto-resize -buffer-name=history  history/yank<cr>
       noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
       noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
@@ -786,6 +786,10 @@ endif " }}}
     noremap <silent> <C-S-Right> :tabmove +1<cr>
     inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
     inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
+
+    " ,t(g)t - Open tag in tab
+    noremap <leader>tt  :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
+    noremap <leader>tgt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
   " }}}
   " Folds {{{
     if exists("+foldenable")
@@ -954,12 +958,6 @@ endif " }}}
   " Swap ' and `
   noremap ' `
   noremap ` '
-
-  " Better tag jumping
-  noremap <c-]> g<c-]>
-  noremap <c-w><c-]> <c-w>g<c-]>
-  noremap <c-w><c-}> <c-w>g<c-}>
-  noremap <leader>tt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
 
   " ,y - Yank to clipboard
   noremap <leader>y "+y
