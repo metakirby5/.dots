@@ -84,5 +84,5 @@
 	amend = commit --amend
 	squash = "!f() { git rebase --interactive HEAD~$1; }; f"
 	find = !git ls-files | grep
-	rgrep = "!f(){(cd "$(git rev-parse --show-toplevel)" && git grep $@)};f"
+	rgrep = "!f(){(cd "$(git rev-parse --show-toplevel)" && git grep "$@")};f"
 	aliases = !git config -l | grep alias | cut -c 7-
