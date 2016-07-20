@@ -224,16 +224,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Shougo/unite-session'             " Save sessions
 
       let g:unite_enable_auto_select = 0
-      noremap <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
-      noremap <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-      noremap <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
-      noremap <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
-      noremap <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
-      noremap <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
-      noremap <leader>y  :Unite -auto-resize -buffer-name=history  history/yank<cr>
-      noremap <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
-      noremap <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
-      noremap <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
+      noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
+      noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
+      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
+      noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
+      noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
+      noremap <silent> <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
+      noremap <silent> <leader>y  :Unite -auto-resize -buffer-name=history  history/yank<cr>
+      noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
+      noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
+      noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
       autocmd FileType unite call s:unite_my_settings()
 
       function! s:unite_my_settings() " {{{
@@ -265,7 +265,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endfunction " }}}
     " }}}
     Plug 'sjl/gundo.vim'                    " Undo tree browser {{{
-      noremap <leader>u :GundoToggle<cr>
+      noremap <silent> <leader>u :GundoToggle<cr>
       let g:gundo_preview_bottom = 1
       let g:gundo_tree_statusline = ' %{&ft} %#Normal#'
       let g:gundo_preview_statusline = ' %{&ft} %#Normal#'
@@ -295,7 +295,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
     " }}}
     Plug 'vim-scripts/BufOnly.vim'          " Delete all buffers but this one {{{
-      noremap <leader>ba :BufOnly<cr>
+      noremap <silent> <leader>ba :BufOnly<cr>
     " }}}
   " }}}
   " Automation {{{
@@ -680,17 +680,17 @@ endif " }}}
   " }}}
   " Buffers {{{
     " ,b[p/n] - Switch to next/prev buffer
-    noremap <leader>bn :bn<cr>
-    noremap <leader>bp :bN<cr>
+    noremap <silent> <leader>bn :bn<cr>
+    noremap <silent> <leader>bp :bN<cr>
 
     " ,bl - List all buffers
-    noremap <leader>bl :buffers<cr>
+    noremap <silent> <leader>bl :buffers<cr>
 
     " ,bs - Switch to buffer by name
     noremap <leader>bs :buffers<cr>:buffer<space>
 
     " ,bd - Close the current buffer
-    noremap <leader>bd :bd<cr>
+    noremap <silent> <leader>bd :bd<cr>
 
     " Close all empty buffers
     function! DeleteEmptyBuffers()
@@ -707,13 +707,13 @@ endif " }}}
     endfunction
 
     " ,be - Close all empty buffers
-    noremap <leader>be :exe DeleteEmptyBuffers()<cr>
+    noremap <silent> <leader>be :exe DeleteEmptyBuffers()<cr>
 
     " ,bt - Open all buffers as tabs
-    noremap <leader>bt :tab ball<cr>
+    noremap <silent> <leader>bt :tab ball<cr>
 
     " ,cd - Switch CWD to the directory of the open buffer
-    noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
+    noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
@@ -736,10 +736,10 @@ endif " }}}
     noremap <leader>= <C-w>=
 
     " ^[hjkl] - Switch to split
-    noremap <silent> <c-j> <C-W>j
-    noremap <silent> <c-k> <C-W>k
-    noremap <silent> <c-l> <C-W>l
-    noremap <silent> <c-h> <C-W>h
+    noremap <c-j> <C-W>j
+    noremap <c-k> <C-W>k
+    noremap <c-l> <C-W>l
+    noremap <c-h> <C-W>h
 
     " ,[HJKL] - Move split
     noremap <leader>J <C-W>J
@@ -748,10 +748,10 @@ endif " }}}
     noremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
-    noremap <leader>j :resize +1<cr>
-    noremap <leader>k :resize -1<cr>
-    noremap <leader>h :vertical resize -1<cr>
-    noremap <leader>l :vertical resize +1<cr>
+    noremap <silent> <leader>j :resize +1<cr>
+    noremap <silent> <leader>k :resize -1<cr>
+    noremap <silent> <leader>h :vertical resize -1<cr>
+    noremap <silent> <leader>l :vertical resize +1<cr>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
@@ -796,8 +796,8 @@ endif " }}}
     inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
 
     " ,t(g)t - Open tag in tab
-    noremap <leader>tt  :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
-    noremap <leader>tgt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tt  :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tgt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
   " }}}
   " Folds {{{
     if exists("+foldenable")
@@ -864,7 +864,7 @@ endif " }}}
 
     " Spellcheck
     " ,/cc - Toggle spellcheck
-    noremap <leader>cc :setlocal spell!<cr>
+    noremap <silent> <leader>cc :setlocal spell!<cr>
 
     " More spellcheck shortcuts
     noremap <leader>cn ]s
@@ -971,7 +971,7 @@ endif " }}}
   noremap Y "+y
 
   " ,p - Toggle paste mode
-  noremap <leader>p :setlocal paste!<cr>
+  noremap <silent> <leader>p :setlocal paste!<cr>
 
   " ,/ - Disable highlight
   noremap <silent> <leader>/ :noh<cr>
@@ -981,9 +981,9 @@ endif " }}}
 
   " ,m - Make and go to first error
   if exists(':Neomake')
-    noremap <leader>m :silent Neomake!\|redraw!\|cc<cr>
+    noremap <silent> <leader>m :silent Neomake!\|redraw!\|cc<cr>
   else
-    noremap <leader>m :silent make\|redraw!\|cc<cr>
+    noremap <silent> <leader>m :silent make\|redraw!\|cc<cr>
   endif
 " }}}
 " Macros {{{
