@@ -68,7 +68,7 @@
 	lbs = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --numstat
 
 	# show
-	o  = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short
+	o  = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --color-words
 	os = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --numstat
 
 	# new commands
