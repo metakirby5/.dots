@@ -727,11 +727,11 @@ endif " }}}
     " ,e - Equalize splits
     noremap <leader>= <C-w>=
 
-    " ,[hjkl] - Switch to split
-    noremap <leader>j <C-W>j
-    noremap <leader>k <C-W>k
-    noremap <leader>h <C-W>h
-    noremap <leader>l <C-W>l
+    " ^[hjkl] - Switch to split
+    noremap <silent> <c-j> <C-W>j
+    noremap <silent> <c-k> <C-W>k
+    noremap <silent> <c-l> <C-W>l
+    noremap <silent> <c-h> <C-W>h
 
     " ,[HJKL] - Move split
     noremap <leader>J <C-W>J
@@ -739,11 +739,11 @@ endif " }}}
     noremap <leader>H <C-W>H
     noremap <leader>L <C-W>L
 
-    " ^[hjkl] - Resize split
-    noremap <silent> <c-j> :resize +1<cr>
-    noremap <silent> <c-k> :resize -1<cr>
-    noremap <silent> <c-l> :vertical resize +1<cr>
-    noremap <silent> <c-h> :vertical resize -1<cr>
+    " ,[hjkl] - Resize split
+    noremap <leader>j :resize +1<cr>
+    noremap <leader>k :resize -1<cr>
+    noremap <leader>h :vertical resize -1<cr>
+    noremap <leader>l :vertical resize +1<cr>
   " }}}
   " Tabs {{{
     " Change maximum number of tabs
