@@ -4,6 +4,7 @@ gnureadline
 greenlet
 humanize
 ipython
+livestreamer
 msgpack-python
 numpy
 pip-autoremove
