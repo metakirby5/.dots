@@ -78,11 +78,10 @@ __mk5_set_prompt() {
       git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
 
-    # Stashed
-    # local git_stash="$(git stash list | wc -l)"
-    # if [ "$git_stash" != 0 ]; then
-    #   git_info+=" $__mk5_b_cyan$__mk5_char_stash$git_stash"
-    # fi
+    # Stashed (list is slow, so only use verify)
+    if git rev-parse --verify refs/stash &>/dev/null; then
+      git_info+=" $__mk5_b_cyan$__mk5_char_stash"
+    fi
 
     # Commits behind upstream
     local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
