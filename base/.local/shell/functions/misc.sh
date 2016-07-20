@@ -77,6 +77,11 @@ touchx() {
     chmod +x "$1"
 }
 
+# Shortcut to awk a field
+field() {
+    awk "{ print \$$1 }"
+}
+
 # Urgent bell when task finishes
 remind() {
     eval "$@"
