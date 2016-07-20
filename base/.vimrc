@@ -203,8 +203,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'sheerun/vim-polyglot'             " Language packs {{{
     " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
-      nnoremap <silent> <bslash> :OverCommandLine<cr>%s/
-      vnoremap <silent> <bslash> :OverCommandLine<cr>s/
+      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
+      vnoremap <silent> <bslash> <esc>:OverCommandLine<cr>s/
     " }}}
     Plug 'Shougo/neosnippet'                " Snippets {{{
       Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
@@ -224,16 +224,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Shougo/unite-session'             " Save sessions
 
       let g:unite_enable_auto_select = 0
-      noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
-      noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
-      noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
-      noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
-      noremap <silent> <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
-      noremap <silent> <leader>y  :Unite -auto-resize -buffer-name=history  history/yank<cr>
-      noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
-      noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
-      noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
+      noremap <silent> <leader>r  <esc>:Unite -auto-resize -buffer-name=register register<cr>
+      noremap <silent> <leader>x  <esc>:Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
+      noremap <silent> <leader>z  <esc>:Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
+      noremap <silent> <leader>q  <esc>:Unite -auto-resize -buffer-name=grep     grep<cr>
+      noremap <silent> <leader>[  <esc>:Unite -auto-resize -buffer-name=outline  outline<cr>
+      noremap <silent> <leader>]  <esc>:UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
+      noremap <silent> <leader>y  <esc>:Unite -auto-resize -buffer-name=history  history/yank<cr>
+      noremap <silent> <leader>;  <esc>:Unite -auto-resize -buffer-name=command  history/command command<cr>
+      noremap <silent> <leader>?  <esc>:Unite -auto-resize -buffer-name=help     help<cr>
+      noremap <silent> <leader>cw <esc>:Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
       autocmd FileType unite call s:unite_my_settings()
 
       function! s:unite_my_settings() " {{{
@@ -265,7 +265,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endfunction " }}}
     " }}}
     Plug 'sjl/gundo.vim'                    " Undo tree browser {{{
-      noremap <silent> <leader>u :GundoToggle<cr>
+      noremap <silent> <leader>u <esc>:GundoToggle<cr>
       let g:gundo_preview_bottom = 1
       let g:gundo_tree_statusline = ' %{&ft} %#Normal#'
       let g:gundo_preview_statusline = ' %{&ft} %#Normal#'
@@ -295,7 +295,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
     " }}}
     Plug 'vim-scripts/BufOnly.vim'          " Delete all buffers but this one {{{
-      noremap <silent> <leader>ba :BufOnly<cr>
+      noremap <silent> <leader>ba <esc>:BufOnly<cr>
     " }}}
   " }}}
   " Automation {{{
@@ -370,10 +370,10 @@ else
       call setreg('/', g:ps, g:ps_t)
     endfunction
 
-    noremap <silent> g> :call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
-    noremap <silent> g< :call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-    xnoremap <silent> g> :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-    xnoremap <silent> g< :call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+    noremap <silent> g> <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
+    noremap <silent> g< <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
+    xnoremap <silent> g> <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+    xnoremap <silent> g< <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
   " }}}
   " Toggle Distractions {{{
     let g:minimal = 0
@@ -660,10 +660,10 @@ endif " }}}
       endif
     endfunction
 
-    noremap <silent> <leader>n :call NumberToggle()<cr>
+    noremap <silent> <leader>n <esc>:call NumberToggle()<cr>
 
     " Toggle virtualedit
-    noremap <silent> <leader>e :let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
+    noremap <silent> <leader>e <esc>:let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
 
     " Preserve selection when (de)indenting in visual mode
     xnoremap > >gv
@@ -680,17 +680,17 @@ endif " }}}
   " }}}
   " Buffers {{{
     " ,b[p/n] - Switch to next/prev buffer
-    noremap <silent> <leader>bn :bn<cr>
-    noremap <silent> <leader>bp :bN<cr>
+    noremap <silent> <leader>bn <esc>:bn<cr>
+    noremap <silent> <leader>bp <esc>:bN<cr>
 
     " ,bl - List all buffers
-    noremap <silent> <leader>bl :buffers<cr>
+    noremap <silent> <leader>bl <esc>:buffers<cr>
 
     " ,bs - Switch to buffer by name
-    noremap <leader>bs :buffers<cr>:buffer<space>
+    noremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
     " ,bd - Close the current buffer
-    noremap <silent> <leader>bd :bd<cr>
+    noremap <silent> <leader>bd <esc>:bd<cr>
 
     " Close all empty buffers
     function! DeleteEmptyBuffers()
@@ -707,13 +707,13 @@ endif " }}}
     endfunction
 
     " ,be - Close all empty buffers
-    noremap <silent> <leader>be :exe DeleteEmptyBuffers()<cr>
+    noremap <silent> <leader>be <esc>:exe DeleteEmptyBuffers()<cr>
 
     " ,bt - Open all buffers as tabs
-    noremap <silent> <leader>bt :tab ball<cr>
+    noremap <silent> <leader>bt <esc>:tab ball<cr>
 
     " ,cd - Switch CWD to the directory of the open buffer
-    noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
+    noremap <silent> <leader>cd <esc>:cd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
@@ -748,23 +748,23 @@ endif " }}}
     noremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
-    noremap <silent> <leader>j :resize +1<cr>
-    noremap <silent> <leader>k :resize -1<cr>
-    noremap <silent> <leader>h :vertical resize -1<cr>
-    noremap <silent> <leader>l :vertical resize +1<cr>
+    noremap <silent> <leader>j <esc>:resize +1<cr>
+    noremap <silent> <leader>k <esc>:resize -1<cr>
+    noremap <silent> <leader>h <esc>:vertical resize -1<cr>
+    noremap <silent> <leader>l <esc>:vertical resize +1<cr>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
     set tabpagemax=100 " Change maximum number of tabs
 
     " Useful mappings for managing tabs
-    noremap <silent> <leader>te :tabedit <tab>
-    noremap <silent> <leader>tn :tabnew<cr>
-    noremap <silent> <leader>to :tabonly<cr>
-    noremap <silent> <leader>td :tabclose<cr>
-    noremap <silent> <leader>tm :tabmove<Space>
-    noremap <silent> <leader>tb :tab ball<cr>
-    noremap <silent> <leader>tl :tabs<cr>
+    noremap          <leader>te <esc>:tabedit <tab>
+    noremap <silent> <leader>tn <esc>:tabnew<cr>
+    noremap <silent> <leader>to <esc>:tabonly<cr>
+    noremap <silent> <leader>td <esc>:tabclose<cr>
+    noremap          <leader>tm <esc>:tabmove<Space>
+    noremap <silent> <leader>tb <esc>:tab ball<cr>
+    noremap <silent> <leader>tl <esc>:tabs<cr>
 
     " ,[1-9] - Switch to tab #
     noremap <leader>1 1gt
@@ -778,26 +778,26 @@ endif " }}}
     noremap <leader>9 9gt
 
     " ^[p / n] or ^[left / right] - Switch tabs
-    noremap <silent> <C-p> :tabprevious<cr>
-    noremap <silent> <C-n> :tabnext<cr>
+    noremap <silent> <C-p>  <esc>:tabprevious<cr>
+    noremap <silent> <C-n>  <esc>:tabnext<cr>
     inoremap <silent> <C-p> <esc>:tabprevious<cr>
     inoremap <silent> <C-n> <esc>:tabnext<cr>
-    noremap <silent> <C-Left> :tabprevious<cr>
-    noremap <silent> <C-Right> :tabnext<cr>
-    inoremap <silent> <C-Left> <esc>:tabprevious<cr>
+    noremap <silent> <C-Left>   <esc>:tabprevious<cr>
+    noremap <silent> <C-Right>  <esc>:tabnext<cr>
+    inoremap <silent> <C-Left>  <esc>:tabprevious<cr>
     inoremap <silent> <C-Right> <esc>:tabnext<cr>
 
     " m[T / t] / ^shift[left / right] - Move tabs
-    noremap <silent> mT :tabmove -1<cr>
-    noremap <silent> mt :tabmove +1<cr>
-    noremap <silent> <C-S-Left> :tabmove -1<cr>
-    noremap <silent> <C-S-Right> :tabmove +1<cr>
-    inoremap <silent> <C-S-Left> <esc>:tabmove -1<cr>
+    noremap <silent> mT  <esc>:tabmove -1<cr>
+    noremap <silent> mt  <esc>:tabmove +1<cr>
+    noremap <silent> <C-S-Left>   <esc>:tabmove -1<cr>
+    noremap <silent> <C-S-Right>  <esc>:tabmove +1<cr>
+    inoremap <silent> <C-S-Left>  <esc>:tabmove -1<cr>
     inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
 
     " ,t(g)t - Open tag in tab
-    noremap <silent> <leader>tt  :tab split<cr>:exec("tag ".expand("<cword>"))<cr>
-    noremap <silent> <leader>tgt :tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tt  <esc>:tab split<cr>:exec("tag ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tgt <esc>:tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
   " }}}
   " Folds {{{
     if exists("+foldenable")
@@ -813,13 +813,13 @@ endif " }}}
       " The mode settings below all start with folds open
 
       " ,zm - Manual mode
-      noremap zm :set foldmethod=manual<cr>zR
+      noremap zm <esc>:set foldmethod=manual<cr>zR
 
       " ,zi - Indent mode
-      noremap zi :set foldmethod=indent<cr>zR
+      noremap zi <esc>:set foldmethod=indent<cr>zR
 
       " ,zs - Syntax mode
-      noremap zs :set foldmethod=syntax<cr>zR
+      noremap zs <esc>:set foldmethod=syntax<cr>zR
 
       " Use syntax mode by default
       set foldmethod=syntax
@@ -857,14 +857,14 @@ endif " }}}
       endif
     endfunction
 
-    noremap <silent> <leader>\ :call ToggleTextWrap()<cr>
+    noremap <silent> <leader>\ <esc>:call ToggleTextWrap()<cr>
 
     " ,f (visual mode) - Reflow selection
     xnoremap <silent> <leader>f Jgqq
 
     " Spellcheck
     " ,/cc - Toggle spellcheck
-    noremap <silent> <leader>cc :setlocal spell!<cr>
+    noremap <silent> <leader>cc <esc>:setlocal spell!<cr>
 
     " More spellcheck shortcuts
     noremap <leader>cn ]s
@@ -971,19 +971,19 @@ endif " }}}
   noremap Y "+y
 
   " ,p - Toggle paste mode
-  noremap <silent> <leader>p :setlocal paste!<cr>
+  noremap <silent> <leader>p <esc>:setlocal paste!<cr>
 
   " ,/ - Disable highlight
-  noremap <silent> <leader>/ :noh<cr>
+  noremap <silent> <leader>/  <esc>:noh<cr>
 
   " K - split line
   noremap <silent> K i<cr><esc>
 
   " ,m - Make and go to first error
   if exists(':Neomake')
-    noremap <silent> <leader>m :silent Neomake!\|redraw!\|cc<cr>
+    noremap <silent> <leader>m <esc>:silent Neomake!\|redraw!\|cc<cr>
   else
-    noremap <silent> <leader>m :silent make\|redraw!\|cc<cr>
+    noremap <silent> <leader>m <esc>:silent make\|redraw!\|cc<cr>
   endif
 " }}}
 " Macros {{{
