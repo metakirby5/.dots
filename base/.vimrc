@@ -29,12 +29,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   command! PU PlugUpdate | PlugUpgrade  " Update and upgrade
   command! PI PlugInstall               " Install
 
-  " Conditional plugins
-  function! When(cond, ...)
-    let opts = get(a:000, 0, {})
-    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-  endfunction
-
   call plug#begin(s:configdir . '/plugins')
   " }}}
   " Interface {{{
@@ -190,9 +184,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Utility {{{
-    Plug 'benekastah/neomake'               " Better make {{{
-          \, When(has('nvim'))
-    " }}}
     Plug 'bronson/vim-visual-star-search'   " Allow * and # on visual {{{
     " }}}
     Plug 'mattn/emmet-vim'                  " Emmet {{{
