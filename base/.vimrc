@@ -168,6 +168,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'tpope/vim-repeat'                 " Make repeat work with plugins {{{
     " }}}
+    Plug 'tpope/vim-speeddating'            " ^a and ^x for dates {{{
+    " }}}
     Plug 'tpope/vim-surround'               " Surround with... {{{
     " }}}
   " }}}
