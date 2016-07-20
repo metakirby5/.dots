@@ -43,7 +43,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nmap <leader>gn <Plug>GitGutterNextHunk
       nmap <leader>gp <Plug>GitGutterPrevHunk
       nmap <leader>ga <Plug>GitGutterStageHunk
-      nmap <leader>gu <Plug>GitGutterRevertHunk
+      nmap <leader>gu <Plug>GitGutterUndoHunk
       nmap <leader>gs <Plug>GitGutterPreviewHunk
       omap ih <Plug>GitGutterTextObjectInnerPending
       omap ah <Plug>GitGutterTextObjectOuterPending
@@ -293,7 +293,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Automation {{{
     Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters {{{
       let g:AutoPairsShortcutToggle = ''
-      let g:AutoPairsShortcutFastWrap = '<c-s>'
+      let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0
       let g:AutoPairsMultilineClose = 0
@@ -948,7 +948,7 @@ endif " }}}
   " Quickly source vimrc
   command! Resource source $MYVIMRC
 
-  " jj to esc
+  " There's only four words in the English langauge with jj.
   inoremap jj <esc>
 
   " Swap ; and :
