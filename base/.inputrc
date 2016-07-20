@@ -17,3 +17,6 @@ set print-completions-horizontally on
 set editing-mode vi
 set keymap vi
 
+# Limit history search to what has been inputted
+"j": history-search-forward
+"k": history-search-backward

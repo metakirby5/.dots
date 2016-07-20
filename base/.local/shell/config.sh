@@ -4,10 +4,12 @@ export EDITOR=$VISUAL                               # part 2
 export LS_COLORS='di=01;34:'                        # Folders are blue
 export LESS_TERMCAP_md="$(tput bold; tput setaf 3)" # Yellow headers in less
 
-# Don't give literal * unless we ask for it
-shopt -s nullglob
+# Completion
+shopt -s nullglob             # don't give literal * unless we ask for it
+shopt -s cdspell              # autocorrect cd
+shopt -s globstar 2>/dev/null # Super-complete **
 
-# Big history
+# History
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history

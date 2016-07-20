@@ -1,0 +1,28 @@
+# Compiled files
+*.o
+*.ln
+a.out
+*.pyc
+*.class
+
+# Temporary files
+*.sw*
+*~
+.nfs*
+
+# OS files
+.DS_Store
+Desktop.ini
+._*
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# App files
+.idea
+.cache
+
+# Tags
+tags
+tags.lock
+tags.temp
