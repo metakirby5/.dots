@@ -204,7 +204,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-      vnoremap <silent> <bslash> <esc>:OverCommandLine<cr>s/
+      vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     Plug 'Shougo/neosnippet'                " Snippets {{{
       Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
