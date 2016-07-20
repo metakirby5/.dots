@@ -224,16 +224,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Shougo/unite-session'             " Save sessions
 
       let g:unite_enable_auto_select = 0
-      noremap <silent> <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
-      noremap <silent> <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-      noremap <silent> <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
-      noremap <silent> <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
-      noremap <silent> <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
-      noremap <silent> <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
-      noremap <silent> <leader>u  :Unite -auto-resize -buffer-name=history  history/yank<cr>
-      noremap <silent> <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
-      noremap <silent> <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
-      noremap <silent> <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
+      noremap <leader>r  :Unite -auto-resize -buffer-name=register register<cr>
+      noremap <leader>x  :Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
+      noremap <leader>z  :Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
+      noremap <leader>q  :Unite -auto-resize -buffer-name=grep     grep<cr>
+      noremap <leader>[  :Unite -auto-resize -buffer-name=outline  outline<cr>
+      noremap <leader>]  :UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
+      noremap <leader>y  :Unite -auto-resize -buffer-name=history  history/yank<cr>
+      noremap <leader>;  :Unite -auto-resize -buffer-name=command  history/command command<cr>
+      noremap <leader>?  :Unite -auto-resize -buffer-name=help     help<cr>
+      noremap <leader>cw :Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
       autocmd FileType unite call s:unite_my_settings()
 
       function! s:unite_my_settings() " {{{
@@ -263,6 +263,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           nnoremap <silent><buffer><expr> r     unite#do_action('rename')
         endif
       endfunction " }}}
+    " }}}
+    Plug 'sjl/gundo.vim'                    " Undo tree browser {{{
+      noremap <leader>u :GundoToggle<cr>
     " }}}
     Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
       let g:multi_cursor_use_default_mapping=0
@@ -396,24 +399,25 @@ else
 endif " }}}
 " }}}
 " General {{{
-  set nu                               " line numbering on
-  set noerrorbells                     " turns off annoying bell sounds for errors
-  set visualbell                       " disable bell part 1
-  set t_vb=                            " disable bell part 2
-  set backspace=2                      " backspace over everything
-  set fileformats=unix,dos,mac         " open files from mac/dos
-  set hidden                           " don't bug me about abandoning buffers
-  set nojoinspaces                     " don't add white space when I don't tell you to
-  set autowrite                        " write before make
-  set mouse=a                          " allow mouse usage
-  set hlsearch                         " highlights all search hits
-  set ignorecase                       " search without regards to case
-  set smartcase                        " search with smart casing
-  set gdefault                         " default global sub
-  set tags=./tags;                     " recursive tag search
-  set efm+=\ (%l)\ error:\ %m          " lint error format
-  set timeoutlen=1000 ttimeoutlen=0    " no escape key delay
-  set ttyfast                          " assume speedy connection
+  set nu                            " line numbering on
+  set noerrorbells                  " turns off annoying bell sounds for errors
+  set visualbell                    " disable bell part 1
+  set t_vb=                         " disable bell part 2
+  set backspace=2                   " backspace over everything
+  set fileformats=unix,dos,mac      " open files from mac/dos
+  set hidden                        " don't bug me about abandoning buffers
+  set nojoinspaces                  " don't add white space when I don't tell you to
+  set autowrite                     " write before make
+  set mouse=a                       " allow mouse usage
+  set hlsearch                      " highlights all search hits
+  set ignorecase                    " search without regards to case
+  set smartcase                     " search with smart casing
+  set gdefault                      " default global sub
+  set tags=./tags;                  " recursive tag search
+  set efm+=\ (%l)\ error:\ %m       " lint error format
+  set timeoutlen=1000 ttimeoutlen=0 " no escape key delay
+  set ttyfast                       " assume speedy connection
+  set undolevels=10000              " allow lots of undos
 " }}}
 " Interface {{{
   " General {{{
@@ -960,8 +964,8 @@ endif " }}}
   noremap ' `
   noremap ` '
 
-  " ,y - Yank to clipboard
-  noremap <leader>y "+y
+  " Y - Yank to clipboard
+  noremap Y "+y
 
   " ,p - Toggle paste mode
   noremap <leader>p :setlocal paste!<cr>
