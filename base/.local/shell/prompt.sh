@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Line colors
 __mk5_normal="\[\e[0m\]"
 __mk5_red="\[\e[0;31m\]"
@@ -26,7 +28,7 @@ __mk5_char_behind='v'
 __mk5_char_ahead='^'
 
 __mk5_hostname="${HOSTNAME%%.*}"
-__mk5_home="$(readlink -f "$HOME" 2>/dev/null)"
+__mk5_home="$(readlink -f "$HOME" 2>/dev/null || echo "$HOME")"
 
 __mk5_set_prompt() {
   # Grab status code first
@@ -98,15 +100,15 @@ __mk5_set_prompt() {
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
-  # pwd stuff
-  local mypwd="$(pwd)"
-
   # Replace git path
+  local mypwd
   local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
   local gitbase
   if [ "$gitpath" ]; then
     gitbase="$(basename "$gitpath")"
     mypwd="$gitbase$(sed "s|^$gitpath||i" <<< "$(pwd -P)")"
+  else
+    mypwd="$PWD"
   fi
 
   # Colorize
