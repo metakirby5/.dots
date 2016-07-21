@@ -22,7 +22,7 @@ alias la='ls -la'
 alias findr='find . -regex'
 alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
-alias map="xargs -n1"
+alias map="tr '\n' '\0' | xargs -0"
 alias g='git'
 alias h='history'
 
