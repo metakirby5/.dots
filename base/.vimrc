@@ -958,6 +958,10 @@ endif " }}}
   noremap ' `
   noremap ` '
 
+  " Indent-aware pasting
+  noremap p ]p
+  noremap P [p
+
   " Y - Yank to clipboard
   noremap Y "+y
 
