@@ -219,6 +219,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>]  <esc>:exec("Tags ".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
     " }}}
+    Plug 'junegunn/vim-peekaboo'            " Register preview {{{
+    " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
@@ -759,18 +761,18 @@ endif " }}}
       " set foldcolumn=1
       hi FoldColumn ctermbg=NONE guibg=NONE
 
-      " zz - toggle folds
-      noremap zz za
+      " z<space> - toggle folds
+      noremap z<space> za
 
       " The mode settings below all start with folds open
 
-      " ,zm - Manual mode
-      noremap zm <esc>:set foldmethod=manual<cr>zR
+      " zm - Marker mode
+      noremap zm <esc>:set foldmethod=marker<cr>zR
 
-      " ,zi - Indent mode
+      " zi - Indent mode
       noremap zi <esc>:set foldmethod=indent<cr>zR
 
-      " ,zs - Syntax mode
+      " zs - Syntax mode
       noremap zs <esc>:set foldmethod=syntax<cr>zR
 
       " Use syntax mode by default
