@@ -57,19 +57,19 @@
 	a  = add
 	aa = add --all
 	ai = add --interactive
+	ap = add --patch
 
 	# reset
-	r   = reset
-	rs  = reset --soft
-	rh  = reset HEAD
-	rsh = reset --soft HEAD
+	r  = reset HEAD
+	rs = reset --soft HEAD
 
 	# stash
 	su = stash save
 	sl = stash list
-	ss = stash show
+	ss = stash show --patch --color-words
 	sp = stash pop
 	sa = stash apply
+	sd = stash drop
 
 	# log
 	l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
@@ -95,9 +95,14 @@
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
+	# TODO ensure esc on fzf doesn't do anything
 	zl  = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
-	zd  = "!git -c color.status=always s | fzf --ansi --with-nth=2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
-	zdc = "!git -c color.status=always s | fzf --ansi --with-nth=2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
+	zs  = "!git sl | fzf-tmux --multi --preview 'git ss $(cut -d: -f1 <<< {})' | cut -d: -f1"
+	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
+	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
 	zo  = "!git o $(git zl) | less -R"
 	za  = "!git a $(git zd)"
-	zu  = "!git rh $(git zdc)"
+	zr  = "!git r $(git zdc)"
+	zsp = "!git sp $(git zs)"
+	zsa = "!git sa $(git zs)"
+	zsd = "!git sd $(git zs)"
