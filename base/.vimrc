@@ -44,14 +44,30 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap ih <Plug>GitGutterTextObjectInnerVisual
       xmap ah <Plug>GitGutterTextObjectOuterVisual
     " }}}
-    Plug 'DanielFGray/DistractionFree.vim'  " Enable minimalism {{{
-      let g:distraction_free#toggle_limelight = 1
-      let g:distraction_free#toggle_options = [
-            \ 'list',
-            \ 'ruler',
-            \ 'showtabline',
-            \ 'laststatus',
-            \]
+    Plug 'junegunn/goyo.vim'                " Enable minimalism {{{
+      function! s:goyo_enter()
+        set noshowmode
+        set noshowcmd
+        set scrolloff=999
+        Limelight
+        IndentGuidesDisable
+      endfunction
+
+      function! s:goyo_leave()
+        set showmode
+        set showcmd
+        set scrolloff=5
+        Limelight!
+        IndentGuidesEnable
+        call <SID>apply_highlights()
+      endfunction
+
+      autocmd! User GoyoEnter nested call <SID>goyo_enter()
+      autocmd! User GoyoLeave nested call <SID>goyo_leave()
+    " }}}
+    Plug 'junegunn/limelight.vim'           " Spotlight on text {{{
+      let g:limelight_conceal_ctermfg = 'darkgrey'
+      let g:limelight_conceal_guifg = 'DarkGrey'
     " }}}
     Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
       set hlsearch
@@ -375,123 +391,126 @@ endif " }}}
     let loaded_matchparen = 0      " this is slow
   " }}}
   " Highlights / Colors {{{
-    " Keep colors in visual
-    hi clear Visual | hi Visual 
-          \ term=reverse cterm=reverse gui=reverse
-          \
-          \
+    function! s:apply_highlights()
+      " Keep colors in visual
+      hi clear Visual | hi Visual
+            \ term=reverse cterm=reverse gui=reverse
+            \
+            \
 
-    " Matching delimiter color
-    hi clear MatchParen | hi MatchParen
-          \
-          \
-          \ ctermbg=darkgrey guibg=darkgrey
+      " Matching delimiter color
+      hi clear MatchParen | hi MatchParen
+            \
+            \
+            \ ctermbg=darkgrey guibg=darkgrey
 
-    " Terms
-    hi clear Search | hi Search
-          \
-          \ ctermfg=black  guifg=black
-          \ ctermbg=yellow guibg=yellow
-    hi clear Todo | hi Todo
-          \ cterm=reverse  gui=reverse
-          \ ctermfg=yellow guifg=yellow
-          \ ctermbg=black  guibg=black
-    hi clear Error | hi Error
-          \ cterm=reverse gui=reverse
-          \ ctermfg=red   guifg=red
-          \ ctermbg=black guibg=black
-    hi clear SpellBad | hi SpellBad
-          \ term=underline cterm=underline gui=underline
-          \ ctermfg=red    guifg=red
-          \
-    hi clear SpellCap | hi SpellCap
-          \ term=underline cterm=underline gui=underline
-          \
-          \
-    hi clear SpellLocal | hi SpellLocal
-          \ term=underline cterm=underline gui=underline
-          \
-          \
-    hi clear SpellRare | hi SpellRare
-          \ term=underline cterm=underline gui=underline
-          \
-          \
+      " Terms
+      hi clear Search | hi Search
+            \
+            \ ctermfg=black  guifg=black
+            \ ctermbg=yellow guibg=yellow
+      hi clear Todo | hi Todo
+            \ cterm=reverse  gui=reverse
+            \ ctermfg=yellow guifg=yellow
+            \ ctermbg=black  guibg=black
+      hi clear Error | hi Error
+            \ cterm=reverse gui=reverse
+            \ ctermfg=red   guifg=red
+            \ ctermbg=black guibg=black
+      hi clear SpellBad | hi SpellBad
+            \ term=underline cterm=underline gui=underline
+            \ ctermfg=red    guifg=red
+            \
+      hi clear SpellCap | hi SpellCap
+            \ term=underline cterm=underline gui=underline
+            \
+            \
+      hi clear SpellLocal | hi SpellLocal
+            \ term=underline cterm=underline gui=underline
+            \
+            \
+      hi clear SpellRare | hi SpellRare
+            \ term=underline cterm=underline gui=underline
+            \
+            \
 
-    " Cursor line
-    hi clear LineNr | hi LineNr
-          \
-          \ ctermfg=darkgrey guifg=darkgrey
-          \
-    hi clear CursorLine | hi CursorLine 
-          \ term=bold     cterm=bold  gui=bold
-          \ ctermbg=black guibg=black
-          \
-    hi clear CursorLineNr | hi CursorLineNr
-          \ term=bold     cterm=bold  gui=bold
-          \ ctermfg=grey  guifg=grey
-          \ ctermbg=black guibg=black
+      " Cursor line
+      hi clear LineNr | hi LineNr
+            \
+            \ ctermfg=darkgrey guifg=darkgrey
+            \
+      hi clear CursorLine | hi CursorLine
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermbg=black guibg=black
+            \
+      hi clear CursorLineNr | hi CursorLineNr
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermfg=grey  guifg=grey
+            \ ctermbg=black guibg=black
 
-    " Vertial lines
-    hi clear CursorColumn | hi CursorColumn
-          \
-          \
-          \ ctermbg=black guibg=black
-    hi clear ColorColumn | hi ColorColumn
-          \
-          \
-          \ ctermbg=black guibg=black
-    hi clear VertSplit | hi VertSplit
-          \
-          \ ctermfg=white guifg=white
-          \ ctermbg=black guibg=black
+      " Vertial lines
+      hi clear CursorColumn | hi CursorColumn
+            \
+            \
+            \ ctermbg=black guibg=black
+      hi clear ColorColumn | hi ColorColumn
+            \
+            \
+            \ ctermbg=black guibg=black
+      hi clear VertSplit | hi VertSplit
+            \
+            \ ctermfg=white guifg=white
+            \ ctermbg=black guibg=black
 
-    " Tabs
-    hi clear TabSel | hi TabLineSel
-          \ term=bold     cterm=bold  gui=bold
-          \ ctermfg=white guifg=white
-          \
-    hi clear TabLine | hi TabLine
-          \
-          \ ctermfg=white guifg=white
-          \ ctermbg=black guibg=black
-    hi clear TabLineFill | hi TabLineFill
-          \
-          \ ctermfg=white guifg=white
-          \ ctermbg=black guibg=black
+      " Tabs
+      hi clear TabSel | hi TabLineSel
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermfg=white guifg=white
+            \
+      hi clear TabLine | hi TabLine
+            \
+            \ ctermfg=white guifg=white
+            \ ctermbg=black guibg=black
+      hi clear TabLineFill | hi TabLineFill
+            \
+            \ ctermfg=white guifg=white
+            \ ctermbg=black guibg=black
 
-    " Status line
-    hi clear StatusLine | hi StatusLine
-          \ term=bold     cterm=bold  gui=bold
-          \ ctermfg=white guifg=white
-          \ ctermbg=black guibg=black
-    hi clear StatusLineNC | hi StatusLineNC
-          \ term=bold        cterm=bold     gui=bold
-          \ ctermfg=darkgrey guifg=darkgrey
-          \ ctermbg=black    guibg=black
+      " Status line
+      hi clear StatusLine | hi StatusLine
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermfg=white guifg=white
+            \ ctermbg=black guibg=black
+      hi clear StatusLineNC | hi StatusLineNC
+            \ term=bold        cterm=bold     gui=bold
+            \ ctermfg=darkgrey guifg=darkgrey
+            \ ctermbg=black    guibg=black
 
-    " Folds
-    hi clear Folded | hi Folded
-          \
-          \ ctermfg=blue guifg=blue
-          \
+      " Folds
+      hi clear Folded | hi Folded
+            \
+            \ ctermfg=blue guifg=blue
+            \
 
-    " Completion menu
-    hi clear Pmenu | hi Pmenu
-          \
-          \ ctermfg=white guifg=black
-          \ ctermbg=black guibg=blue
-    hi clear PmenuSel | hi PmenuSel
-          \ term=bold     cterm=bold  gui=bold
-          \ ctermfg=white guifg=white
-          \ ctermbg=blue  guibg=blue
-    hi clear PmenuSbar | hi PmenuSbar
-          \
-          \
-          \ ctermbg=white guibg=white
-    hi clear PmenuThumb | hi PmenuThumb
-          \
-          \
-          \ ctermbg=blue guibg=blue
+      " Completion menu
+      hi clear Pmenu | hi Pmenu
+            \
+            \ ctermfg=white guifg=black
+            \ ctermbg=black guibg=blue
+      hi clear PmenuSel | hi PmenuSel
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermfg=white guifg=white
+            \ ctermbg=blue  guibg=blue
+      hi clear PmenuSbar | hi PmenuSbar
+            \
+            \
+            \ ctermbg=white guibg=white
+      hi clear PmenuThumb | hi PmenuThumb
+            \
+            \
+            \ ctermbg=blue guibg=blue
+    endfunction
+    call <SID>apply_highlights()
   " }}}
   " Status Line {{{
     " Utilities {{{
@@ -585,17 +604,15 @@ endif " }}}
     inoremap <silent> <up> <esc>gka
 
     " Toggle relative line numbers
-    function! NumberToggle()
+    function! ToggleLineNumbers()
       if(&rnu == 1)
         set nornu
-        set nu
       else
-        set nonu
         set rnu
       endif
     endfunction
 
-    noremap <silent> <leader>n <esc>:call NumberToggle()<cr>
+    noremap <silent> <leader>n <esc>:call ToggleLineNumbers()<cr>
 
     " Toggle virtualedit
     noremap <silent> <leader>e <esc>:let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
@@ -642,7 +659,7 @@ endif " }}}
     endfunction
 
     " ,be - Close all empty buffers
-    noremap <silent> <leader>be <esc>:exe DeleteEmptyBuffers()<cr>
+    noremap <silent> <leader>be <esc>:call DeleteEmptyBuffers()<cr>
 
     " ,bt - Open all buffers as tabs
     noremap <silent> <leader>bt <esc>:tab ball<cr>
