@@ -16,6 +16,7 @@ brew 'ctags'
 brew 'fasd'
 brew 'python'
 brew 'git'
+brew 'fzf'
 brew 'gcc'
 brew 'gnu-sed', args: ['with-default-names']
 brew 'gnupg'

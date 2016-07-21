@@ -193,6 +193,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     Plug 'sheerun/vim-polyglot'             " Language packs {{{
     " }}}
+    Plug 'junegunn/fzf'                     " Fuzzy find engine {{{
+          \, { 'do': './install --bin' }
+      Plug 'junegunn/fzf.vim'                 " Fuzzy find wrapper
+
+      noremap <silent> <leader>z  <esc>:Files<cr>
+      noremap <silent> <leader>x  <esc>:History<cr>
+      noremap <silent> <leader>;  <esc>:History:<cr>
+      noremap <silent> <leader>]  <esc>:exec("Tags ".expand("<cword>"))<cr>
+      noremap <silent> <leader>?  <esc>:Helptags<cr>
+    " }}}
     Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
@@ -200,60 +210,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'Shougo/neosnippet'                " Snippets {{{
       Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
       " }}}
-    " }}}
-    Plug 'Shougo/vimproc'                   " Asynchronous commands {{{
-          \, { 'do': 'make' }
-    " }}}
-    Plug 'Shougo/unite.vim'                 " Fuzzy searcher {{{
-      Plug 'Shougo/unite-outline'             " Nice outline view
-      Plug 'Shougo/neomru.vim'                " Index most reecntly used files
-      Plug 'tsukkee/unite-tag'                " Browse tags
-      Plug 'Shougo/neoyank.vim'               " Yank history
-      Plug 'thinca/vim-unite-history'         " Command history
-      Plug 'kopischke/unite-spell-suggest'    " Spellcheck suggestions
-      Plug 'Shougo/unite-help'                " Get help
-      Plug 'Shougo/unite-session'             " Save sessions
-
-      let g:unite_enable_auto_select = 0
-      noremap <silent> <leader>r  <esc>:Unite -auto-resize -buffer-name=register register<cr>
-      noremap <silent> <leader>x  <esc>:Unite -auto-resize -buffer-name=files    buffer file neomru/file<cr>
-      noremap <silent> <leader>z  <esc>:Unite -auto-resize -buffer-name=rfiles   file_rec/async<cr>
-      noremap <silent> <leader>q  <esc>:Unite -auto-resize -buffer-name=grep     grep<cr>
-      noremap <silent> <leader>[  <esc>:Unite -auto-resize -buffer-name=outline  outline<cr>
-      noremap <silent> <leader>]  <esc>:UniteWithCursorWord -auto-resize -buffer-name=tags tag<cr>
-      noremap <silent> <leader>y  <esc>:Unite -auto-resize -buffer-name=history  history/yank<cr>
-      noremap <silent> <leader>;  <esc>:Unite -auto-resize -buffer-name=command  history/command command<cr>
-      noremap <silent> <leader>?  <esc>:Unite -auto-resize -buffer-name=help     help<cr>
-      noremap <silent> <leader>cw <esc>:Unite -auto-resize -buffer-name=spell    spell_suggest<cr>
-      autocmd FileType unite call s:unite_my_settings()
-
-      function! s:unite_my_settings() " {{{
-        nmap <buffer> <Esc>     <Plug>(unite_exit)
-        nmap <buffer> f         <Plug>(unite_quick_match_jump)
-        imap <buffer> <tab>     <Plug>(unite_select_next_line)
-        imap <buffer> <s-tab>   <Plug>(unite_select_previous_line)
-        imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-        nmap <buffer> '         <Plug>(unite_quick_match_default_action)
-        imap <buffer> '         <Plug>(unite_quick_match_default_action)
-        nmap <buffer> <C-a>     <Plug>(unite_choose_action)
-        imap <buffer> <C-a>     <Plug>(unite_choose_action)
-        nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-        imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-        nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
-        imap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
-        nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-        imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-
-        nnoremap <silent><buffer><expr> l  unite#smart_map('l' , unite#do_action('default'))
-        nnoremap <silent><buffer><expr> cd unite#smart_map('cd', unite#do_action('lcd'))
-
-        let unite = unite#get_current_unite()
-        if unite.profile_name ==# 'search'
-          nnoremap <silent><buffer><expr> r     unite#do_action('replace')
-        else
-          nnoremap <silent><buffer><expr> r     unite#do_action('rename')
-        endif
-      endfunction " }}}
     " }}}
     Plug 'sjl/gundo.vim'                    " Undo tree browser {{{
       noremap <silent> <leader>u <esc>:GundoToggle<cr>
@@ -304,18 +260,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Post-hooks {{{
     call plug#end()
-    " Unite {{{
-      call unite#filters#sorter_default#use(['sorter_rank'])
-      call unite#filters#matcher_default#use(['matcher_fuzzy'])
-      call unite#set_profile('files', 'context.smartcase', 1)
-      call unite#custom#profile('default', 'context', {
-            \   'winheight': 10,
-            \   'start_insert': 1,
-            \   'prompt_focus': 1,
-            \   'force_redraw': 1,
-            \   'no_empty':     1,
-            \ })
-    " }}}
   " }}}
   " Fallbacks {{{
 else
