@@ -67,7 +67,6 @@
 
 	# log
 	l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
-	lnc = log --pretty=format:'%h %cd %an %s%d' --date=short
 	lr  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
 	lp  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
 	ls  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --numstat
@@ -88,4 +87,4 @@
 	rgrep = "!f(){(cd \"$(git rev-parse --show-toplevel)\" && git grep \"$@\")};f"
 	spull = "!git stash save; git pull; git stash pop"
 	aliases = !git config -l | grep alias | cut -c 7-
-	zl = "!git lnc | fzf-tmux --multi --no-sort --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
+	zl = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
