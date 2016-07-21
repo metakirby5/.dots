@@ -16,7 +16,10 @@ export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+__mk5_hist_cmd='history -a; history -c; history -r'
+if ! [[ $PROMPT_COMMAND == *"$__mk5_hist_cmd"*  ]]; then
+  export PROMPT_COMMAND="$__mk5_hist_cmd; $PROMPT_COMMAND"
+fi
 
 # http://stackoverflow.com/a/246128
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

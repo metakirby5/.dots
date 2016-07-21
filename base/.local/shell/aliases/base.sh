@@ -25,6 +25,7 @@ alias aniget='anistrm --program="wget -c"'
 alias map="tr '\n' '\0' | xargs -0"
 alias g='git'
 alias h='history'
+alias zh='eval $(history | fzf --tac --no-sort | cut -d\  -f4-)'
 alias q='fzf | map'
 
 # Prefs

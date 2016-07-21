@@ -159,4 +159,6 @@ __mk5_set_prompt() {
   PS2+="$__mk5_normal "    # Clear colors
 }
 
-PROMPT_COMMAND=__mk5_set_prompt
+if ! [[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]]; then
+  export PROMPT_COMMAND="__mk5_set_prompt; $PROMPT_COMMAND"
+fi
