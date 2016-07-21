@@ -28,6 +28,7 @@ alias h='history'
 
 # Prefs
 which nvim &>/dev/null && alias vim='nvim'
+alias xargs='xargs -o'
 alias less='less -R'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'

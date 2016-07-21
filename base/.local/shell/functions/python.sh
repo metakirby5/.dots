@@ -2,7 +2,7 @@
 # Requires pipdeptree.
 pip-leaves() {
   (
-    pipdeptree --freeze -w silence | grep -o '^[^ =]\+'
+    pipdeptree --freeze -w silence | command grep -o '^[^ =]\+'
     echo 'pipdeptree'
   ) | sort
 }
