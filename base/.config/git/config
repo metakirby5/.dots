@@ -95,14 +95,13 @@
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
-	# TODO ensure esc on fzf doesn't do anything
 	zl  = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
 	zs  = "!git sl | fzf-tmux --multi --preview 'git ss $(cut -d: -f1 <<< {})' | cut -d: -f1"
 	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
 	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
-	zo  = "!git o $(git zl) | less -R"
-	za  = "!git a $(git zd)"
-	zr  = "!git r $(git zdc)"
-	zsp = "!git sp $(git zs)"
-	zsa = "!git sa $(git zs)"
-	zsd = "!git sd $(git zs)"
+	zo  = "!(x=$(git zl);  [ \"$x\" ] && git o $x | less -R)"
+	za  = "!(x=$(git zd);  [ \"$x\" ] && git a $x)"
+	zr  = "!(x=$(git zdc); [ \"$x\" ] && git r $x)"
+	zsp = "!(x=$(git zs);  [ \"$x\" ] && git sp $x)"
+	zsa = "!(x=$(git zs);  [ \"$x\" ] && git sa $x)"
+	zsd = "!(x=$(git zs);  [ \"$x\" ] && git sd $x)"
