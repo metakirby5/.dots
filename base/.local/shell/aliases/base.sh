@@ -25,8 +25,8 @@ alias aniget='anistrm --program="wget -c"'
 alias map="tr '\n' '\0' | xargs -0"
 alias g='git'
 alias h='history'
-alias zh='eval $(history | fzf --tac --no-sort | cut -c8- | tee -a "$HISTFILE")'
-alias q='fzf | map'
+alias zh='eval $(cat "$HISTFILE" | fzf-tmux --tac --no-sort | tee -a "$HISTFILE")'
+alias q='fzf-tmux --preview "(pygmentize {} || cat {}) 2>/dev/null | head -$LINES" | map'
 
 # Prefs
 which nvim &>/dev/null && alias vim='nvim'
