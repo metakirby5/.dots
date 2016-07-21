@@ -26,7 +26,7 @@ alias map="tr '\n' '\0' | xargs -0"
 alias g='git'
 alias h='history'
 alias zh='eval $(cat "$HISTFILE" | fzf-tmux --tac --no-sort | tee -a "$HISTFILE")'
-alias q='fzf-tmux --preview "(pygmentize {} || cat {}) 2>/dev/null | head -$LINES" | map'
+alias q='fzf-tmux --multi --preview "(pygmentize {} || cat {}) 2>/dev/null" | map'
 
 # Prefs
 which nvim &>/dev/null && alias vim='nvim'
