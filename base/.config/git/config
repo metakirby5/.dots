@@ -80,6 +80,7 @@
 	lb  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short
 	lbp = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --patch --color-words
 	lbs = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --numstat
+	lbg = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --graph
 
 	# show
 	o  = show --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --date=short --color-words
@@ -96,9 +97,11 @@
 
 	# fzf
 	zl  = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
+	zb  = "!git -c color.branch=always ba | cut -c3- | fzf-tmux --ansi --multi --preview 'git lbg $(awk \"{print\\$1}\" <<< {})' | awk '{print$1}'"
 	zs  = "!git sl | fzf-tmux --multi --preview 'git ss $(cut -d: -f1 <<< {})' | cut -d: -f1"
 	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
 	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
+	zco = "!(x=$(git zb);  [ \"$x\" ] && git co $x)"
 	zo  = "!(x=$(git zl);  [ \"$x\" ] && git o $x | less -R)"
 	za  = "!(x=$(git zd);  [ \"$x\" ] && git a $x)"
 	zr  = "!(x=$(git zdc); [ \"$x\" ] && git r $x)"
