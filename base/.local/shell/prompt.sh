@@ -2,6 +2,7 @@
 
 # Line colors
 __mk5_normal="\[\e[0m\]"
+__mk5_black="\[\e[0;30m\]"
 __mk5_red="\[\e[0;31m\]"
 __mk5_green="\[\e[0;32m\]"
 __mk5_yellow="\[\e[0;33m\]"
@@ -9,6 +10,7 @@ __mk5_blue="\[\e[0;34m\]"
 __mk5_purple="\[\e[0;35m\]"
 __mk5_cyan="\[\e[0;36m\]"
 __mk5_white="\[\e[0;37m\]"
+__mk5_b_black="\[\e[1;30m\]"
 __mk5_b_red="\[\e[1;31m\]"
 __mk5_b_green="\[\e[1;32m\]"
 __mk5_b_yellow="\[\e[1;33m\]"
@@ -26,6 +28,7 @@ __mk5_char_add='+'
 __mk5_char_stash='\$'
 __mk5_char_behind='v'
 __mk5_char_ahead='^'
+__mk5_char_no_up='!'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$(readlink -f "$HOME" 2>/dev/null || echo "$HOME")"
@@ -62,6 +65,9 @@ __mk5_set_prompt() {
     local git_st="$(git status --porcelain)"
     local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
 
+    # Branch name
+    git_info="$__mk5_purple$git_info"
+
     # Untracked
     local git_unt="$(grep '^??' <<< "$git_st" | wc -l)"
     if [ "$git_unt" != 0 ]; then
@@ -85,19 +91,25 @@ __mk5_set_prompt() {
       git_info+=" $__mk5_b_cyan$__mk5_char_stash"
     fi
 
-    # Commits behind upstream
-    local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
-    if [ "$git_behind" != 0 ]; then
-      git_info+=" $__mk5_b_red$__mk5_char_behind$git_behind"
+    # Upstream?
+    if [ "$git_rev" ]; then
+      # Commits behind upstream
+      local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
+      if [ "$git_behind" != 0 ]; then
+        git_info+=" $__mk5_b_red$__mk5_char_behind$git_behind"
+      fi
+
+      # Commits ahead of upstream
+      local git_ahead="$(awk '{ print $1 }' <<< "$git_rev")"
+      if [ "$git_ahead" != 0 ]; then
+        git_info+=" $__mk5_b_blue$__mk5_char_ahead$git_ahead"
+      fi
+    else
+      # Mark the branch
+      git_info="$__mk5_b_black$__mk5_char_no_up$git_info"
     fi
 
-    # Commits ahead of upstream
-    local git_ahead="$(awk '{ print $1 }' <<< "$git_rev")"
-    if [ "$git_ahead" != 0 ]; then
-      git_info+=" $__mk5_b_blue$__mk5_char_ahead$git_ahead"
-    fi
-
-    git_info="$__mk5_purple$git_info$__mk5_b_purple, "
+    git_info+="$__mk5_b_purple, "
   fi
 
   # Replace git path
