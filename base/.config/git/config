@@ -103,6 +103,7 @@
 	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zci = "!f(){(local x=$(git zl);  [ \"$x\" ] && git co $x \"$@\")};f"
+	zcd = "!f(){(local x=$(git zl);  [ \"$x\" ] && git d $x \"$@\")};f"
 	zo  = "!f(){(local x=$(git zl);  [ \"$x\" ] && git o $x \"$@\" | less -R)};f"
 	za  = "!f(){(local x=$(git zd);  [ \"$x\" ] && git a $x \"$@\")};f"
 	zr  = "!f(){(local x=$(git zdc); [ \"$x\" ] && git r $x \"$@\")};f"

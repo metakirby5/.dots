@@ -372,6 +372,7 @@ endif " }}}
   set nojoinspaces                  " don't add white space when I don't tell you to
   set autowrite                     " write before make
   set mouse=a                       " allow mouse usage
+  set ttymouse=xterm2               " non-jumpy mouse visual select
   set hlsearch                      " highlights all search hits
   set ignorecase                    " search without regards to case
   set smartcase                     " search with smart casing
