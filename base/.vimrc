@@ -215,11 +215,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
 
       let g:fzf_files_options =
         \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
-      noremap <silent> <leader>z  <esc>:Files<cr>
       noremap <silent> <leader>x  <esc>:History<cr>
+      noremap <silent> <leader>z  <esc>:Files<cr>
+      noremap <silent> <leader>a  <esc>:Ag<cr>
+      noremap <silent> <leader>q  <esc>:Lines<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
       noremap <silent> <leader>]  <esc>:exec("Tags '".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
+      noremap <silent> <leader>gz <esc>:GFiles<cr>
+      noremap <silent> <leader>gf <esc>:GFiles?<cr>
     " }}}
     Plug 'junegunn/vim-peekaboo'            " Register preview {{{
     " }}}
@@ -692,10 +696,10 @@ endif " }}}
     noremap <leader>= <C-w>=
 
     " ^[hjkl] - Switch to split
-    noremap <c-j> <C-W>j
-    noremap <c-k> <C-W>k
-    noremap <c-l> <C-W>l
-    noremap <c-h> <C-W>h
+    noremap <leader>j <C-W>j
+    noremap <leader>k <C-W>k
+    noremap <leader>h <C-W>l
+    noremap <leader>l <C-W>h
 
     " ,[HJKL] - Move split
     noremap <leader>J <C-W>J
@@ -704,10 +708,10 @@ endif " }}}
     noremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
-    noremap <silent> <leader>j <esc>:resize +1<cr>
-    noremap <silent> <leader>k <esc>:resize -1<cr>
-    noremap <silent> <leader>h <esc>:vertical resize -1<cr>
-    noremap <silent> <leader>l <esc>:vertical resize +1<cr>
+    noremap <silent> <c-j> <esc>:resize +1<cr>
+    noremap <silent> <c-k> <esc>:resize -1<cr>
+    noremap <silent> <c-l> <esc>:vertical resize -1<cr>
+    noremap <silent> <c-h> <esc>:vertical resize +1<cr>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
