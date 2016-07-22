@@ -96,11 +96,11 @@
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
-	zl  = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
-	zb  = "!git -c color.branch=always ba | cut -c3- | fzf-tmux --ansi --multi --preview 'git lbg $(awk \"{print\\$1}\" <<< {})' | awk '{print$1}'"
-	zs  = "!git sl | fzf-tmux --ansi --no-sort --multi --preview 'git ss $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
-	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
-	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
+	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --with-nth=2.. --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
+	zs  = "!(c='git ss $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zd  = "!(c='git d  $(printf \"%s\n\" {} | cut -c4-)'; git -c color.status=always s | fzf --ansi -n2.. --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -c4-)"
+	zdc = "!(c='git dc $(printf \"%s\n\" {} | cut -c4-)'; git -c color.status=always s | fzf --ansi -n2.. --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -c4-)"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zci = "!f(){(local x=$(git zl);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zcd = "!f(){(local x=$(git zl);  [ \"$x\" ] && git d $x \"$@\")};f"
