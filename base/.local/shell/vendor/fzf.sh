@@ -5,6 +5,7 @@ if which fzf &>/dev/null; then
     ag --hidden -l ||\
     find -L . | cut -c3-\
     ) 2>/dev/null'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
   # Color scheme and file preview
   export FZF_DEFAULT_OPTS="\
