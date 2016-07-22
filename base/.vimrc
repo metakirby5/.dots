@@ -597,9 +597,13 @@ endif " }}}
     if has('nvim')
       let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     else
-      silent! let &t_SI = "\<Esc>[5 q"
-      silent! let &t_SR = "\<Esc>[3 q"
-      silent! let &t_EI = "\<Esc>[1 q"
+      " Enter: Flashing block
+      au VimEnter * silent execute "!echo -ne '\e[1 q'"
+      silent! let &t_EI = "\<Esc>[1 q" " NORMAL:  Flashing block
+      silent! let &t_SR = "\<Esc>[3 q" " REPLACE: Flashing underline
+      silent! let &t_SI = "\<Esc>[5 q" " INSERT:  Flashing bar
+      " Exit: Flashing bar
+      au VimLeave * silent execute "!echo -ne '\e[5 q'"
     endif
   " }}}
 " }}}
