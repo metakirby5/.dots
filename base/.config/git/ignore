@@ -1,3 +1,6 @@
+# VCS
+.git
+
 # Compiled files
 *.o
 *.ln
