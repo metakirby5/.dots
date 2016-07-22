@@ -214,7 +214,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'junegunn/fzf.vim'                 " Fuzzy find wrapper
 
       let g:fzf_files_options =
-        \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
+        \ '--preview "(pygmentize {} || cat {}) 2>/dev/null | head -'.&lines.'"'
       noremap <silent> <leader>z  <esc>:Files<cr>
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
