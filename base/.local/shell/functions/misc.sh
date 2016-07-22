@@ -58,13 +58,12 @@ install-leaves() {
 
 # cd with smart ... handling
 cd() {
-    local num=0
-    if [ -z "$(tr -d . <<< "$1")" ]; then
-        num="$(wc -c <<< "$1")"
-    fi
+    local dots="$(grep -o '^\.*' <<< "$1")"
+    local rest="${1#$dots}"
+    local num="$(wc -c <<< "$dots")"
 
     if [ $num -gt 3 ]; then
-        command cd "..$(printf '%0.s/..' $(seq 1 $(($num - 3))))"
+        command cd "..$(printf '%0.s/..' $(seq 1 $(($num - 3))))$rest"
     else
         command cd "$@"
     fi
