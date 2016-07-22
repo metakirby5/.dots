@@ -65,7 +65,7 @@
 
 	# stash
 	su = stash save
-	sl = stash list
+	sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
 	ss = stash show --patch --color-words
 	sp = stash pop
 	sa = stash apply
@@ -98,7 +98,7 @@
 	# fzf
 	zl  = "!git l | fzf-tmux --ansi --with-nth=2.. --no-sort --multi --preview 'git o $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
 	zb  = "!git -c color.branch=always ba | cut -c3- | fzf-tmux --ansi --multi --preview 'git lbg $(awk \"{print\\$1}\" <<< {})' | awk '{print$1}'"
-	zs  = "!git sl | fzf-tmux --multi --preview 'git ss $(cut -d: -f1 <<< {})' | cut -d: -f1"
+	zs  = "!git sl | fzf-tmux --ansi --no-sort --multi --preview 'git ss $(cut -d\\  -f1 <<< {})' | cut -d\\  -f1"
 	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
 	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
