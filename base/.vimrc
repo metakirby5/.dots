@@ -218,7 +218,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>z  <esc>:Files<cr>
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
-      noremap <silent> <leader>]  <esc>:exec("Tags ".expand("<cword>"))<cr>
+      noremap <silent> <leader>]  <esc>:exec("Tags ^".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
     " }}}
     Plug 'junegunn/vim-peekaboo'            " Register preview {{{
