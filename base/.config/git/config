@@ -89,7 +89,7 @@
 	# new commands
 	fixup = commit --fixup
 	amend = commit --amend
-	squash = "!f() { git rebase --interactive HEAD~$1; }; f"
+	squash = "!f(){(git rebase --interactive HEAD~$1)};f"
 	find = !git ls-files | grep
 	rgrep = "!f(){(cd \"$(git rev-parse --show-toplevel)\" && git grep \"$@\")};f"
 	spull = "!git stash save; git pull; git stash pop"
@@ -101,10 +101,10 @@
 	zs  = "!git sl | fzf-tmux --multi --preview 'git ss $(cut -d: -f1 <<< {})' | cut -d: -f1"
 	zd  = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git d $(cut -c4- <<< {})' | cut -c4-"
 	zdc = "!git -c color.status=always s | fzf --ansi -n2.. --multi --preview 'git dc $(cut -c4- <<< {})' | cut -c4-"
-	zco = "!(x=$(git zb);  [ \"$x\" ] && git co $x)"
-	zo  = "!(x=$(git zl);  [ \"$x\" ] && git o $x | less -R)"
-	za  = "!(x=$(git zd);  [ \"$x\" ] && git a $x)"
-	zr  = "!(x=$(git zdc); [ \"$x\" ] && git r $x)"
-	zsp = "!(x=$(git zs);  [ \"$x\" ] && git sp $x)"
-	zsa = "!(x=$(git zs);  [ \"$x\" ] && git sa $x)"
-	zsd = "!(x=$(git zs);  [ \"$x\" ] && git sd $x)"
+	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
+	zo  = "!f(){(local x=$(git zl);  [ \"$x\" ] && git o $x \"$@\" | less -R)};f"
+	za  = "!f(){(local x=$(git zd);  [ \"$x\" ] && git a $x \"$@\")};f"
+	zr  = "!f(){(local x=$(git zdc); [ \"$x\" ] && git r $x \"$@\")};f"
+	zsp = "!f(){(local x=$(git zs);  [ \"$x\" ] && git sp $x \"$@\")};f"
+	zsa = "!f(){(local x=$(git zs);  [ \"$x\" ] && git sa $x \"$@\")};f"
+	zsd = "!f(){(local x=$(git zs);  [ \"$x\" ] && git sd $x \"$@\")};f"
