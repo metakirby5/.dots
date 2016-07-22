@@ -1,7 +1,9 @@
 if which fzf &>/dev/null; then
   # Show hidden files
   export FZF_DEFAULT_COMMAND='\
-    ag --hidden -l 2>/dev/null || find -L . 2>/dev/null | cut -c3-'
+    git ls-tree -r --name-only HEAD ||\
+    ag --hidden -l 2>/dev/null ||\
+    find -L . 2>/dev/null | cut -c3-'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
   # Color scheme and file preview
