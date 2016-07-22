@@ -11,7 +11,7 @@ if which fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS="\
     --color 'fg:7,bg:-1,hl:3,fg+:7,bg+:-1,hl+:3,info:2,prompt:4,pointer:3,marker:2,spinner:0,header:5'\
     --preview '(x={}; x=\"\${x/#\~/$HOME}\"; pygmentize \"\$x\" || cat \"\$x\") 2>/dev/null'\
-    --bind 'ctrl-i:toggle-preview,ctrl-s:toggle-sort'"
+    --bind 'ctrl-l:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute[(x={}; x=\"\${x/#\~/$HOME}\"; pygmentize \"\$x\" 2>/dev/null || cat \"\$x\") | less -R >&2]'"
   export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
   export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview="
   export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview="
