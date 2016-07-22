@@ -61,7 +61,7 @@
 
 	# reset
 	r  = reset HEAD
-	rs = reset --soft HEAD
+	rh = reset HEAD~
 
 	# stash
 	su = stash save
