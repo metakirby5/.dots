@@ -96,6 +96,7 @@
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
+	z   = "!(git ls-files | fzf)"
 	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --with-nth=2.. --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
 	zs  = "!(c='git ss $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
