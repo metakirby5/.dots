@@ -215,6 +215,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
 
       let g:fzf_files_options =
         \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
+      let g:fzf_buffers_jump = 1
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
       noremap <silent> <leader>a  <esc>:Ag<cr>
