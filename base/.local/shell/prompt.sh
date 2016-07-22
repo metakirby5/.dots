@@ -155,20 +155,20 @@ __mk5_set_prompt() {
   # Apply color
   mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
 
-  PS1=""                   # Clear PS1
-  PS1+="$__mk5_blue$USER"  # User
-  PS1+="$hostname"         # (Hostname)
-  PS1+="$__mk5_b_blue, "   # Separator
-  PS1+="$virtualenv_info"  # (Virtualenv)
-  PS1+="$git_info"         # (Git)
-  PS1+="$mypwd"            # Abbreviated PWD
-  PS1+="\n"                # Newline
-  PS1+="$pcharcolor$pchar" # Prompt
-  PS1+="$__mk5_normal "    # Clear colors
+  PS1=""                     # Clear PS1
+  PS1+="$__mk5_blue$USER"    # User
+  PS1+="$hostname"           # (Hostname)
+  PS1+="$__mk5_b_blue, "     # Separator
+  PS1+="$virtualenv_info"    # (Virtualenv)
+  PS1+="$git_info"           # (Git)
+  PS1+="$mypwd"              # Abbreviated PWD
+  PS1+="\n"                  # Newline
+  PS1+="$pcharcolor$pchar"   # Prompt
+  PS1+="$__mk5_normal "      # Clear colors
 
-  PS2=""                   # Clear PS2
+  PS2=""                     # Clear PS2
   PS2+="$__mk5_yellow$pchar" # Blue continuation line
-  PS2+="$__mk5_normal "    # Clear colors
+  PS2+="$__mk5_normal "      # Clear colors
 }
 
 if ! [[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]]; then
