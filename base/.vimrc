@@ -702,22 +702,22 @@ endif " }}}
     noremap <leader>= <C-w>=
 
     " ^[hjkl] - Switch to split
+    noremap <leader>h <C-W>h
     noremap <leader>j <C-W>j
     noremap <leader>k <C-W>k
-    noremap <leader>h <C-W>l
-    noremap <leader>l <C-W>h
+    noremap <leader>l <C-W>l
 
     " ,[HJKL] - Move split
+    noremap <leader>H <C-W>H
     noremap <leader>J <C-W>J
     noremap <leader>K <C-W>K
-    noremap <leader>H <C-W>H
     noremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
+    noremap <silent> <c-h> <esc>:vertical resize -1<cr>
     noremap <silent> <c-j> <esc>:resize +1<cr>
     noremap <silent> <c-k> <esc>:resize -1<cr>
-    noremap <silent> <c-l> <esc>:vertical resize -1<cr>
-    noremap <silent> <c-h> <esc>:vertical resize +1<cr>
+    noremap <silent> <c-l> <esc>:vertical resize +1<cr>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
