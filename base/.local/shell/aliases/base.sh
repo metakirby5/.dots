@@ -19,7 +19,7 @@ alias restow='stow -R'
 alias tetris='bastet'
 alias ll='ls -l'
 alias la='ls -la'
-alias findr='find . -regex'
+alias findr='find -L . ! -type d -regex'
 alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
 alias map="tr '\n' '\0' | xargs -0"
@@ -27,6 +27,7 @@ alias g='git'
 alias h='history'
 alias zh='eval $(tac "$HISTFILE" | fzf --no-sort --preview= | tee -a "$HISTFILE")'
 alias q='fzf --multi | map'
+alias l='locate / | fzf --multi | map'
 
 # Prefs
 which nvim &>/dev/null && alias vim='nvim'
