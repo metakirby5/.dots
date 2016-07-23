@@ -231,11 +231,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
       " }}}
     " }}}
-    Plug 'sjl/gundo.vim'                    " Undo tree browser {{{
-      noremap <silent> <leader>u <esc>:GundoToggle<cr>
-      let g:gundo_preview_bottom = 1
-      let g:gundo_tree_statusline = ' %{&ft} %#Normal#'
-      let g:gundo_preview_statusline = ' %{&ft} %#Normal#'
+    Plug 'mbbill/undotree'                  " Undo tree browser {{{
+      noremap <silent> <leader>u <esc>:UndotreeToggle<cr>
+      let g:undotree_SetFocusWhenToggle = 1
+      let g:undotree_ShortIndicators = 1
     " }}}
     Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
       let g:multi_cursor_use_default_mapping=0
