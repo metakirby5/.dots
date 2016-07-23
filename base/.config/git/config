@@ -97,11 +97,11 @@
 
 	# fzf
 	z   = "!(git ls-files | fzf)"
-	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --with-nth=2.. --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --with-nth 2.. --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
 	zs  = "!(c='git ss $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
-	zd  = "!(c='git d  $(printf \"%s\n\" {} | cut -c4-)'; git -c color.status=always s | fzf --ansi -n2.. --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -c4-)"
-	zdc = "!(c='git dc $(printf \"%s\n\" {} | cut -c4-)'; git -c color.status=always s | fzf --ansi -n2.. --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -c4-)"
+	zd  = "!(c='p=\"$(git d  {})\"; [ ! \"$p\" ] && cat {} || echo \"$p\"'; git st --porcelain | grep '^.[^ ]'  | awk '{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
+	zdc = "!(c='p=\"$(git dc {})\"; [ ! \"$p\" ] && cat {} || echo \"$p\"'; git st --porcelain | grep '^[^ ?].' | awk '{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zci = "!f(){(local x=$(git zl);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zcd = "!f(){(local x=$(git zl);  [ \"$x\" ] && git d $x \"$@\")};f"
