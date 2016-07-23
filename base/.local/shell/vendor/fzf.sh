@@ -3,7 +3,8 @@ if which fzf &>/dev/null; then
   export FZF_DEFAULT_COMMAND='(\
     git ls-tree -r --name-only HEAD ||\
     ag --hidden -l ||\
-    find -L . | cut -c3- | tail -n+2\
+    find . -path "*/\.*" -prune -o -type f -print -o -type l -print \
+      2>/dev/null | cut -c3- \
     ) 2>/dev/null'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
