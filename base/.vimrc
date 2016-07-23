@@ -69,6 +69,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:limelight_conceal_ctermfg = 'darkgrey'
       let g:limelight_conceal_guifg = 'DarkGrey'
     " }}}
+    Plug 'junegunn/rainbow_parentheses.vim' " Themed rainbow parens {{{
+      au FileType lisp,clojure,scheme RainbowParentheses
+    " }}}
     Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
       set hlsearch
       let g:incsearch#auto_nohlsearch = 1
@@ -398,7 +401,7 @@ endif " }}}
     set ls=2                       " always show status line
     set lcs=tab:▸\ ,trail:·,nbsp:_ " whitespace characters
     set list                       " enable whitespace characters
-    let loaded_matchparen = 0      " this is slow
+    " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
