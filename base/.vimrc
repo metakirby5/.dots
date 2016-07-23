@@ -44,6 +44,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap ih <Plug>GitGutterTextObjectInnerVisual
       xmap ah <Plug>GitGutterTextObjectOuterVisual
     " }}}
+    Plug 'gummesson/stereokai.vim'          " Monokai for vim {{{
+    " }}}
     Plug 'junegunn/goyo.vim'                " Enable minimalism {{{
       function! s:goyo_enter()
         set noshowmode
@@ -217,7 +219,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'junegunn/fzf.vim'                 " Fuzzy find wrapper
 
       let g:fzf_files_options =
-        \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
+            \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
       let g:fzf_buffers_jump = 1
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
@@ -389,7 +391,11 @@ endif " }}}
 " Interface {{{
   " General {{{
     " Set color scheme
-    silent! colorscheme peachpuff
+    if has('gui_running')
+      silent! colorscheme stereokai
+    else
+      silent! colorscheme peachpuff
+    endif
 
     syntax on                      " Syntax highlighting
     set shortmess+=I               " no splash screen
@@ -523,7 +529,10 @@ endif " }}}
             \
             \ ctermbg=blue guibg=blue
     endfunction
-    call <SID>apply_highlights()
+
+    if !has('gui_running')
+      call <SID>apply_highlights()
+    endif
   " }}}
   " Status Line {{{
     " Utilities {{{
