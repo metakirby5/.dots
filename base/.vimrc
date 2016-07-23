@@ -111,19 +111,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         \ '']
       endif
     " }}}
-    Plug 'nathanaelkane/vim-indent-guides'  " Indent guides {{{
-      let g:indent_guides_enable_on_vim_startup = 1
-      let g:indent_guides_start_level = 2
-      let g:indent_guides_guide_size = 1
-      let g:indent_guides_auto_colors = 0
-      au VimEnter,Colorscheme *
-            \ :hi IndentGuidesOdd
-            \ ctermbg=black guibg=black
-      au VimEnter,Colorscheme *
-            \ :hi IndentGuidesEven
-            \ ctermbg=black guibg=black
-      nmap <silent> <leader>i <Plug>IndentGuidesToggle
-      let g:indent_guides_exclude_filetypes = ['help', 'startify']
+    Plug 'Yggdroot/indentLine'              " Indent guides {{{
+      let g:indentLine_color_term = 8
+      let g:indentLine_char = '│'
     " }}}
   " }}}
   " Completion {{{
@@ -405,7 +395,7 @@ endif " }}}
     set title                      " allow titles
     set titlestring=%f             " title is the filename
     set ls=2                       " always show status line
-    set lcs=tab:▸\ ,trail:·,nbsp:_ " whitespace characters
+    set lcs=tab:│\ ,trail:·,nbsp:_ " whitespace characters
     set list                       " enable whitespace characters
     " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
