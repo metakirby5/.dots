@@ -32,7 +32,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   call plug#begin(s:configdir . '/plugins')
   " }}}
   " Interface {{{
-    Plug 'airblade/vim-gitgutter'           " Git gutter {{{
+    " Git gutter {{{
+      Plug 'airblade/vim-gitgutter'
       let g:gitgutter_map_keys = 0
       nmap <leader>gn <Plug>GitGutterNextHunk
       nmap <leader>gp <Plug>GitGutterPrevHunk
@@ -44,9 +45,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap ih <Plug>GitGutterTextObjectInnerVisual
       xmap ah <Plug>GitGutterTextObjectOuterVisual
     " }}}
-    Plug 'gummesson/stereokai.vim'          " Monokai for vim {{{
+    " Monokai for vim {{{
+      Plug 'gummesson/stereokai.vim'
     " }}}
-    Plug 'junegunn/goyo.vim'                " Enable minimalism {{{
+    " Enable minimalism {{{
+      Plug 'junegunn/goyo.vim'
+            \, { 'on': 'Goyo' }
       function! s:goyo_enter()
         set noshowmode
         set noshowcmd
@@ -67,14 +71,36 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       autocmd! User GoyoEnter nested call <SID>goyo_enter()
       autocmd! User GoyoLeave nested call <SID>goyo_leave()
     " }}}
-    Plug 'junegunn/limelight.vim'           " Spotlight on text {{{
+    " Spotlight on text {{{
+      Plug 'junegunn/limelight.vim'
+            \, { 'on': 'Limelight' }
       let g:limelight_conceal_ctermfg = 'darkgrey'
       let g:limelight_conceal_guifg = 'DarkGrey'
     " }}}
-    Plug 'junegunn/rainbow_parentheses.vim' " Themed rainbow parens {{{
+    " Themed rainbow parens {{{
+      Plug 'junegunn/rainbow_parentheses.vim'
+            \, { 'for': [
+            \ 'lisp',
+            \ 'clojure',
+            \ 'scheme' ] }
       au FileType lisp,clojure,scheme RainbowParentheses
     " }}}
-    Plug 'haya14busa/incsearch.vim'         " Highlight all as searching {{{
+    " Highlight all as searching {{{
+      Plug 'haya14busa/incsearch.vim'
+            \, { 'on': [
+            \ '<Plug>(incsearch-forward)',
+            \ '<Plug>(incsearch-backward)',
+            \ '<Plug>(incsearch-nohl-n)',
+            \ '<Plug>(incsearch-nohl-N)',
+            \ '<Plug>(incsearch-nohl-*)',
+            \ '<Plug>(incsearch-nohl-#)',
+            \ '<Plug>(incsearch-nohl-g*)',
+            \ '<Plug>(incsearch-nohl-g#)' ] }
+            \| Plug 'haya14busa/incsearch-fuzzy.vim'
+              \, { 'on': [
+              \ '<Plug>(incsearch-fuzzy-/)',
+              \ '<Plug>(incsearch-fuzzy-?)',
+              \ '<Plug>(incsearch-fuzzy-stay)' ] }
       set hlsearch
       let g:incsearch#auto_nohlsearch = 1
       let g:incsearch#is_stay = 1
@@ -86,32 +112,32 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       map #  <Plug>(incsearch-nohl-#)
       map g* <Plug>(incsearch-nohl-g*)
       map g# <Plug>(incsearch-nohl-g#)
-
-      Plug 'haya14busa/incsearch-fuzzy.vim'   " Fuzzy search {{{
-        map z/ <Plug>(incsearch-fuzzy-/)
-        map z? <Plug>(incsearch-fuzzy-?)
-        map zg/ <Plug>(incsearch-fuzzy-stay)
-      " }}}
+      map z/ <Plug>(incsearch-fuzzy-/)
+      map z? <Plug>(incsearch-fuzzy-?)
+      map zg/ <Plug>(incsearch-fuzzy-stay)
     " }}}
-    Plug 'Konfekt/FastFold'                 " Faster folder {{{
+    " Faster folder {{{
+      Plug 'Konfekt/FastFold'
     " }}}
-    Plug 'mhinz/vim-startify'               " Start screen {{{
+    " Start screen {{{
+      Plug 'mhinz/vim-startify'
       let g:startify_change_to_vcs_root = 1
       if has('nvim')
         let g:startify_custom_header = [
-        \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
-        \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
-        \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
-        \ '']
+              \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
+              \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
+              \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
+              \ '']
       else
         let g:startify_custom_header = [
-        \ '   ╻ ╻╻┏┳┓',
-        \ '   ┃┏┛┃┃┃┃',
-        \ '   ┗┛ ╹╹ ╹',
-        \ '']
+              \ '   ╻ ╻╻┏┳┓',
+              \ '   ┃┏┛┃┃┃┃',
+              \ '   ┗┛ ╹╹ ╹',
+              \ '']
       endif
     " }}}
-    Plug 'Yggdroot/indentLine'              " Indent guides {{{
+    " Indent guides {{{
+      Plug 'Yggdroot/indentLine'
       let g:indentLine_color_term = 8
       let g:indentLine_char = '│'
     " }}}
@@ -161,52 +187,55 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Operators {{{
-    Plug 'junegunn/vim-easy-align'          " Align with ga {{{
+    " Align with ga {{{
+      Plug 'junegunn/vim-easy-align'
+            \, { 'on': '<Plug>(EasyAlign)' }
       xmap ga <Plug>(EasyAlign)
       nmap ga <Plug>(EasyAlign)
     " }}}
-    Plug 'justinmk/vim-sneak'               " Two-character f and t {{{
+    " Two-character f and t {{{
+      Plug 'justinmk/vim-sneak'
       let g:sneak#streak = 1
       let g:sneak#use_ic_scs = 1
     " }}}
-    Plug 'tommcdo/vim-exchange'             " Swap using cx {{{
+    " Swap using cx {{{
+      Plug 'tommcdo/vim-exchange'
     " }}}
-    Plug 'tpope/vim-repeat'                 " Make repeat work with plugins {{{
+    " Make repeat work with plugins {{{
+      Plug 'tpope/vim-repeat'
     " }}}
-    Plug 'tpope/vim-speeddating'            " ^a and ^x for dates {{{
+    " ^a and ^x for dates {{{
+      Plug 'tpope/vim-speeddating'
     " }}}
-    Plug 'tpope/vim-surround'               " Surround with... {{{
-    " }}}
-  " }}}
-  " Text Objects {{{
-    Plug 'glts/vim-textobj-comment'         " Comments {{{
-    " }}}
-    Plug 'kana/vim-textobj-function'        " Functions {{{
-      Plug 'thinca/vim-textobj-function-javascript' " Javascript {{{
-      " }}}
-    " }}}
-    Plug 'kana/vim-textobj-user'            " User-defined {{{
-      Plug 'kana/vim-textobj-indent'          " Indentation levels {{{
-      " }}}
-    " }}}
-    Plug 'reedes/vim-textobj-sentence'      " Better sentences {{{
-    " }}}
-    Plug 'wellle/targets.vim'               " More delimiters {{{
+    " Surround with... {{{
+      Plug 'tpope/vim-surround'
     " }}}
   " }}}
   " Utility {{{
-    Plug 'bronson/vim-visual-star-search'   " Allow * and # on visual {{{
+    " Allow * and # on visual {{{
+      Plug 'bronson/vim-visual-star-search'
     " }}}
-    Plug 'mattn/emmet-vim'                  " Emmet {{{
-      let g:user_emmet_leader_key='<c-m>'
-      let g:user_emmet_install_global = 0
-      autocmd FileType html,css EmmetInstall
+    " Emmet {{{
+      Plug 'mattn/emmet-vim'
+            \, { 'for': ['html'] }
+      let g:user_emmet_leader_key='<c-e>'
     " }}}
-    Plug 'sheerun/vim-polyglot'             " Language packs {{{
+    " Language packs {{{
+      Plug 'sheerun/vim-polyglot'
     " }}}
-    Plug 'junegunn/fzf'                     " Fuzzy find engine {{{
-          \, { 'do': './install --bin' }
-      Plug 'junegunn/fzf.vim'                 " Fuzzy find wrapper
+    " Fuzzy find engine {{{
+      Plug 'junegunn/fzf'
+            \, { 'do': './install --bin' }
+            \| Plug 'junegunn/fzf.vim'
+              \, { 'on': [
+              \ 'History',
+              \ 'Files',
+              \ 'Ag',
+              \ 'Lines',
+              \ 'History',
+              \ 'Tags',
+              \ 'Helptags',
+              \ 'GFiles'] }
 
       let g:fzf_files_options =
             \ '--preview "(pygmentize {} || cat {}) 2>/dev/null"'
@@ -221,22 +250,29 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>gz <esc>:GFiles<cr>
       noremap <silent> <leader>gf <esc>:GFiles?<cr>
     " }}}
-    Plug 'junegunn/vim-peekaboo'            " Register preview {{{
+    " Register preview {{{
+      Plug 'junegunn/vim-peekaboo'
+      let g:peekaboo_delay = 100
     " }}}
-    Plug 'osyo-manga/vim-over'              " Better :%s/.../.../ {{{
+    " Better :%s/.../.../ {{{
+      Plug 'osyo-manga/vim-over'
+              \, { 'on': 'OverCommandLine' }
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
-    Plug 'Shougo/neosnippet'                " Snippets {{{
-      Plug 'Shougo/neosnippet-snippets'       " Snippets pack {{{
-      " }}}
+    " Snippets {{{
+      Plug 'Shougo/neosnippet'
+            \| Plug 'Shougo/neosnippet-snippets'
     " }}}
-    Plug 'mbbill/undotree'                  " Undo tree browser {{{
+    " Undo tree browser {{{
+      Plug 'mbbill/undotree'
+            \, { 'on': 'UndotreeToggle' }
       noremap <silent> <leader>u <esc>:UndotreeToggle<cr>
       let g:undotree_SetFocusWhenToggle = 1
       let g:undotree_ShortIndicators = 1
     " }}}
-    Plug 'terryma/vim-multiple-cursors'     " Multiple cursors {{{
+    " Multiple cursors {{{
+      Plug 'terryma/vim-multiple-cursors'
       let g:multi_cursor_use_default_mapping=0
       let g:multi_cursor_next_key='<C-c>'
       let g:multi_cursor_prev_key='<C-u>'
@@ -254,27 +290,27 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endif
       endfunction
     " }}}
-    Plug 'tomtom/tcomment_vim'              " Toggle comments {{{
+    " Toggle comments {{{
+      Plug 'tomtom/tcomment_vim'
     " }}}
-    Plug 'tpope/vim-fugitive'               " Git functions {{{
-    " }}}
-    Plug 'tpope/vim-sleuth'                 " Autodetect indentation {{{
-    " }}}
-    Plug 'vim-scripts/BufOnly.vim'          " Delete all buffers but this one {{{
-      noremap <silent> <leader>ba <esc>:BufOnly<cr>
+    " Autodetect indentation {{{
+      Plug 'tpope/vim-sleuth'
     " }}}
   " }}}
   " Automation {{{
-    Plug 'jiangmiao/auto-pairs'             " Automatically add delimiters {{{
+    " Automatically add delimiters {{{
+      Plug 'jiangmiao/auto-pairs'
       let g:AutoPairsShortcutToggle = ''
       let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0
       let g:AutoPairsMultilineClose = 0
     " }}}
-    Plug 'ludovicchabant/vim-gutentags'     " Auto-generate ctags {{{
+    " Auto-generate ctags {{{
+      Plug 'ludovicchabant/vim-gutentags'
     " }}}
-    Plug 'pbrisbin/vim-mkdir'               " Automatically mkdir {{{
+    " Automatically mkdir {{{
+      Plug 'pbrisbin/vim-mkdir'
     " }}}
   " }}}
   " Post-hooks {{{
@@ -282,77 +318,81 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Fallbacks {{{
 else
-  " Autocomplete {{{
-    set omnifunc=syntaxcomplete#Complete
-    inoremap <S-tab> <C-x><C-o>
-  " }}}
-  " Search {{{
-    noremap N Nzz
-    noremap n nzz
-    noremap // /\c
-    noremap ?? ?\c
-  " }}}
-  " Spellcheck {{{
-    noremap <leader>cw z=
-  " }}}
-  " Auto-insert Curlies {{{
-    inoremap {<cr> {<cr>}<C-o>O
-  " }}}
-  " Toggle Comments {{{
-    au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
-                                     \   let b:comment_leader = '# ' |
-                                     \ endif
+    " Syntax {{{
+      syntax on
+      filetype plugin indent on
+    " }}}
+    " Autocomplete {{{
+      set omnifunc=syntaxcomplete#Complete
+      inoremap <S-tab> <C-x><C-o>
+    " }}}
+    " Search {{{
+      noremap N Nzz
+      noremap n nzz
+      noremap // /\c
+      noremap ?? ?\c
+    " }}}
+    " Spellcheck {{{
+      noremap <leader>cw z=
+    " }}}
+    " Auto-insert Curlies {{{
+      inoremap {<cr> {<cr>}<C-o>O
+    " }}}
+    " Toggle Comments {{{
+      au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
+                                       \   let b:comment_leader = '# ' |
+                                       \ endif
 
-    au FileType c,cpp,java,scala          let b:comment_leader = '// '
-    au FileType javascript                let b:comment_leader = '// '
-    au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
-    au FileType conf,fstab                let b:comment_leader = '# '
-    au FileType tex                       let b:comment_leader = '% '
-    au FileType mail                      let b:comment_leader = '> '
-    au FileType vim                       let b:comment_leader = '" '
+      au FileType c,cpp,java,scala          let b:comment_leader = '// '
+      au FileType javascript                let b:comment_leader = '// '
+      au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
+      au FileType conf,fstab                let b:comment_leader = '# '
+      au FileType tex                       let b:comment_leader = '% '
+      au FileType mail                      let b:comment_leader = '> '
+      au FileType vim                       let b:comment_leader = '" '
 
-    function! StoreSearch()
-      let g:ps = getreg('/', 1)
-      let g:ps_t = getregtype('/')
-    endfunction
+      function! StoreSearch()
+        let g:ps = getreg('/', 1)
+        let g:ps_t = getregtype('/')
+      endfunction
 
-    function! RestoreSearch()
-      if !(exists('g:ps') && exists('g:ps_t'))
-        return
+      function! RestoreSearch()
+        if !(exists('g:ps') && exists('g:ps_t'))
+          return
+        endif
+
+        call setreg('/', g:ps, g:ps_t)
+      endfunction
+
+      noremap <silent> g> <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
+      noremap <silent> g< <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
+      xnoremap <silent> g> <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
+      xnoremap <silent> g< <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+    " }}}
+    " Toggle Distractions {{{
+      let g:minimal = 0
+      function! ToggleDistractions()
+        if !g:minimal
+          let g:minimal = 1
+          set noshowmode
+          set noruler
+          set showtabline=1
+          set nonu
+          set ls=0
+        else
+          let g:minimal = 0
+          set showmode
+          set ruler
+          set showtabline=2
+          set nu
+          set ls=2
+        endif
+      endfunction
+
+      if !exists(':DistractionsToggle')
+        command DistractionsToggle call ToggleDistractions()
       endif
-
-      call setreg('/', g:ps, g:ps_t)
-    endfunction
-
-    noremap <silent> g> <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
-    noremap <silent> g< <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-    xnoremap <silent> g> <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-    xnoremap <silent> g< <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
-  " }}}
-  " Toggle Distractions {{{
-    let g:minimal = 0
-    function! ToggleDistractions()
-      if !g:minimal
-        let g:minimal = 1
-        set noshowmode
-        set noruler
-        set showtabline=1
-        set nonu
-        set ls=0
-      else
-        let g:minimal = 0
-        set showmode
-        set ruler
-        set showtabline=2
-        set nu
-        set ls=2
-      endif
-    endfunction
-
-    if !exists(':DistractionsToggle')
-      command DistractionsToggle call ToggleDistractions()
-    endif
-  " }}}
+    " }}}
 endif " }}}
 " }}}
 " General {{{
@@ -386,7 +426,6 @@ endif " }}}
       silent! colorscheme peachpuff
     endif
 
-    syntax on                      " Syntax highlighting
     set shortmess+=I               " no splash screen
     set showmatch                  " show match when inserting {}, [], or ()
     set scrolloff=5                " keep at least 5 lines above/below
@@ -842,7 +881,6 @@ endif " }}}
     au BufNewFile,BufRead *.txt setlocal spell spelllang=en
   " }}}
   " Syntax / Filetype {{{
-    filetype plugin indent on
     set smarttab            " remove spaces grouped as tabs
     set autoindent          " copy indent from previous line
     set expandtab           " expand tabs into spaces
