@@ -166,23 +166,32 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         Plug 'ervandew/supertab'
       endif
     " }}}
+    " Snippets {{{
+      Plug 'SirVer/ultisnips'
+            \| Plug 'honza/vim-snippets'
+      let g:UltiSnipsExpandTrigger = '<c-s>'
+      let g:UltiSnipsJumpForwardTrigger = '<c-s>'
+      let g:UltiSnipsJumpBackwardTrigger = '<c-a>'
+    " }}}
     " Settings {{{
       if exists('g:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
         set completeopt-=preview
-        imap <expr><tab>    pumvisible() ?
-              \         "\<c-n>" :
-              \         "\<tab>"
-        imap <expr><cr>     pumvisible() ?
-              \         neosnippet#expandable() ?
-              \           neosnippet#mappings#expand_impl() :
-              \           "\<c-y>" :
-              \         neosnippet#jumpable() ?
-              \           neosnippet#mappings#jump_impl() :
-              \           "\<cr>"
-        imap <expr><bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
-        imap <expr><s-tab>  pumvisible() ? "\<c-p>" : "\<tab>"
+        inoremap <expr> <tab>    pumvisible() ? "\<c-n>" : "\<tab>"
+        inoremap <expr> <s-tab>  pumvisible() ? "\<c-p>" : "\<s-tab>"
+        inoremap <expr> <bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
+        inoremap <silent> <cr>   <c-r>=<SID>smart_cr()<cr>
+
+        let g:ulti_expand_or_jump_res = 0
+        function! s:smart_cr()
+          silent! call UltiSnips#ExpandSnippetOrJump()
+          if g:ulti_expand_or_jump_res
+            return ""
+          else
+            return pumvisible() ? "\<c-y>" : "\<cr>"
+          endif
+        endfunction
       endif
     " }}}
   " }}}
@@ -193,19 +202,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap ga <Plug>(EasyAlign)
       nmap ga <Plug>(EasyAlign)
     " }}}
-    " Two-character f and t {{{
-      Plug 'justinmk/vim-sneak'
-      let g:sneak#streak = 1
-      let g:sneak#use_ic_scs = 1
-    " }}}
-    " Swap using cx {{{
-      Plug 'tommcdo/vim-exchange'
-    " }}}
     " Make repeat work with plugins {{{
       Plug 'tpope/vim-repeat'
-    " }}}
-    " ^a and ^x for dates {{{
-      Plug 'tpope/vim-speeddating'
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
@@ -260,10 +258,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
-    " Snippets {{{
-      Plug 'Shougo/neosnippet'
-            \| Plug 'Shougo/neosnippet-snippets'
-    " }}}
     " Undo tree browser {{{
       Plug 'mbbill/undotree'
             \, { 'on': 'UndotreeToggle' }
@@ -291,7 +285,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endfunction
     " }}}
     " Toggle comments {{{
-      Plug 'tomtom/tcomment_vim'
+      Plug 'tpope/vim-commentary'
     " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
@@ -311,6 +305,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Automatically mkdir {{{
       Plug 'pbrisbin/vim-mkdir'
+    " }}}
+    " Automatically add endif, etc. {{{
+      Plug 'tpope/vim-endwise'
     " }}}
   " }}}
   " Post-hooks {{{
