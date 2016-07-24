@@ -47,6 +47,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Monokai for vim {{{
       Plug 'gummesson/stereokai.vim'
+      " TODO on-trigger?
     " }}}
     " Enable minimalism {{{
       Plug 'junegunn/goyo.vim'
@@ -118,6 +119,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Faster folder {{{
       Plug 'Konfekt/FastFold'
+      " TODO on-trigger?
     " }}}
     " Start screen {{{
       Plug 'mhinz/vim-startify'
@@ -169,8 +171,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Snippets {{{
       Plug 'SirVer/ultisnips'
             \| Plug 'honza/vim-snippets'
-      let g:UltiSnipsExpandTrigger = '<c-s>'
-      let g:UltiSnipsJumpForwardTrigger = '<c-s>'
+      let g:UltiSnipsExpandTrigger = '<c-q>'
+      let g:UltiSnipsJumpForwardTrigger = '<c-q>'
       let g:UltiSnipsJumpBackwardTrigger = '<c-a>'
     " }}}
     " Settings {{{
@@ -204,14 +206,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Make repeat work with plugins {{{
       Plug 'tpope/vim-repeat'
+      " TODO on-trigger
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
+      " TODO on-trigger
     " }}}
   " }}}
   " Utility {{{
     " Allow * and # on visual {{{
       Plug 'bronson/vim-visual-star-search'
+      " TODO on-trigger
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
@@ -250,6 +255,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
+      " TODO on-trigger
       let g:peekaboo_delay = 100
     " }}}
     " Better :%s/.../.../ {{{
@@ -267,6 +273,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
+      " TODO on-trigger
       let g:multi_cursor_use_default_mapping=0
       let g:multi_cursor_next_key='<C-c>'
       let g:multi_cursor_prev_key='<C-u>'
@@ -286,6 +293,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Toggle comments {{{
       Plug 'tpope/vim-commentary'
+      " TODO on-trigger
     " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
@@ -908,6 +916,9 @@ endif " }}}
       command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
             \ | diffthis | wincmd p | diffthis
     endif
+
+    " Use w!! to write as sudo
+    cmap w!! w !sudo tee > /dev/null %
 
     " ,r - Run using filetype
     xnoremap <expr> <leader>r
