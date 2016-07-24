@@ -52,7 +52,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         set noshowcmd
         set scrolloff=999
         Limelight
-        IndentGuidesDisable
+        IndentLinesDisable
       endfunction
 
       function! s:goyo_leave()
@@ -60,7 +60,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         set showcmd
         set scrolloff=5
         Limelight!
-        IndentGuidesEnable
+        IndentLinesEnable
         call <SID>apply_highlights()
       endfunction
 
@@ -775,7 +775,7 @@ endif " }}}
       hi FoldColumn ctermbg=NONE guibg=NONE
 
       " z<space> - toggle folds
-      noremap z<space> za
+      noremap zz za
 
       " The mode settings below all start with folds open
 
