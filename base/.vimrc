@@ -169,11 +169,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endif
     " }}}
     " Snippets {{{
-      Plug 'SirVer/ultisnips'
-            \| Plug 'honza/vim-snippets'
-      let g:UltiSnipsExpandTrigger = '<c-q>'
-      let g:UltiSnipsJumpForwardTrigger = '<c-q>'
-      let g:UltiSnipsJumpBackwardTrigger = '<c-a>'
+      if (version >= 704)
+        Plug 'SirVer/ultisnips'
+              \| Plug 'honza/vim-snippets'
+        let g:UltiSnipsExpandTrigger = '<c-q>'
+        let g:UltiSnipsJumpForwardTrigger = '<c-q>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-a>'
+      endif
     " }}}
     " Settings {{{
       if exists('g:completion_engine')
