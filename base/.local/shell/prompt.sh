@@ -69,19 +69,19 @@ __mk5_set_prompt() {
     git_info="$__mk5_purple$git_info"
 
     # Untracked
-    local git_unt="$(grep '^??' <<< "$git_st" | wc -l)"
+    local git_unt="$(grep '^??' <<< "$git_st" | wc -l | awk '{print$1}')"
     if [ "$git_unt" != 0 ]; then
       git_info+=" $__mk5_b_red$__mk5_char_unt$git_unt"
     fi
 
     # Modified
-    local git_mod="$(grep '^.[^ ?]' <<< "$git_st" | wc -l)"
+    local git_mod="$(grep '^.[^ ?]' <<< "$git_st" | wc -l | awk '{print$1}')"
     if [ "$git_mod" != 0 ]; then
       git_info+=" $__mk5_b_yellow$__mk5_char_mod$git_mod"
     fi
 
     # Staged
-    local git_add="$(grep '^[^ ?].' <<< "$git_st" | wc -l)"
+    local git_add="$(grep '^[^ ?].' <<< "$git_st" | wc -l | awk '{print$1}')"
     if [ "$git_add" != 0 ]; then
       git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
