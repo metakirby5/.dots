@@ -465,6 +465,12 @@ endif " }}}
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
+      " No tildes for empty lines
+      hi clear NonText | hi NonText
+            \
+            \ ctermfg=black guifg=black
+            \
+
       " Keep colors in visual
       hi clear Visual | hi Visual
             \ term=reverse cterm=reverse gui=reverse
@@ -563,6 +569,10 @@ endif " }}}
       hi clear Folded | hi Folded
             \
             \ ctermfg=blue guifg=blue
+            \
+      hi clear FoldColumn | hi FoldColumn
+            \
+            \ ctermbg=NONE guibg=NONE
             \
 
       " Completion menu
@@ -835,14 +845,8 @@ endif " }}}
     if exists("+foldenable")
       set foldenable
 
-      " Enable fold column
-      " set foldcolumn=1
-      hi FoldColumn ctermbg=NONE guibg=NONE
-
       " z<space> - toggle folds
       noremap zz za
-
-      " The mode settings below all start with folds open
 
       " zm - Marker mode
       noremap zm <esc>:set foldmethod=marker<cr>zR
@@ -855,9 +859,6 @@ endif " }}}
 
       " Use syntax mode by default
       set foldmethod=syntax
-
-      " Unfold everything at start
-      set foldlevel=99
     endif
   " }}}
 " }}}
