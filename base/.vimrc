@@ -261,11 +261,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \. substitute(f, ' ', '\\ ', 'g')
       endfunction
 
-      command! -nargs=+ GGrep call fzf#run({ 
+      command! -nargs=+ GGrep call fzf#run({
             \ 'source':
-            \ '(cd "$(git rev-parse --show-toplevel)" && git grep -niI --untracked "<args>")',
+            \ '(cd "$(git rev-parse --show-toplevel)" && git grep --color=always -niI --untracked "<args>")',
             \ 'sink': function('<sid>git_grep_handler'),
-            \ 'options': '--multi',
+            \ 'options': '--ansi --multi',
             \ })
     " }}}
     " Register preview {{{
