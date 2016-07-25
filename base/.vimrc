@@ -324,7 +324,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:AutoPairsMultilineClose = 0
     " }}}
     " Auto-generate ctags {{{
-      Plug 'ludovicchabant/vim-gutentags'
+      if (version >= 704)
+        Plug 'ludovicchabant/vim-gutentags'
+      endif
     " }}}
     " Automatically mkdir {{{
       Plug 'pbrisbin/vim-mkdir'
