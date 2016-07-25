@@ -118,7 +118,7 @@ __mk5_set_prompt() {
   local gitbase
   if [ "$gitpath" ]; then
     gitbase="$(basename "$gitpath")"
-    mypwd="$gitbase$(sed "s|^$gitpath||i" <<< "$(pwd -P)")"
+    mypwd="$gitbase$(perl -pe "s|^$gitpath||i" <<< "$(pwd -P)")"
   else
     mypwd="$PWD"
   fi
@@ -150,7 +150,7 @@ __mk5_set_prompt() {
   fi
 
   # Shorten $HOME
-  mypwd="$(echo "$mypwd" | sed "s|^$__mk5_home|~|")"
+  mypwd="$(echo "$mypwd" | perl -pe "s|^$__mk5_home|~|")"
 
   # Apply color
   mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
