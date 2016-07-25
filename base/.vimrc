@@ -87,35 +87,37 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       au FileType lisp,clojure,scheme RainbowParentheses
     " }}}
     " Highlight all as searching {{{
-      Plug 'haya14busa/incsearch.vim'
-            \, { 'on': [
-            \ '<Plug>(incsearch-forward)',
-            \ '<Plug>(incsearch-backward)',
-            \ '<Plug>(incsearch-nohl-n)',
-            \ '<Plug>(incsearch-nohl-N)',
-            \ '<Plug>(incsearch-nohl-*)',
-            \ '<Plug>(incsearch-nohl-#)',
-            \ '<Plug>(incsearch-nohl-g*)',
-            \ '<Plug>(incsearch-nohl-g#)' ] }
-            \| Plug 'haya14busa/incsearch-fuzzy.vim'
+      if (version >= 704)
+        Plug 'haya14busa/incsearch.vim'
               \, { 'on': [
-              \ '<Plug>(incsearch-fuzzy-/)',
-              \ '<Plug>(incsearch-fuzzy-?)',
-              \ '<Plug>(incsearch-fuzzy-stay)' ] }
-      set hlsearch
-      let g:incsearch#auto_nohlsearch = 1
-      let g:incsearch#is_stay = 1
-      map /  <Plug>(incsearch-forward)
-      map ?  <Plug>(incsearch-backward)
-      map n  <Plug>(incsearch-nohl-n)
-      map N  <Plug>(incsearch-nohl-N)
-      map *  <Plug>(incsearch-nohl-*)
-      map #  <Plug>(incsearch-nohl-#)
-      map g* <Plug>(incsearch-nohl-g*)
-      map g# <Plug>(incsearch-nohl-g#)
-      map z/ <Plug>(incsearch-fuzzy-/)
-      map z? <Plug>(incsearch-fuzzy-?)
-      map zg/ <Plug>(incsearch-fuzzy-stay)
+              \ '<Plug>(incsearch-forward)',
+              \ '<Plug>(incsearch-backward)',
+              \ '<Plug>(incsearch-nohl-n)',
+              \ '<Plug>(incsearch-nohl-N)',
+              \ '<Plug>(incsearch-nohl-*)',
+              \ '<Plug>(incsearch-nohl-#)',
+              \ '<Plug>(incsearch-nohl-g*)',
+              \ '<Plug>(incsearch-nohl-g#)' ] }
+              \| Plug 'haya14busa/incsearch-fuzzy.vim'
+                \, { 'on': [
+                \ '<Plug>(incsearch-fuzzy-/)',
+                \ '<Plug>(incsearch-fuzzy-?)',
+                \ '<Plug>(incsearch-fuzzy-stay)' ] }
+        set hlsearch
+        let g:incsearch#auto_nohlsearch = 1
+        let g:incsearch#is_stay = 1
+        map /  <Plug>(incsearch-forward)
+        map ?  <Plug>(incsearch-backward)
+        map n  <Plug>(incsearch-nohl-n)
+        map N  <Plug>(incsearch-nohl-N)
+        map *  <Plug>(incsearch-nohl-*)
+        map #  <Plug>(incsearch-nohl-#)
+        map g* <Plug>(incsearch-nohl-g*)
+        map g# <Plug>(incsearch-nohl-g#)
+        map z/ <Plug>(incsearch-fuzzy-/)
+        map z? <Plug>(incsearch-fuzzy-?)
+        map zg/ <Plug>(incsearch-fuzzy-stay)
+      endif
     " }}}
     " Faster folder {{{
       Plug 'Konfekt/FastFold'
