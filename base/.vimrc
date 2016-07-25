@@ -245,13 +245,28 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:fzf_buffers_jump = 1
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
-      noremap <silent> <leader>a  <esc>:Ag<cr>
+      noremap          <leader>a  <esc>:Ag<space>
       noremap <silent> <leader>q  <esc>:Lines<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
       noremap <silent> <leader>]  <esc>:exec("Tags '".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
       noremap <silent> <leader>gz <esc>:GFiles<cr>
       noremap <silent> <leader>gf <esc>:GFiles?<cr>
+      noremap          <leader>gq <esc>:GGrep<space>
+
+      function! s:git_grep_handler(line)
+        let parts = split(a:line, ':')
+        let [f, l] = parts[0 : 1]
+        execute 'e +' . l . ' `git rev-parse --show-toplevel`/'
+              \. substitute(f, ' ', '\\ ', 'g')
+      endfunction
+
+      command! -nargs=+ GGrep call fzf#run({ 
+            \ 'source':
+            \ '(cd "$(git rev-parse --show-toplevel)" && git grep -niI --untracked "<args>")',
+            \ 'sink': function('<sid>git_grep_handler'),
+            \ 'options': '--multi',
+            \ })
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
