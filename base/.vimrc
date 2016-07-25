@@ -249,8 +249,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:fzf_buffers_jump = 1
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
-      noremap          <leader>a  <esc>:Ag<space>
-      noremap <silent> <leader>q  <esc>:Lines<cr>
+      noremap          <leader>q  <esc>:Ag<space>
+      noremap <silent> <leader>bq <esc>:Lines<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
       noremap <silent> <leader>]  <esc>:exec("Tags '".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
