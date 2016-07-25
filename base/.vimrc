@@ -39,7 +39,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nmap <leader>gp <Plug>GitGutterPrevHunk
       nmap <leader>ga <Plug>GitGutterStageHunk
       nmap <leader>gu <Plug>GitGutterUndoHunk
-      nmap <leader>gs <Plug>GitGutterPreviewHunk
+      nmap <leader>go <Plug>GitGutterPreviewHunk
       omap ih <Plug>GitGutterTextObjectInnerPending
       omap ah <Plug>GitGutterTextObjectOuterPending
       xmap ih <Plug>GitGutterTextObjectInnerVisual
@@ -251,7 +251,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>]  <esc>:exec("Tags '".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
       noremap <silent> <leader>gz <esc>:GFiles<cr>
-      noremap <silent> <leader>gf <esc>:GFiles?<cr>
+      noremap <silent> <leader>gs <esc>:GFiles?<cr>
       noremap          <leader>gq <esc>:GGrep<space>
 
       function! s:git_grep_handler(line)
