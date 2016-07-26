@@ -727,6 +727,12 @@ endif " }}}
       silent! let &t_SI = "\<Esc>[5 q" " INSERT:  Flashing bar
     endif
   " }}}
+  " Help Splits {{{
+    augroup HELP_SPLITS
+      au!
+      au FileType help wincmd L | vert resize 80
+    augroup END
+  " }}}
 " }}}
 " Navigation {{{
   " General {{{
