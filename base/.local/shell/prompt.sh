@@ -22,6 +22,7 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 __mk5_char_usr='>'
 __mk5_char_root='#'
+__mk5_char_jobs='&'
 __mk5_char_unt='-'
 __mk5_char_mod='*'
 __mk5_char_add='+'
@@ -57,6 +58,13 @@ __mk5_set_prompt() {
   local hostname
   [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
 
+  # Display job count
+  local jobs_info
+  local jobs_count="$(jobs -p | wc -l)"
+  if [ "$jobs_count" != 0 ]; then
+    jobs_info="$__mk5_yellow$__mk5_char_jobs$jobs_count$__mk5_b_yellow, "
+  fi
+
   # Git stuff (mostly in bash for speed)
   local git_info
   local git_path="$PWD"
@@ -65,7 +73,7 @@ __mk5_set_prompt() {
   done
 
   if [ "$git_path" ]; then
-    git_info="$(cat "$git_path/.git/HEAD")"
+    read git_info < "$git_path/.git/HEAD"
 
     if [[ "$git_info" == ref:* ]]; then
       git_info="${git_info##*/}" # ref name
@@ -142,8 +150,8 @@ __mk5_set_prompt() {
   # Virtualenv = blue
   local virtualenv_info
   if [ "$VIRTUAL_ENV" ]; then
-    local envpath="$(cat $VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME \
-      2>/dev/null)"
+    local envpath
+    read envpath < "$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
 
     if [ ! "$envpath" ]; then
       virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
@@ -171,6 +179,7 @@ __mk5_set_prompt() {
   PS1+="$__mk5_blue$USER"    # User
   PS1+="$hostname"           # (Hostname)
   PS1+="$__mk5_b_blue, "     # Separator
+  PS1+="$jobs_info"          # (Jobs)
   PS1+="$virtualenv_info"    # (Virtualenv)
   PS1+="$git_info"           # (Git)
   PS1+="$mypwd"              # Abbreviated PWD
