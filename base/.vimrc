@@ -20,9 +20,11 @@
 " Plugins {{{
   " Setup {{{
 if empty(glob(s:configdir . '/autoload/plug.vim'))
-  exec '!curl -fLo ' . s:configdir . '/autoload/plug.vim --create-dirs
+  let s:plugfile = s:configdir . '/autoload/plug.vim'
+  exec 'silent !curl -fLo ' . s:plugfile . ' --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+  exec 'source ' . s:plugfile
+  au VimEnter * PlugInstall
 endif
 
 if !empty(glob(s:configdir . '/autoload/plug.vim'))
