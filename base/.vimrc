@@ -88,20 +88,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Highlight all as searching {{{
       if (version >= 704)
         Plug 'haya14busa/incsearch.vim'
-              \, { 'on': [
-              \ '<Plug>(incsearch-forward)',
-              \ '<Plug>(incsearch-backward)',
-              \ '<Plug>(incsearch-nohl-n)',
-              \ '<Plug>(incsearch-nohl-N)',
-              \ '<Plug>(incsearch-nohl-*)',
-              \ '<Plug>(incsearch-nohl-#)',
-              \ '<Plug>(incsearch-nohl-g*)',
-              \ '<Plug>(incsearch-nohl-g#)' ] }
+              \, { 'on': '<Plug>(incsearch' }
               \| Plug 'haya14busa/incsearch-fuzzy.vim'
-                \, { 'on': [
-                \ '<Plug>(incsearch-fuzzy-/)',
-                \ '<Plug>(incsearch-fuzzy-?)',
-                \ '<Plug>(incsearch-fuzzy-stay)' ] }
+                \, { 'on': '<Plug>(incsearch-fuzzy' }
         set hlsearch
         let g:incsearch#auto_nohlsearch = 1
         let g:incsearch#is_stay = 1
