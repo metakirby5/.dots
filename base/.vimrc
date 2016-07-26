@@ -715,6 +715,9 @@ endif " }}}
     noremap 0 ^
     noremap ^ 0
 
+    " Shift-tab to go back in jumplist
+    noremap <s-tab> <c-o>
+
     " Return to last edit position when opening files
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
                    \   exe "normal! g`\"" |
