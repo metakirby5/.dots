@@ -119,20 +119,34 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Start screen {{{
       Plug 'mhinz/vim-startify'
+      let g:startify_list_order = [
+            \ ['   Files'], 'files',
+            \ ['   Directory'], 'dir',
+            \ ['   Bookmarks'], 'bookmarks',
+            \ ['   Sessions'], 'sessions',
+            \ ['   Commands'], 'commands']
       let g:startify_change_to_vcs_root = 1
+      let g:startify_relative_path = 1
+      let g:startify_session_autoload = 1
+      let g:startify_session_persistence = 1
+      let g:startify_session_delete_buffers = 1
+      let g:startify_session_sort = 1
       if has('nvim')
-        let g:startify_custom_header = [
-              \ '   ┏┓╻┏━╸┏━┓╻ ╻╻┏┳┓',
-              \ '   ┃┗┫┣╸ ┃ ┃┃┏┛┃┃┃┃',
-              \ '   ╹ ╹┗━╸┗━┛┗┛ ╹╹ ╹',
+        let g:startify_ascii = [
+              \ '            _     ',
+              \ '  ___ _  __(_)_ _ ',
+              \ ' / _ \ |/ / /  / \',
+              \ '/_//_/___/_/_/_/_/',
               \ '']
       else
-        let g:startify_custom_header = [
-              \ '   ╻ ╻╻┏┳┓',
-              \ '   ┃┏┛┃┃┃┃',
-              \ '   ┗┛ ╹╹ ╹',
+        let g:startify_ascii = [
+              \ '       _     ',
+              \ ' _  __(_)_ _ ',
+              \ '| |/ / /  / \',
+              \ '|___/_/_/_/_/',
               \ '']
       endif
+      let g:startify_custom_header = map(g:startify_ascii, "\"   \".v:val")
     " }}}
     " Indent guides {{{
       Plug 'Yggdroot/indentLine'
@@ -369,6 +383,8 @@ else
       noremap n nzz
       noremap // /\c
       noremap ?? ?\c
+      nnoremap <silent> <bslash> <esc>:%s/
+      vnoremap <silent> <bslash> <esc>gv:s/
     " }}}
     " Auto-insert Curlies {{{
       inoremap {<cr> {<cr>}<C-o>O
