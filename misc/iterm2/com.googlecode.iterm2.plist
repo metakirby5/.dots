@@ -986,7 +986,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>191 124 650 452 0 0 1680 1027 </string>
+	<string>0 598 1680 429 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -3995,7 +3995,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>B577FDBB-04C6-47AE-BD9A-C07F3BD9BB88</string>
 	<key>NoSyncLastTipTime</key>
-	<real>490862372.74397898</real>
+	<real>491195229.75569302</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4018,7 +4018,12 @@
 		<string>0008</string>
 		<string>0009</string>
 		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
 	</array>
+	<key>OnlyWhenMoreTabs</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -4054,6 +4059,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/echan/.dots/misc/iterm2</string>
+	<key>PromptOnQuit</key>
+	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
@@ -4065,7 +4072,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-22T08:31:16Z</date>
+	<date>2016-07-26T09:26:14Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
