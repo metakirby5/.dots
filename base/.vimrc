@@ -267,6 +267,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ 'options': '--ansi --multi',
             \ })
     " }}}
+    " Emojis {{{
+      Plug 'junegunn/vim-emoji'
+            \, { 'for': ['markdown', 'gitcommit'] }
+      au FileType markdown,gitcommit setlocal completefunc=emoji#complete
+    " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
       let g:peekaboo_delay = 100
@@ -936,7 +941,7 @@ endif " }}}
     " Enable spell check for text files
     au BufNewFile,BufRead *.txt setlocal spell spelllang=en
   " }}}
-  " Syntax / Filetype {{{
+  " Syntax / FileType {{{
     set smarttab            " remove spaces grouped as tabs
     set autoindent          " copy indent from previous line
     set expandtab           " expand tabs into spaces
@@ -957,7 +962,7 @@ endif " }}}
     au Syntax asm setlocal shiftwidth=8
 
     " crontab - no backups
-    au filetype crontab setlocal nobackup nowritebackup
+    au FileType crontab setlocal nobackup nowritebackup
   " }}}
 " }}}
 " Utilities {{{

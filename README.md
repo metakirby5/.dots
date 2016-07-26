@@ -16,7 +16,7 @@ Here's what you'll need...
 - metakirby5/scripts (somewhat optional)
 - Packages from relevant managers (`~/.local/deps/*`)
 
-### OS X
+### OS X :bu
 
 - Xcode
 - brew
