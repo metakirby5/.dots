@@ -467,7 +467,7 @@ endif " }}}
     set title                      " allow titles
     set titlestring=%f             " title is the filename
     set ls=2                       " always show status line
-    set lcs=tab:│\ ,trail:·,nbsp:_ " whitespace characters
+    set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
     set list                       " enable whitespace characters
     " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
@@ -476,7 +476,7 @@ endif " }}}
       " No tildes for empty lines
       hi clear NonText | hi NonText
             \
-            \ ctermfg=black guifg=black
+            \ ctermfg=darkgrey guifg=darkgrey
             \
 
       " Keep colors in visual
@@ -895,9 +895,10 @@ endif " }}}
     " Format options:
     "   t - Wrap text using textwidth
     "   cro - Auto-insert comment leader when newlining
+    "   j - Exclude comment leader when joining lines
     "   q - Enable formatting with 'gq'
     "   1 - Break lines before one-letter words
-    au BufNewFile,BufRead * setlocal fo=tcroq1
+    au BufNewFile,BufRead * setlocal fo=tcrojq1
     set linebreak " line break only at breaking characters
     set tw=78     " default textwidth
 
