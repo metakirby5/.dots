@@ -748,7 +748,7 @@ endif " }}}
   " Help Splits {{{
     augroup HELP_SPLITS
       au!
-      au FileType help wincmd L | vert resize 80
+      au FileType help wincmd L | vert resize 78
     augroup END
   " }}}
 " }}}
