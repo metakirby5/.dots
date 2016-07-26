@@ -57,11 +57,22 @@ __mk5_set_prompt() {
   local hostname
   [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
 
-  # Git stuff
-  local git_info="$(git symbolic-ref --quiet --short HEAD 2>/dev/null ||\
-    git rev-parse --short HEAD 2>/dev/null)"
+  # Git stuff (mostly in bash for speed)
+  local git_info
+  local git_path="$PWD"
+  until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
+    git_path="${git_path%/*}"
+  done
 
-  if [ "$git_info" ]; then
+  if [ "$git_path" ]; then
+    git_info="$(cat "$git_path/.git/HEAD")"
+
+    if [[ "$git_info" == ref:* ]]; then
+      git_info="${git_info##*/}" # ref name
+    else
+      git_info="${git_info::7}"  # short hash
+    fi
+
     local git_st="$(git status --porcelain)"
     local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
 
@@ -114,11 +125,10 @@ __mk5_set_prompt() {
 
   # Replace git path
   local mypwd
-  local gitpath="$(git rev-parse --show-toplevel 2>/dev/null)"
   local gitbase
-  if [ "$gitpath" ]; then
-    gitbase="$(basename "$gitpath")"
-    mypwd="$gitbase$(perl -pe "s|^$gitpath||i" <<< "$(pwd -P)")"
+  if [ "$git_path" ]; then
+    gitbase="$(basename "$git_path")"
+    mypwd="$gitbase$(perl -pe "s|^$git_path||i" <<< "$(pwd -P)")"
   else
     mypwd="$PWD"
   fi
@@ -136,7 +146,7 @@ __mk5_set_prompt() {
     if [ ! "$envpath" ]; then
       virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
     else
-      [ "$gitpath" ] && envpath="$gitbase${envpath##$gitpath}"
+      [ "$git_path" ] && envpath="$gitbase${envpath##$git_path}"
       case "$mypwd" in
         "$envpath"*)
           suffix="${mypwd##$envpath}"
@@ -150,7 +160,7 @@ __mk5_set_prompt() {
   fi
 
   # Shorten $HOME
-  mypwd="$(echo "$mypwd" | perl -pe "s|^$__mk5_home|~|")"
+  mypwd="$(perl -pe "s|^$__mk5_home|~|" <<< "$mypwd")"
 
   # Apply color
   mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
