@@ -204,11 +204,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:ulti_expand_or_jump_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippetOrJump()
-          if g:ulti_expand_or_jump_res
-            return ""
-          else
-            return pumvisible() ? "\<c-y>" : "\<cr>"
-          endif
+          return g:ulti_expand_or_jump_res ? "" :
+                \ (pumvisible() ? "\<c-y>" : "\<cr>")
         endfunction
       endif
     " }}}
@@ -1093,6 +1090,9 @@ endif " }}}
   " Indent-aware pasting
   noremap p ]p
   noremap P [p
+
+  " s-tab - Unindent
+  inoremap <s-tab> <c-d>
 
   " Y - Yank to clipboard
   noremap Y "+y
