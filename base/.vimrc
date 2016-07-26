@@ -926,6 +926,9 @@ endif " }}}
 
       " Use syntax mode by default
       set foldmethod=syntax
+
+      " Unfold everything at start
+      set foldlevel=99
     endif
   " }}}
 " }}}
