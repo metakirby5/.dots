@@ -470,6 +470,7 @@ endif " }}}
   set hlsearch                      " highlights all search hits
   set ignorecase                    " search without regards to case
   set smartcase                     " search with smart casing
+  set infercase                     " smart casing for keyword completion
   set gdefault                      " default global sub
   set tags=./tags;                  " recursive tag search
   set efm+=\ (%l)\ error:\ %m       " lint error format
@@ -480,6 +481,7 @@ endif " }}}
 " Interface {{{
   " General {{{
     " Set color scheme
+    set background=dark
     if has('gui_running')
       silent! colorscheme stereokai
     else
@@ -494,6 +496,7 @@ endif " }}}
     set titlestring=%f             " title is the filename
     set ls=2                       " always show status line
     set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
+    set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
     set list                       " enable whitespace characters
     " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
