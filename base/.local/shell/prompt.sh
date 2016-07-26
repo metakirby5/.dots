@@ -66,21 +66,28 @@ __mk5_set_prompt() {
   fi
 
   # Git stuff (mostly in bash for speed)
+  local mypwd="$PWD"
   local git_info
+  local git_base
   local git_path="$PWD"
   until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
     git_path="${git_path%/*}"
   done
 
   if [ "$git_path" ]; then
-    read git_info < "$git_path/.git/HEAD"
+    # Replace git path
+    git_base="$(basename "$git_path")"
+    mypwd="$git_base$(perl -pe "s|^$git_path||i" <<< "$(pwd -P)")"
 
+    # Get branch
+    read git_info < "$git_path/.git/HEAD"
     if [[ "$git_info" == ref:* ]]; then
       git_info="${git_info##*/}" # ref name
     else
       git_info="${git_info::7}"  # short hash
     fi
 
+    # Prepare info (TODO optimize)
     local git_st="$(git status --porcelain)"
     local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
 
@@ -133,16 +140,6 @@ __mk5_set_prompt() {
     git_info+="$__mk5_b_purple, "
   fi
 
-  # Replace git path
-  local mypwd
-  local gitbase
-  if [ "$git_path" ]; then
-    gitbase="$(basename "$git_path")"
-    mypwd="$gitbase$(perl -pe "s|^$git_path||i" <<< "$(pwd -P)")"
-  else
-    mypwd="$PWD"
-  fi
-
   # Colorize
   local suffix
   local pwdcolor="$__mk5_green"
@@ -150,16 +147,16 @@ __mk5_set_prompt() {
   # Virtualenv = blue
   local virtualenv_info
   if [ "$VIRTUAL_ENV" ]; then
-    local envpath
-    read envpath < "$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
+    local env_path
+    read env_path < "$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
 
-    if [ ! "$envpath" ]; then
+    if [ ! "$env_path" ]; then
       virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
     else
-      [ "$git_path" ] && envpath="$gitbase${envpath##$git_path}"
+      [ "$git_path" ] && env_path="$git_base${env_path##$git_path}"
       case "$mypwd" in
-        "$envpath"*)
-          suffix="${mypwd##$envpath}"
+        "$env_path"*)
+          suffix="${mypwd##$env_path}"
           pwdcolor="$__mk5_blue"
           ;;
         *)
