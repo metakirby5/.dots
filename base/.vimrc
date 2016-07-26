@@ -211,13 +211,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
-      " TODO on-trigger
     " }}}
   " }}}
   " Utility {{{
     " Allow * and # on visual {{{
       Plug 'bronson/vim-visual-star-search'
-      " TODO on-trigger
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
@@ -271,7 +269,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
-      " TODO on-trigger
       let g:peekaboo_delay = 100
     " }}}
     " Tag browser {{{
@@ -301,7 +298,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
-      " TODO on-trigger
       let g:multi_cursor_use_default_mapping=0
       let g:multi_cursor_next_key='<C-c>'
       let g:multi_cursor_prev_key='<C-u>'
@@ -321,7 +317,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Toggle comments {{{
       Plug 'tpope/vim-commentary'
-      " TODO on-trigger
     " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
