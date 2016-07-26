@@ -60,7 +60,7 @@ __mk5_set_prompt() {
 
   # Display job count
   local jobs_info
-  local jobs_count="$(jobs -p | wc -l)"
+  local jobs_count="$(jobs -p | wc -l | awk '{print$1}')"
   if [ "$jobs_count" != 0 ]; then
     jobs_info="$__mk5_yellow$__mk5_char_jobs$jobs_count$__mk5_b_yellow, "
   fi
