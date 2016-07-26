@@ -186,9 +186,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if (version >= 704)
         Plug 'SirVer/ultisnips'
               \| Plug 'honza/vim-snippets'
-        let g:UltiSnipsExpandTrigger = '<c-q>'
-        let g:UltiSnipsJumpForwardTrigger = '<c-q>'
-        let g:UltiSnipsJumpBackwardTrigger = '<c-a>'
+        let g:UltiSnipsExpandTrigger = '<c-bslash>'
+        let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
       endif
     " }}}
     " Settings {{{
@@ -197,14 +197,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:{s:completion_prefix}enable_smart_case = 1
         set completeopt-=preview
         inoremap <expr> <tab>    pumvisible() ? "\<c-n>" : "\<tab>"
-        inoremap <expr> <s-tab>  pumvisible() ? "\<c-p>" : "\<s-tab>"
+        inoremap <expr> <s-tab>  pumvisible() ? "\<c-p>" : "\<c-d>"
         inoremap <expr> <bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
         inoremap <silent> <cr>   <c-r>=<SID>smart_cr()<cr>
 
         let g:ulti_expand_or_jump_res = 0
         function! s:smart_cr()
-          silent! call UltiSnips#ExpandSnippetOrJump()
-          return g:ulti_expand_or_jump_res ? "" :
+          silent! call UltiSnips#ExpandSnippet()
+          return g:ulti_expand_res ? "" :
                 \ (pumvisible() ? "\<c-y>" : "\<cr>")
         endfunction
       endif
@@ -453,6 +453,10 @@ else
       if !exists(':DistractionsToggle')
         command DistractionsToggle call ToggleDistractions()
       endif
+    " }}}
+    " Shortcuts {{{
+      " s-tab - Unindent
+      inoremap <s-tab> <c-d>
     " }}}
 endif " }}}
 " }}}
@@ -1093,9 +1097,6 @@ endif " }}}
   " Indent-aware pasting
   noremap p ]p
   noremap P [p
-
-  " s-tab - Unindent
-  inoremap <s-tab> <c-d>
 
   " Y - Yank to clipboard
   noremap Y "+y
