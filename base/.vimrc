@@ -319,6 +319,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Automation {{{
+  " Automatically return to last edit position {{{
+      Plug 'dietsche/vim-lastplace'
+  " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
       let g:AutoPairsShortcutToggle = ''
@@ -363,6 +366,9 @@ else
     " }}}
     " Auto-insert Curlies {{{
       inoremap {<cr> {<cr>}<C-o>O
+    " }}}
+    " Automatically return to laste edit position {{{
+      au BufReadPost * silent! normal! g`"zv"`
     " }}}
     " Toggle Comments {{{
       au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
@@ -717,11 +723,6 @@ endif " }}}
 
     " Shift-tab to go back in jumplist
     noremap <s-tab> <c-o>
-
-    " Return to last edit position when opening files
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
-                   \   exe "normal! g`\"" |
-                   \ endif
   " }}}
   " Buffers {{{
     " ,b[p/n] - Switch to next/prev buffer
