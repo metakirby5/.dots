@@ -47,7 +47,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Monokai for vim {{{
       Plug 'gummesson/stereokai.vim'
-      " TODO on-trigger?
     " }}}
     " Enable minimalism {{{
       Plug 'junegunn/goyo.vim'
@@ -121,7 +120,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Faster folder {{{
       Plug 'Konfekt/FastFold'
-      " TODO on-trigger?
     " }}}
     " Start screen {{{
       Plug 'mhinz/vim-startify'
@@ -210,7 +208,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Make repeat work with plugins {{{
       Plug 'tpope/vim-repeat'
-      " TODO on-trigger
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
@@ -277,11 +274,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       " TODO on-trigger
       let g:peekaboo_delay = 100
     " }}}
-    " Better :%s/.../.../ {{{
-      Plug 'osyo-manga/vim-over'
-              \, { 'on': 'OverCommandLine' }
-      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-      vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
+    " Tag browser {{{
+      if v:version >= 703
+        Plug 'majutsushi/tagbar'
+              \, { 'on': 'TagbarToggle' }
+        noremap <silent> <leader>[ <esc>:TagbarToggle<cr>
+      endif
     " }}}
     " Undo tree browser {{{
       Plug 'mbbill/undotree'
@@ -289,6 +287,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>u <esc>:UndotreeToggle<cr>
       let g:undotree_SetFocusWhenToggle = 1
       let g:undotree_ShortIndicators = 1
+    " }}}
+    " Better :%s/.../.../ {{{
+      Plug 'osyo-manga/vim-over'
+              \, { 'on': 'OverCommandLine' }
+      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
+      vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
+    " }}}
+    " Syntax checker {{{
+      Plug 'scrooloose/syntastic'
+            \, { 'on': 'SyntasticCheck' }
+      noremap <silent> <leader>- <esc>:SyntasticCheck<cr>
     " }}}
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
@@ -328,6 +337,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0
+      let g:AutoPairsMapSpace = 0
       let g:AutoPairsMultilineClose = 0
     " }}}
     " Auto-generate ctags {{{
@@ -360,9 +370,6 @@ else
       noremap n nzz
       noremap // /\c
       noremap ?? ?\c
-    " }}}
-    " Spellcheck {{{
-      noremap <leader>cw z=
     " }}}
     " Auto-insert Curlies {{{
       inoremap {<cr> {<cr>}<C-o>O
@@ -502,6 +509,10 @@ endif " }}}
             \ cterm=reverse gui=reverse
             \ ctermfg=red   guifg=red
             \ ctermbg=black guibg=black
+      hi clear WarningMsg | hi WarningMsg
+            \ term=standout cterm=bold gui=bold
+            \ ctermfg=black guifg=black
+            \ ctermbg=yellow guibg=yellow
       hi clear SpellBad | hi SpellBad
             \ term=underline cterm=underline gui=underline
             \ ctermfg=red    guifg=red
@@ -647,7 +658,27 @@ endif " }}}
       " Returns &tw if paste mode is disabled
       " Otherwise, return 'P'
       function! TextWidth()
-          return (!&paste) ? &tw : 'P'
+        return (!&paste) ? &tw : 'P'
+      endfunction
+
+      " Safely gives gutentags status
+      function! GutenStatus()
+        if !exists('*gutentags#statusline')
+          return ''
+        endif
+        let guten_status = gutentags#statusline('Generating tags...')
+        return empty(guten_status) ? ''
+              \: ("\<space>" . guten_status . "\<space>")
+      endfunction
+
+      " Safely gives syntastic status
+      function! SyntasticStatus()
+        if !exists('*SyntasticStatuslineFlag')
+          return ''
+        endif
+        let syntastic_status = SyntasticStatuslineFlag()
+        return empty(syntastic_status) ? ''
+              \: ("\<space>" . syntastic_status . "\<space>")
       endfunction
     " }}}
 
@@ -657,7 +688,11 @@ endif " }}}
     set statusline+=\ %#Normal#%<\ %*               " separator
     set statusline+=\ %f                            " relative path
     set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
-    set statusline+=\ %#Normal#                     " no highlight
+    set statusline+=\ %#ErrorMsg#                   " error highlight
+    set statusline+=%{SyntasticStatus()}            " gutentags
+    set statusline+=%#WarningMsg#                   " warning highlight
+    set statusline+=%{GutenStatus()}                " gutentags
+    set statusline+=%#Normal#                       " no highlight
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
     set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
@@ -667,12 +702,6 @@ endif " }}}
     set statusline+=%{TextWidth()}                  " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
-
-    " Tags status
-    if exists(':GutentagsUnlock')
-      set statusline+=%{gutentags#statusline('\ \|\ TAGS')}
-    endif
-
     set statusline+=\                               " end w/ space
   " }}}
   " Cursor Shape {{{
@@ -778,7 +807,7 @@ endif " }}}
     noremap <leader>s <C-w>s
     noremap <leader>v <C-w>v
 
-    " ,e - Equalize splits
+    " ,= - Equalize splits
     noremap <leader>= <C-w>=
 
     " ^[hjkl] - Switch to split
@@ -905,6 +934,7 @@ endif " }}}
     " More spellcheck shortcuts
     noremap <leader>cn ]s
     noremap <leader>cp [s
+    noremap <leader>cw z=
     noremap <leader>ca zg
 
     " Enable spell check for text files
