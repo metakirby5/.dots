@@ -83,7 +83,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ 'lisp',
             \ 'clojure',
             \ 'scheme' ] }
-      au FileType lisp,clojure,scheme RainbowParentheses
+      augroup PLUG_RAINBOW_PARENTHESES
+        au!
+        au FileType lisp,clojure,scheme RainbowParentheses
+      augroup END
     " }}}
     " Highlight all as searching {{{
       if (version >= 704)
@@ -261,7 +264,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Emojis {{{
       Plug 'junegunn/vim-emoji'
             \, { 'for': ['markdown', 'gitcommit'] }
-      au FileType markdown,gitcommit setlocal completefunc=emoji#complete
+      augroup PLUG_VIM_EMOJI
+        au!
+        au FileType markdown,gitcommit setlocal completefunc=emoji#complete
+      augroup END
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
@@ -365,21 +371,27 @@ else
     " Auto-insert Curlies {{{
       inoremap {<cr> {<cr>}<C-o>O
     " }}}
-    " Automatically return to laste edit position {{{
-      au BufReadPost * silent! normal! g`"zv"`
+    " Automatically return to last edit position {{{
+      augroup LAST_EDIT
+        au!
+        au BufReadPost * silent! normal! g`"zv"`
+      augroup END
     " }}}
     " Toggle Comments {{{
-      au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
-                                       \   let b:comment_leader = '# ' |
-                                       \ endif
+      augroup TOGGLE_COMMENTS
+        au!
+        au BufNewFile,BufFilePre,BufRead * if !exists ('b:comment_leader') |
+                                         \   let b:comment_leader = '# ' |
+                                         \ endif
 
-      au FileType c,cpp,java,scala          let b:comment_leader = '// '
-      au FileType javascript                let b:comment_leader = '// '
-      au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
-      au FileType conf,fstab                let b:comment_leader = '# '
-      au FileType tex                       let b:comment_leader = '% '
-      au FileType mail                      let b:comment_leader = '> '
-      au FileType vim                       let b:comment_leader = '" '
+        au FileType c,cpp,java,scala          let b:comment_leader = '// '
+        au FileType javascript                let b:comment_leader = '// '
+        au FileType zsh,sh,ruby,python        let b:comment_leader = '# '
+        au FileType conf,fstab                let b:comment_leader = '# '
+        au FileType tex                       let b:comment_leader = '% '
+        au FileType mail                      let b:comment_leader = '> '
+        au FileType vim                       let b:comment_leader = '" '
+      augroup END
 
       function! StoreSearch()
         let g:ps = getreg('/', 1)
@@ -614,10 +626,13 @@ endif " }}}
         return (exists('b:modified')) ? '!' : ''
       endfunction
 
-      au FileChangedShellPost * let b:modified = 1
-      au BufRead,BufWrite * if exists('b:modified') |
-                          \   unlet b:modified |
-                          \ endif
+      augroup MODIFIED_FLAG
+        au!
+        au FileChangedShellPost * let b:modified = 1
+        au BufRead,BufWrite * if exists('b:modified') |
+                            \   unlet b:modified |
+                            \ endif
+      augroup END
 
       " Returns a shortened form of &fdm
       function! FDMShort()
@@ -699,13 +714,17 @@ endif " }}}
     if has('nvim')
       let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     else
-      " Enter: Flashing block
-      au VimEnter * silent execute "!echo -ne '\e[1 q'"
+      augroup CHANGE_CURSOR
+        au!
+        " Enter: Flashing block
+        au VimEnter * silent execute "!echo -ne '\e[1 q'"
+        " Exit: Flashing bar
+        au VimLeave * silent execute "!echo -ne '\e[5 q'"
+      augroup END
+
       silent! let &t_EI = "\<Esc>[1 q" " NORMAL:  Flashing block
       silent! let &t_SR = "\<Esc>[3 q" " REPLACE: Flashing underline
       silent! let &t_SI = "\<Esc>[5 q" " INSERT:  Flashing bar
-      " Exit: Flashing bar
-      au VimLeave * silent execute "!echo -ne '\e[5 q'"
     endif
   " }}}
 " }}}
@@ -894,14 +913,20 @@ endif " }}}
     "   j - Exclude comment leader when joining lines
     "   q - Enable formatting with 'gq'
     "   1 - Break lines before one-letter words
-    au BufNewFile,BufRead * setlocal fo=tcrojq1
+    augroup FORMAT_OPTIONS
+      au!
+      au BufNewFile,BufRead * setlocal fo=tcrojq1
+    augroup END
     set linebreak " line break only at breaking characters
     set tw=78     " default textwidth
 
     " Colorcolumn when textwidth on
-    au BufNewFile,BufRead * if !empty(matchstr(&fo, '.*t.*')) |
-                          \   setlocal cc=+1 |
-                          \ endif
+    augroup COLOR_COLUMN
+      au!
+      au BufNewFile,BufRead * if !empty(matchstr(&fo, '.*t.*')) |
+                            \   setlocal cc=+1 |
+                            \ endif
+    augroup END
 
     " ,\ - Toggle text wrap & color column
     function! ToggleTextWrap()
@@ -930,7 +955,10 @@ endif " }}}
     noremap <leader>ca zg
 
     " Enable spell check for text files
-    au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+    augroup SPELLCHECK
+      au!
+      au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+    augroup END
   " }}}
   " Syntax / FileType {{{
     set smarttab            " remove spaces grouped as tabs
@@ -943,17 +971,25 @@ endif " }}}
     " au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
 
     " Markdown - 4 char wide tabs
-    au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-    au Syntax markdown setlocal tabstop=4
-    au Syntax markdown setlocal shiftwidth=4
+    augroup SYNTAX_MARKDOWN
+      au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+      au Syntax markdown setlocal tabstop=4
+      au Syntax markdown setlocal shiftwidth=4
+    augroup END
 
     " Assembly - 8 char wide tabs, no expansion
-    au Syntax asm setlocal noexpandtab
-    au Syntax asm setlocal tabstop=8
-    au Syntax asm setlocal shiftwidth=8
+    augroup SYNTAX_ASM
+      au!
+      au Syntax asm setlocal noexpandtab
+      au Syntax asm setlocal tabstop=8
+      au Syntax asm setlocal shiftwidth=8
+    augroup END
 
     " crontab - no backups
-    au FileType crontab setlocal nobackup nowritebackup
+    augroup SYNTAX_CRONTAB
+      au!
+      au FileType crontab setlocal nobackup nowritebackup
+    augroup END
   " }}}
 " }}}
 " Utilities {{{
