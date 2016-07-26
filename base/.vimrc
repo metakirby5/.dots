@@ -152,6 +152,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Yggdroot/indentLine'
       let g:indentLine_color_term = 8
       let g:indentLine_char = '│'
+
+      " Fix json quotes
+      Plug 'elzr/vim-json'
+      let g:vim_json_syntax_conceal = 0
     " }}}
   " }}}
   " Completion {{{
@@ -533,10 +537,6 @@ endif " }}}
             \ cterm=reverse gui=reverse
             \ ctermfg=red   guifg=red
             \ ctermbg=black guibg=black
-      hi clear WarningMsg | hi WarningMsg
-            \ term=standout cterm=bold gui=bold
-            \ ctermfg=black guifg=black
-            \ ctermbg=yellow guibg=yellow
       hi clear SpellBad | hi SpellBad
             \ term=underline cterm=underline gui=underline
             \ ctermfg=red    guifg=red
