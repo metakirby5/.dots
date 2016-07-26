@@ -96,8 +96,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:incsearch#is_stay = 1
         map /  <Plug>(incsearch-forward)
         map ?  <Plug>(incsearch-backward)
-        map n  <Plug>(incsearch-nohl-n)
-        map N  <Plug>(incsearch-nohl-N)
+        map // <Plug>(incsearch-forward)\c
+        map ?? <Plug>(incsearch-backward)\c
+        map n  <Plug>(incsearch-nohl-n)zz
+        map N  <Plug>(incsearch-nohl-N)zz
         map *  <Plug>(incsearch-nohl-*)
         map #  <Plug>(incsearch-nohl-#)
         map g* <Plug>(incsearch-nohl-g*)
@@ -868,7 +870,7 @@ endif " }}}
       set foldenable
 
       " z<space> - toggle folds
-      noremap zz za
+      noremap z<leader> za
 
       " zm - Marker mode
       noremap zm <esc>:set foldmethod=marker<cr>zR
