@@ -868,9 +868,8 @@ endif " }}}
     "   t - Wrap text using textwidth
     "   cro - Auto-insert comment leader when newlining
     "   q - Enable formatting with 'gq'
-    "   w - End lines unless there is whitespace at the end
     "   1 - Break lines before one-letter words
-    au BufNewFile,BufRead * setlocal fo=tcroqw1
+    au BufNewFile,BufRead * setlocal fo=tcroq1
     set linebreak " line break only at breaking characters
     set tw=78     " default textwidth
 
