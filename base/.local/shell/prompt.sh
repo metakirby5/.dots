@@ -39,11 +39,11 @@ __mk5_set_prompt() {
   local last_status="$?"
 
   # Status color
-  local pcharcolor
+  local pchar_color
   if [ "$last_status" == 0 ]; then
-    pcharcolor="$__mk5_b_green"
+    pchar_color="$__mk5_b_green"
   else
-    pcharcolor="$__mk5_b_red"
+    pchar_color="$__mk5_b_red"
   fi
 
   # Use $ or # for prompt
@@ -142,7 +142,7 @@ __mk5_set_prompt() {
 
   # Colorize
   local suffix
-  local pwdcolor="$__mk5_green"
+  local pwd_color="$__mk5_green"
 
   # Virtualenv = blue
   local virtualenv_info
@@ -157,7 +157,7 @@ __mk5_set_prompt() {
       case "$mypwd" in
         "$env_path"*)
           suffix="${mypwd##$env_path}"
-          pwdcolor="$__mk5_blue"
+          pwd_color="$__mk5_blue"
           ;;
         *)
           virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
@@ -170,7 +170,7 @@ __mk5_set_prompt() {
   mypwd="$(perl -pe "s|^$__mk5_home|~|" <<< "$mypwd")"
 
   # Apply color
-  mypwd="$pwdcolor${mypwd%%$suffix}$__mk5_green$suffix"
+  mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
 
   PS1=""                     # Clear PS1
   PS1+="$__mk5_blue$USER"    # User
@@ -181,7 +181,7 @@ __mk5_set_prompt() {
   PS1+="$git_info"           # (Git)
   PS1+="$mypwd"              # Abbreviated PWD
   PS1+="\n"                  # Newline
-  PS1+="$pcharcolor$pchar"   # Prompt
+  PS1+="$pchar_color$pchar"  # Prompt
   PS1+="$__mk5_normal "      # Clear colors
 
   PS2=""                     # Clear PS2
