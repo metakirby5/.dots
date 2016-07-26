@@ -97,9 +97,11 @@ __mk5_set_prompt() {
       git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
     fi
 
-    # Stashed (list is slow, so only use verify)
-    if git rev-parse --verify refs/stash &>/dev/null; then
-      git_info+=" $__mk5_b_cyan$__mk5_char_stash"
+    # Stashed
+    local git_stash="$(wc -l "$git_path/.git/logs/refs/stash" 2>/dev/null |\
+      awk '{print$1}')"
+    if [ "$git_stash" ]; then
+      git_info+=" $__mk5_b_cyan$__mk5_char_stash$git_stash"
     fi
 
     # Upstream?
