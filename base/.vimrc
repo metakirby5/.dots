@@ -215,7 +215,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
-            \, { 'for': ['html'] }
+            \, { 'for': ['html', 'javascript.jsx'] }
       let g:user_emmet_leader_key='<c-e>'
     " }}}
     " Language packs {{{
