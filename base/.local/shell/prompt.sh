@@ -75,7 +75,7 @@ __mk5_set_prompt() {
       jobs_info+=" $__mk5_yellow$__mk5_char_running$jobs_r"
     fi
 
-    [ "$jobs_info" ] && jobs_info="${jobs_info# }$__mk5_b_yellow, "
+    [ "$jobs_info" ] && jobs_info="${jobs_info:1}$__mk5_b_yellow, "
   fi
 
   # Git stuff (mostly in bash for speed)
