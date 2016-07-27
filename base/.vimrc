@@ -215,6 +215,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endfunction
 
         " Custom completions
+        augroup PLUG_COMPLETION
+          au!
+          au BufEnter *
+                \ if &ft == 'markdown'
+                \ || &ft == 'gitcommit'
+                \ | setlocal omnifunc=emoji#complete
+                \ | endif
+        augroup END
         if !exists('g:neocomplete#force_omni_input_patterns')
           let g:{s:completion_prefix}force_omni_input_patterns = {}
         endif
