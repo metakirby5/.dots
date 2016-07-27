@@ -195,11 +195,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if exists('g:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
+        let g:{s:completion_prefix}auto_completion_start_length = 3
         set completeopt-=preview
-        inoremap <expr> <tab>    pumvisible() ? "\<c-n>" : "\<tab>"
-        inoremap <expr> <s-tab>  pumvisible() ? "\<c-p>" : "\<c-d>"
-        inoremap <expr> <bs>     {g:completion_engine}#smart_close_popup() . "\<bs>"
-        inoremap <silent> <cr>   <c-r>=<SID>smart_cr()<cr>
+        inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" :
+              \ neocomplete#undo_completion()
+        inoremap <expr> <bs>    {g:completion_engine}#smart_close_popup() . "\<bs>"
+        inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
         let g:ulti_expand_or_jump_res = 0
         function! s:smart_cr()
@@ -207,6 +209,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           return g:ulti_expand_res ? "" :
                 \ (pumvisible() ? "\<c-y>" : "\<cr>")
         endfunction
+
+        " Enable omni completion.
+        au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        au FileType python setlocal omnifunc=pythoncomplete#Complete
+        au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
       endif
     " }}}
   " }}}
@@ -746,7 +755,7 @@ endif " }}}
   " Help Splits {{{
     augroup HELP_SPLITS
       au!
-      au FileType help wincmd L | vert resize 79
+      au BufEnter * if &buftype == 'help' | wincmd L | vert resize 79 | endif
     augroup END
   " }}}
 " }}}
