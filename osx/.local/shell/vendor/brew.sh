@@ -3,6 +3,6 @@ if which brew &>/dev/null; then
   for f in \
     "$__brew_prefix"/etc/bash_completion \
     "$__brew_prefix"/bash_completion.d/*; do
-    source "$f"
+    [ -f "$f" ] && source "$f"
   done
 fi

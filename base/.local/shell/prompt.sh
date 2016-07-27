@@ -95,7 +95,7 @@ __mk5_set_prompt() {
     # Get branch
     read git_info < "$git_path/.git/HEAD"
     if [[ "$git_info" == ref:* ]]; then
-      git_info="${git_info##*/}" # ref name
+      git_info="${git_info:16}" # ref name
     else
       git_info="${git_info::7}"  # short hash
     fi
