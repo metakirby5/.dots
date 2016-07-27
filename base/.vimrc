@@ -674,13 +674,9 @@ endif " }}}
         return (&ve == '') ? '' : 've'
       endfunction
 
+      " Returns file's syntax
       function! GetSyntax()
         return (&syntax != '') ? &syntax : 'plaintext'
-      endfunction
-
-      " Returns '*' if text wrap on
-      function! TextWrapOn()
-        return  (!empty(matchstr(&fo, '.*t.*'))) ? '*' : ''
       endfunction
 
       " Returns &tw if paste mode is disabled
@@ -709,7 +705,6 @@ endif " }}}
               \: ("\<space>" . syntastic_status . "\<space>")
       endfunction
     " }}}
-
     " 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
     set statusline=\                                " initialize w/ space
     set statusline+=%n                              " buffer number
@@ -726,8 +721,7 @@ endif " }}}
     set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
     set statusline+=\ %{GetSyntax()}                " syntax
     set statusline+=\ %#Normal#\ %*                 " separator
-    set statusline+=\ %{TextWrapOn()}               " text wrap
-    set statusline+=%{TextWidth()}                  " text width/paste mode
+    set statusline+=\ %{TextWidth()}                " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
     set statusline+=\                               " end w/ space
@@ -939,38 +933,51 @@ endif " }}}
 " Style {{{
   " General {{{
     " Format options:
-    "   t - Wrap text using textwidth
-    "   cro - Auto-insert comment leader when newlining
-    "   j - Exclude comment leader when joining lines
-    "   q - Enable formatting with 'gq'
-    "   1 - Break lines before one-letter words
+    "   t  - Wrap text using textwidth
+    "   c  - Auto-wrap comments
+    "   ro - Auto-insert comment leader when newlining
+    "   q  - Enable formatting with 'gq'
+    "   l  - don't auto-format existing long lines
+    "   mM - auto-break for kanji
+    "   j  - Exclude comment leader when joining lines
     augroup FORMAT_OPTIONS
       au!
-      au BufNewFile,BufRead * setlocal fo=tcrojq1
+      au BufNewFile,BufRead * setlocal fo=tcroqlmM
+      if (version >= 704)
+        au BufNewFile,BufRead * setlocal fo+=j
+      endif
     augroup END
-    set linebreak " line break only at breaking characters
-    set tw=78     " default textwidth
 
-    " Colorcolumn when textwidth on
-    augroup COLOR_COLUMN
+    " Text file format options:
+    "   a - Actively auto-format paragraphs
+    "   n - Recognize numbered lists
+    "   2 - Paragraph-style indents
+    augroup FORMAT_OPTIONS_TXT
       au!
-      au BufNewFile,BufRead * if !empty(matchstr(&fo, '.*t.*')) |
-                            \   setlocal cc=+1 |
-                            \ endif
+      au BufNewFile,BufRead *.txt,*.md setlocal fo+=an2
     augroup END
+
+    let s:default_tw = 78 " default textwidth
+    set linebreak         " line break only at breaking characters
+    set colorcolumn=+1    " column guide
+    exe 'set textwidth=' . s:default_tw
 
     " ,\ - Toggle text wrap & color column
-    function! ToggleTextWrap()
-      if empty(matchstr(&fo, '.*t.*'))
-        setlocal fo+=t
-        setlocal cc=+1
+    function! ToggleTextWidth()
+      if (!&paste)
+        if (&textwidth == 0)
+          exe 'set textwidth=' . s:default_tw
+          set colorcolumn=+1
+        else
+          set textwidth=0
+          set colorcolumn=0
+        endif
       else
-        setlocal fo-=t
-        setlocal cc=0
+        echohl WarningMsg | echom 'Paste mode on.' | echohl None
       endif
     endfunction
 
-    noremap <silent> <leader>\ <esc>:call ToggleTextWrap()<cr>
+    noremap <silent> <leader>\ <esc>:call ToggleTextWidth()<cr>
 
     " ,f (visual mode) - Reflow selection
     xnoremap <silent> <leader>f Jgqq
@@ -988,7 +995,7 @@ endif " }}}
     " Enable spell check for text files
     augroup SPELLCHECK
       au!
-      au BufNewFile,BufRead *.txt setlocal spell spelllang=en
+      au BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en
     augroup END
   " }}}
   " Syntax / FileType {{{
