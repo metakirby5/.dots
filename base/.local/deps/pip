@@ -9,6 +9,7 @@ msgpack-python
 numpy
 pip-autoremove
 pipdeptree
+protobuf
 pushbullet-cli
 python-Levenshtein
 trollius

@@ -4,5 +4,7 @@ coffee-script
 gulp
 http-server
 npm
+pug
+stylus
 juliangruber/vipe
 webpack
