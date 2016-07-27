@@ -211,11 +211,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endfunction
 
         " Enable omni completion.
-        au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        au FileType python setlocal omnifunc=pythoncomplete#Complete
-        au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        augroup PLUG_COMPLETION
+          au!
+          au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+          au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+          au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+          au FileType python setlocal omnifunc=pythoncomplete#Complete
+          au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        augroup END
       endif
     " }}}
   " }}}
