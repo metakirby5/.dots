@@ -153,9 +153,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:indentLine_color_term = 8
       let g:indentLine_char = '│'
 
-      " Fix json quotes
+      " Fix conceals
       Plug 'elzr/vim-json'
       let g:vim_json_syntax_conceal = 0
+      let g:vim_markdown_conceal = 0
     " }}}
   " }}}
   " Completion {{{
