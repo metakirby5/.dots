@@ -22,7 +22,8 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 __mk5_char_usr='>'
 __mk5_char_root='#'
-__mk5_char_jobs='&'
+__mk5_char_stopped='%'
+__mk5_char_running='&'
 __mk5_char_unt='-'
 __mk5_char_mod='*'
 __mk5_char_add='+'
@@ -60,9 +61,21 @@ __mk5_set_prompt() {
 
   # Display job count
   local jobs_info
-  local jobs_count="$(jobs -p | wc -l | awk '{print$1}')"
-  if [ "$jobs_count" != 0 ]; then
-    jobs_info="$__mk5_yellow$__mk5_char_jobs$jobs_count$__mk5_b_yellow, "
+  local jobs_l="$(jobs)"
+  if [ "$jobs_l" ]; then
+    # Stopped
+    local jobs_s="$(grep '^.\{6\}S' <<< "$jobs_l" | wc -l | awk '{print$1}')"
+    if [ "$jobs_s" != 0 ]; then
+      jobs_info+=" $__mk5_red$__mk5_char_stopped$jobs_s"
+    fi
+
+    # Running
+    local jobs_r="$(grep '^.\{6\}R' <<< "$jobs_l" | wc -l | awk '{print$1}')"
+    if [ "$jobs_r" != 0 ]; then
+      jobs_info+=" $__mk5_yellow$__mk5_char_running$jobs_r"
+    fi
+
+    [ "$jobs_info" ] && jobs_info="${jobs_info# }$__mk5_b_yellow, "
   fi
 
   # Git stuff (mostly in bash for speed)
