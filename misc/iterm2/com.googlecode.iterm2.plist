@@ -986,7 +986,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 598 1680 429 0 0 1680 1027 </string>
+	<string>14 21 1650 996 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1717,7 +1717,7 @@
 			<key>Shortcut</key>
 			<string>P</string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<false/>
 			<key>Space</key>
@@ -2461,7 +2461,7 @@
 			<key>Shortcut</key>
 			<string>T</string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<false/>
 			<key>Space</key>
@@ -3207,7 +3207,7 @@
 			<key>Shortcut</key>
 			<string>E</string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<false/>
 			<key>Space</key>
@@ -3953,7 +3953,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<false/>
 			<key>Space</key>
@@ -3995,7 +3995,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>B577FDBB-04C6-47AE-BD9A-C07F3BD9BB88</string>
 	<key>NoSyncLastTipTime</key>
-	<real>491195229.75569302</real>
+	<real>491293058.83134902</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4021,6 +4021,7 @@
 		<string>0011</string>
 		<string>0012</string>
 		<string>0013</string>
+		<string>0014</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
