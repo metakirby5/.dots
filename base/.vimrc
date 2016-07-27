@@ -191,6 +191,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
       endif
     " }}}
+    " Emojis {{{
+      Plug 'junegunn/vim-emoji'
+            \, { 'for': ['markdown', 'gitcommit'] }
+    " }}}
     " Settings {{{
       if exists('g:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
@@ -210,15 +214,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
                 \ (pumvisible() ? "\<c-y>" : "\<cr>")
         endfunction
 
-        " Enable omni completion.
-        augroup PLUG_COMPLETION
-          au!
-          au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-          au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-          au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-          au FileType python setlocal omnifunc=pythoncomplete#Complete
-          au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        augroup END
+        " Custom completions
+        if !exists('g:neocomplete#force_omni_input_patterns')
+          let g:{s:completion_prefix}force_omni_input_patterns = {}
+        endif
+        let g:{s:completion_prefix}force_omni_input_patterns.markdown = ':\w*'
+        let g:{s:completion_prefix}force_omni_input_patterns.gitcommit = ':\w*'
       endif
     " }}}
   " }}}
@@ -289,14 +290,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ 'sink': function('<sid>git_grep_handler'),
             \ 'options': '--ansi --multi',
             \ })
-    " }}}
-    " Emojis {{{
-      Plug 'junegunn/vim-emoji'
-            \, { 'for': ['markdown', 'gitcommit'] }
-      augroup PLUG_VIM_EMOJI
-        au!
-        au FileType markdown,gitcommit setlocal completefunc=emoji#complete
-      augroup END
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
