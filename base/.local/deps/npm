@@ -1,10 +1,9 @@
-babel
 castnow
 coffee-script
 gulp
 http-server
 npm
-pug
+pug-cli
 stylus
 juliangruber/vipe
 webpack
