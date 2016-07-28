@@ -22,7 +22,8 @@ alias la='ls -la'
 alias findr='find -L . ! -type d -regex'
 alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
-alias map="tr '\n' '\0' | xargs -0"
+alias all="tr '\n' '\0' | xargs -0"
+alias map="all -n 1"
 alias g='git'
 alias h='history'
 alias zh='eval $(tac "$HISTFILE" | fzf --no-sort --preview= | tee -a "$HISTFILE")'
