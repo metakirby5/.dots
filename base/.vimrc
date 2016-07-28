@@ -232,6 +232,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endif
     " }}}
   " }}}
+  " Text objects {{{
+    Plug 'michaeljsmith/vim-indent-object'
+    Plug 'wellle/targets.vim'
+  " }}}
   " Operators {{{
     " Align with ga {{{
       Plug 'junegunn/vim-easy-align'
