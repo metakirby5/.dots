@@ -357,9 +357,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Automation {{{
-  " Automatically return to last edit position {{{
-      Plug 'dietsche/vim-lastplace'
-  " }}}
+    " Automatically return to last edit position {{{
+        Plug 'dietsche/vim-lastplace'
+    " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
       let g:AutoPairsShortcutToggle = ''
