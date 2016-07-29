@@ -87,6 +87,7 @@
 	os = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --numstat
 
 	# new commands
+	exec = "!exec "
 	root = rev-parse --show-toplevel
 	fixup = commit --fixup
 	amend = commit --amend
