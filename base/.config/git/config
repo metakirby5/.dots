@@ -106,7 +106,7 @@
 	zss = "!(c='git ss $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zd  = "!(c='p=\"$(git d  {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git st --porcelain | awk '/^.[^ ]/{print$2}'  | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
 	zdc = "!(c='p=\"$(git dc {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git st --porcelain | awk '/^[^ ?]./{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
-	zg  = "!f(){(c=\"git -c color.grep=always g $@ -- {}\"; git grep -liI \"$@\" | fzf --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
+	zg  = "!f(){(c=\"git -c color.grep=always g $@ -- {}\"; git g -l \"$@\" | fzf --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zci = "!f(){(local x=$(git zl);  [ \"$x\" ] && git co $x \"$@\")};f"
 	zcd = "!f(){(local x=$(git zl);  [ \"$x\" ] && git d $x \"$@\")};f"
