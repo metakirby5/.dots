@@ -58,9 +58,17 @@ install-leaves() {
 
 # cd with smart ... handling
 cd() {
-    local dots="$(grep -o '^\.*' <<< "$1")"
-    local rest="${1#$dots}"
-    local num="$(wc -c <<< "$dots")"
+    local first="${1%%/*}"
+    local num
+    local rest
+
+    # Only consider if first is all dots
+    if [ ! "$(tr -d . <<< "$first")" ]; then
+        num="$(wc -c <<< "$first")"
+        rest="${1#$first}"
+    else
+        num=0
+    fi
 
     if [ $num -gt 3 ]; then
         command cd "..$(printf '%0.s/..' $(seq 1 $(($num - 3))))$rest"
