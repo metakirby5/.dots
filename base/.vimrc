@@ -281,14 +281,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:fzf_buffers_jump = 1
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
-      noremap          <leader>q  <esc>:Ag<space>
-      noremap <silent> <leader>bq <esc>:Lines<cr>
+      noremap          <leader>a  <esc>:Ag<space>
+      noremap <silent> <leader>bg <esc>:Lines<cr>
       noremap <silent> <leader>;  <esc>:History:<cr>
       noremap <silent> <leader>]  <esc>:exec("Tags '".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
       noremap <silent> <leader>gz <esc>:GFiles<cr>
       noremap <silent> <leader>gs <esc>:GFiles?<cr>
-      noremap          <leader>gq <esc>:GGrep<space>
+      noremap          <leader>gg <esc>:GGrep<space>
 
       function! s:git_grep_handler(line)
         let parts = split(a:line, ':')
