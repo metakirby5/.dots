@@ -114,9 +114,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         map zg/ <Plug>(incsearch-fuzzy-stay)
       endif
     " }}}
-    " Faster folder {{{
-      Plug 'Konfekt/FastFold'
-    " }}}
     " Start screen {{{
       Plug 'mhinz/vim-startify'
       let g:startify_list_order = [
