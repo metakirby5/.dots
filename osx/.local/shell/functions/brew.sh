@@ -2,8 +2,10 @@
 # Requires Homebrew/homebrew-bundle.
 brew-leaves() {
   brew bundle dump --file=- |\
-    command grep -Ff <(cat <(brew leaves) <(echo 'tap'; echo 'cask')) |\
-    sort
+    command grep -f <( \
+    brew leaves | tr '\n' '\0' | xargs -0 printf "^brew '%s'\n"; \
+    echo "^cask"; \
+    ) | sort
 }
 
 # https://github.com/Homebrew/legacy-homebrew/issues/16639#issuecomment-42813448
