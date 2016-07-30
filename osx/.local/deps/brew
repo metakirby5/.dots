@@ -5,6 +5,7 @@ brew 'cabal-install'
 brew 'coreutils'
 brew 'ctags'
 brew 'fasd'
+brew 'ffms2'
 brew 'fzf'
 brew 'gcc'
 brew 'git'
@@ -18,7 +19,8 @@ brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
 brew 'mobile-shell'
-brew 'mpv', args: ['with-bundle']
+brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
+brew 'mvtools'
 brew 'neofetch'
 brew 'nmap'
 brew 'node'
