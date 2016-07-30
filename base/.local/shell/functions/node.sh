@@ -14,5 +14,5 @@ npm-leaves() {
     }
 EOF
 
-  npm list -g --depth 0 | awk "$SCRIPT"
+  npm list -g --depth 0 | awk "$SCRIPT" | sort
 }
