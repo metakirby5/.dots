@@ -881,7 +881,7 @@ endif " }}}
 
     " Useful mappings for managing tabs
     noremap          <leader>te <esc>:tabedit <tab>
-    noremap <silent> <leader>tn <esc>:tabnew<cr>
+    noremap <silent> <leader>tn <esc>:tabnew<cr>:silent! Startify<cr>
     noremap <silent> <leader>to <esc>:tabonly<cr>
     noremap <silent> <leader>td <esc>:tabclose<cr>
     noremap          <leader>tm <esc>:tabmove<Space>
