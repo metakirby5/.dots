@@ -936,12 +936,6 @@ endif " }}}
 
       " zs - Syntax mode
       noremap zs <esc>:set foldmethod=syntax<cr>zR
-
-      " Use syntax mode by default
-      set foldmethod=syntax
-
-      " Unfold everything at start
-      set foldlevel=99
     endif
   " }}}
 " }}}
