@@ -66,7 +66,7 @@
 	# stash
 	su = stash save
 	sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
-	ss = stash show --patch --color-words
+	so = stash show --patch --color-words
 	sp = stash pop
 	sa = stash apply
 	sd = stash drop
@@ -104,7 +104,7 @@
 	zs  = "!(c='x=\"$(awk \"{print\\$2}\" <<< {})\"; (pygmentize \"$x\" || less \"$x\") 2>/dev/null'; git -c color.status=always s | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$2}')"
 	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
-	zss = "!(c='git ss $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zso = "!(c='git so $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zd  = "!(c='p=\"$(git d  {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git st --porcelain | awk '/^.[^ ]/{print$2}'  | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
 	zdc = "!(c='p=\"$(git dc {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git st --porcelain | awk '/^[^ ?]./{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
 	zg  = "!f(){(c=\"git -c color.grep=always g $@ -- {}\"; git g -l \"$@\" | fzf --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
@@ -114,6 +114,6 @@
 	zo  = "!f(){(local x=$(git zl);  [ \"$x\" ] && git o $x \"$@\" | less -R)};f"
 	za  = "!f(){(local x=$(git zd);  [ \"$x\" ] && git a $x \"$@\")};f"
 	zr  = "!f(){(local x=$(git zdc); [ \"$x\" ] && git r $x \"$@\")};f"
-	zsp = "!f(){(local x=$(git zss); [ \"$x\" ] && git sp $x \"$@\")};f"
-	zsa = "!f(){(local x=$(git zss); [ \"$x\" ] && git sa $x \"$@\")};f"
-	zsd = "!f(){(local x=$(git zss); [ \"$x\" ] && git sd $x \"$@\")};f"
+	zsp = "!f(){(local x=$(git zso); [ \"$x\" ] && git sp $x \"$@\")};f"
+	zsa = "!f(){(local x=$(git zso); [ \"$x\" ] && git sa $x \"$@\")};f"
+	zsd = "!f(){(local x=$(git zso); [ \"$x\" ] && git sd $x \"$@\")};f"
