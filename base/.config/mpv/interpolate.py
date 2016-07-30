@@ -10,16 +10,18 @@ core.std.LoadPlugin(path="/usr/local/lib/libmvtools.dylib")
 FPS = 60
 BLK = 16
 SCENE_THRESH = 48
+PRECISION = int(1e3)
 
 clip = video_in
 if container_fps < FPS:
     print("{}fps -> {}fps".format(container_fps, FPS))
-    clip = core.std.AssumeFPS(clip, fpsnum=int(container_fps), fpsden=1)
+    clip = core.std.AssumeFPS(clip, fpsnum=int(container_fps * PRECISION),
+                              fpsden=PRECISION)
     sup  = core.mv.Super(clip, pel=2, hpad=BLK, vpad=BLK)
     bvec = core.mv.Analyse(sup, truemotion=True, isb=True , chroma=True,
                            search=3, blksize=BLK)
     fvec = core.mv.Analyse(sup, truemotion=True, isb=False, chroma=True,
                            search=3, blksize=BLK)
-    clip = core.mv.BlockFPS(clip, sup, bvec, fvec, num=FPS, den=1,
-                            mode=3, thscd2=SCENE_THRESH)
+    clip = core.mv.BlockFPS(clip, sup, bvec, fvec, num=int(FPS * PRECISION),
+                            den=PRECISION, mode=3, thscd2=SCENE_THRESH)
 clip.set_output()
