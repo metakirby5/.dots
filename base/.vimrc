@@ -509,6 +509,7 @@ endif " }}}
     endif
 
     set shortmess+=I               " no splash screen
+    set cursorline                 " highlight current line
     set showmatch                  " show match when inserting {}, [], or ()
     set scrolloff=5                " keep at least 5 lines above/below
     set sidescrolloff=5            " keep at least 5 lines left/right
@@ -518,7 +519,7 @@ endif " }}}
     set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
     set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
     set list                       " enable whitespace characters
-    " let loaded_matchparen = 0      " this is slow, might disable
+    " let loaded_matchparen = 0      " can be slow
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
