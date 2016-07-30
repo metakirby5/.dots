@@ -9,6 +9,9 @@ __mk5_git() {
     cd)
       cd "$(git rev-parse --show-toplevel)" "$@"
       ;;
+    open)
+      git-open "$@"
+      ;;
     *)
       command "$prog" "$cmd" "$@"
       ;;
