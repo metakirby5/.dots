@@ -10,7 +10,7 @@ core.std.LoadPlugin(path="/usr/local/lib/libmvtools.dylib")
 FPS = 60
 BLK = 32
 SCENE_THRESH = 32
-PRECISION = int(1e3)
+PRECISION = int(1e8)
 
 clip = video_in
 if container_fps < FPS:
