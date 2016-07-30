@@ -8,8 +8,8 @@ core = vs.get_core()
 core.std.LoadPlugin(path="/usr/local/lib/libmvtools.dylib")
 
 FPS = 60
-BLK = 16
-SCENE_THRESH = 48
+BLK = 32
+SCENE_THRESH = 32
 PRECISION = int(1e3)
 
 clip = video_in
