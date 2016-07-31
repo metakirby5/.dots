@@ -8,20 +8,22 @@ import vapoursynth as vs
 core = vs.get_core()
 core.std.LoadPlugin(path="/usr/local/lib/libmvtools.dylib")
 
-FPS = 60             # Target fps
 BLK = 32             # Block size (larger = faster, lower accuracy)
-SCENE_THRESH = 32    # Scene change threshold
-PRECISION = int(1e8) # Precision for FPS
+
+analyse_args = {
+    'blksize':     BLK,
+    'search':      0,
+    'searchparam': 1,
+    'truemotion':  True,
+}
 
 clip = video_in
-if container_fps < FPS:
-    print("{}fps -> {}fps".format(container_fps, FPS))
-    clip = core.std.AssumeFPS(clip, fpsnum=int(container_fps * PRECISION),
-                              fpsden=PRECISION)
+if container_fps < 60:
+    clip = core.std.AssumeFPS(clip,
+                              fpsnum=int(container_fps * 1e3), fpsden=1001)
     sup  = core.mv.Super(clip)
-    bvec = core.mv.Analyse(sup, isb=True , blksize=BLK)
-    fvec = core.mv.Analyse(sup, isb=False, blksize=BLK)
+    bvec = core.mv.Analyse(sup, isb=True , **analyse_args)
+    fvec = core.mv.Analyse(sup, isb=False, **analyse_args)
     clip = core.mv.BlockFPS(clip, sup, bvec, fvec,
-                            num=int(FPS * PRECISION), den=PRECISION,
-                            thscd2=SCENE_THRESH)
+                            num=60000, den=1001)
 clip.set_output()
