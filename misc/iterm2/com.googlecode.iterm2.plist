@@ -932,9 +932,9 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>114</integer>
+	<integer>120</integer>
 	<key>HotkeyCode</key>
-	<integer>15</integer>
+	<integer>7</integer>
 	<key>HotkeyModifiers</key>
 	<integer>1573160</integer>
 	<key>JobName</key>
@@ -983,6 +983,8 @@
 	<string>298 244 570 181 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>269 545 606 456 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>532 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -3995,7 +3997,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>B577FDBB-04C6-47AE-BD9A-C07F3BD9BB88</string>
 	<key>NoSyncLastTipTime</key>
-	<real>491557524.250799</real>
+	<real>491645144.86749899</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4025,6 +4027,7 @@
 		<string>0015</string>
 		<string>0016</string>
 		<string>0017</string>
+		<string>0018</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
@@ -4067,6 +4070,8 @@
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -4076,7 +4081,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-27T09:32:50Z</date>
+	<date>2016-07-31T05:54:56Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -4086,7 +4091,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1468901888</real>
+	<real>1469944576</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>WindowNumber</key>
@@ -4096,7 +4101,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.4</string>
+	<string>3.0.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
