@@ -29,6 +29,20 @@ setmetatable(table, {
       end):curry(...)
     end,
 
+    -- Return the x in self s.t. func(x) is truthy
+    -- function signature is (value, key) since values are more useful
+    filter = function(...)
+      return (function(self, func)
+        local filtered = T{}
+        for k, v in ipairs(self) do
+          if func(v, k) then
+            filtered[#filtered + 1] = v
+          end
+        end
+        return filtered
+      end):curry(...)
+    end,
+
     -- Combine tables
     merge = function(...)
       return (function(self, arr, ...)
@@ -116,16 +130,10 @@ debug.setmetatable(function() end, {
         end):curry(...)
       end,
 
-      -- Return the x in arr s.t. func(x) is truthy
+      -- Return the x in arr s.t. self(x) is truthy
       filter = function(...)
         return (function(self, arr)
-          local filtered = T{}
-          for _, v in ipairs(arr) do
-            if self(v) then
-              filtered[#filtered + 1] = v
-            end
-          end
-          return filtered
+          return table.filter(arr, self)
         end):curry(...)
       end,
     },
