@@ -234,6 +234,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'wellle/targets.vim'
   " }}}
   " Operators {{{
+    " User operators {{{
+      Plug 'kana/vim-operator-user'
+    " }}}
     " Align with ga {{{
       Plug 'junegunn/vim-easy-align'
             \, { 'on': '<Plug>(EasyAlign)' }
@@ -329,6 +332,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'scrooloose/syntastic'
             \, { 'on': 'SyntasticCheck' }
       noremap <silent> <leader>- <esc>:SyntasticCheck<cr>
+    " }}}
+    " Add highlight groups {{{
+      Plug 't9md/vim-quickhl'
+            \, { 'on': [
+            \ '<Plug>(quickhl',
+            \ '<Plug>(operator-quickhl'] }
+      nmap M <Plug>(operator-quickhl-manual-this-motion)
+      xmap M <Plug>(quickhl-manual-this)
+      nmap <leader>M <Plug>(quickhl-manual-reset)
+      xmap <leader>M <Plug>(quickhl-manual-reset)
     " }}}
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
