@@ -1,15 +1,31 @@
 local consts = require('consts')
 
-local function concat(...)
-  concatted = {}
-  for _, t in ipairs({...}) do
-    for _, v in ipairs(t) do
-      concatted[#concatted + 1] = v
-    end
-  end
-  return concatted
+-- Tables+
+function T(t)
+  return setmetatable(t or {}, { __index = table })
 end
+setmetatable(table, {
+  __index = {
+    copy = function(self)
+      copied = {}
+      for k, v in ipairs(self) do
+        copied[k] = v
+      end
+      return copied
+    end,
+    join = function(self, ...)
+      joined = self:copy()
+      for _, t in ipairs({...}) do
+        for _, v in ipairs(t) do
+          joined[#joined + 1] = v
+        end
+      end
+      return joined
+    end,
+  },
+})
 
+-- Functions+
 debug.setmetatable(function() end, {
     -- http://stackoverflow.com/a/20177245
     __len = function(self)
@@ -17,17 +33,15 @@ debug.setmetatable(function() end, {
     end,
     __index = {
       curry = function(self, ...)
-        local args = {...}
+        local args = T{...}
         return function(...)
-          print('args:', table.unpack(args))
-          print('...:', ...)
           if #{...} == 0 then
             return self(table.unpack(args))
           end
-          return self:curry(table.unpack(concat(args, {...})))
+          return self:curry(table.unpack(args:join({...})))
         end
-      end
-    }
+      end,
+    },
 })
 
 local function switch(case)
@@ -90,6 +104,7 @@ local function filter(func, array)
 end
 
 return {
+  T = T,
   switch = switch,
   unpacked = unpacked,
   map = map,
