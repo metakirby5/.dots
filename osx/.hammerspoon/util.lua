@@ -1,8 +1,5 @@
 local consts = require('consts')
 
--- Most functions that take one or more arguments
--- and are not curriers are curried.
-
 -- Tables+
 function T(t)
   return setmetatable(t or {}, { __index = table })
@@ -10,17 +7,19 @@ end
 setmetatable(table, {
   __index = {
     -- Shallow copy
-    copy = function(self)
-      copied = T{}
-      for k, v in ipairs(self) do
-        copied[k] = v
-      end
-      return copied
+    copy = function(...)
+      return (function(self)
+        copied = T{}
+        for k, v in ipairs(self) do
+          copied[k] = v
+        end
+        return copied
+      end):curry(...)
     end,
 
     -- Combine tables
-    merge = function(self, ...)
-      return (function(arr, ...)
+    merge = function(...)
+      return (function(self, arr, ...)
         merged = self:copy()
         for _, t in ipairs({arr, ...}) do
           for k, v in pairs(t) do
@@ -32,8 +31,8 @@ setmetatable(table, {
     end,
 
     -- Concatenate arrays
-    extend = function(self, ...)
-      return (function(arr, ...)
+    extend = function(...)
+      return (function(self, arr, ...)
         extended = self:copy()
         for _, t in ipairs({arr, ...}) do
           for _, v in ipairs(t) do
@@ -45,9 +44,9 @@ setmetatable(table, {
     end,
 
     -- Apply a function over each element
-    map = function(self, ...)
-      return (function(func)
-        local mapped = {}
+    map = function(...)
+      return (function(self, func)
+        local mapped = T{}
 
         -- Ensure lua won't think mapped will be empty
         for i, v in ipairs(self) do
@@ -95,36 +94,38 @@ debug.setmetatable(function() end, {
       end,
 
       -- Call with packed arguments
-      withPacked = function(self, ...)
-        return (function(args)
-          return self(table.unpack(args))
+      withPacked = function(...)
+        return (function(self, args)
+          return self(T(args):unpack())
         end):curry(...)
       end,
 
-      map = function(self, ...)
-        return (function(arr, ...)
+      -- Call over each element in each array in ..., position-wise
+      map = function(...)
+        return (function(self, arr, ...)
           args = T{arr, ...}
 
           -- Get # of items to map
-          local nargs = math.max(table.unpack(args:map(function(list)
+          local nargs = math.max(args:map(function(list)
             return #list
-          end)))
+          end):unpack())
 
-          local mapped = {}
+          local mapped = T{}
           for i = 1, nargs do
             -- Gather the ith arg of each arg list
             ithArgs = args:map(function(list)
               return list[i]
             end)
-            mapped[i] = self(table.unpack(ithArgs, 1, #args))
+            mapped[i] = self(ithArgs:unpack(1, #args))
           end
           return mapped
         end):curry(...)
       end,
 
-      filter = function(self, ...)
-        return (function(arr)
-          local filtered = {}
+      -- Return the x in arr s.t. func(x) is truthy
+      filter = function(...)
+        return (function(self, arr)
+          local filtered = T{}
           for _, v in ipairs(arr) do
             if self(v) then
               filtered[#filtered + 1] = v
@@ -137,16 +138,9 @@ debug.setmetatable(function() end, {
 })
 
 -- Scala-style switch(case) {...}
-local function switch(...)
-  return (function(case, caseTable)
-    local selection = caseTable[case]
-    if selection ~= nil then
-      return selection
-    end
-
-    return caseTable[consts.DEFAULT]
-  end):curry(...)
-end
+local switch = (function(case, caseTable)
+  return caseTable[case] or caseTable[consts.DEFAULT]
+end):curry()
 
 return {
   T = T,
