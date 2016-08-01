@@ -79,21 +79,18 @@ debug.setmetatable(function() end, {
         end
       end,
 
-      -- Argument-based partial application
+      -- Arity-based partial application
       curry = function(self, ...)
         local args = T{...}
 
-        -- Already reached arity?
-        if not (#args < #self) then
-          return self(args:unpack())
+        -- If arity reached, call
+        if #args >= #self then
+          return self(...)
         end
 
+        -- Else, defer to next call
         return function(...)
-          args = args:extend({...})
-          if #args < #self then
-            return self:curry(args:unpack())
-          end
-          return self(args:unpack())
+          return self:curry(args:extend({...}):unpack())
         end
       end,
 
