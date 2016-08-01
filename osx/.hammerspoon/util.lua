@@ -5,9 +5,14 @@ function T(t)
   return setmetatable(t or {}, { __index = table })
 end
 setmetatable(table, {
+  -- Store the parent for easy access
+  __newindex = function(t, k, v)
+    v.__parent = t
+    rawset(t, k, v)
+  end,
   __index = {
     copy = function(self)
-      copied = {}
+      copied = T{}
       for k, v in ipairs(self) do
         copied[k] = v
       end
@@ -27,20 +32,49 @@ setmetatable(table, {
 
 -- Functions+
 debug.setmetatable(function() end, {
-    -- http://stackoverflow.com/a/20177245
+    -- Arity (http://stackoverflow.com/a/20177245)
     __len = function(self)
         return debug.getinfo(self, 'u').nparams
     end,
     __index = {
+      -- Partial application
       curry = function(self, ...)
         local args = T{...}
+
+        -- Already reached arity?
+        if not (#args < #self) then
+          return self(args:unpack())
+        end
+
         return function(...)
-          if #{...} == 0 then
-            return self(table.unpack(args))
+          args = args:join({...})
+          if #args < #self then
+            return self:curry(args:unpack())
           end
-          return self:curry(table.unpack(args:join({...})))
+          return self(args:unpack())
         end
       end,
+
+      -- Call with packed arguments
+      withPacked = function(self, args)
+        return self(table.unpack(args))
+      end,
+
+      -- Partially applied method
+      -- TODO make work
+      -- uncolon = function(self)
+      --   return function(...)
+      --     return self(self, ...)
+      --   end
+      -- end,
+
+      -- Call later with arguments by calling
+      later = function(self, ...)
+        local args = T{...}
+        return function()
+          return self(args:unpack())
+        end
+      end
     },
 })
 
@@ -55,12 +89,6 @@ local function switch(case)
   end
 end
 
--- Prepare `func` to be called with an array that repesents the arguments.
-local function unpacked(func)
-  return function(args)
-    func(table.unpack(args))
-  end
-end
 
 local function mapOne(func, array)
   local mapped = {}
@@ -106,7 +134,6 @@ end
 return {
   T = T,
   switch = switch,
-  unpacked = unpacked,
   map = map,
   filter = filter,
 }

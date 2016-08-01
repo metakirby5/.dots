@@ -46,7 +46,7 @@ local OFFSET_KEYS = {
 }
 
 -- General
-util.map(util.unpacked(hs.hotkey.bind), {
+util.map(function(...) hs.hotkey.bind:withPacked(...) end, {
   {MODS.base, 'r', 'HammerSpoon reloaded!', hs.reload},
   {MODS.base, '\'', nil, hints.show},
 })
@@ -60,6 +60,6 @@ DIR_MODS = {
 
 for mod, action in pairs(DIR_MODS) do
   for key, dir in pairs(DIR_KEYS) do
-    hs.hotkey.bind(mod, key, nil, action:curry(dir))
+    hs.hotkey.bind(mod, key, nil, action:later(dir))
   end
 end
