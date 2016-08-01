@@ -45,9 +45,11 @@ local OFFSET_KEYS = {
   p = -1,
 }
 
+-- Bind this separately for convenience when crashing
+hs.hotkey.bind(MODS.base, 'r', 'Hammerspoon reloaded!', hs.reload)
+
 -- General
-util.map(function(...) hs.hotkey.bind:withPacked(...) end, {
-  {MODS.base, 'r', 'HammerSpoon reloaded!', hs.reload},
+hs.hotkey.bind:withPacked():map({
   {MODS.base, '\'', nil, hints.show},
 })
 

@@ -1,16 +1,15 @@
 local consts = require('consts')
 
+-- Most functions that take one or more arguments
+-- and are not curriers are curried.
+
 -- Tables+
 function T(t)
   return setmetatable(t or {}, { __index = table })
 end
 setmetatable(table, {
-  -- Store the parent for easy access
-  __newindex = function(t, k, v)
-    v.__parent = t
-    rawset(t, k, v)
-  end,
   __index = {
+    -- Shallow copy
     copy = function(self)
       copied = T{}
       for k, v in ipairs(self) do
@@ -18,14 +17,48 @@ setmetatable(table, {
       end
       return copied
     end,
-    join = function(self, ...)
-      joined = self:copy()
-      for _, t in ipairs({...}) do
-        for _, v in ipairs(t) do
-          joined[#joined + 1] = v
+
+    -- Combine tables
+    merge = function(self, ...)
+      return (function(arr, ...)
+        merged = self:copy()
+        for _, t in ipairs({arr, ...}) do
+          for k, v in pairs(t) do
+            merged[k] = v
+          end
         end
-      end
-      return joined
+        return merged
+      end):curry(...)
+    end,
+
+    -- Concatenate arrays
+    extend = function(self, ...)
+      return (function(arr, ...)
+        extended = self:copy()
+        for _, t in ipairs({arr, ...}) do
+          for _, v in ipairs(t) do
+            extended[#extended + 1] = v
+          end
+        end
+        return extended
+      end):curry(...)
+    end,
+
+    -- Apply a function over each element
+    map = function(self, ...)
+      return (function(func)
+        local mapped = {}
+
+        -- Ensure lua won't think mapped will be empty
+        for i, v in ipairs(self) do
+          mapped[i] = consts.NULL
+        end
+
+        for i, v in ipairs(self) do
+          mapped[i] = func(v)
+        end
+        return mapped
+      end):curry(...)
     end,
   },
 })
@@ -36,8 +69,17 @@ debug.setmetatable(function() end, {
     __len = function(self)
         return debug.getinfo(self, 'u').nparams
     end,
+
     __index = {
-      -- Partial application
+      -- Single-time partial application
+      later = function(self, ...)
+        local args = T{...}
+        return function()
+          return self(args:unpack())
+        end
+      end,
+
+      -- Argument-based partial application
       curry = function(self, ...)
         local args = T{...}
 
@@ -47,7 +89,7 @@ debug.setmetatable(function() end, {
         end
 
         return function(...)
-          args = args:join({...})
+          args = args:extend({...})
           if #args < #self then
             return self:curry(args:unpack())
           end
@@ -56,84 +98,60 @@ debug.setmetatable(function() end, {
       end,
 
       -- Call with packed arguments
-      withPacked = function(self, args)
-        return self(table.unpack(args))
+      withPacked = function(self, ...)
+        return (function(args)
+          return self(table.unpack(args))
+        end):curry(...)
       end,
 
-      -- Partially applied method
-      -- TODO make work
-      -- uncolon = function(self)
-      --   return function(...)
-      --     return self(self, ...)
-      --   end
-      -- end,
+      map = function(self, ...)
+        return (function(arr, ...)
+          args = T{arr, ...}
 
-      -- Call later with arguments by calling
-      later = function(self, ...)
-        local args = T{...}
-        return function()
-          return self(args:unpack())
-        end
-      end
+          -- Get # of items to map
+          local nargs = math.max(table.unpack(args:map(function(list)
+            return #list
+          end)))
+
+          local mapped = {}
+          for i = 1, nargs do
+            -- Gather the ith arg of each arg list
+            ithArgs = args:map(function(list)
+              return list[i]
+            end)
+            mapped[i] = self(table.unpack(ithArgs, 1, #args))
+          end
+          return mapped
+        end):curry(...)
+      end,
+
+      filter = function(self, ...)
+        return (function(arr)
+          local filtered = {}
+          for _, v in ipairs(arr) do
+            if self(v) then
+              filtered[#filtered + 1] = v
+            end
+          end
+          return filtered
+        end):curry(...)
+      end,
     },
 })
 
-local function switch(case)
-  return function(caseTable)
+-- Scala-style switch(case) {...}
+local function switch(...)
+  return (function(case, caseTable)
     local selection = caseTable[case]
     if selection ~= nil then
       return selection
     end
 
     return caseTable[consts.DEFAULT]
-  end
-end
-
-
-local function mapOne(func, array)
-  local mapped = {}
-
-  -- Ensure lua won't think mapped will be empty
-  for i, v in ipairs(array) do
-    mapped[i] = consts.NULL
-  end
-
-  for i, v in ipairs(array) do
-    mapped[i] = func(v)
-  end
-  return mapped
-end
-
-local function map(func, ...)
-  -- Get # of items to map
-  local nargs = math.max(table.unpack(mapOne(function(list)
-    return #list
-  end, {...})))
-
-  local mapped = {}
-  for i = 1, nargs do
-    -- Gather the ith arg of each arg list
-    args = mapOne(function(list)
-      return list[i]
-    end, {...})
-    mapped[i] = func(table.unpack(args, 1, #{...}))
-  end
-  return mapped
-end
-
-local function filter(func, array)
-  local filtered = {}
-  for _, v in ipairs(array) do
-    if func(v) then
-      filtered[#filtered + 1] = v
-    end
-  end
-  return filtered
+  end):curry(...)
 end
 
 return {
   T = T,
   switch = switch,
-  map = map,
-  filter = filter,
 }
