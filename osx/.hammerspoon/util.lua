@@ -9,7 +9,7 @@ setmetatable(table, {
     -- Shallow copy
     copy = function(...)
       return (function(self)
-        copied = T{}
+        local copied = T{}
         for k, v in ipairs(self) do
           copied[k] = v
         end
@@ -17,10 +17,22 @@ setmetatable(table, {
       end):curry(...)
     end,
 
+    -- Apply a function over each element
+    -- function signature is (value, key) since values are more useful
+    map = function(...)
+      return (function(self, func)
+        local mapped = self:copy()
+        for k, v in ipairs(self) do
+          mapped[k] = func(v, k)
+        end
+        return mapped
+      end):curry(...)
+    end,
+
     -- Combine tables
     merge = function(...)
       return (function(self, arr, ...)
-        merged = self:copy()
+        local merged = self:copy()
         for _, t in ipairs({arr, ...}) do
           for k, v in pairs(t) do
             merged[k] = v
@@ -33,30 +45,13 @@ setmetatable(table, {
     -- Concatenate arrays
     extend = function(...)
       return (function(self, arr, ...)
-        extended = self:copy()
+        local extended = self:copy()
         for _, t in ipairs({arr, ...}) do
           for _, v in ipairs(t) do
             extended[#extended + 1] = v
           end
         end
         return extended
-      end):curry(...)
-    end,
-
-    -- Apply a function over each element
-    map = function(...)
-      return (function(self, func)
-        local mapped = T{}
-
-        -- Ensure lua won't think mapped will be empty
-        for i, v in ipairs(self) do
-          mapped[i] = consts.NULL
-        end
-
-        for i, v in ipairs(self) do
-          mapped[i] = func(v)
-        end
-        return mapped
       end):curry(...)
     end,
   },
@@ -103,7 +98,7 @@ debug.setmetatable(function() end, {
       -- Call over each element in each array in ..., position-wise
       map = function(...)
         return (function(self, arr, ...)
-          args = T{arr, ...}
+          local args = T{arr, ...}
 
           -- Get # of items to map
           local nargs = math.max(args:map(function(list)
@@ -112,11 +107,10 @@ debug.setmetatable(function() end, {
 
           local mapped = T{}
           for i = 1, nargs do
-            -- Gather the ith arg of each arg list
-            ithArgs = args:map(function(list)
+            -- Call on with ith arg of each arg list
+            mapped[i] = self(args:map(function(list)
               return list[i]
-            end)
-            mapped[i] = self(ithArgs:unpack(1, #args))
+            end):unpack(1, #args))
           end
           return mapped
         end):curry(...)
