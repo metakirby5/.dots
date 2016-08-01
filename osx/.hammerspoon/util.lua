@@ -1,5 +1,35 @@
 local consts = require('consts')
 
+local function concat(...)
+  concatted = {}
+  for _, t in ipairs({...}) do
+    for _, v in ipairs(t) do
+      concatted[#concatted + 1] = v
+    end
+  end
+  return concatted
+end
+
+debug.setmetatable(function() end, {
+    -- http://stackoverflow.com/a/20177245
+    __len = function(self)
+        return debug.getinfo(self, 'u').nparams
+    end,
+    __index = {
+      curry = function(self, ...)
+        local args = {...}
+        return function(...)
+          print('args:', table.unpack(args))
+          print('...:', ...)
+          if #{...} == 0 then
+            return self(table.unpack(args))
+          end
+          return self:curry(table.unpack(concat(args, {...})))
+        end
+      end
+    }
+})
+
 local function switch(case)
   return function(caseTable)
     local selection = caseTable[case]
@@ -8,14 +38,6 @@ local function switch(case)
     end
 
     return caseTable[consts.DEFAULT]
-  end
-end
-
--- Fully curry a function so that it can be executed without arguments.
-local function fullCurry(func, ...)
-  local args = {...}
-  return function()
-    return func(table.unpack(args))
   end
 end
 
@@ -69,7 +91,6 @@ end
 
 return {
   switch = switch,
-  fullCurry = fullCurry,
   unpacked = unpacked,
   map = map,
   filter = filter,

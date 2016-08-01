@@ -60,6 +60,6 @@ DIR_MODS = {
 
 for mod, action in pairs(DIR_MODS) do
   for key, dir in pairs(DIR_KEYS) do
-    hs.hotkey.bind(mod, key, nil, util.fullCurry(action, dir))
+    hs.hotkey.bind(mod, key, nil, action:curry(dir))
   end
 end
