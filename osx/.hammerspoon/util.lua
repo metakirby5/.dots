@@ -1,5 +1,12 @@
 local consts = require('consts')
 
+-- Curry wrapper to resolve functional dependencies
+local c = function(func)
+  return function(...)
+    return func:curry(...)
+  end
+end
+
 -- Tables+
 function T(t)
   return setmetatable(t or {}, { __index = table })
@@ -7,67 +14,57 @@ end
 setmetatable(table, {
   __index = {
     -- Shallow copy
-    copy = function(...)
-      return (function(self)
-        local copied = T{}
-        for k, v in ipairs(self) do
-          copied[k] = v
-        end
-        return copied
-      end):curry(...)
-    end,
+    copy = c(function(self)
+      local copied = T{}
+      for k, v in ipairs(self) do
+        copied[k] = v
+      end
+      return copied
+    end),
 
     -- Apply a function over each element
     -- function signature is (value, key) since values are more useful
-    map = function(...)
-      return (function(self, func)
-        local mapped = self:copy()
-        for k, v in ipairs(self) do
-          mapped[k] = func(v, k)
-        end
-        return mapped
-      end):curry(...)
-    end,
+    map = c(function(self, func)
+      local mapped = self:copy()
+      for k, v in ipairs(self) do
+        mapped[k] = func(v, k)
+      end
+      return mapped
+    end),
 
     -- Return the x in self s.t. func(x) is truthy
     -- function signature is (value, key) since values are more useful
-    filter = function(...)
-      return (function(self, func)
-        local filtered = T{}
-        for k, v in ipairs(self) do
-          if func(v, k) then
-            filtered[#filtered + 1] = v
-          end
+    filter = c(function(self, func)
+      local filtered = T{}
+      for k, v in ipairs(self) do
+        if func(v, k) then
+          filtered[#filtered + 1] = v
         end
-        return filtered
-      end):curry(...)
-    end,
+      end
+      return filtered
+    end),
 
     -- Combine tables
-    merge = function(...)
-      return (function(self, arr, ...)
-        local merged = self:copy()
-        for _, t in ipairs({arr, ...}) do
-          for k, v in pairs(t) do
-            merged[k] = v
-          end
+    merge = c(function(self, arr, ...)
+      local merged = self:copy()
+      for _, t in ipairs({arr, ...}) do
+        for k, v in pairs(t) do
+          merged[k] = v
         end
-        return merged
-      end):curry(...)
-    end,
+      end
+      return merged
+    end),
 
     -- Concatenate arrays
-    extend = function(...)
-      return (function(self, arr, ...)
-        local extended = self:copy()
-        for _, t in ipairs({arr, ...}) do
-          for _, v in ipairs(t) do
-            extended[#extended + 1] = v
-          end
+    extend = c(function(self, arr, ...)
+      local extended = self:copy()
+      for _, t in ipairs({arr, ...}) do
+        for _, v in ipairs(t) do
+          extended[#extended + 1] = v
         end
-        return extended
-      end):curry(...)
-    end,
+      end
+      return extended
+    end),
   },
 })
 
@@ -103,39 +100,33 @@ debug.setmetatable(function() end, {
       end,
 
       -- Call with packed arguments
-      withPacked = function(...)
-        return (function(self, args)
-          return self(T(args):unpack())
-        end):curry(...)
-      end,
+      withPacked = c(function(self, args)
+        return self(T(args):unpack())
+      end),
 
       -- Call over each element in each array in ..., position-wise
-      map = function(...)
-        return (function(self, arr, ...)
-          local args = T{arr, ...}
+      map = c(function(self, arr, ...)
+        local args = T{arr, ...}
 
-          -- Get # of items to map
-          local nargs = math.max(args:map(function(list)
-            return #list
-          end):unpack())
+        -- Get # of items to map
+        local nargs = math.max(args:map(function(list)
+          return #list
+        end):unpack())
 
-          local mapped = T{}
-          for i = 1, nargs do
-            -- Call on with ith arg of each arg list
-            mapped[i] = self(args:map(function(list)
-              return list[i]
-            end):unpack(1, #args))
-          end
-          return mapped
-        end):curry(...)
-      end,
+        local mapped = T{}
+        for i = 1, nargs do
+          -- Call on with ith arg of each arg list
+          mapped[i] = self(args:map(function(list)
+            return list[i]
+          end):unpack(1, #args))
+        end
+        return mapped
+      end),
 
       -- Return the x in arr s.t. self(x) is truthy
-      filter = function(...)
-        return (function(self, arr)
-          return table.filter(arr, self)
-        end):curry(...)
-      end,
+      filter = c(function(self, arr)
+        return table.filter(arr, self)
+      end),
     },
 })
 
