@@ -56,7 +56,7 @@ hs.hotkey.bind:withPacked():map({
 -- Directionals
 DIR_MODS = {
   [MODS.base] = function(dir)
-    window.focused():focusWindowIn(dir, nil, nil, true)
+    window.focused():focusWindowIn(dir)
   end,
 }
 

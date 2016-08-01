@@ -26,9 +26,9 @@ SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
   z:    [-1/2, 1/2 ]
-  ']':  [1/2,  -1/2]
-  '\'': [1/2,  -1  ]
-  '/':  [1/2,  1/2 ]
+  '[':  [1/2,  -1/2]
+  ';': [1/2,  -1  ]
+  '.':  [1/2,  1/2 ]
 APPS =
   t: 'iTerm'
   e: 'Finder'
@@ -364,11 +364,11 @@ for [mod, action] in SPACE_MODS
 
 # Directionals
 DIR_MODS = [
-  [
-    # Select
-    MOD,
-    (dir) -> fw()?.focusClosestNeighbor(dir)
-  ],
+  # [
+  #   # Select
+  #   MOD,
+  #   (dir) -> fw()?.focusClosestNeighbor(dir)
+  # ],
   [
     # Move
     MOVE_MOD,
