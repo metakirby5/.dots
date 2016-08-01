@@ -141,7 +141,8 @@ debug.setmetatable(function() end, {
 
 -- Scala-style switch(case) {...}
 local switch = (function(case, caseTable)
-  return caseTable[case] or caseTable[consts.DEFAULT]
+  local x = caseTable[case]
+  return x == nil and caseTable[consts.DEFAULT] or x
 end):curry()
 
 return {
