@@ -26,9 +26,9 @@ SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
   z:    [-1/2, 1/2 ]
-  '[':  [1/2,  -1/2]
-  ';': [1/2,  -1  ]
-  '.':  [1/2,  1/2 ]
+  ']':  [1/2,  -1/2]
+  '\'': [1/2,  -1  ]
+  '/':  [1/2,  1/2 ]
 APPS =
   t: 'iTerm'
   e: 'Finder'
@@ -333,7 +333,7 @@ cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
   new ChainWindow(win, gap, unit, tolerance) if win?
 
 # Special
-Key.on 'f', MOD, -> cw()?.maximize().set()
+Key.on 'm', MOD, -> cw()?.maximize().set()
 Key.on 'c', MOD, -> cw()?.center().set()
 Key.on 'i', MOD, -> cw()?.rePour().set()
 

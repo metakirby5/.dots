@@ -3,6 +3,15 @@ local util = require('util')
 local hints = require('hints')
 local window = require('window')
 
+-- Auto-reload
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
+  for _ ,file in pairs(files) do
+    if file:sub(-4) == ".lua" then
+      hs.reload()
+    end
+  end
+end):start()
+
 -- Preferences
 local TOLERANCE = 10 -- TODO
 local UNIT = 100 -- TODO
@@ -45,12 +54,9 @@ local OFFSET_KEYS = {
   p = -1,
 }
 
--- Bind this separately for convenience when crashing
-hs.hotkey.bind(MODS.base, 'r', 'Hammerspoon reloaded!', hs.reload)
-
 -- General
 hs.hotkey.bind:withPacked():map({
-  {MODS.base, '\'', nil, hints.show},
+  {MODS.base, 'f', nil, hints.show},
 })
 
 -- Directionals
@@ -65,3 +71,5 @@ for mod, action in pairs(DIR_MODS) do
     hs.hotkey.bind(mod, key, nil, action:later(dir))
   end
 end
+
+hs.notify.show("Hammerspoon", "Config loaded", '')
