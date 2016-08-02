@@ -16,10 +16,15 @@ if which fzf &>/dev/null; then
   export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview="
   export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview="
 
-  # Auto-completion
-  [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.bash" 2>/dev/null
+  # Brew-install settings
+  if [ "$(uname)" == "Darwin" ]; then
+    fzf_opt="$(brew --prefix)/opt/fzf"
 
-  # Key bindings
-  set -o vi
-  source "/usr/local/opt/fzf/shell/key-bindings.bash"
+    # Auto-completion
+    [[ $- == *i* ]] && source "$fzf_opt/shell/completion.bash" 2>/dev/null
+
+    # Key bindings
+    set -o vi
+    source "$fzf_opt/shell/key-bindings.bash"
+  fi
 fi
