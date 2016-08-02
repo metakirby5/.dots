@@ -72,4 +72,4 @@ for mod, action in pairs(DIR_MODS) do
   end
 end
 
-hs.notify.show("Hammerspoon", "Config loaded", '')
+hs.notify.show("Hammerspoon", "Config loaded.", '')
