@@ -1,16 +1,23 @@
-local consts = require('consts')
-local util = require('util')
+local C = require('consts')
+local U = require('util')
 
-function hs.window:focusWindowIn(dir, ...)
-  (util.switch(dir) {
-    [consts.NORTH]   = self.focusWindowNorth,
-    [consts.SOUTH]   = self.focusWindowSouth,
-    [consts.EAST]    = self.focusWindowEast,
-    [consts.WEST]    = self.focusWindowWest,
-    [consts.DEFAULT] = function() error('Invalid direction.') end,
-  })(...)
-end
+-- args:
+--    gaps: the amount of padding between windows, in pixels
+return U.export(function(args)
+  -- Defaults
+  gaps = (args and args.gaps) or 0
 
-return {
-  focused = hs.window.focusedWindow,
-}
+  function hs.window:focusWindowIn(dir, ...)
+    (util.switch(dir) {
+      [C.NORTH]   = self.focusWindowNorth,
+      [C.SOUTH]   = self.focusWindowSouth,
+      [C.EAST]    = self.focusWindowEast,
+      [C.WEST]    = self.focusWindowWest,
+      [C.DEFAULT] = function() error('Invalid direction.') end,
+    })(...)
+  end
+
+  return {
+    focused = hs.window.focusedWindow,
+  }
+end)
