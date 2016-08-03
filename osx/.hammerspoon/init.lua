@@ -1,8 +1,3 @@
-local consts = require('consts')
-local util = require('util')
-local hints = require('hints')
-local window = require('window')
-
 -- Auto-reload
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
   for _ ,file in pairs(files) do
@@ -12,11 +7,14 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
   end
 end):start()
 
--- Preferences
-local TOLERANCE = 10 -- TODO
-local UNIT = 100 -- TODO
-local GAP = 10 -- TODO
+-- Imports
+local C = require('consts')
+local U = require('util')
+local P = require('prefs')
+local hints = require('hints')
+local window = require('window')(P)
 
+-- Keys
 local MODS = {
   base = {'cmd', 'alt'},
   move = {'cmd', 'alt', 'shift'}, -- TODO
@@ -42,10 +40,10 @@ local SNAP_KEYS = {
 }
 
 local DIR_KEYS = {
-  h = consts.WEST,
-  j = consts.SOUTH,
-  k = consts.NORTH,
-  l = consts.EAST,
+  h = C.WEST,
+  j = C.SOUTH,
+  k = C.NORTH,
+  l = C.EAST,
 }
 
 -- TODO

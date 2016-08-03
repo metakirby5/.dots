@@ -1,4 +1,4 @@
-local consts = require('consts')
+local C = require('consts')
 
 -- Curry wrapper to resolve functional dependencies
 local c = function(func)
@@ -9,7 +9,7 @@ end
 
 -- Tables+
 function T(t)
-  return setmetatable(t or {}, { __index = table })
+  return setmetatable(t or {}, {__index = table})
 end
 setmetatable(table, {
   __index = {
@@ -133,10 +133,20 @@ debug.setmetatable(function() end, {
 -- Scala-style switch(case) {...}
 local switch = (function(case, caseTable)
   local x = caseTable[case]
-  return x == nil and caseTable[consts.DEFAULT] or x
+  return x == nil and caseTable[C.DEFAULT] or x
 end):curry()
+
+-- Configurable modules from function
+-- exporter can either take nil for default arguments,
+-- or a table for named arguments.
+local export = (function(exporter)
+  return setmetatable(exporter(), {__call = function(_, ...)
+    return exporter(...)
+  end})
+end)
 
 return {
   T = T,
   switch = switch,
+  export = export,
 }
