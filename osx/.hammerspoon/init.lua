@@ -10,33 +10,16 @@ end):start()
 -- Imports
 local C = require('consts')
 local U = require('util')
-local P = require('prefs')
 local hints = require('hints')
-local window = require('window')(P)
+local window = require('window')
 
 -- Keys
 local MODS = {
   base = {'cmd', 'alt'},
-  move = {'cmd', 'alt', 'shift'}, -- TODO
-  size = {'cmd', 'ctrl', 'shift'}, -- TODO
-  pour = {'ctrl', 'alt', 'shift'}, -- TODO
-  mash = {'ctrl', 'alt', 'cmd'}, -- TODO TBD
-}
-
--- TODO
-local APP_KEYS = {
-  t = 'iTerm',
-  e = 'Finder',
-}
-
--- TODO
-local SNAP_KEYS = {
-  q      = {-1/2, -1/2},
-  a      = {-1/2, -1  },
-  z      = {-1/2, 1/2 },
-  [']']  = {1/2,  -1/2},
-  ['\''] = {1/2,  -1  },
-  ['/']  = {1/2,  1/2 },
+  move = {'cmd', 'alt', 'shift'},
+  size = {'cmd', 'ctrl', 'shift'},
+  pour = {'ctrl', 'alt', 'shift'},
+  mash = {'ctrl', 'alt', 'cmd'},
 }
 
 local DIR_KEYS = {
@@ -44,12 +27,6 @@ local DIR_KEYS = {
   j = C.SOUTH,
   k = C.NORTH,
   l = C.EAST,
-}
-
--- TODO
-local OFFSET_KEYS = {
-  n = 1,
-  p = -1,
 }
 
 -- General
