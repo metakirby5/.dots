@@ -8,7 +8,7 @@ return U.export(function(args)
   gaps = (args and args.gaps) or 0
 
   function hs.window:focusWindowIn(dir, ...)
-    (util.switch(dir) {
+    (U.switch(dir) {
       [C.NORTH]   = self.focusWindowNorth,
       [C.SOUTH]   = self.focusWindowSouth,
       [C.EAST]    = self.focusWindowEast,
