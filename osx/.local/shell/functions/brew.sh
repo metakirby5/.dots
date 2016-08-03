@@ -1,3 +1,21 @@
+# Custom brew commands
+brew() {
+  local cmd="$1"
+  shift
+
+  case "$cmd" in
+    aliasapps)
+      brew-aliasapps
+      ;;
+    prune)
+      brew-prune
+      ;;
+    *)
+      command brew "$cmd" "$@"
+      ;;
+  esac
+}
+
 # Bundles up only leaf brew dependencies.
 # Requires Homebrew/homebrew-bundle.
 brew-leaves() {
@@ -12,11 +30,12 @@ brew-leaves() {
 brew-aliasapps() {
   brew linkapps
   find /Applications -maxdepth 1 -type l | while read f; do
+    local src="$(stat -c%N "$f" | cut -d\' -f4)"
+    rm "$f"
     osascript -e \
       "tell app \"Finder\" to make new alias file at \
-      POSIX file \"/Applications\" to POSIX file \
-      \"$(stat -c%N "$f" | cut -d\' -f4)\"
-      set name of result to \"$f\""
+      POSIX file \"/Applications\" to POSIX file \"$src\"
+      set name of result to \"$(basename "$f")\""
   done
 }
 
