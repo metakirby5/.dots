@@ -50,10 +50,10 @@ setmetatable(table, {
     -- Return the x in self s.t. func(x) is truthy
     -- function signature is (value, key) since values are more useful
     filter = c(function(self, func)
-      local filtered = T{}
+      local filtered = self:copy()
       for k, v in ipairs(self) do
-        if func(v, k) then
-          filtered[#filtered + 1] = v
+        if not func(v, k) then
+          filtered:remove(k)
         end
       end
       return filtered
@@ -62,10 +62,9 @@ setmetatable(table, {
     -- Mutative filter
     filter_ = c(function(self, func)
       local copied = self:copy()
-      self:clear_()
       for k, v in ipairs(copied) do
-        if func(v, k) then
-          self[#self + 1] = v
+        if not func(v, k) then
+          self:remove(k)
         end
       end
       return self
