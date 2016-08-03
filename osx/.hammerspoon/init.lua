@@ -10,14 +10,11 @@ end):start()
 -- Imports
 local C = require('consts')
 local U = require('util')
+local P = require('prefs')
 local hints = require('hints')
-local window = require('window'){gaps = 10}
+local window = require('window')(P)
 
--- Preferences
-local TOLERANCE = 10 -- TODO
-local UNIT = 100 -- TODO
-local GAP = 10 -- TODO
-
+-- Keys
 local MODS = {
   base = {'cmd', 'alt'},
   move = {'cmd', 'alt', 'shift'}, -- TODO
