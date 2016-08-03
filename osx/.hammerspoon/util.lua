@@ -13,6 +13,13 @@ function T(t)
 end
 setmetatable(table, {
   __index = {
+    -- Delete every key
+    clear_ = c(function(self)
+      return self:map_(function(_, k)
+        self[k] = nil
+      end)
+    end),
+
     -- Shallow copy
     copy = c(function(self)
       local copied = T{}
@@ -32,6 +39,14 @@ setmetatable(table, {
       return mapped
     end),
 
+    -- Mutative map
+    map_ = c(function(self, func)
+      for k, v in ipairs(self) do
+        self[k] = func(v, k)
+      end
+      return self
+    end),
+
     -- Return the x in self s.t. func(x) is truthy
     -- function signature is (value, key) since values are more useful
     filter = c(function(self, func)
@@ -42,6 +57,18 @@ setmetatable(table, {
         end
       end
       return filtered
+    end),
+
+    -- Mutative filter
+    filter_ = c(function(self, func)
+      local copied = self:copy()
+      self:clear_()
+      for k, v in ipairs(copied) do
+        if func(v, k) then
+          self[#self + 1] = v
+        end
+      end
+      return self
     end),
 
     -- Combine tables
@@ -55,6 +82,16 @@ setmetatable(table, {
       return merged
     end),
 
+    -- Mutative merge
+    merge_ = c(function(self, arr, ...)
+      for _, t in ipairs({arr, ...}) do
+        for k, v in pairs(t) do
+          self[k] = v
+        end
+      end
+      return self
+    end),
+
     -- Concatenate arrays
     extend = c(function(self, arr, ...)
       local extended = self:copy()
@@ -64,6 +101,16 @@ setmetatable(table, {
         end
       end
       return extended
+    end),
+
+    -- Mutative extend
+    extend_ = c(function(self, arr, ...)
+      for _, t in ipairs({arr, ...}) do
+        for _, v in ipairs(t) do
+          self[#self + 1] = v
+        end
+      end
+      return self
     end),
   },
 })
