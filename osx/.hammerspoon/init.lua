@@ -7,20 +7,16 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
   end
 end):start()
 
--- Imports
-local C = require('consts')
-local U = require('util')
-local hints = require('hints')
-local window = require('window')
+-- Consts
+local C = {
+  NORTH   = 'NORTH',
+  SOUTH   = 'SOUTH',
+  EAST    = 'EAST',
+  WEST    = 'WEST',
+}
 
 -- Keys
-local MODS = {
-  base = {'cmd', 'alt'},
-  move = {'cmd', 'alt', 'shift'},
-  size = {'cmd', 'ctrl', 'shift'},
-  pour = {'ctrl', 'alt', 'shift'},
-  mash = {'ctrl', 'alt', 'cmd'},
-}
+local MOD = {'cmd', 'alt'}
 
 local DIR_KEYS = {
   h = C.WEST,
@@ -29,22 +25,24 @@ local DIR_KEYS = {
   l = C.EAST,
 }
 
--- General
-hs.hotkey.bind:withPacked():map({
-  {MODS.base, 'f', nil, hints.show},
-})
+-- Hints
+hs.hints.showTitleThresh = 0
+hs.hotkey.bind(MOD, 'f', nil, hs.hints.windowHints)
 
--- Directionals
-DIR_MODS = {
-  [MODS.base] = function(dir)
-    window.focused():focusWindowIn(dir)
-  end,
-}
+-- Focus
+function hs.window:focusWindowIn(dir, ...)
+  return ({
+    [C.NORTH]   = self.focusWindowNorth,
+    [C.SOUTH]   = self.focusWindowSouth,
+    [C.EAST]    = self.focusWindowEast,
+    [C.WEST]    = self.focusWindowWest,
+  })[dir](...)
+end
 
-for mod, action in pairs(DIR_MODS) do
-  for key, dir in pairs(DIR_KEYS) do
-    hs.hotkey.bind(mod, key, nil, action:later(dir))
-  end
+for key, dir in pairs(DIR_KEYS) do
+  hs.hotkey.bind(MOD, key, nil, hs.fnutils.partial(function()
+    hs.window.focusedWindow():focusWindowIn(dir)
+  end))
 end
 
 hs.notify.show("Hammerspoon", "Config loaded.", '')
