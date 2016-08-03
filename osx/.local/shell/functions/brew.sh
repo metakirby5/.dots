@@ -10,11 +10,13 @@ brew-leaves() {
 
 # https://github.com/Homebrew/legacy-homebrew/issues/16639#issuecomment-42813448
 brew-aliasapps() {
+  brew linkapps
   find /Applications -maxdepth 1 -type l | while read f; do
     osascript -e \
       "tell app \"Finder\" to make new alias file at \
-      POSIX file \"/Applications\" to POSIX file \"$(stat -f%Y "$f")\""
-    rm "$f"
+      POSIX file \"/Applications\" to POSIX file \
+      \"$(stat -c%N "$f" | cut -d\' -f4)\"
+      set name of result to \"$f\""
   done
 }
 
