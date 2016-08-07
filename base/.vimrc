@@ -774,7 +774,9 @@ endif " }}}
   " Help Splits {{{
     augroup HELP_SPLITS
       au!
-      au BufEnter * if &buftype == 'help' | wincmd L | vert resize 79 | endif
+      au BufEnter * if &buftype == 'help' |
+            \ wincmd L | exe 'vert resize ' . &tw
+            \ | endif
     augroup END
   " }}}
 " }}}
