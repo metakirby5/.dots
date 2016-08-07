@@ -322,6 +322,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:undotree_SetFocusWhenToggle = 1
       let g:undotree_ShortIndicators = 1
     " }}}
+    " Numi-esque code interpreter {{{
+      Plug 'metakirby5/codi.vim'
+    " }}}
     " Better :%s/.../.../ {{{
       Plug 'osyo-manga/vim-over'
               \, { 'on': 'OverCommandLine' }
@@ -590,8 +593,8 @@ endif " }}}
             \
       hi clear CursorLine | hi CursorLine
             \ term=bold     cterm=bold  gui=bold
-            \ ctermbg=black guibg=black
             \
+            \ ctermbg=black guibg=black
       hi clear CursorLineNr | hi CursorLineNr
             \ term=bold     cterm=bold  gui=bold
             \ ctermfg=grey  guifg=grey
@@ -973,12 +976,11 @@ endif " }}}
     augroup END
 
     " Text file format options:
-    "   a - Actively auto-format paragraphs
     "   n - Recognize numbered lists
     "   2 - Paragraph-style indents
     augroup FORMAT_OPTIONS_TXT
       au!
-      au BufNewFile,BufRead *.txt,*.md setlocal fo+=an2
+      au BufNewFile,BufRead *.txt,*.md setlocal fo+=n2
     augroup END
 
     let s:default_tw = 78 " default textwidth
