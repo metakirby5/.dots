@@ -1058,18 +1058,27 @@ endif " }}}
 " }}}
 " Utilities {{{
   " General {{{
-    " Use DiffOrig to see file differences
-    if !exists(':DiffOrig')
-      command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
-            \ | diffthis | wincmd p | diffthis
-    endif
+    " :Diff - see file differences
+    command! Diff vert new | set bt=nofile | r ++edit # | 0d_
+          \ | diffthis | wincmd p | diffthis
 
-    " Use w!! to write as sudo
-    cmap w!! w !sudo tee > /dev/null %
+    " :R - Execute current script
+    function! s:runbuf(...)
+      if exists('g:runbuf') | exe 'bdel '.g:runbuf | endif
+      new
+      let g:runbuf = bufnr('%')
+      setlocal buftype=nofile
+      exe 'r !./# '.join(a:000, ' ')
+      wincmd p
+    endfunction
+    command! -nargs=* R call s:runbuf(<f-args>)
 
-    " ,r - Run using filetype
-    xnoremap <expr> <leader>r
-          \ "\<Esc>:'<,'>:w !" . getbufvar('%', 'run_command', &filetype) . "\<cr>"
+    " :Sudow - to write as sudo
+    function! s:sudow(...)
+      let file = a:0 ? join(a:000, ' ') : bufname('%')
+      silent! exe 'w !sudo tee '.file
+    endfunction
+    command! -nargs=* Sudow call s:sudow(<f-args>)
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
