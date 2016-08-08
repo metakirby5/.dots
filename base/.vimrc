@@ -325,9 +325,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:codi#interpreters = {
             \ 'haskell': {
                 \ 'bin': 'ghci',
-                \ 'prompt': '> ',
-                \ 'prepipe': 'tr "" "\n" | sed "/\[?1./d"',
-                \ 'postpipe': 'cut -c2-',
+                \ 'prompt': '^> ',
+                \ 'prepipe':
+                  \ 'sed "s/\(\[?1[hl]\|E\)//g" | tr "" "\n" | cut -c2-',
                 \ },
             \}
     " }}}
