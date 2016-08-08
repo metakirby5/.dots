@@ -326,7 +326,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ 'haskell': {
                 \ 'bin': 'ghci',
                 \ 'prompt': '^> ',
-                \ 'prepipe':
+                \ 'preprocess':
                   \ 'sed "s/\(\[?1[hl]\|E\)//g" | tr "" "\n" | cut -c2-',
                 \ },
             \}
