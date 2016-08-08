@@ -513,6 +513,7 @@ endif " }}}
   set timeoutlen=1000 ttimeoutlen=0 " no escape key delay
   set ttyfast                       " assume speedy connection
   set undolevels=10000              " allow lots of undos
+  set updatetime=500                " fire hold events every half-second
 " }}}
 " Interface {{{
   " General {{{
