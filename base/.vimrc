@@ -322,6 +322,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
+      let g:codi#interpreters = {
+            \ 'haskell': {
+                \ 'bin': 'ghci',
+                \ 'prompt': '> ',
+                \ 'prepipe': 'tr "" "\n" | sed "/\[?1./d"',
+                \ 'postpipe': 'cut -c2-',
+                \ },
+            \}
     " }}}
     " Better :%s/.../.../ {{{
       Plug 'osyo-manga/vim-over'
