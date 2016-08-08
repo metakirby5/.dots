@@ -99,17 +99,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:incsearch#is_stay = 1
         map /  <Plug>(incsearch-forward)
         map ?  <Plug>(incsearch-backward)
-        map // <Plug>(incsearch-forward)\c
-        map ?? <Plug>(incsearch-backward)\c
+        map // <Plug>(incsearch-fuzzy-/)
+        map ?? <Plug>(incsearch-fuzzy-?)
         map n  <Plug>(incsearch-nohl-n)zz
         map N  <Plug>(incsearch-nohl-N)zz
         map *  <Plug>(incsearch-nohl-*)
         map #  <Plug>(incsearch-nohl-#)
         map g* <Plug>(incsearch-nohl-g*)
         map g# <Plug>(incsearch-nohl-g#)
-        map z/ <Plug>(incsearch-fuzzy-/)
-        map z? <Plug>(incsearch-fuzzy-?)
-        map zg/ <Plug>(incsearch-fuzzy-stay)
+        map g/ <Plug>(incsearch-fuzzy-stay)
       endif
     " }}}
     " Start screen {{{
@@ -411,8 +409,8 @@ else
       inoremap <S-tab> <C-x><C-o>
     " }}}
     " Search {{{
-      noremap N Nzz
       noremap n nzz
+      noremap N Nzz
       noremap // /\c
       noremap ?? ?\c
       nnoremap <silent> <bslash> <esc>:%s/
