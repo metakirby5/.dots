@@ -280,7 +280,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap          <leader>a  <esc>:Ag<space>
       noremap <silent> <leader>A  <esc>:exec("Ag ".expand("<cword>"))<cr>
       noremap <silent> <leader>bg <esc>:Lines<cr>
-      noremap <silent> <leader>;  <esc>:History:<cr>
+      noremap <silent> <leader>:  <esc>:History:<cr>
+      noremap <silent> <leader>;  <esc>:Commands<cr>
       noremap <silent> <leader>]  <esc>:exec("Tags ^".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
       noremap <silent> <leader>gz <esc>:GFiles<cr>
