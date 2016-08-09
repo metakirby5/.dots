@@ -7,6 +7,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias ip-public="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ip-local="ipconfig getifaddr en0"
+alias codi="vim codi.py -c 'setlocal buftype=nofile | Codi'"
 for method in GET POST PUT DELETE; do
 	alias "$method"="curl -X $method"
 done
