@@ -113,10 +113,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Start screen {{{
       Plug 'mhinz/vim-startify'
       let g:startify_list_order = [
-            \ ['   Files'], 'files',
-            \ ['   Directory'], 'dir',
             \ ['   Bookmarks'], 'bookmarks',
             \ ['   Sessions'], 'sessions',
+            \ ['   Files'], 'files',
+            \ ['   Directory'], 'dir',
             \ ['   Commands'], 'commands']
       let g:startify_change_to_vcs_root = 1
       let g:startify_relative_path = 1
