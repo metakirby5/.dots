@@ -778,7 +778,8 @@ endif " }}}
     augroup HELP_SPLITS
       au!
       au BufEnter * if &buftype == 'help' |
-            \ wincmd L | exe 'vert resize ' . &tw
+            \ wincmd L | exe 'vert resize ' . &tw 
+            \ | noremap <buffer> q <esc>:q<cr>
             \ | endif
     augroup END
   " }}}
