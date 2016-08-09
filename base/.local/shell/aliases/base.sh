@@ -29,7 +29,10 @@ alias g='git'
 alias h='history'
 alias zh='eval $(tac "$HISTFILE" | fzf --no-sort --preview= | tee -a "$HISTFILE")'
 alias q='fzf --multi | map'
-alias l='locate / | fzf --multi | map'
+alias ql='locate / | fzf --multi | map'
+alias u='pushd'
+alias p='popd'
+alias l='dirs -v'
 
 # Prefs
 which nvim &>/dev/null && alias vim='nvim'
