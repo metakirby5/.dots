@@ -1,8 +1,9 @@
 # Codi
+# Usage: codi [filetype] [filename]
 codi() {
-  vim -c \
+  vim $2 -c \
     "let g:startify_disable_at_vimenter = 1 |\
-    set buftype=nofile laststatus=0 |\
+    set laststatus=0 |\
     hi ColorColumn ctermbg=NONE |\
     hi VertSplit ctermbg=NONE |\
     hi NonText ctermfg=0 |\
