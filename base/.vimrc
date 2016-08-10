@@ -268,9 +268,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \ 'Ag',
               \ 'Lines',
               \ 'History',
+              \ 'Commands',
               \ 'Tags',
               \ 'Helptags',
-              \ 'GFiles'] }
+              \ 'GFiles',
+              \ 'GGrep'] }
 
       let g:fzf_files_options =
             \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
@@ -326,6 +328,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:codi#interpreters = {
             \ 'haskell': {
                 \ 'bin': 'ghci',
+                \ 'deps': ['sed', 'tr', 'cut'],
                 \ 'prompt': '^> ',
                 \ 'preprocess':
                   \ 'sed "s/\(\[?1[hl]\|E\)//g" | tr "" "\n" | cut -c2-',
