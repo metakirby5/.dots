@@ -325,8 +325,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
-      function! s:pp_hs(content)
-        let c = substitute(a:content, "".'\(\[?1[hl]\|E\)', '', 'g')
+      function! s:pp_hs(evaled)
+        let c = substitute(a:evaled, "".'\(\[?1[hl]\|E\)', '', 'g')
         let c = substitute(c, "", "\n", 'g')
         let l = split(c, "\n")
         let l = []
