@@ -325,21 +325,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
-      function! s:pp_hs(evaled)
-        let c = substitute(a:evaled, "".'\(\[?1[hl]\|E\)', '', 'g')
-        let c = substitute(c, "", "\n", 'g')
-        let l = split(c, "\n")
-        let l = []
-        for line in split(c, "\n")
-          call add(l, line[1:])
-        endfor
-        return join(l, "\n")
-      endfunction
       let g:codi#interpreters = {
             \ 'haskell': {
                 \ 'bin': 'ghci',
                 \ 'prompt': '^> ',
-                \ 'preprocess': function('s:pp_hs'),
                 \ },
             \}
     " }}}
