@@ -136,9 +136,9 @@ class ChainWindow
 
   updateScr: (scr) ->
     @prevScr = if @scr? then @scr else scr
-    @prevSf = @prevScr?.visibleFrameInRectangle()
+    @prevSf = @prevScr?.flippedVisibleFrame()
     @scr = scr
-    @sf = @scr.visibleFrameInRectangle()
+    @sf = @scr.flippedVisibleFrame()
 
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
@@ -326,6 +326,11 @@ class ChainWindow
         @f.y = @sf.y + @sf.height - @f.height - @gap
     this
 
+class Hints
+  constructor: (@weight = 24, @appearance = 'dark') ->
+    @active = false
+    @hints = []
+
 # Shortcuts
 fw = Window.focused
 cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
@@ -364,11 +369,11 @@ for [mod, action] in SPACE_MODS
 
 # Directionals
 DIR_MODS = [
-  # [
-  #   # Select
-  #   MOD,
-  #   (dir) -> fw()?.focusClosestNeighbor(dir)
-  # ],
+  [
+    # Select
+    MOD,
+    (dir) -> fw()?.focusClosestNeighbor(dir)
+  ],
   [
     # Move
     MOVE_MOD,
@@ -403,3 +408,5 @@ for key, dest of SNAPS
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
+
+# vim:ft=coffee
