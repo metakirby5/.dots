@@ -13,6 +13,7 @@ protobuf
 pushbullet-cli
 python-Levenshtein
 trollius
+vboxapi
 virtualenvwrapper
 wheel
 whizkers
