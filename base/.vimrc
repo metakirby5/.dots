@@ -325,29 +325,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
-      function! s:pp_hs(output)
-        " BSD is fine.
-        let s:uname = system('uname -s')
-        if s:uname =~ 'Darwin' || s:uname =~ 'BSD'
-          return a:output
-        endif
-
-        " On Linux, strip escape codes and add newlines where they should go
-        let c = substitute(a:output, '\(\[?1[hl]\|E\)', '', 'g')
-        let c = substitute(c, '', "\n", 'g')
-
-        " Also strip first character
-        let l = []
-        for line in split(c, "\n")
-          call add(l, line[1:])
-        endfor
-        return join(l, "\n")
-      endfunction
       let g:codi#interpreters = {
             \ 'haskell': {
-                \ 'bin': 'ghci',
                 \ 'prompt': '^> ',
-                \ 'preprocess': function('s:pp_hs'),
                 \ },
             \}
     " }}}
