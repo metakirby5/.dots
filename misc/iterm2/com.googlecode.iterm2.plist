@@ -986,7 +986,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>532 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>484 277 796 473 0 0 1680 1027 </string>
+	<string>484 255 796 473 0 0 1680 1027 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -1327,7 +1327,7 @@
 				<real>0.20784313976764679</real>
 			</dict>
 			<key>Cursor Type</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
@@ -2071,7 +2071,7 @@
 				<real>0.20784313976764679</real>
 			</dict>
 			<key>Cursor Type</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Custom Command</key>
 			<string>Yes</string>
 			<key>Custom Directory</key>
@@ -2817,7 +2817,7 @@
 				<real>0.20784313976764679</real>
 			</dict>
 			<key>Cursor Type</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Custom Command</key>
 			<string>Yes</string>
 			<key>Custom Directory</key>
@@ -3563,7 +3563,7 @@
 				<real>0.20784313976764679</real>
 			</dict>
 			<key>Cursor Type</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Custom Command</key>
 			<string>Yes</string>
 			<key>Custom Directory</key>
