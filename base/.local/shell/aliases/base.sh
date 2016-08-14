@@ -34,7 +34,6 @@ alias p='popd'
 alias l='dirs -v'
 
 # Prefs
-which nvim &>/dev/null && alias vim='nvim'
 alias less='less -R'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
