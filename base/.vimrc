@@ -181,8 +181,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         Plug 'SirVer/ultisnips'
               \| Plug 'honza/vim-snippets'
         let g:UltiSnipsExpandTrigger = '<c-bslash>'
-        let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+        let g:UltiSnipsJumpForwardTrigger = '<c-n>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-p>'
       endif
     " }}}
     " Emojis {{{
