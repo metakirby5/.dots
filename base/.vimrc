@@ -176,15 +176,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         Plug 'ervandew/supertab'
       endif
     " }}}
-    " " Snippets {{{
-    "   if (version >= 704)
-    "     Plug 'SirVer/ultisnips'
-    "           \| Plug 'honza/vim-snippets'
-    "     let g:UltiSnipsExpandTrigger = '<c-bslash>'
-    "     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    "     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-    "   endif
-    " " }}}
+    " Snippets {{{
+      if (version >= 704)
+        Plug 'SirVer/ultisnips'
+              \| Plug 'honza/vim-snippets'
+        let g:UltiSnipsExpandTrigger = '<c-bslash>'
+        let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+      endif
+    " }}}
     " Emojis {{{
       Plug 'junegunn/vim-emoji'
             \, { 'for': ['markdown', 'gitcommit'] }
@@ -201,7 +201,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         inoremap <expr> <bs>    {g:completion_engine}#smart_close_popup() . "\<bs>"
         inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
-        let g:ulti_expand_res = 0
+        let g:ulti_expand_or_jump_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippet()
           return g:ulti_expand_res ? "" :
