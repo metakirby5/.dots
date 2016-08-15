@@ -1,3 +1,14 @@
+# fzf cache
+FZF_CACHE=~/.cache/fzf
+fzf() {
+  exec > >(tee "$FZF_CACHE")
+  command fzf "$@"
+}
+
+fzc() {
+  cat "$FZF_CACHE"
+}
+
 # fzf + ag
 zag() {
   local c="ag --color -C 5 $@ {}"
