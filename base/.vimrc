@@ -1011,14 +1011,17 @@ endif " }}}
     " Spellcheck
     set spelllang=en
 
-    " ,/cc - Toggle spellcheck
+    " ,cc - Toggle spellcheck
     noremap <silent> <leader>cc <esc>:setlocal spell!<cr>
 
     " More spellcheck shortcuts
     noremap <leader>cn ]s
     noremap <leader>cp [s
     noremap <leader>cw z=
-    noremap <leader>ca zg
+    noremap <leader>cg zg
+    noremap <leader>cug zug
+    noremap <leader>cb zw
+    noremap <leader>cub zuw
 
     " Enable spell check for text files
     augroup SPELLCHECK
