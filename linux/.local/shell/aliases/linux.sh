@@ -7,4 +7,3 @@ alias ls='ls -xh --color=auto'
 alias clip='xclip -sel c'
 alias dump='xclip -sel c -o'
 alias open='xdg-open'
-alias vim=vimx
