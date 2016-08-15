@@ -22,6 +22,15 @@ fi
 
 # http://stackoverflow.com/a/246128
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-for f in $dir/{aliases,functions,vendor}/* $dir/prompt.sh; do
-  source "$f"
+
+# Directories
+for d in "$dir"/{aliases,functions,vendor}; do
+  [ -d "$d" ] && for f in "$d"/*; do
+    source "$f"
+  done
+done
+
+# Files
+for f in $dir/prompt.sh; do
+  [ -f "$f" ] && source "$f"
 done

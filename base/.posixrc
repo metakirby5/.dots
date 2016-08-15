@@ -27,3 +27,6 @@ USER_COMPL=~/.bash_completion.d
 [ -d "$USER_COMPL" ] && for f in "$USER_COMPL"/*; do
   source "$f"
 done
+
+# Reset the exit code
+true
