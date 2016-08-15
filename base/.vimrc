@@ -1009,6 +1009,8 @@ endif " }}}
     xnoremap <silent> <leader>f Jgqq
 
     " Spellcheck
+    set spelllang=en
+
     " ,/cc - Toggle spellcheck
     noremap <silent> <leader>cc <esc>:setlocal spell!<cr>
 
@@ -1021,7 +1023,8 @@ endif " }}}
     " Enable spell check for text files
     augroup SPELLCHECK
       au!
-      au BufNewFile,BufRead *.txt,*.md setlocal spell spelllang=en
+      au BufNewFile,BufRead *.txt setlocal spell
+      au Filetype markdown,help setlocal spell
     augroup END
   " }}}
   " Syntax / FileType {{{
