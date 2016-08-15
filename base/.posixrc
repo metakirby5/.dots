@@ -23,6 +23,7 @@ for rc in \
 done
 
 # Completions
-for f in ~/.bash_completion.d/*; do
+USER_COMPL=~/.bash_completion.d
+[ -d "$USER_COMPL" ] && for f in "$USER_COMPL"/*; do
   source "$f"
 done

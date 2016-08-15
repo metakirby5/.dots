@@ -5,7 +5,6 @@ export LS_COLORS='di=01;34:'                        # Folders are blue
 export LESS_TERMCAP_md="$(tput bold; tput setaf 3)" # Yellow headers in less
 
 # Completion
-shopt -s nullglob             # don't give literal * unless we ask for it
 shopt -s cdspell              # autocorrect cd
 shopt -s globstar 2>/dev/null # Super-complete **
 
