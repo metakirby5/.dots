@@ -126,10 +126,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:startify_session_sort = 1
       if has('nvim')
         let g:startify_ascii = [
-              \ '            _     ',
-              \ '  ___ _  __(_)_ _ ',
-              \ ' / _ \ |/ / /  / \',
-              \ '/_//_/___/_/_/_/_/',
+              \ '           _     ',
+              \ '  __ _  __(_)_ _ ',
+              \ ' /  \ |/ / /  / \',
+              \ '/_/_/___/_/_/_/_/',
               \ '']
       else
         let g:startify_ascii = [
