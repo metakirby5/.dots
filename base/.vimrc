@@ -260,7 +260,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Fuzzy find engine {{{
       Plug 'junegunn/fzf'
-            \, { 'do': './install --bin' }
+            \, { 'do': './install --bin >/dev/null' }
             \| Plug 'junegunn/fzf.vim'
               \, { 'on': [
               \ 'History',
