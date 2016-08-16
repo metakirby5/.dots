@@ -198,7 +198,7 @@ __mk5_set_prompt() {
   PS1+="$__mk5_normal "      # Clear colors
 
   PS2=""                     # Clear PS2
-  PS2+="$__mk5_yellow$pchar" # Blue continuation line
+  PS2+="$__mk5_yellow$pchar" # Yellow continuation line
   PS2+="$__mk5_normal "      # Clear colors
 }
 
