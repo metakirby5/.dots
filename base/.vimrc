@@ -13,7 +13,6 @@
   endif
 
   " Leader
-  let mapleader = "\<Space>"
   let g:mapleader = "\<Space>"
   noremap <leader><space> <space>
 " }}}
