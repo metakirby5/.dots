@@ -21,9 +21,9 @@
   " Setup {{{
 if empty(glob(s:configdir . '/autoload/plug.vim'))
   let s:plugfile = s:configdir . '/autoload/plug.vim'
-  exec 'silent !curl -fLo ' . s:plugfile . ' --create-dirs
+  exe 'silent !curl -fLo ' . s:plugfile . ' --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  exec 'source ' . s:plugfile
+  exe 'source ' . s:plugfile
   au VimEnter * PlugInstall
 endif
 
@@ -280,21 +280,21 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       noremap <silent> <leader>x  <esc>:History<cr>
       noremap <silent> <leader>z  <esc>:Files<cr>
       noremap          <leader>a  <esc>:Ag<space>
-      noremap <silent> <leader>A  <esc>:exec("Ag ".expand("<cword>"))<cr>
+      noremap <silent> <leader>A  <esc>:exe("Ag ".expand("<cword>"))<cr>
       noremap <silent> <leader>bg <esc>:Lines<cr>
       noremap <silent> <leader>:  <esc>:History:<cr>
       noremap <silent> <leader>;  <esc>:Commands<cr>
-      noremap <silent> <leader>]  <esc>:exec("Tags ^".expand("<cword>"))<cr>
+      noremap <silent> <leader>]  <esc>:exe("Tags ^".expand("<cword>"))<cr>
       noremap <silent> <leader>?  <esc>:Helptags<cr>
       noremap <silent> <leader>gz <esc>:GFiles<cr>
       noremap <silent> <leader>gs <esc>:GFiles?<cr>
       noremap          <leader>gg <esc>:GGrep<space>
-      noremap <silent> <leader>GG <esc>:exec("GGrep ".expand("<cword>"))<cr>
+      noremap <silent> <leader>GG <esc>:exe("GGrep ".expand("<cword>"))<cr>
 
       function! s:git_grep_handler(line)
         let parts = split(a:line, ':')
         let [f, l] = parts[0 : 1]
-        execute 'e +' . l . ' `git rev-parse --show-toplevel`/'
+        exe 'e +' . l . ' `git rev-parse --show-toplevel`/'
               \. substitute(f, ' ', '\\ ', 'g')
       endfunction
 
@@ -325,6 +325,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
+      let g:codi#interpreters = {
+          \     'purescript': {
+          \         'bin': ['pulp', 'psci'],
+          \         'prompt': '^> ',
+          \     },
+          \ }
     " }}}
     " Better :%s/.../.../ {{{
       Plug 'osyo-manga/vim-over'
@@ -931,8 +937,8 @@ endif " }}}
     inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
 
     " ,t(g)t - Open tag in tab
-    noremap <silent> <leader>tt  <esc>:tab split<cr>:exec("tag ".expand("<cword>"))<cr>
-    noremap <silent> <leader>tgt <esc>:tab split<cr>:exec("tjump ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tt  <esc>:tab split<cr>:exe("tag ".expand("<cword>"))<cr>
+    noremap <silent> <leader>tgt <esc>:tab split<cr>:exe("tjump ".expand("<cword>"))<cr>
   " }}}
   " Folds {{{
     if exists("+foldenable")
