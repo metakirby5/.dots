@@ -13,7 +13,8 @@
   endif
 
   " Leader
-  let g:mapleader = "\<Space>"
+  let mapleader = "\<Space>"
+  let g:mapleader = mapleader
   noremap <leader><space> <space>
 " }}}
 " Plugins {{{
@@ -1074,10 +1075,12 @@ endif " }}}
       new
       let g:runbuf = bufnr('%')
       setlocal buftype=nofile
-      exe 'r !./# '.join(a:000, ' ')
+      let args = a:000
+      map(args, 'shellescape(v:val)')
+      silent exe 'r !./# '.join(args, ' ')
       wincmd p
     endfunction
-    command! -nargs=* R call s:runbuf(<f-args>)
+    command! -nargs=* Run call s:runbuf(<f-args>)
 
     " :Sudow - to write as sudo
     function! s:sudow(...)
