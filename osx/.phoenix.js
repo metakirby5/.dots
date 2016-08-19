@@ -184,9 +184,10 @@ Window::hint = (seq,
   sf = @screen().frame()
   text = seq
 
-  # If title length is too long, truncate
-  if this.app().windows().length > 1
+  # If more than one app window visible, show title
+  if this.app().windows({visible: true}).length > 1
     title = this.title()
+    # If title length is too long, truncate
     if title.length > titleLength
       title = (title.substr 0, titleLength - titleCont.length) + titleCont
     text += ' | ' + title
