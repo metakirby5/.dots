@@ -22,6 +22,9 @@ WINS =
   unit: 100
   factor: 2
   gap: 10
+MODALS =
+  unit: 10
+  gap: WINS.gap
 HINTS =
   stopEvents: [
     'screensDidChange',
@@ -143,6 +146,10 @@ edgeOf = (f, dir, gap = 0) ->
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
 
+intersects = (f, g, gap = 0) ->
+  f.x <= g.x + g.width + gap and g.y <= f.x + f.width + gap and
+  f.y <= g.y + g.height + gap and g.y <= f.y + f.height + gap
+
 # Screen methods
 Screen::idx = ->
   (_.find (Screen.all().map (s, i) -> [i, s]),
@@ -189,12 +196,29 @@ Window::hint = (seq,
   hint
 
 # Modal methods
+Modal::open = []
 Modal::updateSeqLen = (len) ->
   if not @seq?
     return
   next = @seq.substr len
   @text = next + @text.substr(@curSeqLen)
   @curSeqLen = next.length
+
+Modal::_show = Modal::show
+Modal::show = ->
+  if not _.contains(@open, this)
+    while _.some(@open.map (m) => intersects(@frame(), m.frame(), MODALS.gap))
+      @origin = {
+        x: @origin.x
+        y: @origin.y - MODALS.unit
+      }
+    @open.push this
+  @_show()
+
+Modal::_close = Modal::close
+Modal::close = ->
+  Modal::open = _.without(@shown, this)
+  @_close()
 
 # Hints
 class HintTree
