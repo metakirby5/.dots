@@ -41,7 +41,7 @@ HINTS =
   ]
   kStop: 'escape'
   kPop: 'delete'
-  chars: 'FJ' # chars: 'FJDKSLAGHRUEIWOVNCM'
+  chars: 'FJDKSLAGHRUEIWOVNCM'
   weight: 24
   appearance: 'dark'
   titleLength: 15
@@ -52,7 +52,7 @@ GENERAL =
   maximize: 'm'
   center: 'c'
   rePour: 'i'
-  hinter: 'f'
+  hinter: 'y'
 SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
@@ -188,8 +188,9 @@ Window::hint = (seq,
       y: (Math.min (
         Math.max (
           Screen.all()[0].frame().height -
-          (f.y + f.height / 2 + hf.height / 2)), sf.y
-        ), sf.y + sf.height - hf.height)
+          (f.y + f.height / 2 + hf.height / 2)
+        ), sf.y
+      ), sf.y + sf.height - hf.height)
 
   hint.seq = seq
   hint.curSeqLen = seq.length
@@ -277,9 +278,14 @@ class Hinter
 
   # Advance state machine
   push: (k) ->
-    @seq += k
-    @state = @state.get(k)
-    @update()
+    next = @state.get(k)
+    if not next
+      @stop()
+    else
+      @seq += k
+      @prev = @state
+      @state = next
+      @update(true)
 
   # Retract state machine
   pop: ->
@@ -288,11 +294,12 @@ class Hinter
       @stop()
     else
       @seq = @seq.popped()
+      @prev = @state
       @state = @state.parent
-      @update()
+      @update(false)
 
   # Re-show hints reflecting current state, or select window if complete
-  update: ->
+  update: (descending) ->
     # If state is a leaf, we're done
     if @state not instanceof HintTree
       # Cancel hints
@@ -309,14 +316,20 @@ class Hinter
 
     # Otherwise, update texts and only show hints under state
     else
-      # Hide non-matching hints
-      @tree.map ((w) => w.hintInstance.close()), @state
-
       # Update text
-      @state.map (w) => w.hintInstance.updateSeqLen(@seq.length)
+      @state.map (w) =>
+        w.hintInstance.updateSeqLen(@seq.length)
 
-      # Show matching hints
-      @state.map (w) => w.hintInstance.show()
+      if descending
+        # Hide non-matching hints
+        @prev.map (w) =>
+          w.hintInstance.close()
+        , @state
+      else
+        # Show matching hints
+        @state.map (w) =>
+          w.hintInstance.show()
+        , @prev
 
   # Start hint mode
   start: ->
@@ -326,8 +339,7 @@ class Hinter
     @active = true
 
     # Internal state
-    @tree = new HintTree @chars, Window.all {visible: true}
-    @state = @tree
+    @state = new HintTree @chars, Window.all {visible: true}
     @seq = ''
 
     # Keybinds
@@ -341,7 +353,7 @@ class Hinter
     @stopEvents.map (e) => @events.push new Event e, => @stop()
 
     # Finally, show hints
-    @tree.map (w) -> w.hintInstance.show()
+    @state.map (w) -> w.hintInstance.show()
 
   # Stop hint mode
   stop: ->
@@ -351,7 +363,8 @@ class Hinter
     @active = false
 
     # Close hints, disable keybinds, disable events
-    @tree.map (w) -> w.hintInstance.close()
+    (if @state instanceof HintTree then @state else @prev).map (w) ->
+      w.hintInstance.close()
     @binds.map (k) -> k.disable()
     @events.map (e) -> e.disable()
 
