@@ -133,40 +133,66 @@ class Hints
     @binds = []
     @hints = []
 
-  bindHints: (wins, prefix = '') ->
-    # Base case - no wins
-    if not wins?
-      return
-
+  hintBinds: (wins, prefix = '') ->
     # Base case - we have enough keys
     if wins.length <= @chars.length
       (_.zip wins, @chars).map ([w, k]) =>
-        h = (new ChainWindow w).hint(prefix + k)
-        h.show()
-        @hints.push h
-        @binds.push Key.on k, [], =>
-          w.focus()
-          Mouse.move
-            x: h.origin.x + h.frame().width / 2
-            y: Screen.all()[0].frame().height -
-            h.origin.y - h.frame().height / 2
-          @hide()
+        if w?
+          # Create hint
+          Phoenix.log 'hinting ' + prefix + k
+          h = (new ChainWindow w).hint(prefix + k)
+          h.show()
+          @hints.push h
+          bind = new Key k, [], =>
+            # Focus window
+            w.focus()
+
+            # Center mouse
+            Mouse.move
+              x: h.origin.x + h.frame().width / 2
+              y: Screen.all()[0].frame().height -
+              h.origin.y - h.frame().height / 2
+
+            # Hide hints
+            @hide()
+
+          # Disable bind until it's time
+          bind.disable()
+          @binds.push bind
+          bind
 
     # Recursive case - chunk and bind
     else
+      # Chunk into @chars.length groups
       (_.zip _.chain(wins).groupBy((e, i) =>
-        Math.floor i / @chars.length
-      ).toArray().value(), @chars).map ([w, p]) => @bindHints w, p
+        i % @chars.length
+      ).toArray().value(), @chars).map ([w, p]) =>
+        Phoenix.log 'prefixing ' + prefix + p
+        if w?
+          # Create binds
+          subBinds = @hintBinds w, prefix + p
+
+          # Create prefix bind
+          bind = new Key p, [], =>
+            subBinds.map (subBind) ->
+              Phoenix.log subBind
+              subBind.enable()
+
+          # Disable bind until it's time
+          bind.disable()
+          @binds.push bind
+          bind
 
   show: ->
-    @binds.push Key.on @cancel, [], => @hide()
-    @bindHints Window.all
+    @binds.push new Key @cancel, [], => @hide()
+    binds = @hintBinds Window.all
       visible: true
+    binds.map (bind) -> bind.enable()
+    @binds.concat binds
 
   hide: ->
-    (_.zip @binds, @hints).map ([b, h]) =>
-      Key.off(b)
-      h.close()
+    @hints.map (h) -> h.close()
+    @binds.map (b) -> b.disable()
     @binds = []
 
 # Window chaining
