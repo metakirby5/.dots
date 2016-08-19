@@ -390,6 +390,10 @@ class Hinter
     @binds.map (k) -> k.disable()
     @events.map (e) -> e.disable()
 
+  # Toggle hint mode
+  toggle: ->
+    if @active then @stop() else @start()
+
 # Window chaining
 class ChainWindow
   constructor: (@win,
@@ -611,7 +615,7 @@ hinter = new Hinter()
 Key.on GENERAL.maximize, MODS.base, -> cw()?.maximize().set()
 Key.on GENERAL.center, MODS.base, -> cw()?.center().set()
 Key.on GENERAL.rePour, MODS.base, -> cw()?.rePour().set()
-Key.on GENERAL.hinter, MODS.base, -> hinter.start()
+Key.on GENERAL.hinter, MODS.base, -> hinter.toggle()
 
 # Apps
 for key, app of APPS
