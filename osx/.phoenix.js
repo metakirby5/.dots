@@ -197,55 +197,64 @@ Modal::updateSeqLen = (len) ->
   @curSeqLen = next.length
 
 # Hints
+class HintTree
+  constructor: (@chars, wins, @parent, @prefix = '') ->
+    @tree = {}
+
+    # Base case - we have enough keys
+    if wins.length <= @chars.length
+      (_.zip wins, @chars).map ([w, k]) => @add w, @prefix + k if w?
+
+    # Recursive case - split and add
+    else
+      # Split into @chars.length groups
+      (_.zip _.toArray(_.groupBy(wins, (e, i) => i % @chars.length)),@chars)
+        .map ([ws, k]) => @add ws, @prefix + k if ws?
+
+  # Get child
+  get: (c) ->
+    @tree[c]
+
+  # Add Window(s) as child
+  add: (child, seq) ->
+    # Extract window from unary array
+    child = child[0] if child.length == 1
+
+    # Child will either be a Window or HintTree
+    if child instanceof Window
+      child.hintInstance = child.hint(seq)
+    else
+      child = new HintTree @chars, child, this, seq
+
+    # Add the child
+    @tree[seq.pop()] = child
+
+  # Perform on all leaf nodes, with optional subtree to exclude
+  map: (f, except) ->
+    if except?.parent?
+      delete except.parent.tree[except.prefix.pop()]
+
+    if this != except
+      (_.keys @tree).map (k) =>
+        # Only act on non-metadata keys
+        if k.length == 1
+          if @tree[k] not instanceof HintTree
+            f @tree[k]
+          else
+            @tree[k].map f
+
+    if except?.parent?
+      except.parent.tree[except.prefix.pop()] = except
+
 class Hinter
   constructor: (@chars = HINTS.chars, @stopEvents = HINTS.stopEvents,
       @kStop = HINTS.kStop, @kPop = HINTS.kPop) ->
     @active = false
 
-  # Create hint tree
-  buildTree: (wins, prefix = '') ->
-    root = {}
-
-    # Base case - we have enough keys
-    if wins.length <= @chars.length
-      (_.zip wins, @chars).map ([w, k]) =>
-        if w?
-          w.hintInstance = w.hint(prefix + k)
-          root[k] = w
-
-    # Recursive case - split and subtree
-    else
-      # Split into @chars.length groups
-      (_.zip _.chain(wins).groupBy((e, i) =>
-        i % @chars.length
-      ).toArray().value(), @chars).map ([ws, k]) =>
-        if ws?
-          # If there's only one in the group, just bind
-          if ws.length == 1
-            w = ws[0]
-            w.hintInstance = w.hint(prefix + k)
-            root[k] = w
-          # Otherwise, build a subtree
-          else
-            root[k] = @buildTree ws, prefix + k
-            root[k].parent = root
-
-    root
-
-  # Perform on all leaf nodes
-  onLeaves: (tree, f) ->
-    if tree instanceof Window
-      f tree
-    else
-      (_.keys tree).map (k) =>
-        # Only act on non-metadata keys
-        if k.length == 1
-          @onLeaves tree[k], f
-
   # Advance state machine
   push: (k) ->
     @seq += k
-    @state = @state[k]
+    @state = @state.get(k)
     @update()
 
   # Retract state machine
@@ -260,36 +269,30 @@ class Hinter
 
   # Re-show hints reflecting current state, or select window if complete
   update: ->
-    # If state is a window, we're done
-    if @state instanceof Window
+    # If state is a leaf, we're done
+    if @state not instanceof HintTree
       # Cancel hints
       @stop()
 
       # Focus window
-      @state.focus()
+      w = @state
+      w.focus()
 
       # Center mouse
-      h = @state.hintInstance
       Mouse.move
-        x: h.origin.x + h.frame().width / 2
-        y: Screen.all()[0].frame().height - h.origin.y - h.frame().height / 2
+        x: w.frame().x + w.frame().width / 2
+        y: w.frame().y + w.frame().height / 2
 
     # Otherwise, update texts and only show hints under state
     else
-      # Hide non-matching hints (temporarily unset for ease)
-      if @state.parent?
-        delete @state.parent[@seq.pop()]
-        @onLeaves @tree, (w) =>
-          w.hintInstance.close()
-        @state.parent[@seq.pop()] = @state
+      # Hide non-matching hints
+      @tree.map ((w) => w.hintInstance.close()), @state
 
       # Update text
-      @onLeaves @state, (w) =>
-        w.hintInstance.updateSeqLen(@seq.length)
+      @state.map (w) => w.hintInstance.updateSeqLen(@seq.length)
 
       # Show matching hints
-      @onLeaves @state, (w) =>
-        w.hintInstance.show()
+      @state.map (w) => w.hintInstance.show()
 
   # Start hint mode
   start: ->
@@ -298,22 +301,23 @@ class Hinter
       return
     @active = true
 
-    @tree = @buildTree Window.all
-      visible: true
+    # Internal state
+    @tree = new HintTree @chars, Window.all {visible: true}
     @state = @tree
     @seq = ''
+
+    # Keybinds
     @binds = []
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
     @binds.extend @chars.map (k) => new Key k, [], => @push k
-    @events = []
 
-    # Other hint cancellers
+    # Events
+    @events = []
     @stopEvents.map (e) => @events.push new Event e, => @stop()
 
-    # Show hints
-    @onLeaves @tree, (w) =>
-      w.hintInstance.show()
+    # Finally, show hints
+    @tree.map (w) -> w.hintInstance.show()
 
   # Stop hint mode
   stop: ->
@@ -322,9 +326,8 @@ class Hinter
       return
     @active = false
 
-    # Hide all hints
-    @onLeaves @tree, (w) ->
-      w.hintInstance.close()
+    # Close hints, disable keybinds, disable events
+    @tree.map (w) -> w.hintInstance.close()
     @binds.map (k) -> k.disable()
     @events.map (e) -> e.disable()
 
