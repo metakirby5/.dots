@@ -17,67 +17,66 @@ AXES = [VERTICAL, HORIZONTAL]
 # Preferences
 Phoenix.set
   openAtLogin: true
-WINS =
-  tolerance: 10
-  unit: 100
-  factor: 2
-  gap: 10
-MODALS =
-  unit: 10
-  gap: WINS.gap
-HINTS =
-  stopEvents: [
-    'screensDidChange',
-    'spaceDidChange',
-    'mouseDidLeftClick',
-    'mouseDidRightClick',
-    'appDidActivate',
-    'appDidHide',
-    'appDidShow',
-    'windowDidFocus',
-    'windowDidMove',
-    'windowDidMinimize',
-    'windowDidUnminimize',
-  ]
-  kStop: 'escape'
-  kPop: 'delete'
-  chars: 'FJDKSLAGHRUEIWOVNCM'
-  weight: 24
-  appearance: 'dark'
-  titleLength: 15
-  titleCont: '…'
-  debounce: 200
-
-# Keys
-GENERAL =
-  maximize: 'm'
-  center: 'c'
-  rePour: 'i'
-  hinter: 'y'
-SNAPS =
-  q:    [-1/2, -1/2]
-  a:    [-1/2, -1  ]
-  z:    [-1/2, 1/2 ]
-  ']':  [1/2,  -1/2]
-  '\'': [1/2,  -1  ]
-  '/':  [1/2,  1/2 ]
-APPS =
-  t: 'iTerm'
-  e: 'Finder'
-MODS =
-  base: ['cmd', 'alt']
-  move: ['cmd', 'alt', 'shift']
-  size: ['cmd', 'ctrl']
-  pour: ['cmd', 'alt', 'ctrl']
-  tile: ['cmd', 'ctrl', 'shift']
-DIR_KEYS =
-  h: WEST
-  j: SOUTH
-  k: NORTH
-  l: EAST
-OFFSET_KEYS =
-  n:  1
-  p: -1
+p =
+  wins:
+    tolerance: 10
+    unit: 100
+    factor: 2
+    gap: 10
+  modals:
+    unit: 10
+    gap: 10
+  hints:
+    stopEvents: [
+      'screensDidChange',
+      'spaceDidChange',
+      'mouseDidLeftClick',
+      'mouseDidRightClick',
+      'appDidActivate',
+      'appDidHide',
+      'appDidShow',
+      'windowDidFocus',
+      'windowDidMove',
+      'windowDidMinimize',
+      'windowDidUnminimize',
+    ]
+    kStop: 'escape'
+    kPop: 'delete'
+    chars: 'FJDKSLAGHRUEIWOVNCM'
+    weight: 24
+    appearance: 'dark'
+    titleLength: 15
+    titleCont: '…'
+    debounce: 200
+  keys:
+    maximize: 'm'
+    center: 'c'
+    rePour: 'i'
+    hinter: 'y'
+    snaps:
+      q:    [-1/2, -1/2]
+      a:    [-1/2, -1  ]
+      z:    [-1/2, 1/2 ]
+      ']':  [1/2,  -1/2]
+      '\'': [1/2,  -1  ]
+      '/':  [1/2,  1/2 ]
+    apps:
+      t: 'iTerm'
+      e: 'Finder'
+    mods:
+      base: ['cmd', 'alt']
+      move: ['cmd', 'alt', 'shift']
+      size: ['cmd', 'ctrl']
+      pour: ['cmd', 'alt', 'ctrl']
+      tile: ['cmd', 'ctrl', 'shift']
+    dirs:
+      h: WEST
+      j: SOUTH
+      k: NORTH
+      l: EAST
+    offsets:
+      n:  1
+      p: -1
 
 # Utilities
 String.prototype.map = Array.prototype.map
@@ -178,8 +177,8 @@ Space::idx = ->
 
 # Window methods
 Window::hint = (seq,
-    weight = HINTS.weight, appearance = HINTS.appearance,
-    titleLength = HINTS.titleLength, titleCont = HINTS.titleCont) ->
+    weight = p.hints.weight, appearance = p.hints.appearance,
+    titleLength = p.hints.titleLength, titleCont = p.hints.titleCont) ->
   f = @frame()
   sf = @screen().frame()
   text = seq
@@ -225,10 +224,11 @@ Modal::updateSeqLen = (len) ->
 Modal::_show = Modal::show
 Modal::show = ->
   if not _.contains(@open, this)
-    while _.some(@open.map (m) => intersects(@frame(), m.frame(), MODALS.gap))
+    while _.some(@open.map (m) =>
+        intersects @frame(), m.frame(), p.modals.gap)
       @origin = {
         x: @origin.x
-        y: @origin.y - MODALS.unit
+        y: @origin.y - p.modals.unit
       }
     @open.push this
   @_show()
@@ -289,8 +289,9 @@ class HintTree
       except.parent.tree[except.prefix.pop()] = except
 
 class Hinter
-  constructor: (@chars = HINTS.chars, @stopEvents = HINTS.stopEvents,
-      @kStop = HINTS.kStop, @kPop = HINTS.kPop, debounce = HINTS.debounce) ->
+  constructor: (@chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
+      @kStop = p.hints.kStop, @kPop = p.hints.kPop,
+      debounce = p.hints.debounce) ->
     @active = false
     @bouncedHints = _.debounce @showHints, debounce
 
@@ -396,8 +397,8 @@ class Hinter
 
 # Window chaining
 class ChainWindow
-  constructor: (@win,
-      @gap = WINS.gap, @unit = WINS.unit, @tolerance = WINS.tolerance) ->
+  constructor: (@win, @gap = p.wins.gap, @unit = p.wins.unit,
+      @tolerance = p.wins.tolerance) ->
     @f = @win.frame()
     @updateScr @win.screen()
     @dropSize = @gap + @tolerance
@@ -612,21 +613,21 @@ cw = ->
 
 # General
 hinter = new Hinter()
-Key.on GENERAL.maximize, MODS.base, -> cw()?.maximize().set()
-Key.on GENERAL.center, MODS.base, -> cw()?.center().set()
-Key.on GENERAL.rePour, MODS.base, -> cw()?.rePour().set()
-Key.on GENERAL.hinter, MODS.base, -> hinter.toggle()
+Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
+Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
+Key.on p.keys.rePour, p.keys.mods.base, -> cw()?.rePour().set()
+Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
 
 # Apps
-for key, app of APPS
+for key, app of p.keys.apps
   do (key, app) ->
-    Key.on key, MODS.base, -> App.launch(app).focus()
+    Key.on key, p.keys.mods.base, -> App.launch(app).focus()
 
 # Spaces
 SPACE_MODS = [
   [
     # Move
-    MODS.move,
+    p.keys.mods.move,
     (num) -> cw()?.setSpace(num).reproportion().set().focus()
   ],
 ]
@@ -636,7 +637,7 @@ for [mod, action] in SPACE_MODS
     do (num, mod, action) ->
       s = '' + num
       Key.on (s.substr s.length - 1), mod, -> action (num - 1)
-  for key, offset of OFFSET_KEYS
+  for key, offset of p.keys.offsets
     do (key, mod, action, offset) ->
       Key.on key, mod, ->
         idx = Space.active().idx()
@@ -646,40 +647,40 @@ for [mod, action] in SPACE_MODS
 DIR_MODS = [
   [
     # Select
-    MODS.base,
+    p.keys.mods.base,
     (dir) -> fw()?.focusClosestNeighbor(dir)
   ],
   [
     # Move
-    MODS.move,
+    p.keys.mods.move,
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
     # Size
-    MODS.size,
+    p.keys.mods.size,
     (dir) -> cw()?.sizeIn(dir).set()
   ],
   [
     # Pour
-    MODS.pour,
+    p.keys.mods.pour,
     (dir) -> cw()?.pourIn(dir).set()
   ],
   [
     # Tile
-    MODS.tile,
+    p.keys.mods.tile,
     (dir) -> cw()?.adjustIn(dir).set()
   ],
 ]
 
 for [mod, action] in DIR_MODS
-  for key, dir of DIR_KEYS
+  for key, dir of p.keys.dirs
     do (key, mod, action, dir) ->
       Key.on key, mod, -> action dir
 
 # Snaps
-for key, dest of SNAPS
+for key, dest of p.keys.snaps
   do (key, dest) ->
-    Key.on key, MODS.base, -> cw()?.snap(dest...).set()
+    Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
