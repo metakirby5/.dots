@@ -24,7 +24,8 @@ WINS =
   factor: 2
   gap: 10
 HINTS =
-  cancel: 'escape'
+  kStop: 'escape'
+  kPop: 'delete'
   chars: 'fj'
   weight: 24
   appearance: 'dark'
@@ -56,6 +57,11 @@ DIR_KEYS =
 OFFSET_KEYS =
   n:  1
   p: -1
+
+# Utilities
+String.prototype.map = Array.prototype.map
+Array.prototype.extend = (a) ->
+  Array.prototype.push.apply this, a
 
 # Helpers
 identify = (x) ->
@@ -126,73 +132,125 @@ Space::idx = ->
   (_.find (Space.all().map (s, i) -> [i, s]),
           ([i, s]) => @isEqual s)[0]
 
-# Hint manager
-class Hints
-  constructor: (@chars = HINTS.chars, @cancel = HINTS.cancel) ->
-    @active = false
-    @binds = []
-    @hints = []
+# Window methods
+Window::hint = (activator,
+    weight = HINTS.weight, appearance = HINTS.appearance,
+    titleLength = HINTS.titleLength, titleCont = HINTS.titleCont) ->
+  f = @frame()
+  sf = @screen().frame()
+  text = activator
 
-  hintBinds: (wins, prefix = '') ->
+  # If title length is too long, truncate
+  if this.app().windows().length > 1
+    text += ' | ' + this.title()
+    if this.title().length > titleLength
+      text = (text.substr 0, titleLength - titleCont.length) + titleCont
+
+  Modal.build
+    text: text
+    icon: this.app().icon()
+    weight: weight
+    appearance: appearance
+    origin: (hf) =>
+      x: (Math.min (
+        Math.max f.x + f.width / 2 - hf.width / 2, sf.x
+      ), sf.x + sf.width - hf.width)
+      y: (Math.min (
+        Math.max (
+          Screen.all()[0].frame().height -
+          (f.y + f.height / 2 + hf.height / 2)), sf.y
+        ), sf.y + sf.height - hf.height)
+
+# Hints
+class Hinter
+  constructor: (@chars = HINTS.chars,
+      @kStop = HINTS.kStop, @kPop = HINTS.kPop) ->
+
+  # Create hint tree
+  buildTree: (wins, prefix = '') ->
+    root = {}
+
     # Base case - we have enough keys
     if wins.length <= @chars.length
       (_.zip wins, @chars).map ([w, k]) =>
         if w?
-          # Create hint
-          Phoenix.log 'hinting ' + prefix + k
-          h = (new ChainWindow w).hint(prefix + k)
-          h.show()
-          @hints.push h
-          bind = new Key k, [], =>
-            # Focus window
-            w.focus()
+          w.key = prefix + k
+          root[k] = w
 
-            # Center mouse
-            Mouse.move
-              x: h.origin.x + h.frame().width / 2
-              y: Screen.all()[0].frame().height -
-              h.origin.y - h.frame().height / 2
-
-            # Hide hints
-            @hide()
-
-          # Disable bind until it's time
-          bind.disable()
-          @binds.push bind
-          bind
-
-    # Recursive case - chunk and bind
+    # Recursive case - chunk and subtree
     else
       # Chunk into @chars.length groups
       (_.zip _.chain(wins).groupBy((e, i) =>
         i % @chars.length
-      ).toArray().value(), @chars).map ([w, p]) =>
-        Phoenix.log 'prefixing ' + prefix + p
-        if w?
-          # Create binds
-          subBinds = @hintBinds w, prefix + p
+      ).toArray().value(), @chars).map ([ws, k]) =>
+        if ws?
+          root[k] = @buildTree ws, prefix + k
+          root[k].parent = root
 
-          # Create prefix bind
-          bind = new Key p, [], =>
-            subBinds.map (subBind) ->
-              Phoenix.log subBind
-              subBind.enable()
+    root
 
-          # Disable bind until it's time
-          bind.disable()
-          @binds.push bind
-          bind
+  # Perform on all leaf nodes
+  onLeaves: (tree, f) ->
+    if tree.key?
+      f tree
+    else
+      (_.keys tree).map (k) =>
+        # Only act on non-metadata keys
+        if k.length == 1
+          @onLeaves tree[k], f
 
-  show: ->
-    @binds.push new Key @cancel, [], => @hide()
-    binds = @hintBinds Window.all
-      visible: true
-    binds.map (bind) -> bind.enable()
-    @binds.concat binds
+  # Advance state machine
+  push: (k) ->
+    @pos++
+    @state = @state[k]
+    @update()
+
+  # Retract state machine
+  pop: ->
+    @pos--
+    @state = @state.parent
+    @update()
+
+  update: ->
+    # If state is a window, we're done
+    if @state.key?
+      # Cancel hints
+      @stop()
+
+      # Focus window
+      @state.focus()
+
+      # Center mouse
+      h = @state.activeHint
+      Mouse.move
+        x: h.origin.x + h.frame().width / 2
+        y: Screen.all()[0].frame().height - h.origin.y - h.frame().height / 2
+
+    # Otherwise, show hints under state
+    else
+      @hide()
+      @onLeaves @state, (w) =>
+        w.activeHint = w.hint(w.key.substr @pos)
+        w.activeHint.show()
 
   hide: ->
-    @hints.map (h) -> h.close()
-    @binds.map (b) -> b.disable()
+    @onLeaves @tree, (w) ->
+      w.activeHint?.close()
+
+  start: ->
+    @tree = @buildTree Window.all
+      visible: true
+    @state = @tree
+    @pos = 0
+    @binds = []
+    @binds.push new Key @kStop, [], => @stop()
+    @binds.push new Key @kPop, [], => @pop()
+    @binds.extend @chars.map (k) => new Key k, [], => @push k
+    @update()
+
+  stop: ->
+    @hide()
+    @binds.map (k) -> k.disable()
     @binds = []
 
 # Window chaining
@@ -202,32 +260,6 @@ class ChainWindow
     @f = @win.frame()
     @updateScr @win.screen()
     @dropSize = @gap + @tolerance
-
-  hint: (activator,
-      weight = HINTS.weight, appearance = HINTS.appearance,
-      titleLength = HINTS.titleLength, titleCont = HINTS.titleCont) ->
-    text = activator
-
-    # If title length is too long, truncate
-    if @win.app().windows().length > 1
-      text += ' | ' + @win.title()
-      if @win.title().length > titleLength
-        text = (text.substr 0, titleLength - titleCont.length) + titleCont
-
-    Modal.build
-      text: text
-      icon: @win.app().icon()
-      weight: weight
-      appearance: appearance
-      origin: (hf) =>
-        x: (Math.min (
-          Math.max @f.x + @f.width / 2 - hf.width / 2, @sf.x
-        ), @sf.x + @sf.width - hf.width)
-        y: (Math.min (
-          Math.max (
-            Screen.all()[0].frame().height -
-            (@f.y + @f.height / 2 + hf.height / 2)), @sf.y
-          ), @sf.y + @sf.height - hf.height)
 
   set: ->
     @win.setFrame @f
@@ -443,8 +475,8 @@ Key.on 'c', MODS.base, -> cw()?.center().set()
 Key.on 'i', MODS.base, -> cw()?.rePour().set()
 
 # Hints
-hinter = new Hints()
-Key.on 'y', MODS.base, -> hinter.show()
+hinter = new Hinter()
+Key.on 'y', MODS.base, -> hinter.start()
 
 # Apps
 for key, app of APPS
