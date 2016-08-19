@@ -88,6 +88,21 @@ String.prototype.poppedFront = -> this.substr(1)
 Array.prototype.extend = (a) ->
   Array.prototype.push.apply this, a
 
+ALL_KEYS = (String.fromCharCode(c) for c in [39]
+    .concat [44..57]
+    .concat [59]
+    .concat [61]
+    .concat [65..93]
+    .concat [96])
+  .concat ('f' + i for i in [1..19])
+  .concat ('keypad' + i for i in [0..9]
+    .concat ['Clear', 'Enter']
+    .concat ('.*+/-='.split ''))
+  .concat [
+    'return', 'tab', 'space', 'delete', 'escape', 'help', 'home', 'pageUp',
+    'forwardDelete', 'end', 'pageDown', 'left', 'right', 'down', 'up',
+  ]
+
 # Helpers
 identify = (x) ->
   if x in DIRS
@@ -238,8 +253,8 @@ class HintTree
         .map ([ws, k]) => @add ws, @prefix + k if ws?
 
   # Get child
-  get: (c) ->
-    @tree[c]
+  get: (k) ->
+    @tree[k]
 
   # Add Window(s) as child
   add: (child, seq) ->
@@ -350,7 +365,8 @@ class Hinter
     @binds = []
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
-    @binds.extend @chars.map (k) => new Key k, [], => @push k
+    @binds.extend (_.without ALL_KEYS, @kStop, @kPop).map (k) =>
+      new Key k, [], => @push k
 
     # Events
     @events = []
