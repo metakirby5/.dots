@@ -64,6 +64,10 @@ OFFSET_KEYS =
 
 # Utilities
 String.prototype.map = Array.prototype.map
+String.prototype.pop = -> this.charAt(this.length - 1)
+String.prototype.popped = -> this.substr(0, this.length - 1)
+String.prototype.popFront = -> this.charAt(0)
+String.prototype.poppedFront = -> this.substr(1)
 Array.prototype.extend = (a) ->
   Array.prototype.push.apply this, a
 
@@ -137,12 +141,12 @@ Space::idx = ->
           ([i, s]) => @isEqual s)[0]
 
 # Window methods
-Window::hint = (activator,
+Window::hint = (seq,
     weight = HINTS.weight, appearance = HINTS.appearance,
     titleLength = HINTS.titleLength, titleCont = HINTS.titleCont) ->
   f = @frame()
   sf = @screen().frame()
-  text = activator
+  text = seq
 
   # If title length is too long, truncate
   if this.app().windows().length > 1
@@ -152,7 +156,7 @@ Window::hint = (activator,
     text += ' | ' + title
 
   # Build a modal centered within the window
-  Modal.build
+  hint = Modal.build
     text: text
     icon: this.app().icon()
     weight: weight
@@ -167,10 +171,22 @@ Window::hint = (activator,
           (f.y + f.height / 2 + hf.height / 2)), sf.y
         ), sf.y + sf.height - hf.height)
 
+  hint.seq = seq
+  hint.curSeqLen = seq.length
+  hint
+
+# Modal methods
+Modal::updateSeqLen = (len) ->
+  if @seq?
+    next = @seq.substr len
+    @text = next + @text.substr(@curSeqLen)
+    @curSeqLen = next.length
+
 # Hints
 class Hinter
   constructor: (@chars = HINTS.chars,
       @kStop = HINTS.kStop, @kPop = HINTS.kPop) ->
+    @active = false
 
   # Create hint tree
   buildTree: (wins, prefix = '') ->
@@ -180,7 +196,7 @@ class Hinter
     if wins.length <= @chars.length
       (_.zip wins, @chars).map ([w, k]) =>
         if w?
-          w.key = prefix + k
+          w.hintInstance = w.hint(prefix + k)
           root[k] = w
 
     # Recursive case - split and subtree
@@ -193,7 +209,7 @@ class Hinter
           # If there's only one in the group, just bind
           if ws.length == 1
             w = ws[0]
-            w.key = prefix + k
+            w.hintInstance = w.hint(prefix + k)
             root[k] = w
           # Otherwise, build a subtree
           else
@@ -204,7 +220,7 @@ class Hinter
 
   # Perform on all leaf nodes
   onLeaves: (tree, f) ->
-    if tree.key?
+    if tree.hintInstance?
       f tree
     else
       (_.keys tree).map (k) =>
@@ -214,25 +230,24 @@ class Hinter
 
   # Advance state machine
   push: (k) ->
-    @pos++
+    @seq += k
     @state = @state[k]
     @update()
 
   # Retract state machine
   pop: ->
-    @pos--
-
     # If we pop past empty, stop hints
-    if @pos < 0
+    if not @seq
       @stop()
     else
+      @seq = @seq.popped()
       @state = @state.parent
       @update()
 
   # Re-show hints reflecting current state, or select window if complete
   update: ->
     # If state is a window, we're done
-    if @state.key?
+    if @state.hintInstance?
       # Cancel hints
       @stop()
 
@@ -240,40 +255,55 @@ class Hinter
       @state.focus()
 
       # Center mouse
-      h = @state.activeHint
+      h = @state.hintInstance
       Mouse.move
         x: h.origin.x + h.frame().width / 2
         y: Screen.all()[0].frame().height - h.origin.y - h.frame().height / 2
 
-    # Otherwise, show hints under state
+    # Otherwise, update texts and only show hints under state
     else
-      @hide()
-      @onLeaves @state, (w) =>
-        w.activeHint = w.hint(w.key.substr @pos)
-        w.activeHint.show()
+      # Hide non-matching hints (temporarily unset for ease)
+      if @state.parent?
+        delete @state.parent[@seq.pop()]
+        @onLeaves @tree, (w) =>
+          w.hintInstance.close()
+        @state.parent[@seq.pop()] = @state
 
-  # Hide all hints
-  hide: ->
-    @onLeaves @tree, (w) ->
-      w.activeHint?.close()
+      # Update text
+      @onLeaves @state, (w) =>
+        w.hintInstance.updateSeqLen(@seq.length)
+
+      # Show matching hints
+      @onLeaves @state, (w) =>
+        w.hintInstance.show()
 
   # Start hint mode
   start: ->
+    # Only if not already active
+    if @active
+      return
+
+    @active = true
     @tree = @buildTree Window.all
       visible: true
     @state = @tree
-    @pos = 0
+    @seq = ''
     @binds = []
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
     @binds.extend @chars.map (k) => new Key k, [], => @push k
-    @update()
+
+    # Show hints
+    @onLeaves @tree, (w) =>
+      w.hintInstance.show()
 
   # Stop hint mode
   stop: ->
-    @hide()
+    # Hide all hints
+    @onLeaves @tree, (w) ->
+      w.hintInstance.close()
     @binds.map (k) -> k.disable()
-    @binds = []
+    @active = false
 
 # Window chaining
 class ChainWindow
