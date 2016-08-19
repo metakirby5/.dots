@@ -233,7 +233,7 @@ class HintTree
     # Recursive case - split and add
     else
       # Split into @chars.length groups
-      (_.zip _.toArray(_.groupBy(wins, (e, i) => i % @chars.length)),@chars)
+      (_.zip _.toArray(_.groupBy(wins, (e, i) => i % @chars.length)), @chars)
         .map ([ws, k]) => @add ws, @prefix + k if ws?
 
   # Get child
