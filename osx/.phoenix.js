@@ -18,10 +18,14 @@ AXES = [VERTICAL, HORIZONTAL]
 Phoenix.set
   openAtLogin: true
 
-TOLERANCE = 10
-UNIT = 100
-FACTOR = 2
-GAP = 10
+WINS =
+  tolerance: 10
+  unit: 100
+  factor: 2
+  gap: 10
+HINTS =
+  weight: 24
+  appearance: 'dark'
 SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
@@ -34,11 +38,12 @@ APPS =
   e: 'Finder'
 
 # Keys
-MOD = ['cmd', 'alt']
-MOVE_MOD = ['cmd', 'alt', 'shift']
-SIZE_MOD = ['cmd', 'ctrl']
-POUR_MOD = ['cmd', 'alt', 'ctrl']
-TILE_MOD = ['cmd', 'ctrl', 'shift']
+MODS =
+  base: ['cmd', 'alt']
+  move: ['cmd', 'alt', 'shift']
+  size: ['cmd', 'ctrl']
+  pour: ['cmd', 'alt', 'ctrl']
+  tile: ['cmd', 'ctrl', 'shift']
 DIR_KEYS =
   h: WEST
   j: SOUTH
@@ -121,7 +126,8 @@ Space::idx = ->
 
 # Window chaining
 class ChainWindow
-  constructor: (@win, @gap = 0, @unit = 1, @tolerance = 0) ->
+  constructor: (@win,
+      @gap = WINS.gap, @unit = WINS.unit, @tolerance = WINS.tolerance) ->
     @f = @win.frame()
     @updateScr @win.screen()
     @dropSize = @gap + @tolerance
@@ -326,32 +332,35 @@ class ChainWindow
         @f.y = @sf.y + @sf.height - @f.height - @gap
     this
 
+  hint: (char, weight = HINTS.weight, appearance = HINTS.appearance) ->
+    this
+
 class Hints
-  constructor: (@weight = 24, @appearance = 'dark') ->
+  constructor: ->
     @active = false
     @hints = []
 
 # Shortcuts
 fw = Window.focused
-cw = (gap = GAP, unit = UNIT, tolerance = TOLERANCE) ->
+cw = ->
   win = fw()
-  new ChainWindow(win, gap, unit, tolerance) if win?
+  new ChainWindow(win) if win?
 
 # Special
-Key.on 'm', MOD, -> cw()?.maximize().set()
-Key.on 'c', MOD, -> cw()?.center().set()
-Key.on 'i', MOD, -> cw()?.rePour().set()
+Key.on 'm', MODS.base, -> cw()?.maximize().set()
+Key.on 'c', MODS.base, -> cw()?.center().set()
+Key.on 'i', MODS.base, -> cw()?.rePour().set()
 
 # Apps
 for key, app of APPS
   do (key, app) ->
-    Key.on key, MOD, -> App.launch(app).focus()
+    Key.on key, MODS.base, -> App.launch(app).focus()
 
 # Spaces
 SPACE_MODS = [
   [
     # Move
-    MOVE_MOD,
+    MODS.move,
     (num) -> cw()?.setSpace(num).reproportion().set().focus()
   ],
 ]
@@ -371,27 +380,27 @@ for [mod, action] in SPACE_MODS
 DIR_MODS = [
   [
     # Select
-    MOD,
+    MODS.base,
     (dir) -> fw()?.focusClosestNeighbor(dir)
   ],
   [
     # Move
-    MOVE_MOD,
+    MODS.move,
     (dir) -> cw()?.moveIn(dir).set()
   ],
   [
     # Size
-    SIZE_MOD,
+    MODS.size,
     (dir) -> cw()?.sizeIn(dir).set()
   ],
   [
     # Pour
-    POUR_MOD,
+    MODS.pour,
     (dir) -> cw()?.pourIn(dir).set()
   ],
   [
     # Tile
-    TILE_MOD,
+    MODS.tile,
     (dir) -> cw()?.adjustIn(dir).set()
   ],
 ]
@@ -404,7 +413,7 @@ for [mod, action] in DIR_MODS
 # Snaps
 for key, dest of SNAPS
   do (key, dest) ->
-    Key.on key, MOD, -> cw()?.snap(dest...).set()
+    Key.on key, MODS.base, -> cw()?.snap(dest...).set()
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
