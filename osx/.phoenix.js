@@ -25,7 +25,7 @@ WINS =
 HINTS =
   kStop: 'escape'
   kPop: 'delete'
-  chars: 'FJDKSLAGHRUEIWOVNCM'
+  chars: 'FJ' # chars: 'FJDKSLAGHRUEIWOVNCM'
   weight: 24
   appearance: 'dark'
   titleLength: 15
@@ -190,8 +190,15 @@ class Hinter
         i % @chars.length
       ).toArray().value(), @chars).map ([ws, k]) =>
         if ws?
-          root[k] = @buildTree ws, prefix + k
-          root[k].parent = root
+          # If there's only one in the group, just bind
+          if ws.length == 1
+            w = ws[0]
+            w.key = prefix + k
+            root[k] = w
+          # Otherwise, build a subtree
+          else
+            root[k] = @buildTree ws, prefix + k
+            root[k].parent = root
 
     root
 
@@ -214,8 +221,13 @@ class Hinter
   # Retract state machine
   pop: ->
     @pos--
-    @state = @state.parent
-    @update()
+
+    # If we pop past empty, stop hints
+    if @pos < 0
+      @stop()
+    else
+      @state = @state.parent
+      @update()
 
   # Re-show hints reflecting current state, or select window if complete
   update: ->
