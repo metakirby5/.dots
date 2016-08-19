@@ -23,6 +23,19 @@ WINS =
   factor: 2
   gap: 10
 HINTS =
+  stopEvents: [
+    'screensDidChange',
+    'spaceDidChange',
+    'mouseDidLeftClick',
+    'mouseDidRightClick',
+    'appDidActivate',
+    'appDidHide',
+    'appDidShow',
+    'windowDidFocus',
+    'windowDidMove',
+    'windowDidMinimize',
+    'windowDidUnminimize',
+  ]
   kStop: 'escape'
   kPop: 'delete'
   chars: 'FJ' # chars: 'FJDKSLAGHRUEIWOVNCM'
@@ -177,14 +190,15 @@ Window::hint = (seq,
 
 # Modal methods
 Modal::updateSeqLen = (len) ->
-  if @seq?
-    next = @seq.substr len
-    @text = next + @text.substr(@curSeqLen)
-    @curSeqLen = next.length
+  if not @seq?
+    return
+  next = @seq.substr len
+  @text = next + @text.substr(@curSeqLen)
+  @curSeqLen = next.length
 
 # Hints
 class Hinter
-  constructor: (@chars = HINTS.chars,
+  constructor: (@chars = HINTS.chars, @stopEvents = HINTS.stopEvents,
       @kStop = HINTS.kStop, @kPop = HINTS.kPop) ->
     @active = false
 
@@ -282,8 +296,8 @@ class Hinter
     # Only if not already active
     if @active
       return
-
     @active = true
+
     @tree = @buildTree Window.all
       visible: true
     @state = @tree
@@ -292,6 +306,10 @@ class Hinter
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
     @binds.extend @chars.map (k) => new Key k, [], => @push k
+    @events = []
+
+    # Other hint cancellers
+    @stopEvents.map (e) => @events.push new Event e, => @stop()
 
     # Show hints
     @onLeaves @tree, (w) =>
@@ -299,11 +317,16 @@ class Hinter
 
   # Stop hint mode
   stop: ->
+    # Only if active
+    if not @active
+      return
+    @active = false
+
     # Hide all hints
     @onLeaves @tree, (w) ->
       w.hintInstance.close()
     @binds.map (k) -> k.disable()
-    @active = false
+    @events.map (e) -> e.disable()
 
 # Window chaining
 class ChainWindow
