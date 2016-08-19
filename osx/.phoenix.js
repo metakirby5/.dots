@@ -146,9 +146,10 @@ Window::hint = (activator,
 
   # If title length is too long, truncate
   if this.app().windows().length > 1
-    text += ' | ' + this.title()
-    if this.title().length > titleLength
-      text = (text.substr 0, titleLength - titleCont.length) + titleCont
+    title = this.title()
+    if title.length > titleLength
+      title = (title.substr 0, titleLength - titleCont.length) + titleCont
+    text += ' | ' + title
 
   Modal.build
     text: text
