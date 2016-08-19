@@ -5,12 +5,7 @@
 " Use za to toggle the folds
 
 " Setup {{{
-  let s:configdir = '~/.vim'
-  let s:configfile = '~/.vimrc'
-  if has('nvim')
-    let s:configdir = '~/.config/nvim'
-    let s:configfile = s:configdir . '/init.vim'
-  endif
+  let s:configdir = has('nvim') ? '~/.config/nvim' : '~/.vim'
 
   " Leader
   let mapleader = "\<Space>"
@@ -160,17 +155,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endfunction
 
         Plug 'Shougo/Deoplete.nvim', { 'do': function('DoRemote') }
-        let g:completion_engine = 'deoplete'
-        let s:completion_prefix = g:completion_engine . '#'
+        let s:completion_engine = 'deoplete'
+        let s:completion_prefix = s:completion_engine . '#'
       elseif has('lua')
         if (version >= 704 || version == 703 && has('patch885'))
           Plug 'Shougo/neocomplete.vim'
-          let g:completion_engine = 'neocomplete'
-          let s:completion_prefix = g:completion_engine . '#'
+          let s:completion_engine = 'neocomplete'
+          let s:completion_prefix = s:completion_engine . '#'
         else
           Plug 'Shougo/neocomplcache.vim'
-          let g:completion_engine = 'neocomplcache'
-          let s:completion_prefix = g:completion_engine . '_'
+          let s:completion_engine = 'neocomplcache'
+          let s:completion_prefix = s:completion_engine . '_'
         endif
       else
         Plug 'ervandew/supertab'
@@ -190,7 +185,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \, { 'for': ['markdown', 'gitcommit'] }
     " }}}
     " Settings {{{
-      if exists('g:completion_engine')
+      if exists('s:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
         let g:{s:completion_prefix}auto_completion_start_length = 3
@@ -198,7 +193,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" :
               \ neocomplete#undo_completion()
-        inoremap <expr> <bs>    {g:completion_engine}#smart_close_popup() . "\<bs>"
+        inoremap <expr> <bs>    {s:completion_engine}#smart_close_popup()
+              \. "\<bs>"
         inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
         let g:ulti_expand_or_jump_res = 0
@@ -451,16 +447,16 @@ else
       augroup END
 
       function! StoreSearch()
-        let g:ps = getreg('/', 1)
-        let g:ps_t = getregtype('/')
+        let s:ps = getreg('/', 1)
+        let s:ps_t = getregtype('/')
       endfunction
 
       function! RestoreSearch()
-        if !(exists('g:ps') && exists('g:ps_t'))
+        if !(exists('s:ps') && exists('s:ps_t'))
           return
         endif
 
-        call setreg('/', g:ps, g:ps_t)
+        call setreg('/', s:ps, s:ps_t)
       endfunction
 
       noremap <silent> g> <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
@@ -469,17 +465,17 @@ else
       xnoremap <silent> g< <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
     " }}}
     " Toggle Distractions {{{
-      let g:minimal = 0
+      let s:minimal = 0
       function! ToggleDistractions()
-        if !g:minimal
-          let g:minimal = 1
+        if !s:minimal
+          let s:minimal = 1
           set noshowmode
           set noruler
           set showtabline=1
           set nonu
           set ls=0
         else
-          let g:minimal = 0
+          let s:minimal = 0
           set showmode
           set ruler
           set showtabline=2
@@ -1071,9 +1067,9 @@ endif " }}}
 
     " :R - Execute current script
     function! s:runbuf(...)
-      if exists('g:runbuf') | exe 'bdel '.g:runbuf | endif
+      if exists('s:runbuf') | exe 'bdel '.s:runbuf | endif
       new
-      let g:runbuf = bufnr('%')
+      let s:runbuf = bufnr('%')
       setlocal buftype=nofile
       let args = a:000
       map(args, 'shellescape(v:val)')
