@@ -79,13 +79,17 @@ p =
       p: -1
 
 # Utilities
+Object.prototype.map = (f) ->
+  r = {}
+  Object.keys(this).map (k) => r[k] = f this[k], k
+  r
+Array.prototype.extend = (a) ->
+  Array.prototype.push.apply this, a
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
 String.prototype.popFront = -> this.charAt(0)
 String.prototype.poppedFront = -> this.substr(1)
-Array.prototype.extend = (a) ->
-  Array.prototype.push.apply this, a
 
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
@@ -420,7 +424,7 @@ class ChainWindow
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
-    for win in @win.others {screen: @scr, visible: true}
+    @win.others({screen: @scr, visible: true}).map (win) =>
       nf = win.frame()
       ne = edgeOf nf, (oppositeOf dir)
       if (isCloser dir, e, ne) and
@@ -499,7 +503,7 @@ class ChainWindow
     @set()
 
     # Now, resize all other windows
-    for win in @win.others {screen: @scr, visible: true}
+    @win.others({screen: @scr, visible: true}).map (win) =>
       new ChainWindow(win, @gap, @unit, @tolerance)
         .sizeTo(@dropSize, @dropSize, true)
         .fill()
@@ -508,7 +512,7 @@ class ChainWindow
     this
 
   fill: (axes = AXES, skipFrame = false) ->
-    for axis in axes
+    axes.map (axis) =>
       switch axis
         when VERTICAL
           y = (@closestIn NORTH, skipFrame) + @gap
@@ -543,7 +547,7 @@ class ChainWindow
     next = Space.all()[num]
     if next?
       next.addWindows [@win]
-      for prev in @win.spaces()
+      @win.spaces().map (prev) =>
         prev.removeWindows [@win] if not prev.isEqual(next)
       @updateScr next.screen()
     this
@@ -619,32 +623,27 @@ Key.on p.keys.rePour, p.keys.mods.base, -> cw()?.rePour().set()
 Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
 
 # Apps
-for key, app of p.keys.apps
-  do (key, app) ->
-    Key.on key, p.keys.mods.base, -> App.launch(app).focus()
+p.keys.apps.map (app, key) ->
+  Key.on key, p.keys.mods.base, -> App.launch(app).focus()
 
 # Spaces
-SPACE_MODS = [
+[
   [
     # Move
     p.keys.mods.move,
     (num) -> cw()?.setSpace(num).reproportion().set().focus()
   ],
-]
-
-for [mod, action] in SPACE_MODS
-  for num in [1..10]
-    do (num, mod, action) ->
-      s = '' + num
-      Key.on (s.substr s.length - 1), mod, -> action (num - 1)
-  for key, offset of p.keys.offsets
-    do (key, mod, action, offset) ->
-      Key.on key, mod, ->
-        idx = Space.active().idx()
-        action (idx + offset)
+].map ([mod, action]) ->
+  [1..10].map (num) ->
+    s = '' + num
+    Key.on (s.substr s.length - 1), mod, -> action (num - 1)
+  p.keys.offsets.map (offset, key) ->
+    Key.on key, mod, ->
+      idx = Space.active().idx()
+      action (idx + offset)
 
 # Directionals
-DIR_MODS = [
+[
   [
     # Select
     p.keys.mods.base,
@@ -670,17 +669,12 @@ DIR_MODS = [
     p.keys.mods.tile,
     (dir) -> cw()?.adjustIn(dir).set()
   ],
-]
-
-for [mod, action] in DIR_MODS
-  for key, dir of p.keys.dirs
-    do (key, mod, action, dir) ->
-      Key.on key, mod, -> action dir
+].map ([mod, action]) -> p.keys.dirs.map (dir, key) ->
+  Key.on key, mod, -> action dir
 
 # Snaps
-for key, dest of p.keys.snaps
-  do (key, dest) ->
-    Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
+p.keys.snaps.map (dest, key) ->
+  Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
