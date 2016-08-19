@@ -151,6 +151,7 @@ Window::hint = (activator,
       title = (title.substr 0, titleLength - titleCont.length) + titleCont
     text += ' | ' + title
 
+  # Build a modal centered within the window
   Modal.build
     text: text
     icon: this.app().icon()
@@ -182,9 +183,9 @@ class Hinter
           w.key = prefix + k
           root[k] = w
 
-    # Recursive case - chunk and subtree
+    # Recursive case - split and subtree
     else
-      # Chunk into @chars.length groups
+      # Split into @chars.length groups
       (_.zip _.chain(wins).groupBy((e, i) =>
         i % @chars.length
       ).toArray().value(), @chars).map ([ws, k]) =>
@@ -216,6 +217,7 @@ class Hinter
     @state = @state.parent
     @update()
 
+  # Re-show hints reflecting current state, or select window if complete
   update: ->
     # If state is a window, we're done
     if @state.key?
@@ -238,10 +240,12 @@ class Hinter
         w.activeHint = w.hint(w.key.substr @pos)
         w.activeHint.show()
 
+  # Hide all hints
   hide: ->
     @onLeaves @tree, (w) ->
       w.activeHint?.close()
 
+  # Start hint mode
   start: ->
     @tree = @buildTree Window.all
       visible: true
@@ -253,6 +257,7 @@ class Hinter
     @binds.extend @chars.map (k) => new Key k, [], => @push k
     @update()
 
+  # Stop hint mode
   stop: ->
     @hide()
     @binds.map (k) -> k.disable()
@@ -474,13 +479,11 @@ cw = ->
   win = fw()
   new ChainWindow(win) if win?
 
-# Special
+# General
+hinter = new Hinter()
 Key.on GENERAL.maximize, MODS.base, -> cw()?.maximize().set()
 Key.on GENERAL.center, MODS.base, -> cw()?.center().set()
 Key.on GENERAL.rePour, MODS.base, -> cw()?.rePour().set()
-
-# Hints
-hinter = new Hinter()
 Key.on GENERAL.hinter, MODS.base, -> hinter.start()
 
 # Apps
