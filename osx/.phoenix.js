@@ -46,6 +46,7 @@ HINTS =
   appearance: 'dark'
   titleLength: 15
   titleCont: '…'
+  debounce: 200
 
 # Keys
 GENERAL =
@@ -273,8 +274,9 @@ class HintTree
 
 class Hinter
   constructor: (@chars = HINTS.chars, @stopEvents = HINTS.stopEvents,
-      @kStop = HINTS.kStop, @kPop = HINTS.kPop) ->
+      @kStop = HINTS.kStop, @kPop = HINTS.kPop, debounce = HINTS.debounce) ->
     @active = false
+    @bouncedHints = _.debounce @showHints, debounce
 
   # Advance state machine
   push: (k) ->
@@ -322,14 +324,16 @@ class Hinter
 
       if descending
         # Hide non-matching hints
-        @prev.map (w) =>
+        @prev.map (w) ->
           w.hintInstance.close()
         , @state
       else
         # Show matching hints
-        @state.map (w) =>
-          w.hintInstance.show()
-        , @prev
+        @bouncedHints @state
+
+  # So we can debounce
+  showHints: (state) ->
+    state?.map (w) -> w.hintInstance.show()
 
   # Start hint mode
   start: ->
@@ -353,7 +357,7 @@ class Hinter
     @stopEvents.map (e) => @events.push new Event e, => @stop()
 
     # Finally, show hints
-    @state.map (w) -> w.hintInstance.show()
+    @showHints @state
 
   # Stop hint mode
   stop: ->
@@ -363,6 +367,7 @@ class Hinter
     @active = false
 
     # Close hints, disable keybinds, disable events
+    @bouncedHints() # cancels debounce
     (if @state instanceof HintTree then @state else @prev).map (w) ->
       w.hintInstance.close()
     @binds.map (k) -> k.disable()
