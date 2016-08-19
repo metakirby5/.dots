@@ -1,4 +1,5 @@
 BeautifulSoup
+Pillow
 fuzzywuzzy
 gnureadline
 greenlet
@@ -6,12 +7,12 @@ humanize
 ipython
 livestreamer
 msgpack-python
-numpy
 pip-autoremove
 pipdeptree
 protobuf
 pushbullet-cli
 python-Levenshtein
+scipy
 trollius
 vboxapi
 virtualenvwrapper

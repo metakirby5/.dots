@@ -17,7 +17,6 @@ AXES = [VERTICAL, HORIZONTAL]
 # Preferences
 Phoenix.set
   openAtLogin: true
-
 WINS =
   tolerance: 10
   unit: 100
@@ -26,11 +25,18 @@ WINS =
 HINTS =
   kStop: 'escape'
   kPop: 'delete'
-  chars: 'fj'
+  chars: 'FJDKSLAGHRUEIWOVNCM'
   weight: 24
   appearance: 'dark'
   titleLength: 15
   titleCont: '…'
+
+# Keys
+GENERAL =
+  maximize: 'm'
+  center: 'c'
+  rePour: 'i'
+  hinter: 'f'
 SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
@@ -41,8 +47,6 @@ SNAPS =
 APPS =
   t: 'iTerm'
   e: 'Finder'
-
-# Keys
 MODS =
   base: ['cmd', 'alt']
   move: ['cmd', 'alt', 'shift']
@@ -470,13 +474,13 @@ cw = ->
   new ChainWindow(win) if win?
 
 # Special
-Key.on 'm', MODS.base, -> cw()?.maximize().set()
-Key.on 'c', MODS.base, -> cw()?.center().set()
-Key.on 'i', MODS.base, -> cw()?.rePour().set()
+Key.on GENERAL.maximize, MODS.base, -> cw()?.maximize().set()
+Key.on GENERAL.center, MODS.base, -> cw()?.center().set()
+Key.on GENERAL.rePour, MODS.base, -> cw()?.rePour().set()
 
 # Hints
 hinter = new Hinter()
-Key.on 'y', MODS.base, -> hinter.start()
+Key.on GENERAL.hinter, MODS.base, -> hinter.start()
 
 # Apps
 for key, app of APPS
