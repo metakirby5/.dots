@@ -220,7 +220,7 @@ class Hinter
 
   # Perform on all leaf nodes
   onLeaves: (tree, f) ->
-    if tree.hintInstance?
+    if tree instanceof Window
       f tree
     else
       (_.keys tree).map (k) =>
@@ -247,7 +247,7 @@ class Hinter
   # Re-show hints reflecting current state, or select window if complete
   update: ->
     # If state is a window, we're done
-    if @state.hintInstance?
+    if @state instanceof Window
       # Cancel hints
       @stop()
 
