@@ -80,9 +80,7 @@ p =
 
 # Utilities
 Object.prototype.map = (f) ->
-  r = {}
-  Object.keys(this).map (k) => r[k] = f this[k], k
-  r
+  Object.keys(this).reduce ((o, k) => o[k] = f this[k], k; o), {}
 Array.prototype.extend = (a) -> Array.prototype.push.apply this, a
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
