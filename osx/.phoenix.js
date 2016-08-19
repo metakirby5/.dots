@@ -24,8 +24,12 @@ WINS =
   factor: 2
   gap: 10
 HINTS =
+  cancel: 'escape'
+  chars: 'fj'
   weight: 24
   appearance: 'dark'
+  titleLength: 15
+  titleCont: '…'
 SNAPS =
   q:    [-1/2, -1/2]
   a:    [-1/2, -1  ]
@@ -114,15 +118,56 @@ edgeOf = (f, dir, gap = 0) ->
 
 # Screen methods
 Screen::idx = ->
-  that = this
   (_.find (Screen.all().map (s, i) -> [i, s]),
-          ([i, s]) -> that.isEqual s)[0]
+          ([i, s]) => @isEqual s)[0]
 
 # Space methods
 Space::idx = ->
-  that = this
   (_.find (Space.all().map (s, i) -> [i, s]),
-          ([i, s]) -> that.isEqual s)[0]
+          ([i, s]) => @isEqual s)[0]
+
+# Hint manager
+class Hints
+  constructor: (@chars = HINTS.chars, @cancel = HINTS.cancel) ->
+    @active = false
+    @binds = []
+    @hints = []
+
+  bindHints: (wins, prefix = '') ->
+    # Base case - no wins
+    if not wins?
+      return
+
+    # Base case - we have enough keys
+    if wins.length <= @chars.length
+      (_.zip wins, @chars).map ([w, k]) =>
+        h = (new ChainWindow w).hint(prefix + k)
+        h.show()
+        @hints.push h
+        @binds.push Key.on k, [], =>
+          w.focus()
+          Mouse.move
+            x: h.origin.x + h.frame().width / 2
+            y: Screen.all()[0].frame().height -
+            h.origin.y - h.frame().height / 2
+          @hide()
+
+    # Recursive case - chunk and bind
+    else
+      (_.zip _.chain(wins).groupBy((e, i) =>
+        Math.floor i / @chars.length
+      ).toArray().value(), @chars).map ([w, p]) => @bindHints w, p
+
+  show: ->
+    @binds.push Key.on @cancel, [], => @hide()
+    @bindHints Window.all
+      visible: true
+
+  hide: ->
+    (_.zip @binds, @hints).map ([b, h]) =>
+      Key.off(b)
+      h.close()
+    @binds = []
 
 # Window chaining
 class ChainWindow
@@ -131,6 +176,32 @@ class ChainWindow
     @f = @win.frame()
     @updateScr @win.screen()
     @dropSize = @gap + @tolerance
+
+  hint: (activator,
+      weight = HINTS.weight, appearance = HINTS.appearance,
+      titleLength = HINTS.titleLength, titleCont = HINTS.titleCont) ->
+    text = activator
+
+    # If title length is too long, truncate
+    if @win.app().windows().length > 1
+      text += ' | ' + @win.title()
+      if @win.title().length > titleLength
+        text = (text.substr 0, titleLength - titleCont.length) + titleCont
+
+    Modal.build
+      text: text
+      icon: @win.app().icon()
+      weight: weight
+      appearance: appearance
+      origin: (hf) =>
+        x: (Math.min (
+          Math.max @f.x + @f.width / 2 - hf.width / 2, @sf.x
+        ), @sf.x + @sf.width - hf.width)
+        y: (Math.min (
+          Math.max (
+            Screen.all()[0].frame().height -
+            (@f.y + @f.height / 2 + hf.height / 2)), @sf.y
+          ), @sf.y + @sf.height - hf.height)
 
   set: ->
     @win.setFrame @f
@@ -157,6 +228,8 @@ class ChainWindow
          (not onlyCatch or catchable @f, dir, nf)
         closest = ne
     closest
+
+  # Begin chainables
 
   move: (dx, dy) ->
     @f.x += dx
@@ -332,14 +405,6 @@ class ChainWindow
         @f.y = @sf.y + @sf.height - @f.height - @gap
     this
 
-  hint: (char, weight = HINTS.weight, appearance = HINTS.appearance) ->
-    this
-
-class Hints
-  constructor: ->
-    @active = false
-    @hints = []
-
 # Shortcuts
 fw = Window.focused
 cw = ->
@@ -350,6 +415,10 @@ cw = ->
 Key.on 'm', MODS.base, -> cw()?.maximize().set()
 Key.on 'c', MODS.base, -> cw()?.center().set()
 Key.on 'i', MODS.base, -> cw()?.rePour().set()
+
+# Hints
+hinter = new Hints()
+Key.on 'y', MODS.base, -> hinter.show()
 
 # Apps
 for key, app of APPS
