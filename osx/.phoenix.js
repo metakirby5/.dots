@@ -282,7 +282,7 @@ class Hinter
     if not next
       @stop()
     else
-      @seq += k
+      @len++
       @prev = @state
       @state = next
       @update(true)
@@ -290,10 +290,10 @@ class Hinter
   # Retract state machine
   pop: ->
     # If we pop past empty, stop hints
-    if not @seq
+    if not @len
       @stop()
     else
-      @seq = @seq.popped()
+      @len--
       @prev = @state
       @state = @state.parent
       @update(false)
@@ -318,7 +318,7 @@ class Hinter
     else
       # Update text
       @state.map (w) =>
-        w.hintInstance.updateSeqLen(@seq.length)
+        w.hintInstance.updateSeqLen(@len)
 
       if descending
         # Hide non-matching hints
@@ -340,7 +340,7 @@ class Hinter
 
     # Internal state
     @state = new HintTree @chars, Window.all {visible: true}
-    @seq = ''
+    @len = 0
 
     # Keybinds
     @binds = []
