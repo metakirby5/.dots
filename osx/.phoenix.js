@@ -42,7 +42,7 @@ p =
     ]
     kStop: 'escape'
     kPop: 'delete'
-    chars: 'FJDKSLAGHRUEIWOVNCM'
+    chars: 'FJ' #DKSLAGHRUEIWOVNCM'
     weight: 24
     appearance: 'dark'
     titleLength: 15
@@ -262,16 +262,16 @@ class HintTree
 
   # Map on all leaf nodes, with exclude
   map: (f, exclude) ->
-    @tree.map (v, k) =>
+    @tree.map (v, k) ->
       # Base case -  exclude
       if v == exclude
         v
       # Base case - node
       else if v not instanceof HintTree
-        f @tree[k]
+        f v
       # Recursive case
       else
-        @tree[k].map f exclude
+        v.map f, exclude
 
 class Hinter
   constructor: (@chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
