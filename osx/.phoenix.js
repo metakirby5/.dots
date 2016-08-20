@@ -42,12 +42,12 @@ p =
     ]
     kStop: 'escape'
     kPop: 'delete'
-    chars: 'FJ' #DKSLAGHRUEIWOVNCM'
+    chars: 'FJDKSLAGHRUEIWOVNCM'
     weight: 24
     appearance: 'dark'
     titleLength: 15
     titleCont: '…'
-    debounce: 200
+    debounce: 150
   keys:
     maximize: 'm'
     center: 'c'
