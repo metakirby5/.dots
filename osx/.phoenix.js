@@ -242,52 +242,36 @@ Modal::close = ->
 # Hints
 class HintTree
   constructor: (@chars, wins, @parent, @prefix = '') ->
+    # Add children
     @tree = {}
-
-    # Base case - we have enough keys
-    if wins.length <= @chars.length
-      (_.zip wins, @chars).map ([w, k]) => @add w, @prefix + k if w?
-
-    # Recursive case - split and add
-    else
-      # Split into @chars.length groups
-      (_.zip _.toArray(_.groupBy(wins, (e, i) => i % @chars.length)), @chars)
-        .map ([ws, k]) => @add ws, @prefix + k if ws?
+    (_.zip @chars, _.toArray _.groupBy wins, (e, i) => i % @chars.length)
+      .map ([k, ws]) => if ws?
+        @tree[k] = (
+          seq = @prefix + k
+          if ws.length == 1
+            w = ws[0]
+            w.hintInstance = w.hint seq
+            w
+          else
+            new HintTree @chars, ws, this, seq
+        )
 
   # Get child
   get: (k) ->
     @tree[k]
 
-  # Add Window(s) as child
-  add: (child, seq) ->
-    # Extract window from unary array
-    child = child[0] if child.length == 1
-
-    # Child will either be a Window or HintTree
-    if child instanceof Window
-      child.hintInstance = child.hint(seq)
-    else
-      child = new HintTree @chars, child, this, seq
-
-    # Add the child
-    @tree[seq.pop()] = child
-
-  # Perform on all leaf nodes, with optional subtree to exclude
-  map: (f, except) ->
-    if except?.parent?
-      delete except.parent.tree[except.prefix.pop()]
-
-    if this != except
-      (_.keys @tree).map (k) =>
-        # Only act on non-metadata keys
-        if k.length == 1
-          if @tree[k] not instanceof HintTree
-            f @tree[k]
-          else
-            @tree[k].map f
-
-    if except?.parent?
-      except.parent.tree[except.prefix.pop()] = except
+  # Map on all leaf nodes, with exclude
+  map: (f, exclude) ->
+    @tree.map (v, k) =>
+      # Base case -  exclude
+      if v == exclude
+        v
+      # Base case - node
+      else if v not instanceof HintTree
+        f @tree[k]
+      # Recursive case
+      else
+        @tree[k].map f exclude
 
 class Hinter
   constructor: (@chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
