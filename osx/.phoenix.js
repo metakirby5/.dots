@@ -286,7 +286,7 @@ class Hinter
       @len++
       @prev = @state
       @state = next
-      @update(true)
+      @update true
 
   # Retract state machine
   pop: ->
@@ -297,7 +297,7 @@ class Hinter
       @len--
       @prev = @state
       @state = @state.parent
-      @update(false)
+      @update false
 
   # Re-show hints reflecting current state, or select window if complete
   update: (descending) ->
@@ -385,20 +385,14 @@ class ChainWindow
     @updateScr @win.screen()
     @dropSize = @gap + @tolerance
 
-  set: ->
-    @win.setFrame @f
-    this
-
-  focus: ->
-    @win.focus()
-    this
-
+  # Private: update window screen for chains
   updateScr: (scr) ->
     @prevScr = if @scr? then @scr else scr
     @prevSf = @prevScr?.flippedVisibleFrame()
     @scr = scr
     @sf = @scr.flippedVisibleFrame()
 
+  # Private: get closest window, with border calculation
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
@@ -413,20 +407,34 @@ class ChainWindow
 
   # Begin chainables
 
+  # Apply frame
+  set: ->
+    @win.setFrame @f
+    this
+
+  # Focus window
+  focus: ->
+    @win.focus()
+    this
+
+  # Delta move
   move: (dx, dy) ->
     @f.x += dx
     @f.y += dy
     this
 
+  # Absolute move
   moveTo: (x, y) ->
     @f.x = x
     @f.y = y
     this
 
+  # Default delta move in direction
   moveIn: (dir) ->
     @move (deltaIn dir, @unit)...
     this
 
+  # Move edge to coordinate
   moveEdgeTo: (dir, c) ->
     switch dir
       when SOUTH then @f.y = c - @f.height - @gap
@@ -435,22 +443,26 @@ class ChainWindow
       when WEST then @f.x = c + @gap
     this
 
+  # Delta resize
   size: (dx, dy, center = false) ->
     @move -dx / 2, -dy / 2 if center
     @f.width += dx
     @f.height += dy
     this
 
+  # Absolute resize
   sizeTo: (width, height, center = false) ->
     @move (@f.width - width) / 2, (@f.height - height) / 2 if center
     @f.width = width
     @f.height = height
     this
 
+  # Default delta size in direction
   sizeIn: (dir, center = false, amt = @unit) ->
     @size (deltaIn dir, amt)..., center
     this
 
+  # Extension in direction
   extendIn: (dir, amt = @unit) ->
     switch axisOf dir
       when VERTICAL then @f.height += amt
@@ -489,6 +501,7 @@ class ChainWindow
 
     this
 
+  # Consume as much unoccupied space as possible
   fill: (axes = AXES, skipFrame = false) ->
     axes.map (axis) =>
       switch axis
@@ -504,10 +517,12 @@ class ChainWindow
           @f.width = width
     this
 
+  # Move in direcion until an edge is hit
   fallIn: (dir) ->
     @moveEdgeTo dir, (@closestIn dir, true)
     this
 
+  # fallIn + fill
   pourIn: (dir) ->
     g = _.extend {}, @f
     @sizeTo @dropSize, @dropSize, true
@@ -516,11 +531,13 @@ class ChainWindow
     @fill [(oppositeOf axisOf dir), (axisOf dir)]
     this
 
+  # Recalculate fill
   rePour: ->
     @sizeTo @dropSize, @dropSize, true
     @fill()
     this
 
+  # Absoulute space set
   setSpace: (num) ->
     next = Space.all()[num]
     if next?
@@ -560,11 +577,13 @@ class ChainWindow
     @f.y += @sf.y
     this
 
+  # Center within screen
   center: ->
     @f.x = @sf.x + (@sf.width - @f.width) / 2
     @f.y = @sf.y + (@sf.height - @f.height) / 2
     this
 
+  # Maximize within screen
   maximize: ->
     @moveTo @sf.x + @gap, @sf.y + @gap
     @sizeTo @sf.width - 2 * @gap, @sf.height - 2 * @gap
