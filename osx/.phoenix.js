@@ -341,8 +341,9 @@ class Hinter
     @binds = []
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
-    @binds.extend (_.without ALL_KEYS, @kStop, @kPop).map (k) =>
-      new Key k, [], => @push k
+    (_.without ALL_KEYS, @kStop, @kPop).map (k) =>
+      [[], ['shift']].map (mod) =>
+        @binds.push new Key k, mod, => @push k
 
     # Events
     @events = []
