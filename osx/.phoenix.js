@@ -102,7 +102,13 @@ ALL_KEYS = (String.fromCharCode(c) for c in [39]
     'forwardDelete', 'end', 'pageDown', 'left', 'right', 'down', 'up',
   ]
 
-# Helpers
+# Keybind helpers
+modalize = (handler, excludes...) ->
+  _.flatten (_.difference ALL_KEYS, excludes).map (k) ->
+    [[], ['shift']].map (mod) ->
+      new Key k, mod, -> handler k, mod
+
+# Coordinate system helpers
 identify = (x) ->
   if x in DIRS
     DIR
@@ -341,9 +347,7 @@ class Hinter
     @binds = []
     @binds.push new Key @kStop, [], => @stop()
     @binds.push new Key @kPop, [], => @pop()
-    (_.without ALL_KEYS, @kStop, @kPop).map (k) =>
-      [[], ['shift']].map (mod) =>
-        @binds.push new Key k, mod, => @push k
+    @binds.extend modalize ((k) => @push k), @kStop, @kPop
 
     # Events
     @events = []
