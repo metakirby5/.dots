@@ -243,18 +243,15 @@ Modal::close = ->
 class HintTree
   constructor: (@chars, wins, @parent, @prefix = '') ->
     # Add children
-    @tree = {}
-    (_.zip @chars, _.toArray _.groupBy wins, (e, i) => i % @chars.length)
-      .map ([k, ws]) => if ws?
-        @tree[k] = (
-          seq = @prefix + k
-          if ws.length == 1
-            w = ws[0]
-            w.hintInstance = w.hint seq
-            w
-          else
-            new HintTree @chars, ws, this, seq
-        )
+    @tree = (_.groupBy wins, (e, i) => @chars.charAt(i % @chars.length))
+      .map (ws, k) =>
+        seq = @prefix + k
+        if ws.length == 1
+          w = ws[0]
+          w.hintInstance = w.hint seq
+          w
+        else
+          new HintTree @chars, ws, this, seq
 
   # Get child
   get: (k) ->
