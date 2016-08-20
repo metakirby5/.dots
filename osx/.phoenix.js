@@ -15,8 +15,7 @@ AXIS = 'AXIS'
 AXES = [VERTICAL, HORIZONTAL]
 
 # Preferences
-Phoenix.set
-  openAtLogin: true
+Phoenix.set openAtLogin: true
 p =
   wins:
     tolerance: 10
@@ -167,14 +166,10 @@ intersects = (f, g, gap = 0) ->
   f.y <= g.y + g.height + gap and g.y <= f.y + f.height + gap
 
 # Screen methods
-Screen::idx = ->
-  (_.find (Screen.all().map (s, i) -> [i, s]),
-          ([i, s]) => @isEqual s)[0]
+Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
 
 # Space methods
-Space::idx = ->
-  (_.find (Space.all().map (s, i) -> [i, s]),
-          ([i, s]) => @isEqual s)[0]
+Space::idx = -> _.findIndex Space.all(), (s) => @isEqual s
 
 # Window methods
 Window::hint = (seq,
@@ -185,7 +180,7 @@ Window::hint = (seq,
   text = seq
 
   # If more than one app window visible, show title
-  if this.app().windows({visible: true}).length > 1
+  if this.app().windows(visible: true).length > 1
     title = this.title()
     # If title length is too long, truncate
     if title.length > titleLength
@@ -227,10 +222,9 @@ Modal::show = ->
   if not _.contains(@open, this)
     while _.some(@open.map (m) =>
         intersects @frame(), m.frame(), p.modals.gap)
-      @origin = {
+      @origin =
         x: @origin.x
         y: @origin.y - p.modals.unit
-      }
     @open.push this
   @_show()
 
@@ -254,8 +248,7 @@ class HintTree
           new HintTree @chars, ws, this, seq
 
   # Get child
-  get: (k) ->
-    @tree[k]
+  get: (k) -> @tree[k]
 
   # Map on all leaf nodes, with exclude
   map: (f, exclude) ->
@@ -276,6 +269,9 @@ class Hinter
       debounce = p.hints.debounce) ->
     @active = false
     @bouncedHints = _.debounce @showHints, debounce
+
+  # So we can debounce
+  showHints: (state) -> state?.map (w) -> w.hintInstance.show()
 
   # Advance state machine
   push: (k) ->
@@ -330,10 +326,6 @@ class Hinter
         # Show matching hints
         @bouncedHints @state
 
-  # So we can debounce
-  showHints: (state) ->
-    state?.map (w) -> w.hintInstance.show()
-
   # Start hint mode
   start: ->
     # Only if not already active
@@ -342,7 +334,7 @@ class Hinter
     @active = true
 
     # Internal state
-    @state = new HintTree @chars, Window.all {visible: true}
+    @state = new HintTree @chars, Window.all visible: true
     @len = 0
 
     # Keybinds
@@ -374,8 +366,7 @@ class Hinter
     @events.map (e) -> e.disable()
 
   # Toggle hint mode
-  toggle: ->
-    if @active then @stop() else @start()
+  toggle: -> if @active then @stop() else @start()
 
 # Window chaining
 class ChainWindow
@@ -396,7 +387,7 @@ class ChainWindow
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
-    @win.others({screen: @scr, visible: true}).map (win) =>
+    @win.others(screen: @scr, visible: true).map (win) =>
       nf = win.frame()
       ne = edgeOf nf, (oppositeOf dir)
       if (isCloser dir, e, ne) and
@@ -493,7 +484,7 @@ class ChainWindow
     @set()
 
     # Now, resize all other windows
-    @win.others({screen: @scr, visible: true}).map (win) =>
+    @win.others(screen: @scr, visible: true).map (win) =>
       new ChainWindow(win, @gap, @unit, @tolerance)
         .sizeTo(@dropSize, @dropSize, true)
         .fill()
