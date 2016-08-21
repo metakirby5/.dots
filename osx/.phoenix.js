@@ -236,7 +236,7 @@ Modal::show = ->
 
 Modal::_close = Modal::close
 Modal::close = ->
-  Modal::open = _.without(@shown, this)
+  Modal::open = _.without(@open, this)
   @_close()
 
 # Hints
