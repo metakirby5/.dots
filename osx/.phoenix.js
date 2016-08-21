@@ -168,7 +168,7 @@ edgeOf = (f, dir, gap = 0) ->
     when WEST then f.x - gap
 
 intersects = (f, g, gap = 0) ->
-  f.x <= g.x + g.width + gap and g.y <= f.x + f.width + gap and
+  f.x <= g.x + g.width + gap and g.x <= f.x + f.width + gap and
   f.y <= g.y + g.height + gap and g.y <= f.y + f.height + gap
 
 # Screen methods
