@@ -57,7 +57,7 @@ __mk5_set_prompt() {
 
   # Display hostname if ssh'd
   local hostname
-  [ "$SSH_TTY" ] && hostname="$__mk5_b_cyan@$__mk5_cyan$__mk5_hostname"
+  [ "$SSH_TTY" ] && hostname="$__mk5_blue$__mk5_hostname$__mk5_b_blue, "
 
   # Display job count
   local jobs_info
@@ -186,15 +186,20 @@ __mk5_set_prompt() {
   mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
 
   PS1=""                     # Clear PS1
-  PS1+="$__mk5_blue$USER"    # User
   PS1+="$hostname"           # (Hostname)
-  PS1+="$__mk5_b_blue, "     # Separator
   PS1+="$jobs_info"          # (Jobs)
   PS1+="$virtualenv_info"    # (Virtualenv)
   PS1+="$git_info"           # (Git)
   PS1+="$mypwd"              # Abbreviated PWD
-  PS1+="\n"                  # Newline
-  PS1+="$pchar_color$pchar"  # Prompt
+
+  # If only one character, single-line
+  local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
+  if [ $(wc -c <<< "$stripped") == 2 ]; then
+    PS1="$pchar_color$stripped"
+  else
+    PS1+="\n"                  # Newline
+    PS1+="$pchar_color$pchar"  # Prompt
+  fi
   PS1+="$__mk5_normal "      # Clear colors
 
   PS2=""                     # Clear PS2
