@@ -57,7 +57,7 @@ __mk5_set_prompt() {
 
   # Display hostname if ssh'd
   local hostname
-  [ "$SSH_TTY" ] && hostname="$__mk5_blue$__mk5_hostname$__mk5_b_blue, "
+  [ "$SSH_TTY" ] && hostname="$__mk5_cyan$__mk5_hostname$__mk5_b_cyan, "
 
   # Display job count
   local jobs_info
