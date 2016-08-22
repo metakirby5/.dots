@@ -612,17 +612,17 @@ Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
-  Phoenix.log r.output
-  sf = Space.active().screen().frame()
-  Modal.build
-    text: r.output
-    duration: p.modals.duration
-    weight: p.modals.weight
-    appearance: p.modals.appearance
-    origin: (mf) ->
-      x: sf.x + sf.width / 2 - mf.width / 2
-      y: sf.y + sf.height / 2 - mf.height / 2
-  .show()
+  Phoenix.notify r.output
+  # sf = Space.active().screen().frame()
+  # Modal.build
+  #   text: r.output
+  #   duration: p.modals.duration
+  #   weight: p.modals.weight
+  #   appearance: p.modals.appearance
+  #   origin: (mf) ->
+  #     x: sf.x + sf.width / 2 - mf.width / 2
+  #     y: sf.y + sf.height / 2 - mf.height / 2
+  # .show()
 
 # Apps
 p.keys.apps.map (app, key) ->
