@@ -441,8 +441,8 @@ class ChainWindow
     this
 
   # Proxy: focus
-  focus: (args...) ->
-    @win.focus.bind(@win).apply args
+  focus: ->
+    @win.focus()
     this
 
   # Switch window to neighbor
