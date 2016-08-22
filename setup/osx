@@ -23,7 +23,7 @@ fi
 echo "Please do the following:"
 echo "    - Install Xcode from the App Store."
 echo "    - Import the Terminal.app profile in \
-misc/terminal/Japanesque.terminal."
+misc/osx/terminal/Japanesque.terminal."
 get_ready
 
 echo "Installing brew..."
@@ -59,7 +59,7 @@ echo "Setting OS X defaults..."
 yes | osx-set-defaults
 
 echo "Copying over root configs (sudo required)..."
-sudo cp "$DOTS/misc/root_bashrc.sh" /var/root/.bash_profile
+sudo cp "$DOTS/misc/shell/root_bashrc.sh" /var/root/.bash_profile
 sudo ln -s ~/.vimrc /var/root/.vimrc
 
 echo "Done! For post-install:"

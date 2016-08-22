@@ -1,0 +1,13 @@
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com-PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+   <key>LSRiskCategorySafe</key>
+    <dict>
+     <key>LSRiskCategoryExtensions</key>
+      <array>
+        <string>mkv</string>
+        <string>webm</string>
+      </array>
+    </dict>
+  </dict>
+</plist>

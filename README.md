@@ -106,7 +106,7 @@ For OS X, use the system theme.
 - Install packages from language-specific managers.
   - You can also try using `install-leaves` instead.
 - Install browser extensions/themes.
-- If you want, copy over `misc/root_bashrc.sh` to your root's
+- If you want, copy over `misc/shell/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
 
@@ -122,7 +122,7 @@ For OS X, use the system theme.
 -- or --
 
 - Install Xcode from the App Store.
-- Import the `Terminal.app` profile in `misc/terminal/Japanesque.terminal`.
+- Import the `Terminal.app` profile in `misc/osx/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
 - Install `stow` using `brew`.
 - `cd ~/.dots`
