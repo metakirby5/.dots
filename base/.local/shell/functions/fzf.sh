@@ -1,8 +1,13 @@
 # fzf cache
 FZF_CACHE=~/.cache/fzf
+
+FZF_CACHE_DIR="$(dirname "$FZF_CACHE")"
+[ ! -d "$FZF_CACHE_DIR" ] && mkdir -p "$FZF_CACHE_DIR"
+
 fzf() {
-  exec > >(tee "$FZF_CACHE")
+  exec 3>&1 1> >(tee "$FZF_CACHE")
   command fzf "$@"
+  exec 1>&3 3>&-
 }
 
 fzc() {
