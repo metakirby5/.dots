@@ -25,6 +25,9 @@ p =
   modals:
     unit: 10
     gap: 10
+    duration: 1
+    weight: 24
+    appearance: 'dark'
   hints:
     stopEvents: [
       'screensDidChange',
@@ -42,16 +45,15 @@ p =
     kStop: 'escape'
     kPop: 'delete'
     chars: 'FJDKSLAGHRUEIWOVNCM'
-    weight: 24
-    appearance: 'dark'
     titleLength: 15
     titleCont: '…'
     debounce: 150
   keys:
     maximize: 'm'
     center: 'c'
-    rePour: 'i'
+    rePour: 'u'
     hinter: 'y'
+    status: 'i'
     snaps:
       q:    [-1/2, -1/2]
       a:    [-1/2, -1  ]
@@ -180,7 +182,7 @@ Space::idx = -> _.findIndex Space.all(), (s) => @isEqual s
 
 # Window methods
 Window::hint = (seq,
-    weight = p.hints.weight, appearance = p.hints.appearance,
+    weight = p.modals.weight, appearance = p.modals.appearance,
     titleLength = p.hints.titleLength, titleCont = p.hints.titleCont) ->
   f = @frame()
   sf = @screen().frame()
@@ -200,16 +202,16 @@ Window::hint = (seq,
     icon: this.app().icon()
     weight: weight
     appearance: appearance
-    origin: (hf) =>
+    origin: (mf) ->
       x: (Math.min (
-        Math.max f.x + f.width / 2 - hf.width / 2, sf.x
-      ), sf.x + sf.width - hf.width)
+        Math.max f.x + f.width / 2 - mf.width / 2, sf.x
+      ), sf.x + sf.width - mf.width)
       y: (Math.min (
         Math.max (
           Screen.all()[0].frame().height -
-          (f.y + f.height / 2 + hf.height / 2)
+          (f.y + f.height / 2 + mf.height / 2)
         ), sf.y
-      ), sf.y + sf.height - hf.height)
+      ), sf.y + sf.height - mf.height)
 
   hint.seq = seq
   hint.curSeqLen = seq.length
@@ -615,6 +617,20 @@ Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.rePour, p.keys.mods.base, -> cw()?.rePour().set()
 Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
+Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
+  "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
+], (r) ->
+  Phoenix.log r.output
+  sf = Space.active().screen().frame()
+  Modal.build
+    text: r.output
+    duration: p.modals.duration
+    weight: p.modals.weight
+    appearance: p.modals.appearance
+    origin: (mf) ->
+      x: sf.x + sf.width / 2 - mf.width / 2
+      y: sf.y + sf.height / 2 - mf.height / 2
+  .show()
 
 # Apps
 p.keys.apps.map (app, key) ->
