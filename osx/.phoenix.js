@@ -697,7 +697,8 @@ p.keys.apps.map (app, key) ->
   p.keys.offsets.map (offset, key) ->
     Key.on key, mod, ->
       idx = mousedScreen().currentSpace().idx()
-      action (idx + offset)
+      slen = Space.all().length
+      action (((idx + offset) % slen) + slen) % slen
 
 # Directionals
 [
