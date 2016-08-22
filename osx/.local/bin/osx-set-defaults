@@ -37,6 +37,8 @@ DEFAULTS=(
     NSGlobalDomain AppleKeyboardUIMode -int 2"
   ["Show all file extensions"]="\
     NSGlobalDomain AppleShowAllExtensions -bool true"
+  ["Hide Menu Bar"]="\
+    NSGlobalDomain _HiHideMenuBar -bool true"
 
   # com.apple.dock
   ["No dock magnification"]="\
