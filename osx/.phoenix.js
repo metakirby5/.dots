@@ -21,7 +21,7 @@ p =
     tolerance: 10
     unit: 100
     factor: 2
-    gap: 10
+    gap: 20
   modals:
     unit: 10
     gap: 10
