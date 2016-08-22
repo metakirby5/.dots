@@ -358,7 +358,7 @@ class Hinter
     if @active
       return
 
-    wins = Window.all visible: true
+    wins = Window.recent()
 
     # Bail if nothing to hint
     if not wins.length
@@ -642,9 +642,9 @@ class ChainWindow
     this
 
 # Shortcuts
-fw = Window.focused
 cw = ->
-  win = fw()
+  win = Window.focused() or
+        Window.recent()[0]
   new ChainWindow(win) if win?
 
 # General
