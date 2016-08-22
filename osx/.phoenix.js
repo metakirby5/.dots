@@ -220,6 +220,12 @@ Window::hint = (seq,
 # Modal methods
 Modal::open = []
 
+Modal::_build = Modal::build
+Modal::build = (props) ->
+  Modal._build _.extend props,
+    weight: p.modals.weight
+    appearance: p.modals.appearance
+
 Modal::center = ->
   mf = @frame()
   sf = Space.active().screen().frame()
@@ -298,8 +304,6 @@ class Hinter
     @bouncedHints = _.debounce @showHints, debounce
     @noWinMsg = Modal.build
       text: 'No windows to hint.'
-      weight: p.modals.weight
-      appearance: p.modals.appearance
     .center()
 
   # So we can debounce
@@ -659,8 +663,6 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   Phoenix.notify r.output
   # Modal.build
   #   text: r.output
-  #   weight: p.modals.weight
-  #   appearance: p.modals.appearance
   # .center().closeAfter(p.modals.duration).show()
 
 # Apps
