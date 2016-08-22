@@ -219,12 +219,22 @@ Window::hint = (seq,
 
 # Modal methods
 Modal::open = []
+
+Modal::center = ->
+  mf = @frame()
+  sf = Space.active().screen().frame()
+  @origin =
+    x: sf.x + sf.width / 2 - mf.width / 2
+    y: sf.y + sf.height / 2 - mf.height / 2
+  this
+
 Modal::updateSeqLen = (len) ->
   if not @seq?
     return
   next = @seq.substr len
   @text = next + @text.substr(@curSeqLen)
   @curSeqLen = next.length
+  this
 
 Modal::_show = Modal::show
 Modal::show = ->
@@ -236,11 +246,13 @@ Modal::show = ->
         y: @origin.y - p.modals.unit
     @open.push this
   @_show()
+  this
 
 Modal::_close = Modal::close
 Modal::close = ->
   Modal::open = _.without(@open, this)
   @_close()
+  this
 
 # Hints
 class HintTree
@@ -340,10 +352,25 @@ class Hinter
     # Only if not already active
     if @active
       return
+
+    wins = Window.all visible: true
+
+    # Bail if nothing to hint
+    if not wins.length
+      Timer.off @msg_t if @msg_t?
+      @msg?.close()
+      @msg = Modal.build
+        text: 'No windows to hint.'
+        weight: p.modals.weight
+        appearance: p.modals.appearance
+      .center().show()
+      @msg_t = Timer.after p.modals.duration, => @msg.close()
+      return
+
     @active = true
 
     # Internal state
-    @state = new HintTree @chars, Window.all visible: true
+    @state = new HintTree @chars, wins
     @len = 0
 
     # Keybinds
