@@ -1,5 +1,6 @@
 # General
 set bell-style visible
+set keyseq-timeout 1
 
 # Completion behavior
 set completion-ignore-case on
