@@ -103,10 +103,11 @@ ALL_KEYS = (String.fromCharCode(c) for c in [39]
   ]
 
 # Keybind helpers
+# Returns an array of identifiers
 modalize = (handler, excludes...) ->
   _.flatten (_.difference ALL_KEYS, excludes).map (k) ->
     [[], ['shift']].map (mod) ->
-      new Key k, mod, -> handler k, mod
+      Key.on k, mod, -> handler k, mod
 
 # Coordinate system helpers
 identify = (x) ->
@@ -344,14 +345,14 @@ class Hinter
     @len = 0
 
     # Keybinds
-    @binds = []
-    @binds.push new Key @kStop, [], => @stop()
-    @binds.push new Key @kPop, [], => @pop()
-    @binds.extend modalize ((k) => @push k), @kStop, @kPop
+    @binds = (modalize ((k) => @push k), @kStop, @kPop)
+      .concat [
+        (Key.on @kStop, [], => @stop()),
+        (Key.on @kPop, [], => @pop()),
+      ]
 
     # Events
-    @events = []
-    @stopEvents.map (e) => @events.push new Event e, => @stop()
+    @events = @stopEvents.map (e) => Event.on e, => @stop()
 
     # Finally, show hints
     @showHints @state
@@ -367,8 +368,8 @@ class Hinter
     @bouncedHints() # cancels debounce
     (if @state instanceof HintTree then @state else @prev).map (w) ->
       w.hintInstance.close()
-    @binds.map (k) -> k.disable()
-    @events.map (e) -> e.disable()
+    @binds.map Key.off
+    @events.map Event.off
 
   # Toggle hint mode
   toggle: -> if @active then @stop() else @start()
