@@ -51,7 +51,7 @@ p =
   keys:
     maximize: 'm'
     center: 'c'
-    rePour: 'u'
+    reFill: 'u'
     hinter: 'y'
     status: 'i'
     snaps:
@@ -475,20 +475,8 @@ class ChainWindow
   # Disclaimer: only works if window covers the entire edge of resize...
   adjustIn: (dir, amt = @unit) ->
     # First, resize our window
-    # Reset by filling
-    @sizeTo(@dropSize, @dropSize, true)
-    @fill()
-    # Extend in any direction where there exist windows
-    dirs = _.filter (dirsOf (axisOf dir)), (dir) =>
-      (@win.neighbors dir).length
-    switch dirs.length
-      # Sandiwched between two windows: resize from center
-      when 2 then @sizeIn dir, true, amt
-      # On edge: extend in direction of the window
-      when 1 then @extendIn dirs[0], amt * coeff dir
-      # Otherwise, no other windows, so maximize
-      else
-        @maximize()
+    @reFill()
+    @sizeIn dir, true, amt
     @set()
 
     # Now, resize all other windows
@@ -497,6 +485,10 @@ class ChainWindow
         .sizeTo(@dropSize, @dropSize, true)
         .fill()
         .set()
+
+    # Final resize
+    @reFill()
+    @set()
 
     this
 
@@ -516,6 +508,12 @@ class ChainWindow
           @f.width = width
     this
 
+  # Recalculate fill
+  reFill: ->
+    @sizeTo @dropSize, @dropSize, true
+    @fill()
+    this
+
   # Move in direcion until an edge is hit
   fallIn: (dir) ->
     @moveEdgeTo dir, (@closestIn dir, true)
@@ -528,12 +526,6 @@ class ChainWindow
     @moveEdgeTo dir, (edgeOf g, dir, @gap)
     @fallIn dir
     @fill [(oppositeOf axisOf dir), (axisOf dir)]
-    this
-
-  # Recalculate fill
-  rePour: ->
-    @sizeTo @dropSize, @dropSize, true
-    @fill()
     this
 
   # Absoulute space set
@@ -615,7 +607,7 @@ cw = ->
 hinter = new Hinter()
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
-Key.on p.keys.rePour, p.keys.mods.base, -> cw()?.rePour().set()
+Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
 Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
