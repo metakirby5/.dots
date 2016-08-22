@@ -234,7 +234,7 @@ Modal::center = ->
     y: sf.y + sf.height / 2 - mf.height / 2
   this
 
-Modal::closeAfter = (s) ->
+Modal::closeAfter = (s = p.modals.duration) ->
   Timer.off @mt if @mt?
   @mt = Timer.after s, => @close()
   this
@@ -249,13 +249,13 @@ Modal::updateSeqLen = (len) ->
 
 Modal::_show = Modal::show
 Modal::show = ->
-  if not _.contains(@open, this)
-    while _.some(@open.map (m) =>
-        intersects @frame(), m.frame(), p.modals.gap)
-      @origin =
-        x: @origin.x
-        y: @origin.y - p.modals.unit
-    @open.push this
+  Modal::open = _.without(@open, this)
+  while _.some(@open.map (m) =>
+      intersects @frame(), m.frame(), p.modals.gap)
+    @origin =
+      x: @origin.x
+      y: @origin.y - p.modals.unit
+  @open.push this
   @_show()
   this
 
@@ -304,7 +304,6 @@ class Hinter
     @bouncedHints = _.debounce @showHints, debounce
     @noWinMsg = Modal.build
       text: 'No windows to hint.'
-    .center()
 
   # So we can debounce
   showHints: (state) -> state?.map (w) -> w.hintInstance.show()
@@ -366,7 +365,7 @@ class Hinter
 
     # Bail if nothing to hint
     if not wins.length
-      return @noWinMsg.closeAfter(p.modals.duration).show()
+      return @noWinMsg.center().show().closeAfter()
     @noWinMsg.close()
 
     @active = true
@@ -646,10 +645,18 @@ class ChainWindow
     this
 
 # Shortcuts
+cwModal = Modal.build
+  text: 'No windows to chain.'
+.center()
 cw = ->
   win = Window.focused() or
         Window.recent()[0]
-  new ChainWindow(win) if win?
+  if not win?
+    cwModal.center().show().closeAfter()
+    null
+  else
+    cwModal.close()
+    new ChainWindow(win)
 
 # General
 hinter = new Hinter()
@@ -663,7 +670,7 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   Phoenix.notify r.output
   # Modal.build
   #   text: r.output
-  # .center().closeAfter(p.modals.duration).show()
+  # .center().show().closeAfter()
 
 # Apps
 p.keys.apps.map (app, key) ->
