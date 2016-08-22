@@ -228,6 +228,11 @@ Modal::center = ->
     y: sf.y + sf.height / 2 - mf.height / 2
   this
 
+Modal::closeAfter = (s) ->
+  Timer.off @mt if @mt?
+  @mt = Timer.after s, => @close()
+  this
+
 Modal::updateSeqLen = (len) ->
   if not @seq?
     return
@@ -250,6 +255,7 @@ Modal::show = ->
 
 Modal::_close = Modal::close
 Modal::close = ->
+  Timer.off @mt if @mt?
   Modal::open = _.without(@open, this)
   @_close()
   this
@@ -290,6 +296,11 @@ class Hinter
       debounce = p.hints.debounce) ->
     @active = false
     @bouncedHints = _.debounce @showHints, debounce
+    @noWinMsg = Modal.build
+      text: 'No windows to hint.'
+      weight: p.modals.weight
+      appearance: p.modals.appearance
+    .center()
 
   # So we can debounce
   showHints: (state) -> state?.map (w) -> w.hintInstance.show()
@@ -357,15 +368,8 @@ class Hinter
 
     # Bail if nothing to hint
     if not wins.length
-      Timer.off @msg_t if @msg_t?
-      @msg?.close()
-      @msg = Modal.build
-        text: 'No windows to hint.'
-        weight: p.modals.weight
-        appearance: p.modals.appearance
-      .center().show()
-      @msg_t = Timer.after p.modals.duration, => @msg.close()
-      return
+      return @noWinMsg.closeAfter(p.modals.duration).show()
+    @noWinMsg.close()
 
     @active = true
 
@@ -640,16 +644,11 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
   Phoenix.notify r.output
-  # sf = Space.active().screen().frame()
   # Modal.build
   #   text: r.output
-  #   duration: p.modals.duration
   #   weight: p.modals.weight
   #   appearance: p.modals.appearance
-  #   origin: (mf) ->
-  #     x: sf.x + sf.width / 2 - mf.width / 2
-  #     y: sf.y + sf.height / 2 - mf.height / 2
-  # .show()
+  # .center().closeAfter(p.modals.duration).show()
 
 # Apps
 p.keys.apps.map (app, key) ->
