@@ -170,12 +170,19 @@ edgeOf = (f, dir, gap = 0) ->
     when EAST then f.x + f.width + gap
     when WEST then f.x - gap
 
+within = (f, p) ->
+  f.x <= p.x <= f.x + f.width and
+  f.y <= p.y <= f.y + f.height
+
 intersects = (f, g, gap = 0) ->
   f.x <= g.x + g.width + gap and g.x <= f.x + f.width + gap and
   f.y <= g.y + g.height + gap and g.y <= f.y + f.height + gap
 
 # Screen methods
 Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
+
+mousedScreen = ->
+  _.find Screen.all(), (s) -> within s.flippedFrame(), Mouse.location()
 
 # Space methods
 Space::idx = -> _.findIndex Space.all(), (s) => @isEqual s
@@ -228,7 +235,7 @@ Modal::build = (props) ->
 
 Modal::center = ->
   mf = @frame()
-  sf = Space.active().screen().frame()
+  sf = mousedScreen().frame()
   @origin =
     x: sf.x + sf.width / 2 - mf.width / 2
     y: sf.y + sf.height / 2 - mf.height / 2
@@ -681,7 +688,7 @@ p.keys.apps.map (app, key) ->
   [
     # Move
     p.keys.mods.move,
-    (num) -> cw()?.setSpace(num).reproportion().set().focus()
+    (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo()
   ],
 ].map ([mod, action]) ->
   [1..10].map (num) ->
@@ -689,7 +696,7 @@ p.keys.apps.map (app, key) ->
     Key.on (s.substr s.length - 1), mod, -> action (num - 1)
   p.keys.offsets.map (offset, key) ->
     Key.on key, mod, ->
-      idx = Space.active().idx()
+      idx = mousedScreen().currentSpace().idx()
       action (idx + offset)
 
 # Directionals
