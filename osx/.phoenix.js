@@ -335,13 +335,7 @@ class Hinter
       @stop()
 
       # Focus window
-      w = @state
-      w.focus()
-
-      # Center mouse
-      Mouse.move
-        x: w.frame().x + w.frame().width / 2
-        y: w.frame().y + w.frame().height / 2
+      (new ChainWindow @state).focus().mouseTo()
 
     # Otherwise, update texts and only show hints under state
     else
@@ -411,9 +405,13 @@ class Hinter
 class ChainWindow
   constructor: (@win, @gap = p.wins.gap, @unit = p.wins.unit,
       @tolerance = p.wins.tolerance) ->
+    @dropSize = @gap + @tolerance
+    @updateWin()
+
+  # Private: update window vars
+  updateWin: ->
     @f = @win.frame()
     @updateScr @win.screen()
-    @dropSize = @gap + @tolerance
 
   # Private: update window screen for chains
   updateScr: (scr) ->
@@ -422,7 +420,7 @@ class ChainWindow
     @scr = scr
     @sf = @scr.flippedVisibleFrame()
 
-  # Private: get closest window, with border calculation
+  # Private: get closest window edge, with border calculation
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
     e = edgeOf @f, dir, @gap - if skipFrame then 0 else 1
     closest = edgeOf @sf, dir
@@ -442,9 +440,24 @@ class ChainWindow
     @win.setFrame @f
     this
 
-  # Focus window
-  focus: ->
-    @win.focus()
+  # Proxy: focus
+  focus: (args...) ->
+    @win.focus.bind(@win).apply args
+    this
+
+  # Switch window to neighbor
+  neighbor: (dir) ->
+    n = (@win.neighbors dir)?[0]
+    if n?
+      @win = n
+      @updateWin()
+    this
+
+  # Center mouse on window
+  mouseTo: ->
+    Mouse.move
+      x: @f.x + @f.width / 2
+      y: @f.y + @f.height / 2
     this
 
   # Delta move
@@ -675,7 +688,7 @@ p.keys.apps.map (app, key) ->
   [
     # Select
     p.keys.mods.base,
-    (dir) -> fw()?.focusClosestNeighbor(dir)
+    (dir) -> cw()?.neighbor(dir).focus().mouseTo()
   ],
   [
     # Move
