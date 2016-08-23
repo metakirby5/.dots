@@ -52,7 +52,8 @@ p =
     maximize: 'm'
     center: 'c'
     reFill: 'u'
-    hinter: 'y'
+    winHinter: 'y'
+    scrHinter: 's'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -181,6 +182,27 @@ intersects = (f, g, gap = 0) ->
 # Screen methods
 Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
 
+Screen::hint = (seq) ->
+  sf = @frame()
+  text = seq
+
+  # Build a modal centered within the screen
+  hint = Modal.build
+    text: seq
+    origin: (mf) ->
+      x: sf.x + sf.width / 2 - mf.width / 2
+      y: sf.y + sf.height / 2 - mf.height / 2
+
+  hint.seq = seq
+  hint.curSeqLen = seq.length
+  hint
+
+Screen::mouseTo = ->
+  f = this.flippedFrame()
+  Mouse.move
+    x: f.x + f.width / 2
+    y: f.y + f.height / 2
+
 mousedScreen = ->
   _.find Screen.all(), (s) -> within s.flippedFrame(), Mouse.location()
 
@@ -188,9 +210,9 @@ mousedScreen = ->
 Space::idx = -> _.findIndex Space.all(), (s) => @isEqual s
 
 # Window methods
-Window::hint = (seq,
-    weight = p.modals.weight, appearance = p.modals.appearance,
-    titleLength = p.hints.titleLength, titleCont = p.hints.titleCont) ->
+Window::hint = (seq) ->
+  titleLength = p.hints.titleLength
+  titleCont = p.hints.titleCont
   f = @frame()
   sf = @screen().frame()
   text = seq
@@ -207,8 +229,6 @@ Window::hint = (seq,
   hint = Modal.build
     text: text
     icon: this.app().icon()
-    weight: weight
-    appearance: appearance
     origin: (mf) ->
       x: (Math.min (
         Math.max f.x + f.width / 2 - mf.width / 2, sf.x
@@ -304,13 +324,14 @@ class HintTree
         v.map f, exclude
 
 class Hinter
-  constructor: (@chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
+  constructor: (@hintableGetter, @action,
+      @chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
       @kStop = p.hints.kStop, @kPop = p.hints.kPop,
       debounce = p.hints.debounce) ->
     @active = false
     @bouncedHints = _.debounce @showHints, debounce
-    @noWinMsg = Modal.build
-      text: 'No windows to hint.'
+    @noHintablesMsg = Modal.build
+      text: 'Nothing to hint.'
 
   # So we can debounce
   showHints: (state) -> state?.map (w) -> w.hintInstance.show()
@@ -337,15 +358,15 @@ class Hinter
       @state = @state.parent
       @update false
 
-  # Re-show hints reflecting current state, or select window if complete
+  # Re-show hints reflecting current state, or action on hintable if complete
   update: (descending) ->
     # If state is a leaf, we're done
     if @state not instanceof HintTree
       # Cancel hints
       @stop()
 
-      # Focus window
-      (new ChainWindow @state).focus().mouseTo()
+      # Do action
+      @action @state
 
     # Otherwise, update texts and only show hints under state
     else
@@ -368,17 +389,17 @@ class Hinter
     if @active
       return
 
-    wins = Window.recent()
+    hintables = @hintableGetter()
 
     # Bail if nothing to hint
-    if not wins.length
-      return @noWinMsg.center().show().closeAfter()
-    @noWinMsg.close()
+    if not hintables.length
+      return @noHintablesMsg.center().show().closeAfter()
+    @noHintablesMsg.close()
 
     @active = true
 
     # Internal state
-    @state = new HintTree @chars, wins
+    @state = new HintTree @chars, hintables
     @len = 0
 
     # Keybinds
@@ -667,12 +688,18 @@ cw = ->
     cwModal.close()
     new ChainWindow(win)
 
+# Hinters
+winHinter = new Hinter Window.recent, (w) ->
+  (new ChainWindow w).focus().mouseTo()
+scrHinter = new Hinter Screen.all, (s) ->
+  s.mouseTo()
+
 # General
-hinter = new Hinter()
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
-Key.on p.keys.hinter, p.keys.mods.base, -> hinter.toggle()
+Key.on p.keys.winHinter, p.keys.mods.base, -> winHinter.toggle()
+Key.on p.keys.scrHinter, p.keys.mods.base, -> scrHinter.toggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
