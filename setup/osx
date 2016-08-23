@@ -26,12 +26,16 @@ echo "    - Import the Terminal.app profile in \
 misc/osx/terminal/Japanesque.terminal."
 get_ready
 
-echo "Installing brew..."
-/usr/bin/ruby -e "$(curl -fsSL \
-  https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! which brew &>/dev/null; then
+  echo "Installing brew..."
+  /usr/bin/ruby -e "$(curl -fsSL \
+    https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
-echo "Installing stow using brew..."
-brew install stow
+if ! which stow &>/dev/null; then
+  echo "Installing stow using brew..."
+  brew install stow
+fi
 
 echo "Stowing base and osx..."
 cd "$DOTS"
@@ -41,19 +45,22 @@ echo "Installing brew dependencies..."
 brew bundle --file=- < "$DEPS/brew"
 
 echo "Changing your shell (sudo required)..."
-sudo echo /usr/local/bin/bash >> /etc/shells
+grep '/usr/local/bin/bash' /etc/shells &>/dev/null ||
+  sudo echo /usr/local/bin/bash >> /etc/shells
 chsh -s /usr/local/bin/bash
 
 echo "Modifying ~/.bashrc and ~/.bash_profile..."
-cat >> ~/.bashrc <<< 'source ~/.posixrc'
-cat >> ~/.bash_profile <<< 'source ~/.bashrc'
+grep 'source ~/.posixrc' ~/.bashrc ||
+  cat >> ~/.bashrc <<< 'source ~/.posixrc'
+grep 'source ~/.bashrc' ~/.bash_profile ||
+  cat >> ~/.bash_profile <<< 'source ~/.bashrc'
 source ~/.bashrc
 
 echo "Installing other packages..."
 install-leaves
 
 echo "Running whizkers with defaults..."
-whizkers
+whizkers -e
 
 echo "Setting OS X defaults..."
 yes | osx-set-defaults
