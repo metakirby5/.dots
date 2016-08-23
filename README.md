@@ -3,7 +3,11 @@
 
 All of my dotfiles.
 
-![OS X preview](https://ptpb.pw/2UZh.png)
+![Fetch](https://ptpb.pw/2UZh.png)
+
+![Dash](https://ptpb.pw/EpY4.png)
+
+![Code](https://ptpb.pw/DrKI.png)
 
 Here's what you'll need...
 
