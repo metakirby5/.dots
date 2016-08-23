@@ -638,13 +638,15 @@ class ChainWindow
   # x and y are fractions of the screen, negative or positive
   snap: (x = null, y = null) ->
     if x?
-      @f.width = @sf.width * Math.abs(x) - 1.5 * @gap
+      gap = (if Math.abs(x) >= 1 then 2 else 1.5) * @gap
+      @f.width = @sf.width * Math.abs(x) - gap
       if x < 0
         @f.x = @sf.x + @gap
       else
         @f.x = @sf.x + @sf.width - @f.width - @gap
     if y?
-      @f.height = @sf.height * Math.abs(y) - 1.5 * @gap
+      gap = (if Math.abs(y) >= 1 then 2 else 1.5) * @gap
+      @f.height = @sf.height * Math.abs(y) - gap
       if y < 0
         @f.y = @sf.y + @gap
       else
