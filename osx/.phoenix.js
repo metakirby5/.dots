@@ -631,23 +631,26 @@ class ChainWindow
   # Ensure window frame is proportionally equivalent to its frame on the
   # previous screen
   reproportion: ->
+    # Helpers
+    ungap = (c) => c - 2 * @gap
+
     # Translate to true origin
-    @f.x -= @prevSf.x
-    @f.y -= @prevSf.y
+    @f.x -= @prevSf.x + @gap
+    @f.y -= @prevSf.y + @gap
 
     # Scale x
-    xFactor = @sf.width / @prevSf.width
+    xFactor = (ungap @sf.width) / (ungap @prevSf.width)
     @f.x *= xFactor
     @f.width *= xFactor
 
     # Scale y
-    yFactor = @sf.height / @prevSf.height
+    yFactor = (ungap @sf.height) / (ungap @prevSf.height)
     @f.y *= yFactor
     @f.height *= yFactor
 
     # Translate to new screen origin
-    @f.x += @sf.x
-    @f.y += @sf.y
+    @f.x += @sf.x + @gap
+    @f.y += @sf.y + @gap
     this
 
   # Center within screen
