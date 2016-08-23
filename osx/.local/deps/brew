@@ -19,7 +19,6 @@ brew 'hub'
 brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
-brew 'mobile-shell'
 brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
 brew 'mvtools'
 brew 'neofetch'

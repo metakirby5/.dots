@@ -9,7 +9,6 @@ livestreamer
 msgpack-python
 pip-autoremove
 pipdeptree
-protobuf
 pushbullet-cli
 python-Levenshtein
 scipy
