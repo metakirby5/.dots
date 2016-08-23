@@ -885,10 +885,10 @@ endif " }}}
     noremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
-    noremap <silent> <c-h> <esc>:vertical resize -5<cr>
-    noremap <silent> <c-j> <esc>:resize +5<cr>
-    noremap <silent> <c-k> <esc>:resize -5<cr>
-    noremap <silent> <c-l> <esc>:vertical resize +5<cr>
+    noremap <silent> <c-h> <c-w><
+    noremap <silent> <c-j> <c-w>+
+    noremap <silent> <c-k> <c-w>-
+    noremap <silent> <c-l> <c-w>>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
