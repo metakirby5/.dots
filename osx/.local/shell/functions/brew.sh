@@ -13,6 +13,9 @@ brew() {
     o)
       command brew info "$@"
       ;;
+    s)
+      command brew services "$@"
+      ;;
     i)
       command brew install "$@"
       ;;
