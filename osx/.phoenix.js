@@ -702,6 +702,8 @@ cw = ->
 winHinter = new Hinter Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
 scrHinter = new Hinter Screen.all, (s) ->
+  s.mouseTo()
+scrMovHinter = new Hinter Screen.all, (s) ->
   cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
 
 # General
@@ -710,6 +712,7 @@ Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
 Key.on p.keys.winHinter, p.keys.mods.base, -> winHinter.toggle()
 Key.on p.keys.scrHinter, p.keys.mods.base, -> scrHinter.toggle()
+Key.on p.keys.scrHinter, p.keys.mods.move, -> scrMovHinter.toggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
