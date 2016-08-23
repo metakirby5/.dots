@@ -22,6 +22,7 @@ Here's what you'll need...
 - brew
 - metakirby5/Spice
 - XVimProject/XVim (hopefully on brew soon)
+- DrabWeb/iTerm2 (borderless + gaps + padding)
 
 ### Linux
 
