@@ -10,6 +10,21 @@ brew() {
     prune)
       brew-prune
       ;;
+    i)
+      command brew install "$@"
+      ;;
+    ci)
+      command brew cask install "$@"
+      ;;
+    ui)
+      command brew uninstall "$@"
+      ;;
+    cui)
+      command brew cask uninstall "$@"
+      ;;
+    cz)
+      command brew cask zap "$@"
+      ;;
     *)
       command brew "$cmd" "$@"
       ;;
