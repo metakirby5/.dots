@@ -13,6 +13,9 @@ brew() {
     o)
       command brew info "$@"
       ;;
+    co)
+      command brew cask info "$@"
+      ;;
     s)
       command brew services "$@"
       ;;
