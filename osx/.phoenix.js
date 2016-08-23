@@ -613,6 +613,13 @@ class ChainWindow
       @updateScr next.screen()
     this
 
+  # Absolute screen set
+  setScreen: (num) ->
+    next = Screen.all()[num]
+    if next?
+      @setSpace next.currentSpace().idx()
+    this
+
   # Ensure window fits within the screen
   constrain: ->
     @f.width = Math.min @f.width, @sf.width - 2 * @gap
@@ -692,7 +699,7 @@ cw = ->
 winHinter = new Hinter Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
 scrHinter = new Hinter Screen.all, (s) ->
-  s.mouseTo()
+  cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
