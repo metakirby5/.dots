@@ -10,23 +10,29 @@ export LANG=C
 
 # Info Options {{{
 
+myprin() {
+    if [ "$2" ]; then
+        get$2
+        eval local info="\$$2"
+    fi
+    prin "$(color 8) $1 $(color 0)│ $(color 7)$info"
+}
 
 # Info
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 printinfo () {
-    info title
-    info underline
-    info "os" distro
-    info "up" uptime
-    info "shell" shell
-    info "packages" packages
-    info "resolution" resolution
-    info "icons" icons
-    info "cpu" cpu
-    info "memory" memory
+    prin "$(color 4)      echan $(color 0)│ $(color 7)${HOSTNAME%%.*}"
+    prin "$(color 0)────────────┼─────────────────────────"
+    myprin "        os" distro
+    myprin "        up" uptime
+    myprin "     shell" shell
+    myprin "  packages" packages
+    myprin "resolution" resolution
+    myprin "    memory" memory
+    prin "$(color 0)────────────┼─────────────────────────"
     info linebreak
-    info cols
+    info cols | sed 's/^/   /'
 }
 
 
