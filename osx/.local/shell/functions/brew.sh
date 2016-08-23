@@ -10,14 +10,23 @@ brew() {
     prune)
       brew-prune
       ;;
+    o)
+      command brew info "$@"
+      ;;
     i)
       command brew install "$@"
+      ;;
+    ri)
+      command brew reinstall "$@"
       ;;
     ci)
       command brew cask install "$@"
       ;;
     ui)
       command brew uninstall "$@"
+      ;;
+    ut)
+      command brew rmtree "$@"
       ;;
     cui)
       command brew cask uninstall "$@"
