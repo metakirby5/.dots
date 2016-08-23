@@ -3,7 +3,7 @@
 
 All of my dotfiles.
 
-![OS X preview](https://www.dropbox.com/s/e7jtq1a1fp1y0mr/Screenshot%202016-08-22%2022.58.14.png?dl=1)
+![OS X preview](https://ptpb.pw/2UZh.png)
 
 Here's what you'll need...
 
