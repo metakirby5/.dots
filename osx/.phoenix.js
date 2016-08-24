@@ -221,7 +221,7 @@ Screen::mouseTo = ->
     x: f.x + f.width / 2
     y: f.y + f.height / 2
 
-mousedScreen = ->
+Screen.moused = ->
   _.find Screen.all(), (s) -> within s.flippedFrame(), Mouse.location()
 
 # Space methods
@@ -273,7 +273,7 @@ Modal::build = (props) ->
 
 Modal::center = ->
   mf = @frame()
-  sf = mousedScreen().frame()
+  sf = Screen.moused().frame()
   @origin =
     x: sf.x + sf.width / 2 - mf.width / 2
     y: sf.y + sf.height / 2 - mf.height / 2
@@ -525,7 +525,7 @@ class HintMode extends Mode
     else
       # Update text
       @state.map (o) =>
-        o.hint.updateSeqLen(@len)
+        o.hint.updateSeqLen @len
 
       if descending
         # Hide non-matching hints
@@ -843,7 +843,7 @@ p.keys.apps.map (app, key) ->
     Key.on (s.substr s.length - 1), mod, -> action (num - 1)
   p.keys.offsets.map (offset, key) ->
     Key.on key, mod, ->
-      idx = mousedScreen().currentSpace().idx()
+      idx = Screen.moused().currentSpace().idx()
       slen = Space.all().length
       action (((idx + offset) % slen) + slen) % slen
 
