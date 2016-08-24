@@ -90,6 +90,7 @@ String.prototype.popped = -> this.substr(0, this.length - 1)
 String.prototype.popFront = -> this.charAt(0)
 String.prototype.poppedFront = -> this.substr(1)
 
+# Barebones event class
 class EventEmitter
   constructor: ->
     @cbs = {}
@@ -106,7 +107,7 @@ class EventEmitter
 
   # Broadcast to listeners
   emit: (e, args...) ->
-    @cbs[e].map (f) -> f args...
+    @cbs[e]?.map (f) -> f args...
 
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
@@ -202,7 +203,6 @@ Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
 
 Screen::hint = (seq) ->
   sf = @frame()
-  text = seq
 
   # Build a modal centered within the screen
   hint = Modal.build
@@ -311,7 +311,11 @@ Modal::close = ->
   @_close()
   this
 
-# Modal binds
+# Mode binds
+
+# Base mode class
+# Emits 'start', 'stop', and 'key'
+# Privately emits 'prestart' and 'prestop'
 class Mode extends EventEmitter
   constructor: ->
     super
@@ -325,8 +329,10 @@ class Mode extends EventEmitter
       return
     @active = true
 
+    # Capture all keys
     @binds = _.flatten ALL_KEYS.map (k) => [[], ['shift']].map (mod) =>
         Key.on k, mod, => @emit 'key', k, mod
+    @emit 'prestart'
     @emit 'start'
 
   # Stop the mode
@@ -336,35 +342,43 @@ class Mode extends EventEmitter
       return
     @active = false
 
-    @emit 'stop'
+    # Uncapture all keys
     @binds.map Key.off
+    @emit 'prestop'
+    @emit 'stop'
 
+# Manager of modes
 class ModeManager
   constructor: ->
     @modes = {}
     @cur = undefined
 
+  # Add a mode
   add: (name, mode) ->
     @modes[name] = mode
 
     # On this mode starting
-    mode.on 'start', =>
+    mode.on 'prestart', =>
       @cur = name
 
       # Shut down all other modes
       @modes.map ((m, n) => m.stop() if n != name)
 
     # On this mode stopping
-    mode.on 'stop', =>
+    # Start is not guaranteed to have been run
+    mode.on 'prestop', =>
       # Only if stopping the current mode
       @cur = undefined if @cur == name
 
+  # Start mode by name
   start: (name) ->
     @modes[name]?.start()
 
+  # Stop current mode
   stop: ->
     @modes[@cur]?.stop()
 
+  # Start mode by name, or turn off if current mode is name
   toggle: (name) ->
     if @cur == name
       @stop()
@@ -374,14 +388,18 @@ class ModeManager
 # Hints
 class HintTree
   constructor: (@chars, objs, @parent, @prefix = '') ->
-    # Add children
+    # Divide children amongst @chars
     @tree = (_.groupBy objs, (e, i) => @chars.charAt(i % @chars.length))
       .map (os, k) =>
+        # The sequence for the hint
         seq = @prefix + k
+
+        # If only one candidate for char, end tree here
         if os.length == 1
           o = os[0]
           obj: o
           hint: o.hint seq
+        # Otherwise, make a subtree
         else
           new HintTree @chars, os, this, seq
 
@@ -391,7 +409,7 @@ class HintTree
   # Map on all leaf nodes, with exclude
   map: (f, exclude) ->
     @tree.map (v, k) ->
-      # Base case -  exclude
+      # Base case - exclude
       if v == exclude
         v
       # Base case - node
@@ -408,6 +426,8 @@ class HintMode extends Mode
       debounce = p.hints.debounce) ->
     super
     @bouncedHints = _.debounce @showHints, debounce
+
+    # Modal to indicate there's nothing to hint
     @noHintablesMsg = Modal.build
       text: 'Nothing to hint.'
 
@@ -417,8 +437,9 @@ class HintMode extends Mode
 
       # Bail if nothing to hint
       if not hintables.length
-        @noHintablesMsg.center().show().closeAfter()
-        @stop()
+        @noHintablesMsg.center().show()
+        @stopTimer = Timer.after p.modals.duration, => @stop()
+        return
       @noHintablesMsg.close()
 
       # Internal state
@@ -433,13 +454,21 @@ class HintMode extends Mode
 
     # Handle stop event
     @on 'stop', =>
+      # Cancel any existing timer for stops
+      Timer.off @stopTimer if @stopTimer?
+
       # Close hints
       @bouncedHints() # cancels debounce
+      @noHintablesMsg.close()
       (if @state instanceof HintTree then @state else @prev)?.map (o) ->
         o.hint.close()
 
       # Disable events
-      @events.map Event.off
+      @events?.map Event.off
+
+      # Destroy internal state
+      @state = undefined
+      @len = undefined
 
     # Handle key event
     @on 'key', (k) =>
@@ -453,12 +482,15 @@ class HintMode extends Mode
 
   # Advance state machine
   push: (k) ->
-    next = @state.get(k)
-    if not next
+    # If no candidate, stop hints
+    next = @state?.get(k)
+    if not next?
       @stop()
     else
       @len++
       @prev = @state
+
+      # Descend
       @state = next
       @update true
 
@@ -470,6 +502,8 @@ class HintMode extends Mode
     else
       @len--
       @prev = @state
+
+      # Ascend
       @state = @state.parent
       @update false
 
@@ -478,11 +512,14 @@ class HintMode extends Mode
   update: (descending) ->
     # If state is a leaf, we're done
     if @state not instanceof HintTree
+      # Save the object to act on
+      obj = @state.obj
+
       # Cancel hints
       @stop()
 
       # Do action
-      @action @state.obj
+      @action obj
 
     # Otherwise, update texts and only show hints under state
     else
