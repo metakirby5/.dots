@@ -293,6 +293,36 @@ Modal::close = ->
   @_close()
   this
 
+# Modal binds
+class Mode
+  currentMode: undefined
+
+  constructor: ->
+    @binds = []
+
+  # Start the mode
+  start: ->
+    # Don't start if already in the mode
+    if @currentMode == this
+      return
+    @stop()
+
+    @binds = _.flatten ALL_KEYS.map (k) -> [[], ['shift']].map (mod) ->
+        Key.on k, mod, => @handler k, mod
+    Mode::currentMode = this
+    @begin()
+
+  # Stop the mode
+  stop: ->
+    @binds.map Key.off
+    @currentMode?.end()
+    Mode::currentMode = undefined
+
+  # Abstract methods
+  handler: (k, mod) -> throw Error 'unimplemented handler'
+  begin: -> throw Error 'unimplemented begin'
+  end: -> throw Error 'unimplemented end'
+
 # Hints
 class HintTree
   constructor: (@chars, wins, @parent, @prefix = '') ->
