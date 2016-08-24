@@ -350,40 +350,49 @@ class Mode extends EventEmitter
 # Manager of modes
 class ModeManager
   constructor: ->
+    @cid = 0
     @modes = {}
     @cur = undefined
 
-  # Add a mode
-  add: (name, mode) ->
-    @modes[name] = mode
+  # Add a mode, return an id
+  add: (mode) ->
+    id = @cid++
+    @modes[id] = mode
 
     # On this mode starting
     mode.on 'prestart', =>
-      @cur = name
+      @cur = id
 
       # Shut down all other modes
-      @modes.map ((m, n) => m.stop() if n != name)
+      @modes.map ((m, n) => m.stop() if +n != id)
 
     # On this mode stopping
     # Start is not guaranteed to have been run
     mode.on 'prestop', =>
       # Only if stopping the current mode
-      delete @cur if @cur == name
+      delete @cur if @cur == id
 
-  # Start mode by name
-  start: (name) ->
-    @modes[name]?.start()
+    id
+
+  # Stop and remove a mode by id
+  remove: (id) ->
+    @modes[id]?.stop()
+    delete @modes[id]
+
+  # Start mode by id
+  start: (id) ->
+    @modes[id]?.start()
 
   # Stop current mode
   stop: ->
     @modes[@cur]?.stop()
 
-  # Start mode by name, or turn off if current mode is name
-  toggle: (name) ->
-    if @cur == name
+  # Start mode by id, or turn off if current mode is id
+  toggle: (id) ->
+    if @cur == id
       @stop()
     else
-      @start name
+      @start id
 
 # Hints
 class HintTree
@@ -819,20 +828,20 @@ cw = ->
 
 # Modes
 modes = new ModeManager()
-modes.add 'winHint', new HintMode Window.recent, (w) ->
+winHint = modes.add new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
-modes.add 'scrHint', new HintMode Screen.all, (s) ->
+scrHint = modes.add new HintMode Screen.all, (s) ->
   s.mouseTo()
-modes.add 'scrMovHint', new HintMode Screen.all, (s) ->
+scrMovHint = modes.add new HintMode Screen.all, (s) ->
   cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
-Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle 'winHint'
-Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle 'scrHint'
-Key.on p.keys.scrHintMode, p.keys.mods.move, -> modes.toggle 'scrMovHint'
+Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
+Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
+Key.on p.keys.scrHintMode, p.keys.mods.move, -> modes.toggle scrMovHint
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
