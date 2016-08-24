@@ -192,6 +192,12 @@ intersects = (f, g, gap = 0) ->
   f.x <= g.x + g.width + gap and g.x <= f.x + f.width + gap and
   f.y <= g.y + g.height + gap and g.y <= f.y + f.height + gap
 
+gapify = (f, gap) ->
+  f.x += gap
+  f.y += gap
+  f.width -= gap * 2
+  f.height -= gap * 2
+
 # Screen methods
 Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
 
@@ -537,6 +543,26 @@ class ChainWindow
     @dropSize = @gap + @tolerance
     @updateWin()
 
+  # Private: wrap with gap compensation
+  ungapped: (f) -> (args...) =>
+    ungap = @gap / 2
+
+    # Ungap
+    gapify @f,      -ungap
+    gapify @sf,      ungap
+    gapify @prevSf,  ungap if @prevSf?
+
+    # Call the function
+    res = f args...
+
+    # Regap
+    gapify @f,       ungap
+    gapify @sf,     -ungap
+    gapify @prevSf, -ungap if @prevSf?
+
+    # Return the result
+    res
+
   # Private: update window vars
   updateWin: ->
     @f = @win.frame()
@@ -687,7 +713,7 @@ class ChainWindow
     @fill()
     this
 
-  # Move in direcion until an edge is hit
+  # Move in direction until an edge is hit
   fallIn: (dir) ->
     @moveEdgeTo dir, (@closestIn dir, true)
     this
@@ -728,27 +754,24 @@ class ChainWindow
 
   # Ensure window frame is proportionally equivalent to its frame on the
   # previous screen
-  reproportion: ->
-    # Helpers
-    ungap = (c) => c - 2 * @gap
-
+  reproportion: -> do @ungapped =>
     # Translate to true origin
-    @f.x -= @prevSf.x + @gap
-    @f.y -= @prevSf.y + @gap
+    @f.x -= @prevSf.x
+    @f.y -= @prevSf.y
 
     # Scale x
-    xFactor = (ungap @sf.width) / (ungap @prevSf.width)
+    xFactor = @sf.width / @prevSf.width
     @f.x *= xFactor
     @f.width *= xFactor
 
     # Scale y
-    yFactor = (ungap @sf.height) / (ungap @prevSf.height)
+    yFactor = @sf.height / @prevSf.height
     @f.y *= yFactor
     @f.height *= yFactor
 
     # Translate to new screen origin
-    @f.x += @sf.x + @gap
-    @f.y += @sf.y + @gap
+    @f.x += @sf.x
+    @f.y += @sf.y
     this
 
   # Center within screen
@@ -758,28 +781,26 @@ class ChainWindow
     this
 
   # Maximize within screen
-  maximize: ->
-    @moveTo @sf.x + @gap, @sf.y + @gap
-    @sizeTo @sf.width - 2 * @gap, @sf.height - 2 * @gap
+  maximize: -> do @ungapped =>
+    @moveTo @sf.x, @sf.y
+    @sizeTo @sf.width, @sf.height
     this
 
   # Snap to the sides of the screen
   # x and y are fractions of the screen, negative or positive
-  snap: (x = null, y = null) ->
+  snap: (x = null, y = null) -> do @ungapped =>
     if x?
-      gap = (if Math.abs(x) >= 1 then 2 else 1.5) * @gap
-      @f.width = @sf.width * Math.abs(x) - gap
+      @f.width = @sf.width * Math.abs(x)
       if x < 0
-        @f.x = @sf.x + @gap
+        @f.x = @sf.x
       else
-        @f.x = @sf.x + @sf.width - @f.width - @gap
+        @f.x = @sf.x + @sf.width - @f.width
     if y?
-      gap = (if Math.abs(y) >= 1 then 2 else 1.5) * @gap
-      @f.height = @sf.height * Math.abs(y) - gap
+      @f.height = @sf.height * Math.abs(y)
       if y < 0
-        @f.y = @sf.y + @gap
+        @f.y = @sf.y
       else
-        @f.y = @sf.y + @sf.height - @f.height - @gap
+        @f.y = @sf.y + @sf.height - @f.height
     this
 
 # Shortcuts
