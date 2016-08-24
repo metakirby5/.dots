@@ -32,7 +32,7 @@ printinfo () {
     myprin "    memory" memory
     prin "$(color 0)────────────┼─────────────────────────"
     info linebreak
-    info cols | sed 's/^/   /'
+    info cols | sed 's/^/[3C/'
 }
 
 
