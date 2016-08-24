@@ -52,8 +52,8 @@ p =
     maximize: 'm'
     center: 'c'
     reFill: 'u'
-    winHinter: 'y'
-    scrHinter: 's'
+    winHintMode: 'y'
+    scrHintMode: 's'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -89,6 +89,24 @@ String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
 String.prototype.popFront = -> this.charAt(0)
 String.prototype.poppedFront = -> this.substr(1)
+
+class EventEmitter
+  constructor: ->
+    @cbs = {}
+
+  # Add listener
+  on: (e, f) ->
+    if not @cbs[e]?
+      @cbs[e] = []
+    @cbs[e].push f
+
+  # Remove listener
+  off: (e, f) ->
+    @cbs[e] = _.without (@cbs[e] ? []), f
+
+  # Broadcast to listeners
+  emit: (e, args...) ->
+    @cbs[e].map (f) -> f args...
 
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
@@ -294,63 +312,78 @@ Modal::close = ->
   this
 
 # Modal binds
-class Mode
+class Mode extends EventEmitter
   constructor: ->
+    super
     @active = false
     @binds = []
 
   # Start the mode
   start: ->
-    # Don't start if already in the mode
+    # Don't start if not stopped
     if @active
       return
-    @stop()
+    @active = true
 
-    @binds = _.flatten ALL_KEYS.map (k) -> [[], ['shift']].map (mod) ->
-        Key.on k, mod, => @handler k, mod
-    Mode::currentMode = this
-    @begin()
+    @binds = _.flatten ALL_KEYS.map (k) => [[], ['shift']].map (mod) =>
+        Key.on k, mod, => @emit 'key', k, mod
+    @emit 'start'
 
   # Stop the mode
   stop: ->
-    @binds.map Key.off
-    @currentMode?.end()
-    Mode::currentMode = undefined
+    # Don't stop if not started
+    if not @active
+      return
+    @active = false
 
-  # Abstract methods
-  handler: (k, mod) -> throw Error 'unimplemented handler'
-  begin: -> throw Error 'unimplemented begin'
-  end: -> throw Error 'unimplemented end'
+    @emit 'stop'
+    @binds.map Key.off
 
 class ModeManager
   constructor: ->
     @modes = {}
-    @current = undefined
+    @cur = undefined
 
   add: (name, mode) ->
     @modes[name] = mode
 
-  start: (name) ->
-    if @current?
-      @current.stop()
-    @current = @modes[name]
-    @current.start()
+    # On this mode starting
+    mode.on 'start', =>
+      @cur = name
 
-  stop: (name) ->
+      # Shut down all other modes
+      @modes.map ((m, n) => m.stop() if n != name)
+
+    # On this mode stopping
+    mode.on 'stop', =>
+      # Only if stopping the current mode
+      @cur = undefined if @cur == name
+
+  start: (name) ->
+    @modes[name]?.start()
+
+  stop: ->
+    @modes[@cur]?.stop()
+
+  toggle: (name) ->
+    if @cur == name
+      @stop()
+    else
+      @start name
 
 # Hints
 class HintTree
-  constructor: (@chars, wins, @parent, @prefix = '') ->
+  constructor: (@chars, objs, @parent, @prefix = '') ->
     # Add children
-    @tree = (_.groupBy wins, (e, i) => @chars.charAt(i % @chars.length))
-      .map (ws, k) =>
+    @tree = (_.groupBy objs, (e, i) => @chars.charAt(i % @chars.length))
+      .map (os, k) =>
         seq = @prefix + k
-        if ws.length == 1
-          w = ws[0]
-          w.hintInstance = w.hint seq
-          w
+        if os.length == 1
+          o = os[0]
+          obj: o
+          hint: o.hint seq
         else
-          new HintTree @chars, ws, this, seq
+          new HintTree @chars, os, this, seq
 
   # Get child
   get: (k) -> @tree[k]
@@ -368,18 +401,55 @@ class HintTree
       else
         v.map f, exclude
 
-class Hinter
+class HintMode extends Mode
   constructor: (@hintableGetter, @action,
       @chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
       @kStop = p.hints.kStop, @kPop = p.hints.kPop,
       debounce = p.hints.debounce) ->
-    @active = false
+    super
     @bouncedHints = _.debounce @showHints, debounce
     @noHintablesMsg = Modal.build
       text: 'Nothing to hint.'
 
+    # Handle start event
+    @on 'start', =>
+      hintables = @hintableGetter()
+
+      # Bail if nothing to hint
+      if not hintables.length
+        @noHintablesMsg.center().show().closeAfter()
+        @stop()
+      @noHintablesMsg.close()
+
+      # Internal state
+      @state = new HintTree @chars, hintables
+      @len = 0
+
+      # Events
+      @events = @stopEvents.map (e) => Event.on e, => @stop()
+
+      # Finally, show hints
+      @showHints @state
+
+    # Handle stop event
+    @on 'stop', =>
+      # Close hints
+      @bouncedHints() # cancels debounce
+      (if @state instanceof HintTree then @state else @prev)?.map (o) ->
+        o.hint.close()
+
+      # Disable events
+      @events.map Event.off
+
+    # Handle key event
+    @on 'key', (k) =>
+      switch k
+        when @kStop then @stop()
+        when @kPop then @pop()
+        else @push k
+
   # So we can debounce
-  showHints: (state) -> state?.map (w) -> w.hintInstance.show()
+  showHints: (state) -> state?.map (o) -> o.hint.show()
 
   # Advance state machine
   push: (k) ->
@@ -403,7 +473,8 @@ class Hinter
       @state = @state.parent
       @update false
 
-  # Re-show hints reflecting current state, or action on hintable if complete
+  # Re-show hints reflecting current state,
+  # or action on hintable if complete
   update: (descending) ->
     # If state is a leaf, we're done
     if @state not instanceof HintTree
@@ -411,71 +482,22 @@ class Hinter
       @stop()
 
       # Do action
-      @action @state
+      @action @state.obj
 
     # Otherwise, update texts and only show hints under state
     else
       # Update text
-      @state.map (w) =>
-        w.hintInstance.updateSeqLen(@len)
+      @state.map (o) =>
+        o.hint.updateSeqLen(@len)
 
       if descending
         # Hide non-matching hints
-        @prev.map (w) ->
-          w.hintInstance.close()
+        @prev.map (o) ->
+          o.hint.close()
         , @state
       else
         # Show matching hints
         @bouncedHints @state
-
-  # Start hint mode
-  start: ->
-    # Only if not already active
-    if @active
-      return
-
-    hintables = @hintableGetter()
-
-    # Bail if nothing to hint
-    if not hintables.length
-      return @noHintablesMsg.center().show().closeAfter()
-    @noHintablesMsg.close()
-
-    @active = true
-
-    # Internal state
-    @state = new HintTree @chars, hintables
-    @len = 0
-
-    # Keybinds
-    @binds = (modalize ((k) => @push k), @kStop, @kPop)
-      .concat [
-        (Key.on @kStop, [], => @stop()),
-        (Key.on @kPop, [], => @pop()),
-      ]
-
-    # Events
-    @events = @stopEvents.map (e) => Event.on e, => @stop()
-
-    # Finally, show hints
-    @showHints @state
-
-  # Stop hint mode
-  stop: ->
-    # Only if active
-    if not @active
-      return
-    @active = false
-
-    # Close hints, disable keybinds, disable events
-    @bouncedHints() # cancels debounce
-    (if @state instanceof HintTree then @state else @prev).map (w) ->
-      w.hintInstance.close()
-    @binds.map Key.off
-    @events.map Event.off
-
-  # Toggle hint mode
-  toggle: -> if @active then @stop() else @start()
 
 # Window chaining
 class ChainWindow
@@ -741,23 +763,24 @@ cw = ->
     null
   else
     cwModal.close()
-    new ChainWindow(win)
+    new ChainWindow win
 
-# Hinters
-winHinter = new Hinter Window.recent, (w) ->
+# Modes
+modes = new ModeManager()
+modes.add 'winHint', new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
-scrHinter = new Hinter Screen.all, (s) ->
+modes.add 'scrHint', new HintMode Screen.all, (s) ->
   s.mouseTo()
-scrMovHinter = new Hinter Screen.all, (s) ->
+modes.add 'scrMovHint', new HintMode Screen.all, (s) ->
   cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
-Key.on p.keys.winHinter, p.keys.mods.base, -> winHinter.toggle()
-Key.on p.keys.scrHinter, p.keys.mods.base, -> scrHinter.toggle()
-Key.on p.keys.scrHinter, p.keys.mods.move, -> scrMovHinter.toggle()
+Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle 'winHint'
+Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle 'scrHint'
+Key.on p.keys.scrHintMode, p.keys.mods.move, -> modes.toggle 'scrMovHint'
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
