@@ -295,15 +295,14 @@ Modal::close = ->
 
 # Modal binds
 class Mode
-  currentMode: undefined
-
   constructor: ->
+    @active = false
     @binds = []
 
   # Start the mode
   start: ->
     # Don't start if already in the mode
-    if @currentMode == this
+    if @active
       return
     @stop()
 
@@ -322,6 +321,22 @@ class Mode
   handler: (k, mod) -> throw Error 'unimplemented handler'
   begin: -> throw Error 'unimplemented begin'
   end: -> throw Error 'unimplemented end'
+
+class ModeManager
+  constructor: ->
+    @modes = {}
+    @current = undefined
+
+  add: (name, mode) ->
+    @modes[name] = mode
+
+  start: (name) ->
+    if @current?
+      @current.stop()
+    @current = @modes[name]
+    @current.start()
+
+  stop: (name) ->
 
 # Hints
 class HintTree
