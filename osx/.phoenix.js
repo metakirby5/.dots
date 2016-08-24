@@ -109,6 +109,7 @@ class EventEmitter
   emit: (e, args...) ->
     @cbs[e]?.map (f) -> f args...
 
+# Every bindable key on a Macbook Pro keyboard
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
     .concat [59]
@@ -123,13 +124,6 @@ ALL_KEYS = (String.fromCharCode(c) for c in [39]
     'return', 'tab', 'space', 'delete', 'escape', 'help', 'home', 'pageUp',
     'forwardDelete', 'end', 'pageDown', 'left', 'right', 'down', 'up',
   ]
-
-# Keybind helpers
-# Returns an array of identifiers
-modalize = (handler, excludes...) ->
-  _.flatten (_.difference ALL_KEYS, excludes).map (k) ->
-    [[], ['shift']].map (mod) ->
-      Key.on k, mod, -> handler k, mod
 
 # Coordinate system helpers
 identify = (x) ->
