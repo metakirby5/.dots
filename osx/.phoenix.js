@@ -362,7 +362,7 @@ class ModeManager
     # Start is not guaranteed to have been run
     mode.on 'prestop', =>
       # Only if stopping the current mode
-      @cur = undefined if @cur == name
+      delete @cur if @cur == name
 
   # Start mode by name
   start: (name) ->
@@ -461,8 +461,8 @@ class HintMode extends Mode
       @events?.map Event.off
 
       # Destroy internal state
-      @state = undefined
-      @len = undefined
+      delete @state
+      delete @len
 
     # Handle key event
     @on 'key', (k) =>
