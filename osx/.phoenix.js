@@ -84,6 +84,7 @@ p =
 Object.prototype.map = (f) ->
   Object.keys(this).reduce ((o, k) => o[k] = f this[k], k; o), {}
 Array.prototype.extend = (a) -> Array.prototype.push.apply this, a
+Array.prototype.contains = (x) -> -1 < Array.prototype.indexOf.apply this, x
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
@@ -746,6 +747,45 @@ class ChainWindow
       @updateScr next.screen()
     this
 
+  # Add to space
+  spaceOn: (num) ->
+    Space.all()[num]?.addWindows [@win]
+    this
+
+  # Remove from space
+  spaceOff: (num) ->
+    Space.all()[num]?.removeWindows [@win]
+    this
+
+  # Toggle on space
+  spaceToggle: (num) ->
+    next = Space.all()[num]
+    if next?
+      if _.some (@win.spaces().map (s) -> s.isEqual next)
+        @spaceOff num
+      else
+        @spaceOn num
+    this
+
+  # Put on all spaces
+  spaceAll: ->
+    Space.all().map (s) => s.addWindows [@win]
+    this
+
+  # Only put on this space
+  spaceOnly: ->
+    Space.all().map (s) =>
+      s.removeWindows [@win] if not s.isEqual Space.active()
+    this
+
+  # Toggle on all spaces
+  spaceAllToggle: ->
+    if @win.spaces().length == Space.all().length
+      @spaceOnly()
+    else
+      @spaceAll()
+    this
+
   # Absolute screen set
   setScreen: (num) ->
     next = Screen.all()[num]
@@ -842,6 +882,7 @@ Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.scrHintMode, p.keys.mods.move, -> modes.toggle scrMovHint
+Key.on p.keys.scrHintMode, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
@@ -860,6 +901,11 @@ p.keys.apps.map (app, key) ->
     # Move
     p.keys.mods.move,
     (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo()
+  ],
+  [
+    # Toggle
+    p.keys.mods.pour,
+    (num) -> cw()?.spaceToggle num
   ],
 ].map ([mod, action]) ->
   [1..10].map (num) ->
