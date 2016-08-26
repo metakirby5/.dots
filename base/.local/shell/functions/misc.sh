@@ -45,7 +45,7 @@ install-leaves() {
                 [ "$m" == "AppStore" -a "$(uname)" == "Darwin" ]; then
             if [ "$reqs" ]; then
                 echo -e "${GREEN}Installing $m leaves with \`${INSTALLERS[$m]}\`...$NORM"
-                eval echo "$reqs" | ${INSTALLERS[$m]}
+                echo "$reqs" | ${INSTALLERS[$m]}
             else
                 echo -e "${GREEN}$m up to date!$NORM"
             fi
