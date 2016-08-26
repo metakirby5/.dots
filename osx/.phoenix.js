@@ -91,8 +91,9 @@ Array.prototype.subsets = ->
   if not this.length
     [this]
   else
-    rest = this[1..].subsets()
-    rest.concat rest.map (a) => [this[0]].concat a
+    [x, xs...] = this
+    rest = xs.subsets()
+    rest.concat rest.map (a) => a.concat x
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
@@ -121,10 +122,10 @@ class EventEmitter
 # Every bindable key on a Macbook Pro keyboard
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
-    .concat [59]
-    .concat [61]
+    .concat 59
+    .concat 61
     .concat [65..93]
-    .concat [96])
+    .concat 96)
   .concat ('f' + i for i in [1..19])
   .concat ('keypad' + i for i in [0..9]
     .concat ['Clear', 'Enter']
