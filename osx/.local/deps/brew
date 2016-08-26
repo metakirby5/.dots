@@ -12,7 +12,6 @@ brew 'git'
 brew 'gnu-sed', args: ['with-default-names']
 brew 'gnupg'
 brew 'homebrew/completions/brew-cask-completion'
-brew 'homebrew/python/numpy'
 brew 'homebrew/science/r'
 brew 'htop'
 brew 'hub'
