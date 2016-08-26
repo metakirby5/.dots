@@ -52,6 +52,7 @@ p =
     maximize: 'm'
     center: 'c'
     reFill: 'u'
+    spaceAll: 's'
     winHintMode: 'y'
     scrHintMode: 's'
     status: 'i'
@@ -83,8 +84,9 @@ p =
 # Utilities
 Object.prototype.map = (f) ->
   Object.keys(this).reduce ((o, k) => o[k] = f this[k], k; o), {}
-Array.prototype.extend = (a) -> Array.prototype.push.apply this, a
-Array.prototype.contains = (x) -> -1 < Array.prototype.indexOf.apply this, x
+Array.prototype.extend = (a) -> this.push a...
+Array.prototype.contains = (x) -> -1 < this.indexOf x
+Array.prototype.equals = (a) -> _.all (_.zip this, a).map ([a, b]) -> a == b
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
@@ -397,6 +399,10 @@ class ModeManager
 
 # Hints
 class HintTree
+  # chars is the possible hint chars
+  # objs is the objects to hint
+  # parent is the parent of the hint tree, which is undefined for root
+  # prefix is the hint prefix
   constructor: (@chars, objs, @parent, @prefix = '') ->
     # Divide children amongst @chars
     @tree = (_.groupBy objs, (e, i) => @chars.charAt(i % @chars.length))
@@ -430,6 +436,12 @@ class HintTree
         v.map f, exclude
 
 class HintMode extends Mode
+  # hintableGetter provides an array of hintables when called
+  # action is a function w/ params (hintedObj, mod)
+  # chars is the possible hint chars
+  # stopEvents is the events on which hint mode should be stopped
+  # kStop is the key which triggers stopping hint mode
+  # kPop is the key which goes back a hint letter
   constructor: (@hintableGetter, @action,
       @chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
       @kStop = p.hints.kStop, @kPop = p.hints.kPop,
@@ -481,7 +493,8 @@ class HintMode extends Mode
       delete @len
 
     # Handle key event
-    @on 'key', (k) =>
+    @on 'key', (k, mod) =>
+      @mod = mod
       switch k
         when @kStop then @stop()
         when @kPop then @pop()
@@ -529,7 +542,7 @@ class HintMode extends Mode
       @stop()
 
       # Do action
-      @action obj
+      @action obj, @mod
 
     # Otherwise, update texts and only show hints under state
     else
@@ -870,19 +883,19 @@ cw = ->
 modes = new ModeManager()
 winHint = modes.add new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
-scrHint = modes.add new HintMode Screen.all, (s) ->
-  s.mouseTo()
-scrMovHint = modes.add new HintMode Screen.all, (s) ->
-  cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
+scrHint = modes.add new HintMode Screen.all, (s, mods) ->
+  if mods.equals ['shift']
+    cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
+  else
+    s.mouseTo()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
+Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
-Key.on p.keys.scrHintMode, p.keys.mods.move, -> modes.toggle scrMovHint
-Key.on p.keys.scrHintMode, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
