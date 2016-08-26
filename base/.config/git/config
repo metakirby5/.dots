@@ -92,9 +92,9 @@
 	exec = "!exec "
 	root = rev-parse --show-toplevel
 	fixup = commit --fixup
-	fu = fixup
+	fu = !git fixup
 	amend = commit --amend
-	m = amend
+	m = !git amend
 	squash = "!f(){(git rebase --interactive HEAD~$1)};f"
 	find = !git ls-files | grep -iI
 	f = find
