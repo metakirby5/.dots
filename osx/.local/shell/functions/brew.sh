@@ -7,7 +7,7 @@ brew() {
     aliasapps)
       brew-aliasapps
       ;;
-    prune)
+    trim)
       brew-prune
       ;;
     o)
