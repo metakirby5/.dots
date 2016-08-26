@@ -87,6 +87,12 @@ Object.prototype.map = (f) ->
 Array.prototype.extend = (a) -> this.push a...
 Array.prototype.contains = (x) -> -1 < this.indexOf x
 Array.prototype.equals = (a) -> _.all (_.zip this, a).map ([a, b]) -> a == b
+Array.prototype.subsets = ->
+  if not this.length
+    [this]
+  else
+    rest = this[1..].subsets()
+    rest.concat rest.map (a) => [this[0]].concat a
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> this.charAt(this.length - 1)
 String.prototype.popped = -> this.substr(0, this.length - 1)
@@ -317,7 +323,7 @@ Modal::close = ->
 # Mode binds
 
 # Base mode class
-# Emits 'start', 'stop', and 'key'
+# Emits 'start', 'stop', and 'key' (key, shift)
 # Privately emits 'prestart' and 'prestop'
 class Mode extends EventEmitter
   constructor: ->
@@ -334,7 +340,7 @@ class Mode extends EventEmitter
 
     # Capture all keys
     @binds = _.flatten ALL_KEYS.map (k) => [[], ['shift']].map (mod) =>
-        Key.on k, mod, => @emit 'key', k, mod
+        Key.on k, mod, => @emit 'key', k, mod.equals ['shift']
     @emit 'prestart'
     @emit 'start'
 
@@ -493,8 +499,7 @@ class HintMode extends Mode
       delete @len
 
     # Handle key event
-    @on 'key', (k, mod) =>
-      @mod = mod
+    @on 'key', (k, @shift) =>
       switch k
         when @kStop then @stop()
         when @kPop then @pop()
@@ -542,7 +547,7 @@ class HintMode extends Mode
       @stop()
 
       # Do action
-      @action obj, @mod
+      @action obj, @shift
 
     # Otherwise, update texts and only show hints under state
     else
@@ -883,8 +888,8 @@ cw = ->
 modes = new ModeManager()
 winHint = modes.add new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
-scrHint = modes.add new HintMode Screen.all, (s, mods) ->
-  if mods.equals ['shift']
+scrHint = modes.add new HintMode Screen.all, (s, shift) ->
+  if shift
     cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
