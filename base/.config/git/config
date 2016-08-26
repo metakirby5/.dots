@@ -101,7 +101,7 @@
 	g = grep -niI --heading -C 5 --untracked
 	rg = !git g
 	spull = "!git stash save; git pull; git stash pop"
-	upush = git push -u origin HEAD
+	upush = push -u origin HEAD
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
