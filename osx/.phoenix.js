@@ -275,11 +275,32 @@ Window::hint = (seq) ->
 # Modal methods
 Modal::open = []
 
-Modal::_build = Modal::build
-Modal::build = (props) ->
+Modal._build = Modal.build
+Modal.build = (props = {}) ->
   Modal._build _.extend props,
     weight: p.modals.weight
     appearance: p.modals.appearance
+
+Modal::_show = Modal::show
+Modal::show = ->
+  Modal::open = _.without(@open, this)
+  while _.some(@open.map (m) =>
+      intersects @frame(), m.frame(), p.modals.gap)
+    @origin =
+      x: @origin.x
+      y: @origin.y - p.modals.unit
+  @open.push this
+  @_show()
+  this
+
+Modal::_close = Modal::close
+Modal::close = ->
+  Timer.off @mt if @mt?
+  Modal::open = _.without(@open, this)
+  @_close()
+  this
+
+Modal::setText = (@text) -> this
 
 Modal::center = ->
   mf = @frame()
@@ -302,24 +323,16 @@ Modal::updateSeqLen = (len) ->
   @curSeqLen = next.length
   this
 
-Modal::_show = Modal::show
-Modal::show = ->
-  Modal::open = _.without(@open, this)
-  while _.some(@open.map (m) =>
-      intersects @frame(), m.frame(), p.modals.gap)
-    @origin =
-      x: @origin.x
-      y: @origin.y - p.modals.unit
-  @open.push this
-  @_show()
-  this
+# Toast messages
+class Toaster
+  constructor: (@modal = Modal.build()) ->
+  @instance: new Toaster()
 
-Modal::_close = Modal::close
-Modal::close = ->
-  Timer.off @mt if @mt?
-  Modal::open = _.without(@open, this)
-  @_close()
-  this
+  toast: (text) -> @modal.setText(text).center().show().closeAfter()
+  @toast: (args...) -> @instance.toast args...
+
+  close: -> @modal.close()
+  @close: (args...) -> @instance.close args...
 
 # Mode binds
 
@@ -456,20 +469,15 @@ class HintMode extends Mode
     super
     @bouncedHints = _.debounce @showHints, debounce
 
-    # Modal to indicate there's nothing to hint
-    @noHintablesMsg = Modal.build
-      text: 'Nothing to hint.'
-
     # Handle start event
     @on 'start', =>
       hintables = @hintableGetter()
 
       # Bail if nothing to hint
       if not hintables.length
-        @noHintablesMsg.center().show()
-        @stopTimer = Timer.after p.modals.duration, => @stop()
+        Toaster.toast 'Nothing to hint.'
+        @stop()
         return
-      @noHintablesMsg.close()
 
       # Internal state
       @state = new HintTree @chars, hintables
@@ -488,7 +496,6 @@ class HintMode extends Mode
 
       # Close hints
       @bouncedHints() # cancels debounce
-      @noHintablesMsg.close()
       (if @state instanceof HintTree then @state else @prev)?.map (o) ->
         o.hint.close()
 
@@ -872,17 +879,13 @@ class ChainWindow
     this
 
 # Shortcuts
-cwModal = Modal.build
-  text: 'No windows to chain.'
-.center()
 cw = ->
   win = Window.focused() or
         Window.recent()[0]
   if not win?
-    cwModal.center().show().closeAfter()
+    Toaster.toast 'No windows to chain.'
     null
   else
-    cwModal.close()
     new ChainWindow win
 
 # Modes
@@ -906,9 +909,7 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
   Phoenix.notify r.output
-  # Modal.build
-  #   text: r.output
-  # .center().show().closeAfter()
+  # Toaster.toast r.output
 
 # Apps
 p.keys.apps.map (app, key) ->
