@@ -15,13 +15,13 @@
       },
 
       "colors": {
-         "toolbar": {{ chrome_fgc }},
-         "bookmark_text": {{ chrome_bgc }},
-         "tab_background_text": {{ chrome_bgc }},
-         "tab_text": {{ chrome_bgc }},
+         "toolbar": {{ fgc | to_chrome }},
+         "bookmark_text": {{ bgc | to_chrome }},
+         "tab_background_text": {{ bgc | to_chrome }},
+         "tab_text": {{ bgc | to_chrome }},
 
-         "ntp_background": {{ chrome_bgc }},
-         "ntp_text": {{ chrome_fgc }}
+         "ntp_background": {{ bgc | to_chrome }},
+         "ntp_text": {{ fgc | to_chrome }}
       },
 
       "tints": {
