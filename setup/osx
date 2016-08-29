@@ -59,8 +59,8 @@ source ~/.bashrc
 echo "Installing other packages..."
 install-leaves
 
-echo "Running whizkers with defaults..."
-whizkers -e
+echo "Running sanpai with defaults..."
+sanpai -e
 
 echo "Setting OS X defaults..."
 yes | osx-set-defaults

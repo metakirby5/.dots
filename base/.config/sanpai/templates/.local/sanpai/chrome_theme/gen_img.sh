@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-images=~/.whizkers_output/chrome_theme/images
+images=~/.local/sanpai/chrome_theme/images
 
 mkdir -p "$images"
 convert -size 30x256 xc:{{ n_primary }} "$images/theme_frame.png"

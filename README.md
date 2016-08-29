@@ -16,7 +16,7 @@ Here's what you'll need...
 ### All platforms
 
 - GNU Stow
-- metakirby5/whizkers
+- metakirby5/sanpai
 - metakirby5/scripts (somewhat optional)
 - Packages from relevant managers (`~/.local/deps/*`)
 
@@ -94,7 +94,7 @@ Here's what you'll need...
 
 ### Chrome
 
-Theme in `~/.whizkers_output/chrome_theme/`.
+Theme in `~/.local/sanpai/chrome_theme/`.
 
 For OS X, use the system theme.
 
@@ -135,7 +135,7 @@ For OS X, use the system theme.
 - `brew bundle --file=- < ~/.local/deps/brew`
 - [Set your shell to `brew`'s `bash`.](https://johndjameson.com/blog/updating-your-shell-with-homebrew/)
 - `source ~/.bashrc`
-- Install `whizkers` via `pip` and use it to choose a colorscheme.
+- Install `sanpai` via `pip` and use it to choose a colorscheme.
 - `yes | osx-set-defaults`
 - Tweak whatever other settings you want in Preferences.app.
 - Install the apps in `~/.local/deps/AppStore`.
@@ -143,7 +143,7 @@ For OS X, use the system theme.
 ### Linux
 
 - Install all the dependencies you need with your favorite package
-  manager. You really need `stow` and `whizkers`.
+  manager. You really need `stow` and `sanpai`.
 - `cd ~/.dots`
 - `stow base linux`
 - If you are using i3:
@@ -152,10 +152,10 @@ For OS X, use the system theme.
 - `source ~/.bashrc`
 - Ensure your profile is called `profile` so the templates in
   `~/.mozilla/firefox/profile` can render properly.
-- Use `whizkers` and choose a colorscheme.
+- Use `sanpai` and choose a colorscheme.
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles
-  from `~/.whizkers_output/userstyles`.
-- Set up oomox and use the file in `~/.whizkers_output/oomox.sh`.
+  from `~/.local/sanpai/userstyles`.
+- Set up oomox and use the file in `~/.local/sanpai/oomox.sh`.
 
 ## Maintenance
 
@@ -164,5 +164,5 @@ For OS X, use the system theme.
 
 ## TODO
 
-- [ ] Fix whizkers files to allow light colorschemes
+- [ ] Fix sanpai files to allow light colorschemes
 - [ ] Stick XVimProject/XVim on brew
