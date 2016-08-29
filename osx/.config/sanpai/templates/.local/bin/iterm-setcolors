@@ -1,0 +1,32 @@
+#!/usr/bin/env osascript
+# vim:ft=applescript
+
+tell application "iTerm2"
+  repeat with w in windows
+    tell current session of w
+      set background color to {{ bgc | to_apple }}
+      set bold color to {{ fgc | to_apple }}
+      set cursor color to {{ fgc | to_apple }}
+      set cursor text color to {{ bgc | to_apple }}
+      set foreground color to {{ fgc | to_apple }}
+      set selected text color to {{ bgc | to_apple }}
+      set selection color to {{ b_primary | to_apple }}
+      set ANSI black color to {{ n_black | to_apple }}
+      set ANSI red color to {{ n_red | to_apple }}
+      set ANSI green color to {{ n_green | to_apple }}
+      set ANSI yellow color to {{ n_yellow | to_apple }}
+      set ANSI blue color to {{ n_blue | to_apple }}
+      set ANSI magenta color to {{ n_magenta | to_apple }}
+      set ANSI cyan color to {{ n_cyan | to_apple }}
+      set ANSI white color to {{ n_white | to_apple }}
+      set ANSI bright black color to {{ b_black | to_apple }}
+      set ANSI bright red color to {{ b_red | to_apple }}
+      set ANSI bright green color to {{ b_green | to_apple }}
+      set ANSI bright yellow color to {{ b_yellow | to_apple }}
+      set ANSI bright blue color to {{ b_blue | to_apple }}
+      set ANSI bright magenta color to {{ b_magenta | to_apple }}
+      set ANSI bright cyan color to {{ b_cyan | to_apple }}
+      set ANSI bright white color to {{ b_white | to_apple }}
+    end tell
+  end repeat
+end tell
