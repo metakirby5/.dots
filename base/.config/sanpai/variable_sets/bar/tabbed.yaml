@@ -1,4 +1,2 @@
-bar_black_fgc: false
-bar_white_fgc: false
-bar_bgc: "#00{` {{ colors }}['background'].lstrip('#')  `}"
-bar_block_bgc: "#ff{` {{ colors }}['background'].lstrip('#')  `}"
+bar_bgc: "#00{{ bgc | nohash}}"
+bar_block_bgc: "#ff{{ bgc | nohash }}"

@@ -13,16 +13,16 @@ mogrify \
 	"$TMPBG"
 killall -SIGUSR1 dunst # pause dunst
 i3lock -ndi "$TMPBG" \
-	--ringvercolor={{ n_black_nohash}}ff \
-	--insidevercolor={{ n_black_nohash }}ff \
-	--ringwrongcolor={{ n_red_nohash}}ff \
-	--insidewrongcolor={{ n_red_nohash}}ff \
-	--ringcolor={{ bgc_nohash }}ff \
-	--insidecolor={{ bgc_nohash }}ff \
+	--ringvercolor={{ n_black | nohash}}ff \
+	--insidevercolor={{ n_black | nohash }}ff \
+	--ringwrongcolor={{ n_red | nohash}}ff \
+	--insidewrongcolor={{ n_red | nohash}}ff \
+	--ringcolor={{ bgc | nohash }}ff \
+	--insidecolor={{ bgc | nohash }}ff \
 	--linecolor=00000000 \
 	--textcolor=00000000 \
-	--keyhlcolor={{ n_primary_nohash }}ff \
-	--bshlcolor={{ n_secondary_nohash }}ff
+	--keyhlcolor={{ n_primary | nohash }}ff \
+	--bshlcolor={{ n_secondary | nohash }}ff
 killall -SIGUSR2 dunst # resume dunst
 rm "$TMPBG"
 

@@ -4,8 +4,14 @@
 !! URxvt
 
 ! Fonts
-URxvt.font:      {{ #term_fonts }}xft:{{ . }}:pixelsize={{ pixelsize }}:antialias=true:hinting=true,{{ /term_fonts }}
-URxvt.boldFont:  {{ #term_fonts }}xft:{{ . }}{{ #use_bold }}:bold{{ /use_bold }}:pixelsize={{ pixelsize }}:antialias=true:hinting=true,{{ /term_fonts }}
+URxvt.font: {% for f in term_fonts -%}
+  xft:{{ f }}:pixelsize={{ pixelsize }}:antialias=true:hinting=true,
+{%- endfor %}
+URxvt.boldfont: {% for f in term_fonts -%}
+  xft:{{ f }}{{
+    ':bold' if use_bold else ''
+  }}:pixelsize={{ pixelsize }}:antialias=true:hinting=true,
+{%- endfor %}
 URxvt.letterSpace: {{ term_letterspace }}
 
 ! Colors

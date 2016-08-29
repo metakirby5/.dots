@@ -20,7 +20,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "{{ #use_bold }}<b>{{ /use_bold }}%a{{ #use_bold }}</b>{{ /use_bold }} / %s\n\n%b"
+    format = "{{ '<b>' if use_bold else '' }}%a{{ '</b>' if use_bold else '' }} / %s\n\n%b"
 
     # Sort messages by urgency.
     sort = yes

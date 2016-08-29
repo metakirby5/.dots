@@ -14,22 +14,12 @@ emit-lemonblocks \
   -L "{{ bar_underline_color }}" \
   2>/dev/null | tee ~/.lemonlog |\
   lemonbar -a 256 \
-    {{ #bar_black_fgc }}
-    -F "{{ n_black }}" \
-    {{ /bar_black_fgc }}
-    {{ ^bar_black_fgc }}
-    {{ #bar_white_fgc }}
-    -F "{{ b_white }}" \
-    {{ /bar_white_fgc }}
-    {{ ^bar_white_fgc }}
-    -F "{{ fgc }}" \
-    {{ /bar_white_fgc }}
-    {{ /bar_black_fgc }}
+    -F "{{ bar_fgc }}" \
     -B "{{ bar_bgc }}" \
     -u {{ bar_underline }} \
     -g x{{ bar_height }} \
-    {{ #bar_on_bottom }} -b {{ /bar_on_bottom }} \
-    {{ #bar_fonts }} -f "{{ . }}" {{ /bar_fonts }} \
+    {{ '-b' if bar_on_bottom else '' }} \
+    {% for f in bar_fonts %} -f "{{ f }}" {% endfor %} \
     -o {{ bar_font_offset }} |\
   bash >/dev/null &
 
