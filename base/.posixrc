@@ -16,6 +16,10 @@ for p in \
 done
 export PATH
 
+# Anything that's important to do first
+PRE_CONF="$LOCAL/shell/pre.sh"
+[ -f "$PRE_CONF" ] && source "$PRE_CONF"
+
 # Configs
 for rc in \
     "$LOCAL/shell/config.sh"; do

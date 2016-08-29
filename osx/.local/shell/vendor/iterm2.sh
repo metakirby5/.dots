@@ -290,6 +290,3 @@ if [[ "$TERM" != screen && "$ITERM_SHELL_INTEGRATION_INSTALLED" = "" && "$-" == 
   iterm2_print_state_data
   iterm2_print_version_number
 fi
-
-# Load colors
-iterm-setcolors
