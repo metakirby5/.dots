@@ -23,20 +23,14 @@ floating: false
 inner_gap_size: 15
 dunst_gap: 20
 border_size: 5
-dmenu_flags: '-i -f -fn {{
+dmenu_flags: &dmenu_flags '-i -f -fn {{
   font }}:pixelsize={{ pixelsize
   }} -nf {{ colors.foreground
   }} -nb {{ colors.background
   }} -sf {{ colors.foreground
   }} -sb {{ colors[colors.primary].normal
   }} -h {{ bar_height }} {{ "-b" if bar_on_bottom else "" }}'
-dunst_dmenu_flags: '-i -f -fn {{
-  font }}:pixelsize={{ pixelsize
-  }} -nf {{ colors.foreground
-  }} -nb {{ colors.background
-  }} -sf {{ colors.foreground
-  }} -sb {{ colors[colors.primary].normal
-  }} -h {{ bar_height }} {{ "-b" if bar_on_bottom else "" }}'
+dunst_dmenu_flags: *dmenu_flags
 dunst_geometry: "0x5-{{
     inner_gap_size + dunst_gap
   }}+{{
