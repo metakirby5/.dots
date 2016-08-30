@@ -64,7 +64,7 @@ p =
       '\'': [1/2,  -1  ]
       '/':  [1/2,  1/2 ]
     apps:
-      t: 'iTerm'
+      t: 'iTerm2'
       e: 'Finder'
     mods:
       base: ['cmd', 'alt']
