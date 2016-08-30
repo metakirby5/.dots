@@ -23,17 +23,16 @@ floating: false
 inner_gap_size: 15
 dunst_gap: 20
 border_size: 5
-dmenu_flags: '-i -f -fn "font:pixelsize=pixelsize" -nf "{{
-    colors.foreground
-  }}" -nb "{{
-    colors.background
-  }}" -sf "{{
-    colors.foreground
-  }}" -sb "{{
-    colors[colors.primary].normal
-  }}" -h {{ bar_height }} {{ "-b" if bar_on_bottom else "" }}'
-dunst_dmenu_flags: '-i -f -fn "font:pixelsize=pixelsize" -nf {{
-    colors.foreground
+dmenu_flags: '-i -f -fn {{
+  font }}:pixelsize={{ pixelsize
+  }} -nf {{ colors.foreground
+  }} -nb {{ colors.background
+  }} -sf {{ colors.foreground
+  }} -sb {{ colors[colors.primary].normal
+  }} -h {{ bar_height }} {{ "-b" if bar_on_bottom else "" }}'
+dunst_dmenu_flags: '-i -f -fn {{
+  font }}:pixelsize={{ pixelsize
+  }} -nf {{ colors.foreground
   }} -nb {{ colors.background
   }} -sf {{ colors.foreground
   }} -sb {{ colors[colors.primary].normal
@@ -149,37 +148,37 @@ irssi_colors:
 
 # Convenience
 
-scheme_name:      "{{ colors.name }}"
+scheme_name:        "{{ colors.name }}"
 
-bgc:              "{{ colors.background }}"
-fgc:              "{{ colors.foreground }}"
+bgc:                "{{ colors.background }}"
+fgc:                "{{ colors.foreground }}"
 
-n_black:          "{{ colors.black.normal }}"
-b_black:          "{{ colors.black.bold }}"
-n_red:            "{{ colors.red.normal }}"
-b_red:            "{{ colors.red.bold }}"
-n_green:          "{{ colors.green.normal }}"
-b_green:          "{{ colors.green.bold }}"
-n_yellow:         "{{ colors.yellow.normal }}"
-b_yellow:         "{{ colors.yellow.bold }}"
-n_blue:           "{{ colors.blue.normal }}"
-b_blue:           "{{ colors.blue.bold }}"
-n_magenta:        "{{ colors.magenta.normal }}"
-b_magenta:        "{{ colors.magenta.bold }}"
-n_cyan:           "{{ colors.cyan.normal }}"
-b_cyan:           "{{ colors.cyan.bold }}"
-n_white:          "{{ colors.white.normal }}"
-b_white:          "{{ colors.white.bold }}"
+n_black:            "{{ colors.black.normal }}"
+b_black:            "{{ colors.black.bold }}"
+n_red:              "{{ colors.red.normal }}"
+b_red:              "{{ colors.red.bold }}"
+n_green:            "{{ colors.green.normal }}"
+b_green:            "{{ colors.green.bold }}"
+n_yellow:           "{{ colors.yellow.normal }}"
+b_yellow:           "{{ colors.yellow.bold }}"
+n_blue:             "{{ colors.blue.normal }}"
+b_blue:             "{{ colors.blue.bold }}"
+n_magenta:          "{{ colors.magenta.normal }}"
+b_magenta:          "{{ colors.magenta.bold }}"
+n_cyan:             "{{ colors.cyan.normal }}"
+b_cyan:             "{{ colors.cyan.bold }}"
+n_white:            "{{ colors.white.normal }}"
+b_white:            "{{ colors.white.bold }}"
 
-n_primary:            "{{ colors[colors.primary].normal }}"
-b_primary:            "{{ colors[colors.primary].bold }}"
-n_secondary:          "{{ colors[colors.secondary].normal }}"
-b_secondary:          "{{ colors[colors.secondary].bold }}"
+n_primary:          "{{ colors[colors.primary].normal }}"
+b_primary:          "{{ colors[colors.primary].bold }}"
+n_secondary:        "{{ colors[colors.secondary].normal }}"
+b_secondary:        "{{ colors[colors.secondary].bold }}"
 
-text_primary:         "{{ colors.primary }}"
-text_secondary:       "{{ colors.secondary }}"
-primary_n:    "{{ colornumbers[colors.primary] }}"
-secondary_n:  "{{ colornumbers[colors.secondary] }}"
+text_primary:       "{{ colors.primary }}"
+text_secondary:     "{{ colors.secondary }}"
+primary_n:          "{{ colornumbers[colors.primary] }}"
+secondary_n:        "{{ colornumbers[colors.secondary] }}"
 
 irssi_primary_n:    "{{ irssi_colors[colors.primary].normal }}"
 irssi_primary_b:    "{{ irssi_colors[colors.primary].bold }}"
