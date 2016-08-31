@@ -626,7 +626,7 @@ class EvalMode extends Mode
       when 'return'
         try
           # Eval with Phoenix as `this`
-          @command = "#{((s) -> eval s).call Phoenix, @command}"
+          @command = JSON.stringify ((s) -> eval s).call Phoenix, @command
           @pos = @command.length
         catch e
           Phoenix.notify e
