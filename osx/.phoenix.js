@@ -631,8 +631,6 @@ class EvalMode extends Mode
           if result?
             @command = result
             @pos = @command.length
-          else
-            throw "StringifyError: Got #{result}: #{@command}"
         catch e
           Phoenix.notify e
       when 'left' then @setPos @pos - 1
