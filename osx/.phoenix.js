@@ -626,8 +626,12 @@ class EvalMode extends Mode
       when 'return'
         try
           # Eval with Phoenix as `this`
-          @command = JSON.stringify ((s) -> eval s).call Phoenix, @command
-          @pos = @command.length
+          result = JSON.stringify ((s) -> eval s).call Phoenix, @command
+          if result?
+            @command = result
+            @pos = @command.length
+          else
+            throw "StringifyError: Got #{result}: #{@command}"
         catch e
           Phoenix.notify e
       when 'left' then @setPos @pos - 1
