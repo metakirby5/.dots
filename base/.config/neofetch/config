@@ -24,7 +24,7 @@ printinfo () {
     prin "$(color 4)                                    echan "
     prin "$(color 0)────────────────┬─────────────────────────"
     myprin "            os" distro
-    myprin "            up" uptime
+    myprin "        uptime" uptime
     myprin "window manager" "Phoenix"
     myprin "         shell" shell
     myprin "      packages" packages
