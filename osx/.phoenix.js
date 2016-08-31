@@ -48,12 +48,11 @@ p =
     titleLength: 15
     titleCont: '…'
     debounce: 150
-  eval:
+  input:
     stopEvents: [
       'screensDidChange',
       'spaceDidChange',
     ]
-    prompt: '> '
     cursor: 'ˌ'
   keys:
     maximize: 'm'
@@ -62,7 +61,7 @@ p =
     spaceAll: 's'
     winHintMode: 'y'
     scrHintMode: 's'
-    evalMode: 'return'
+    evalInputMode: 'return'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -595,22 +594,29 @@ class HintMode extends Mode
         # Show matching hints
         @bouncedHints @state
 
-# Evals for fun
-class EvalMode extends Mode
-  constructor: (@prompt = p.eval.prompt, @cursor = p.eval.cursor,
-      @stopEvents = p.eval.stopEvents) ->
+# Mode for inputting text
+class InputMode extends Mode
+  # @action is (@input, returnPressed) -> [input, output]
+  constructor: (@action, @icon = null, @prompt = '',
+      @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
     super @stopEvents
 
     # Initialize state, listen to events, and show modal
     @on 'start', =>
-      @modal = Modal.build
-        text: @prompt + @cursor
-      @command = ''
+      @input = ''
       @pos = 0
-      @modal.center().show()
+      inputModalArgs = text: @prompt + @cursor
+      inputModalArgs.icon = @icon if @icon?
+      @inputModal = Modal.build inputModalArgs
+      @inputModal.center().show()
+
+      @output = ''
+      @outputModal = Modal.build text: @output
 
     # Stop listening to events and close modal
-    @on 'stop', => @modal?.close()
+    @on 'stop', =>
+      @inputModal?.close()
+      @outputModal?.close()
 
     # Handle keypress
     @on 'key', (k, shift) =>
@@ -622,32 +628,37 @@ class EvalMode extends Mode
 
   # Update command state and modal from key event
   update: (k) ->
+    submitting = false
     switch k
-      when 'return'
-        try
-          result = JSON.stringify ((s) ->
-            eval "(function(){return #{s}}())").call null, @command
-          if result?
-            @command = result
-            @pos = @command.length
-        catch e
-          Phoenix.notify e
+      when 'return' then submitting = true
       when 'left' then @setPos @pos - 1
       when 'right' then @setPos @pos + 1
       when 'delete'
-        @command = @command.remove @pos - 1
+        @input = @input.remove @pos - 1
         @setPos @pos - 1
       when 'space'
-        @command = @command.insert ' ', @pos
+        @input = @input.insert ' ', @pos
         @setPos @pos + 1
       else
-        @command = @command.insert k, @pos
+        @input = @input.insert k, @pos
         @setPos @pos + 1
-    @modal.setText(@prompt + @command.insert @cursor, @pos).center()
+
+    # Run the action and reset position accordingly
+    [input, @output] = @action @input, submitting
+    if input?
+      @pos = input.length if input != @input
+      @input = input
+
+    # Set modals' text
+    @inputModal.setText(@prompt + @input.insert @cursor, @pos).center()
+    if @output?
+      @outputModal.setText(@output).center().show()
+    else
+      @outputModal.close()
 
   # Set the cursor position with bounds handling
   setPos: (i) ->
-    @pos = Math.max 0, Math.min @command.length, i
+    @pos = Math.max 0, Math.min @input.length, i
 
 # Window chaining
 class ChainWindow
@@ -974,7 +985,15 @@ scrHint = modes.add new HintMode Screen.all, (s, shift) ->
     cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
-evalMode = modes.add new EvalMode()
+evalInput = modes.add new InputMode (input, returnPressed) ->
+  try
+    result = JSON.stringify ((s) ->
+      eval "(function(){return #{s}}())").call null, input
+    output = result if result?
+  catch e
+    err = e.toString()
+  [(if returnPressed then output) or input, err or output]
+, App.get('Phoenix').icon()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
@@ -983,7 +1002,7 @@ Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
 Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
-Key.on p.keys.evalMode, p.keys.mods.base, -> modes.toggle evalMode
+Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
