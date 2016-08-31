@@ -48,6 +48,8 @@ p =
     titleLength: 15
     titleCont: '…'
     debounce: 150
+  eval:
+    prompt: '> '
   keys:
     maximize: 'm'
     center: 'c'
@@ -55,6 +57,7 @@ p =
     spaceAll: 's'
     winHintMode: 'y'
     scrHintMode: 's'
+    evalMode: 'return'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -134,6 +137,17 @@ ALL_KEYS = (String.fromCharCode(c) for c in [39]
     'return', 'tab', 'space', 'delete', 'escape', 'help', 'home', 'pageUp',
     'forwardDelete', 'end', 'pageDown', 'left', 'right', 'down', 'up',
   ]
+
+# Mapping of character to character + shift (wish there was a func for this)
+SHIFT_KEYS = _.extend
+  '`': '~', '1': '!', '2': '@', '3': '#', '4': '$', '5': '%', '6': '^',
+  '7': '&', '8': '*', '9': '(', '0': ')', '-': '_', '=': '+', '[': '{',
+  ']': '}', '\\': '|', ';': ':', '\'': '"', ',': '<', '.': '>', '/': '?',
+, _.object (
+  String.fromCharCode(c) for c in [97..122]
+), (
+  String.fromCharCode(c) for c in [65..90]
+)
 
 # Coordinate system helpers
 identify = (x) ->
@@ -572,6 +586,41 @@ class HintMode extends Mode
         # Show matching hints
         @bouncedHints @state
 
+# Evals for fun
+class EvalMode extends Mode
+  constructor: (@prompt = p.eval.prompt) ->
+    super
+
+    # Initialize state and show modal
+    @on 'start', =>
+      @modal = Modal.build
+        text: @prompt
+      @command = ''
+      @modal.center().show()
+
+    # Close modal
+    @on 'stop', =>
+      @modal.close()
+
+    # Handle keypress
+    @on 'key', (k, shift) =>
+      k = k.toLowerCase() # normalize
+      switch k
+        when 'escape' then @stop()
+        else @update if shift then SHIFT_KEYS[k] or k else k
+
+  update: (k) ->
+    switch k
+      when 'return'
+        try
+          @command = "#{eval @command}"
+        catch e
+          Phoenix.notify e
+      when 'delete' then @command = @command.popped()
+      when 'space'  then @command += ' '
+      else @command += k
+    @modal.setText("#{@prompt}#{@command}").center().show()
+
 # Window chaining
 class ChainWindow
   constructor: (@win, @gap = p.wins.gap, @unit = p.wins.unit,
@@ -897,6 +946,7 @@ scrHint = modes.add new HintMode Screen.all, (s, shift) ->
     cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
+evalMode = modes.add new EvalMode()
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
@@ -905,6 +955,7 @@ Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
 Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
+Key.on p.keys.evalMode, p.keys.mods.base, -> modes.toggle evalMode
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
