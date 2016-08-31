@@ -12,27 +12,25 @@ export LANG=C
 
 myprin() {
     if [ "$2" ]; then
-        get$2
-        eval local info="\$$2"
+        get$2 &>/dev/null && eval local info="\$$2"
     fi
-    prin "$(color 8) $1 $(color 0)│ $(color 7)$info"
+    prin "$(color 7) $1 $(color 0)│ $(color 15)${info:=$2}"
 }
 
 # Info
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 printinfo () {
-    prin "$(color 4)      echan $(color 0)│ $(color 7)${HOSTNAME%%.*}"
-    prin "$(color 0)────────────┼─────────────────────────"
-    myprin "        os" distro
-    myprin "        up" uptime
-    myprin "     shell" shell
-    myprin "  packages" packages
-    myprin "resolution" resolution
-    myprin "    memory" memory
-    prin "$(color 0)────────────┼─────────────────────────"
+    prin "$(color 4)                                    echan "
+    prin "$(color 0)────────────────┬─────────────────────────"
+    myprin "            os" distro
+    myprin "            up" uptime
+    myprin "window manager" "Phoenix"
+    myprin "         shell" shell
+    myprin "      packages" packages
+    prin "$(color 0)────────────────┴─────────────────────────"
     info linebreak
-    info cols | sed 's/^/[3C/'
+    info cols | sed 's/^/[5C/'
 }
 
 
