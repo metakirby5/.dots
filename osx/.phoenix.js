@@ -55,8 +55,12 @@ p =
     ]
     cursor: 'ˌ'
   eval:
+    icon: App.get('Phoenix').icon()
     instantPrefix: '@'
     errStr: '…'
+  shell:
+    icon: App.get('iTerm2').icon()
+    bin: '/usr/local/bin/bash'
   keys:
     maximize: 'm'
     center: 'c'
@@ -65,6 +69,7 @@ p =
     winHintMode: 'y'
     scrHintMode: 's'
     evalInputMode: 'return'
+    shellInputMode: '\\'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -1002,7 +1007,13 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
       Phoenix.notify e if returnPressed
 
   [(output if returnPressed) or input, (err or output if instant)]
-, App.get('Phoenix').icon()
+, p.eval.icon
+shellInput = modes.add new InputMode (input, returnPressed) ->
+  if returnPressed
+    Task.run p.shell.bin, (['-c'].concat input), (r) ->
+      Phoenix.notify r.output or r.error
+  [if returnPressed then '' else input]
+, p.shell.icon
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
@@ -1012,6 +1023,7 @@ Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
+Key.on p.keys.shellInputMode, p.keys.mods.base, -> modes.toggle shellInput
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
