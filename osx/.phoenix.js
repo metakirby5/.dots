@@ -54,6 +54,9 @@ p =
       'spaceDidChange',
     ]
     cursor: 'ˌ'
+  eval:
+    instantPrefix: '@'
+    errStr: '…'
   keys:
     maximize: 'm'
     center: 'c'
@@ -986,13 +989,19 @@ scrHint = modes.add new HintMode Screen.all, (s, shift) ->
   else
     s.mouseTo()
 evalInput = modes.add new InputMode (input, returnPressed) ->
-  try
-    result = JSON.stringify ((s) ->
-      eval "(function(){return #{s}}())").call null, input
-    output = result if result?
-  catch e
-    err = e.toString()
-  [(if returnPressed then output) or input, err or output]
+  instant = (input.charAt 0) == p.eval.instantPrefix
+  command = if instant then input.substr 1 else input
+
+  if instant or returnPressed
+    try
+      result = JSON.stringify ((s) ->
+        eval "(function(){return #{s}}())").call null, command
+      output = result if result?
+    catch e
+      err = p.eval.errStr
+      Phoenix.notify e if returnPressed
+
+  [(output if returnPressed) or input, (err or output if instant)]
 , App.get('Phoenix').icon()
 
 # General
