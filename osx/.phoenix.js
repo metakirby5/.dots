@@ -50,6 +50,7 @@ p =
     debounce: 150
   eval:
     prompt: '> '
+    cursor: 'ˌ'
   keys:
     maximize: 'm'
     center: 'c'
@@ -87,21 +88,23 @@ p =
 # Utilities
 Object.prototype.map = (f) ->
   Object.keys(this).reduce ((o, k) => o[k] = f this[k], k; o), {}
-Array.prototype.extend = (a) -> this.push a...
-Array.prototype.contains = (x) -> -1 < this.indexOf x
+Array.prototype.extend = (a) -> @push a...
+Array.prototype.contains = (x) -> -1 < @indexOf x
 Array.prototype.equals = (a) -> _.all (_.zip this, a).map ([a, b]) -> a == b
 Array.prototype.subsets = ->
-  if not this.length
+  if not this
     [this]
   else
     [x, xs...] = this
     rest = xs.subsets()
     rest.concat rest.map (a) => a.concat x
 String.prototype.map = Array.prototype.map
-String.prototype.pop = -> this.charAt(this.length - 1)
-String.prototype.popped = -> this.substr(0, this.length - 1)
-String.prototype.popFront = -> this.charAt(0)
-String.prototype.poppedFront = -> this.substr(1)
+String.prototype.pop = -> @charAt @length - 1
+String.prototype.popped = -> @substr 0, @length - 1
+String.prototype.popFront = -> @charAt 0
+String.prototype.poppedFront = -> @substr 1
+String.prototype.insert = (s, i) -> (@substr 0, i) + s + @substr i
+String.prototype.remove = (i) -> (@substr 0, i) + @substr i + 1
 
 # Barebones event class
 class EventEmitter
@@ -588,14 +591,15 @@ class HintMode extends Mode
 
 # Evals for fun
 class EvalMode extends Mode
-  constructor: (@prompt = p.eval.prompt) ->
+  constructor: (@prompt = p.eval.prompt, @cursor = p.eval.cursor) ->
     super
 
     # Initialize state and show modal
     @on 'start', =>
       @modal = Modal.build
-        text: @prompt
+        text: @prompt + @cursor
       @command = ''
+      @pos = 0
       @modal.center().show()
 
     # Close modal
@@ -607,6 +611,7 @@ class EvalMode extends Mode
       k = k.toLowerCase() # normalize
       switch k
         when 'escape' then @stop()
+        when 'up', 'down' then null # ignore these
         else @update if shift then SHIFT_KEYS[k] or k else k
 
   update: (k) ->
@@ -614,12 +619,25 @@ class EvalMode extends Mode
       when 'return'
         try
           @command = "#{eval @command}"
+          @pos = @command.length
         catch e
           Phoenix.notify e
-      when 'delete' then @command = @command.popped()
-      when 'space'  then @command += ' '
-      else @command += k
-    @modal.setText("#{@prompt}#{@command}").center().show()
+      when 'left' then @setPos @pos - 1
+      when 'right' then @setPos @pos + 1
+      when 'delete'
+        @command = @command.remove @pos - 1
+        @setPos @pos - 1
+      when 'space'
+        @command = @command.insert ' ', @pos
+        @setPos @pos + 1
+      else
+        @command = @command.insert k, @pos
+        @setPos @pos + 1
+    @modal
+      .setText(@prompt + @command.insert @cursor, @pos).center().show()
+
+  setPos: (i) ->
+    @pos = Math.max 0, Math.min @command.length, i
 
 # Window chaining
 class ChainWindow
