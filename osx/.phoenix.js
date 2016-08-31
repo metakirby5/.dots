@@ -625,7 +625,8 @@ class EvalMode extends Mode
     switch k
       when 'return'
         try
-          @command = "#{eval @command}"
+          # Eval with Phoenix as `this`
+          @command = "#{((s) -> eval s).call Phoenix, @command}"
           @pos = @command.length
         catch e
           Phoenix.notify e
