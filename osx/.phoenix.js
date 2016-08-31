@@ -614,6 +614,7 @@ class EvalMode extends Mode
         when 'up', 'down' then null # ignore these
         else @update if shift then SHIFT_KEYS[k] or k else k
 
+  # Update command state and modal from key event
   update: (k) ->
     switch k
       when 'return'
@@ -633,9 +634,9 @@ class EvalMode extends Mode
       else
         @command = @command.insert k, @pos
         @setPos @pos + 1
-    @modal
-      .setText(@prompt + @command.insert @cursor, @pos).center().show()
+    @modal.setText(@prompt + @command.insert @cursor, @pos).center()
 
+  # Set the cursor position with bounds handling
   setPos: (i) ->
     @pos = Math.max 0, Math.min @command.length, i
 
