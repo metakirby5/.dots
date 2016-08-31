@@ -627,7 +627,7 @@ class EvalMode extends Mode
         try
           # Eval with Phoenix as `this`
           result = JSON.stringify ((s) ->
-            eval "(#{s})").call Phoenix, @command
+            eval "(function(){return #{s}}())").call Phoenix, @command
           if result?
             @command = result
             @pos = @command.length
