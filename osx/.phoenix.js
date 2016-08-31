@@ -57,7 +57,7 @@ p =
   eval:
     icon: App.get('Phoenix').icon()
     instantPrefix: '@'
-    errStr: '…'
+    progressStr: '…'
   shell:
     icon: App.get('iTerm2').icon()
     bin: '/usr/local/bin/bash'
@@ -1003,10 +1003,11 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
         eval "(function(){return #{s}}())").call null, command
       output = result if result?
     catch e
-      err = p.eval.errStr
+      err = p.eval.progressStr
       Phoenix.notify e if returnPressed
 
-  [(output if returnPressed) or input, (err or output if instant)]
+  [(output if returnPressed) or input,
+   (err or output or p.eval.progressStr if instant)]
 , p.eval.icon
 shellInput = modes.add new InputMode (input, returnPressed) ->
   if returnPressed
