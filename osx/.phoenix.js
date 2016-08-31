@@ -49,6 +49,10 @@ p =
     titleCont: '…'
     debounce: 150
   eval:
+    stopEvents: [
+      'screensDidChange',
+      'spaceDidChange',
+    ]
     prompt: '> '
     cursor: 'ˌ'
   keys:
@@ -591,20 +595,23 @@ class HintMode extends Mode
 
 # Evals for fun
 class EvalMode extends Mode
-  constructor: (@prompt = p.eval.prompt, @cursor = p.eval.cursor) ->
+  constructor: (@prompt = p.eval.prompt, @cursor = p.eval.cursor,
+      @stopEvents = p.eval.stopEvents) ->
     super
 
-    # Initialize state and show modal
+    # Initialize state, listen to events, and show modal
     @on 'start', =>
+      @events = @stopEvents.map (e) => Event.on e, => @stop()
       @modal = Modal.build
         text: @prompt + @cursor
       @command = ''
       @pos = 0
       @modal.center().show()
 
-    # Close modal
+    # Stop listening to events and close modal
     @on 'stop', =>
-      @modal.close()
+      @events?.map Event.off
+      @modal?.close()
 
     # Handle keypress
     @on 'key', (k, shift) =>
