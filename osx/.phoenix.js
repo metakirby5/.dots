@@ -361,7 +361,7 @@ class Toaster
 # Emits 'start', 'stop', and 'key' (key, shift)
 # Privately emits 'prestart' and 'prestop'
 class Mode extends EventEmitter
-  constructor: ->
+  constructor: (@stopEvents = []) ->
     super
     @active = false
     @binds = []
@@ -376,6 +376,10 @@ class Mode extends EventEmitter
     # Capture all keys
     @binds = _.flatten ALL_KEYS.map (k) => [[], ['shift']].map (mod) =>
         Key.on k, mod, => @emit 'key', k, mod.equals ['shift']
+
+    # Stop on stopEvents
+    @events = @stopEvents.map (e) => Event.on e, => @stop()
+
     @emit 'prestart'
     @emit 'start'
 
@@ -387,7 +391,11 @@ class Mode extends EventEmitter
     @active = false
 
     # Uncapture all keys
-    @binds.map Key.off
+    @binds?.map Key.off
+
+    # Stop listening to events
+    @events?.map Event.off
+
     @emit 'prestop'
     @emit 'stop'
 
@@ -487,7 +495,7 @@ class HintMode extends Mode
       @chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
       @kStop = p.hints.kStop, @kPop = p.hints.kPop,
       debounce = p.hints.debounce) ->
-    super
+    super @stopEvents
     @bouncedHints = _.debounce @showHints, debounce
 
     # Handle start event
@@ -504,9 +512,6 @@ class HintMode extends Mode
       @state = new HintTree @chars, hintables
       @len = 0
 
-      # Events
-      @events = @stopEvents.map (e) => Event.on e, => @stop()
-
       # Finally, show hints
       @showHints @state
 
@@ -519,9 +524,6 @@ class HintMode extends Mode
       @bouncedHints() # cancels debounce
       (if @state instanceof HintTree then @state else @prev)?.map (o) ->
         o.hint.close()
-
-      # Disable events
-      @events?.map Event.off
 
       # Destroy internal state
       delete @state
@@ -597,11 +599,10 @@ class HintMode extends Mode
 class EvalMode extends Mode
   constructor: (@prompt = p.eval.prompt, @cursor = p.eval.cursor,
       @stopEvents = p.eval.stopEvents) ->
-    super
+    super @stopEvents
 
     # Initialize state, listen to events, and show modal
     @on 'start', =>
-      @events = @stopEvents.map (e) => Event.on e, => @stop()
       @modal = Modal.build
         text: @prompt + @cursor
       @command = ''
@@ -609,9 +610,7 @@ class EvalMode extends Mode
       @modal.center().show()
 
     # Stop listening to events and close modal
-    @on 'stop', =>
-      @events?.map Event.off
-      @modal?.close()
+    @on 'stop', => @modal?.close()
 
     # Handle keypress
     @on 'key', (k, shift) =>
