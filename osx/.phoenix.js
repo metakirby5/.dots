@@ -986,29 +986,38 @@ cw = ->
 
 # Modes
 modes = new ModeManager()
+
 winHint = modes.add new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
+
 scrHint = modes.add new HintMode Screen.all, (s, shift) ->
   if shift
     cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
+
 evalInput = modes.add new InputMode (input, returnPressed) ->
   instant = (input.charAt 0) == p.eval.instantPrefix
   command = if instant then input.substr 1 else input
 
+  # Eval
   if instant or returnPressed
     try
       result = JSON.stringify ((s) ->
         eval "(function(){return #{s}}())").call null, command
-      output = result if result?
+      output = result ? ''
     catch e
       err = p.eval.progressStr
       Phoenix.notify e if returnPressed
 
-  [(output if returnPressed) or input,
-   (err or output or p.eval.progressStr if instant)]
+  # Set input and output
+  [
+    ((if instant then p.eval.instantPrefix else '') +
+      output if returnPressed) or input,
+    (err or output or p.eval.progressStr if instant)
+  ]
 , p.eval.icon
+
 shellInput = modes.add new InputMode (input, returnPressed) ->
   if returnPressed
     Task.run p.shell.bin, (['-c'].concat input), (r) ->
