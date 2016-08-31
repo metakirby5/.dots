@@ -625,9 +625,8 @@ class EvalMode extends Mode
     switch k
       when 'return'
         try
-          # Eval with Phoenix as `this`
           result = JSON.stringify ((s) ->
-            eval "(function(){return #{s}}())").call Phoenix, @command
+            eval "(function(){return #{s}}())").call null, @command
           if result?
             @command = result
             @pos = @command.length
