@@ -29,19 +29,18 @@ p =
     weight: 24
     appearance: 'dark'
   hints:
-    stopEvents: [
-      'screensDidChange',
-      'spaceDidChange',
-      'mouseDidLeftClick',
-      'mouseDidRightClick',
-      'appDidActivate',
-      'appDidHide',
-      'appDidShow',
-      'windowDidFocus',
-      'windowDidMove',
-      'windowDidMinimize',
-      'windowDidUnminimize',
-    ]
+    stopEvents:
+      [ 'screensDidChange'
+      , 'spaceDidChange'
+      , 'mouseDidLeftClick'
+      , 'mouseDidRightClick'
+      , 'appDidActivate'
+      , 'appDidHide'
+      , 'appDidShow'
+      , 'windowDidFocus'
+      , 'windowDidMove'
+      , 'windowDidMinimize'
+      , 'windowDidUnminimize' ]
     kStop: 'escape'
     kPop: 'delete'
     chars: 'FJDKSLAGHRUEIWOVNCM'
@@ -49,12 +48,11 @@ p =
     titleCont: '…'
     debounce: 150
   input:
-    stopEvents: [
-      'screensDidChange',
-      'spaceDidChange',
-      'mouseDidLeftClick',
-      'mouseDidRightClick',
-    ]
+    stopEvents:
+      [ 'screensDidChange'
+      , 'spaceDidChange'
+      , 'mouseDidLeftClick'
+      , 'mouseDidRightClick' ]
     cursor: 'ˌ'
   eval:
     icon: App.get('Phoenix').icon()
@@ -1089,18 +1087,11 @@ p.keys.apps.map (app, key) ->
   Key.on key, p.keys.mods.base, -> App.launch(app).focus()
 
 # Spaces
-[
-  [
-    # Move
-    p.keys.mods.move,
-    (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo()
-  ],
-  [
-    # Toggle
-    p.keys.mods.pour,
-    (num) -> cw()?.spaceToggle num
-  ],
-].map ([mod, action]) ->
+[ [ p.keys.mods.move # move
+  , (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo() ]
+, [ p.keys.mods.pour # toggle
+  , (num) -> cw()?.spaceToggle num ] ]
+.map ([mod, action]) ->
   [1..10].map (num) ->
     s = '' + num
     Key.on (s.substr s.length - 1), mod, -> action (num - 1)
@@ -1111,33 +1102,17 @@ p.keys.apps.map (app, key) ->
       action (((idx + offset) % slen) + slen) % slen
 
 # Directionals
-[
-  [
-    # Select
-    p.keys.mods.base,
-    (dir) -> cw()?.neighbor(dir).focus().mouseTo()
-  ],
-  [
-    # Move
-    p.keys.mods.move,
-    (dir) -> cw()?.moveIn(dir).set()
-  ],
-  [
-    # Size
-    p.keys.mods.size,
-    (dir) -> cw()?.sizeIn(dir).set()
-  ],
-  [
-    # Pour
-    p.keys.mods.pour,
-    (dir) -> cw()?.pourIn(dir).set()
-  ],
-  [
-    # Tile
-    p.keys.mods.tile,
-    (dir) -> cw()?.adjustIn(dir).set()
-  ],
-].map ([mod, action]) -> p.keys.dirs.map (dir, key) ->
+[ [ p.keys.mods.base # select
+  , (dir) -> cw()?.neighbor(dir).focus().mouseTo() ]
+, [ p.keys.mods.move # move
+  , (dir) -> cw()?.moveIn(dir).set() ]
+, [ p.keys.mods.size # size
+  , (dir) -> cw()?.sizeIn(dir).set() ]
+, [ p.keys.mods.pour # pour
+  , (dir) -> cw()?.pourIn(dir).set() ]
+, [ p.keys.mods.tile # tile
+  , (dir) -> cw()?.adjustIn(dir).set() ] ]
+.map ([mod, action]) -> p.keys.dirs.map (dir, key) ->
   Key.on key, mod, -> action dir
 
 # Snaps
