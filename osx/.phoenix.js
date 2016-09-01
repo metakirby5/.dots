@@ -607,7 +607,7 @@ class HintMode extends Mode
 
 # Mode for inputting text
 class InputMode extends Mode
-  # @action is (@input, returnPressed) -> [input, output]
+  # @action is (@input, specialKey) -> [input, output]
   constructor: (@action, @icon = null, @prompt = '',
       @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
     super @stopEvents
@@ -640,7 +640,7 @@ class InputMode extends Mode
 
   # Update command state and modal from key event
   update: (k) ->
-    submitting = false
+    specialKey = undefined
     switch @mod
 
       # Readline controls
@@ -662,12 +662,13 @@ class InputMode extends Mode
       else
         switch k
           when 'return'
-            submitting = true
+            specialKey = k
 
             # Add to history
             if not @history.length or (@input and @history[0] != @input)
               @history.unshift @input
             @historyPos = -1
+          when 'tab' then specialKey = k
           when 'down' then @moveHistory 1
           when 'up' then @moveHistory -1
           when 'left' then @movePos -1
@@ -685,7 +686,7 @@ class InputMode extends Mode
             @movePos 1
 
     # Run the action and reset position accordingly
-    [input, @output] = @action @input, submitting
+    [input, @output] = @action @input, specialKey
     if input? and input != @input
       @input = input
       @pos = input.length
@@ -1039,9 +1040,10 @@ scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   else
     s.mouseTo()
 
-evalInput = modes.add new InputMode (input, returnPressed) ->
+evalInput = modes.add new InputMode (input, specialKey) ->
   instant = (input.charAt 0) == p.eval.instantPrefix
   command = if instant then input.substr 1 else input
+  returnPressed = specialKey == 'return'
 
   # Eval
   if command and (instant or returnPressed)
@@ -1058,7 +1060,8 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
   , (err or output or p.eval.progressStr if instant) ]
 , p.eval.icon
 
-shellInput = modes.add new InputMode (input, returnPressed) ->
+shellInput = modes.add new InputMode (input, specialKey) ->
+  returnPressed = specialKey == 'return'
   if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Phoenix.notify r.output or r.error
