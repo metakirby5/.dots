@@ -674,7 +674,9 @@ class InputMode extends Mode
           when 'right' then @movePos 1
           when 'delete'
             @input = @input.remove @pos - 1
-            @movePos 1
+            @movePos -1
+          when 'forwarddelete'
+            @input = @input.remove @pos
           when 'space'
             @input = @input.insert ' ', @pos
             @movePos 1
@@ -1042,25 +1044,22 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
   command = if instant then input.substr 1 else input
 
   # Eval
-  if instant or returnPressed
+  if command and (instant or returnPressed)
     try
-      result = JSON.stringify ((s) ->
-        eval "(function(){return #{s}}())").call null, command
+      result = JSON.stringify ((s) -> eval "(#{s})").call null, command
       output = result ? ''
     catch e
       err = p.eval.progressStr
       Phoenix.notify e if returnPressed
 
   # Set input and output
-  [
-    ((if instant then p.eval.instantPrefix else '') +
-     (output ? '') if returnPressed) or input,
-    (err or output or p.eval.progressStr if instant)
-  ]
+  [ (if instant then p.eval.instantPrefix else '') +
+    ((output if returnPressed) ? command)
+  , (err or output or p.eval.progressStr if instant) ]
 , p.eval.icon
 
 shellInput = modes.add new InputMode (input, returnPressed) ->
-  if returnPressed
+  if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Phoenix.notify r.output or r.error
       Phoenix.log r.error if r.error
