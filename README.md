@@ -16,7 +16,7 @@ Here's what you'll need...
 ### All platforms
 
 - GNU Stow
-- metakirby5/sanpai
+- metakirby5/zenbu
 - metakirby5/scripts (somewhat optional)
 - Packages from relevant managers (`~/.local/deps/*`)
 
@@ -94,7 +94,7 @@ Here's what you'll need...
 
 ### Chrome
 
-Theme in `~/.local/sanpai/chrome_theme/`.
+Theme in `~/.local/zenbu/chrome_theme/`.
 
 For OS X, use the system theme.
 
@@ -135,7 +135,7 @@ For OS X, use the system theme.
 - `brew bundle --file=- < ~/.local/deps/brew`
 - [Set your shell to `brew`'s `bash`.](https://johndjameson.com/blog/updating-your-shell-with-homebrew/)
 - `source ~/.bashrc`
-- Install `sanpai` via `pip` and use it to choose a colorscheme.
+- Install `zenbu` via `pip` and use it to choose a colorscheme.
 - `yes | osx-set-defaults`
 - Tweak whatever other settings you want in Preferences.app.
 - Install the apps in `~/.local/deps/AppStore`.
@@ -143,7 +143,7 @@ For OS X, use the system theme.
 ### Linux
 
 - Install all the dependencies you need with your favorite package
-  manager. You really need `stow` and `sanpai`.
+  manager. You really need `stow` and `zenbu`.
 - `cd ~/.dots`
 - `stow base linux`
 - If you are using i3:
@@ -152,10 +152,10 @@ For OS X, use the system theme.
 - `source ~/.bashrc`
 - Ensure your profile is called `profile` so the templates in
   `~/.mozilla/firefox/profile` can render properly.
-- Use `sanpai` and choose a colorscheme.
+- Use `zenbu` and choose a colorscheme.
 - Install *Stylish* for Chrome/Firefox and install the relevant userstyles
-  from `~/.local/sanpai/userstyles`.
-- Set up oomox and use the file in `~/.local/sanpai/oomox.sh`.
+  from `~/.local/zenbu/userstyles`.
+- Set up oomox and use the file in `~/.local/zenbu/oomox.sh`.
 
 ## Maintenance
 
@@ -164,5 +164,5 @@ For OS X, use the system theme.
 
 ## TODO
 
-- [ ] Fix sanpai files to allow light colorschemes
+- [ ] Fix zenbu files to allow light colorschemes
 - [ ] Stick XVimProject/XVim on brew

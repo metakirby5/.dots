@@ -13,7 +13,7 @@ done
 
 # Shortcuts
 alias resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile'
-alias update-conf='pullc && restow-dots && resource && sanpai -e'
+alias update-conf='pullc && restow-dots && resource && zenbu -e'
 alias unstow='stow -D'
 alias restow='stow -R'
 alias tetris='bastet'

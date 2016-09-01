@@ -57,7 +57,7 @@ bar_font_offset: -5
 bar_underline: 0
 
 # GTK
-gtk_theme: "oomox-sanpai"
+gtk_theme: "oomox-zenbu"
 gtk_icon_theme: "Numix-Circle"
 gtk_cursor_theme: "Adwaita"
 

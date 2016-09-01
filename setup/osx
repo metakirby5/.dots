@@ -59,8 +59,8 @@ source ~/.bashrc
 echo "Installing other packages..."
 install-leaves
 
-echo "Running sanpai with defaults..."
-sanpai -e
+echo "Running zenbu with defaults..."
+zenbu -e
 
 echo "Setting OS X defaults..."
 yes | osx-set-defaults
