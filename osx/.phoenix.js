@@ -52,6 +52,8 @@ p =
     stopEvents: [
       'screensDidChange',
       'spaceDidChange',
+      'mouseDidLeftClick',
+      'mouseDidRightClick',
     ]
     cursor: 'ˌ'
   eval:
@@ -61,6 +63,7 @@ p =
   shell:
     icon: App.get('iTerm2').icon()
     bin: '/usr/local/bin/bash'
+    rc: '~/.bashrc'
   keys:
     maximize: 'm'
     center: 'c'
@@ -1060,8 +1063,11 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
 
 shellInput = modes.add new InputMode (input, returnPressed) ->
   if returnPressed
-    Task.run p.shell.bin, (['-c'].concat input), (r) ->
+    Task.run p.shell.bin, (
+      ['-c'].concat "TERM=xterm source #{p.shell.rc} && #{input}"
+    ), (r) ->
       Phoenix.notify r.output or r.error
+      Phoenix.log r.error if r.error
   [if returnPressed then '' else input]
 , p.shell.icon
 
