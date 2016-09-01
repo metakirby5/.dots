@@ -667,8 +667,8 @@ class InputMode extends Mode
             if not @history.length or @history[0] != @input
               @history.unshift @input
             @historyPos = -1
-          when 'down' then @moveHistory -1
-          when 'up' then @moveHistory 1
+          when 'down' then @moveHistory 1
+          when 'up' then @moveHistory -1
           when 'left' then @movePos -1
           when 'right' then @movePos 1
           when 'delete'
@@ -704,7 +704,7 @@ class InputMode extends Mode
     if @historyPos == -1
       @current = @input
 
-    @historyPos = Math.min @history.length - 1, Math.max -1, @historyPos + d
+    @historyPos = Math.min @history.length - 1, Math.max -1, @historyPos - d
     @input = if @historyPos == -1 then @current else @history[@historyPos]
     @pos = @input.length
 
