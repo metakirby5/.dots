@@ -607,7 +607,7 @@ class HintMode extends Mode
 
 # Mode for inputting text
 class InputMode extends Mode
-  # @action is (@input, specialKey) -> [input, output]
+  # @action is (@input, specialKey) -> [input, output, exit]
   constructor: (@action, @icon = null, @prompt = '',
       @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
     super @stopEvents
@@ -685,8 +685,13 @@ class InputMode extends Mode
             @input = @input.insert k, @pos
             @movePos 1
 
-    # Run the action and reset position accordingly
-    [input, @output] = @action @input, specialKey
+    # Run the action
+    [input, @output, exit] = @action @input, specialKey
+
+    # Exit if requested
+    return @stop() if exit
+
+    # Set input and reset position
     if input? and input != @input
       @input = input
       @pos = input.length
@@ -1066,7 +1071,7 @@ shellInput = modes.add new InputMode (input, specialKey) ->
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Phoenix.notify r.output or r.error
       Phoenix.log r.error if r.error
-  [if returnPressed then '' else input]
+  [(if returnPressed then '' else input), null, returnPressed]
 , p.shell.icon
 
 # General
