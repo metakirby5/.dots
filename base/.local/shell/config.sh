@@ -31,6 +31,6 @@ for d in "$dir"/{aliases,functions,vendor}; do
 done
 
 # Files
-for f in $dir/prompt.sh; do
+for f in "$dir"/prompt.sh; do
   [ -f "$f" ] && source "$f"
 done
