@@ -1063,9 +1063,7 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
 
 shellInput = modes.add new InputMode (input, returnPressed) ->
   if returnPressed
-    Task.run p.shell.bin, (
-      ['-c'].concat "TERM=xterm source #{p.shell.rc} && #{input}"
-    ), (r) ->
+    Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Phoenix.notify r.output or r.error
       Phoenix.log r.error if r.error
   [if returnPressed then '' else input]
