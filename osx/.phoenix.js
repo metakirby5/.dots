@@ -608,11 +608,13 @@ class InputMode extends Mode
   constructor: (@action, @icon = null, @prompt = '',
       @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
     super @stopEvents
+    @history = []
 
     # Initialize state, listen to events, and show modal
     @on 'start', =>
       @input = ''
       @pos = 0
+      @historyPos = -1
       inputModalArgs = text: @prompt + @cursor
       inputModalArgs.icon = @icon if @icon?
       @inputModal = Modal.build inputModalArgs
@@ -631,31 +633,38 @@ class InputMode extends Mode
       k = k.toLowerCase() # normalize
       switch k
         when 'escape' then @stop()
-        when 'up', 'down' then null # ignore these
         else @update if shift then SHIFT_KEYS[k] or k else k
 
   # Update command state and modal from key event
   update: (k) ->
     submitting = false
     switch k
-      when 'return' then submitting = true
-      when 'left' then @setPos @pos - 1
-      when 'right' then @setPos @pos + 1
+      when 'return'
+        submitting = true
+
+        # Add to history
+        if not @history.length or @history[0] != @input
+          @history.unshift @input
+        @historyPos = -1
+      when 'down' then @moveHistory -1
+      when 'up' then @moveHistory 1
+      when 'left' then @movePos -1
+      when 'right' then @movePos 1
       when 'delete'
         @input = @input.remove @pos - 1
-        @setPos @pos - 1
+        @movePos 1
       when 'space'
         @input = @input.insert ' ', @pos
-        @setPos @pos + 1
+        @movePos 1
       else
         @input = @input.insert k, @pos
-        @setPos @pos + 1
+        @movePos 1
 
     # Run the action and reset position accordingly
     [input, @output] = @action @input, submitting
-    if input?
-      @pos = input.length if input != @input
+    if input? and input != @input
       @input = input
+      @pos = input.length
 
     # Set modals' text
     @inputModal.setText(@prompt + @input.insert @cursor, @pos).center()
@@ -664,9 +673,19 @@ class InputMode extends Mode
     else
       @outputModal.close()
 
-  # Set the cursor position with bounds handling
-  setPos: (i) ->
-    @pos = Math.max 0, Math.min @input.length, i
+  # Move the cursor position with bounds handling
+  movePos: (d) ->
+    @pos = Math.min @input.length, Math.max 0, @pos + d
+
+  # Move the history position and set input
+  moveHistory: (d) ->
+    # Save current line
+    if @historyPos == -1
+      @current = @input
+
+    @historyPos = Math.min @history.length - 1, Math.max -1, @historyPos + d
+    @input = if @historyPos == -1 then @current else @history[@historyPos]
+    @pos = @input.length
 
 # Window chaining
 class ChainWindow
