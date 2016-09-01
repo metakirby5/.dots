@@ -2,7 +2,7 @@
 export VISUAL=vim                                   # vim > emacs
 export EDITOR=$VISUAL                               # part 2
 export LS_COLORS='di=01;34:'                        # Folders are blue
-export LESS_TERMCAP_md="$(tput bold; tput setaf 3)" # Yellow headers in less
+export LESS_TERMCAP_md="$(echo -ne '\033[1;33m')"   # Yellow headers in less
 
 # Completion
 shopt -s cdspell              # autocorrect cd
