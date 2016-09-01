@@ -664,7 +664,7 @@ class InputMode extends Mode
             submitting = true
 
             # Add to history
-            if not @history.length or @history[0] != @input
+            if not @history.length or (@input and @history[0] != @input)
               @history.unshift @input
             @historyPos = -1
           when 'down' then @moveHistory 1
@@ -1053,7 +1053,7 @@ evalInput = modes.add new InputMode (input, returnPressed) ->
   # Set input and output
   [
     ((if instant then p.eval.instantPrefix else '') +
-      output if returnPressed) or input,
+     (output ? '') if returnPressed) or input,
     (err or output or p.eval.progressStr if instant)
   ]
 , p.eval.icon
