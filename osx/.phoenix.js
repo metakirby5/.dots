@@ -381,8 +381,10 @@ class Mode extends EventEmitter
     @active = true
 
     # Capture all keys
-    @binds = _.flatten ALL_KEYS.map (k) => [[], ['shift']].map (mod) =>
-        Key.on k, mod, => @emit 'key', k, mod.equals ['shift']
+    @binds = _.flatten ALL_KEYS.map (k) => [
+      [], ['shift'], ['ctrl']
+    ].map (mod) =>
+      Key.on k, mod, => @emit 'key', k, _.first mod
 
     # Stop on stopEvents
     @events = @stopEvents.map (e) => Event.on e, => @stop()
@@ -537,7 +539,7 @@ class HintMode extends Mode
       delete @len
 
     # Handle key event
-    @on 'key', (k, @shift) =>
+    @on 'key', (k, @mod) =>
       switch k
         when @kStop then @stop()
         when @kPop then @pop()
@@ -585,7 +587,7 @@ class HintMode extends Mode
       @stop()
 
       # Do action
-      @action obj, @shift
+      @action obj, @mod
 
     # Otherwise, update texts and only show hints under state
     else
@@ -629,36 +631,55 @@ class InputMode extends Mode
       @outputModal?.close()
 
     # Handle keypress
-    @on 'key', (k, shift) =>
+    @on 'key', (k, @mod) =>
       k = k.toLowerCase() # normalize
       switch k
         when 'escape' then @stop()
-        else @update if shift then SHIFT_KEYS[k] or k else k
+        else @update if @mod =='shift' then SHIFT_KEYS[k] or k else k
 
   # Update command state and modal from key event
   update: (k) ->
     submitting = false
-    switch k
-      when 'return'
-        submitting = true
+    switch @mod
 
-        # Add to history
-        if not @history.length or @history[0] != @input
-          @history.unshift @input
-        @historyPos = -1
-      when 'down' then @moveHistory -1
-      when 'up' then @moveHistory 1
-      when 'left' then @movePos -1
-      when 'right' then @movePos 1
-      when 'delete'
-        @input = @input.remove @pos - 1
-        @movePos 1
-      when 'space'
-        @input = @input.insert ' ', @pos
-        @movePos 1
+      # Readline controls
+      when 'ctrl'
+        switch k
+          when 'a' then @pos = 0
+          when 'e' then @pos = @input.length
+          when 'b' then @movePos -1
+          when 'f' then @movePos 1
+          when 'p' then @moveHistory -1
+          when 'n' then @moveHistory 1
+          when 'u'
+            @input = @input.substr @pos
+            @pos = 0
+          when 'k'
+            @input = @input.substr 0, @pos
+
+      # Text
       else
-        @input = @input.insert k, @pos
-        @movePos 1
+        switch k
+          when 'return'
+            submitting = true
+
+            # Add to history
+            if not @history.length or @history[0] != @input
+              @history.unshift @input
+            @historyPos = -1
+          when 'down' then @moveHistory -1
+          when 'up' then @moveHistory 1
+          when 'left' then @movePos -1
+          when 'right' then @movePos 1
+          when 'delete'
+            @input = @input.remove @pos - 1
+            @movePos 1
+          when 'space'
+            @input = @input.insert ' ', @pos
+            @movePos 1
+          else
+            @input = @input.insert k, @pos
+            @movePos 1
 
     # Run the action and reset position accordingly
     [input, @output] = @action @input, submitting
@@ -1009,8 +1030,8 @@ modes = new ModeManager()
 winHint = modes.add new HintMode Window.recent, (w) ->
   (new ChainWindow w).focus().mouseTo()
 
-scrHint = modes.add new HintMode Screen.all, (s, shift) ->
-  if shift
+scrHint = modes.add new HintMode Screen.all, (s, mod) ->
+  if mod == 'shift'
     cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
