@@ -17,10 +17,14 @@ if which fzf &>/dev/null; then
   export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview="
   export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview="
 
-  # Brew-install settings
+  # Get location of fzf install
   if [ "$(uname)" == "Darwin" ]; then
     fzf_opt="$(brew --prefix)/opt/fzf"
+  else
+    fzf_opt=~/.fzf/shell
+  fi
 
+  if [ -d "$fzf_opt" ]; then
     # Auto-completion
     [[ $- == *i* ]] && source "$fzf_opt/shell/completion.bash" 2>/dev/null
 
