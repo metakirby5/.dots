@@ -10,7 +10,7 @@ brew 'gcc'
 brew 'gifsicle'
 brew 'git'
 brew 'gnu-sed', args: ['with-default-names']
-brew 'gnupg'
+brew 'gnupg2'
 brew 'homebrew/completions/brew-cask-completion'
 brew 'homebrew/science/r'
 brew 'htop'
