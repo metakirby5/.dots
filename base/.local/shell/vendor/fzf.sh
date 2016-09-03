@@ -1,3 +1,6 @@
+# Add fzf to path if installed locally
+[ -d ~/.fzf/bin ] && export PATH="$PATH:$HOME/.fzf/bin"
+
 if which fzf &>/dev/null; then
   # Show hidden files
   export FZF_DEFAULT_COMMAND='(\
@@ -21,8 +24,7 @@ if which fzf &>/dev/null; then
   if [ "$(uname)" == "Darwin" ]; then
     fzf_opt="$(brew --prefix)/opt/fzf"
   else
-    fzf_opt=~/.fzf/shell
-    export PATH="$PATH:$HOME/.fzf/bin"
+    fzf_opt=~/.fzf
   fi
 
   if [ -d "$fzf_opt" ]; then
