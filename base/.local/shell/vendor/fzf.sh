@@ -22,6 +22,7 @@ if which fzf &>/dev/null; then
     fzf_opt="$(brew --prefix)/opt/fzf"
   else
     fzf_opt=~/.fzf/shell
+    export PATH="$PATH:$HOME/.fzf/bin"
   fi
 
   if [ -d "$fzf_opt" ]; then
