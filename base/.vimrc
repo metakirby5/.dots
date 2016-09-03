@@ -255,18 +255,20 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'sheerun/vim-polyglot'
     " }}}
     " Fuzzy find engine {{{
-      Plug 'junegunn/fzf.vim'
-        \, { 'on': [
-        \ 'History',
-        \ 'Files',
-        \ 'Ag',
-        \ 'Lines',
-        \ 'History',
-        \ 'Commands',
-        \ 'Tags',
-        \ 'Helptags',
-        \ 'GFiles',
-        \ 'GGrep'] }
+      Plug 'junegunn/fzf'
+            \, { 'do': './install --bin' }
+            \| Plug 'junegunn/fzf.vim'
+              \, { 'on': [
+              \ 'History',
+              \ 'Files',
+              \ 'Ag',
+              \ 'Lines',
+              \ 'History',
+              \ 'Commands',
+              \ 'Tags',
+              \ 'Helptags',
+              \ 'GFiles',
+              \ 'GGrep'] }
 
       let g:fzf_files_options =
             \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
