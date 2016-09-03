@@ -389,7 +389,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:AutoPairsMultilineClose = 0
     " }}}
     " Auto-generate ctags {{{
-      if (version >= 704)
+      if version >= 704 && executable('ctags')
         Plug 'ludovicchabant/vim-gutentags'
       endif
     " }}}
