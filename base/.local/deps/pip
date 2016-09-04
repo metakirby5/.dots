@@ -1,6 +1,5 @@
 BeautifulSoup
-Jinja2
-Pillow
+colorz
 fuzzywuzzy
 gnureadline
 greenlet
@@ -12,10 +11,9 @@ pip-autoremove
 pipdeptree
 pushbullet-cli
 python-Levenshtein
-scipy
 trollius
 vboxapi
 virtualenvwrapper
 wheel
-whizkers
 wsgiref
+zenbu
