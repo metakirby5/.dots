@@ -5,28 +5,29 @@
 	excludesfile = ~/.config/git/ignore          # global ignore
 	whitespace = space-before-tab,trailing-space # error on bad whitespace
 [push]
-	default = upstream       # push to upstream
+	default = upstream         # push to upstream
 [merge]
-	defaultToUpstream = true # merge with upstream by default
-	log = true               # summary on merge
+	defaultToUpstream = true   # merge with upstream by default
+	log = true                 # summary on merge
 [rebase]
-	autosquash = true        # reposition fixups
+	autosquash = true          # reposition fixups
 [branch]
-	autosetuprebase = always # rebase on pull, not merge
+	autosetuprebase = always   # rebase on pull, not merge
 [apply]
- 	whitespace = fix         # fix whitespace when applying patches
+ 	whitespace = fix           # fix whitespace when applying patches
 [diff]
-	renames = copies         # detect renames and copies
+	renames = copies           # detect renames and copies
+	compactionHeuristic = true # improve diffs
 [diff "bin"]
-	textconv = hexdump -v -C # diff binaries by hexdump
+	textconv = hexdump -v -C   # diff binaries by hexdump
 [grep]
-	lineNumber = true        # show line number in output
-	fullName = true          # filenames are relative to VCS root
+	lineNumber = true          # show line number in output
+	fullName = true            # filenames are relative to VCS root
 [rerere]
-	enabled = true           # remember past conflict resolutions
+	enabled = true             # remember past conflict resolutions
 [log]
-	date = local             # use local time
-	decorate = short         # show refs
+	date = local               # use local time
+	decorate = short           # show refs
 [color]
 	ui = auto
 	diff = auto
