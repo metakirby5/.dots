@@ -33,7 +33,7 @@ __mk5_char_ahead='^'
 __mk5_char_no_up='!'
 
 __mk5_hostname="${HOSTNAME%%.*}"
-__mk5_home="$(readlink -f "$HOME" 2>/dev/null || echo "$HOME")"
+__mk5_home="$HOME"
 
 __mk5_set_prompt() {
   # Grab status code first
@@ -90,7 +90,7 @@ __mk5_set_prompt() {
   if [ "$git_path" ]; then
     # Replace git path
     git_base="$(basename "$git_path")"
-    mypwd="$git_base$(perl -pe "s|^$git_path||i" <<< "$(pwd -P)")"
+    mypwd="$git_base$(perl -pe "s|^$git_path||i" <<< "$mypwd")"
 
     # Get branch
     read git_info < "$git_path/.git/HEAD"
