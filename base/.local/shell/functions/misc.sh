@@ -55,6 +55,7 @@ install-leaves() {
         fi
     done
 
+    echo
 }
 
 # cd with smart ... handling
