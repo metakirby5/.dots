@@ -33,6 +33,7 @@ install-leaves() {
         [brew]="brew bundle --file=-"
         [pip]="xargs pip install --upgrade"
         [npm]="xargs npm install -g"
+        [gem]="xargs gem install"
     )
 
     for src in "$DEPS_DIR"/*; do
