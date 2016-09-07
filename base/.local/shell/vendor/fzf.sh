@@ -4,7 +4,6 @@
 if which fzf &>/dev/null; then
   # Show hidden files
   export FZF_DEFAULT_COMMAND='(\
-    git ls-tree -r --name-only HEAD ||\
     ag --hidden -l ||\
     find -L . ! -type d | cut -c3- | tail -n+2\
     ) 2>/dev/null'
