@@ -55,11 +55,11 @@ p =
       , 'mouseDidRightClick' ]
     cursor: 'ˌ'
   eval:
-    icon: App.get('Phoenix').icon()
+    prompt: '> '
     instantPrefix: '@'
     progressStr: '…'
   shell:
-    icon: App.get('iTerm2').icon()
+    prompt: '$ '
     bin: '/usr/local/bin/bash'
     rc: '~/.bashrc'
   keys:
@@ -69,8 +69,8 @@ p =
     spaceAll: 's'
     winHintMode: 'y'
     scrHintMode: 's'
-    evalInputMode: 'return'
-    shellInputMode: '\\'
+    evalInputMode: '\\'
+    shellInputMode: 'return'
     status: 'i'
     snaps:
       q:    [-1/2, -1/2]
@@ -608,7 +608,7 @@ class HintMode extends Mode
 # Mode for inputting text
 class InputMode extends Mode
   # @action is (@input, specialKey) -> [input, output, exit]
-  constructor: (@action, @icon = null, @prompt = '',
+  constructor: (@prompt, @action,
       @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
     super @stopEvents
     @history = []
@@ -618,9 +618,7 @@ class InputMode extends Mode
       @input = ''
       @pos = 0
       @historyPos = -1
-      inputModalArgs = text: @prompt + @cursor
-      inputModalArgs.icon = @icon if @icon?
-      @inputModal = Modal.build inputModalArgs
+      @inputModal = Modal.build text: @prompt + @cursor
       @inputModal.center().show()
 
       @output = ''
@@ -1045,7 +1043,7 @@ scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   else
     s.mouseTo()
 
-evalInput = modes.add new InputMode (input, specialKey) ->
+evalInput = modes.add new InputMode p.eval.prompt, (input, specialKey) ->
   instant = (input.charAt 0) == p.eval.instantPrefix
   command = if instant then input.substr 1 else input
   returnPressed = specialKey == 'return'
@@ -1063,16 +1061,14 @@ evalInput = modes.add new InputMode (input, specialKey) ->
   [ (if instant then p.eval.instantPrefix else '') +
     ((output if returnPressed) ? command)
   , (err or output or p.eval.progressStr if instant) ]
-, p.eval.icon
 
-shellInput = modes.add new InputMode (input, specialKey) ->
+shellInput = modes.add new InputMode p.shell.prompt, (input, specialKey) ->
   returnPressed = specialKey == 'return'
   if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Phoenix.notify r.output or r.error
       Phoenix.log r.error if r.error
   [(if returnPressed then '' else input), null, returnPressed]
-, p.shell.icon
 
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
