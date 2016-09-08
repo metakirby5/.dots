@@ -255,7 +255,7 @@ Screen::hint = (seq) ->
   hint
 
 Screen::mouseTo = ->
-  f = this.flippedFrame()
+  f = @flippedFrame()
   Mouse.move
     x: f.x + f.width / 2
     y: f.y + f.height / 2
@@ -275,8 +275,8 @@ Window::hint = (seq) ->
   text = seq
 
   # If more than one app window visible, show title
-  if this.app().windows(visible: true).length > 1
-    title = this.title()
+  if @app().windows(visible: true).length > 1
+    title = @title()
     # If title length is too long, truncate
     if title.length > titleLength
       title = (title.substr 0, titleLength - titleCont.length) + titleCont
@@ -285,7 +285,7 @@ Window::hint = (seq) ->
   # Build a modal centered within the window
   hint = Modal.build
     text: text
-    icon: this.app().icon()
+    icon: @app().icon()
     origin: (mf) ->
       x: (Math.min (
         Math.max f.x + f.width / 2 - mf.width / 2, sf.x
@@ -312,7 +312,7 @@ Modal.build = (props = {}) ->
 
 Modal::_show = Modal::show
 Modal::show = ->
-  Modal::open = _.without(@open, this)
+  Modal::open = _.without @open, this
   while _.some(@open.map (m) =>
       intersects @frame(), m.frame(), p.modals.gap)
     @origin =
@@ -325,7 +325,7 @@ Modal::show = ->
 Modal::_close = Modal::close
 Modal::close = ->
   Timer.off @mt if @mt?
-  Modal::open = _.without(@open, this)
+  Modal::open = _.without @open, this
   @_close()
   this
 
