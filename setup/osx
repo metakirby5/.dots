@@ -39,7 +39,7 @@ fi
 
 echo "Stowing base and osx..."
 cd "$DOTS"
-stow base osx
+stow base osx --no-folding
 
 echo "Installing brew dependencies..."
 brew bundle --file=- < "$DEPS/brew"
