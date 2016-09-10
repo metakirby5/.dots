@@ -1,5 +1,7 @@
+bower
 castnow
 coffee-script
+elm
 git-open
 gulp
 http-server
@@ -8,3 +10,4 @@ npm
 pug-cli
 stylus
 webpack
+webpack-dev-server
