@@ -200,8 +200,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:ulti_expand_or_jump_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippet()
-          return g:ulti_expand_res ? "" :
-                \ (pumvisible() ? "\<c-y>" : "\<cr>")
+          return g:ulti_expand_res ? "" : "\<cr>"
         endfunction
 
         " Custom completions
