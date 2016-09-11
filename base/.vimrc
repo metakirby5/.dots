@@ -176,8 +176,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         Plug 'SirVer/ultisnips'
               \| Plug 'honza/vim-snippets'
         let g:UltiSnipsExpandTrigger = '<c-bslash>'
-        let g:UltiSnipsJumpForwardTrigger = '<c-n>'
-        let g:UltiSnipsJumpBackwardTrigger = '<c-p>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+        let g:UltiSnipsJumpForwardTrigger = '<c-j>'
       endif
     " }}}
     " Emojis {{{
@@ -197,7 +197,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \. "\<bs>"
         inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
-        let g:ulti_expand_or_jump_res = 0
+        let g:ulti_expand_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippet()
           return g:ulti_expand_res ? "" : "\<cr>"
@@ -352,8 +352,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'terryma/vim-multiple-cursors'
       let g:multi_cursor_use_default_mapping=0
       let g:multi_cursor_next_key='<C-c>'
-      let g:multi_cursor_prev_key='<C-p>'
-      let g:multi_cursor_skip_key='<C-n>'
+      let g:multi_cursor_prev_key='<C-k>'
+      let g:multi_cursor_skip_key='<C-j>'
       let g:multi_cursor_quit_key='<Esc>'
 
       function! Multiple_cursors_before()
