@@ -2,5 +2,7 @@
 # Assumes a file with the name of the directory in $DOTS is located
 # in $LOCAL/stowed, for each stowed dotfile set.
 
+[ -z "$DOTS" -o -z "$LOCAL" ] && exit 1
+
 cd "$DOTS"
 stow -R $(ls "$LOCAL/stowed") --no-folding
