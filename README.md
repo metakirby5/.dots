@@ -105,7 +105,7 @@ For OS X, use the system theme.
 ### All platforms
 
 - Clone this repo into `~/.dots`.
-- Add `source ~/.posixrc` to the appropriate files
+- Add `source ~/.linker` to the appropriate files
   (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
 - Install packages from language-specific managers.

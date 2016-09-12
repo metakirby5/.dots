@@ -50,8 +50,8 @@ grep '/usr/local/bin/bash' /etc/shells &>/dev/null ||
 chsh -s /usr/local/bin/bash
 
 echo "Modifying ~/.bashrc and ~/.bash_profile..."
-grep 'source ~/.posixrc' ~/.bashrc ||
-  cat >> ~/.bashrc <<< 'source ~/.posixrc'
+grep 'source ~/.linker' ~/.bashrc ||
+  cat >> ~/.bashrc <<< 'source ~/.linker'
 grep 'source ~/.bashrc' ~/.bash_profile ||
   cat >> ~/.bash_profile <<< 'source ~/.bashrc'
 source ~/.bashrc
