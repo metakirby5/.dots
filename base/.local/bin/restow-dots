@@ -3,6 +3,4 @@
 # in $LOCAL/stowed, for each stowed dotfile set.
 
 [ -z "$DOTS" -o -z "$LOCAL" ] && exit 1
-
-cd "$DOTS"
-stow -R $(ls "$LOCAL/stowed") --no-folding
+stow -R -d "$DOTS" -t "$HOME" --no-folding $(ls "$LOCAL/stowed")
