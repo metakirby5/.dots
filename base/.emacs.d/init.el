@@ -1,21 +1,21 @@
 ; Packages
-(require 'package) ; {{{
-  ; Define repos
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(require 'package)
 
-  ; Activate packages
-  (package-initialize)
+; Define repos
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-  ; Fetch packages
-  (or (file-exists-p package-user-dir) (package-refresh-contents))
+; Activate packages
+(package-initialize)
 
-  ; Helper to install and require
-  (defun pkg (p &rest body)
-    (unless (require p nil t)
-      (package-install p)
-      (require p))
-    body)
-; }}}
+; Fetch packages
+(or (file-exists-p package-user-dir) (package-refresh-contents))
+
+; Helper to install and require
+(defun pkg (p &rest body)
+(unless (require p nil t)
+    (package-install p)
+    (require p))
+body)
 
 (pkg 'mouse
   (xterm-mouse-mode t)
@@ -36,7 +36,23 @@
   (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
 
   ; Backtab = jump backwards
-  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward))
+  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
+
+  ; Preserve visual mode
+  (defun evil-shift-left-visual ()
+    (interactive)
+    (evil-shift-left (region-beginning) (region-end))
+    (evil-normal-state)
+    (evil-visual-restore))
+
+  (defun evil-shift-right-visual ()
+    (interactive)
+    (evil-shift-right (region-beginning) (region-end))
+    (evil-normal-state)
+      (evil-visual-restore))
+
+  (define-key evil-visual-state-map (kbd ">") 'evil-shift-right-visual)
+  (define-key evil-visual-state-map (kbd "<") 'evil-shift-left-visual))
 
 (pkg 'evil-leader
   (global-evil-leader-mode)
@@ -85,8 +101,6 @@
 
 ; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
-(defvaralias 'c-basic-offset 'tab-width)
-(defvaralias 'cperl-indent-level 'tab-width)
 
 ; Settings
 (let
