@@ -12,88 +12,88 @@
 
 ; Helper to install and require
 (defun pkg (p &rest body)
-(unless (require p nil t)
+  (unless (require p nil t)
     (package-install p)
     (require p))
-body)
+  body)
 
 (pkg 'mouse
-  (xterm-mouse-mode t)
-  (global-set-key [mouse-4] (lambda ()
-                              (interactive)
-                              (scroll-down 1)))
-  (global-set-key [mouse-5] (lambda ()
-                              (interactive)
-                              (scroll-up 1)))
-  (defun track-mouse (e))
-  (setq mouse-sel-mode t))
+     (xterm-mouse-mode t)
+     (global-set-key [mouse-4] (lambda ()
+                                 (interactive)
+                                 (scroll-down 1)))
+     (global-set-key [mouse-5] (lambda ()
+                                 (interactive)
+                                 (scroll-up 1)))
+     (defun track-mouse (e))
+     (setq mouse-sel-mode t))
 
 (pkg 'evil
-  (evil-mode 1)
+     (evil-mode 1)
 
-  ; Swap ; and :
-  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-  (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
+     ; Swap ; and :
+     (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+     (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
 
-  ; Backtab = jump backwards
-  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
+     ; Backtab = jump backwards
+     (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
 
-  ; Preserve visual mode
-  (defun evil-shift-left-visual ()
-    (interactive)
-    (evil-shift-left (region-beginning) (region-end))
-    (evil-normal-state)
-    (evil-visual-restore))
+     ; Preserve visual mode
+     (defun evil-shift-left-visual ()
+       (interactive)
+       (evil-shift-left (region-beginning) (region-end))
+       (evil-normal-state)
+       (evil-visual-restore))
 
-  (defun evil-shift-right-visual ()
-    (interactive)
-    (evil-shift-right (region-beginning) (region-end))
-    (evil-normal-state)
-      (evil-visual-restore))
+     (defun evil-shift-right-visual ()
+       (interactive)
+       (evil-shift-right (region-beginning) (region-end))
+       (evil-normal-state)
+       (evil-visual-restore))
 
-  (define-key evil-visual-state-map (kbd ">") 'evil-shift-right-visual)
-  (define-key evil-visual-state-map (kbd "<") 'evil-shift-left-visual))
+     (define-key evil-visual-state-map (kbd ">") 'evil-shift-right-visual)
+     (define-key evil-visual-state-map (kbd "<") 'evil-shift-left-visual))
 
 (pkg 'evil-leader
-  (global-evil-leader-mode)
-  (evil-leader/set-leader "<SPC>"))
+     (global-evil-leader-mode)
+     (evil-leader/set-leader "<SPC>"))
 
 (pkg 'helm
-  (pkg 'helm-config)
-  (helm-mode 1)
+     (pkg 'helm-config)
+     (helm-mode 1)
 
-  ; Replace keybinds with helm equivalents
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+     ; Replace keybinds with helm equivalents
+     (global-set-key (kbd "M-x") 'helm-M-x)
+     (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
+     (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-  ; Fuzzy all the things
-  (setq
-    helm-mode-fuzzy-match t
-    helm-completion-in-region-fuzzy-match t
-    helm-recentf-fuzzy-match t
-    helm-buffers-fuzzy-matching t
-    helm-recentf-fuzzy-match t
-    helm-buffers-fuzzy-matching t
-    helm-locate-fuzzy-match t
-    helm-M-x-fuzzy-match t
-    helm-semantic-fuzzy-match t
-    helm-imenu-fuzzy-match t
-    helm-apropos-fuzzy-match t
-    helm-lisp-fuzzy-completion t))
+     ; Fuzzy all the things
+     (setq
+       helm-mode-fuzzy-match t
+       helm-completion-in-region-fuzzy-match t
+       helm-recentf-fuzzy-match t
+       helm-buffers-fuzzy-matching t
+       helm-recentf-fuzzy-match t
+       helm-buffers-fuzzy-matching t
+       helm-locate-fuzzy-match t
+       helm-M-x-fuzzy-match t
+       helm-semantic-fuzzy-match t
+       helm-imenu-fuzzy-match t
+       helm-apropos-fuzzy-match t
+       helm-lisp-fuzzy-completion t))
 
 (pkg 'auto-complete
-  (ac-config-default))
+     (ac-config-default))
 
 (pkg 'smart-mode-line
-  (setq
-    sml/no-confirm-load-theme t
-    sml/theme 'respectful)
-  (sml/setup))
+     (setq
+       sml/no-confirm-load-theme t
+       sml/theme 'respectful)
+     (sml/setup))
 
 (pkg 'git-gutter
-  (global-git-gutter-mode t)
-  (git-gutter:linum-setup))
+     (global-git-gutter-mode t)
+     (git-gutter:linum-setup))
 
 ; General
 (menu-bar-mode -1) ; Disable toolbar
