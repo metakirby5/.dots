@@ -34,6 +34,9 @@
   ; Swap ; and :
   (define-key evil-normal-state-map (kbd ";") 'evil-ex)
   (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
+
+  ; Backtab = jump backwards
+  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
 ; }}}
 
 (pkg 'evil-leader) ; {{{
@@ -93,6 +96,9 @@
         (make-directory dir)))
     (list backupdir))
   (setq
+    ; System
+    vc-follow-symlinks t
+
     ; Appearance
     inhibit-startup-screen t
     scroll-step 1
