@@ -382,7 +382,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ '[': ']',
             \ '{': '}',
             \ '"': '"',
-            \ '`': '`',
             \ }
       let g:AutoPairsShortcutToggle = ''
       let g:AutoPairsShortcutFastWrap = '<c-l>'

@@ -74,8 +74,15 @@
 ; }}}
 
 (pkg 'smart-mode-line) ; {{{
-  (setq sml/no-confirm-load-theme t)
+  (setq
+    sml/no-confirm-load-theme t
+    sml/theme 'respectful)
   (sml/setup)
+; }}}
+
+(pkg 'git-gutter) ; {{{
+  (global-git-gutter-mode t)
+  (git-gutter:linum-setup)
 ; }}}
 
 ; General
@@ -87,14 +94,16 @@
 
 ; Settings
 (let
-  ((backupdir (concat user-emacs-directory "backups/")))
+  ((backupdir (concat user-emacs-directory "backups/"))
+   (undodir (concat user-emacs-directory "undo/")))
 
   ; Make required directories
   (mapc
     (lambda (dir)
       (unless (file-exists-p dir)
         (make-directory dir)))
-    (list backupdir))
+    `(,backupdir ,undodir))
+
   (setq
     ; System
     vc-follow-symlinks t
@@ -107,6 +116,10 @@
     ; Whitespace
     tab-width 2
     indent-tabs-mode nil
+
+    ; Persistent undo
+    undo-tree-auto-save-history t
+    undo-tree-history-directory-alist `(("." . ,undodir))
 
     ; Backups
     backup-directory-alist `((".*" . ,backupdir))
