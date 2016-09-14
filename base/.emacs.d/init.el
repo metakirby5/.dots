@@ -31,6 +31,9 @@
 (pkg 'evil
      (evil-mode 1)
 
+     ;; Keep Vim ctrl-u
+     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+
      ;; Swap ; and :
      (define-key evil-normal-state-map (kbd ";") 'evil-ex)
      (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
@@ -83,6 +86,10 @@
       helm-lisp-fuzzy-completion t))
 
 (pkg 'auto-complete
+     (setq ac-delay 0
+	   ac-quick-help-delay 0
+	   ac-auto-show-menu t)
+     (global-set-key (kbd "<backtab>") 'ac-previous)
      (ac-config-default))
 
 (pkg 'smart-mode-line
