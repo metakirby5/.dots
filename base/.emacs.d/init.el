@@ -10,13 +10,14 @@
   (or (file-exists-p package-user-dir) (package-refresh-contents))
 
   ; Helper to install and require
-  (defun pkg (p)
+  (defun pkg (p &rest body)
     (unless (require p nil t)
       (package-install p)
-      (require p)))
+      (require p))
+    body)
 ; }}}
 
-(pkg 'mouse) ; {{{
+(pkg 'mouse
   (xterm-mouse-mode t)
   (global-set-key [mouse-4] (lambda ()
                               (interactive)
@@ -25,10 +26,9 @@
                               (interactive)
                               (scroll-up 1)))
   (defun track-mouse (e))
-  (setq mouse-sel-mode t)
-; }}}
+  (setq mouse-sel-mode t))
 
-(pkg 'evil) ; {{{
+(pkg 'evil
   (evil-mode 1)
 
   ; Swap ; and :
@@ -36,15 +36,13 @@
   (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
 
   ; Backtab = jump backwards
-  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
-; }}}
+  (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward))
 
-(pkg 'evil-leader) ; {{{
+(pkg 'evil-leader
   (global-evil-leader-mode)
-  (evil-leader/set-leader "<SPC>")
-; }}}
+  (evil-leader/set-leader "<SPC>"))
 
-(pkg 'helm) ; {{{
+(pkg 'helm
   (pkg 'helm-config)
   (helm-mode 1)
 
@@ -66,24 +64,20 @@
     helm-semantic-fuzzy-match t
     helm-imenu-fuzzy-match t
     helm-apropos-fuzzy-match t
-    helm-lisp-fuzzy-completion t)
-; }}}
+    helm-lisp-fuzzy-completion t))
 
-(pkg 'auto-complete) ; {{{
-  (ac-config-default)
-; }}}
+(pkg 'auto-complete
+  (ac-config-default))
 
-(pkg 'smart-mode-line) ; {{{
+(pkg 'smart-mode-line
   (setq
     sml/no-confirm-load-theme t
     sml/theme 'respectful)
-  (sml/setup)
-; }}}
+  (sml/setup))
 
-(pkg 'git-gutter) ; {{{
+(pkg 'git-gutter
   (global-git-gutter-mode t)
-  (git-gutter:linum-setup)
-; }}}
+  (git-gutter:linum-setup))
 
 ; General
 (menu-bar-mode -1) ; Disable toolbar
@@ -91,6 +85,8 @@
 
 ; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 
 ; Settings
 (let
