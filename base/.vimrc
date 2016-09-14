@@ -76,10 +76,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Themed rainbow parens {{{
       Plug 'junegunn/rainbow_parentheses.vim'
-            \, { 'for': [
-            \ 'lisp',
-            \ 'clojure',
-            \ 'scheme' ] }
+            \, { 'on': 'RainbowParentheses' }
       augroup PLUG_RAINBOW_PARENTHESES
         au!
         au FileType lisp,clojure,scheme RainbowParentheses
