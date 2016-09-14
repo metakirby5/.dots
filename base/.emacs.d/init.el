@@ -7,12 +7,10 @@
 ;; Activate packages
 (package-initialize)
 
-;; Fetch packages
-(or (file-exists-p package-user-dir) (package-refresh-contents))
-
 ;; Helper to install and require
 (defun pkg (p)
   (unless (require p nil t)
+    (package-refresh-contents)
     (package-install p)
     (require p)))
 
@@ -67,36 +65,36 @@
 	      (global-evil-surround-mode 1))
 
        (progn (pkg 'evil-mc)
-	      (global-evil-mc-mode 1)))
+	      (global-evil-mc-mode 1))
 
-(progn (pkg 'helm)
-       (progn (pkg 'helm-config)
-	      (helm-mode 1))
+       (progn (pkg 'evil-commentary)
+	      (evil-commentary-mode)))
 
-       ;; Replace keybinds with helm equivalents
-       (global-set-key (kbd "M-x") 'helm-M-x)
-       (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
-       (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-       ;; Fuzzy all the things
+(progn (pkg 'ivy) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
+       (ivy-mode 1)
        (setq
-	helm-mode-fuzzy-match t
-	helm-completion-in-region-fuzzy-match t
-	helm-recentf-fuzzy-match t
-	helm-buffers-fuzzy-matching t
-	helm-recentf-fuzzy-match t
-	helm-buffers-fuzzy-matching t
-	helm-locate-fuzzy-match t
-	helm-M-x-fuzzy-match t
-	helm-semantic-fuzzy-match t
-	helm-imenu-fuzzy-match t
-	helm-apropos-fuzzy-match t
-	helm-lisp-fuzzy-completion t))
+	ivy-use-virtual-buffers t
+	ivy-initial-inputs-alist nil
+	ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
+				(t . ivy--regex-fuzzy)))
+       (define-key evil-normal-state-map "\C-s" 'swiper)
+       (define-key evil-normal-state-map (kbd "C-c C-r") 'ivy-resume)
+       (define-key evil-normal-state-map (kbd "<f6>") 'ivy-resume)
+       (define-key evil-normal-state-map (kbd "M-x") 'counsel-M-x)
+       (define-key evil-normal-state-map (kbd "C-x C-f") 'counsel-find-file)
+       (define-key evil-normal-state-map (kbd "<f1> f") 'counsel-describe-function)
+       (define-key evil-normal-state-map (kbd "<f1> v") 'counsel-describe-variable)
+       (define-key evil-normal-state-map (kbd "<f1> l") 'counsel-load-library)
+       (define-key evil-normal-state-map (kbd "<f2> i") 'counsel-info-lookup-symbol)
+       (define-key evil-normal-state-map (kbd "<f2> u") 'counsel-unicode-char)
+       (define-key evil-normal-state-map (kbd "C-c g") 'counsel-git)
+       (define-key evil-normal-state-map (kbd "C-c j") 'counsel-git-grep)
+       (define-key evil-normal-state-map (kbd "C-c k") 'counsel-ag)
+       (define-key evil-normal-state-map (kbd "C-x l") 'counsel-locate)
+       (define-key evil-normal-state-map (kbd "C-S-o") 'counsel-rhythmbox)
+       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (progn (pkg 'auto-complete)
-       (setq ac-delay 1
-	     ac-quick-help-delay 1
-	     ac-auto-show-menu t)
        (global-set-key (kbd "<backtab>") 'ac-previous)
        (ac-config-default))
 
