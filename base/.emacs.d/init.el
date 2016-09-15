@@ -114,9 +114,11 @@
        (setq-default which-key-idle-delay 0.5)
        (which-key-mode))
 
-(progn (pkg 'auto-complete)
-       (global-set-key (kbd "<backtab>") 'ac-previous)
-       (ac-config-default))
+(progn (pkg 'auto-complete) (pkg 'fuzzy)
+       (ac-config-default)
+       (setq-default ac-use-fuzzy t)
+       (define-key ac-mode-map (kbd "TAB") 'auto-complete)
+       (define-key ac-mode-map (kbd "<backtab>") 'ac-previous))
 
 (progn (pkg 'flycheck)
        (global-flycheck-mode))
