@@ -25,6 +25,12 @@
        (defun track-mouse (e))
        (setq-default mouse-sel-mode t))
 
+(progn (pkg 'whitespace)
+       (global-whitespace-mode)
+       (setq-default
+        whitespace-line-column 78
+        whitespace-style '(face trailing tabs lines-tail)))
+
 (progn (pkg 'saveplace)
        (setq-default save-place t))
 
