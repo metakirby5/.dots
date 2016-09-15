@@ -14,23 +14,6 @@
     (package-install p)
     (require p)))
 
-(progn (pkg 'mouse)
-       (xterm-mouse-mode t)
-       (global-set-key [mouse-4] (lambda ()
-                                   (interactive)
-                                   (scroll-down 1)))
-       (global-set-key [mouse-5] (lambda ()
-                                   (interactive)
-                                   (scroll-up 1)))
-       (defun track-mouse (e))
-       (setq-default mouse-sel-mode t))
-
-(progn (pkg 'whitespace)
-       (global-whitespace-mode)
-       (setq-default
-        whitespace-line-column 78
-        whitespace-style '(face trailing tabs lines-tail)))
-
 (progn (pkg 'saveplace)
        (setq-default save-place t))
 
@@ -143,12 +126,17 @@
         '(git-gutter:added-sign "+ ")
         '(git-gutter:deleted-sign "- ")))
 
+(progn (pkg 'aggressive-indent)
+       (global-aggressive-indent-mode 1))
+
 (progn (pkg 'rainbow-delimiters)
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 ;; General
 (menu-bar-mode -1) ;; Disable toolbar
 (global-linum-mode t) ;; Line numbers
+(show-paren-mode t) ;; Show matching parens
+(global-whitespace-mode) ;; Highlight whitespace
 
 ;; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -174,10 +162,13 @@
    inhibit-startup-screen t
    scroll-step 1
    scroll-margin 5
+   word-wrap t
 
    ;; Whitespace
    tab-width 2
    indent-tabs-mode nil
+   whitespace-line-column 78
+   whitespace-style '(face trailing tabs lines-tail)
 
    ;; Return to last edit position
    save-place-file saveplacefile
@@ -190,6 +181,17 @@
    backup-directory-alist `((".*" . ,backupdir))
    auto-save-file-name-transforms `((".*" ,backupdir t))
    backup-by-copying t))
+
+;; Enable mouse
+(xterm-mouse-mode t)
+(global-set-key [mouse-4] (lambda ()
+                            (interactive)
+                            (scroll-down 1)))
+(global-set-key [mouse-5] (lambda ()
+                            (interactive)
+                            (scroll-up 1)))
+(defun track-mouse (e))
+(setq-default mouse-sel-mode t)
 
 ;; Create parent directory if it doesn't exist
 (defadvice
