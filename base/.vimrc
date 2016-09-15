@@ -362,6 +362,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
     " }}}
+    " Autocomplete from tmux panes {{{
+      Plug 'wellle/tmux-complete.vim'
+    " }}}
   " }}}
   " Automation {{{
     " Automatically return to last edit position {{{
