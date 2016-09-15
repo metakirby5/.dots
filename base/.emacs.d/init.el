@@ -106,7 +106,7 @@
        (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-immediate-done)
        (define-key ivy-minibuffer-map (kbd "RET") 'ivy-alt-done)
 
-       ;; Counsel binds
+       ;; Ivy binds
        (define-key evil-normal-state-map "\C-s" 'swiper)
        (define-key evil-normal-state-map (kbd "C-c C-r") 'ivy-resume)
        (define-key evil-normal-state-map (kbd "<f6>") 'ivy-resume)
@@ -127,7 +127,8 @@
          ";" 'counsel-M-x
          "gz" 'counsel-git
          "gg" 'counsel-git-grep
-         "a" 'counsel-ag))
+         "a" 'counsel-ag
+         "x" 'ivy-switch-buffer))
 
 (progn (pkg 'which-key)
        (setq-default which-key-idle-delay 0.5)
@@ -175,12 +176,11 @@
         '(git-gutter:modified ((t (:inherit default :foreground "yellow"))))
         '(git-gutter:added ((t (:inherit default :foreground "green"))))
         '(git-gutter:removed ((t (:inherit default :foreground "red")))))
-       (evil-leader/set-key
-         "gn" 'git-gutter:next-hunk
-         "gp" 'git-gutter:previous-hunk
-         "ga" 'git-gutter:stage-hunk
-         "gu" 'git-gutter:revert-hunk
-         "go" 'git-gutter:popup-diff))
+       (define-key evil-normal-state-map (kbd "]g") 'git-gutter:next-hunk)
+       (define-key evil-normal-state-map (kbd "[g") 'git-gutter:previous-hunk)
+       (define-key evil-normal-state-map (kbd "ga") 'git-gutter:stage-hunk)
+       (define-key evil-normal-state-map (kbd "gu") 'git-gutter:revert-hunk)
+       (define-key evil-normal-state-map (kbd "go") 'git-gutter:popup-diff))
 
 (progn (pkg 'aggressive-indent)
        (global-aggressive-indent-mode 1))
@@ -193,6 +193,9 @@
 
 (progn (pkg 'rainbow-delimiters)
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+
+(progn (pkg 'autopair)
+       (autopair-global-mode))
 
 ;; Languages
 (progn (pkg 'company-jedi)

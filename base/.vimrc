@@ -35,15 +35,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Git gutter {{{
       Plug 'airblade/vim-gitgutter'
       let g:gitgutter_map_keys = 0
-      nmap <leader>gn <Plug>GitGutterNextHunk
-      nmap <leader>gp <Plug>GitGutterPrevHunk
+      nmap [g <Plug>GitGutterPrevHunk
+      nmap ]g <Plug>GitGutterNextHunk
       nmap <leader>ga <Plug>GitGutterStageHunk
       nmap <leader>gu <Plug>GitGutterUndoHunk
       nmap <leader>go <Plug>GitGutterPreviewHunk
-      omap ih <Plug>GitGutterTextObjectInnerPending
-      omap ah <Plug>GitGutterTextObjectOuterPending
-      xmap ih <Plug>GitGutterTextObjectInnerVisual
-      xmap ah <Plug>GitGutterTextObjectOuterVisual
+      omap ig <Plug>GitGutterTextObjectInnerPending
+      omap ag <Plug>GitGutterTextObjectOuterPending
+      xmap ig <Plug>GitGutterTextObjectInnerVisual
+      xmap ag <Plug>GitGutterTextObjectOuterVisual
     " }}}
     " Monokai for vim {{{
       Plug 'gummesson/stereokai.vim'
@@ -70,6 +70,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
 
       autocmd! User GoyoEnter nested call <SID>goyo_enter()
       autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+      noremap cog <esc>:Goyo<cr>
     " }}}
     " Spotlight on text {{{
       Plug 'junegunn/limelight.vim'
@@ -248,16 +250,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \, { 'do': './install --bin' }
             \| Plug 'junegunn/fzf.vim'
               \, { 'on': [
-              \ 'History',
-              \ 'Files',
-              \ 'Ag',
-              \ 'Lines',
-              \ 'History',
-              \ 'Commands',
-              \ 'Tags',
-              \ 'Helptags',
-              \ 'GFiles',
-              \ 'GGrep'] }
+              \ 'Files', 'GFiles', 'Buffers', 'Colors', 'Ag', 'Lines',
+              \ 'Blines', 'Tags', 'BTags', 'Marks', 'Windows', 'Locate',
+              \ 'History', 'Snippets', 'Commits', 'BCommits', 'Commands',
+              \ 'Maps', 'Helptags', 'Filetypes' ] }
 
       let g:fzf_files_options =
             \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
@@ -340,12 +336,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
-      let g:multi_cursor_use_default_mapping=0
-      let g:multi_cursor_next_key='<C-c>'
-      let g:multi_cursor_prev_key='<C-k>'
-      let g:multi_cursor_skip_key='<C-j>'
-      let g:multi_cursor_quit_key='<Esc>'
-
       function! Multiple_cursors_before()
         if exists(':NeoCompleteLock') == 2
           NeoCompleteLock
@@ -366,6 +356,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
     " }}}
+    " Paired keybindings {{{
+      Plug 'tpope/vim-unimpaired'
+    " }}}
     " Autocomplete from tmux panes {{{
       Plug 'wellle/tmux-complete.vim'
     " }}}
@@ -376,7 +369,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
-      let g:AutoPairsShortcutToggle = ''
+      let g:AutoPairsShortcutToggle = 'coa'
       let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0
@@ -481,11 +474,8 @@ else
 
       if !exists(':DistractionsToggle')
         command DistractionsToggle call ToggleDistractions()
+        noremap cog :DistractionsToggle<cr>
       endif
-    " }}}
-    " Shortcuts {{{
-      " s-tab - Unindent
-      inoremap <s-tab> <c-d>
     " }}}
 endif " }}}
 " }}}
@@ -805,20 +795,6 @@ endif " }}}
     inoremap <silent> <down> <esc>gja
     inoremap <silent> <up> <esc>gka
 
-    " Toggle relative line numbers
-    function! ToggleLineNumbers()
-      if(&rnu == 1)
-        set nornu
-      else
-        set rnu
-      endif
-    endfunction
-
-    noremap <silent> <leader>n <esc>:call ToggleLineNumbers()<cr>
-
-    " Toggle virtualedit
-    noremap <silent> <leader>e <esc>:let &virtualedit=&virtualedit=="" ? "all" : ""<cr>
-
     " Preserve selection when (de)indenting in visual mode
     xnoremap > >gv
     xnoremap < <gv
@@ -831,10 +807,6 @@ endif " }}}
     noremap <s-tab> <c-o>
   " }}}
   " Buffers {{{
-    " ,b[p/n] - Switch to next/prev buffer
-    noremap <silent> <leader>bn <esc>:bn<cr>
-    noremap <silent> <leader>bp <esc>:bN<cr>
-
     " ,bl - List all buffers
     noremap <silent> <leader>bl <esc>:buffers<cr>
 
@@ -929,23 +901,13 @@ endif " }}}
     noremap <leader>8 8gt
     noremap <leader>9 9gt
 
-    " ^[p / n] or ^[left / right] - Switch tabs
-    noremap <silent> <C-p>  <esc>:tabprevious<cr>
-    noremap <silent> <C-n>  <esc>:tabnext<cr>
-    inoremap <silent> <C-p> <esc>:tabprevious<cr>
-    inoremap <silent> <C-n> <esc>:tabnext<cr>
-    noremap <silent> <C-Left>   <esc>:tabprevious<cr>
-    noremap <silent> <C-Right>  <esc>:tabnext<cr>
-    inoremap <silent> <C-Left>  <esc>:tabprevious<cr>
-    inoremap <silent> <C-Right> <esc>:tabnext<cr>
+    " [w ]w - Forward and backwards tabs
+    noremap <silent> [w <esc>:tabprevious<cr>
+    noremap <silent> ]w <esc>:tabnext<cr>
 
-    " m[T / t] / ^shift[left / right] - Move tabs
-    noremap <silent> mT  <esc>:tabmove -1<cr>
-    noremap <silent> mt  <esc>:tabmove +1<cr>
-    noremap <silent> <C-S-Left>   <esc>:tabmove -1<cr>
-    noremap <silent> <C-S-Right>  <esc>:tabmove +1<cr>
-    inoremap <silent> <C-S-Left>  <esc>:tabmove -1<cr>
-    inoremap <silent> <C-S-Right> <esc>:tabmove +1<cr>
+    " [W ]W - Move tabs
+    noremap <silent> [W <esc>:tabmove -1<cr>
+    noremap <silent> ]W <esc>:tabmove +1<cr>
 
     " ,t(g)t - Open tag in tab
     noremap <silent> <leader>tt  <esc>:tab split<cr>:exe("tag ".expand("<cword>"))<cr>
@@ -954,9 +916,6 @@ endif " }}}
   " Folds {{{
     if exists("+foldenable")
       set foldenable
-
-      " z<space> - toggle folds
-      noremap z<leader> za
 
       " zm - Marker mode
       noremap zm <esc>:set foldmethod=marker<cr>zR
@@ -1015,25 +974,13 @@ endif " }}}
       endif
     endfunction
 
-    noremap <silent> <leader>\ <esc>:call ToggleTextWidth()<cr>
+    noremap cot <esc>:call ToggleTextWidth()<cr>
 
     " ,f (visual mode) - Reflow selection
     xnoremap <silent> <leader>f Jgqq
 
     " Spellcheck
     set spelllang=en
-
-    " ,cc - Toggle spellcheck
-    noremap <silent> <leader>cc <esc>:setlocal spell!<cr>
-
-    " More spellcheck shortcuts
-    noremap <leader>cn ]s
-    noremap <leader>cp [s
-    noremap <leader>cw z=
-    noremap <leader>cg zg
-    noremap <leader>cug zug
-    noremap <leader>cb zw
-    noremap <leader>cub zuw
 
     " Enable spell check for text files
     augroup SPELLCHECK
@@ -1051,13 +998,6 @@ endif " }}}
 
     " Define tab settings for filetypes via:
     " au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
-
-    " Markdown - 4 char wide tabs
-    augroup SYNTAX_MARKDOWN
-      au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-      au Syntax markdown setlocal tabstop=4
-      au Syntax markdown setlocal shiftwidth=4
-    augroup END
 
     " Assembly - 8 char wide tabs, no expansion
     augroup SYNTAX_ASM
@@ -1166,16 +1106,10 @@ endif " }}}
   noremap Y "+y
 
   " ,p - Toggle paste mode
-  noremap <silent> <leader>p <esc>:setlocal paste!<cr>
-
-  " ,/ - Disable highlight
-  noremap <silent> <leader>/  <esc>:noh<cr>
+  noremap cop <esc>:setlocal paste!<cr>
 
   " K - split line
-  noremap <silent> K i<cr><esc>
-
-  " ,m - Make and go to first error
-  noremap <silent> <leader>m <esc>:silent make\|redraw!\|cc<cr>
+  noremap K i<cr><esc>
 " }}}
 " Macros {{{
   " " File header function
