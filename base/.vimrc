@@ -177,10 +177,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:UltiSnipsJumpForwardTrigger = '<c-j>'
       endif
     " }}}
-    " Emojis {{{
-      Plug 'junegunn/vim-emoji'
-            \, { 'for': ['markdown', 'gitcommit'] }
-    " }}}
     " Settings {{{
       if exists('s:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
@@ -203,12 +199,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         " Custom completions
         augroup PLUG_COMPLETION
           au!
-          au BufEnter *
-                \ if &ft == 'markdown'
-                \ || &ft == 'gitcommit'
-                \ | setlocal omnifunc=emoji#complete
-                \ | endif
         augroup END
+
         if !exists('g:neocomplete#force_omni_input_patterns')
           let g:{s:completion_prefix}force_omni_input_patterns = {}
         endif
