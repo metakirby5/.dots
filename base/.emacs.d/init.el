@@ -68,7 +68,17 @@
               (global-evil-mc-mode 1))
 
        (progn (pkg 'evil-commentary)
-              (evil-commentary-mode)))
+              (evil-commentary-mode))
+
+       (progn (pkg 'evil-terminal-cursor-changer)
+              (evil-terminal-cursor-changer-activate)
+              (setq-default
+               blink-cursor-mode t
+               evil-motion-state-cursor 'box
+               evil-visual-state-cursor 'box
+               evil-normal-state-cursor 'box
+               evil-insert-state-cursor 'bar
+               evil-emacs-state-cursor  'hbar)))
 
 (progn (pkg 'ivy) (pkg 'ivy-hydra) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
        (ivy-mode 1)
@@ -119,7 +129,11 @@
 
 (progn (pkg 'git-gutter)
        (global-git-gutter-mode t)
-       (git-gutter:linum-setup))
+       (git-gutter:linum-setup)
+       (custom-set-variables
+        '(git-gutter:modified-sign "~ ")
+        '(git-gutter:added-sign "+ ")
+        '(git-gutter:deleted-sign "- ")))
 
 (progn (pkg 'rainbow-delimiters)
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
