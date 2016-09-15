@@ -112,7 +112,12 @@
        (define-key evil-normal-state-map (kbd "C-c k") 'counsel-ag)
        (define-key evil-normal-state-map (kbd "C-x l") 'counsel-locate)
        (define-key evil-normal-state-map (kbd "C-S-o") 'counsel-rhythmbox)
-       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+       (evil-leader/set-key
+         ";" 'counsel-M-x
+         "gz" 'counsel-git
+         "gg" 'counsel-git-grep
+         "a" 'counsel-ag))
 
 (progn (pkg 'which-key)
        (setq-default which-key-idle-delay 0.5)
@@ -142,6 +147,7 @@
         '(git-gutter:modified-sign "~ ")
         '(git-gutter:added-sign "+ ")
         '(git-gutter:deleted-sign "- "))
+       (set-face-foreground 'git-gutter:modified "yellow")
        (evil-leader/set-key
          "gn" 'git-gutter:next-hunk
          "gp" 'git-gutter:previous-hunk
@@ -200,7 +206,8 @@
    tab-width 2
    indent-tabs-mode nil
    whitespace-line-column 78
-   whitespace-style '(face trailing tabs lines-tail)
+   whitespace-style '(face trailing tabs tab-mark lines-tail)
+   whitespace-display-mappings '((tab-mark 9 [9474 9] [92 9]))
 
    ;; Return to last edit position
    save-place-file saveplacefile
@@ -213,6 +220,10 @@
    backup-directory-alist `((".*" . ,backupdir))
    auto-save-file-name-transforms `((".*" ,backupdir t))
    backup-by-copying t))
+
+(custom-set-faces
+ '(whitespace-tab ((t (:foreground "blue"))))
+ '(linum ((t (:foreground "brightblack")))))
 
 ;; Enable mouse
 (xterm-mouse-mode t)
