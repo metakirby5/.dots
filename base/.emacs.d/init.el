@@ -194,6 +194,15 @@
 (progn (pkg 'rainbow-delimiters)
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
+;; Languages
+(progn (pkg 'company-jedi)
+       (add-hook 'python-mode-hook
+                 (lambda () (add-to-list 'company-backends 'company-jedi))))
+
+(progn (pkg 'elm-mode)
+       (add-hook 'elm-mode-hook
+                 (lambda () (add-to-list 'company-backends 'company-elm))))
+
 ;; General
 (menu-bar-mode -1)
 (global-linum-mode t)
