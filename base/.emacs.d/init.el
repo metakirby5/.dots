@@ -144,10 +144,15 @@
        (global-git-gutter-mode t)
        (git-gutter:linum-setup)
        (custom-set-variables
+        '(git-gutter:unchanged-sign "  ")
         '(git-gutter:modified-sign "~ ")
         '(git-gutter:added-sign "+ ")
         '(git-gutter:deleted-sign "- "))
-       (set-face-foreground 'git-gutter:modified "yellow")
+       (custom-set-faces
+        '(git-gutter:unchanged ((t (:inherit default))))
+        '(git-gutter:modified ((t (:inherit default :foreground "yellow"))))
+        '(git-gutter:added ((t (:inherit default :foreground "green"))))
+        '(git-gutter:removed ((t (:inherit default :foreground "red")))))
        (evil-leader/set-key
          "gn" 'git-gutter:next-hunk
          "gp" 'git-gutter:previous-hunk
@@ -157,6 +162,12 @@
 
 (progn (pkg 'aggressive-indent)
        (global-aggressive-indent-mode 1))
+
+(progn (pkg 'highlight-indent-guides)
+       (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+       (setq-default
+        highlight-indent-guides-method 'character
+        highlight-indent-guides-character ?\│))
 
 (progn (pkg 'rainbow-delimiters)
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
@@ -223,7 +234,8 @@
 
 (custom-set-faces
  '(whitespace-tab ((t (:foreground "blue"))))
- '(linum ((t (:foreground "brightblack")))))
+ '(region ((t (:inverse-video t))))
+ '(linum ((t (:inherit default :foreground "brightblack")))))
 
 ;; Enable mouse
 (xterm-mouse-mode t)
