@@ -100,6 +100,10 @@
        (define-key evil-normal-state-map (kbd "C-S-o") 'counsel-rhythmbox)
        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
+(progn (pkg 'which-key)
+       (setq-default which-key-idle-delay 0.5)
+       (which-key-mode))
+
 (progn (pkg 'auto-complete)
        (global-set-key (kbd "<backtab>") 'ac-previous)
        (ac-config-default))
