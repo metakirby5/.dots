@@ -23,6 +23,16 @@
        ;; Keep Vim ctrl-u
        (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 
+       ;; Visually move up and down lines
+       (define-key evil-normal-state-map
+         (kbd "j") 'evil-next-visual-line)
+       (define-key evil-normal-state-map
+         (kbd "k") 'evil-previous-visual-line)
+       (define-key evil-normal-state-map
+         (kbd "<up>") 'evil-next-visual-line)
+       (define-key evil-normal-state-map
+         (kbd "<down>") 'evil-previous-visual-line)
+
        ;; Swap ; and :
        (define-key evil-normal-state-map (kbd ";") 'evil-ex)
        (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
