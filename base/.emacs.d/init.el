@@ -30,6 +30,21 @@
        ;; Backtab = jump backwards
        (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
 
+       ;; Split line
+       (define-key evil-normal-state-map
+         (kbd "K") (lambda () (interactive) (insert "\n")))
+
+       ;; Split keybinds
+       (evil-leader/set-key
+         "h" 'evil-window-left
+         "j" 'evil-window-down
+         "k" 'evil-window-up
+         "l" 'evil-window-right
+         "H" 'evil-window-move-far-left
+         "J" 'evil-window-move-very-bottom
+         "K" 'evil-window-move-very-top
+         "L" 'evil-window-move-far-right)
+
        ;; Preserve visual mode
        (defun evil-shift-left-visual ()
          (interactive)
@@ -105,7 +120,9 @@
 
 (progn (pkg 'auto-complete) (pkg 'fuzzy)
        (ac-config-default)
-       (setq-default ac-use-fuzzy t)
+       (setq-default
+        ac-use-fuzzy t
+        ac-auto-show-menu t)
        (define-key ac-mode-map (kbd "TAB") 'auto-complete)
        (define-key ac-mode-map (kbd "<backtab>") 'ac-previous))
 
@@ -124,7 +141,13 @@
        (custom-set-variables
         '(git-gutter:modified-sign "~ ")
         '(git-gutter:added-sign "+ ")
-        '(git-gutter:deleted-sign "- ")))
+        '(git-gutter:deleted-sign "- "))
+       (evil-leader/set-key
+         "gn" 'git-gutter:next-hunk
+         "gp" 'git-gutter:previous-hunk
+         "ga" 'git-gutter:stage-hunk
+         "gu" 'git-gutter:revert-hunk
+         "go" 'git-gutter:popup-diff))
 
 (progn (pkg 'aggressive-indent)
        (global-aggressive-indent-mode 1))
@@ -133,10 +156,10 @@
        (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 ;; General
-(menu-bar-mode -1) ;; Disable toolbar
-(global-linum-mode t) ;; Line numbers
-(show-paren-mode t) ;; Show matching parens
-(global-whitespace-mode) ;; Highlight whitespace
+(menu-bar-mode -1)
+(global-linum-mode t)
+(show-paren-mode t)
+(global-whitespace-mode)
 
 ;; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -157,12 +180,21 @@
   (setq-default
    ;; System
    vc-follow-symlinks t
+   ring-bell-function 'ignore
 
    ;; Appearance
    inhibit-startup-screen t
+   initial-scratch-message ""
    scroll-step 1
    scroll-margin 5
    word-wrap t
+
+   ;; Modeline
+   mode-line-format
+   (list " "
+         'mode-line-buffer-identification
+         '(mode-line-modified " [%+] / ")
+         'mode-name)
 
    ;; Whitespace
    tab-width 2
