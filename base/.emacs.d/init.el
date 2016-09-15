@@ -17,13 +17,13 @@
 (progn (pkg 'mouse)
        (xterm-mouse-mode t)
        (global-set-key [mouse-4] (lambda ()
-				   (interactive)
-				   (scroll-down 1)))
+                                   (interactive)
+                                   (scroll-down 1)))
        (global-set-key [mouse-5] (lambda ()
-				   (interactive)
-				   (scroll-up 1)))
+                                   (interactive)
+                                   (scroll-up 1)))
        (defun track-mouse (e))
-       (setq mouse-sel-mode t))
+       (setq-default mouse-sel-mode t))
 
 (progn (pkg 'saveplace)
        (setq-default save-place t))
@@ -43,40 +43,40 @@
 
        ;; Preserve visual mode
        (defun evil-shift-left-visual ()
-	 (interactive)
-	 (evil-shift-left (region-beginning) (region-end))
-	 (evil-normal-state)
-	 (evil-visual-restore))
+         (interactive)
+         (evil-shift-left (region-beginning) (region-end))
+         (evil-normal-state)
+         (evil-visual-restore))
 
        (defun evil-shift-right-visual ()
-	 (interactive)
-	 (evil-shift-right (region-beginning) (region-end))
-	 (evil-normal-state)
-	 (evil-visual-restore))
+         (interactive)
+         (evil-shift-right (region-beginning) (region-end))
+         (evil-normal-state)
+         (evil-visual-restore))
 
        (define-key evil-visual-state-map (kbd ">") 'evil-shift-right-visual)
        (define-key evil-visual-state-map (kbd "<") 'evil-shift-left-visual)
 
        (progn (pkg 'evil-leader)
-	      (global-evil-leader-mode)
-	      (evil-leader/set-leader "<SPC>"))
+              (global-evil-leader-mode)
+              (evil-leader/set-leader "<SPC>"))
 
        (progn (pkg 'evil-surround)
-	      (global-evil-surround-mode 1))
+              (global-evil-surround-mode 1))
 
        (progn (pkg 'evil-mc)
-	      (global-evil-mc-mode 1))
+              (global-evil-mc-mode 1))
 
        (progn (pkg 'evil-commentary)
-	      (evil-commentary-mode)))
+              (evil-commentary-mode)))
 
 (progn (pkg 'ivy) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
        (ivy-mode 1)
-       (setq
-	ivy-use-virtual-buffers t
-	ivy-initial-inputs-alist nil
-	ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
-				(t . ivy--regex-fuzzy)))
+       (setq-default
+        ivy-use-virtual-buffers t
+        ivy-initial-inputs-alist nil
+        ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy)))
        (define-key evil-normal-state-map "\C-s" 'swiper)
        (define-key evil-normal-state-map (kbd "C-c C-r") 'ivy-resume)
        (define-key evil-normal-state-map (kbd "<f6>") 'ivy-resume)
@@ -99,9 +99,9 @@
        (ac-config-default))
 
 (progn (pkg 'smart-mode-line)
-       (setq
-	sml/no-confirm-load-theme t
-	sml/theme 'respectful)
+       (setq-default
+        sml/no-confirm-load-theme t
+        sml/theme 'respectful)
        (sml/setup))
 
 (progn (pkg 'git-gutter)
@@ -131,7 +131,7 @@
        (make-directory dir)))
    `(,backupdir ,undodir))
 
-  (setq
+  (setq-default
    ;; System
    vc-follow-symlinks t
 
@@ -164,7 +164,7 @@
   (unless (file-exists-p filename)
     (let ((dir (file-name-directory filename)))
       (unless (file-exists-p dir)
-	(make-directory dir)))))
+        (make-directory dir)))))
 
 ;; Right-aligned linum
 (defadvice
