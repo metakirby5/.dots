@@ -70,13 +70,19 @@
        (progn (pkg 'evil-commentary)
               (evil-commentary-mode)))
 
-(progn (pkg 'ivy) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
+(progn (pkg 'ivy) (pkg 'ivy-hydra) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
        (ivy-mode 1)
        (setq-default
-        ivy-use-virtual-buffers t
-        ivy-initial-inputs-alist nil
+        ivy-use-virtual-buffers t ;; Add virtual buffers
+        ivy-initial-inputs-alist nil ;; No start anchor
+        ;; Fuzzy
         ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
+       ;; Folder navigation
+       (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-immediate-done)
+       (define-key ivy-minibuffer-map (kbd "RET") 'ivy-alt-done)
+
+       ;; Counsel binds
        (define-key evil-normal-state-map "\C-s" 'swiper)
        (define-key evil-normal-state-map (kbd "C-c C-r") 'ivy-resume)
        (define-key evil-normal-state-map (kbd "<f6>") 'ivy-resume)
@@ -97,6 +103,9 @@
 (progn (pkg 'auto-complete)
        (global-set-key (kbd "<backtab>") 'ac-previous)
        (ac-config-default))
+
+(progn (pkg 'flycheck)
+       (global-flycheck-mode))
 
 (progn (pkg 'smart-mode-line)
        (setq-default
