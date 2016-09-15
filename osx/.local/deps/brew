@@ -3,6 +3,7 @@ brew 'bash'
 brew 'beeftornado/rmtree/brew-rmtree'
 brew 'coreutils'
 brew 'ctags'
+brew 'emacs', service_restart: true
 brew 'fasd'
 brew 'fzf'
 brew 'gcc'

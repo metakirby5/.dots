@@ -133,13 +133,25 @@
        (setq-default which-key-idle-delay 0.5)
        (which-key-mode))
 
-(progn (pkg 'auto-complete) (pkg 'fuzzy)
-       (ac-config-default)
+(progn (pkg 'company)
+       (progn (pkg 'company-flx)
+              (with-eval-after-load 'company (company-flx-mode +1)))
+       (add-hook 'after-init-hook 'global-company-mode)
        (setq-default
-        ac-use-fuzzy t
-        ac-auto-show-menu t)
-       (define-key ac-mode-map (kbd "TAB") 'auto-complete)
-       (define-key ac-mode-map (kbd "<backtab>") 'ac-previous))
+        company-idle-delay 0)
+       (define-key company-active-map
+         (kbd "TAB") 'company-select-next)
+       (define-key company-active-map
+         (kbd "<backtab>") 'company-select-previous)
+       (custom-set-faces
+        '(company-tooltip
+          ((t (:background "brightblack" :foreground "brightwhite"))))
+        '(company-tooltip-selection
+          ((t (:background "brightblue" :foreground "brightwhite"))))
+        '(company-scrollbar-fg
+          ((t (:background "brightblue"))))
+        '(company-scrollbar-bg
+          ((t (:background "brightwhite"))))))
 
 (progn (pkg 'flycheck)
        (global-flycheck-mode))
