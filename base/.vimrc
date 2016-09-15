@@ -5,7 +5,7 @@
 " Use za to toggle the folds
 
 " Setup {{{
-  let s:configdir = has('nvim') ? '~/.config/nvim' : '~/.vim'
+  let s:configdir = $HOME.(has('nvim') ? '/.config/nvim' : '/.vim')
 
   " Leader
   let mapleader = "\<Space>"
@@ -13,6 +13,9 @@
   noremap <leader><space> <space>
 " }}}
 " Plugins {{{
+  " Native {{{
+    runtime macros/matchit.vim
+  " }}}
   " Setup {{{
 if empty(glob(s:configdir . '/autoload/plug.vim'))
   let s:plugfile = s:configdir . '/autoload/plug.vim'
@@ -193,19 +196,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:ulti_expand_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippet()
-          return g:ulti_expand_res ? "" : "\<cr>"
+          return g:ulti_expand_res ? ""
+                \: {s:completion_engine}#smart_close_popup()."\<cr>"
         endfunction
 
         " Custom completions
         augroup PLUG_COMPLETION
           au!
         augroup END
-
         if !exists('g:neocomplete#force_omni_input_patterns')
           let g:{s:completion_prefix}force_omni_input_patterns = {}
         endif
-        let g:{s:completion_prefix}force_omni_input_patterns.markdown = ':\w*'
-        let g:{s:completion_prefix}force_omni_input_patterns.gitcommit = ':\w*'
       endif
     " }}}
   " }}}
@@ -356,6 +357,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endif
       endfunction
     " }}}
+    " Readline bindings {{{
+      Plug 'tpope/vim-rsi'
+    " }}}
     " Toggle comments {{{
       Plug 'tpope/vim-commentary'
     " }}}
@@ -372,12 +376,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
-      let g:AutoPairs = {
-            \ '(': ')',
-            \ '[': ']',
-            \ '{': '}',
-            \ '"': '"',
-            \ }
       let g:AutoPairsShortcutToggle = ''
       let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
@@ -493,9 +491,9 @@ endif " }}}
 " }}}
 " General {{{
   set nu                            " line numbering on
-  set noerrorbells                  " turns off annoying bell sounds for errors
-  set visualbell                    " disable bell part 1
-  set t_vb=                         " disable bell part 2
+  set noerrorbells                  " disable bell part 1
+  set novisualbell                  " disable bell part 2
+  set t_vb=                         " disable bell part 3
   set backspace=2                   " backspace over everything
   set fileformats=unix,dos,mac      " open files from mac/dos
   set hidden                        " don't bug me about abandoning buffers
@@ -514,6 +512,7 @@ endif " }}}
   set ttyfast                       " assume speedy connection
   set undolevels=10000              " allow lots of undos
   set updatetime=500                " fire hold events every half-second
+  exe "set viminfo='100,n".s:configdir.'/info'
 " }}}
 " Interface {{{
   " General {{{
@@ -685,6 +684,10 @@ endif " }}}
 
     if !has('gui_running')
       call <SID>apply_highlights()
+      augroup CUSTOM_COLORS
+        au!
+        au ColorScheme * call <SID>apply_highlights()
+      augroup END
     endif
   " }}}
   " Status Line {{{
@@ -1096,10 +1099,15 @@ endif " }}}
       silent! exe 'w !sudo tee '.file
     endfunction
     command! -nargs=* Sudow call s:sudow(<f-args>)
+
+    " ,q - edit macro
+    nnoremap <leader>q :<c-u><c-r><c-r>='let @'.v:register.' = '
+          \.string(getreg(v:register))<cr><c-f><left>
+
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
-      set directory=~/.vim/swaps           " set swap directory
+      exe 'set directory='.s:configdir.'/swaps'
       set backupskip=/tmp/*,/private/tmp/* " no backups for tmp files
       if !isdirectory(&directory)
         silent call mkdir(&directory, 'p')
@@ -1108,7 +1116,7 @@ endif " }}}
   " }}}
   " Persistent Undo {{{
     if exists('&undodir')
-      set undodir=~/.vim/undo    " set undo directory
+      exe 'set undodir='.s:configdir.'/undo'
       set undofile               " use an undo file
       if !isdirectory(&undodir)
         silent call mkdir(&undodir, 'p')
@@ -1117,7 +1125,7 @@ endif " }}}
   " }}}
   " File backups {{{
     if exists('&backupdir')
-      set backupdir=~/.vim/backups  " set backup directory
+      exe 'set backupdir='.s:configdir.'/backups'
       if !isdirectory(&backupdir)
         silent call mkdir(&backupdir, 'p')
       endif
@@ -1142,9 +1150,6 @@ endif " }}}
   " Quickly source vimrc
   command! Resource source $MYVIMRC
 
-  " There's only four words in the English langauge with jj.
-  inoremap jj <esc>
-
   " Swap ; and :
   noremap ; :
   noremap : ;
@@ -1152,6 +1157,10 @@ endif " }}}
   " Swap ' and `
   noremap ' `
   noremap ` '
+
+  " Preserve prefix when going through history
+  cnoremap <c-n> <down>
+  cnoremap <c-p> <up>
 
   " Y - Yank to clipboard
   noremap Y "+y
