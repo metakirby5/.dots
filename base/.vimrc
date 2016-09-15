@@ -589,6 +589,7 @@ endif " }}}
             \
             \ ctermfg=darkgrey guifg=darkgrey
             \
+      hi clear SignColumn | hi link SignColumn LineNr
       hi clear CursorLine | hi CursorLine
             \ term=bold     cterm=bold  gui=bold
             \
@@ -644,6 +645,20 @@ endif " }}}
       hi clear FoldColumn | hi FoldColumn
             \
             \ ctermbg=NONE guibg=NONE
+            \
+
+      " Diffs
+      hi clear DiffAdd | hi DiffAdd
+            \
+            \ ctermfg=green guifg=green
+            \
+      hi clear DiffChange | hi DiffChange
+            \
+            \ ctermfg=yellow guifg=yellow
+            \
+      hi clear DiffDelete | hi DiffDelete
+            \
+            \ ctermfg=red guifg=red
             \
 
       " Completion menu
