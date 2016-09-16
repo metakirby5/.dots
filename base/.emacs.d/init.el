@@ -17,6 +17,9 @@
 (progn (pkg 'saveplace)
        (setq-default save-place t))
 
+(progn (pkg 'xclip)
+       (xclip-mode 1))
+
 (progn (pkg 'evil)
        (evil-mode 1)
 
@@ -128,7 +131,8 @@
          "gz" 'counsel-git
          "gg" 'counsel-git-grep
          "a" 'counsel-ag
-         "x" 'ivy-switch-buffer))
+         "x" 'ivy-switch-buffer
+         "y" 'counsel-yank-pop))
 
 (progn (pkg 'which-key)
        (setq-default which-key-idle-delay 0.5)
@@ -205,6 +209,8 @@
 (progn (pkg 'elm-mode)
        (add-hook 'elm-mode-hook
                  (lambda () (add-to-list 'company-backends 'company-elm))))
+
+(progn (pkg 'coffee-mode))
 
 ;; General
 (menu-bar-mode -1)
