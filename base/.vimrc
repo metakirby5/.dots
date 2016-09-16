@@ -213,6 +213,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Text objects {{{
+    Plug 'kana/vim-textobj-user'
+    Plug 'kana/vim-textobj-entire'
+    Plug 'kana/vim-textobj-line'
+    Plug 'kana/vim-smartword' " {{{
+      map w  <Plug>(smartword-w)
+      map b  <Plug>(smartword-b)
+      map e  <Plug>(smartword-e)
+      map ge  <Plug>(smartword-ge)
+    " }}}
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'wellle/targets.vim'
   " }}}

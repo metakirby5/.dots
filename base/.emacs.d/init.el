@@ -227,6 +227,9 @@
 (progn (pkg 'autopair)
        (autopair-global-mode))
 
+(progn (pkg 'dtrt-indent)
+       (add-hook 'prog-mode-hook 'dtrt-indent-mode))
+
 ;; Languages
 (progn (pkg 'company-jedi)
        (add-hook 'python-mode-hook
