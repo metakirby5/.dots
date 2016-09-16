@@ -40,6 +40,12 @@
        (define-key evil-normal-state-map (kbd ";") 'evil-ex)
        (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
 
+       ;; Swap 0 and ^
+       (define-key evil-normal-state-map
+         (kbd "0") 'evil-first-non-blank)
+       (define-key evil-normal-state-map
+         (kbd "^") 'evil-beginning-of-line)
+
        ;; Backtab = jump backwards
        (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
 
@@ -96,6 +102,15 @@
                evil-normal-state-cursor 'box
                evil-insert-state-cursor 'bar
                evil-emacs-state-cursor  'hbar)))
+
+(progn (pkg 'linum-relative)
+       (linum-relative-on)
+       (setq-default
+        linum-relative-format "%3s "
+        linum-relative-current-symbol "")
+       (custom-set-faces
+        '(linum-relative-current-face
+          ((t (:background "brightblack" :foreground "white"))))))
 
 (progn (pkg 'ivy) (pkg 'ivy-hydra) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
        (ivy-mode 1)
@@ -182,9 +197,10 @@
         '(git-gutter:removed ((t (:inherit default :foreground "red")))))
        (define-key evil-normal-state-map (kbd "]g") 'git-gutter:next-hunk)
        (define-key evil-normal-state-map (kbd "[g") 'git-gutter:previous-hunk)
-       (define-key evil-normal-state-map (kbd "ga") 'git-gutter:stage-hunk)
-       (define-key evil-normal-state-map (kbd "gu") 'git-gutter:revert-hunk)
-       (define-key evil-normal-state-map (kbd "go") 'git-gutter:popup-diff))
+       (evil-leader/set-key
+         "ga" 'git-gutter:stage-hunk
+         "gu" 'git-gutter:revert-hunk
+         "go" 'git-gutter:popup-diff))
 
 (progn (pkg 'aggressive-indent)
        (global-aggressive-indent-mode 1))
@@ -299,10 +315,10 @@
         (make-directory dir)))))
 
 ;; Right-aligned linum
-(defadvice
-    linum-update-window
-    (around linum-dynamic activate)
-  (let*
-      ((w (length (number-to-string (count-lines (point-min) (point-max)))))
-       (linum-format (concat "%" (number-to-string w) "d ")))
-    ad-do-it))
+;; (defadvice
+;;     linum-update-window
+;;     (around linum-dynamic activate)
+;;   (let*
+;;       ((w (length (number-to-string (count-lines (point-min) (point-max)))))
+;;        (linum-format (concat "%" (number-to-string w) "d ")))
+;;     ad-do-it))
