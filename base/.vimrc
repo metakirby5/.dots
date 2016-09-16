@@ -231,6 +231,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
+      nmap s <Plug>Ysurround
+      nmap S <Plug>YSurround
+      nmap ss <Plug>Yssurround
+      nmap Ss <Plug>YSsurround
+      nmap SS <Plug>YSsurround
+      xmap s <Plug>VSurround
+      xmap gs <Plug>VgSurround
     " }}}
   " }}}
   " Utility {{{
@@ -372,7 +379,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
-      let g:AutoPairsShortcutToggle = 'coa'
+      let g:AutoPairsShortcutToggle = ''
       let g:AutoPairsShortcutFastWrap = '<c-l>'
       let g:AutoPairsShortcutJump = ''
       let g:AutoPairsCenterLine = 0

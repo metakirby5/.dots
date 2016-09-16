@@ -85,7 +85,15 @@
               (evil-leader/set-leader "<SPC>"))
 
        (progn (pkg 'evil-surround)
-              (global-evil-surround-mode 1))
+              (global-evil-surround-mode 1)
+              (evil-define-key 'visual
+                evil-surround-mode-map "s" 'evil-surround-region)
+              (evil-define-key 'visual
+                evil-surround-mode-map "gs" 'evil-Surround-region)
+              (define-key evil-normal-state-map
+                (kbd "s") 'evil-surround-edit)
+              (define-key evil-normal-state-map
+                (kbd "S") 'evil-Surround-edit))
 
        (progn (pkg 'evil-mc)
               (global-evil-mc-mode 1))
