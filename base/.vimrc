@@ -809,9 +809,10 @@ endif " }}}
     xnoremap > >gv
     xnoremap < <gv
 
-    " Swap 0 and ^
-    noremap 0 ^
-    noremap ^ 0
+    " Swap 0 and ^, treat long lines as break lines
+    noremap 0 g^
+    noremap ^ g0
+    noremap $ g$
 
     " Shift-tab to go back in jumplist
     noremap <s-tab> <c-o>

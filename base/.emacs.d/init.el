@@ -40,11 +40,13 @@
        (define-key evil-normal-state-map (kbd ";") 'evil-ex)
        (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
 
-       ;; Swap 0 and ^
+       ;; Swap 0 and ^, with visual move
        (define-key evil-normal-state-map
-         (kbd "0") 'evil-first-non-blank)
+         (kbd "0") 'evil-first-non-blank-of-visual-line)
        (define-key evil-normal-state-map
-         (kbd "^") 'evil-beginning-of-line)
+         (kbd "^") 'evil-beginning-of-visual-line)
+       (define-key evil-normal-state-map
+         (kbd "$") 'evil-end-of-visual-line)
 
        ;; Backtab = jump backwards
        (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
@@ -268,6 +270,9 @@
    initial-scratch-message ""
    scroll-step 1
    scroll-margin 5
+   scroll-conservatively 0
+   scroll-up-aggressively 0.01
+   scroll-down-aggressively 0.01
    word-wrap t
 
    ;; Modeline
