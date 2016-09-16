@@ -220,14 +220,20 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " User operators {{{
       Plug 'kana/vim-operator-user'
     " }}}
+    " Make repeat work with plugins {{{
+      Plug 'tpope/vim-repeat'
+    " }}}
     " Align with ga {{{
       Plug 'junegunn/vim-easy-align'
             \, { 'on': '<Plug>(EasyAlign)' }
       xmap ga <Plug>(EasyAlign)
       nmap ga <Plug>(EasyAlign)
     " }}}
-    " Make repeat work with plugins {{{
-      Plug 'tpope/vim-repeat'
+    " Exchange text {{{
+      Plug 'tommcdo/vim-exchange'
+    " }}}
+    " Toggle comments {{{
+      Plug 'tpope/vim-commentary'
     " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
@@ -238,6 +244,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nmap SS <Plug>YSsurround
       xmap s <Plug>VSurround
       xmap gs <Plug>VgSurround
+    " }}}
+    " Replace with register {{{
+      Plug 'vim-scripts/ReplaceWithRegister'
     " }}}
   " }}}
   " Utility {{{
@@ -354,11 +363,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endif
       endfunction
     " }}}
+    " Ablolish, Subvert, and Coerce {{{
+      Plug 'tpope/vim-abolish'
+    " }}}
     " Readline bindings {{{
       Plug 'tpope/vim-rsi'
-    " }}}
-    " Toggle comments {{{
-      Plug 'tpope/vim-commentary'
     " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
@@ -789,7 +798,7 @@ endif " }}}
     augroup HELP_SPLITS
       au!
       au BufEnter * if &buftype == 'help' |
-            \ wincmd L | exe 'vert resize ' . &tw 
+            \ wincmd L | exe 'vert resize ' . &tw
             \ | noremap <buffer> q <esc>:q<cr>
             \ | endif
     augroup END
@@ -857,7 +866,7 @@ endif " }}}
   " }}}
   " Splits {{{
     " Get rid of vertical split pipe
-    set fillchars+=vert:\ 
+    set fillchars+=vert:\
 
     " Open new split panes to the right and bottom, instead of left and top
     set splitbelow
