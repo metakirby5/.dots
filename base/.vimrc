@@ -71,7 +71,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       autocmd! User GoyoEnter nested call <SID>goyo_enter()
       autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-      noremap cog <esc>:Goyo<cr>
+      nnoremap cog <esc>:Goyo<cr>
     " }}}
     " Spotlight on text {{{
       Plug 'junegunn/limelight.vim'
@@ -493,7 +493,7 @@ else
 
       if !exists(':DistractionsToggle')
         command DistractionsToggle call ToggleDistractions()
-        noremap cog :DistractionsToggle<cr>
+        nnoremap cog :DistractionsToggle<cr>
       endif
     " }}}
 endif " }}}
@@ -994,7 +994,7 @@ endif " }}}
       endif
     endfunction
 
-    noremap cot <esc>:call ToggleTextWidth()<cr>
+    nnoremap cot <esc>:call ToggleTextWidth()<cr>
 
     " ,f (visual mode) - Reflow selection
     xnoremap <silent> <leader>f Jgqq
@@ -1126,7 +1126,7 @@ endif " }}}
   noremap Y "+y
 
   " ,p - Toggle paste mode
-  noremap cop <esc>:setlocal paste!<cr>
+  nnoremap cop <esc>:setlocal paste!<cr>
 
   " K - split line
   noremap K i<cr><esc>
