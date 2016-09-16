@@ -874,9 +874,6 @@ endif " }}}
     endif
   " }}}
   " Splits {{{
-    " Get rid of vertical split pipe
-    set fillchars+=vert:\
-
     " Open new split panes to the right and bottom, instead of left and top
     set splitbelow
     set splitright
