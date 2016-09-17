@@ -18,6 +18,8 @@
   (package-install 'use-package))
 
 (defun pkg (p)
+  "Requires a package, installing if necessary.
+P: The quoted package."
   (unless (require p nil t)
     (package-refresh-contents)
     (package-install p)
@@ -64,36 +66,35 @@
        (define-key evil-normal-state-map
          (kbd "K") (lambda () (interactive) (insert "\n")))
 
-       ;; Split keybinds
-       (evil-leader/set-key
-         "h" 'evil-window-left
-         "j" 'evil-window-down
-         "k" 'evil-window-up
-         "l" 'evil-window-right
-         "H" 'evil-window-move-far-left
-         "J" 'evil-window-move-very-bottom
-         "K" 'evil-window-move-very-top
-         "L" 'evil-window-move-far-right)
-
        ;; Preserve visual mode
-       (defun evil-shift-left-visual ()
-         (interactive)
-         (evil-shift-left (region-beginning) (region-end))
-         (evil-normal-state)
-         (evil-visual-restore))
-
-       (defun evil-shift-right-visual ()
-         (interactive)
-         (evil-shift-right (region-beginning) (region-end))
-         (evil-normal-state)
-         (evil-visual-restore))
-
-       (define-key evil-visual-state-map (kbd ">") 'evil-shift-right-visual)
-       (define-key evil-visual-state-map (kbd "<") 'evil-shift-left-visual)
+       (define-key evil-visual-state-map (kbd "<")
+         (lambda ()
+           (interactive)
+           (evil-shift-left (region-beginning) (region-end))
+           (evil-normal-state)
+           (evil-visual-restore)))
+       (define-key evil-visual-state-map (kbd ">")
+         (lambda ()
+           (interactive)
+           (evil-shift-right (region-beginning) (region-end))
+           (evil-normal-state)
+           (evil-visual-restore)))
 
        (progn (pkg 'evil-leader)
               (global-evil-leader-mode)
-              (evil-leader/set-leader "<SPC>"))
+              (evil-leader/set-leader "<SPC>")
+              (evil-leader/set-key
+                ;; Split keybinds
+                "s" 'evil-window-split
+                "v" 'evil-window-vsplit
+                "h" 'evil-window-left
+                "j" 'evil-window-down
+                "k" 'evil-window-up
+                "l" 'evil-window-right
+                "H" 'evil-window-move-far-left
+                "J" 'evil-window-move-very-bottom
+                "K" 'evil-window-move-very-top
+                "L" 'evil-window-move-far-right))
 
        (progn (pkg 'evil-surround)
               (global-evil-surround-mode 1)
