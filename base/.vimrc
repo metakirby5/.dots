@@ -508,7 +508,7 @@ else
 endif " }}}
 " }}}
 " General {{{
-  set rnu                           " relative line numbering on
+  set nu                            " line numbering on
   set noerrorbells                  " disable bell part 1
   set novisualbell                  " disable bell part 2
   set t_vb=                         " disable bell part 3
