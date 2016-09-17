@@ -166,8 +166,8 @@ BINDINGS: extra keybindings."
              "C-c j" 'counsel-git-grep
              "C-c k" 'counsel-ag
              "C-x l" 'counsel-locate
-             "C-S-o" 'counsel-rhythmbox
-             "C-r" 'counsel-expression-history)
+             "C-c r" 'counsel-rhythmbox
+             "C-c h" 'counsel-expression-history)
        (evil-leader/set-key
          ";" 'counsel-M-x
          "gz" 'counsel-git
@@ -326,7 +326,8 @@ BINDINGS: extra keybindings."
    undo-tree-auto-save-history t
    undo-tree-history-directory-alist `(("." . ,undodir))
 
-   ;; Backups
+   ;; (No) backups
+   auto-save-default nil
    backup-directory-alist `((".*" . ,backupdir))
    auto-save-file-name-transforms `((".*" ,backupdir t))
    backup-by-copying t))
@@ -334,6 +335,7 @@ BINDINGS: extra keybindings."
 (custom-set-faces
  '(whitespace-tab ((t (:foreground "blue"))))
  '(region ((t (:inverse-video t))))
+ '(vertical-border ((t (:background "black" :foreground "black"))))
  '(linum ((t (:inherit default :foreground "brightblack")))))
 
 ;; Enable mouse
