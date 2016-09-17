@@ -283,19 +283,19 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:fzf_files_options =
             \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
       let g:fzf_buffers_jump = 1
-      noremap <silent> <leader>x  <esc>:History<cr>
-      noremap <silent> <leader>z  <esc>:Files<cr>
-      noremap          <leader>a  <esc>:Ag<space>
-      noremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
-      noremap <silent> <leader>bg <esc>:Lines<cr>
-      noremap <silent> <leader>:  <esc>:History:<cr>
-      noremap <silent> <leader>;  <esc>:Commands<cr>
-      noremap <silent> <leader>]  <esc>:exe('Tags ^'.expand('<cword>').' ')<cr>
-      noremap <silent> <leader>?  <esc>:Helptags<cr>
-      noremap <silent> <leader>gz <esc>:GFiles<cr>
-      noremap <silent> <leader>gs <esc>:GFiles?<cr>
-      noremap          <leader>gg <esc>:GGrep<space>
-      noremap <silent> <leader>GG <esc>:exe('GGrep '.expand('<cword>'))<cr>
+      nnoremap <silent> <leader>x  <esc>:History<cr>
+      nnoremap <silent> <leader>z  <esc>:Files<cr>
+      nnoremap          <leader>a  <esc>:Ag<space>
+      nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
+      nnoremap <silent> <leader>bg <esc>:Lines<cr>
+      nnoremap <silent> <leader>:  <esc>:History:<cr>
+      nnoremap <silent> <leader>;  <esc>:Commands<cr>
+      nnoremap <silent> <leader>]  <esc>:exe('Tags ^'.expand('<cword>').' ')<cr>
+      nnoremap <silent> <leader>?  <esc>:Helptags<cr>
+      nnoremap <silent> <leader>gz <esc>:GFiles<cr>
+      nnoremap <silent> <leader>gs <esc>:GFiles?<cr>
+      nnoremap          <leader>gg <esc>:GGrep<space>
+      nnoremap <silent> <leader>GG <esc>:exe('GGrep '.expand('<cword>'))<cr>
 
       function! s:git_grep_handler(line)
         let parts = split(a:line, ':')
@@ -319,13 +319,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if v:version >= 703
         Plug 'majutsushi/tagbar'
               \, { 'on': 'TagbarToggle' }
-        noremap <silent> <leader>[ <esc>:TagbarToggle<cr>
+        nnoremap <silent> <leader>[ <esc>:TagbarToggle<cr>
       endif
     " }}}
     " Undo tree browser {{{
       Plug 'mbbill/undotree'
             \, { 'on': 'UndotreeToggle' }
-      noremap <silent> <leader>u <esc>:UndotreeToggle<cr>
+      nnoremap <silent> <leader>u <esc>:UndotreeToggle<cr>
       let g:undotree_SetFocusWhenToggle = 1
       let g:undotree_ShortIndicators = 1
     " }}}
@@ -347,7 +347,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Syntax checker {{{
       Plug 'scrooloose/syntastic'
             \, { 'on': 'SyntasticCheck' }
-      noremap <silent> <leader>- <esc>:SyntasticCheck<cr>
+      nnoremap <silent> <leader>- <esc>:SyntasticCheck<cr>
     " }}}
     " Add highlight groups {{{
       Plug 't9md/vim-quickhl'
@@ -838,13 +838,13 @@ endif " }}}
   " }}}
   " Buffers {{{
     " ,bl - List all buffers
-    noremap <silent> <leader>bl <esc>:buffers<cr>
+    nnoremap <silent> <leader>bl <esc>:buffers<cr>
 
     " ,bs - Switch to buffer by name
-    noremap <leader>bs <esc>:buffers<cr>:buffer<space>
+    nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
     " ,bd - Close the current buffer
-    noremap <silent> <leader>bd <esc>:bd<cr>
+    nnoremap <silent> <leader>bd <esc>:bd<cr>
 
     " Close all empty buffers
     function! DeleteEmptyBuffers()
@@ -861,13 +861,13 @@ endif " }}}
     endfunction
 
     " ,be - Close all empty buffers
-    noremap <silent> <leader>be <esc>:call DeleteEmptyBuffers()<cr>
+    nnoremap <silent> <leader>be <esc>:call DeleteEmptyBuffers()<cr>
 
     " ,bt - Open all buffers as tabs
-    noremap <silent> <leader>bt <esc>:tab ball<cr>
+    nnoremap <silent> <leader>bt <esc>:tab ball<cr>
 
     " ,cd - Switch CWD to the directory of the open buffer
-    noremap <silent> <leader>cd <esc>:cd %:p:h<cr> :pwd<cr>
+    nnoremap <silent> <leader>cd <esc>:cd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
@@ -880,78 +880,78 @@ endif " }}}
     set splitright
 
     " ,[sv] - Horizontal/vertical split
-    noremap <leader>s <C-w>s
-    noremap <leader>v <C-w>v
+    nnoremap <leader>s <C-w>s
+    nnoremap <leader>v <C-w>v
 
     " ,= - Equalize splits
-    noremap <leader>= <C-w>=
+    nnoremap <leader>= <C-w>=
 
     " ^[hjkl] - Switch to split
-    noremap <leader>h <C-W>h
-    noremap <leader>j <C-W>j
-    noremap <leader>k <C-W>k
-    noremap <leader>l <C-W>l
+    nnoremap <leader>h <C-W>h
+    nnoremap <leader>j <C-W>j
+    nnoremap <leader>k <C-W>k
+    nnoremap <leader>l <C-W>l
 
     " ,[HJKL] - Move split
-    noremap <leader>H <C-W>H
-    noremap <leader>J <C-W>J
-    noremap <leader>K <C-W>K
-    noremap <leader>L <C-W>L
+    nnoremap <leader>H <C-W>H
+    nnoremap <leader>J <C-W>J
+    nnoremap <leader>K <C-W>K
+    nnoremap <leader>L <C-W>L
 
     " ,[hjkl] - Resize split
-    noremap <silent> <c-h> <c-w><
-    noremap <silent> <c-j> <c-w>+
-    noremap <silent> <c-k> <c-w>-
-    noremap <silent> <c-l> <c-w>>
+    nnoremap <silent> <c-h> <c-w><
+    nnoremap <silent> <c-j> <c-w>+
+    nnoremap <silent> <c-k> <c-w>-
+    nnoremap <silent> <c-l> <c-w>>
   " }}}
   " Tabs {{{
     set showtabline=1  " only show tab line if 2+ tabs
     set tabpagemax=100 " Change maximum number of tabs
 
     " Useful mappings for managing tabs
-    noremap          <leader>te <esc>:tabedit <tab>
-    noremap <silent> <leader>tn <esc>:tabnew<cr>:silent! Startify<cr>
-    noremap <silent> <leader>to <esc>:tabonly<cr>
-    noremap <silent> <leader>td <esc>:tabclose<cr>
-    noremap          <leader>tm <esc>:tabmove<Space>
-    noremap <silent> <leader>tb <esc>:tab ball<cr>
-    noremap <silent> <leader>tl <esc>:tabs<cr>
+    nnoremap          <leader>te <esc>:tabedit <tab>
+    nnoremap <silent> <leader>tn <esc>:tabnew<cr>:silent! Startify<cr>
+    nnoremap <silent> <leader>to <esc>:tabonly<cr>
+    nnoremap <silent> <leader>td <esc>:tabclose<cr>
+    nnoremap          <leader>tm <esc>:tabmove<Space>
+    nnoremap <silent> <leader>tb <esc>:tab ball<cr>
+    nnoremap <silent> <leader>tl <esc>:tabs<cr>
 
     " ,[1-9] - Switch to tab #
-    noremap <leader>1 1gt
-    noremap <leader>2 2gt
-    noremap <leader>3 3gt
-    noremap <leader>4 4gt
-    noremap <leader>5 5gt
-    noremap <leader>6 6gt
-    noremap <leader>7 7gt
-    noremap <leader>8 8gt
-    noremap <leader>9 9gt
+    nnoremap <leader>1 1gt
+    nnoremap <leader>2 2gt
+    nnoremap <leader>3 3gt
+    nnoremap <leader>4 4gt
+    nnoremap <leader>5 5gt
+    nnoremap <leader>6 6gt
+    nnoremap <leader>7 7gt
+    nnoremap <leader>8 8gt
+    nnoremap <leader>9 9gt
 
     " [w ]w - Forward and backwards tabs
-    noremap <silent> [w <esc>:tabprevious<cr>
-    noremap <silent> ]w <esc>:tabnext<cr>
+    nnoremap <silent> [w <esc>:tabprevious<cr>
+    nnoremap <silent> ]w <esc>:tabnext<cr>
 
     " [W ]W - Move tabs
-    noremap <silent> [W <esc>:tabmove -1<cr>
-    noremap <silent> ]W <esc>:tabmove +1<cr>
+    nnoremap <silent> [W <esc>:tabmove -1<cr>
+    nnoremap <silent> ]W <esc>:tabmove +1<cr>
 
     " ,t(g)t - Open tag in tab
-    noremap <silent> <leader>tt  <esc>:tab split<cr>:exe("tag ".expand("<cword>"))<cr>
-    noremap <silent> <leader>tgt <esc>:tab split<cr>:exe("tjump ".expand("<cword>"))<cr>
+    nnoremap <silent> <leader>tt  <esc>:tab split<cr>:exe("tag ".expand("<cword>"))<cr>
+    nnoremap <silent> <leader>tgt <esc>:tab split<cr>:exe("tjump ".expand("<cword>"))<cr>
   " }}}
   " Folds {{{
     if exists("+foldenable")
       set foldenable
 
       " zm - Marker mode
-      noremap zm <esc>:set foldmethod=marker<cr>zR
+      nnoremap zm <esc>:set foldmethod=marker<cr>zR
 
       " zi - Indent mode
-      noremap zi <esc>:set foldmethod=indent<cr>zR
+      nnoremap zi <esc>:set foldmethod=indent<cr>zR
 
       " zs - Syntax mode
-      noremap zs <esc>:set foldmethod=syntax<cr>zR
+      nnoremap zs <esc>:set foldmethod=syntax<cr>zR
     endif
   " }}}
 " }}}
