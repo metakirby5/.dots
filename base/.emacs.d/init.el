@@ -55,8 +55,8 @@ BINDINGS: extra keybindings."
              ;; Visually move up and down lines
              "j" 'evil-next-visual-line
              "k" 'evil-previous-visual-line
-             "<up>" 'evil-next-visual-line
-             "<down>" 'evil-previous-line
+             "<up>" 'evil-previous-visual-line
+             "<down>" 'evil-next-visual-line
 
              ;; Swap ; and :
              ";" 'evil-ex
@@ -74,9 +74,21 @@ BINDINGS: extra keybindings."
              "K" (lambda () (interactive) (insert "\n")))
 
        (bind evil-visual-state-map
+
+             ;; Visually move up and down lines
+             "j" 'evil-next-visual-line
+             "k" 'evil-previous-visual-line
+             "<up>" 'evil-previous-visual-line
+             "<down>" 'evil-next-visual-line
+
              ;; Swap ; and :
              ";" 'evil-ex
              ":" 'evil-repeat-find-char
+
+             ;; Swap 0 and ^, with visual move
+             "0" 'evil-first-non-blank-of-visual-line
+             "^" 'evil-beginning-of-visual-line
+             "$" 'evil-end-of-visual-line
 
              ;; Preserve visual mode
              "<" (lambda ()
@@ -181,9 +193,11 @@ BINDINGS: extra keybindings."
          "x" 'ivy-switch-buffer
          "y" 'counsel-yank-pop))
 
-(progn (pkg 'fzf)
+(progn (pkg 'projectile) (pkg 'counsel-projectile)
+       (add-hook 'prog-mode-hook 'projectile-mode)
+       (counsel-projectile-on)
        (evil-leader/set-key
-         "z" 'fzf))
+         "z" 'counsel-projectile-find-file))
 
 (progn (pkg 'which-key)
        (setq-default which-key-idle-delay 0.5)
