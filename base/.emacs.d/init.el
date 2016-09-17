@@ -145,6 +145,16 @@ BINDINGS: extra keybindings."
         ;; Fuzzy
         ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
+
+       ;; fzf-like search
+       (defun ivy-recursive-open ()
+         (interactive)
+         (let ((f (ivy-read "Open file:"
+                            (split-string
+                             (shell-command-to-string
+                              "find -L . ! -type d") "\n"))))
+           (find-file f)))
+
        ;; Folder navigation
        (bind ivy-minibuffer-map
              "C-j" 'ivy-immediate-done
@@ -168,7 +178,9 @@ BINDINGS: extra keybindings."
              "C-x l" 'counsel-locate
              "C-c r" 'counsel-rhythmbox
              "C-c h" 'counsel-expression-history)
+
        (evil-leader/set-key
+         "z" 'ivy-recursive-open
          ";" 'counsel-M-x
          "gz" 'counsel-git
          "gg" 'counsel-git-grep
