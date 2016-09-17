@@ -36,6 +36,9 @@ BINDINGS: extra keybindings."
     (setq key (pop bindings)
           cmd (pop bindings))))
 
+(progn (pkg 'exec-path-from-shell)
+       (exec-path-from-shell-initialize))
+
 (progn (pkg 'saveplace)
        (setq-default save-place t))
 
@@ -146,15 +149,6 @@ BINDINGS: extra keybindings."
         ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
 
-       ;; fzf-like search
-       (defun ivy-recursive-open ()
-         (interactive)
-         (let ((f (ivy-read "Open file:"
-                            (split-string
-                             (shell-command-to-string
-                              "find -L . ! -type d") "\n"))))
-           (find-file f)))
-
        ;; Folder navigation
        (bind ivy-minibuffer-map
              "C-j" 'ivy-immediate-done
@@ -180,13 +174,16 @@ BINDINGS: extra keybindings."
              "C-c h" 'counsel-expression-history)
 
        (evil-leader/set-key
-         "z" 'ivy-recursive-open
          ";" 'counsel-M-x
          "gz" 'counsel-git
          "gg" 'counsel-git-grep
          "a" 'counsel-ag
          "x" 'ivy-switch-buffer
          "y" 'counsel-yank-pop))
+
+(progn (pkg 'fzf)
+       (evil-leader/set-key
+         "z" 'fzf))
 
 (progn (pkg 'which-key)
        (setq-default which-key-idle-delay 0.5)
