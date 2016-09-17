@@ -259,6 +259,19 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Utility {{{
+    " Emacs which-key for vim {{{
+      Plug 'hecal3/vim-leader-guide'
+      function! s:map_leader_guides(l)
+        for k in a:l
+          let g = k == '<leader>' ? g:mapleader : k
+          exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
+          exe 'vnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
+        endfor
+      endfunction
+      call s:map_leader_guides([
+            \ '<leader>', '[', ']',
+            \ ])
+    " }}}
     " Allow * and # on visual {{{
       Plug 'bronson/vim-visual-star-search'
     " }}}
@@ -418,6 +431,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Post-hooks {{{
     call plug#end()
+
+    " vim-leader-guide
+    let g:lgmap = {}
+    call leaderGuide#register_prefix_descriptions('', 'g:lgmap')
   " }}}
   " Fallbacks {{{
 else
