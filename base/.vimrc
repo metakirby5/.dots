@@ -542,6 +542,7 @@ endif " }}}
       silent! colorscheme peachpuff
     endif
 
+    set guioptions-=r              " no gui scrollbar
     set shortmess+=I               " no splash screen
     set showmatch                  " show match when inserting {}, [], or ()
     set scrolloff=5                " keep at least 5 lines above/below

@@ -133,15 +133,16 @@ BINDINGS: extra keybindings."
        (progn (pkg 'evil-commentary)
               (evil-commentary-mode))
 
-       (progn (pkg 'evil-terminal-cursor-changer)
-              (evil-terminal-cursor-changer-activate)
-              (setq-default
-               blink-cursor-mode t
-               evil-motion-state-cursor 'box
-               evil-visual-state-cursor 'box
-               evil-normal-state-cursor 'box
-               evil-insert-state-cursor 'bar
-               evil-emacs-state-cursor  'hbar)))
+       (if (not (display-graphic-p))
+           (progn (pkg 'evil-terminal-cursor-changer)
+                  (evil-terminal-cursor-changer-activate)
+                  (setq-default
+                   blink-cursor-mode t
+                   evil-motion-state-cursor 'box
+                   evil-visual-state-cursor 'box
+                   evil-normal-state-cursor 'box
+                   evil-insert-state-cursor 'bar
+                   evil-emacs-state-cursor  'hbar))))
 
 (progn (pkg 'linum-relative)
        (linum-relative-on)
@@ -291,7 +292,13 @@ BINDINGS: extra keybindings."
 
 (progn (pkg 'coffee-mode))
 
+(progn (pkg 'markdown-mode))
+
 ;; General
+(if (display-graphic-p)
+    (progn (tool-bar-mode -1)
+           (scroll-bar-mode -1)
+           (set-fringe-mode 0)))
 (menu-bar-mode -1)
 (global-linum-mode t)
 (show-paren-mode t)
@@ -329,6 +336,10 @@ BINDINGS: extra keybindings."
    scroll-down-aggressively 0.01
    word-wrap t
 
+   ;; Parens
+   show-paren-delay 0
+   show-paren-style 'expression
+
    ;; Modeline
    mode-line-format
    (list " "
@@ -356,11 +367,17 @@ BINDINGS: extra keybindings."
    auto-save-file-name-transforms `((".*" ,backupdir t))
    backup-by-copying t))
 
-(custom-set-faces
- '(whitespace-tab ((t (:foreground "blue"))))
- '(region ((t (:inverse-video t))))
- '(vertical-border ((t (:background "black" :foreground "black"))))
- '(linum ((t (:inherit default :foreground "brightblack")))))
+;; Theme
+(if (display-graphic-p)
+    ;; Theme for graphical
+    (progn (pkg 'moe-theme)
+           (moe-dark))
+  ;; Custom faces for terminal
+  (custom-set-faces
+   '(whitespace-tab ((t (:foreground "blue"))))
+   '(region ((t (:inverse-video t))))
+   '(vertical-border ((t (:background "black" :foreground "black"))))
+   '(linum ((t (:inherit default :foreground "brightblack"))))))
 
 ;; Enable mouse
 (xterm-mouse-mode t)
