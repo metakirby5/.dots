@@ -232,7 +232,17 @@ P: The quoted package."
         highlight-indent-guides-character ?\│))
 
 (progn (pkg 'rainbow-delimiters)
-       (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+       (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+       (custom-set-faces
+        '(rainbow-delimiters-depth-1-face ((t (:foreground "brightgreen"))))
+        '(rainbow-delimiters-depth-2-face ((t (:foreground "brightyellow"))))
+        '(rainbow-delimiters-depth-3-face ((t (:foreground "brightblue"))))
+        '(rainbow-delimiters-depth-4-face ((t (:foreground "brightmagenta"))))
+        '(rainbow-delimiters-depth-5-face ((t (:foreground "brightcyan"))))
+        '(rainbow-delimiters-depth-6-face ((t (:foreground "brightgreen"))))
+        '(rainbow-delimiters-depth-7-face ((t (:foreground "brightyellow"))))
+        '(rainbow-delimiters-depth-8-face ((t (:foreground "brightblue"))))
+        '(rainbow-delimiters-depth-9-face ((t (:foreground "brightmagenta"))))))
 
 (progn (pkg 'autopair)
        (autopair-global-mode))
