@@ -1,13 +1,22 @@
+;;; init.el --- Emacs configuration
+
+;; Author: Ethan Chan <metakirby5@gmail.com
+
+;;; Commentary:
+
+;; Cool stuff ahead!
+
+;;; Code:
+
 ;; Packages
 (require 'package)
-
-;; Define repos
+(setq-default package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-;; Activate packages
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; Helper to install and require
 (defun pkg (p)
   (unless (require p nil t)
     (package-refresh-contents)
@@ -317,7 +326,6 @@
 (global-set-key [mouse-5] (lambda ()
                             (interactive)
                             (scroll-up 1)))
-(defun track-mouse (e))
 (setq-default mouse-sel-mode t)
 
 ;; Create parent directory if it doesn't exist
@@ -338,3 +346,6 @@
 ;;       ((w (length (number-to-string (count-lines (point-min) (point-max)))))
 ;;        (linum-format (concat "%" (number-to-string w) "d ")))
 ;;     ad-do-it))
+
+(provide 'init)
+;;; init.el ends here
