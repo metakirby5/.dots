@@ -13,17 +13,28 @@
 (setq-default package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 
+;; Helpers
 (defun pkg (p)
-  "Requires a package, installing if necessary.
+  "Require a package, installing if necessary.
 P: The quoted package."
   (unless (require p nil t)
     (package-refresh-contents)
     (package-install p)
     (require p)))
+
+(defun bind (map key cmd &rest bindings)
+  "Return a function which binds a list of keybindings to a keymap.
+MAP: the keymap.
+KEY: the key.
+CMD: the action.
+BINDINGS: extra keybindings."
+  (while key
+    (if map
+        (define-key map (kbd key) cmd)
+      (global-set-key (kbd key) cmd))
+    (setq key (pop bindings)
+          cmd (pop bindings))))
 
 (progn (pkg 'saveplace)
        (setq-default save-place t))
@@ -34,51 +45,47 @@ P: The quoted package."
 (progn (pkg 'evil)
        (evil-mode 1)
 
-       ;; Keep Vim ctrl-u
-       (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+       (bind evil-normal-state-map
+             ;; Keep Vim ctrl-u
+             "C-u" 'evil-scroll-up
 
-       ;; Visually move up and down lines
-       (define-key evil-normal-state-map
-         (kbd "j") 'evil-next-visual-line)
-       (define-key evil-normal-state-map
-         (kbd "k") 'evil-previous-visual-line)
-       (define-key evil-normal-state-map
-         (kbd "<up>") 'evil-next-visual-line)
-       (define-key evil-normal-state-map
-         (kbd "<down>") 'evil-previous-visual-line)
+             ;; Visually move up and down lines
+             "j" 'evil-next-visual-line
+             "k" 'evil-previous-visual-line
+             "<up>" 'evil-next-visual-line
+             "<down>" 'evil-previous-line
 
-       ;; Swap ; and :
-       (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-       (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
+             ;; Swap ; and :
+             ";" 'evil-ex
+             ":" 'evil-repeat-find-char
 
-       ;; Swap 0 and ^, with visual move
-       (define-key evil-normal-state-map
-         (kbd "0") 'evil-first-non-blank-of-visual-line)
-       (define-key evil-normal-state-map
-         (kbd "^") 'evil-beginning-of-visual-line)
-       (define-key evil-normal-state-map
-         (kbd "$") 'evil-end-of-visual-line)
+             ;; Swap 0 and ^, with visual move
+             "0" 'evil-first-non-blank-of-visual-line
+             "^" 'evil-beginning-of-visual-line
+             "$" 'evil-end-of-visual-line
 
-       ;; Backtab = jump backwards
-       (define-key evil-normal-state-map (kbd "<backtab>") 'evil-jump-backward)
+             ;; Backtab = jump backwards
+             "<backtab>" 'evil-jump-backward
 
-       ;; Split line
-       (define-key evil-normal-state-map
-         (kbd "K") (lambda () (interactive) (insert "\n")))
+             ;; K = split line
+             "K" (lambda () (interactive) (insert "\n")))
 
-       ;; Preserve visual mode
-       (define-key evil-visual-state-map (kbd "<")
-         (lambda ()
-           (interactive)
-           (evil-shift-left (region-beginning) (region-end))
-           (evil-normal-state)
-           (evil-visual-restore)))
-       (define-key evil-visual-state-map (kbd ">")
-         (lambda ()
-           (interactive)
-           (evil-shift-right (region-beginning) (region-end))
-           (evil-normal-state)
-           (evil-visual-restore)))
+       (bind evil-visual-state-map
+             ;; Swap ; and :
+             ";" 'evil-ex
+             ":" 'evil-repeat-find-char
+
+             ;; Preserve visual mode
+             "<" (lambda ()
+                   (interactive)
+                   (evil-shift-left (region-beginning) (region-end))
+                   (evil-normal-state)
+                   (evil-visual-restore))
+             ">" (lambda ()
+                   (interactive)
+                   (evil-shift-right (region-beginning) (region-end))
+                   (evil-normal-state)
+                   (evil-visual-restore)))
 
        (progn (pkg 'evil-leader)
               (global-evil-leader-mode)
@@ -98,14 +105,12 @@ P: The quoted package."
 
        (progn (pkg 'evil-surround)
               (global-evil-surround-mode 1)
-              (evil-define-key 'visual
-                evil-surround-mode-map "s" 'evil-surround-region)
-              (evil-define-key 'visual
-                evil-surround-mode-map "gs" 'evil-Surround-region)
-              (define-key evil-normal-state-map
-                (kbd "s") 'evil-surround-edit)
-              (define-key evil-normal-state-map
-                (kbd "S") 'evil-Surround-edit))
+              (evil-define-key 'normal evil-surround-mode-map
+                "s" 'evil-surround-edit
+                "S" 'evil-Surround-edit)
+              (evil-define-key 'visual evil-surround-mode-map
+                "s" 'evil-surround-region
+                "S" 'evil-Surround-region))
 
        (progn (pkg 'evil-mc)
               (global-evil-mc-mode 1))
@@ -141,26 +146,28 @@ P: The quoted package."
         ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
        ;; Folder navigation
-       (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-immediate-done)
-       (define-key ivy-minibuffer-map (kbd "RET") 'ivy-alt-done)
+       (bind ivy-minibuffer-map
+             "C-j" 'ivy-immediate-done
+             "RET" 'ivy-alt-done)
 
        ;; Ivy binds
-       (define-key evil-normal-state-map "\C-s" 'swiper)
-       (define-key evil-normal-state-map (kbd "C-c C-r") 'ivy-resume)
-       (define-key evil-normal-state-map (kbd "<f6>") 'ivy-resume)
-       (define-key evil-normal-state-map (kbd "M-x") 'counsel-M-x)
-       (define-key evil-normal-state-map (kbd "C-x C-f") 'counsel-find-file)
-       (define-key evil-normal-state-map (kbd "<f1> f") 'counsel-describe-function)
-       (define-key evil-normal-state-map (kbd "<f1> v") 'counsel-describe-variable)
-       (define-key evil-normal-state-map (kbd "<f1> l") 'counsel-load-library)
-       (define-key evil-normal-state-map (kbd "<f2> i") 'counsel-info-lookup-symbol)
-       (define-key evil-normal-state-map (kbd "<f2> u") 'counsel-unicode-char)
-       (define-key evil-normal-state-map (kbd "C-c g") 'counsel-git)
-       (define-key evil-normal-state-map (kbd "C-c j") 'counsel-git-grep)
-       (define-key evil-normal-state-map (kbd "C-c k") 'counsel-ag)
-       (define-key evil-normal-state-map (kbd "C-x l") 'counsel-locate)
-       (define-key evil-normal-state-map (kbd "C-S-o") 'counsel-rhythmbox)
-       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+       (bind evil-normal-state-map
+             "C-s" 'swiper
+             "C-c C-r" 'ivy-resume
+             "<f6>" 'ivy-resume
+             "M-x" 'counsel-M-x
+             "C-x C-f" 'counsel-find-file
+             "<f1> f" 'counsel-describe-function
+             "<f1> v" 'counsel-describe-variable
+             "<f1> l" 'counsel-load-library
+             "<f2> i" 'counsel-info-lookup-symbol
+             "<f2> u" 'counsel-unicode-char
+             "C-c g" 'counsel-git
+             "C-c j" 'counsel-git-grep
+             "C-c k" 'counsel-ag
+             "C-x l" 'counsel-locate
+             "C-S-o" 'counsel-rhythmbox
+             "C-r" 'counsel-expression-history)
        (evil-leader/set-key
          ";" 'counsel-M-x
          "gz" 'counsel-git
@@ -179,10 +186,9 @@ P: The quoted package."
        (add-hook 'after-init-hook 'global-company-mode)
        (setq-default
         company-idle-delay 0)
-       (define-key company-active-map
-         (kbd "TAB") 'company-select-next)
-       (define-key company-active-map
-         (kbd "<backtab>") 'company-select-previous)
+       (bind company-active-map
+             "TAB" 'company-select-next
+             "<backtab>" 'company-select-previous)
        (custom-set-faces
         '(company-tooltip
           ((t (:background "brightblack" :foreground "brightwhite"))))
@@ -215,8 +221,9 @@ P: The quoted package."
         '(git-gutter:modified ((t (:inherit default :foreground "yellow"))))
         '(git-gutter:added ((t (:inherit default :foreground "green"))))
         '(git-gutter:removed ((t (:inherit default :foreground "red")))))
-       (define-key evil-normal-state-map (kbd "]g") 'git-gutter:next-hunk)
-       (define-key evil-normal-state-map (kbd "[g") 'git-gutter:previous-hunk)
+       (bind evil-normal-state-map
+             "[g" 'git-gutter:previous-hunk
+             "]g" 'git-gutter:next-hunk)
        (evil-leader/set-key
          "ga" 'git-gutter:stage-hunk
          "gu" 'git-gutter:revert-hunk

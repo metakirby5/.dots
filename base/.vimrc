@@ -252,7 +252,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nmap Ss <Plug>YSsurround
       nmap SS <Plug>YSsurround
       xmap s <Plug>VSurround
-      xmap gs <Plug>VgSurround
+      xmap S <Plug>VgSurround
     " }}}
     " Replace with register {{{
       Plug 'vim-scripts/ReplaceWithRegister'
