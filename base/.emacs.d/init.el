@@ -273,6 +273,7 @@ BINDINGS: extra keybindings."
 (global-linum-mode t)
 (show-paren-mode t)
 (global-whitespace-mode)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
