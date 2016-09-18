@@ -376,8 +376,9 @@ BINDINGS: extra keybindings."
   (custom-set-faces
    '(whitespace-tab ((t (:foreground "blue"))))
    '(region ((t (:inverse-video t))))
+   '(show-paren-match ((t (:background "brightblack"))))
    '(vertical-border ((t (:background "black" :foreground "black"))))
-   '(linum ((t (:inherit default :foreground "brightblack"))))))
+   '(linum ((t (:inherit default :foreground "gray"))))))
 
 ;; Enable mouse
 (xterm-mouse-mode t)
