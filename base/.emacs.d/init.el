@@ -24,7 +24,7 @@ P: The quoted package."
     (require p)))
 
 (defun bind (map key cmd &rest bindings)
-  "Return a function which binds a list of keybindings to a keymap.
+  "Bind a list of keybindings to a keymap.
 MAP: the keymap.
 KEY: the key.
 CMD: the action.
