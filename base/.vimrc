@@ -261,6 +261,19 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Utility {{{
     " Emacs which-key for vim {{{
       Plug 'hecal3/vim-leader-guide'
+      function! s:leader_guide_displayfunc()
+        " Kill ending <cr>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname, '<cr>$', '', 'i')
+        " Kill beginning <esc>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname, '^<esc>', '', 'i')
+        " Kill beginning <plug>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname, '^<plug>(\([^)]*\))',
+              \ '\1', 'i')
+      endfunction
+      let g:leaderGuide_displayfunc = [function("s:leader_guide_displayfunc")]
       function! s:map_leader_guides(l)
         for k in a:l
           let g = k == '<leader>' ? g:mapleader : k
@@ -269,7 +282,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endfor
       endfunction
       call s:map_leader_guides([
-            \ '<leader>', '[', ']',
+            \ '<leader>', '[', ']', 'co',
             \ ])
     " }}}
     " Allow * and # on visual {{{

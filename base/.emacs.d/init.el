@@ -254,7 +254,7 @@ BINDINGS: extra keybindings."
          "go" 'git-gutter:popup-diff))
 
 (progn (pkg 'aggressive-indent)
-       (global-aggressive-indent-mode 1))
+       (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode))
 
 (progn (pkg 'highlight-indent-guides)
        (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
@@ -291,8 +291,10 @@ BINDINGS: extra keybindings."
                  (lambda () (add-to-list 'company-backends 'company-elm))))
 
 (progn (pkg 'coffee-mode))
-
 (progn (pkg 'markdown-mode))
+(progn (pkg 'yaml-mode))
+(progn (pkg 'jade-mode))
+(progn (pkg 'stylus-mode))
 
 ;; General
 (if (display-graphic-p)
