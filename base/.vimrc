@@ -261,6 +261,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Utility {{{
     " Emacs which-key for vim {{{
       Plug 'hecal3/vim-leader-guide'
+      let g:leaderGuide_default_group_name = "+group"
       function! s:leader_guide_displayfunc()
         " Kill ending <cr>
         let g:leaderGuide#displayname =
