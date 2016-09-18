@@ -47,8 +47,8 @@
 	st = status
 
 	# branch
-	b = branch
-	ba = branch --all
+	b = branch -vv
+	ba = branch -vv --all
 
 	# diff
 	d   = diff --color-words
