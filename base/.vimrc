@@ -270,8 +270,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \ substitute(g:leaderGuide#displayname, '^<esc>', '', 'i')
         " Kill beginning <plug>
         let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname, '^<plug>(\([^)]*\))',
-              \ '\1', 'i')
+              \ substitute(g:leaderGuide#displayname,
+              \ '^<plug>(\?\([^)]*\))\?', '\1', 'i')
       endfunction
       let g:leaderGuide_displayfunc = [function("s:leader_guide_displayfunc")]
       function! s:map_leader_guides(l)
@@ -1098,8 +1098,9 @@ endif " }}}
     command! -nargs=* Sudow call s:sudow(<f-args>)
 
     " ,q - edit macro
-    nnoremap <leader>q :<c-u><c-r><c-r>='let @'.v:register.' = '
+    nnoremap <Plug>edit-macro :<c-u><c-r><c-r>='let @'.v:register.' = '
           \.string(getreg(v:register))<cr><c-f><left>
+    nmap <leader>q <Plug>edit-macro
 
   " }}}
   " Centralized swap files {{{
