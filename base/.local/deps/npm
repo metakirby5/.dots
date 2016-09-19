@@ -4,7 +4,6 @@ coffee-script
 elm
 git-open
 gulp
-http-server
 juliangruber/vipe
 npm
 pug-cli
