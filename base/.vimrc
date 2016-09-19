@@ -283,15 +283,22 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endif
       endfunction
       let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
-      function! s:map_leaderGuides(l)
+      function! s:map_leaderGuides(maps, l)
         for k in a:l
           let g = k == '<leader>' ? g:mapleader : k
-          exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
-          exe 'vnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
+          if a:maps =~ 'n'
+            exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
+          endif
+          if a:maps =~ 'v'
+            exe 'vnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
+          endif
         endfor
       endfunction
-      call s:map_leaderGuides([
-            \ '<leader>', '[', ']', 'co',
+      call s:map_leaderGuides('n', [
+            \ 'co',
+            \ ])
+      call s:map_leaderGuides('nv', [
+            \ '<leader>', '[', ']',
             \ ])
     " }}}
     " Allow * and # on visual {{{
