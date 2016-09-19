@@ -262,7 +262,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Emacs which-key for vim {{{
       Plug 'hecal3/vim-leader-guide'
       let g:leaderGuide_default_group_name = "+group"
-      function! s:leader_guide_displayfunc()
+      let g:leaderGuide_hspace = 2
+      let s:leaderGuide_max_desc_len = 30
+      function! s:leaderGuide_displayfunc()
         " Kill ending <cr>
         let g:leaderGuide#displayname =
               \ substitute(g:leaderGuide#displayname, '<cr>$', '', 'i')
@@ -273,16 +275,22 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:leaderGuide#displayname =
               \ substitute(g:leaderGuide#displayname,
               \ '^<plug>(\?\([^)]*\))\?', '\1', 'i')
+        " Truncate to s:leaderGuide_max_desc_len chars or less
+        if len(g:leaderGuide#displayname) > s:leaderGuide_max_desc_len
+          let g:leaderGuide#displayname =
+                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-3]
+                \."..."
+        endif
       endfunction
-      let g:leaderGuide_displayfunc = [function("s:leader_guide_displayfunc")]
-      function! s:map_leader_guides(l)
+      let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
+      function! s:map_leaderGuides(l)
         for k in a:l
           let g = k == '<leader>' ? g:mapleader : k
           exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
           exe 'vnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
         endfor
       endfunction
-      call s:map_leader_guides([
+      call s:map_leaderGuides([
             \ '<leader>', '[', ']', 'co',
             \ ])
     " }}}
