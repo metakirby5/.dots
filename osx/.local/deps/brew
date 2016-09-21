@@ -1,3 +1,4 @@
+brew 'android-platform-tools'
 brew 'asciinema'
 brew 'bash'
 brew 'beeftornado/rmtree/brew-rmtree'
