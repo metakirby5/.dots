@@ -36,7 +36,7 @@ set $dmFlags            {{ dmenu_flags }}
 set $dmPrompt           λ
 
 # Settings
-set $term               urxvt256cc
+set $term               {{ term_name }}
 set $volChangeSound     /usr/share/sounds/gnome/default/alerts/drip.ogg
 set $volPct             5
 set $brightPct          10
@@ -69,12 +69,19 @@ set $xwi                xwininfo -tree -root | grep
 
 ## SESSION
 
-exec $nsi i3-focus-last
 exec_always $nsi feh -zr --bg-fill $wallpapers
+
+{{ i3_initcode }}
 
 # lemonbar
 bar {
-  i3bar_command startbar
+{% if bar_cmd %}
+  i3bar_command {{ bar_cmd }}
+{% else %}
+  mode hide
+  hidden_state hide
+  modifier none
+{% endif %}
 }
 
 # Terminal on scratch
@@ -131,7 +138,6 @@ for_window [class="feh|mpv"] floating enable
 # Tasks
 bindsym $mod+b              sticky toggle
 bindsym $mod+f              fullscreen toggle
-bindsym $mod+Tab            exec $nsi i3-focus-last --switch
 bindsym $mod+Shift+q        kill
 bindsym $mod+Shift+c        reload
 bindsym $mod+Shift+r        restart
@@ -140,14 +146,12 @@ bindsym $mod+Escape         exec $nsi xautolock -locknow
 bindsym $mod+Shift+Escape   exit
 
 # Executables
-bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu_counter dmenu $dmFlags -t -p "$dmPrompt" -counter $dmCounter'
+bindsym $mod+r exec $nsi j4-dmenu-desktop --term='$term' --dmenu='dmenu $dmFlags -t -p "$dmPrompt"'
 bindsym $mod+t exec $nsi $term -e tmux
 # File browser
 bindsym $mod+e exec $nsi $term -e ranger
 # Display currently playing song
 bindsym $mod+backslash exec $nsi mpc-notify
-# Next wallpaper
-bindsym $mod+Control+w exec $nsi feh -zr --bg-fill $wallpapers
 
 # Screenshots to clipboard
 set $_scrot               scrot "$HOME/Pictures/Screenshots/%m-%d-%y_%T.png"
@@ -242,8 +246,8 @@ bindsym $mod+s split v
 
 # Switch to workspace
 bindsym $mod+w              workspace back_and_forth
-bindsym $mod+p              workspace prev_on_output
-bindsym $mod+n              workspace next_on_output
+bindsym $mod+bracketleft    workspace prev_on_output
+bindsym $mod+bracketright   workspace next_on_output
 
 bindsym $mod+grave workspace  $wDash
 bindsym $mod+1 workspace      $w1
@@ -259,8 +263,8 @@ bindsym $mod+0 workspace      $w10
 
 # Move focused container to workspace
 bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
-bindsym $mod+Shift+p              move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+n              move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
 
 bindsym $mod+Shift+grave move container to workspace $wDash
 bindsym $mod+Shift+1     move container to workspace $w1

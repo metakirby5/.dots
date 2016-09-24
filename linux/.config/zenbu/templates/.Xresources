@@ -53,7 +53,7 @@ URxvt.color15:      {{ b_white }}
 
 ! Appearance
 URxvt.saveLines:        12000
-URxvt.internalBorder:   30
+URxvt.internalBorder:   {{ term_padding }}
 URxvt.urgentOnBell:     true
 URxvt.scrollBar:        false
 URxvt.cursorBlink:      true
