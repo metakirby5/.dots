@@ -1,0 +1,19 @@
+i3_initcode: |
+  exec $nsi urxvtd -q -o -f
+  # exec $nsicompton
+  exec $nsi xautolock
+  exec $nsi dunst
+  exec $nsi xcape -e Control_L=Escape
+  exec $nsi setxkbmap -option ctrl:nocaps
+  exec xrandr --output DP-1 --rotate left
+term_name: "urxvtc"
+xft_dpi: 96
+font: "Ubuntu"
+term_fonts:
+  - "Ubuntu Mono"
+pixelsize: 18
+term_letterspace: 0
+term_padding: 15
+border_size: 2
+bar_cmd: false
+bar_height: 10
