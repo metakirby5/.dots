@@ -387,9 +387,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      Plug 'scrooloose/syntastic'
-            \, { 'on': 'SyntasticCheck' }
-      nnoremap <silent> <leader>- <esc>:SyntasticCheck<cr>
+      Plug 'maralla/validator.vim'
+      let g:validator_auto_open_quickfix = 1
+      " Plug 'scrooloose/syntastic'
+      "       \, { 'on': 'SyntasticCheck' }
+      " nnoremap <silent> <leader>- <esc>:SyntasticCheck<cr>
     " }}}
     " Add highlight groups {{{
       Plug 't9md/vim-quickhl'
