@@ -462,10 +462,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Post-hooks {{{
     call plug#end()
-
-    " vim-leader-guide
-    let g:lgmap = {}
-    call leaderGuide#register_prefix_descriptions('', 'g:lgmap')
   " }}}
   " Fallbacks {{{
 else
