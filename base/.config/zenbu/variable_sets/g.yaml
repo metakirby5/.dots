@@ -1,6 +1,6 @@
 i3_initcode: |
   exec $nsi urxvtd -q -o -f
-  # exec $nsicompton
+  exec $nsi compton
   exec $nsi xautolock
   exec $nsi dunst
   exec $nsi xcape -e Control_L=Escape
