@@ -1,3 +1,4 @@
+username: "luluco"
 i3_initcode: |
   exec $nsi urxvtd -q -o -f
   exec $nsi compton
@@ -15,5 +16,5 @@ pixelsize: 18
 term_letterspace: 0
 term_padding: 15
 border_size: 2
-bar_cmd: false
+bar_cmd: none
 bar_height: 10

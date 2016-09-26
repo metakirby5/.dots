@@ -20,7 +20,7 @@ term_letterspace: 2
 term_padding: 30
 
 # WM
-i3_initcode: ""
+i3_initcode: none
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 floating: false
 inner_gap_size: 15
