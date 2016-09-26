@@ -1,0 +1,10 @@
+[2016-09-25 22:57:38.738] [console_user_server] [info] version 0.90.40
+[2016-09-25 22:57:39.868] [console_user_server] [info] grabber_client_ is connected
+[2016-09-25 22:57:39.869] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-25 22:57:40.871] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-25 22:58:39.828] [console_user_server] [warning] parse error in /Users/echan/.karabiner.d/configuration/karabiner.json: parse error - unexpected end of input
+[2016-09-25 23:02:51.829] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-25 23:04:13.526] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-25 23:04:31.020] [console_user_server] [info] the configuration directory is updated.
+[2016-09-25 23:04:32.588] [console_user_server] [info] the configuration directory is updated.
+[2016-09-25 23:04:32.758] [console_user_server] [info] configuration_core_ was loaded.
