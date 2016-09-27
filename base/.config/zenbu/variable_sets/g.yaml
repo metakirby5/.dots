@@ -1,5 +1,6 @@
 username: "luluco"
 i3_initcode: |
+  exec $nsi gnome-settings-daemon
   exec $nsi urxvtd -q -o -f
   exec $nsi compton
   exec $nsi xautolock
@@ -7,6 +8,9 @@ i3_initcode: |
   exec $nsi xcape -e Control_L=Escape
   exec $nsi setxkbmap -option ctrl:nocaps
   exec xrandr --output DP-1 --rotate left
+i3_default_workspaces: |
+  workspace 1:一 output DVI-I-1
+  workspace 2:二 output DP-1
 term_name: "urxvtc"
 xft_dpi: 96
 font: "Ubuntu"

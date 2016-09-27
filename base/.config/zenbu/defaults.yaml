@@ -21,13 +21,15 @@ term_padding: 30
 
 # WM
 i3_initcode: none
+i3_default_workspaces: |
+  workspace 1:一 output eDP1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
 floating: false
 inner_gap_size: 15
 dunst_gap: 20
 border_size: 5
 dmenu_flags: &dmenu_flags '-i -f -fn {{
-  font }}:pixelsize={{ pixelsize
+  font }}:pixelsize={{ pixelsize - 4
   }} -nf "{{ colors.foreground
   }}" -nb "{{ colors.background
   }}" -sf "{{ colors.foreground
