@@ -186,6 +186,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if exists('s:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
+        let g:{s:completion_prefix}max_list = 10
+        let g:{s:completion_prefix}max_keyword_width = 40
+        let g:{s:completion_prefix}auto_complete_delay = 200
+        let g:{s:completion_prefix}enable_auto_delimiter = 1
         set completeopt-=preview
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" :
@@ -386,10 +390,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Syntax checker {{{
       Plug 'maralla/validator.vim'
-      let g:validator_auto_open_quickfix = 1
-      " Plug 'scrooloose/syntastic'
-      "       \, { 'on': 'SyntasticCheck' }
-      " nnoremap <silent> <leader>- <esc>:SyntasticCheck<cr>
     " }}}
     " Add highlight groups {{{
       Plug 't9md/vim-quickhl'
@@ -843,11 +843,19 @@ endif " }}}
       silent! let &t_SI = "\<Esc>[5 q" " INSERT:  Flashing bar
     endif
   " }}}
+  " Quickfix Splits {{{
+    augroup QUICKFIX_SPLITS
+      au!
+      au BufEnter * if &buftype == 'quickfix'
+            \ | noremap <buffer> q <esc>:q<cr>
+            \ | endif
+    augroup END
+  " }}}
   " Help Splits {{{
     augroup HELP_SPLITS
       au!
-      au BufEnter * if &buftype == 'help' |
-            \ wincmd L | exe 'vert resize ' . &tw
+      au BufEnter * if &buftype == 'help'
+            \ | wincmd L | exe 'vert resize ' . &tw
             \ | noremap <buffer> q <esc>:q<cr>
             \ | endif
     augroup END
@@ -992,6 +1000,10 @@ endif " }}}
       " zs - Syntax mode
       nnoremap zs <esc>:set foldmethod=syntax<cr>zR
     endif
+  " }}}
+  " Pane toggles {{{
+    nnoremap <silent> cpc <esc>:cw<cr>
+    nnoremap <silent> cpl <esc>:lw<cr>
   " }}}
 " }}}
 " Style {{{
