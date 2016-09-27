@@ -12,9 +12,12 @@ xft_dpi: 96
 font: "Ubuntu"
 term_fonts:
   - "Ubuntu Mono"
+bar_fonts:
+  - "Ubuntu-12"
+  - "M+ 1p-10"
+bar_font_offset: 0
 pixelsize: 18
 term_letterspace: 0
 term_padding: 15
 border_size: 2
-bar_cmd: none
-bar_height: 10
+bar_height: 20
