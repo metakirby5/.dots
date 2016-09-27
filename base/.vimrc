@@ -186,7 +186,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if exists('s:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
-        let g:{s:completion_prefix}auto_completion_start_length = 3
         set completeopt-=preview
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" :
@@ -198,8 +197,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:ulti_expand_res = 0
         function! s:smart_cr()
           silent! call UltiSnips#ExpandSnippet()
-          return g:ulti_expand_res ? ""
-                \: {s:completion_engine}#smart_close_popup()."\<cr>"
+          return g:ulti_expand_res ? "" : "\<c-y>\<cr>"
         endfunction
 
         " Custom completions
