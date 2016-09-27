@@ -245,9 +245,9 @@ bindsym $mod+v split h
 bindsym $mod+s split v
 
 # Switch to workspace
-bindsym $mod+w              workspace back_and_forth
-bindsym $mod+bracketleft    workspace prev_on_output
-bindsym $mod+bracketright   workspace next_on_output
+bindsym $mod+w workspace back_and_forth
+bindsym $mod+p workspace prev_on_output
+bindsym $mod+n workspace next_on_output
 
 bindsym $mod+grave workspace  $wDash
 bindsym $mod+1 workspace      $w1
@@ -262,9 +262,9 @@ bindsym $mod+9 workspace      $w9
 bindsym $mod+0 workspace      $w10
 
 # Move focused container to workspace
-bindsym $mod+Shift+w              move container to workspace back_and_forth; workspace back_and_forth
-bindsym $mod+Shift+bracketleft    move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+bracketright   move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Shift+w move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Shift+p move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+n move container to workspace next_on_output; workspace next_on_output
 
 bindsym $mod+Shift+grave move container to workspace $wDash; workspace $wDash
 bindsym $mod+Shift+1     move container to workspace $w1; workspace $w1
