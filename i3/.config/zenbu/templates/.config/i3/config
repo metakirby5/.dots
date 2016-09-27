@@ -97,7 +97,7 @@ bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT -e tmux new-session 
 font pango:$fontName $fontSize
 floating_modifier $mod
 focus_follows_mouse no
-mouse_warping none
+mouse_warping output
 workspace_auto_back_and_forth yes
 for_window[class=".*"] title_format " %title"
 
