@@ -1,6 +1,5 @@
 username: "luluco"
 i3_initcode: |
-  exec $nsi gnome-settings-daemon
   exec $nsi urxvtd -q -o -f
   exec $nsi compton
   exec $nsi xautolock
