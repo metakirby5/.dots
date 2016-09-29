@@ -8,6 +8,7 @@ i3_initcode: |
   exec $nsi xcape -e Control_L=Escape
   exec $nsi setxkbmap -option ctrl:nocaps
   exec $nsi xrandr --output DP-1 --rotate left
+  exec $nsi xset dpms 720 840 960 s 600
 i3_default_workspaces: |
   workspace 1:一 output DVI-I-1
   workspace 2:二 output DP-1
