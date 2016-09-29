@@ -5,9 +5,8 @@ i3_initcode: |
   exec $nsi compton
   exec $nsi xautolock
   exec $nsi dunst
-  exec $nsi setxkbmap -option ctrl:nocaps
+  exec $nsi xmodmap -e "keycode 66 = Escape"
   exec $nsi xmodmap -e "keycode 9 = grave asciitilde"
-  exec $nsi xcape -e 'Control_L=Escape'
   exec $nsi xrandr --output DP-1 --rotate left
   exec $nsi xset dpms 720 840 960 s 600
 i3_default_workspaces: |
