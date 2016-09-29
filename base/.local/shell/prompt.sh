@@ -101,7 +101,7 @@ __mk5_set_prompt() {
     fi
 
     # Prepare info (TODO optimize)
-    local git_st="$(git status --porcelain)"
+    local git_st="$(git status --porcelain 2>/dev/null)"
     local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
 
     # Branch name
