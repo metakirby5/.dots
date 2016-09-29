@@ -35,12 +35,14 @@
 	branch = auto
 [alias]
 	# misc
+	i = init
 	cl = clone --recursive
 	co = checkout
 	ci = commit
 	rb = rebase
 	cp = cherry-pick
 	t = tag
+	r = reset
 
 	# status
 	s  = status --short
@@ -61,10 +63,6 @@
 	aa = add --all
 	ai = add --interactive
 	ap = add --patch
-
-	# reset
-	r  = reset HEAD
-	rh = reset HEAD~
 
 	# stash
 	su = stash save
@@ -93,9 +91,7 @@
 	exec = "!exec "
 	root = rev-parse --show-toplevel
 	fixup = commit --fixup
-	fu = !git fixup
 	amend = commit --amend
-	m = !git amend
 	squash = "!f(){(git rebase --interactive HEAD~$1)};f"
 	find = !git ls-files | grep -iI
 	f = find
