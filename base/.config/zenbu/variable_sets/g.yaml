@@ -4,7 +4,7 @@ i3_initcode: |
   exec $nsi compton
   exec $nsi xautolock
   exec $nsi dunst
-  exec $nsi xmodmap -e "keycode 66 = Escape"
+  exec $nsi setxkbmap -option caps:escape
   exec $nsi xmodmap -e "keycode 9 = grave asciitilde"
   exec $nsi xrandr --output DP-1 --rotate left
   exec $nsi xset dpms 720 840 960 s 600
