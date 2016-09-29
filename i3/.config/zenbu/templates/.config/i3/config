@@ -25,7 +25,7 @@ set $cUrgentIN          #f79bad
 set $cMainBG            {{ bgc }}
 set $cMainFG            {{ fgc }}
 set $fontName           {{ font }}
-set $fontSize           8
+set $fontSize           {{ pixelsize - 6 }}
 set $border             {{ border_size }}
 set $gapsInner          {{ inner_gap_size }}
 set $gapsOuter          0
