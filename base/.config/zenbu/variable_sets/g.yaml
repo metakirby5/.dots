@@ -8,6 +8,7 @@ i3_initcode: |
   exec $nsi xmodmap -e "keycode 9 = grave asciitilde"
   exec $nsi xrandr --output DP-1 --rotate left
   exec $nsi xset dpms 720 840 960 s 600
+  bindsym $mod+Shift+d exec $nsi xdotool mousemove --sync --screen 0 1899 1123 click 1 mousemove --sync restore
 i3_default_workspaces: |
   workspace 1:一 output DVI-I-1
   workspace 2:二 output DP-1
