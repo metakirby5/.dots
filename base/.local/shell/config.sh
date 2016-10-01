@@ -24,7 +24,7 @@ fi
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Directories
-for d in "$dir"/{aliases,functions,vendor}; do
+for d in "$dir"/{vendor,functions,aliases}; do
   [ -d "$d" ] && for f in "$d"/*; do
     source "$f"
   done
