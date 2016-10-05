@@ -40,7 +40,7 @@ brew 'ruby'
 brew 'stow'
 brew 'terminal-notifier'
 brew 'the_silver_searcher'
-brew 'tmux'
+brew 'tmux', args: ['HEAD']
 brew 'trash'
 brew 'wget'
 cask 'airdroid'
