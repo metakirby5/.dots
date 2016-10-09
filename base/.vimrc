@@ -404,9 +404,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Paired keybindings {{{
       Plug 'tpope/vim-unimpaired'
     " }}}
-    " Autocomplete from tmux panes {{{
-      Plug 'wellle/tmux-complete.vim'
-    " }}}
   " }}}
   " Automation {{{
     " Automatically set paste {{{
