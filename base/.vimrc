@@ -186,16 +186,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if exists('s:completion_engine')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
-        let g:{s:completion_prefix}max_list = 10
-        let g:{s:completion_prefix}max_keyword_width = 40
-        let g:{s:completion_prefix}auto_complete_delay = 200
         let g:{s:completion_prefix}enable_auto_delimiter = 1
         set completeopt-=preview
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" :
-              \ neocomplete#undo_completion()
-        inoremap <expr> <bs>    {s:completion_engine}#smart_close_popup()
-              \. "\<bs>"
+        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
         inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
         let g:ulti_expand_res = 0
@@ -204,14 +198,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           return g:ulti_expand_res ? ""
                 \: pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
         endfunction
-
-        " Custom completions
-        augroup PLUG_COMPLETION
-          au!
-        augroup END
-        if !exists('g:neocomplete#force_omni_input_patterns')
-          let g:{s:completion_prefix}force_omni_input_patterns = {}
-        endif
       endif
     " }}}
   " }}}
