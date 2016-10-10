@@ -289,7 +289,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
-            \, { 'for': ['html', 'javascript.jsx'] }
+            \, { 'for': ['html', 'javascript.jsx', 'jinja2'] }
+      au BufNewFile,BufRead *.dtl set filetype=jinja2
       let g:user_emmet_leader_key='<c-e>'
     " }}}
     " Language packs {{{
@@ -370,7 +371,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      Plug 'maralla/validator.vim'
+      if has('job') && has('timers') && has('lambda') &&
+            \ (has('python') || has('python3'))
+        Plug 'maralla/validator.vim'
+      else
+        Plug 'scrooloose/syntastic'
+      endif
     " }}}
     " Add highlight groups {{{
       Plug 't9md/vim-quickhl'
