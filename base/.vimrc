@@ -1106,10 +1106,6 @@ endif " }}}
     nnoremap <Plug>edit-macro :<c-u><c-r><c-r>='let @'.v:register.' = '
           \.string(getreg(v:register))<cr><c-f><left>
     nmap <leader>q <Plug>edit-macro
-
-    " U - fix syntax highlighting
-    nnoremap U <esc>:syntax on<cr>:syntax sync fromstart<cr>:redraw!<cr>
-
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
@@ -1176,6 +1172,9 @@ endif " }}}
 
   " K - split line
   noremap K i<cr><esc>
+
+  " U - fix syntax highlighting
+  nnoremap <silent> U <esc>:syntax sync fromstart<cr>
 " }}}
 " Macros {{{
   " " File header function
