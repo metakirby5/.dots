@@ -1107,6 +1107,9 @@ endif " }}}
           \.string(getreg(v:register))<cr><c-f><left>
     nmap <leader>q <Plug>edit-macro
 
+    " U - fix syntax highlighting
+    nnoremap U <esc>:syntax on<cr>:syntax sync fromstart<cr>:redraw!<cr>
+
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
