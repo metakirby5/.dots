@@ -6,6 +6,8 @@
 	whitespace = space-before-tab,trailing-space # error on bad whitespace
 [push]
 	default = upstream         # push to upstream
+[pull]
+	rebase = true              # rebase instead of merge on pull
 [merge]
 	defaultToUpstream = true   # merge with upstream by default
 	log = true                 # summary on merge
