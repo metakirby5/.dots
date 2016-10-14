@@ -8,6 +8,7 @@ brew 'emacs', service_restart: true
 brew 'fasd'
 brew 'fzf'
 brew 'gcc'
+brew 'gdb'
 brew 'gifsicle'
 brew 'git'
 brew 'gnu-sed', args: ['with-default-names']
