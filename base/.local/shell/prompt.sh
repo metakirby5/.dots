@@ -40,7 +40,7 @@ __mk5_set_prompt() {
   local last_status="$?"
 
   # Status color
-  local pchar_color
+  local pchar_color=
   if [ "$last_status" == 0 ]; then
     pchar_color="$__mk5_b_green"
   else
@@ -48,7 +48,7 @@ __mk5_set_prompt() {
   fi
 
   # Use $ or # for prompt
-  local pchar
+  local pchar=
   if [ "$EUID" == 0 ]; then
     pchar="$__mk5_char_root"
   else
@@ -56,11 +56,11 @@ __mk5_set_prompt() {
   fi
 
   # Display hostname if ssh'd
-  local hostname
+  local hostname=
   [ "$SSH_TTY" ] && hostname="$__mk5_cyan$__mk5_hostname$__mk5_b_cyan, "
 
   # Display job count
-  local jobs_info
+  local jobs_info=
   local jobs_l="$(jobs)"
   if [ "$jobs_l" ]; then
     # Stopped
@@ -80,8 +80,8 @@ __mk5_set_prompt() {
 
   # Git stuff (mostly in bash for speed)
   local mypwd="$PWD"
-  local git_info
-  local git_base
+  local git_info=
+  local git_base=
   local git_path="$PWD"
   until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
     git_path="${git_path%/*}"
@@ -154,14 +154,15 @@ __mk5_set_prompt() {
   fi
 
   # Colorize
-  local suffix
+  local suffix=
   local pwd_color="$__mk5_green"
 
   # Virtualenv = blue
-  local virtualenv_info
+  local virtualenv_info=
   if [ "$VIRTUAL_ENV" ]; then
-    local env_path
-    read env_path < "$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
+    local project_filename="$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
+    local env_path=
+    [ -f "$project_filename" ] && read env_path < "$project_filename"
 
     if [ ! "$env_path" ]; then
       virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
