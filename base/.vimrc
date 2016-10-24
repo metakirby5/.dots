@@ -553,7 +553,7 @@ endif " }}}
   set ttyfast                       " assume speedy connection
   set undolevels=10000              " allow lots of undos
   set updatetime=500                " fire hold events every half-second
-  exe "set viminfo='100,n".s:configdir.'/info'
+  exe "set viminfo='100,n".s:configdir.'/'.(has('nvim') ? 'nv_' : '').'info'
 " }}}
 " Interface {{{
   " General {{{
