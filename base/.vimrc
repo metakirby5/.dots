@@ -1167,7 +1167,10 @@ endif " }}}
   " Y - Yank to clipboard
   noremap Y "+y
 
-  " ,p - Toggle paste mode
+  " Q - Replay macro
+  noremap Q @q
+
+  " cop - Toggle paste mode
   nnoremap cop <esc>:setlocal paste!<cr>
 
   " K - split line
