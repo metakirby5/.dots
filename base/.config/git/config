@@ -57,8 +57,10 @@
 	# diff
 	d   = diff --color-words
 	dl  = diff
+	ds  = diff --name-status
 	dc  = diff --color-words --cached
-	dlc = diff --cached
+	dcl = diff --cached
+	dcs  = diff --name-status --cached
 
 	# add
 	a  = add
