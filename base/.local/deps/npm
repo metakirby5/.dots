@@ -5,6 +5,8 @@ elm
 git-open
 gulp
 juliangruber/vipe
+mocha
+nodemon
 npm
 pug-cli
 stylus
