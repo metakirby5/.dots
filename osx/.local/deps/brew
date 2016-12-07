@@ -44,6 +44,7 @@ brew 'terminal-notifier'
 brew 'the_silver_searcher'
 brew 'tmux', args: ['HEAD']
 brew 'trash'
+brew 'tree'
 brew 'wget'
 cask 'airdroid'
 cask 'atom'
