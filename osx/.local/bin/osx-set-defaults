@@ -70,7 +70,7 @@ DEFAULTS=(
 
   # com.apple.menuextra.clock
   ["24 hour clock"]="\
-    com.apple.menuextra.clock DateFormat -string 'EEE MM d  H:mm'"
+    com.apple.menuextra.clock DateFormat -string 'EEE MMM d H:mm'"
   ["No flashing time separators"]="\
     com.apple.menuextra.clock FlashDateSeparators -bool false"
   ["Digital clock"]="\
@@ -93,6 +93,10 @@ DEFAULTS=(
     com.apple.finder NewWindowTarget -string PfHm"
   ["Set default Finder location to \$HOME (2)"]="\
     com.apple.finder NewWindowTargetPath -string file://${HOME}"
+  ["Remove items from the Trash after 30 days"]="\
+    com.apple.finder FXRemoveOldTrashItems -bool true"
+  ["Keep folders on top when sorting by name"]="\
+    com.apple.finder _FXSortFoldersFirst -bool true"
 
   # com.apple.desktopservices
   ["Don't write .DS_Store files on USBs"]="\
