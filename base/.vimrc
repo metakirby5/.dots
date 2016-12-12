@@ -115,7 +115,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ ['   Files'], 'files',
             \ ['   Directory'], 'dir',
             \ ['   Commands'], 'commands']
-      let g:startify_change_to_vcs_root = 1
       let g:startify_relative_path = 1
       let g:startify_session_autoload = 1
       let g:startify_session_persistence = 1
@@ -357,6 +356,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
+            \, { 'on': 'Codi' }
       let g:codi#interpreters = {
           \     'purescript': {
           \         'bin': ['pulp', 'psci'],
