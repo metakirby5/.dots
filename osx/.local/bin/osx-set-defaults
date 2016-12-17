@@ -15,8 +15,8 @@ DEFAULTS=(
     NSGlobalDomain AppleAquaColorVariant -int 1"
   ["Black bar and dock"]="\
     NSGlobalDomain AppleInterfaceStyle -string Dark"
-  ["Don't automatically hide menu bar"]="\
-    NSGlobalDomain '_HIHideMenuBar' -bool false"
+  ["Automatically hide menu bar"]="\
+    NSGlobalDomain '_HIHideMenuBar' -bool true"
   ["Show scrollbars when scrolling"]="\
     NSGlobalDomain AppleShowScrollBars -string WhenScrolling"
   ["Click in scroll bar to jump to next page"]="\
