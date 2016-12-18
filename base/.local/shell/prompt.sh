@@ -24,13 +24,6 @@ __mk5_char_usr='>'
 __mk5_char_root='#'
 __mk5_char_stopped='%'
 __mk5_char_running='&'
-__mk5_char_unt='-'
-__mk5_char_mod='*'
-__mk5_char_add='+'
-__mk5_char_stash='\$'
-__mk5_char_behind='v'
-__mk5_char_ahead='^'
-__mk5_char_no_up='!'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$HOME"
@@ -91,38 +84,14 @@ __mk5_set_prompt() {
     # Replace git path
     git_base="$(basename "$git_path")"
     mypwd="$git_base$(perl -pe "s|^$git_path||i" <<< "$mypwd")"
+    git_info="$__mk5_purple"
 
-    # Get branch
-    read git_info < "$git_path/.git/HEAD"
-    if [[ "$git_info" == ref:* ]]; then
-      git_info="${git_info:16}" # ref name
+    # Branch
+    read git_head < "$git_path/.git/HEAD"
+    if [[ "$git_head" == ref:* ]]; then
+      git_info+="${git_head:16}"  # ref name
     else
-      git_info="${git_info::7}"  # short hash
-    fi
-
-    # Prepare info (TODO optimize)
-    local git_st="$(git status --porcelain 2>/dev/null)"
-    local git_rev="$(git rev-list --left-right --count ...@{u} 2>/dev/null)"
-
-    # Branch name
-    git_info="$__mk5_purple$git_info"
-
-    # Untracked
-    local git_unt="$(grep '^??' <<< "$git_st" | wc -l | awk '{print$1}')"
-    if [ "$git_unt" != 0 ]; then
-      git_info+=" $__mk5_b_red$__mk5_char_unt$git_unt"
-    fi
-
-    # Modified
-    local git_mod="$(grep '^.[^ ?]' <<< "$git_st" | wc -l | awk '{print$1}')"
-    if [ "$git_mod" != 0 ]; then
-      git_info+=" $__mk5_b_yellow$__mk5_char_mod$git_mod"
-    fi
-
-    # Staged
-    local git_add="$(grep '^[^ ?].' <<< "$git_st" | wc -l | awk '{print$1}')"
-    if [ "$git_add" != 0 ]; then
-      git_info+=" $__mk5_b_green$__mk5_char_add$git_add"
+      git_info+="${git_head::7}"  # short hash
     fi
 
     # Stashed
@@ -132,23 +101,34 @@ __mk5_set_prompt() {
       git_info+=" $__mk5_b_cyan$__mk5_char_stash$git_stash"
     fi
 
-    # Upstream?
-    if [ "$git_rev" ]; then
-      # Commits behind upstream
-      local git_behind="$(awk '{ print $2 }' <<< "$git_rev")"
-      if [ "$git_behind" != 0 ]; then
-        git_info+=" $__mk5_b_red$__mk5_char_behind$git_behind"
-      fi
+    # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
+    git_info+="$(git status --porcelain -b | awk '
+    /^## / {
+      if ($0 ~ /ahead /) {
+        ahead = $0;
+        sub(/.*ahead /,  "", ahead);
+        sub(/\].*|, .*/, "", ahead);
+      }
+      if ($0 ~ /behind /) {
+        behind = $0;
+        sub(/.*behind /, "", behind);
+        sub(/\].*|, .*/, "", behind);
+      }
+      m = 1;
+    }
 
-      # Commits ahead of upstream
-      local git_ahead="$(awk '{ print $1 }' <<< "$git_rev")"
-      if [ "$git_ahead" != 0 ]; then
-        git_info+=" $__mk5_b_blue$__mk5_char_ahead$git_ahead"
-      fi
-    else
-      # Mark the branch
-      git_info="$__mk5_b_black$__mk5_char_no_up$git_info"
-    fi
+    m == 0 && /^\?\?/  { untracked++; m = 1; }
+    m == 0 && /^.[^ ]/ { changed++;          }
+    m == 0 && /^[^ ]./ { staged++;           }
+    m == 1              { m = 0;              }
+
+    END {
+      if (untracked) printf " \033[1;31m-%d\033[0m", untracked;
+      if (changed  ) printf " \033[1;33m*%d\033[0m", changed  ;
+      if (staged   ) printf " \033[1;32m+%d\033[0m", staged   ;
+      if (behind   ) printf " \033[1;31mv%d\033[0m", behind   ;
+      if (ahead    ) printf " \033[1;34m^%d\033[0m", ahead    ;
+    }')"
 
     git_info+="$__mk5_b_purple, "
   fi
