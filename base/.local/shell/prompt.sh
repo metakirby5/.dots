@@ -22,8 +22,6 @@ __mk5_b_white="\[\e[1;37m\]"
 # Special characters
 __mk5_char_usr='>'
 __mk5_char_root='#'
-__mk5_char_stopped='%'
-__mk5_char_running='&'
 
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$HOME"
@@ -53,23 +51,18 @@ __mk5_set_prompt() {
   [ "$SSH_TTY" ] && hostname="$__mk5_cyan$__mk5_hostname$__mk5_b_cyan, "
 
   # Display job count
-  local jobs_info=
-  local jobs_l="$(jobs)"
-  if [ "$jobs_l" ]; then
-    # Stopped
-    local jobs_s="$(grep '^.\{6\}S' <<< "$jobs_l" | wc -l | awk '{print$1}')"
-    if [ "$jobs_s" != 0 ]; then
-      jobs_info+=" $__mk5_red$__mk5_char_stopped$jobs_s"
-    fi
+  jobs_info="$(jobs | awk '
+  m == 1 { m = 0; }
 
-    # Running
-    local jobs_r="$(grep '^.\{6\}R' <<< "$jobs_l" | wc -l | awk '{print$1}')"
-    if [ "$jobs_r" != 0 ]; then
-      jobs_info+=" $__mk5_yellow$__mk5_char_running$jobs_r"
-    fi
+  m == 0 && /^.{6}S/ { stopped++; m = 1; }
+  m == 0 && /^.{6}R/ { running++; m = 1; }
 
-    [ "$jobs_info" ] && jobs_info="${jobs_info:1}$__mk5_b_yellow, "
-  fi
+  END {
+    if (stopped) printf " \033[31m%%%d\033[0m", stopped;
+    if (running) printf " \033[33m&%d\033[0m", running;
+  }')"
+
+  [ "$jobs_info" ] && jobs_info="${jobs_info:1}$__mk5_b_yellow, "
 
   # Git stuff (mostly in bash for speed)
   local mypwd="$PWD"
@@ -103,6 +96,8 @@ __mk5_set_prompt() {
 
     # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
     git_info+="$(git status --porcelain -b | awk '
+    m == 1 { m = 0; }
+
     /^## / {
       if ($0 ~ /ahead /) {
         ahead = $0;
@@ -120,7 +115,6 @@ __mk5_set_prompt() {
     m == 0 && /^\?\?/  { untracked++; m = 1; }
     m == 0 && /^.[^ ]/ { changed++;          }
     m == 0 && /^[^ ]./ { staged++;           }
-    m == 1              { m = 0;              }
 
     END {
       if (untracked) printf " \033[1;31m-%d\033[0m", untracked;
