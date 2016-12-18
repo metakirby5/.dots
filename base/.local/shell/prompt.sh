@@ -19,10 +19,6 @@ __mk5_b_purple="\[\e[1;35m\]"
 __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
-# Special characters
-__mk5_char_usr='>'
-__mk5_char_root='#'
-
 __mk5_hostname="${HOSTNAME%%.*}"
 __mk5_home="$HOME"
 
@@ -41,9 +37,9 @@ __mk5_set_prompt() {
   # Use $ or # for prompt
   local pchar=
   if [ "$EUID" == 0 ]; then
-    pchar="$__mk5_char_root"
+    pchar="#"
   else
-    pchar="$__mk5_char_usr"
+    pchar=">"
   fi
 
   # Display hostname if ssh'd
@@ -51,7 +47,7 @@ __mk5_set_prompt() {
   [ "$SSH_TTY" ] && hostname="$__mk5_cyan$__mk5_hostname$__mk5_b_cyan, "
 
   # Display job count
-  jobs_info="$(jobs | awk '
+  local jobs_info="$(jobs | awk '
   m == 1 { m = 0; }
 
   m == 0 && /^.{6}S/ { stopped++; m = 1; }
@@ -77,21 +73,20 @@ __mk5_set_prompt() {
     # Replace git path
     git_base="$(basename "$git_path")"
     mypwd="$git_base$(perl -pe "s|^$git_path||i" <<< "$mypwd")"
-    git_info="$__mk5_purple"
 
     # Branch
     read git_head < "$git_path/.git/HEAD"
     if [[ "$git_head" == ref:* ]]; then
-      git_info+="${git_head:16}"  # ref name
+      git_info="${git_head:16}"  # ref name
     else
-      git_info+="${git_head::7}"  # short hash
+      git_info="${git_head::7}"  # short hash
     fi
 
     # Stashed
     local git_stash="$(wc -l "$git_path/.git/logs/refs/stash" 2>/dev/null |\
       awk '{print$1}')"
     if [ "$git_stash" ]; then
-      git_info+=" $__mk5_b_cyan$__mk5_char_stash$git_stash"
+      git_info+=" $__mk5_b_cyan"'\$'"$git_stash"
     fi
 
     # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
@@ -99,15 +94,15 @@ __mk5_set_prompt() {
     m == 1 { m = 0; }
 
     /^## / {
-      if ($0 ~ /ahead /) {
+      if ($0 ~ /[[ ]ahead /) {
         ahead = $0;
-        sub(/.*ahead /,  "", ahead);
-        sub(/\].*|, .*/, "", ahead);
+        sub(/.*[[ ]ahead /,  "", ahead);
+        sub(/[,\]].*/, "", ahead);
       }
-      if ($0 ~ /behind /) {
+      if ($0 ~ /[[ ]behind /) {
         behind = $0;
-        sub(/.*behind /, "", behind);
-        sub(/\].*|, .*/, "", behind);
+        sub(/.*[[ ]behind /, "", behind);
+        sub(/[,\]].*/, "", behind);
       }
       m = 1;
     }
@@ -124,7 +119,7 @@ __mk5_set_prompt() {
       if (ahead    ) printf " \033[1;34m^%d\033[0m", ahead    ;
     }')"
 
-    git_info+="$__mk5_b_purple, "
+    git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
   # Colorize
