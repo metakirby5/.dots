@@ -14,7 +14,6 @@ pipdeptree
 pushbullet-cli
 python-Levenshtein
 trollius
-vboxapi
 virtualenvwrapper
 wheel
 wsgiref
