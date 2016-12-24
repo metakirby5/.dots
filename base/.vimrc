@@ -358,6 +358,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'metakirby5/codi.vim'
             \, { 'on': 'Codi' }
       let g:codi#interpreters = {
+          \     'python': {
+          \         'bin': 'python3',
+          \     },
           \     'purescript': {
           \         'bin': ['pulp', 'psci'],
           \         'prompt': '^> ',
