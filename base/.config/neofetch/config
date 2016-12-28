@@ -12,7 +12,7 @@ export LANG=C
 
 myprin() {
     if [ "$2" ]; then
-        get$2 &>/dev/null && eval local info="\$$2"
+        get_$2 &>/dev/null && eval local info="\$$2"
     fi
     prin "$(color 7) $1 $(color 0)│ $(color 15)${info:=$2}"
 }
@@ -23,11 +23,11 @@ myprin() {
 printinfo () {
     prin "$(color 4)                                    echan "
     prin "$(color 0)────────────────┬─────────────────────────"
-    myprin "            os" distro
-    myprin "        uptime" uptime
+    myprin "　　　　　　os" distro
+    myprin "　　　　uptime" uptime
     myprin "window manager" "Phoenix"
-    myprin "         shell" shell
-    myprin "      packages" packages
+    myprin "　　　　 shell" shell
+    myprin "　　　packages" packages
     prin "$(color 0)────────────────┴─────────────────────────"
     info linebreak
     info cols | sed 's/^/[5C/'
@@ -42,6 +42,8 @@ kernel_shorthand="on"
 
 
 # Distro
+
+distro_shorthand="on"
 
 # Mac OS X hide/show build version
 # --osx_buildversion on/off
