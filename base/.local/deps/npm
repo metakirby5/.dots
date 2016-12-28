@@ -8,6 +8,7 @@ nodemon
 npm
 pug-cli
 stylus
+tldr
 webpack
 webpack-dev-server
 yarn
