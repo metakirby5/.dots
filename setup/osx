@@ -71,5 +71,4 @@ sudo ln -s ~/.vimrc /var/root/.vimrc
 
 echo "Done! For post-install:"
 echo "  - Tweak any other settings (keybinds, etc.) in Preferences.app"
-echo "  - Install the apps in ~/.local/deps/AppStore"
 echo "  - Configure apps (browsers, brew cask-installed, etc.)"

@@ -1,6 +1,7 @@
 Unidecode
 beautifulsoup4
 colorz
+docutils
 flake8
 fuzzywuzzy
 humanize

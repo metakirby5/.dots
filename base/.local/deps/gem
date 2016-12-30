@@ -4,5 +4,7 @@ gem_leaves
 io-console
 json
 net-telnet
+openssl
 psych
 vimgolf
+xmlrpc

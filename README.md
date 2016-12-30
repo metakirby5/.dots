@@ -138,7 +138,6 @@ For OS X, use the system theme.
 - Install `zenbu` via `pip` and use it to choose a colorscheme.
 - `yes | osx-set-defaults`
 - Tweak whatever other settings you want in Preferences.app.
-- Install the apps in `~/.local/deps/AppStore`.
 
 ### Linux
 

@@ -10,6 +10,13 @@ brew() {
     trim)
       brew-prune
       ;;
+    up)
+      brew update
+      brew upgrade
+      brew prune
+      brew cleanup
+      brew doctor
+      ;;
     o)
       command brew info "$@"
       ;;

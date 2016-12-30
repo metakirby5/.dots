@@ -4,7 +4,7 @@ brew 'bash'
 brew 'beeftornado/rmtree/brew-rmtree'
 brew 'coreutils'
 brew 'ctags'
-brew 'emacs', restart_service: true
+brew 'emacs'
 brew 'fasd'
 brew 'fzf'
 brew 'gcc'
@@ -21,6 +21,7 @@ brew 'hub'
 brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
+brew 'mas'
 brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
 brew 'mvtools'
 brew 'neofetch'
