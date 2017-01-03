@@ -47,6 +47,7 @@ brew 'tmux', args: ['HEAD']
 brew 'trash'
 brew 'tree'
 brew 'ttyrec'
+brew 'watchman'
 brew 'wget'
 cask 'airdroid'
 cask 'atom'
