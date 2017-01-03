@@ -905,7 +905,7 @@ endif " }}}
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
-      set switchbuf=useopen,usetab,newtab
+      set switchbuf=useopen,usetab
     endif
   " }}}
   " Splits {{{
