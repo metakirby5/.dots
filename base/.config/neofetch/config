@@ -12,9 +12,10 @@ export LANG=C
 
 myprin() {
     if [ "$2" ]; then
-        get_$2 &>/dev/null && eval local info="\$$2"
+        get_$2 &>/dev/null
+        eval local info="\${$2:-$2}"
     fi
-    prin "$(color 7) $1 $(color 0)│ $(color 15)${info:=$2}"
+    prin "$(color 7) $1 $(color 0)│ $(color 15)$info"
 }
 
 # Info
