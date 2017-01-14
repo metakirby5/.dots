@@ -2,4 +2,4 @@ startup_message off
 altscreen on
 shell -$SHELL
 caption always "%{= kw}%?%-Lw%?%{Kw} %n*%f %t%?(%u)%? %{kw}%?%+Lw%? %=%{= Kw} %H "
-
+defscrollback 100000
