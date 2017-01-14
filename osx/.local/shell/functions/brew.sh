@@ -8,7 +8,7 @@ brew() {
       brew-aliasapps
       ;;
     trim)
-      brew-prune
+      brew-trim
       ;;
     up)
       brew update
@@ -17,11 +17,11 @@ brew() {
       brew cleanup
       brew doctor
       ;;
+    /)
+      command brew search "$@"
+      ;;
     o)
       command brew info "$@"
-      ;;
-    co)
-      command brew cask info "$@"
       ;;
     s)
       command brew services "$@"
@@ -32,14 +32,20 @@ brew() {
     ri)
       command brew reinstall "$@"
       ;;
-    ci)
-      command brew cask install "$@"
-      ;;
     ui)
       command brew uninstall "$@"
       ;;
     ut)
       command brew rmtree "$@"
+      ;;
+    c/)
+      command brew cask search "$@"
+      ;;
+    co)
+      command brew cask info "$@"
+      ;;
+    ci)
+      command brew cask install "$@"
       ;;
     cui)
       command brew cask uninstall "$@"
@@ -78,7 +84,7 @@ brew-aliasapps() {
 
 # A script to prune the leaves of your brew packages.
 # Requires beeftornado/homebrew-rmtree
-brew-prune() {
+brew-trim() {
   for formula in $(brew leaves); do
     read -p "Keep $(brew desc "$formula")? [Y/n] " keep
     case $keep in
