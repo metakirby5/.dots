@@ -38,20 +38,33 @@ brew() {
     ut)
       command brew rmtree "$@"
       ;;
-    c/)
-      command brew cask search "$@"
-      ;;
-    co)
-      command brew cask info "$@"
-      ;;
-    ci)
-      command brew cask install "$@"
-      ;;
-    cui)
-      command brew cask uninstall "$@"
-      ;;
-    cz)
-      command brew cask zap "$@"
+    c)
+      local cmd="$1"
+      shift
+
+      case "$cmd" in
+        /)
+          command brew cask search "$@"
+          ;;
+        o)
+          command brew cask info "$@"
+          ;;
+        i)
+          command brew cask install "$@"
+          ;;
+        ri)
+          command brew cask reinstall "$@"
+          ;;
+        ui)
+          command brew cask uninstall "$@"
+          ;;
+        z)
+          command brew cask zap "$@"
+          ;;
+        *)
+          command brew cask "$cmd" "$@"
+          ;;
+      esac
       ;;
     *)
       command brew "$cmd" "$@"
