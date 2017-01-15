@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Custom brew commands
 brew() {
   local cmd="$1"
@@ -75,11 +77,13 @@ brew() {
 # Bundles up only leaf brew dependencies.
 # Requires Homebrew/homebrew-bundle.
 brew-leaves() {
-  brew bundle dump --file=- |\
-    command grep -f <( \
-    brew leaves | tr '\n' '\0' | xargs -0 printf "^brew '%s'\n"; \
-    echo "^cask"; \
-    ) | sort
+  (
+    bundle="$(brew bundle dump --file=-)"
+    grep -f <(
+      brew leaves | tr '\n' '\0' | xargs -0 printf "^brew '%s'\n"
+    ) <<< "$bundle"
+    grep -v '^brew' <<< "$bundle"
+  ) | sort
 }
 
 # https://github.com/Homebrew/legacy-homebrew/issues/16639#issuecomment-42813448
