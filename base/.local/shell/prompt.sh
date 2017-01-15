@@ -91,7 +91,7 @@ __mk5_set_prompt() {
 
     # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
     git_info+="$(git status --porcelain -b | awk '
-    m == 1 { m = 0; }
+    { m = 0; }
 
     /^## / {
       if ($0 ~ /[[ ]ahead /) {
