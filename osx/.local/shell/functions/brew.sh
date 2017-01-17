@@ -13,11 +13,11 @@ brew() {
       brew-trim
       ;;
     up)
-      brew update
-      brew upgrade
-      brew prune
-      brew cleanup
-      brew doctor
+      command brew update
+      command brew upgrade
+      command brew prune
+      command brew cleanup
+      command brew doctor
       ;;
     /)
       command brew search "$@"
@@ -37,7 +37,7 @@ brew() {
     ui)
       command brew uninstall "$@"
       ;;
-    ut)
+    z)
       command brew rmtree "$@"
       ;;
     c)
