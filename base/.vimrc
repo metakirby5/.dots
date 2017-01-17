@@ -90,21 +90,17 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Highlight all as searching {{{
       if (version >= 704)
         Plug 'haya14busa/incsearch.vim'
-              \| Plug 'haya14busa/incsearch-fuzzy.vim'
         set hlsearch
         let g:incsearch#auto_nohlsearch = 1
         let g:incsearch#is_stay = 1
         map /  <Plug>(incsearch-forward)
         map ?  <Plug>(incsearch-backward)
-        map // <Plug>(incsearch-fuzzy-/)
-        map ?? <Plug>(incsearch-fuzzy-?)
         map n  <Plug>(incsearch-nohl-n)zz
         map N  <Plug>(incsearch-nohl-N)zz
         map *  <Plug>(incsearch-nohl-*)
         map #  <Plug>(incsearch-nohl-#)
         map g* <Plug>(incsearch-nohl-g*)
         map g# <Plug>(incsearch-nohl-g#)
-        map g/ <Plug>(incsearch-fuzzy-stay)
       endif
     " }}}
     " Start screen {{{
@@ -282,9 +278,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       call s:map_leaderGuides('nv', [
             \ '<leader>', '[', ']',
             \ ])
-    " }}}
-    " Allow * and # on visual {{{
-      Plug 'bronson/vim-visual-star-search'
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
@@ -556,7 +549,7 @@ endif " }}}
   set ttyfast                       " assume speedy connection
   set undolevels=10000              " allow lots of undos
   set updatetime=500                " fire hold events every half-second
-  exe "set viminfo='100,n".s:configdir.'/'.(has('nvim') ? 'nv_' : '').'info'
+  exe "set viminfo='100,h,n".s:configdir.'/'.(has('nvim') ? 'nv_' : '').'info'
 " }}}
 " Interface {{{
   " General {{{
