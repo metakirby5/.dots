@@ -5,7 +5,7 @@ docutils
 flake8
 fuzzywuzzy
 humanize
-ipython
+jupyter
 livestreamer
 matplotlib
 neovim
