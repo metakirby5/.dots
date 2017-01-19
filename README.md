@@ -3,11 +3,7 @@
 
 All of my dotfiles.
 
-![Fetch](https://ptpb.pw/2UZh.png)
-
-![Dash](https://ptpb.pw/EpY4.png)
-
-![Code](https://ptpb.pw/DrKI.png)
+![dtop](https://s.kirbi.es/dtop.png)
 
 Here's what you'll need...
 
