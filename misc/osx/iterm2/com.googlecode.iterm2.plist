@@ -1674,13 +1674,13 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>270 582 606 456 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>532 476 620 392 0 0 1680 1027 </string>
+	<string>233 374 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>484 230 918 498 0 0 1680 1050 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 575 1680 475 0 0 1680 1050 </string>
+	<string>191 129 690 476 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -5559,11 +5559,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-10-09T23:51:33Z</date>
+	<date>2017-01-13T23:37:36Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SmartPlacement</key>
