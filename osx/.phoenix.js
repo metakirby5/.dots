@@ -17,19 +17,23 @@ AXES = [VERTICAL, HORIZONTAL]
 # Preferences
 Phoenix.set openAtLogin: true
 p =
+  ## WINDOWS
   wins:
-    tolerance: 10
-    unit: 100
-    factor: 2
-    gap: 20
+    tolerance: 10                # Tolerance for window movement (for pouring)
+    unit: 100                    # Increment for moving and resizing
+    gap: 20                      # Gap between windows
+
+  ## MODAL DIALOGS
   modals:
-    unit: 10
-    gap: 10
-    duration: 1
-    weight: 24
-    appearance: 'dark'
-  hints:
-    stopEvents:
+    unit: 10                     # Increment for overlapping modal offset
+    gap: 10                      # Gap between modals
+    duration: 1                  # Seconds modal stays open
+    weight: 24                   # Font weight of modals
+    appearance: 'dark'           # Appearance (vibrance) of modals
+
+  ## MODES
+  hints:                         ## WINDOW HINT MODE
+    stopEvents:                  # Events which halt hint mode
       [ 'screensDidChange'
       , 'spaceDidChange'
       , 'mouseDidLeftClick'
@@ -41,61 +45,73 @@ p =
       , 'windowDidMove'
       , 'windowDidMinimize'
       , 'windowDidUnminimize' ]
-    kStop: 'escape'
-    kPop: 'delete'
-    chars: 'FJDKSLAGHRUEIWOVNCM'
-    titleLength: 15
-    titleCont: '…'
-    debounce: 150
-  input:
-    stopEvents:
+    kStop: 'escape'              # Key which exits hint mode
+    kPop: 'delete'               # Key which erases a hint character
+    chars: 'FJDKSLAGHRUEIWOVNCM' # Hint characters (in order)
+    titleLength: 15              # Maximum hint title length
+    titleCont: '…'               # String to indicate title continuation
+    debounce: 150                # Milliseconds to debounce hints
+
+  input:                         ## GENERAL INPUT MODE
+    stopEvents:                  # Events which halt input mode
       [ 'screensDidChange'
       , 'spaceDidChange'
       , 'mouseDidLeftClick'
       , 'mouseDidRightClick' ]
-    cursor: 'ˌ'
-  eval:
-    prompt: '> '
-    instantPrefix: '@'
-    progressStr: '…'
-  shell:
-    prompt: '$ '
-    bin: '/usr/local/bin/bash'
-    rc: '~/.bashrc'
+    cursor: 'ˌ'                  # String to show to represent cursor position
+
+  eval:                          ## JAVASCRIPT EVAL MODE
+    prompt: '> '                 # Prompt character
+    instantPrefix: '@'           # Prefix to toggle "instant eval"
+    progressStr: '…'             # String to show while "instant eval" errors
+
+  shell:                         ## SHELL COMMAND MODE
+    prompt: '$ '                 # Prompt character
+    bin: '/usr/local/bin/bash'   # Shell to run (abs. path)
+
+  ## KEYBINDINGS
   keys:
-    maximize: 'm'
-    center: 'c'
-    reFill: 'u'
-    spaceAll: 's'
-    winHintMode: 'y'
-    scrHintMode: 's'
-    evalInputMode: '\\'
-    shellInputMode: 'return'
-    status: 'i'
-    snaps:
-      q:    [-1/2, -1/2]
-      a:    [-1/2, -1  ]
-      z:    [-1/2, 1/2 ]
-      ']':  [1/2,  -1/2]
-      '\'': [1/2,  -1  ]
-      '/':  [1/2,  1/2 ]
-    apps:
-      t: 'iTerm2'
-      e: 'Finder'
+    ## MODIFIER KEYS
     mods:
       base: ['cmd', 'alt']
       move: ['cmd', 'alt', 'shift']
       size: ['cmd', 'ctrl']
       pour: ['cmd', 'alt', 'ctrl']
       tile: ['cmd', 'ctrl', 'shift']
-    dirs:
+
+    ## MULTI-MODIFIER KEYS
+    snaps:                   # Window snap proportions
+      q:    [-1/2, -1/2]
+      a:    [-1/2, -1  ]
+      z:    [-1/2, 1/2 ]
+      ']':  [1/2,  -1/2]
+      '\'': [1/2,  -1  ]
+      '/':  [1/2,  1/2 ]
+    dirs:                    # Directionals
       h: WEST
       j: SOUTH
       k: NORTH
       l: EAST
-    offsets:
+    offsets:                 # Next, previous
       n:  1
       p: -1
+
+    ## ACTIVATE WITH mods.base
+    maximize: 'm'            # Maximize window, w/ gaps
+    center: 'c'              # Center window
+    reFill: 'u'              # Grow window to fill empty space
+    status: 'i'              # Show datetime in notification
+    winHintMode: 'y'         # Activate window hint mode
+    scrHintMode: 's'         # Activate screen hint mode
+    evalInputMode: '\\'      # Activate JS eval mdoe
+    shellInputMode: 'return' # Activate shell input mode
+    apps:                    # Launch applications
+      t: 'iTerm2'
+      e: 'Finder'
+
+
+    ## ACTIVATE WITH mods.pour
+    spaceAll: 's'            # Put window on all spaces
 
 # Utilities
 Object.prototype.map = (f) ->
