@@ -795,23 +795,21 @@ endif " }}}
     " }}}
     " 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
     set statusline=\                                " initialize w/ space
-    set statusline+=%n                              " buffer number
-    set statusline+=\ %#Normal#%<\ %*               " separator
-    set statusline+=\ %f                            " relative path
+    set statusline+=%f                              " relative path
     set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
     set statusline+=\ %#ErrorMsg#                   " error highlight
-    set statusline+=%{SyntasticStatus()}            " gutentags
+    set statusline+=%{SyntasticStatus()}            " syntastic
     set statusline+=%#WarningMsg#                   " warning highlight
     set statusline+=%{GutenStatus()}                " gutentags
     set statusline+=%#Normal#                       " no highlight
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
     set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
-    set statusline+=\ %{GetSyntax()}                " syntax
-    set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %{TextWidth()}                " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
-    set statusline+=\ %2c\ -\ %3l/%L\ -\ %P         " char# - curline/totline - file%
+    set statusline+=\ %{GetSyntax()}                " syntax
+    set statusline+=\ %#Normal#\ %*                 " separator
+    set statusline+=\ %P                            " file%
     set statusline+=\                               " end w/ space
   " }}}
   " Cursor Shape {{{
@@ -955,9 +953,11 @@ endif " }}}
     nnoremap <leader>8 8gt
     nnoremap <leader>9 9gt
 
-    " [w ]w - Forward and backwards tabs
+    " [w ]w / H L - Forward and backwards tabs
     nnoremap <silent> [w <esc>:tabprevious<cr>
     nnoremap <silent> ]w <esc>:tabnext<cr>
+    nnoremap <silent> H <esc>:tabprevious<cr>
+    nnoremap <silent> L <esc>:tabnext<cr>
 
     " [W ]W - Move tabs
     nnoremap <silent> [W <esc>:tabmove -1<cr>
