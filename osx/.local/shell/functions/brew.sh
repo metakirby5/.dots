@@ -19,6 +19,9 @@ brew() {
       command brew cleanup
       command brew doctor
       ;;
+    l)
+      command brew list "$@"
+      ;;
     /)
       command brew search "$@"
       ;;
@@ -45,6 +48,9 @@ brew() {
       shift
 
       case "$cmd" in
+        l)
+          command brew cask list "$@"
+          ;;
         /)
           command brew cask search "$@"
           ;;
