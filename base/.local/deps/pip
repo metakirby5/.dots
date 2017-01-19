@@ -13,6 +13,7 @@ pip-autoremove
 pipdeptree
 pushbullet-cli
 python-Levenshtein
+sklearn
 virtualenvwrapper
 wheel
 zenbu
