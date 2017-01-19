@@ -17,7 +17,6 @@ brew() {
       command brew upgrade
       command brew prune
       command brew cleanup
-      command brew doctor
       ;;
     l)
       command brew list "$@"
