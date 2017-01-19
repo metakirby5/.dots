@@ -1,0 +1,32 @@
+wallpapers: "/Users/echan/.local/zenbu/auto/wall.png"
+
+colors:
+  name:         "winter"
+  primary:      "blue"
+  secondary:    "green"
+  background:   "#1C1D2B"
+  foreground:   "#EBEBFF"
+  white:
+    normal:     "#DEDEF5"
+    bold:       "#E7E7FF"
+  black:
+    normal:     "#21212A"
+    bold:       "#2B2C37"
+  red:
+    normal:     "#9984a5"
+    bold:       "#c7acd7"
+  green:
+    normal:     "#5a66aa"
+    bold:       "#7484dc"
+  yellow:
+    normal:     "#b8b7c6"
+    bold:       "#e6e5f8"
+  blue:
+    normal:     "#4038aa"
+    bold:       "#5248dc"
+  magenta:
+    normal:     "#a33d88"
+    bold:       "#d54fb1"
+  cyan:
+    normal:     "#9daac7"
+    bold:       "#c4d4f9"
