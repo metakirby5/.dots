@@ -1,0 +1,37 @@
+name:           "swelo"
+
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#000000"
+  foreground:   "#c0b18b"
+  background:   "#1f1f1f"
+  notify:       "1f1f1f"
+  not-foreground: "c0b18b"
+  cursor:       "#c0b18b"
+  black:
+    normal:     "#4a3637"
+    bold:       "#402e2e"
+  red:
+    normal:     "#d17b49"
+    bold:       "#ac5d2f"
+  green:
+    normal:     "#7b8748"
+    bold:       "#647035"
+  yellow:
+    normal:     "#af865a"
+    bold:       "#8f6840"
+  blue:
+    normal:     "#535c5c"
+    bold:       "#444b4b"
+  magenta:
+    normal:     "#775759"
+    bold:       "#614445"
+  cyan:
+    normal:     "#6d715e"
+    bold:       "#585c49"
+  white:
+    normal:     "#c0b18b"
+    bold:       "#978965"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/bun.jpg"

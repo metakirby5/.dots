@@ -1,0 +1,36 @@
+name:           "bhien"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#69734d"
+  foreground:   "#f3eed8"
+  background:   "#282b3e"
+  not-foreground:       "f3eed8"
+  notify: "282b3e"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#5e5e5e"
+    bold:       "#5e5e5e"
+  red:
+    normal:     "#db5151"
+    bold:       "#db5151"
+  green:
+    normal:     "#7a9272"
+    bold:       "#7a9272"
+  yellow:
+    normal:     "#eaa85e"
+    bold:       "#eaa85e"
+  blue:
+    normal:     "#4d4791"
+    bold:       "#4d4791"
+  magenta:
+    normal:     "#a53946"
+    bold:       "#a53946"
+  cyan:
+    normal:     "#73859d"
+    bold:       "#73859d"
+  white:
+    normal:     "#f3eed8"
+    bold:       "#f3eed8"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/bus.jpg"

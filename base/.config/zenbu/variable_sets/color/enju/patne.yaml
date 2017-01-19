@@ -1,0 +1,57 @@
+name:           "patne"
+
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#c3c2cc"
+  foreground:   "#bebdc7"
+  background:   "#25282f"
+  not-foreground:       "BEBDC7"
+  notify: "25282f"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#5e5e5e"
+    bold:       "#5e5e5e"
+  red:
+    normal:     "#db5151"
+    bold:       "#db5151"
+  green:
+    normal:     "#7a9272"
+    bold:       "#7a9272"
+  yellow:
+    normal:     "#eaa85e"
+    bold:       "#eaa85e"
+  blue:
+    normal:     "#4d4791"
+    bold:       "#4d4791"
+  magenta:
+    normal:     "#a53946"
+    bold:       "#a53946"
+  cyan:
+  cursor:       "#bebdc7"
+  black:
+    normal:     "#484848"
+    bold:       "#484848"
+  red:
+    normal:     "#cd8376"
+    bold:       "#cd8376"
+  green:
+    normal:     "#82726c"
+    bold:       "#82726c"
+  yellow:
+    normal:     "#7db0df"
+    bold:       "#7db0df"
+  blue:
+    normal:     "#5c7186"
+    bold:       "#5c7186"
+  magenta:
+    normal:     "#ca6c5e"
+    bold:       "#ca6c5e"
+  cyan:
+    normal:     "#5e8d87"
+    bold:       "#5e8d87"
+  white:
+    normal:     "#bebdc7"
+    bold:       "#bebdc7"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/nationalpark.jpg"

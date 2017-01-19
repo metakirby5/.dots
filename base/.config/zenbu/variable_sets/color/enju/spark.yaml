@@ -1,0 +1,36 @@
+name:           "spark"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#"
+  foreground:   "#bbac69"
+  background:   "#423d2b"
+  notify:       "bbac69"
+  not-foreground: ""
+  cursor:       "#cccccc"
+  black:
+    normal:     "#53503b"
+    bold:       "#343225"
+  red:
+    normal:     "#957542"
+    bold:       "#705832"
+  green:
+    normal:     "#a0882e"
+    bold:       "#806d25"
+  yellow:
+    normal:     "#d4b74f"
+    bold:       "#ae9641"
+  blue:
+    normal:     "#9597a3"
+    bold:       "#72737c"
+  magenta:
+    normal:     "#886928"
+    bold:       "#664f1e"
+  cyan:
+    normal:     "#a9aebc"
+    bold:       "#878b96"
+  white:
+    normal:     "#bbac69"
+    bold:       "#988c55"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/sparks.jpg"

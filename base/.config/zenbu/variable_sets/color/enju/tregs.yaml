@@ -1,0 +1,42 @@
+name:          "tregs"
+
+colors:
+  primary:     "yellow"
+  secondary:   "green"
+  background:  "#313131"
+  notify:       "313131"
+  not-foreground: "DFDBCA"
+  foreground:  "#DFDBCA"
+  cursor:      "#D1B882"
+  black:
+    normal:    "#b0b0b0"
+    bold:      "#b0b0b0"
+  red:
+    normal:    "#C3665A"
+    bold:      "#C3665A"
+  green:
+    normal:    "#858138"
+    bold:      "#858138"
+  yellow:
+    normal:    "#A3783D"
+    bold:      "#A3783D"
+  blue:
+    normal:    "#465059"
+    bold:      "#465059"
+    normal:    "#8D4D52"
+    bold:      "#8D4D52"
+  cyan:
+    normal:    "#9FB88B"
+    bold:      "#9FB88B"
+  white:
+    normal:    "#DFDBCA"
+    bold:      "#DFDBCA"
+
+wallpaper:     "/home/skr0tm/Pictures/wallpaper/legs.jpg"
+
+bordersize:    "10"
+
+shadopac:      "0.05"
+
+border:        "#a1adb8"
+unfocused:     "#5f5f5f"

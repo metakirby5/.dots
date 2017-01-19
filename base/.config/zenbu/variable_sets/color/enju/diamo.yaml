@@ -1,0 +1,37 @@
+name:           "diamo"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#"
+  foreground:   "#c1bdbc"
+  background:   "#211b1d"
+  notify:       "211b1d"
+  not-foreground: "c1bdbc"
+  cursor:       "#cccccc"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#4d4045"
+    bold:       "#7e6971"
+  red:
+    normal:     "#be6169"
+    bold:       "#be8187"
+  green:
+    normal:     "#3e8c75"
+    bold:       "#5b8c7e"
+  yellow:
+    normal:     "#aa9e76"
+    bold:       "#dad3ab"
+  blue:
+    normal:     "#3e668c"
+    bold:       "#5d758c"
+  magenta:
+    normal:     "#8f575a"
+    bold:       "#8f696b"
+  cyan:
+    normal:     "#75bfb0"
+    bold:       "#8bbfb4"
+  white:
+    normal:     "#c1bdbc"
+    bold:       "#949190"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/diamond.jpg"

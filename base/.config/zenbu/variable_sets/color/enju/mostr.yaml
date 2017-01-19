@@ -1,0 +1,56 @@
+name:           "mostr.yaml"
+colors:
+  primary:      "green"
+  secondary:    "blue"
+  inactive:     "#0e181a"
+  foreground:   "#c9c6c9"
+  background:   "#0e181a"
+  not-foreground:       "c9c8c9"
+  notify: "0e181a"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#5e5e5e"
+    bold:       "#5e5e5e"
+  red:
+    normal:     "#db5151"
+    bold:       "#db5151"
+  green:
+    normal:     "#7a9272"
+    bold:       "#7a9272"
+  yellow:
+    normal:     "#eaa85e"
+    bold:       "#eaa85e"
+  blue:
+    normal:     "#4d4791"
+    bold:       "#4d4791"
+  magenta:
+    normal:     "#a53946"
+    bold:       "#a53946"
+  cyan:
+  cursor:       "#c9c6c9"
+  black:
+    normal:     "#1c2f34"
+    bold:       "#1c2f34"
+  red:
+    normal:     "#435255"
+    bold:       "#435255"
+  green:
+    normal:     "#546668"
+    bold:       "#546668"
+  yellow:
+    normal:     "#65787c"
+    bold:       "#65787c"
+  blue:
+    normal:     "#7e8c8f"
+    bold:       "#7e8c8f"
+  magenta:
+    normal:     "#a9adb0"
+    bold:       "#a9adb0"
+  cyan:
+    normal:     "#c9cbcc"
+    bold:       "#c9cbcc"
+  white:
+    normal:     "#c9c6c9"
+    bold:       "#c9c6c9"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/river.jpg"

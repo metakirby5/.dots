@@ -1,0 +1,36 @@
+name:           "crosi"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#"
+  foreground:   "#c7d0c1"
+  background:   "#1e1d1f"
+  notify:       "c7d0c1"
+  not-foreground: "403d42"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#2a2b33"
+    bold:       "#25272e"
+  red:
+    normal:     "#b49290"
+    bold:       "#957977"
+  green:
+    normal:     "#76827e"
+    bold:       "#4b5250"
+  yellow:
+    normal:     "#c4a676"
+    bold:       "#816e4e"
+  blue:
+    normal:     "#475162"
+    bold:       "#2f3641"
+  magenta:
+    normal:     "#6a5a74"
+    bold:       "#493e50"
+  cyan:
+    normal:     "#737eab"
+    bold:       "#525a7a"
+  white:
+    normal:     "#c7d0c1"
+    bold:       "#959c90"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/crossing.jpg"

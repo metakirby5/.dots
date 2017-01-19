@@ -1,0 +1,32 @@
+name:   "comfy"
+colors:
+ foreground:   "#c3c7c8"
+ background:   "#2e2b37"
+ notify:       "#2e2b37"
+ not-foreground: "#c3c7c8"
+ cursor:       "#c3c7c8"
+ black:
+     normal:     "#2e2b37"
+     bold:       "#463e42"
+ red:
+     normal:     "#6e4a46"
+     bold:       "#6e4b46"
+ green:
+     normal:     "#554f4f"
+     bold:       "#554f4f"
+ yellow:
+     normal:     "#847765"
+     bold:       "#847765"
+ blue:
+     normal:     "#54626d"
+     bold:       "#54626d"
+ magenta:
+     normal:     "#755a5f"
+     bold:       "#755a5f"
+ cyan:
+     normal:     "#706c7a"
+     bold:       "#706c7a"
+ white:
+     normal:     "#c3c7c8"
+     bold:       "#c3c7c8"
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/bed.jpg"

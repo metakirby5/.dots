@@ -1,0 +1,36 @@
+name:           "stawd"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#282716"
+  foreground:   "#a9adb0"
+  background:   "#282716"
+  not-foreground:       "a9adb0"
+  notify: "292716"
+  cursor:       "#a9adb0"
+  black:
+    normal:     "#4c5127"
+    bold:       "#4c5127"
+  red:
+    normal:     "#7a6754"
+    bold:       "#7a6754"
+  green:
+    normal:     "#5b6040"
+    bold:       "#5b6040"
+  yellow:
+    normal:     "#8c8f5c"
+    bold:       "#8c8f5c"
+  blue:
+    normal:     "#598399"
+    bold:       "#598399"
+  magenta:
+    normal:     "#4d5135"
+    bold:       "#4d5135"
+  cyan:
+    normal:     "#7f948f"
+    bold:       "#a7948f"
+  white:
+    normal:     "#a9adb0"
+    bold:       "#a9adb0"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/staywild.jpg"

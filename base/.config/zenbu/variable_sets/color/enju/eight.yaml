@@ -1,0 +1,30 @@
+colors:
+  background:         "#2d2d2d"
+  foreground:         "#d3d0c8"
+  cursor:             "#d3d0c8"
+  black:
+    normal:           "#2d2d2d"
+    bold:             "#747369"
+  red:
+    normal:           "#f2777a"
+    bold:             "#f2777a"
+  green:
+    normal:           "#99cc99"
+    bold:             "#99cc99"
+  yellow:
+    normal:           "#ffcc66"
+    bold:             "#ffcc66"
+  blue:
+    normal:           "#6699cc"
+    bold:             "#6699cc"
+  magenta:
+    normal:           "#cc99cc"
+    bold:             "#cc99cc"
+  cyan:
+    normal:           "#66cccc"
+    bold:             "#66cccc"
+  white:
+    normal:           "#d3d0c8"
+    bold:             "#f2f0ec"
+
+wallpaper: "/home/skr0tm/Pictures/wallpaper/drawnbackstreet.jpg"

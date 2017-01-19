@@ -1,0 +1,37 @@
+name:           "slate"
+colors:
+  primary:      "white"
+  secondary:    "green"
+  inactive:     "#292a1d"
+  foreground:   "#cdc7a1"
+  background:   "#292a1d"
+  not-foreground: "cdc7a1"
+  notify: "292a1d"
+  cursor:       "#cccccc"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#494b2f"
+    bold:       "#494b2f"
+  red:
+    normal:     "#704842"
+    bold:       "#704842"
+  green:
+    normal:     "#445226"
+    bold:       "#445226"
+  yellow:
+    normal:     "#7d6c57"
+    bold:       "#7d6c57"
+  blue:
+    normal:     "#5e6e68"
+    bold:       "#5e6e68"
+  magenta:
+    normal:     "#817264"
+    bold:       "#817264"
+  cyan:
+    normal:     "#5e735c"
+    bold:       "#5e735c"
+  white:
+    normal:     "#cdc7a1"
+    bold:       "#cdc7a1"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/train.jpg"

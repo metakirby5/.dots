@@ -1,0 +1,36 @@
+name:           "catpl"
+colors:
+  primary:      "red"
+  secondary:    "yellow"
+  inactive:     "#"
+  foreground:   "#a08e8e"
+  background:   "#001b21"
+  notify:       "001b21"
+  not-foreground: "a08e8e"
+  cursor:       "#cccccc"
+  black:
+    normal:     "#002133"
+    bold:       "#002f49"
+  red:
+    normal:     "#454239"
+    bold:       "#524f44"
+  green:
+    normal:     "#0f5551"
+    bold:       "#14726c"
+  yellow:
+    normal:     "#6b6863"
+    bold:       "#837f79"
+  blue:
+    normal:     "#21444e"
+    bold:       "#2b5a67"
+  magenta:
+    normal:     "#443a3a"
+    bold:       "#5a4d4d"
+  cyan:
+    normal:     "#369c8f"
+    bold:       "#3cad9e"
+  white:
+    normal:     "#a08e8e"
+    bold:       "#baa5a5"
+
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/catplant.jpg"

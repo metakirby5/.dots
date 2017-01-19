@@ -1,0 +1,32 @@
+name:   "tybea"
+colors:
+ foreground:   "#daba8b"
+ background:   "#191716"
+ notify:       "#191716"
+ not-foreground: "#daba8b"
+ cursor:       "#daba8b"
+ black:
+     normal:     "#0f0e0d"
+     bold:       "#383332"
+ red:
+     normal:     "#845336"
+     bold:       "#8c4f4a"
+ green:
+     normal:     "#57553c"
+     bold:       "#898471"
+ yellow:
+     normal:     "#a17e3e"
+     bold:       "#c8b491"
+ blue:
+     normal:     "#43454f"
+     bold:       "#65788f"
+ magenta:
+     normal:     "#604848"
+     bold:       "#755e4a"
+ cyan:
+     normal:     "#5c6652"
+     bold:       "#718062"
+ white:
+     normal:     "#a18b62"
+     bold:       "#bc9d66"
+wallpaper:    "/home/skr0tm/Pictures/wallpaper/diamond.jpg"
