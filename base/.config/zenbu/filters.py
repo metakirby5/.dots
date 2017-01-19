@@ -1,6 +1,7 @@
 import struct
 import codecs
 
+
 # Hex to X
 
 def nohash(hex):
@@ -20,6 +21,7 @@ def to_apple(hex, alpha=0):
     return '{{{}}}'.format(', '.join(map(
         lambda x: str(x * 257), to_rgb(hex) + (alpha,)
     )))
+
 
 # [r, g, b]
 def to_iterm(hex):
