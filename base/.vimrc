@@ -65,11 +65,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         set scrolloff=5
         Limelight!
         IndentLinesEnable
-        call <SID>apply_highlights()
+        call s:apply_highlights()
       endfunction
 
-      autocmd! User GoyoEnter nested call <SID>goyo_enter()
-      autocmd! User GoyoLeave nested call <SID>goyo_leave()
+      autocmd! User GoyoEnter nested call s:goyo_enter()
+      autocmd! User GoyoLeave nested call s:goyo_leave()
 
       nnoremap cog <esc>:Goyo<cr>
     " }}}
@@ -147,11 +147,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Completion {{{
     " Engine {{{
       if has('nvim')
-        function! DoRemote(arg)
+        function! s:do_remote(arg)
           UpdateRemotePlugins
         endfunction
 
-        Plug 'Shougo/Deoplete.nvim', { 'do': function('DoRemote') }
+        Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
         let s:completion_engine = 'deoplete'
         let s:completion_prefix = s:completion_engine . '#'
       elseif has('lua')
@@ -185,7 +185,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         set completeopt-=preview
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-        inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+        inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
 
         let g:ulti_expand_res = 0
         function! s:smart_cr()
@@ -481,12 +481,12 @@ else
         au FileType vim                       let b:comment_leader = '" '
       augroup END
 
-      function! StoreSearch()
+      function! s:search_store()
         let s:ps = getreg('/', 1)
         let s:ps_t = getregtype('/')
       endfunction
 
-      function! RestoreSearch()
+      function! s:search_restore()
         if !(exists('s:ps') && exists('s:ps_t'))
           return
         endif
@@ -494,34 +494,32 @@ else
         call setreg('/', s:ps, s:ps_t)
       endfunction
 
-      noremap <silent> g> <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>
-      noremap <silent> g< <esc>:call StoreSearch()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>
-      xnoremap <silent> g> <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call RestoreSearch()<cr>gv
-      xnoremap <silent> g< <esc>:call StoreSearch()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call RestoreSearch()<cr>gv
+      noremap <silent> g> <esc>:call <sid>search_store()<cr>:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call <sid>search_restore()<cr>
+      noremap <silent> g< <esc>:call <sid>search_store()<cr>:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call <sid>search_restore()<cr>
+      xnoremap <silent> g> <esc>:call <sid>search_store()<cr>gv:<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<cr>/<cr>:noh<cr>:call <sid>search_restore()<cr>gv
+      xnoremap <silent> g< <esc>:call <sid>search_store()<cr>gv:<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<cr>//e<cr>:noh<cr>:call <sid>search_restore()<cr>gv
     " }}}
     " Toggle Distractions {{{
       let s:minimal = 0
-      function! ToggleDistractions()
+      function! s:Goyo()
         if !s:minimal
           let s:minimal = 1
           set noshowmode
           set noruler
-          set showtabline=1
           set nonu
           set ls=0
         else
           let s:minimal = 0
           set showmode
           set ruler
-          set showtabline=2
           set nu
           set ls=2
         endif
       endfunction
 
-      if !exists(':DistractionsToggle')
-        command DistractionsToggle call ToggleDistractions()
-        nnoremap cog :DistractionsToggle<cr>
+      if !exists(':Goyo')
+        command Goyo call s:Goyo()
+        nnoremap cog :Goyo<cr>
       endif
     " }}}
 endif " }}}
@@ -721,21 +719,15 @@ endif " }}}
     endfunction
 
     if !has('gui_running')
-      call <SID>apply_highlights()
+      call s:apply_highlights()
       augroup CUSTOM_COLORS
         au!
-        au ColorScheme * call <SID>apply_highlights()
+        au ColorScheme * call s:apply_highlights()
       augroup END
     endif
   " }}}
   " Status Line {{{
     " Utilities {{{
-      " Returns '!' if file externally modified since last read/write
-      " :e to get rid of this warning
-      function! ExtModified()
-        return (exists('b:modified')) ? '!' : ''
-      endfunction
-
       augroup MODIFIED_FLAG
         au!
         au FileChangedShellPost * let b:modified = 1
@@ -744,8 +736,31 @@ endif " }}}
                             \ endif
       augroup END
 
+      " Flags for statusline
+      function! _s_flags()
+        let flags = []
+
+        " See if anything has changed git-wise
+        if exists('*GitGutterGetHunkSummary')
+          let gits = 0
+          for i in GitGutterGetHunkSummary()
+            let gits += i
+          endfor
+          if gits
+            call add(flags, '~')
+          endif
+        endif
+
+        " See if file externally modified
+        if exists('b:modified')
+          call add(flags, '!')
+        endif
+
+        return join(flags, ',')
+      endfunction
+
       " Returns a shortened form of &fdm
-      function! FDMShort()
+      function! _s_fdm()
         if &fdm == 'manual'
           return 'm'
         elseif &fdm == 'syntax'
@@ -758,56 +773,52 @@ endif " }}}
       endfunction
 
       " Returns 've' if virtualedit is not off
-      function! GetVe()
+      function! _s_ve()
         return (&ve == '') ? '' : 've'
       endfunction
 
       " Returns file's syntax
-      function! GetSyntax()
+      function! _s_syntax()
         return (&syntax != '') ? &syntax : 'plaintext'
       endfunction
 
       " Returns &tw if paste mode is disabled
       " Otherwise, return 'P'
-      function! TextWidth()
+      function! _s_tw()
         return (!&paste) ? &tw : 'P'
       endfunction
 
       " Safely gives gutentags status
-      function! GutenStatus()
+      function! _s_gutentags()
         if !exists('*gutentags#statusline')
           return ''
         endif
-        let guten_status = gutentags#statusline('Generating tags...')
-        return empty(guten_status) ? ''
-              \: ("\<space>" . guten_status . "\<space>")
+        return gutentags#statusline('Generating tags...')
       endfunction
 
       " Safely gives syntastic status
-      function! SyntasticStatus()
+      function! _s_syntastic()
         if !exists('*SyntasticStatuslineFlag')
           return ''
         endif
-        let syntastic_status = SyntasticStatuslineFlag()
-        return empty(syntastic_status) ? ''
-              \: ("\<space>" . syntastic_status . "\<space>")
+        return SyntasticStatuslineFlag()
       endfunction
     " }}}
     " .vimrc   ...   ve   78   vim   25%
     set statusline=\                                " initialize w/ space
     set statusline+=%f                              " relative path
-    set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
+    set statusline+=%(\ [%{_s_flags()}%M%R]%)       " flags
     set statusline+=\ %#ErrorMsg#                   " error highlight
-    set statusline+=%{SyntasticStatus()}            " syntastic
+    set statusline+=%(\ %{_s_syntastic()}%)         " syntastic
     set statusline+=%#WarningMsg#                   " warning highlight
-    set statusline+=%{GutenStatus()}                " gutentags
+    set statusline+=%(\ %{_s_gutentags()}%)         " gutentags
     set statusline+=%#Normal#                       " no highlight
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
-    set statusline+=%(\ %{GetVe()}\ %)%#Normal#\ %* " virtualedit
-    set statusline+=\ %{TextWidth()}                " text width/paste mode
+    set statusline+=%(\ %{_s_ve()}\ %)%#Normal#\ %* " virtualedit
+    set statusline+=\ %{_s_tw()}                    " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
-    set statusline+=\ %{GetSyntax()}                " syntax
+    set statusline+=\ %{_s_syntax()}                " syntax
     set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %P                            " file%
     set statusline+=\                               " end w/ space
