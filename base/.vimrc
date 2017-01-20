@@ -793,7 +793,7 @@ endif " }}}
               \: ("\<space>" . syntastic_status . "\<space>")
       endfunction
     " }}}
-    " 1   .vimrc                                    ve   vim   0   12 - 193/689 - 25%
+    " .vimrc   ...   ve   78   vim   25%
     set statusline=\                                " initialize w/ space
     set statusline+=%f                              " relative path
     set statusline+=%(\ [%{ExtModified()}%M%R]%)    " flags
