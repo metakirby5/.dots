@@ -2,212 +2,51 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Ansi 0 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_black|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_black|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_black|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 1 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_red|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_red|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_red|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 2 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_green|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_green|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_green|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 3 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_yellow|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_yellow|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_yellow|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 4 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_blue|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_blue|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_blue|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 5 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_magenta|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_magenta|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_magenta|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 6 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_cyan|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_cyan|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_cyan|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 7 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (n_white|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (n_white|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (n_white|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 8 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_black|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_black|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_black|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 9 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_red|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_red|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_red|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 10 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_green|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_green|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_green|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 11 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_yellow|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_yellow|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_yellow|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 12 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_blue|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_blue|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_blue|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 13 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_magenta|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_magenta|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_magenta|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 14 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_cyan|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_cyan|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_cyan|to_iterm)[2] }}</real>
-	</dict>
-	<key>Ansi 15 Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (b_white|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (b_white|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (b_white|to_iterm)[2] }}</real>
-	</dict>
-	<key>Background Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (bgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (bgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (bgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Bold Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (fgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (fgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (fgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Cursor Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (fgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (fgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (fgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Cursor Text Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (bgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (bgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (bgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Foreground Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (fgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (fgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (fgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Selected Text Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (bgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (bgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (bgc|to_iterm)[2] }}</real>
-	</dict>
-	<key>Selection Color</key>
-	<dict>
-		<key>Red Component</key>
-		<real>{{ (fgc|to_iterm)[0] }}</real>
-		<key>Green Component</key>
-		<real>{{ (fgc|to_iterm)[1] }}</real>
-		<key>Blue Component</key>
-		<real>{{ (fgc|to_iterm)[2] }}</real>
-	</dict>
+    <key>Ansi 0 Color</key>
+    {{ n_black|to_iterm_dict }}
+    <key>Ansi 1 Color</key>
+    {{ n_red|to_iterm_dict }}
+    <key>Ansi 2 Color</key>
+    {{ n_green|to_iterm_dict }}
+    <key>Ansi 3 Color</key>
+    {{ n_yellow|to_iterm_dict }}
+    <key>Ansi 4 Color</key>
+    {{ n_blue|to_iterm_dict }}
+    <key>Ansi 5 Color</key>
+    {{ n_magenta|to_iterm_dict }}
+    <key>Ansi 6 Color</key>
+    {{ n_cyan|to_iterm_dict }}
+    <key>Ansi 7 Color</key>
+    {{ n_white|to_iterm_dict }}
+    <key>Ansi 8 Color</key>
+    {{ b_black|to_iterm_dict }}
+    <key>Ansi 9 Color</key>
+    {{ b_red|to_iterm_dict }}
+    <key>Ansi 10 Color</key>
+    {{ b_green|to_iterm_dict }}
+    <key>Ansi 11 Color</key>
+    {{ b_yellow|to_iterm_dict }}
+    <key>Ansi 12 Color</key>
+    {{ b_blue|to_iterm_dict }}
+    <key>Ansi 13 Color</key>
+    {{ b_magenta|to_iterm_dict }}
+    <key>Ansi 14 Color</key>
+    {{ b_cyan|to_iterm_dict }}
+    <key>Ansi 15 Color</key>
+    {{ b_white|to_iterm_dict }}
+    <key>Background Color</key>
+    {{ bgc|to_iterm_dict }}
+    <key>Bold Color</key>
+    {{ fgc|to_iterm_dict }}
+    <key>Cursor Color</key>
+    {{ fgc|to_iterm_dict }}
+    <key>Cursor Text Color</key>
+    {{ bgc|to_iterm_dict }}
+    <key>Foreground Color</key>
+    {{ fgc|to_iterm_dict }}
+    <key>Selected Text Color</key>
+    {{ bgc|to_iterm_dict }}
+    <key>Selection Color</key>
+    {{ fgc|to_iterm_dict }}
 </dict>
 </plist>

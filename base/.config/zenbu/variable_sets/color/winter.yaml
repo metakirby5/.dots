@@ -19,8 +19,8 @@ colors:
     normal:     "#5a66aa"
     bold:       "#7484dc"
   yellow:
-    normal:     "#b8b7c6"
-    bold:       "#e6e5f8"
+    normal:     "#6A66B3"
+    bold:       "#847EDE"
   blue:
     normal:     "#4038aa"
     bold:       "#5248dc"
@@ -28,5 +28,5 @@ colors:
     normal:     "#a33d88"
     bold:       "#d54fb1"
   cyan:
-    normal:     "#9daac7"
-    bold:       "#c4d4f9"
+    normal:     "#849ACA"
+    bold:       "#9DB8F3"

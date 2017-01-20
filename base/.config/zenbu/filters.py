@@ -23,6 +23,13 @@ def to_apple(hex, alpha=0):
     )))
 
 
-# [r, g, b]
-def to_iterm(hex):
-    return [x / 255.0 for x in to_rgb(hex)]
+# <dict> ... </dict>
+def to_iterm_dict(hex):
+    return """<dict>
+        <key>Red Component</key>
+        <real>{}</real>
+        <key>Green Component</key>
+        <real>{}</real>
+        <key>Blue Component</key>
+        <real>{}</real>
+    </dict>""".format(*(x / 255.0 for x in to_rgb(hex)))
