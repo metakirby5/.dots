@@ -47,6 +47,7 @@ brew 'trash'
 brew 'tree'
 brew 'ttyrec'
 brew 'watchman'
+brew 'weechat', args: ['with-lua', 'with-perl', 'with-python', 'with-ruby']
 brew 'wget'
 cask 'airdroid'
 cask 'atom'
