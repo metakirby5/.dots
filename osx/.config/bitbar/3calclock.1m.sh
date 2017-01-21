@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 pad_cal() {
-  cat - <(echo ' ') | tr '\n' '\0' | xargs -0 printf '%-20s\n'
+  cat - <(echo ' ') | tr '\n' '\0' | xargs -0 printf '  %-20s\n'
 }
 
 # http://unix.stackexchange.com/a/182545
@@ -20,5 +20,5 @@ fi
 
 LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'
 echo '---'
-paste <(cal $pm $py | pad_cal) <(cal | pad_cal) <(cal $nm $ny | pad_cal) |
-  awk 'NF {print $0, "|trim=false font=Menlo size=12"}'
+paste -d\  <(cal $pm $py | pad_cal) <(cal | pad_cal) <(cal $nm $ny | pad_cal) |
+  awk 'NF {print $0 "|trim=false font=Menlo size=12"}' | cut -c2-
