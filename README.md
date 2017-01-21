@@ -82,11 +82,7 @@ Here's what you'll need...
 
 ### Safari
 
-- tampermonkey
-- flipxfx/sVim
-- chrisaljoudi/ublock
-- com.searchpreview
-- com.sidetree.HoverZoom
+Extensions in `misc/osx/safari`.
 
 ### Chrome
 
