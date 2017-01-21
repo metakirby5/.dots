@@ -359,10 +359,10 @@ class Line
   end
 
   def has_url?
-    !/https?:\/\/[^ 　\(\)\r\n]*/.match(remove_color_message).nil?
+    !/https?:\/\/[^ 　\(\)\r\n]*/.match(remove_color_message.force_encoding('UTF-8')).nil?
   end
 
   def urls
-    remove_color_message.scan(/https?:\/\/[^ 　\(\)\r\n]*/).uniq
+    remove_color_message.force_encoding('UTF-8').scan(/https?:\/\/[^ 　\(\)\r\n]*/).uniq
   end
 end
