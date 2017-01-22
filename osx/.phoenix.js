@@ -943,7 +943,7 @@ class ChainWindow
       next.addWindows [@win]
       @win.spaces().map (prev) =>
         prev.removeWindows [@win] if not prev.isEqual(next)
-      @updateScr next.screen()
+      @updateScr @win.screen()
     this
 
   # Add to space
