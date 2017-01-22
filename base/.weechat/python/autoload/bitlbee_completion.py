@@ -1,0 +1,1 @@
+../bitlbee_completion.py

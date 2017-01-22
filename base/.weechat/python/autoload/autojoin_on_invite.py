@@ -1,0 +1,1 @@
+../autojoin_on_invite.py
