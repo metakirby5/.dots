@@ -27,7 +27,7 @@ p =
   modals:
     unit: 10                     # Increment for overlapping modal offset
     gap: 10                      # Gap between modals
-    duration: 1                  # Seconds modal stays open
+    duration: 3                  # Seconds modal stays open
     weight: 24                   # Font weight of modals
     appearance: 'dark'           # Appearance (vibrance) of modals
 
@@ -174,7 +174,7 @@ SHIFT_KEYS = _.extend
   '`': '~', '1': '!', '2': '@', '3': '#', '4': '$', '5': '%', '6': '^',
   '7': '&', '8': '*', '9': '(', '0': ')', '-': '_', '=': '+', '[': '{',
   ']': '}', '\\': '|', ';': ':', '\'': '"', ',': '<', '.': '>', '/': '?',
-, _.object (
+, _.zipObject (
   String.fromCharCode(c) for c in [97..122]
 ), (
   String.fromCharCode(c) for c in [65..90]
@@ -328,6 +328,31 @@ Modal.build = (props = {}) ->
 
 Modal::_show = Modal::show
 Modal::show = ->
+  @untrack()
+
+  # Close on click
+  @clickEvent = Event.on 'mouseDidLeftClick', (point) =>
+    if within @frame(), point
+      @close()
+
+  @resolveOverlaps()
+  @_show()
+  this
+
+Modal::_close = Modal::close
+Modal::close = ->
+  @untrack()
+  @_close()
+  this
+
+Modal::setText = (@text) -> this
+
+Modal::untrack = ->
+  Timer.off @mt if @mt?  # Disable closeAfter timer
+  Event.off @clickEvent if @clickEvent?  # Disable clickEvent
+  Modal::open = _.without @open, this  # Untrack modal locaiton
+
+Modal::resolveOverlaps = ->
   Modal::open = _.without @open, this
   while _.some(@open.map (m) =>
       intersects @frame(), m.frame(), p.modals.gap)
@@ -335,17 +360,6 @@ Modal::show = ->
       x: @origin.x
       y: @origin.y - p.modals.unit
   @open.push this
-  @_show()
-  this
-
-Modal::_close = Modal::close
-Modal::close = ->
-  Timer.off @mt if @mt?
-  Modal::open = _.without @open, this
-  @_close()
-  this
-
-Modal::setText = (@text) -> this
 
 Modal::center = ->
   mf = @frame()
@@ -711,7 +725,7 @@ class InputMode extends Mode
       @pos = input.length
 
     # Set modals' text
-    @inputModal.setText(@prompt + @input.insert @cursor, @pos).center()
+    @inputModal.setText(@prompt + @input.insert @cursor, @pos).center().show()
     if @output?
       @outputModal.setText(@output).center().show()
     else
@@ -1082,7 +1096,7 @@ shellInput = modes.add new InputMode p.shell.prompt, (input, specialKey) ->
   returnPressed = specialKey == 'return'
   if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
-      Phoenix.notify r.output or r.error
+      Toaster.toast r.output or r.error
       Phoenix.log r.error if r.error
   [(if returnPressed then '' else input), null, returnPressed]
 
@@ -1098,8 +1112,7 @@ Key.on p.keys.shellInputMode, p.keys.mods.base, -> modes.toggle shellInput
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
-  Phoenix.notify r.output
-  # Toaster.toast r.output
+  Toaster.toast r.output.trim()
 
 # Apps
 p.keys.apps.map (app, key) ->
@@ -1138,7 +1151,7 @@ p.keys.apps.map (app, key) ->
 p.keys.snaps.map (dest, key) ->
   Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
 
-# Notify upon load of config
-Phoenix.notify 'Config loaded.'
+# Toast upon load of config
+Toaster.toast 'Config loaded.'
 
 # vim:ft=coffee
