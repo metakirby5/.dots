@@ -31,7 +31,6 @@ if which fzf &>/dev/null; then
     [[ $- == *i* ]] && source "$fzf_opt/shell/completion.bash" 2>/dev/null
 
     # Key bindings
-    set -o vi
     source "$fzf_opt/shell/key-bindings.bash"
   fi
 fi

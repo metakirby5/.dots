@@ -4,6 +4,9 @@ export EDITOR=$VISUAL                               # part 2
 export LS_COLORS='di=01;34:'                        # Folders are blue
 export LESS_TERMCAP_md="$(echo -ne '\033[1;33m')"   # Yellow headers in less
 
+# Keybindings
+set -o vi  # vim > emacs part 2
+
 # Completion
 shopt -s cdspell              # autocorrect cd
 shopt -s globstar 2>/dev/null # Super-complete **
