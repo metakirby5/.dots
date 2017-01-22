@@ -1097,7 +1097,7 @@ shellInput = modes.add new InputMode p.shell.prompt, (input, specialKey) ->
   returnPressed = specialKey == 'return'
   if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
-      Toaster.toast r.output or r.error
+      Toaster.toast (r.output or r.error).trim()
       Phoenix.log r.error if r.error
   [(if returnPressed then '' else input), null, returnPressed]
 
