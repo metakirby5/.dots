@@ -804,7 +804,7 @@ endif " }}}
         return SyntasticStatuslineFlag()
       endfunction
     " }}}
-    " .vimrc   ...   ve   78   vim   25%
+    " .vimrc   ...   ve   78   vim   25%   44 - 807/1242
     set statusline=\                                " initialize w/ space
     set statusline+=%f                              " relative path
     set statusline+=%(\ [%{_s_flags()}%M%R]%)       " flags
@@ -820,7 +820,7 @@ endif " }}}
     set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %{_s_syntax()}                " syntax
     set statusline+=\ %#Normal#\ %*                 " separator
-    set statusline+=\ %P                            " file%
+    set statusline+=\ %2c\ -\ %3l/%L                " x, y/ymax
     set statusline+=\                               " end w/ space
   " }}}
   " Cursor Shape {{{
