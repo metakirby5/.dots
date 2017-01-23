@@ -4,7 +4,6 @@ mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "~/Music"
 mpd_crossfade_time = "5"
-mpd_communication_mode = "notifications" # (polling/notifications)
 
 # Music visualizer ############################################################
 
@@ -165,8 +164,6 @@ song_columns_list_format = "(50)[]{t|f} (25)[{{
 # UI/Misc #####################################################################
 
 show_hidden_files_in_local_browser = "no"
-display_screens_numbers_on_start = "no"
-#execute_on_song_change = "mpc-notify"
 jump_to_now_playing_song_at_start = "yes"
 
 mouse_support = "yes"
@@ -206,8 +203,8 @@ empty_tag_marker = "<unknown>"
 ## As you can see, above example will switch between
 ## playlist, visualizer and media library screens.
 ##
-screen_switcher_mode = "sequence: 2 -> 3"
-startup_screen = "2"
+screen_switcher_mode = "playlist,browser"
+startup_screen = "playlist"
 
 # classic/columns
 playlist_display_mode = "classic"
@@ -216,12 +213,9 @@ search_engine_display_mode = "classic"
 playlist_editor_display_mode = "classic"
 
 default_find_mode = "wrapped" # (wrapped/normal)
-default_space_mode = "select" # (add/select)
-default_tag_editor_left_col = "dirs" # (albums/dirs)
 
-ask_before_clearing_main_playlist = "no"
-allow_physical_files_deletion = "no"
-allow_physical_directories_deletion = "no"
+ask_before_clearing_playlists = "no"
+allow_for_physical_item_deletion = "no"
 
 # Colors definitions ##########################################################
 
