@@ -494,9 +494,12 @@ class HintTree
   # prefix is the hint prefix
   constructor: (@chars, objs, @parent, @prefix = '') ->
     # Divide children amongst @chars
-    objs.map (o, i) -> o.idx = i
-    @tree = _.groupBy objs, (o) => @chars.charAt(o.idx % @chars.length)
+    indexed = objs.map (o, i) -> {o, i}
+    @tree = _.groupBy indexed, ({o, i}) => @chars.charAt(i % @chars.length)
       .map (os, k) =>
+        # Unpack the object
+        os = os.map ({o, i}) -> o
+
         # The sequence for the hint
         seq = @prefix + k
 
