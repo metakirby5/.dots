@@ -505,7 +505,7 @@ class HintTree
 
         # If only one candidate for char, end tree here
         if os.length == 1
-          o = os[0]
+          o = _.head os
           obj: o
           hint: o.hint seq
         # Otherwise, make a subtree
@@ -697,7 +697,7 @@ class InputMode extends Mode
             specialKey = k
 
             # Add to history
-            if not @history.length or (@input and @history[0] != @input)
+            if not @history.length or (@input and (_.head @history) != @input)
               @history.unshift @input
             @historyPos = -1
           when 'tab' then specialKey = k
@@ -815,7 +815,7 @@ class ChainWindow
 
   # Switch window to neighbor
   neighbor: (dir) ->
-    n = (@win.neighbors dir)?[0]
+    n = _.head _.filter (@win.neighbors dir), (w) -> w.isNormal()
     if n?
       @win = n
       @updateWin()
