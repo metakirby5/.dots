@@ -24,16 +24,13 @@ myprin() {
 printinfo () {
     prin "$(color 4)                                    echan "
     prin "$(color 0)────────────────┬─────────────────────────"
-    myprin "　　　　　　os" distro
-    myprin "　　　　uptime" uptime
-    myprin "window manager" "Phoenix"
-    myprin "　　　　 shell" shell
-    myprin "　　　packages" packages
+    myprin "             os" distro
+    myprin "         uptime" uptime
+    myprin " window manager" "Phoenix"
+    myprin "          shell" shell
+    myprin "       packages" packages
     prin "$(color 0)────────────────┴─────────────────────────"
-    info linebreak
-    info cols | sed 's/^/[5C/'
 }
-
 
 # Kernel
 
