@@ -45,8 +45,6 @@ p =
       , 'windowDidMove'
       , 'windowDidMinimize'
       , 'windowDidUnminimize' ]
-    kStop: 'escape'              # Key which exits hint mode
-    kPop: 'delete'               # Key which erases a hint character
     chars: 'FJDKSLAGHRUEIWOVNCM' # Hint characters (in order)
     titleLength: 15              # Maximum hint title length
     titleCont: '…'               # String to indicate title continuation
@@ -283,6 +281,7 @@ Screen.moused = ->
 Space::idx = -> _.findIndex Space.all(), (s) => @isEqual s
 
 # Window methods
+Window::chain = -> new ChainWindow this
 Window::hint = (seq) ->
   titleLength = p.hints.titleLength
   titleCont = p.hints.titleCont
@@ -529,18 +528,13 @@ class HintTree
         v.map f, exclude
 
 class HintMode extends Mode
+  chars: p.hints.chars
+
   # hintableGetter provides an array of hintables when called
   # action is a function w/ params (hintedObj, mod)
-  # chars is the possible hint chars
-  # stopEvents is the events on which hint mode should be stopped
-  # kStop is the key which triggers stopping hint mode
-  # kPop is the key which goes back a hint letter
-  constructor: (@hintableGetter, @action,
-      @chars = p.hints.chars, @stopEvents = p.hints.stopEvents,
-      @kStop = p.hints.kStop, @kPop = p.hints.kPop,
-      debounce = p.hints.debounce) ->
-    super @stopEvents
-    @bouncedHints = _.debounce @showHints, debounce
+  constructor: (@hintableGetter, @action) ->
+    super p.hints.stopEvents
+    @bouncedHints = _.debounce @showHints, p.hints.debounce
 
     # Handle start event
     @on 'start', =>
@@ -576,8 +570,8 @@ class HintMode extends Mode
     # Handle key event
     @on 'key', (k, @mod) =>
       switch k
-        when @kStop then @stop()
-        when @kPop then @pop()
+        when 'escape' then @stop()
+        when 'delete' then @pop()
         else @push k
 
   # So we can debounce
@@ -641,10 +635,11 @@ class HintMode extends Mode
 
 # Mode for inputting text
 class InputMode extends Mode
+  cursor: p.input.cursor
+
   # @action is (@input, specialKey) -> [input, output, exit]
-  constructor: (@prompt, @action,
-      @cursor = p.input.cursor, @stopEvents = p.input.stopEvents) ->
-    super @stopEvents
+  constructor: (@prompt, @action) ->
+    super p.input.stopEvents
     @history = []
 
     # Initialize state, listen to events, and show modal
@@ -751,9 +746,11 @@ class InputMode extends Mode
 
 # Window chaining
 class ChainWindow
-  constructor: (@win, @gap = p.wins.gap, @unit = p.wins.unit,
-      @tolerance = p.wins.tolerance) ->
-    @dropSize = @gap + @tolerance
+  gap: p.wins.gap
+  unit: p.wins.unit
+
+  constructor: (@win) ->
+    @dropSize = @gap + p.wins.tolerance
     @updateWin()
 
   # Private: wrap with gap compensation
@@ -893,10 +890,7 @@ class ChainWindow
 
     # Now, resize all other windows
     @win.others(screen: @scr, visible: true).map (win) =>
-      new ChainWindow(win, @gap, @unit, @tolerance)
-        .sizeTo(@dropSize, @dropSize, true)
-        .fill()
-        .set()
+      win.chain().reFill().set()
 
     # Final resize
     @reFill()
@@ -1063,13 +1057,13 @@ cw = ->
     Toaster.toast 'No windows to chain.'
     null
   else
-    new ChainWindow win
+    win.chain()
 
 # Modes
 modes = new ModeManager()
 
 winHint = modes.add new HintMode Window.recent, (w) ->
-  (new ChainWindow w).focus().mouseTo()
+  w.chain().focus().mouseTo()
 
 scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   if mod == 'shift'
