@@ -39,7 +39,7 @@ __mk5_set_prompt() {
   if [ "$EUID" == 0 ]; then
     pchar="#"
   else
-    pchar=">"
+    pchar="┄"
   fi
 
   # Display hostname if ssh'd
