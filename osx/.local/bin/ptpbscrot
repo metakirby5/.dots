@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Used as an Automator action.
+
+out="$(curl -sF "c=@$1" "https://ptpb.pw/")"
+cat <<< "$out" > "$(dirname "$1")/.$(basename "$1").ptpb"
+url="$(awk '/^url:/{print $2}' <<< "$out")"
+pbcopy <<< "$url"
+osascript <<EOF
+  display notification "$1" with title "Screenshot URL on clipboard." subtitle "$url" sound name "Pop"
+EOF
