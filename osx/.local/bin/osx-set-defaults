@@ -101,6 +101,10 @@ DEFAULTS=(
   # com.apple.desktopservices
   ["Don't write .DS_Store files on USBs"]="\
     com.apple.desktopservices DSDontWriteUSBStores -bool true"
+
+  # com.apple.screencapture
+  ["Put screenshots in ~/Pictures/Screenshots/"]="\
+    com.apple.screencapture location ~/Pictures/Screenshots/"
 )
 
 # Open up the log file
