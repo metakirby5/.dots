@@ -637,7 +637,7 @@ class HintMode extends Mode
 class InputMode extends Mode
   cursor: p.input.cursor
 
-  # @action is (@input, specialKey) -> [input, output, exit]
+  # @action is (@input, keyPressed) -> [input, output, exit]
   constructor: (@prompt, @action) ->
     super p.input.stopEvents
     @history = []
@@ -667,7 +667,6 @@ class InputMode extends Mode
 
   # Update command state and modal from key event
   update: (k) ->
-    specialKey = undefined
     switch @mod
 
       # Readline controls
@@ -689,13 +688,11 @@ class InputMode extends Mode
       else
         switch k
           when 'return'
-            specialKey = k
-
             # Add to history
             if not @history.length or (@input and (_.head @history) != @input)
               @history.unshift @input
             @historyPos = -1
-          when 'tab' then specialKey = k
+          when 'tab' then  # no-op
           when 'down' then @moveHistory 1
           when 'up' then @moveHistory -1
           when 'left' then @movePos -1
@@ -713,7 +710,7 @@ class InputMode extends Mode
             @movePos 1
 
     # Run the action
-    [input, @output, exit] = @action @input, specialKey
+    [input, @output, exit] = @action @input, k
 
     # Exit if requested
     return @stop() if exit
@@ -1071,10 +1068,10 @@ scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   else
     s.mouseTo()
 
-evalInput = modes.add new InputMode p.eval.prompt, (input, specialKey) ->
+evalInput = modes.add new InputMode p.eval.prompt, (input, keyPressed) ->
   instant = (input.charAt 0) == p.eval.instantPrefix
   command = if instant then input.substr 1 else input
-  returnPressed = specialKey == 'return'
+  returnPressed = keyPressed == 'return'
 
   # Eval
   if command and (instant or returnPressed)
@@ -1088,10 +1085,11 @@ evalInput = modes.add new InputMode p.eval.prompt, (input, specialKey) ->
   # Set input and output
   [ (if instant then p.eval.instantPrefix else '') +
     ((output if returnPressed) ? command)
-  , (err or output or p.eval.progressStr if instant) ]
+  , (err or output or p.eval.progressStr if instant)
+  , returnPressed and not command ]
 
-shellInput = modes.add new InputMode p.shell.prompt, (input, specialKey) ->
-  returnPressed = specialKey == 'return'
+shellInput = modes.add new InputMode p.shell.prompt, (input, keyPressed) ->
+  returnPressed = keyPressed == 'return'
   if input and returnPressed
     Task.run p.shell.bin, (['-lc'].concat input), (r) ->
       Toaster.toast (r.output or r.error).trim()
