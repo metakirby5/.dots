@@ -8,6 +8,16 @@ cat <<< "$out" > "$(dirname "$1")/.$(basename "$1").ptpb"
 url="$(awk '/^url:/{print $2}' <<< "$out")"
 pbcopy <<< "$url"
 
-osascript <<EOF
-  display notification "$url" with title "Screenshot URL on clipboard." sound name "Pop"
-EOF
+action="$(/usr/local/bin/terminal-notifier \
+  -sender "com.apple.Photos" \
+  -group 438 \
+  -contentImage "$1" \
+  -title "Screenshot URL on clipboard." \
+  -message "$url" \
+  -open "$url" \
+  -actions Delete)"
+
+if [[ "$action" ]]; then
+  uuid="$(awk '/^uuid:/{print $2}' <<< "$out")"
+  curl -X DELETE "https://ptpb.pw/$uuid"
+fi
