@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Used as an Automator action.
 
-[[ "$1" == *.ptpb ]] && exit
+[[ ! "$1" || "$1" == *.ptpb ]] && exit
 
 out="$(curl -sF "c=@$1" "https://ptpb.pw/")"
 cat <<< "$out" > "$(dirname "$1")/.$(basename "$1").ptpb"
@@ -9,5 +9,5 @@ url="$(awk '/^url:/{print $2}' <<< "$out")"
 pbcopy <<< "$url"
 
 osascript <<EOF
-  display notification "$1" with title "Screenshot URL on clipboard." subtitle "$url" sound name "Pop"
+  display notification "$url" with title "Screenshot URL on clipboard." sound name "Pop"
 EOF
