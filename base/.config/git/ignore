@@ -7,6 +7,7 @@
 a.out
 *.pyc
 *.class
+*.pdf
 
 # Temporary files
 *.sw*
@@ -24,6 +25,7 @@ Thumbs.db
 # App files
 .idea
 .cache
+.ipynb_checkpoints
 
 # Tags
 tags
