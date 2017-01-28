@@ -24,6 +24,7 @@ alias aniget='anistrm --program="wget -c"'
 alias pypush='python setup.py sdist bdist_wheel upload -r live'
 alias all="tr '\n' '\0' | xargs -0"
 alias map="all -n 1"
+alias cl='clear'
 alias c='cd'
 alias l='ls'
 alias ll='ls -l'
