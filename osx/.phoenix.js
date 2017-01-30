@@ -1059,7 +1059,9 @@ cw = ->
 # Modes
 modes = new ModeManager()
 
-winHint = modes.add new HintMode Window.recent, (w) ->
+winHint = modes.add new HintMode (->
+  _.filter Window.recent(), (w) -> w.isNormal()
+), (w) ->
   w.chain().focus().mouseTo()
 
 scrHint = modes.add new HintMode Screen.all, (s, mod) ->
