@@ -1079,9 +1079,8 @@ endif " }}}
     command! -nargs=* Sudow call s:sudow(<f-args>)
 
     " ,q - edit macro
-    nnoremap <Plug>edit-macro :<c-u><c-r><c-r>='let @'.v:register.' = '
+    nnoremap <leader>q :<c-u><c-r><c-r>='let @'.v:register.' = '
           \.string(getreg(v:register))<cr><c-f><left>
-    nmap <leader>q <Plug>edit-macro
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
