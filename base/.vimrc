@@ -398,6 +398,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Ablolish, Subvert, and Coerce {{{
       Plug 'tpope/vim-abolish'
     " }}}
+    " Unix buffer-linked utils {{{
+      Plug 'tpope/vim-eunuch'
+    " }}}
     " Readline bindings for insert mode {{{
       Plug 'tpope/vim-rsi'
     " }}}
