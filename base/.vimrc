@@ -152,17 +152,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         endfunction
 
         Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
-        let s:completion_engine = 'deoplete'
-        let s:completion_prefix = s:completion_engine . '#'
+        let s:completion_prefix = 'deoplete#'
       elseif has('lua')
         if (version >= 704 || version == 703 && has('patch885'))
           Plug 'Shougo/neocomplete.vim'
-          let s:completion_engine = 'neocomplete'
-          let s:completion_prefix = s:completion_engine . '#'
+          let s:completion_prefix = 'neocomplete#'
         else
           Plug 'Shougo/neocomplcache.vim'
-          let s:completion_engine = 'neocomplcache'
-          let s:completion_prefix = s:completion_engine . '_'
+          let s:completion_prefix = 'neocomplcache_'
         endif
       else
         Plug 'ervandew/supertab'
@@ -178,22 +175,23 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       endif
     " }}}
     " Settings {{{
-      if exists('s:completion_engine')
+      if exists('s:completion_prefix')
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
         let g:{s:completion_prefix}enable_auto_delimiter = 1
-        set completeopt-=preview
-        inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-        inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
-
-        let g:ulti_expand_res = 0
-        function! s:smart_cr()
-          silent! call UltiSnips#ExpandSnippet()
-          return g:ulti_expand_res ? ""
-                \: pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-        endfunction
       endif
+
+      set completeopt-=preview
+      inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+      inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+      inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
+
+      let g:ulti_expand_res = 0
+      function! s:smart_cr()
+        silent! call UltiSnips#ExpandSnippet()
+        return g:ulti_expand_res ? ""
+              \: pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+      endfunction
     " }}}
   " }}}
   " Text objects {{{
@@ -256,8 +254,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         " Truncate to s:leaderGuide_max_desc_len chars or less
         if len(g:leaderGuide#displayname) > s:leaderGuide_max_desc_len
           let g:leaderGuide#displayname =
-                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-3]
-                \."..."
+                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-1]
+                \."…"
         endif
       endfunction
       let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
@@ -412,7 +410,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'ConradIrwin/vim-bracketed-paste'
     " }}}
     " Automatically return to last edit position {{{
-        Plug 'dietsche/vim-lastplace'
+      Plug 'dietsche/vim-lastplace'
     " }}}
     " Automatically add delimiters {{{
       Plug 'jiangmiao/auto-pairs'
@@ -451,8 +449,6 @@ else
     " Search {{{
       noremap n nzz
       noremap N Nzz
-      noremap // /\c
-      noremap ?? ?\c
       nnoremap <silent> <bslash> <esc>:%s/
       vnoremap <silent> <bslash> <esc>gv:s/
     " }}}
@@ -574,7 +570,7 @@ endif " }}}
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
-      " No tildes for empty lines
+      " Empty lines, etc.
       hi clear NonText | hi NonText
             \
             \ ctermfg=darkgrey guifg=darkgrey
@@ -609,18 +605,13 @@ endif " }}}
             \ term=underline cterm=underline gui=underline
             \ ctermfg=red    guifg=red
             \
-      hi clear SpellCap | hi SpellCap
+      hi clear SpellOkay | hi SpellOkay
             \ term=underline cterm=underline gui=underline
             \
             \
-      hi clear SpellLocal | hi SpellLocal
-            \ term=underline cterm=underline gui=underline
-            \
-            \
-      hi clear SpellRare | hi SpellRare
-            \ term=underline cterm=underline gui=underline
-            \
-            \
+      hi clear SpellCap | hi link SpellCap SpellOkay
+      hi clear SpellLocal | hi link SpellLocal SpellOkay
+      hi clear SpellRare | hi link SpellRare SpellOkay
 
       " Cursor line
       hi clear LineNr | hi LineNr
@@ -638,14 +629,12 @@ endif " }}}
             \ ctermbg=black guibg=black
 
       " Vertial lines
-      hi clear CursorColumn | hi CursorColumn
+      hi clear Column | hi Column
             \
             \
             \ ctermbg=black guibg=black
-      hi clear ColorColumn | hi ColorColumn
-            \
-            \
-            \ ctermbg=black guibg=black
+      hi clear CursorColumn | hi link CursorColumn Column
+      hi clear ColorColumn | hi link ColorColumn Column
       hi clear VertSplit | hi VertSplit
             \
             \ ctermfg=white guifg=white
@@ -660,10 +649,7 @@ endif " }}}
             \
             \ ctermfg=white guifg=white
             \ ctermbg=black guibg=black
-      hi clear TabLineFill | hi TabLineFill
-            \
-            \ ctermfg=white guifg=white
-            \ ctermbg=black guibg=black
+      hi clear TabLineFill | hi link TabLineFill TabLine
 
       " Status line
       hi clear StatusLine | hi StatusLine
@@ -873,34 +859,8 @@ endif " }}}
     noremap <s-tab> <c-o>
   " }}}
   " Buffers {{{
-    " ,bl - List all buffers
-    nnoremap <silent> <leader>bl <esc>:buffers<cr>
-
     " ,bs - Switch to buffer by name
     nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
-
-    " ,bd - Close the current buffer
-    nnoremap <silent> <leader>bd <esc>:bd<cr>
-
-    " Close all empty buffers
-    function! DeleteEmptyBuffers()
-      let [i, n; empty] = [1, bufnr('$')]
-      while i <= n
-        if bufloaded(i) && bufname(i) == '' && getbufline(i, 1, 2) == ['']
-          call add(empty, i)
-        endif
-        let i += 1
-      endwhile
-      if len(empty) > 0
-        exe 'bdelete' join(empty)
-      endif
-    endfunction
-
-    " ,be - Close all empty buffers
-    nnoremap <silent> <leader>be <esc>:call DeleteEmptyBuffers()<cr>
-
-    " ,bt - Open all buffers as tabs
-    nnoremap <silent> <leader>bt <esc>:tab ball<cr>
 
     " ,cd - Switch CWD to the directory of the open buffer
     nnoremap <silent> <leader>cd <esc>:cd %:p:h<cr> :pwd<cr>
@@ -922,7 +882,7 @@ endif " }}}
     " ,= - Equalize splits
     nnoremap <leader>= <C-w>=
 
-    " ^[hjkl] - Switch to split
+    " ,[hjkl] - Switch to split
     nnoremap <leader>h <C-W>h
     nnoremap <leader>j <C-W>j
     nnoremap <leader>k <C-W>k
@@ -934,7 +894,7 @@ endif " }}}
     nnoremap <leader>K <C-W>K
     nnoremap <leader>L <C-W>L
 
-    " ,[hjkl] - Resize split
+    " ^[hjkl] - Resize split
     nnoremap <silent> <c-h> <c-w><
     nnoremap <silent> <c-j> <c-w>+
     nnoremap <silent> <c-k> <c-w>-
@@ -1185,58 +1145,4 @@ endif " }}}
 
   " U - fix syntax highlighting
   nnoremap <silent> U <esc>:syntax sync fromstart<cr>
-" }}}
-" Macros {{{
-  " " File header function
-  " function FileHeader()
-  "     let s:line=line(".")
-  "     call setline(s:line, "/*******************************************************************************")
-  "     call append(s:line,  " * Filename: ".expand("%:t"))
-  "     call append(s:line+1," * Author: Ethan Chan")
-  "     call append(s:line+3," * Date: ".strftime("%D"))
-  "     call append(s:line+5," *")
-  "     call append(s:line+6," * Description: ")
-  "     call append(s:line+7," *      ")
-  "     call append(s:line+8," * ****************************************************************************/")
-  "     unlet s:line
-  " endfunction
-  "
-  " " ,ih - Insert file header
-  " noremap <silent> <leader>ih mz:exe FileHeader()<cr>`z8<cr>A
-  "
-  " " Method header function
-  " function MethodHeader()
-  "     let s:line=line(".")
-  "     call setline(s:line,  "/*******************************************************************************")
-  "     call append(s:line,   " * Function name: ")
-  "     call append(s:line+1, " * Function prototype: TODO")
-  "     call append(s:line+2, " *")
-  "     call append(s:line+3, " * Description:")
-  "     call append(s:line+4, " *      TODO")
-  "     call append(s:line+5, " *")
-  "     call append(s:line+6, " * Parameters:")
-  "     call append(s:line+7, " *      arg 1: _name -- _desc TODO")
-  "     call append(s:line+8, " * Side effects:")
-  "     call append(s:line+9, " *      TODO")
-  "     call append(s:line+10," * Error conditions:")
-  "     call append(s:line+11," *      _errcond TODO")
-  "     call append(s:line+12," *          Action: _action TODO")
-  "     call append(s:line+13," * Return value: _type TODO")
-  "     call append(s:line+14," *      _val -- _meaning TODO")
-  "     call append(s:line+15," *")
-  "     call append(s:line+16," * Registers used:")
-  "     call append(s:line+17," *      %i0: _name -- _desc TODO")
-  "     call append(s:line+18," *")
-  "     call append(s:line+19," *      %l0: _name -- _desc TODO")
-  "     call append(s:line+20," *")
-  "     call append(s:line+21," *      %o0: _name -- _desc TODO")
-  "     call append(s:line+22," * ****************************************************************************/")
-  "     unlet s:line
-  " endfunction
-  "
-  " " ,im - Insert method header
-  " noremap <silent> <leader>im mz:exe MethodHeader()<cr>`z<cr>A
-  "
-  " Automatically insert file header in *.{c,cpp,h,s}
-  " au BufNewFile *.{c,cpp,h,s} exe "normal mz:exe FileHeader()\<cr>zR`z8\<cr>A"
 " }}}
