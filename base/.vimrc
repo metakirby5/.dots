@@ -398,6 +398,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Ablolish, Subvert, and Coerce {{{
       Plug 'tpope/vim-abolish'
     " }}}
+    " Readline bindings for insert mode {{{
+      Plug 'tpope/vim-rsi'
+    " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
     " }}}
