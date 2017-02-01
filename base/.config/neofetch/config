@@ -273,10 +273,13 @@ disk_display="off"
 
 # Image Options {{{
 
+case "$(uname -s)" in
+    'Darwin') image_backend='iterm2' ;;
+esac
 
 # Image Source
 # --image wall, ascii, /path/to/img, /path/to/dir/, off
-image="wall"
+image="wallpaper"
 
 # Thumbnail directory
 thumbnail_dir="$HOME/.cache/thumbnails/neofetch"
