@@ -579,6 +579,12 @@ endif " }}}
             \ ctermfg=darkgrey guifg=darkgrey
             \
 
+      " End of buffer tildes
+      hi clear EndOfBuffer | hi EndOfBuffer
+            \ 
+            \ ctermfg=black guifg=black
+            \
+
       " Keep colors in visual
       hi clear Visual | hi Visual
             \ term=reverse cterm=reverse gui=reverse
