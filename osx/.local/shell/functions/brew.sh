@@ -27,6 +27,9 @@ brew() {
     o)
       command brew info "$@"
       ;;
+    e)
+      command brew edit "$@"
+      ;;
     s)
       command brew services "$@"
       ;;
@@ -55,6 +58,9 @@ brew() {
           ;;
         o)
           command brew cask info "$@"
+          ;;
+        e)
+          command brew cask edit "$@"
           ;;
         i)
           command brew cask install "$@"
