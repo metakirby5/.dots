@@ -581,7 +581,7 @@ endif " }}}
 
       " End of buffer tildes
       hi clear EndOfBuffer | hi EndOfBuffer
-            \ 
+            \
             \ ctermfg=black guifg=black
             \
 
