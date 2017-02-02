@@ -13,6 +13,7 @@ shopt -s globstar 2>/dev/null # Super-complete **
 
 # History
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries or leading spaces
+export HISTTIMEFORMAT="%d/%m/%y %T "     # add timestamps
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
