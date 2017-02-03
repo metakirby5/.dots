@@ -6,6 +6,7 @@ brew 'brew-cask-completion'
 brew 'coreutils'
 brew 'ctags'
 brew 'emacs', restart_service: true
+brew 'entr'
 brew 'fasd'
 brew 'fzf'
 brew 'gcc'
