@@ -365,9 +365,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if has('job') && has('timers') && has('lambda') &&
-            \ (has('python') || has('python3'))
-        Plug 'maralla/validator.vim'
+      if has('nvim') || has('job') && has('channel') && has('timers')
+        Plug 'w0rp/ale'
+        let g:ale_lint_delay = 100
+        let g:ale_sign_error = ' '
+        let g:ale_sign_warning = ' '
+        nmap <silent> [s <Plug>(ale_previous_wrap)
+        nmap <silent> ]s <Plug>(ale_next_wrap)
       else
         Plug 'scrooloose/syntastic'
       endif
@@ -409,6 +413,11 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Paired keybindings {{{
       Plug 'tpope/vim-unimpaired'
+    " }}}
+    " Toggle locationlist and quickfix {{{
+      Plug 'Valloric/ListToggle'
+      let g:lt_location_list_toggle_map = 'coo'
+      let g:lt_quickfix_list_toggle_map = 'coq'
     " }}}
   " }}}
   " Automation {{{
@@ -842,7 +851,7 @@ endif " }}}
     augroup HELP_SPLITS
       au!
       au BufEnter * if &buftype == 'help'
-            \ | wincmd L | exe 'vert resize ' . &tw
+            \ | wincmd L | exe 'vert resize ' . (&tw + 1)
             \ | noremap <buffer> q <esc>:q<cr>
             \ | endif
     augroup END
