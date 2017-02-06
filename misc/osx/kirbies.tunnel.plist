@@ -5,16 +5,20 @@
 	<key>KeepAlive</key>
 	<true/>
 	<key>Label</key>
-	<string>es.kirbi.ssh.reverse.tunnel</string>
+	<string>kirbies.tunnel</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>ssh</string>
 		<string>-NTC</string>
 		<string>-o ExitOnForwardFailure=yes</string>
 		<string>-R 10022:localhost:22</string>
+		<string>-i</string>
+		<string>/Users/echan/.ssh/tunnel_id_rsa</string>
 		<string>kirbies</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
+	<key>UserName</key>
+	<string>echan</string>
 </dict>
 </plist>
