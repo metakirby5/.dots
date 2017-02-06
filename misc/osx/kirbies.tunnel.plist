@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>KeepAlive</key>
-	<true/>
 	<key>Label</key>
 	<string>kirbies.tunnel</string>
 	<key>ProgramArguments</key>
@@ -12,13 +10,13 @@
 		<string>-NTC</string>
 		<string>-o ExitOnForwardFailure=yes</string>
 		<string>-R 10022:localhost:22</string>
-		<string>-i</string>
-		<string>/Users/echan/.ssh/tunnel_id_rsa</string>
 		<string>kirbies</string>
 	</array>
-	<key>RunAtLoad</key>
-	<true/>
 	<key>UserName</key>
 	<string>echan</string>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
 </dict>
 </plist>
