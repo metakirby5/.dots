@@ -365,13 +365,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if has('nvim') || has('job') && has('channel') && has('timers')
-        Plug 'w0rp/ale'
-        let g:ale_lint_delay = 100
-        let g:ale_sign_error = ' '
-        let g:ale_sign_warning = ' '
-        nmap <silent> [s <Plug>(ale_previous_wrap)
-        nmap <silent> ]s <Plug>(ale_next_wrap)
+      if has('nvim') || has('job') && has('timers') && has('lambda') &&
+            \ (has('python') || has('python3'))
+        Plug 'maralla/validator.vim'
       else
         Plug 'scrooloose/syntastic'
       endif
