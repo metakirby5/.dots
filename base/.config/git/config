@@ -42,6 +42,7 @@
 	co = checkout
 	ci = commit
 	rb = rebase
+	rbc = rebase --continue
 	cp = cherry-pick
 	t = tag
 	r = reset
