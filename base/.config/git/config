@@ -41,8 +41,6 @@
 	cl = clone --recursive
 	co = checkout
 	ci = commit
-	rb = rebase
-	rbc = rebase --continue
 	cp = cherry-pick
 	t = tag
 	r = reset
@@ -76,6 +74,11 @@
 	sp = stash pop
 	sa = stash apply
 	sd = stash drop
+
+	# rebase
+	rb = rebase
+	rbi = rebase --interactive
+	rbc = rebase --continue
 
 	# log
 	l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
