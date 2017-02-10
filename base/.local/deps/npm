@@ -1,6 +1,7 @@
 bower
 castnow
 coffee-script
+coffeelint
 elm
 git-open
 jsonlint
