@@ -15,6 +15,7 @@ AXIS = 'AXIS'
 AXES = [VERTICAL, HORIZONTAL]
 
 # Preferences
+Phoenix.set openAtLogin: true
 p =
   ## WINDOWS
   wins:
