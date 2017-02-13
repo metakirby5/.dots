@@ -111,6 +111,8 @@ For OS X, use the system theme.
 
 - Python: `xargs pip install --upgrade < ~/.local/deps/pip`
 - Node: `xargs npm install -g < ~/.local/deps/npm`
+- Ruby: `xargs gem install < ~/.local/deps/gem`
+- Lua: `xargs luarocks install < ~/.local/deps/luarocks`
 
 ### OS X
 
