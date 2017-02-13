@@ -367,7 +367,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Syntax checker {{{
       if has('nvim') || has('job') && has('channel') && has('timers')
         Plug 'w0rp/ale'
-        let g:ale_use_ch_sendraw = 1
         let g:ale_lint_delay = 100
         let g:ale_sign_error = ' '
         let g:ale_sign_warning = ' '
