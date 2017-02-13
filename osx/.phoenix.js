@@ -123,7 +123,7 @@ Array.prototype.subsets = ->
   else
     [x, xs...] = this
     rest = xs.subsets()
-    rest.concat rest.map (a) => a.concat x
+    rest.concat rest.map (a) -> a.concat x
 String.prototype.map = Array.prototype.map
 String.prototype.pop = -> @charAt @length - 1
 String.prototype.popped = -> @substr 0, @length - 1
@@ -353,8 +353,7 @@ Modal::untrack = ->
 
 Modal::resolveOverlaps = ->
   Modal::open = _.without @open, this
-  while _.some(@open.map (m) =>
-      intersects @frame(), m.frame(), p.modals.gap)
+  while _.some(@open.map (m) => intersects @frame(), m.frame(), p.modals.gap)
     @origin =
       x: @origin.x
       y: @origin.y - p.modals.unit
@@ -455,7 +454,7 @@ class ModeManager
       @cur = id
 
       # Shut down all other modes
-      @modes.map ((m, n) => m.stop() if +n != id)
+      @modes.map ((m, n) -> m.stop() if +n != id)
 
     # On this mode stopping
     # Start is not guaranteed to have been run
@@ -886,7 +885,7 @@ class ChainWindow
     @set()
 
     # Now, resize all other windows
-    @win.others(screen: @scr, visible: true).map (win) =>
+    @win.others(screen: @scr, visible: true).map (win) ->
       win.chain().reFill().set()
 
     # Final resize
@@ -1149,7 +1148,7 @@ p.keys.apps.map (app, key) ->
 p.keys.snaps.map (dest, key) ->
   Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
 
-# Toast upon load of config
-Toaster.toast 'Config loaded.'
+# Notify upon load of config
+Phoenix.notify 'Config loaded.'
 
 # vim:ft=coffee
