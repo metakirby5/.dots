@@ -24,6 +24,7 @@ local p = {
       k = C.NORTH,
       l = C.EAST,
     },
+    maximize = 'm',
     hints = 'y',
     reload = 'r',
   },
@@ -32,6 +33,8 @@ local p = {
 -- General
 hs.hotkey.bind:withPacked():map({
   {p.keys.mods.pour, p.keys.reload, nil, hs.reload},
+  {p.keys.mods.base, p.keys.maximize, nil,
+    function() window.focused():maximize() end},
   {p.keys.mods.base, p.keys.hints, nil, hints.show},
 })
 
@@ -53,7 +56,7 @@ SNAPS = {
   ['a'] = '0,0 1x2',
   ['z'] = '0,1 1x1',
   [']'] = '1,0 1x1',
-  [';'] = '1,0 1x2',
+  ['"'] = '1,0 1x2',
   ['/'] = '1,1 1x1',
 }
 for key, cell in pairs(SNAPS) do
