@@ -199,6 +199,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     Plug 'kana/vim-textobj-entire'
     Plug 'kana/vim-textobj-line'
     Plug 'kana/vim-textobj-indent'
+    Plug 'glts/vim-textobj-comment'
     Plug 'wellle/targets.vim'
   " }}}
   " Operators {{{
@@ -365,13 +366,16 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if has('nvim') || has('job') && has('channel') && has('timers')
-        Plug 'w0rp/ale'
-        let g:ale_lint_delay = 100
-        let g:ale_sign_error = '∙'
-        let g:ale_sign_warning = '∙'
-        nmap <silent> [s <Plug>(ale_previous_wrap)
-        nmap <silent> ]s <Plug>(ale_next_wrap)
+      if has('job') && has('timer') && has('lambda') &&
+            \ (has('python') || has('python3'))
+        Plug 'maralla/validator.vim'
+      " if has('nvim') || has('job') && has('channel') && has('timers')
+      "   Plug 'w0rp/ale'
+      "   let g:ale_lint_delay = 100
+      "   let g:ale_sign_error = '∙'
+      "   let g:ale_sign_warning = '∙'
+      "   nmap <silent> [s <Plug>(ale_previous_wrap)
+      "   nmap <silent> ]s <Plug>(ale_next_wrap)
       else
         Plug 'scrooloose/syntastic'
       endif
