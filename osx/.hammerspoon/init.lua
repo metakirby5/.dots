@@ -24,7 +24,6 @@ local p = {
       k = C.NORTH,
       l = C.EAST,
     },
-    maximize = 'm',
     hints = 'y',
     reload = 'r',
   },
@@ -33,8 +32,6 @@ local p = {
 -- General
 hs.hotkey.bind:withPacked():map({
   {p.keys.mods.pour, p.keys.reload, nil, hs.reload},
-  {p.keys.mods.base, p.keys.maximize, nil,
-    function() window.focused():maximize() end},
   {p.keys.mods.base, p.keys.hints, nil, hints.show},
 })
 
@@ -50,16 +47,17 @@ for mod, action in pairs(DIR_MODS) do
   end
 end
 
--- Snaps
-SNAPS = {
+-- Grid cells
+GRID_CELLS = {
   ['q'] = '0,0 1x1',
   ['a'] = '0,0 1x2',
   ['z'] = '0,1 1x1',
   [']'] = '1,0 1x1',
   ['"'] = '1,0 1x2',
   ['/'] = '1,1 1x1',
+  ['m'] = '0,0 2x2',
 }
-for key, cell in pairs(SNAPS) do
+for key, cell in pairs(GRID_CELLS) do
   hs.hotkey.bind(p.keys.mods.base, key, function()
     hs.grid.set(window.focused(), cell)
   end)
