@@ -368,8 +368,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if has('nvim') || has('job') && has('channel') && has('timers')
         Plug 'w0rp/ale'
         let g:ale_lint_delay = 100
-        let g:ale_sign_error = ' '
-        let g:ale_sign_warning = ' '
+        let g:ale_sign_error = '∙'
+        let g:ale_sign_warning = '∙'
         nmap <silent> [s <Plug>(ale_previous_wrap)
         nmap <silent> ]s <Plug>(ale_next_wrap)
       else
@@ -723,6 +723,16 @@ endif " }}}
             \
             \
             \ ctermbg=blue guibg=blue
+
+      " ALE
+      hi clear ALEErrorSign | hi ALEErrorSign
+            \
+            \ ctermfg=red guifg=red
+            \
+      hi clear ALEWarningSign | hi ALEWarningSign
+            \
+            \ ctermfg=yellow guifg=yellow
+            \
     endfunction
 
     if !has('gui_running')
