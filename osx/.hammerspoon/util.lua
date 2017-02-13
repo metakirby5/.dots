@@ -23,7 +23,7 @@ setmetatable(table, {
     -- Shallow copy
     copy = c(function(self)
       local copied = T{}
-      for k, v in ipairs(self) do
+      for k, v in pairs(self) do
         copied[k] = v
       end
       return copied
@@ -33,7 +33,7 @@ setmetatable(table, {
     -- function signature is (value, key) since values are more useful
     map = c(function(self, func)
       local mapped = self:copy()
-      for k, v in ipairs(self) do
+      for k, v in pairs(self) do
         mapped[k] = func(v, k)
       end
       return mapped
@@ -41,7 +41,7 @@ setmetatable(table, {
 
     -- Mutative map
     map_ = c(function(self, func)
-      for k, v in ipairs(self) do
+      for k, v in pairs(self) do
         self[k] = func(v, k)
       end
       return self
@@ -51,7 +51,7 @@ setmetatable(table, {
     -- function signature is (value, key) since values are more useful
     filter = c(function(self, func)
       local filtered = self:copy()
-      for k, v in ipairs(self) do
+      for k, v in pairs(self) do
         if not func(v, k) then
           filtered:remove(k)
         end
@@ -62,7 +62,7 @@ setmetatable(table, {
     -- Mutative filter
     filter_ = c(function(self, func)
       local copied = self:copy()
-      for k, v in ipairs(copied) do
+      for k, v in pairs(copied) do
         if not func(v, k) then
           self:remove(k)
         end
@@ -73,7 +73,7 @@ setmetatable(table, {
     -- Combine tables
     merge = c(function(self, arr, ...)
       local merged = self:copy()
-      for _, t in ipairs({arr, ...}) do
+      for _, t in pairs({arr, ...}) do
         for k, v in pairs(t) do
           merged[k] = v
         end
@@ -83,7 +83,7 @@ setmetatable(table, {
 
     -- Mutative merge
     merge_ = c(function(self, arr, ...)
-      for _, t in ipairs({arr, ...}) do
+      for _, t in pairs({arr, ...}) do
         for k, v in pairs(t) do
           self[k] = v
         end
