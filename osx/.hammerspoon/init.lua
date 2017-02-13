@@ -1,15 +1,17 @@
+-- luacheck: globals hs, read_globals T
+
 -- Bind reload as a failsafe
 hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'r', nil, hs.reload)
 
 -- Auto-reload
-local watcher = hs.pathwatcher.new(hs.configdir, hs.reload):start()
+hs.pathwatcher.new(hs.configdir, hs.reload):start()
 
 -- Imports
+require('util')
+require('grid')
 local C = require('consts')
-local U = require('util')
 local hints = require('hints')
 local window = require('window')
-local grid = require('grid')
 
 -- Keys
 local p = T{

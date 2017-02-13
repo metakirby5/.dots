@@ -1,3 +1,5 @@
+-- luacheck: globals hs
+
 local C = require('consts')
 local U = require('util')
 

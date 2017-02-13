@@ -1,3 +1,5 @@
+-- luacheck: globals T
+
 local C = require('consts')
 
 -- Curry wrapper to resolve functional dependencies
