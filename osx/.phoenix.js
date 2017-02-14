@@ -106,7 +106,7 @@ p =
     apps:                    # Launch applications
       t: 'iTerm2'
       e: 'Finder'
-
+      g: 'Google Chrome'
 
     ## ACTIVATE WITH mods.pour
     spaceAll: 's'            # Put window on all spaces
