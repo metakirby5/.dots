@@ -8,12 +8,12 @@
 	<array>
 		<string>ssh</string>
 		<string>-NTC</string>
-		<string>-o ExitOnForwardFailure=yes</string>
-		<string>-R 10022:localhost:22</string>
+		<string>-o</string>
+		<string>ExitOnForwardFailure=yes</string>
+		<string>-R</string>
+		<string>10022:localhost:22</string>
 		<string>kirbies</string>
 	</array>
-	<key>UserName</key>
-	<string>echan</string>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>KeepAlive</key>
