@@ -371,8 +371,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:ale_lint_delay = 100
         let g:ale_sign_error = '∙'
         let g:ale_sign_warning = '∙'
+        let g:ale_echo_msg_format = '%linter%: %s'
         nmap <silent> [s <Plug>(ale_previous_wrap)
         nmap <silent> ]s <Plug>(ale_next_wrap)
+
+        let g:ale_linters = {
+              \ 'cpp': ['g++'],
+        \}
       else
         Plug 'scrooloose/syntastic'
       endif
