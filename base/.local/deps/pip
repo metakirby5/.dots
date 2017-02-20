@@ -6,6 +6,7 @@ flake8
 fuzzywuzzy
 humanize
 jupyter
+jupyter-pip
 livestreamer
 matplotlib
 neovim
