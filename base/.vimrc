@@ -154,15 +154,13 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
         let s:completion_prefix = 'deoplete#'
       elseif has('lua')
-        if version >= 704 || version == 703 && has('patch885')
+        if (version >= 704 || version == 703 && has('patch885'))
           Plug 'Shougo/neocomplete.vim'
           let s:completion_prefix = 'neocomplete#'
         else
           Plug 'Shougo/neocomplcache.vim'
           let s:completion_prefix = 'neocomplcache_'
         endif
-      elseif version >= 704
-        Plug 'maxboisvert/vim-simple-complete'
       else
         Plug 'ervandew/supertab'
       endif
