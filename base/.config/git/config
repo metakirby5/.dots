@@ -82,6 +82,7 @@
 
 	# log
 	l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
+	ll  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d'
 	lr  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
 	lp  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
 	ls  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --numstat
