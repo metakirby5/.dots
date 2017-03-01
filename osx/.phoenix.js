@@ -1,5 +1,8 @@
 #!/usr/bin/env coffee -p
 
+# Reload shortcut first
+Key.on 'r', ['cmd', 'alt', 'ctrl'], -> Phoenix.reload()
+
 # Cardinal directions
 NORTH = 'north'
 SOUTH = 'south'
