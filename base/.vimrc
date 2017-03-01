@@ -454,6 +454,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'tpope/vim-endwise'
     " }}}
   " }}}
+  " Integrations {{{
+    Plug 'wakatime/vim-wakatime'
+  " }}}
   " Post-hooks {{{
     call plug#end()
   " }}}
