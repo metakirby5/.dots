@@ -7,5 +7,6 @@ json
 net-telnet
 openssl
 psych
+sqlite3
 vimgolf
 xmlrpc
