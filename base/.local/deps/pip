@@ -15,6 +15,6 @@ pipdeptree
 pushbullet-cli
 python-Levenshtein
 sklearn
+tensorflow
 virtualenvwrapper
-wheel
 zenbu
