@@ -7,7 +7,6 @@ fuzzywuzzy
 humanize
 jupyter
 jupyter-pip
-livestreamer
 matplotlib
 neovim
 pip-autoremove
@@ -15,6 +14,7 @@ pipdeptree
 pushbullet-cli
 python-Levenshtein
 sklearn
+streamlink
 tensorflow
 virtualenvwrapper
 zenbu
