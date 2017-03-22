@@ -366,7 +366,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if has('nvim') || has('job') && has('channel') && has('timers')
+      if has('nvim') ||
+            \ version >= 800 && has('job') && has('channel') && has('timers')
         Plug 'w0rp/ale'
         let g:ale_lint_delay = 100
         let g:ale_sign_error = '∙'
