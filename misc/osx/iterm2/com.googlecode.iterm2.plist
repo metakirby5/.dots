@@ -1891,7 +1891,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>810 191 673 252 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>270 582 606 456 0 0 1680 1050 </string>
+	<string>244 740 606 456 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>233 374 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
@@ -1899,7 +1899,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>341 491 618 323 0 0 1680 1050 </string>
+	<string>132 306 690 476 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
