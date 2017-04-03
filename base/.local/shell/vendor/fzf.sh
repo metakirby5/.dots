@@ -4,6 +4,7 @@
 if which fzf &>/dev/null; then
   # Show hidden files
   export FZF_DEFAULT_COMMAND='(\
+    rg --hidden -l . ||\
     ag --hidden -l . ||\
     find -L . ! -type d | cut -c3- | tail -n+2\
     ) 2>/dev/null'
