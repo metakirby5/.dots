@@ -29,6 +29,7 @@ brew 'macvim', args: ['with-lua', 'with-override-system-vim']
 brew 'mas'
 brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
 brew 'mvtools'
+brew 'ncdu'
 brew 'neofetch'
 brew 'neovim/neovim/neovim'
 brew 'nmap'
@@ -50,6 +51,7 @@ brew 'ruby'
 brew 'stow'
 brew 'terminal-notifier'
 brew 'the_silver_searcher'
+brew 'tig'
 brew 'tmux', args: ['HEAD']
 brew 'trash'
 brew 'tree'
@@ -58,6 +60,7 @@ brew 'verilator'
 brew 'watchman'
 brew 'weechat', args: ['with-lua', 'with-perl', 'with-python', 'with-ruby']
 brew 'wget'
+brew 'yank'
 cask 'airdroid'
 cask 'atom'
 cask 'bartender'
