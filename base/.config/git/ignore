@@ -8,6 +8,7 @@ a.out
 *.pyc
 *.class
 *.pdf
+.stack-work
 
 # Temporary files
 *.sw*
