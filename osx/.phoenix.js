@@ -775,14 +775,15 @@ class ChainWindow
   # Private: update window vars
   updateWin: ->
     @f = @win.frame()
-    @updateScr @win.screen()
+    @updateScr()
 
   # Private: update window screen for chains
-  updateScr: (scr) ->
-    @prevScr = if @scr? then @scr else scr
+  updateScr: ->
+    next = @win.screen()
+    @prevScr = @scr ? next
     @prevSf = @prevScr?.flippedVisibleFrame()
-    @scr = scr
-    @sf = @scr.flippedVisibleFrame()
+    @scr = next
+    @sf = @scr?.flippedVisibleFrame()
 
   # Private: get closest window edge, with border calculation
   closestIn: (dir, skipFrame = false, onlyCatch = true) ->
@@ -940,7 +941,7 @@ class ChainWindow
       next.addWindows [@win]
       @win.spaces().map (prev) =>
         prev.removeWindows [@win] if not prev.isEqual(next)
-      @updateScr @win.screen()
+      @updateScr()
     this
 
   # Add to space
