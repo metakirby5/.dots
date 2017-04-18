@@ -1067,12 +1067,15 @@ endif " }}}
     set shiftwidth=2        " tab is 2 spaces
 
     " C indent options
-    set cino+=l1 " align with case label
-    set cino+=(0 " align with first non-white character after (
-    set cino+=Ws " indent after lone (
-    set cino+=m1 " align ) like }
-    set cino+=j1 " properly indent anonymous classes/functions
-    set cino+=J1 " properly indent javascript objects
+    set cino+=l1   " align with case label
+    set cino+=(0   " align with first non-white character after (
+    set cino+=Ws   " indent after lone (
+    set cino+=m1   " align ) like }
+    set cino+=j1   " properly indent anonymous classes/functions
+    set cino+=J1   " properly indent javascript objects
+    set cino+=N-s  " don't indent in namespaces
+    set cino+=g0   " don't indent scope labels
+    set cino+=+0   " don't indent after template directive
 
     " Define tab settings for filetypes via:
     " au Syntax c,cpp,asm,java,py,othertypes setlocal whatever=#
