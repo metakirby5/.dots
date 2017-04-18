@@ -39,6 +39,7 @@
 	# misc
 	i = init
 	cl = clone --recursive
+	rt = remote -v
 	co = checkout
 	ci = commit
 	cp = cherry-pick
