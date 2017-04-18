@@ -897,6 +897,9 @@ endif " }}}
     noremap <s-tab> <c-o>
   " }}}
   " Buffers {{{
+    " ,bd - Close the current buffer
+    nnoremap <silent> <leader>bd <esc>:bd<cr>
+
     " ,bs - Switch to buffer by name
     nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
