@@ -52,6 +52,7 @@
 
 	# branch
 	b = branch -vv
+	br = branch -vv --remote
 	ba = branch -vv --all
 
 	# diff
