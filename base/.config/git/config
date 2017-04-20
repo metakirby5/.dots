@@ -46,6 +46,12 @@
 	t = tag
 	r = reset
 
+	# push / pull
+	p = pull --prune
+	ps = "!git stash save; git pull; git stash pop"
+	u = push
+	up = push -u origin HEAD
+
 	# status
 	s  = status --short
 	st = status
@@ -104,12 +110,11 @@
 	fixup = commit --fixup
 	amend = commit --amend
 	squash = "!f(){(git rebase --interactive HEAD~$1)};f"
+	sq = squash
 	find = !git ls-files | grep -iI
 	f = find
 	g = grep -niI --heading -C 5 --untracked
 	rg = !git g
-	spull = "!git stash save; git pull; git stash pop"
-	upush = push -u origin HEAD
 	aliases = !git config -l | grep alias | cut -c 7-
 
 	# fzf
