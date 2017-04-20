@@ -4,6 +4,8 @@
 [core]
 	excludesfile = ~/.config/git/ignore          # global ignore
 	whitespace = space-before-tab,trailing-space # error on bad whitespace
+[remote]
+	prune = true               # delete branches not present on remote
 [push]
 	default = upstream         # push to upstream
 [pull]
@@ -47,7 +49,7 @@
 	r = reset
 
 	# push / pull
-	p = pull --prune
+	p = pull
 	ps = "!git stash save; git pull; git stash pop"
 	u = push
 	up = push -u origin HEAD
