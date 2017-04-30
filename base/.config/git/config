@@ -62,6 +62,8 @@
 	b = branch -vv
 	br = branch -vv --remote
 	ba = branch -vv --all
+	# delete branches whose upstream is deleted
+	bd = "!git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 
 	# diff
 	d   = diff --color-words
