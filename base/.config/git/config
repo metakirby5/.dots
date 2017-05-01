@@ -4,8 +4,6 @@
 [core]
 	excludesfile = ~/.config/git/ignore          # global ignore
 	whitespace = space-before-tab,trailing-space # error on bad whitespace
-[remote]
-	prune = true               # delete branches not present on remote
 [push]
 	default = upstream         # push to upstream
 [pull]
@@ -63,7 +61,7 @@
 	br = branch -vv --remote
 	ba = branch -vv --all
 	# delete branches whose upstream is deleted
-	bd = "!git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
+	bd = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 
 	# diff
 	d   = diff --color-words
