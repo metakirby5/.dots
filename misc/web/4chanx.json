@@ -1,6 +1,6 @@
 {
   "version": "1.13.8.6",
-  "date": 1494265282371,
+  "date": 1494268086827,
   "Conf": {
     "JSON Index": true,
     "Use 4chan X Catalog": true,
@@ -175,7 +175,7 @@
     "Index Size": "small",
     "Show Replies": true,
     "Catalog Hover Expand": false,
-    "Catalog Hover Toggle": true,
+    "Catalog Hover Toggle": false,
     "Pin Watched Threads": false,
     "Anchor Hidden Threads": true,
     "Refreshed Navigation": false,
@@ -277,10 +277,22 @@
     },
     "lastReadPosts": {
       "boards": {
+        "bant": {
+          "236951": 237666,
+          "251777": 251922,
+          "253044": 253820
+        },
+        "g": {
+          "60279512": 60280323,
+          "60279951": 60280284
+        },
         "w": {
           "2008336": 2013354
         },
         "wg": {
+          "6907979": 6919777,
+          "6914289": 6919708,
+          "6916974": 6919991,
           "6919859": 6919914
         }
       },
@@ -292,7 +304,7 @@
     },
     "watchedThreads": {
       "boards": {},
-      "lastChecked": 1494265120934
+      "lastChecked": 1494267968420
     },
     "customTitles": {
       "boards": {}
