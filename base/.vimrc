@@ -674,9 +674,9 @@ endif " }}}
             \ ctermfg=white guifg=white
             \
       hi clear TabLine | hi TabLine
-            \
-            \ ctermfg=white guifg=white
-            \ ctermbg=black guibg=black
+            \ term=bold     cterm=bold  gui=bold
+            \ ctermfg=black guifg=black
+            \ ctermbg=NONE guibg=NONE
       hi clear TabLineFill | hi link TabLineFill TabLine
 
       " Status line
