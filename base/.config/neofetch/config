@@ -30,6 +30,7 @@ printinfo () {
     myprin "         shell" shell
     myprin "      packages" packages
     prin "$(color 0)────────────────┴─────────────────────────"
+    get_cols | sed 's/^/     /'
 }
 
 # Kernel
