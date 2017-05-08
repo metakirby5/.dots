@@ -683,11 +683,11 @@ endif " }}}
       hi clear StatusLine | hi StatusLine
             \ term=bold     cterm=bold  gui=bold
             \ ctermfg=white guifg=white
-            \ ctermbg=black guibg=black
+            \ ctermbg=NONE guibg=NONE
       hi clear StatusLineNC | hi StatusLineNC
             \ term=bold        cterm=bold     gui=bold
             \ ctermfg=darkgrey guifg=darkgrey
-            \ ctermbg=black    guibg=black
+            \ ctermbg=NONE    guibg=NONE
 
       " Folds
       hi clear Folded | hi Folded
