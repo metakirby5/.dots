@@ -1026,7 +1026,7 @@ endif " }}}
 
     let s:default_tw = 78 " default textwidth
     set linebreak         " line break only at breaking characters
-    set colorcolumn=+1    " column guide
+    " set colorcolumn=+1    " column guide
     exe 'set textwidth=' . s:default_tw
 
     " ,\ - Toggle text wrap & color column
@@ -1034,10 +1034,10 @@ endif " }}}
       if (!&paste)
         if (&textwidth == 0)
           exe 'set textwidth=' . s:default_tw
-          set colorcolumn=+1
+          " set colorcolumn=+1
         else
           set textwidth=0
-          set colorcolumn=0
+          " set colorcolumn=0
         endif
       else
         echohl WarningMsg | echom 'Paste mode on.' | echohl None
