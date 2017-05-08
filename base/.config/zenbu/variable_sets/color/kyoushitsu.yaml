@@ -1,0 +1,30 @@
+colors:
+  name:         "kyoushitsu"
+  primary:      "blue"
+  secondary:    "cyan"
+  background:   "#12121E"
+  foreground:   "#EBEBFF"
+  white:
+    normal:     "#DEDEF5"
+    bold:       "#E7E7FF"
+  black:
+    normal:     "#31313F"
+    bold:       "#3E3E4F"
+  red:
+    normal:     "#a88193"
+    bold:       "#daa7be"
+  green:
+    normal:     "#a2bcc7"
+    bold:       "#caebf9"
+  yellow:
+    normal:     "#c6b59c"
+    bold:       "#f8e2c3"
+  blue:
+    normal:     "#4f64aa"
+    bold:       "#6681dc"
+  magenta:
+    normal:     "#7b77aa"
+    bold:       "#9f9adc"
+  cyan:
+    normal:     "#68adc7"
+    bold:       "#82d8f9"
