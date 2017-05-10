@@ -426,6 +426,10 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:lt_location_list_toggle_map = 'coo'
       let g:lt_quickfix_list_toggle_map = 'coq'
     " }}}
+    " Vim wiki {{{
+      " TODO: learn how to use this
+      Plug 'vimwiki/vimwiki'
+    " }}}
   " }}}
   " Automation {{{
     " Automatically set paste {{{
