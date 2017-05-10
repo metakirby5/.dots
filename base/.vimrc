@@ -866,10 +866,11 @@ endif " }}}
 " Navigation {{{
   " General {{{
     " Treat long lines as break lines (useful when moving around in them)
-    noremap <silent> j gj
-    noremap <silent> k gk
-    noremap <silent> <down> gj
-    noremap <silent> <up> gk
+    " Account for <count>j/k
+    noremap <silent> <expr> j v:count ? 'j' : 'gj'
+    noremap <silent> <expr> k v:count ? 'k' : 'gk'
+    noremap <silent> <expr> <down> v:count ? 'j' : 'gj'
+    noremap <silent> <expr> <up> v:count ? 'k' : 'gk'
     inoremap <silent> <down> <esc>gja
     inoremap <silent> <up> <esc>gka
 
