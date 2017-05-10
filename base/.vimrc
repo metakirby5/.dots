@@ -431,6 +431,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Automatically set paste {{{
       Plug 'ConradIrwin/vim-bracketed-paste'
     " }}}
+    " Context-aware paste {{{
+      Plug 'sickill/vim-pasta'
+    " }}}
     " Automatically return to last edit position {{{
       Plug 'dietsche/vim-lastplace'
     " }}}
