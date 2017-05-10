@@ -817,7 +817,7 @@ endif " }}}
         return SyntasticStatuslineFlag()
       endfunction
     " }}}
-    " .vimrc   ...   ve   78   vim   25%   44 - 807/1242
+    "                               [~,+]   ve   78   vim   44 - 807/1242
     set statusline=\                                " initialize w/ space
     set statusline+=%#ErrorMsg#                     " error highlight
     set statusline+=%(\ %{_s_syntastic()}%)         " syntastic
