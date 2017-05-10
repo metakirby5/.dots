@@ -1171,6 +1171,10 @@ endif " }}}
   " Y - Yank to clipboard
   noremap Y "+y
 
+  " ,[p/P] - Paste from clipboard
+  noremap <leader>p "+p
+  noremap <leader>P "+P
+
   " Q - Replay macro
   noremap Q @q
 
