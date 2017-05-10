@@ -524,13 +524,11 @@ else
           let s:minimal = 1
           set noshowmode
           set noruler
-          set nonu
           set ls=0
         else
           let s:minimal = 0
           set showmode
           set ruler
-          set nu
           set ls=2
         endif
       endfunction
@@ -543,7 +541,6 @@ else
 endif " }}}
 " }}}
 " General {{{
-  set nu                            " line numbering on
   set noerrorbells                  " disable bell part 1
   set novisualbell                  " disable bell part 2
   set t_vb=                         " disable bell part 3
@@ -644,7 +641,7 @@ endif " }}}
       " Cursor line
       hi clear LineNr | hi LineNr
             \
-            \ ctermfg=darkgrey guifg=darkgrey
+            \ ctermfg=black guifg=black
             \
       hi clear SignColumn | hi link SignColumn LineNr
       hi clear CursorLine | hi CursorLine
@@ -671,8 +668,8 @@ endif " }}}
       " Tabs
       hi clear TabSel | hi TabLineSel
             \ term=bold     cterm=bold  gui=bold
-            \ ctermfg=white guifg=white
-            \
+            \ ctermfg=gray guifg=gray
+            \ ctermbg=NONE guibg=NONE
       hi clear TabLine | hi TabLine
             \ term=bold     cterm=bold  gui=bold
             \ ctermfg=black guifg=black
@@ -682,7 +679,7 @@ endif " }}}
       " Status line
       hi clear StatusLine | hi StatusLine
             \ term=bold     cterm=bold  gui=bold
-            \ ctermfg=white guifg=white
+            \ ctermfg=grey guifg=grey
             \ ctermbg=NONE guibg=NONE
       hi clear StatusLineNC | hi StatusLineNC
             \ term=bold        cterm=bold     gui=bold
@@ -830,15 +827,14 @@ endif " }}}
     " }}}
     " .vimrc   ...   ve   78   vim   25%   44 - 807/1242
     set statusline=\                                " initialize w/ space
-    set statusline+=%f                              " relative path
-    set statusline+=%(\ [%{_s_flags()}%M%R]%)       " flags
-    set statusline+=\ %#ErrorMsg#                   " error highlight
+    set statusline+=%#ErrorMsg#                     " error highlight
     set statusline+=%(\ %{_s_syntastic()}%)         " syntastic
     set statusline+=%#WarningMsg#                   " warning highlight
     set statusline+=%(\ %{_s_gutentags()}%)         " gutentags
     set statusline+=%#Normal#                       " no highlight
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
+    set statusline+=%(\ [%{_s_flags()}%M%R]%)       " flags
     set statusline+=%(\ %{_s_ve()}\ %)%#Normal#\ %* " virtualedit
     set statusline+=\ %{_s_tw()}                    " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
