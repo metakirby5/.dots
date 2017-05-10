@@ -1,0 +1,15 @@
+#!/usr/bin/env osascript -l JavaScript
+// vim: ft=javascript
+
+ObjC.import('stdlib')
+
+let vox = Application('Vox')
+if (!vox.running()) $.exit(1)
+
+JSON.stringify({
+  state: vox.playerState(),
+  track: vox.track(),
+  artist: vox.artist(),
+  currentTime: vox.currentTime(),
+  totalTime: vox.totalTime(),
+})
