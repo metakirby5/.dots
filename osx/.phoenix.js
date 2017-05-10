@@ -350,7 +350,6 @@ Modal::close = ->
 Modal::setText = (@text) -> this
 
 Modal::untrack = ->
-  Timer.off @mt if @mt?  # Disable closeAfter timer
   Event.off @clickEvent if @clickEvent?  # Disable clickEvent
   Modal::open = _.without @open, this  # Untrack modal locaiton
 
@@ -370,11 +369,6 @@ Modal::center = ->
     y: sf.y + sf.height / 2 - mf.height / 2
   this
 
-Modal::closeAfter = (s = p.modals.duration) ->
-  Timer.off @mt if @mt?
-  @mt = Timer.after s, => @close()
-  this
-
 Modal::updateSeqLen = (len) ->
   if not @seq?
     return
@@ -388,10 +382,20 @@ class Toaster
   constructor: (@modal = Modal.build()) ->
   @instance: new Toaster()
 
-  toast: (text) -> @modal.setText(text).center().show().closeAfter()
+  toast: (text, s = p.modals.duration) ->
+    @modal.setText(text).center().show()
+
+    # Bind escape to close modal
+    @binds = [(Key.on 'escape', [], => @close())]
+
+    # Close after specified duration
+    Timer.off @mt if @mt?
+    @mt = Timer.after s, => @close()
   @toast: (args...) -> @instance.toast args...
 
-  close: -> @modal.close()
+  close: ->
+    @binds?.map Key.off
+    @modal.close()
   @close: (args...) -> @instance.close args...
 
 # Mode binds
