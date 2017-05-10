@@ -267,7 +267,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
           endif
           if a:maps =~ 'v'
-            exe 'vnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
+            exe 'xnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
           endif
         endfor
       endfunction
@@ -363,7 +363,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'osyo-manga/vim-over'
               \, { 'on': 'OverCommandLine' }
       nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-      vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
+      xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
       if has('nvim') ||
@@ -475,7 +475,7 @@ else
       noremap n nzz
       noremap N Nzz
       nnoremap <silent> <bslash> <esc>:%s/
-      vnoremap <silent> <bslash> <esc>gv:s/
+      xnoremap <silent> <bslash> <esc>gv:s/
     " }}}
     " Auto-insert Curlies {{{
       inoremap {<cr> {<cr>}<C-o>O
@@ -899,7 +899,7 @@ endif " }}}
     nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
     " ,cd - Switch CWD to the directory of the open buffer
-    nnoremap <silent> <leader>cd <esc>:cd %:p:h<cr> :pwd<cr>
+    nnoremap <silent> <leader>bc <esc>:cd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
@@ -1177,12 +1177,14 @@ endif " }}}
   cnoremap <c-n> <down>
   cnoremap <c-p> <up>
 
-  " Y - Yank to clipboard
-  noremap Y "+y
+  " <leader>[y/p/P/d] - Interact with clipboard
+  noremap <leader>y "+y
+  noremap <leader>p "+]p
+  noremap <leader>P "+]P
+  noremap <leader>d "+d
 
-  " ,[p/P] - Paste from clipboard
-  noremap <leader>p "+p
-  noremap <leader>P "+P
+  " _ - Delete to _
+  noremap _ "_d
 
   " Q - Replay macro
   noremap Q @q
