@@ -43,9 +43,9 @@ render: -> '''
 update: (output) ->
   data = JSON.parse output if output
   if !data
-    $('#vox').hide()
+    $('#vox').fadeOut()
   else
-    $('#vox').show()
+    $('#vox').fadeIn()
     $("#track").text data.track
     $("#artist").text data.artist
     $("#time-fill").width "#{100 * data.currentTime / data.totalTime}%"
