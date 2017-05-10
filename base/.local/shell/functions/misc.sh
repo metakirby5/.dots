@@ -26,7 +26,6 @@ install-leaves() {
     local YELLOW="\033[0;33m"
 
     local INSTALLERS=(
-        [mas]="xargs mas install"
         [brew]="brew bundle --file=-"
         [pip]="xargs pip install"
         [npm]="xargs npm install -g"
