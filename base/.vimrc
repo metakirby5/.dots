@@ -280,7 +280,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " Emmet {{{
       Plug 'mattn/emmet-vim'
-            \, { 'for': ['html', 'javascript.jsx', 'jinja2'] }
       au BufNewFile,BufRead *.dtl set filetype=jinja2
       let g:user_emmet_leader_key='<c-e>'
     " }}}
