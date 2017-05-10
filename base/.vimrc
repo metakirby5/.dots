@@ -809,14 +809,6 @@ endif " }}}
         return (!&paste) ? &tw : 'P'
       endfunction
 
-      " Safely gives gutentags status
-      function! _s_gutentags()
-        if !exists('*gutentags#statusline')
-          return ''
-        endif
-        return gutentags#statusline('Generating tags...')
-      endfunction
-
       " Safely gives syntastic status
       function! _s_syntastic()
         if !exists('*SyntasticStatuslineFlag')
@@ -829,8 +821,6 @@ endif " }}}
     set statusline=\                                " initialize w/ space
     set statusline+=%#ErrorMsg#                     " error highlight
     set statusline+=%(\ %{_s_syntastic()}%)         " syntastic
-    set statusline+=%#WarningMsg#                   " warning highlight
-    set statusline+=%(\ %{_s_gutentags()}%)         " gutentags
     set statusline+=%#Normal#                       " no highlight
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
