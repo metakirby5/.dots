@@ -565,7 +565,12 @@ endif " }}}
   set ttyfast                       " assume speedy connection
   set undolevels=10000              " allow lots of undos
   set updatetime=500                " fire hold events every half-second
+
+  " Save vim information in config dir, accounting for nvim
   exe "set viminfo='100,h,n".s:configdir.'/'.(has('nvim') ? 'nv_' : '').'info'
+
+  " Make gx select whole WORDs
+  let g:netrw_gx="<cWORD>"
 " }}}
 " Interface {{{
   " General {{{
