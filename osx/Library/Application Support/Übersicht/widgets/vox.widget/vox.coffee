@@ -4,24 +4,23 @@ refreshFrequency: 1000
 style: '''
 left 2rem
 bottom 2rem
+width 30rem
 
-#vox
-  width 30rem
-  font-family sans-serif
-  color white
+font-family sans-serif
+color white
 
-#artist
+.info
+  padding-bottom 0.5rem
+
+.artist
   color rgba(white, 0.5)
   padding-bottom 0.1rem
 
-#info
-  padding-bottom 0.5rem
-
-#time
+.time
   height 0.1rem
   background-color rgba(white, 0.5)
 
-#time-fill
+.time-fill
   width 0
   transition width 0.5s
   height 100%
@@ -29,23 +28,22 @@ bottom 2rem
 '''
 
 render: -> '''
-<div id="vox">
-  <div id="info">
-    <div id="artist"></div>
-    <div id="track"></div>
-  </div>
-  <div id="time">
-    <div id="time-fill"></div>
-  </div>
+<div class="info">
+  <div class="artist"></div>
+  <div class="track"></div>
+</div>
+<div class="time">
+  <div class="time-fill"></div>
 </div>
 '''
 
-update: (output) ->
+update: (output, elt) ->
   data = JSON.parse output if output
+  $elt = $(elt)
   if !data
-    $('#vox').fadeOut()
+    $elt.fadeOut()
   else
-    $('#vox').fadeIn()
-    $("#track").text data.track
-    $("#artist").text data.artist
-    $("#time-fill").width "#{100 * data.currentTime / data.totalTime}%"
+    $elt.fadeIn()
+    $elt.find('.track').text data.track
+    $elt.find('.artist').text data.artist
+    $elt.find('.time-fill').width "#{100 * data.currentTime / data.totalTime}%"
