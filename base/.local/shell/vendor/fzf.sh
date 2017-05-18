@@ -11,7 +11,7 @@ if which fzf &>/dev/null; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
   # Color scheme and file preview
-  FZF_PREVIEWER='((x={}; x="${x/#\~/$HOME}"; pygmentize "$x" || less "$x") 2>/dev/null)'
+  FZF_PREVIEWER='highlight -q --force -O ansi {} || cat {}'
   export FZF_DEFAULT_OPTS="\
     --color 'fg:7,bg:-1,hl:3,fg+:7,bg+:-1,hl+:3,info:2,prompt:4,pointer:3,marker:2,spinner:0,header:5' \
     --preview '$FZF_PREVIEWER' --preview-window right:hidden \
