@@ -297,7 +297,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
               \ 'Maps', 'Helptags', 'Filetypes' ] }
 
       let g:fzf_files_options =
-            \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+            \ '--preview "highlight -q --force -O ansi {} || cat {}"'
       let g:fzf_buffers_jump = 1
       nnoremap <silent> <leader>x  <esc>:History<cr>
       nnoremap <silent> <leader>z  <esc>:Files<cr>
