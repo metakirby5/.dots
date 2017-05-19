@@ -15,7 +15,7 @@ if which fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS="\
     --color 'fg:7,bg:-1,hl:3,fg+:7,bg+:-1,hl+:3,info:2,prompt:4,pointer:3,marker:2,spinner:0,header:5' \
     --preview '$FZF_PREVIEWER' --preview-window right:hidden \
-    --bind 'ctrl-l:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute[$FZF_PREVIEWER | less -R >&2]'"
+    --bind 'ctrl-l:toggle-preview,ctrl-s:toggle-sort'"
   export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
   export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview="
   export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview="
