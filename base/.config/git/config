@@ -11,6 +11,10 @@
 [merge]
 	defaultToUpstream = true   # merge with upstream by default
 	log = true                 # summary on merge
+	tool = vimdiff             # use vimdiff
+	conflictstyle = diff3      # use HEAD/base/other style conflicts
+[mergetool]
+	prompt = false             # don't prompt when using mergetool
 [rebase]
 	autosquash = true          # reposition fixups
 [branch]
@@ -20,8 +24,11 @@
 [diff]
 	renames = copies           # detect renames and copies
 	compactionHeuristic = true # improve diffs
+	tool = vimdiff             # use vimdiff
 [diff "bin"]
 	textconv = hexdump -v -C   # diff binaries by hexdump
+[difftool]
+	prompt = false             # don't prompt when using difftool
 [grep]
 	lineNumber = true          # show line number in output
 	fullName = true            # filenames are relative to VCS root
@@ -45,6 +52,10 @@
 	cp = cherry-pick
 	t = tag
 	r = reset
+
+	# Tools
+	mt = mergetool
+	dt = difftool
 
 	# push / pull
 	p = pull
