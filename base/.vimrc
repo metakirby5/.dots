@@ -1201,3 +1201,8 @@ endif " }}}
   " U - fix syntax highlighting
   nnoremap <silent> U <esc>:syntax sync fromstart<cr>
 " }}}
+" vimdiff {{{
+  noremap <leader>gr :diffget REMOTE<cr>
+  noremap <leader>gb :diffget BASE<cr>
+  noremap <leader>gl :diffget LOCAL<cr>
+" }}}
