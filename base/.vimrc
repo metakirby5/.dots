@@ -982,13 +982,13 @@ endif " }}}
       set foldenable
 
       " zm - Marker mode
-      nnoremap zm <esc>:set foldmethod=marker<cr>zR
+      nnoremap Zm <esc>:set foldmethod=marker<cr>zR
 
       " zi - Indent mode
-      nnoremap zi <esc>:set foldmethod=indent<cr>zR
+      nnoremap Zi <esc>:set foldmethod=indent<cr>zR
 
       " zs - Syntax mode
-      nnoremap zs <esc>:set foldmethod=syntax<cr>zR
+      nnoremap Zs <esc>:set foldmethod=syntax<cr>zR
     endif
   " }}}
   " Pane toggles {{{
