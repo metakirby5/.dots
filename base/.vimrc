@@ -981,13 +981,16 @@ endif " }}}
     if exists("+foldenable")
       set foldenable
 
-      " zm - Marker mode
+      " Zo - Solo curent fold
+      nnoremap Zo zMzvzz
+
+      " Zm - Marker mode
       nnoremap Zm <esc>:set foldmethod=marker<cr>zR
 
-      " zi - Indent mode
+      " Zi - Indent mode
       nnoremap Zi <esc>:set foldmethod=indent<cr>zR
 
-      " zs - Syntax mode
+      " Zs - Syntax mode
       nnoremap Zs <esc>:set foldmethod=syntax<cr>zR
     endif
   " }}}
