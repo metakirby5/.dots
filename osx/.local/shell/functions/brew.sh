@@ -91,7 +91,7 @@ brew-leaves() {
   (
     bundle="$(brew bundle dump --file=-)"
     grep -f <(
-      brew leaves | tr '\n' '\0' | xargs -0 printf "^brew '%s'\n"
+      brew leaves | tr '\n' '\0' | xargs -0 printf "^brew \"%s\"\n"
     ) <<< "$bundle"
     grep -v '^brew' <<< "$bundle"
   ) | sort
