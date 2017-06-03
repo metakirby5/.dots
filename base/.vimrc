@@ -828,8 +828,8 @@ endif " }}}
         return SyntasticStatuslineFlag()
       endfunction
     " }}}
-    "                               [~,+]   ve   78   vim   44 - 807/1242
-    set statusline=\                                " initialize w/ space
+    " FILENAME                              [~,+]   ve   78   vim   44 - 807/1242
+    set statusline=\ %f\                            " filename
     set statusline+=%#ErrorMsg#                     " error highlight
     set statusline+=%(\ %{_s_syntastic()}%)         " syntastic
     set statusline+=%#Normal#                       " no highlight
