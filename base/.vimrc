@@ -901,7 +901,7 @@ endif " }}}
     " ,bs - Switch to buffer by name
     nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
-    " ,cd - Switch CWD to the directory of the open buffer
+    " ,bc - Switch CWD to the directory of the open buffer
     nnoremap <silent> <leader>bc <esc>:cd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
