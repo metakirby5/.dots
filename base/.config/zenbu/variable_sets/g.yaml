@@ -1,4 +1,5 @@
 username: "luluco"
+i3_gaps: false
 i3_initcode: |
   exec $nsi urxvtd -q -o -f
   exec $nsi compton

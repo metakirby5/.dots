@@ -20,6 +20,7 @@ term_letterspace: 2
 term_padding: 30
 
 # WM
+i3_gaps: true
 i3_initcode: none
 i3_default_workspaces: |
   workspace 1:一 output eDP1

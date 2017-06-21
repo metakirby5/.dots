@@ -97,7 +97,9 @@ bindsym $mod+equal exec $nsi ($xwi $spT || $term -name $spT -e tmux new-session 
 font pango:$fontName $fontSize
 floating_modifier $mod
 focus_follows_mouse no
+{% if i3_gaps %}
 mouse_warping output
+{% endif %}
 workspace_auto_back_and_forth yes
 for_window[class=".*"] title_format " %title"
 
@@ -109,9 +111,11 @@ for_window [class=".*"] border normal $border
 for_window [class=".*"] border pixel $border
 {% endif %}
 
+{% if i3_gaps %}
 # Gaps
 gaps inner $gapsInner
 gaps outer $gapsOuter
+{% endif %}
 
 # Colors
 
@@ -122,7 +126,9 @@ client.focused          $cFocusBG     $cFocusBG     $cFocusFG     $cFocusIN
 client.focused_inactive $cSubFocusBG  $cSubFocusBG  $cSubFocusFG  $cSubFocusIN
 client.unfocused        $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
 client.urgent           $cUrgentBG    $cUrgentBG    $cUrgentFG    $cUrgentIN
+{% if i3_gaps %}
 client.placeholder      $cUnfocusBG   $cUnfocusBG   $cUnfocusFG   $cUnfocusIN
+{% endif %}
 
 ## WINDOW RULES
 
@@ -230,10 +236,12 @@ bindsym $mod+Control+$down      resize grow height    $movePx px or 1 ppt
 bindsym $mod+Control+$up        resize shrink height  $movePx px or 1 ppt
 bindsym $mod+Control+$right     resize grow width     $movePx px or 1 ppt
 
+{% if i3_gaps %}
 # Gaps
 bindsym $mod+g            gaps inner all plus   5
 bindsym $mod+Shift+g      gaps inner all minus  5
 bindsym $mod+Control+g    gaps inner all set    $gapsInner
+{% endif %}
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+u layout stacking
