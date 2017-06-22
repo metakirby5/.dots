@@ -22,5 +22,5 @@ bar_cmd: false
 pixelsize: 18
 term_letterspace: 0
 term_padding: 15
-border_size: 2
+border_size: 5
 bar_height: 20
