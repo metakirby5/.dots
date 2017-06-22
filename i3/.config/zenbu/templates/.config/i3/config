@@ -80,7 +80,7 @@ bar {
 {% else %}
   mode hide
   hidden_state hide
-  modifier none
+  modifier Mod5
 {% endif %}
 }
 

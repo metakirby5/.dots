@@ -7,21 +7,18 @@ i3_initcode: |
   exec $nsi dunst
   exec $nsi setxkbmap -option caps:escape
   exec $nsi xmodmap -e "keycode 9 = grave asciitilde"
-  exec $nsi xrandr --output DP-1 --rotate left
+  exec $nsi xrandr --output DP-4 --auto --pos 1200x400 --output DP-5 --auto --rotate left --pos 0x0
   exec $nsi xset dpms 720 840 960 s 600
-  bindsym $mod+Shift+d exec $nsi xdotool mousemove --sync --screen 0 1899 1123 click 1 mousemove --sync restore
+  # bindsym $mod+Shift+d exec $nsi xdotool mousemove --sync --screen 0 1899 1123 click 1 mousemove --sync restore
 i3_default_workspaces: |
-  workspace 1:一 output DVI-I-1
-  workspace 2:二 output DP-1
+  workspace 1:一 output DP-5
+  workspace 2:二 output DP-4
 term_name: "urxvtc"
 xft_dpi: 96
 font: "Ubuntu"
 term_fonts:
   - "Ubuntu Mono"
-bar_fonts:
-  - "Ubuntu-12"
-  - "M+ 1p-10"
-bar_font_offset: 0
+bar_cmd: false
 pixelsize: 18
 term_letterspace: 0
 term_padding: 15

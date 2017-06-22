@@ -58,6 +58,8 @@ Here's what you'll need...
 - actionless/oomox
 - gtk-reload (from neeasade/autotheme.sh)
 - devmon
+- trash-cli
+- eBrnd/i3lock-color
 
 ## Fonts
 
