@@ -9,7 +9,7 @@ mogrify \
 	-sample 5% -sample 2000% \
 	-fill black -colorize 50% \
 	-font "{{ font }}-Regular" -kerning 5 -pointsize 100 \
-	-fill white -gravity center -annotate +0+180 "locked" \
+	-fill white -gravity SouthWest -annotate +50+50 "locked" \
 	"$TMPBG"
 killall -SIGUSR1 dunst # pause dunst
 i3lock -ndi "$TMPBG" \
