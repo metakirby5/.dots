@@ -1,4 +1,6 @@
 username: "luluco"
+tile_wallpaper: true
+wallpapers: "/usr/local/share/img/mv-bg.png"
 i3_gaps: false
 i3_initcode: |
   exec $nsi urxvtd -q -o -f

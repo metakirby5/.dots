@@ -69,7 +69,7 @@ set $xwi                xwininfo -tree -root | grep
 
 ## SESSION
 
-exec_always $nsi feh -zr --bg-fill $wallpapers
+exec_always $nsi feh -r {% if tile_wallpaper %} --bg-tile {% else %} -z --bg-fill {% endif %} $wallpapers
 
 {{ i3_initcode }}
 

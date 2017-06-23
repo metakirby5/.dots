@@ -25,6 +25,7 @@ i3_initcode: none
 i3_default_workspaces: |
   workspace 1:一 output eDP1
 wallpapers: "/usr/share/backgrounds/in_rotation/"
+tile_wallpaper: false
 floating: false
 inner_gap_size: 15
 dunst_gap: 20
