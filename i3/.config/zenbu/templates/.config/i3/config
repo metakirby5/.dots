@@ -143,7 +143,7 @@ for_window [class="feh|mpv"] floating enable
 
 # Tasks
 bindsym $mod+b              sticky toggle
-bindsym $mod+f              fullscreen toggle
+bindsym $mod+f              fullscreen
 bindsym $mod+Shift+q        kill
 bindsym $mod+Shift+c        reload
 bindsym $mod+Shift+r        restart
