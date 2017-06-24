@@ -1,169 +1,169 @@
-brew 'alexcormier/personal/setwp'
-brew 'android-platform-tools'
-brew 'asciinema'
-brew 'bash'
-brew 'bfg'
-brew 'brew-cask-completion'
-brew 'cliclick'
-brew 'coreutils'
-brew 'cowsay'
-brew 'ctags'
-brew 'dos2unix'
-brew 'emacs', restart_service: true
-brew 'entr'
-brew 'fasd'
-brew 'findutils', args: ['with-default-names']
-brew 'fortune'
-brew 'fzf'
-brew 'gcc'
-brew 'gdb'
-brew 'gifsicle'
-brew 'git'
-brew 'gnu-sed', args: ['with-default-names']
-brew 'gnupg'
-brew 'haskell-stack'
-brew 'highlight'
-brew 'homebrew/science/r'
-brew 'htop'
-brew 'hub'
-brew 'hugo'
-brew 'jq'
-brew 'lesspipe', args: ['with-syntax-highlighting']
-brew 'macvim', args: ['with-lua', 'with-override-system-vim']
-brew 'mas'
-brew 'megatools'
-brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
-brew 'mvtools'
-brew 'ncdu'
-brew 'neofetch'
-brew 'neovim/neovim/neovim'
-brew 'nmap'
-brew 'ocaml'
-brew 'p7zip'
-brew 'pandoc'
-brew 'parallel'
-brew 'pebble/pebble-sdk/pebble-sdk'
-brew 'pinentry-mac'
-brew 'poppler'
-brew 'pv'
-brew 'python3'
-brew 'qt'
-brew 'ranger'
-brew 'reattach-to-user-namespace'
-brew 'ripgrep'
-brew 'rlwrap'
-brew 'ruby'
-brew 'sshfs'
-brew 'stow'
-brew 'terminal-notifier'
-brew 'the_silver_searcher'
-brew 'tig'
-brew 'tmux'
-brew 'trash'
-brew 'tree'
-brew 'ttyrec'
-brew 'verilator'
-brew 'watchman'
-brew 'weechat', args: ['with-lua', 'with-perl', 'with-python', 'with-ruby']
-brew 'wget'
-brew 'yank'
-cask 'ableton-live-suite'
-cask 'airdroid'
-cask 'atom'
-cask 'avast-mac-security'
-cask 'bartender'
-cask 'beardedspice'
-cask 'betterzipql'
-cask 'bitbar'
-cask 'blockblock'
-cask 'cakebrew'
-cask 'calibre'
-cask 'clion'
-cask 'colorpicker'
-cask 'colorpicker-skalacolor'
-cask 'dolphin'
-cask 'dropbox'
-cask 'easy-move-plus-resize'
-cask 'emacs'
-cask 'firefox'
-cask 'flash-npapi'
-cask 'flux'
-cask 'gimp'
-cask 'goofy'
-cask 'google-chrome'
-cask 'hammerspoon'
-cask 'hapu'
-cask 'iina'
-cask 'imageoptim'
-cask 'java'
-cask 'jd-gui'
-cask 'kextviewr'
-cask 'knockknock'
-cask 'launchcontrol'
-cask 'league-of-legends'
-cask 'mactex'
-cask 'malwarebytes-anti-malware'
-cask 'numi'
-cask 'openemu'
-cask 'osu'
-cask 'osxfuse'
-cask 'oversight'
-cask 'phoenix'
-cask 'provisionql'
-cask 'qlcolorcode'
-cask 'qlimagesize'
-cask 'qlmarkdown'
-cask 'qlprettypatch'
-cask 'qlstephen'
-cask 'qlvideo'
-cask 'quicklook-csv'
-cask 'quicklook-json'
-cask 'quicklookase'
-cask 'ransomwhere'
-cask 'rcdefaultapp'
-cask 'remote-play'
-cask 'save-hollywood'
-cask 'shortcat'
-cask 'skype'
-cask 'slack'
-cask 'steam'
-cask 'suspicious-package'
-cask 'teamspeak-client'
-cask 'telegram'
-cask 'textual'
-cask 'the-unarchiver'
-cask 'themeengine'
-cask 'torbrowser'
-cask 'transmission'
-cask 'ubersicht'
-cask 'virtualbox'
-cask 'virtualbox-extension-pack'
-cask 'vox'
-cask 'webpquicklook'
-cask 'whatsyoursign'
-cask 'wineskin-winery'
-cask 'xbox360-controller-driver'
-mas 'Boxy', id: 1053031090
-mas 'Controllers Lite', id: 673660806
-mas 'GarageBand', id: 682658836
-mas 'Keynote', id: 409183694
-mas 'LINE', id: 539883307
-mas 'Numbers', id: 409203825
-mas 'Pages', id: 409201541
-mas 'Paws for Trello', id: 1124077199
-mas 'WeChat', id: 836500024
-mas 'Xcode', id: 497799835
-mas 'iMovie', id: 408981434
-tap 'alexcormier/personal'
-tap 'beeftornado/rmtree'
-tap 'caskroom/cask'
-tap 'caskroom/drivers'
-tap 'caskroom/fonts'
-tap 'homebrew/bundle'
-tap 'homebrew/completions'
-tap 'homebrew/core'
-tap 'homebrew/fuse'
-tap 'homebrew/science'
-tap 'homebrew/services'
-tap 'neovim/neovim'
-tap 'pebble/pebble-sdk'
+brew "alexcormier/personal/setwp"
+brew "android-platform-tools"
+brew "asciinema"
+brew "bash"
+brew "bfg"
+brew "brew-cask-completion"
+brew "cliclick"
+brew "coreutils"
+brew "cowsay"
+brew "ctags"
+brew "dos2unix"
+brew "emacs", restart_service: true
+brew "entr"
+brew "fasd"
+brew "findutils", args: ["with-default-names"]
+brew "fortune"
+brew "fzf"
+brew "gcc"
+brew "gdb"
+brew "gifsicle"
+brew "git"
+brew "gnu-sed", args: ["with-default-names"]
+brew "gnupg"
+brew "haskell-stack"
+brew "highlight"
+brew "homebrew/science/r"
+brew "htop"
+brew "hub"
+brew "hugo"
+brew "jq"
+brew "lesspipe", args: ["with-syntax-highlighting"]
+brew "macvim", args: ["with-lua", "with-override-system-vim"]
+brew "mas"
+brew "megatools"
+brew "mpv", args: ["with-bundle", "with-vapoursynth"]
+brew "mvtools"
+brew "ncdu"
+brew "neofetch"
+brew "neovim/neovim/neovim"
+brew "nmap"
+brew "ocaml"
+brew "p7zip"
+brew "pandoc"
+brew "parallel"
+brew "pebble/pebble-sdk/pebble-sdk"
+brew "pinentry-mac"
+brew "poppler"
+brew "pv"
+brew "python3"
+brew "qt"
+brew "ranger"
+brew "reattach-to-user-namespace"
+brew "ripgrep"
+brew "rlwrap"
+brew "ruby"
+brew "sshfs"
+brew "stow"
+brew "terminal-notifier"
+brew "the_silver_searcher"
+brew "tig"
+brew "tmux"
+brew "trash"
+brew "tree"
+brew "ttyrec"
+brew "verilator"
+brew "watchman"
+brew "weechat", args: ["with-lua", "with-perl", "with-python", "with-ruby"]
+brew "wget"
+brew "yank"
+cask "ableton-live-suite"
+cask "airdroid"
+cask "atom"
+cask "avast-mac-security"
+cask "bartender"
+cask "beardedspice"
+cask "betterzipql"
+cask "bitbar"
+cask "blockblock"
+cask "cakebrew"
+cask "calibre"
+cask "clion"
+cask "colorpicker"
+cask "colorpicker-skalacolor"
+cask "dolphin"
+cask "dropbox"
+cask "easy-move-plus-resize"
+cask "emacs"
+cask "firefox"
+cask "flash-npapi"
+cask "flux"
+cask "gimp"
+cask "goofy"
+cask "google-chrome"
+cask "hammerspoon"
+cask "hapu"
+cask "iina"
+cask "imageoptim"
+cask "java"
+cask "jd-gui"
+cask "kextviewr"
+cask "knockknock"
+cask "launchcontrol"
+cask "league-of-legends"
+cask "mactex"
+cask "malwarebytes-anti-malware"
+cask "numi"
+cask "openemu"
+cask "osu"
+cask "osxfuse"
+cask "oversight"
+cask "phoenix"
+cask "provisionql"
+cask "qlcolorcode"
+cask "qlimagesize"
+cask "qlmarkdown"
+cask "qlprettypatch"
+cask "qlstephen"
+cask "qlvideo"
+cask "quicklook-csv"
+cask "quicklook-json"
+cask "quicklookase"
+cask "ransomwhere"
+cask "rcdefaultapp"
+cask "remote-play"
+cask "save-hollywood"
+cask "shortcat"
+cask "skype"
+cask "slack"
+cask "steam"
+cask "suspicious-package"
+cask "teamspeak-client"
+cask "telegram"
+cask "textual"
+cask "the-unarchiver"
+cask "themeengine"
+cask "torbrowser"
+cask "transmission"
+cask "ubersicht"
+cask "virtualbox"
+cask "virtualbox-extension-pack"
+cask "vox"
+cask "webpquicklook"
+cask "whatsyoursign"
+cask "wineskin-winery"
+cask "xbox360-controller-driver"
+mas "Boxy", id: 1053031090
+mas "Controllers Lite", id: 673660806
+mas "GarageBand", id: 682658836
+mas "Keynote", id: 409183694
+mas "LINE", id: 539883307
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Paws for Trello", id: 1124077199
+mas "WeChat", id: 836500024
+mas "Xcode", id: 497799835
+mas "iMovie", id: 408981434
+tap "alexcormier/personal"
+tap "beeftornado/rmtree"
+tap "caskroom/cask"
+tap "caskroom/drivers"
+tap "caskroom/fonts"
+tap "homebrew/bundle"
+tap "homebrew/completions"
+tap "homebrew/core"
+tap "homebrew/fuse"
+tap "homebrew/science"
+tap "homebrew/services"
+tap "neovim/neovim"
+tap "pebble/pebble-sdk"
