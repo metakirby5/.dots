@@ -31,6 +31,7 @@ brew 'jq'
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'macvim', args: ['with-lua', 'with-override-system-vim']
 brew 'mas'
+brew 'megatools'
 brew 'mpv', args: ['with-bundle', 'with-vapoursynth']
 brew 'mvtools'
 brew 'ncdu'
