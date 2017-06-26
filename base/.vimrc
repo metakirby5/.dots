@@ -5,7 +5,12 @@
 " Use za to toggle the folds
 
 " Setup {{{
-  let s:configdir = $HOME.(has('nvim') ? '/.config/nvim' : '/.vim')
+  let s:configdir = $HOME . (has('nvim') ? '/.config/nvim' : '/.vim')
+
+  let s:localrc = s:configdir . '/local.vim'
+  if !empty(glob(s:localrc))
+    exe 'source '.s:localrc
+  endif
 
   " Leader
   let mapleader = "\<Space>"
@@ -146,23 +151,25 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Completion {{{
     " Engine {{{
-      if has('nvim')
-        function! s:do_remote(arg)
-          UpdateRemotePlugins
-        endfunction
+      if !exists("g:mk5_no_completion")
+        if has('nvim')
+          function! s:do_remote(arg)
+            UpdateRemotePlugins
+          endfunction
 
-        Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
-        let s:completion_prefix = 'deoplete#'
-      elseif has('lua')
-        if (version >= 704 || version == 703 && has('patch885'))
-          Plug 'Shougo/neocomplete.vim'
-          let s:completion_prefix = 'neocomplete#'
+          Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
+          let s:completion_prefix = 'deoplete#'
+        elseif has('lua')
+          if (version >= 704 || version == 703 && has('patch885'))
+            Plug 'Shougo/neocomplete.vim'
+            let s:completion_prefix = 'neocomplete#'
+          else
+            Plug 'Shougo/neocomplcache.vim'
+            let s:completion_prefix = 'neocomplcache_'
+          endif
         else
-          Plug 'Shougo/neocomplcache.vim'
-          let s:completion_prefix = 'neocomplcache_'
+          Plug 'ervandew/supertab'
         endif
-      else
-        Plug 'ervandew/supertab'
       endif
     " }}}
     " Snippets {{{
@@ -365,8 +372,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if has('nvim') ||
-            \ version >= 800 && has('job') && has('channel') && has('timers')
+      if !exists("g:mk5_use_syntastic") && (
+            \ has('nvim') ||
+            \ version >= 800 && has('job') && has('channel') && has('timers'))
         Plug 'w0rp/ale'
         let g:ale_lint_delay = 100
         let g:ale_sign_error = '∙'
@@ -895,14 +903,14 @@ endif " }}}
     noremap <s-tab> <c-o>
   " }}}
   " Buffers {{{
-    " ,bd - Close the current buffer
-    nnoremap <silent> <leader>bd <esc>:bd<cr>
+    " ,fd - Close the current buffer
+    nnoremap <silent> <leader>fd <esc>:bd<cr>
 
-    " ,bs - Switch to buffer by name
-    nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
+    " ,fs - Switch to buffer by name
+    nnoremap <leader>fs <esc>:buffers<cr>:buffer<space>
 
-    " ,bc - Switch CWD to the directory of the open buffer
-    nnoremap <silent> <leader>bc <esc>:cd %:p:h<cr> :pwd<cr>
+    " ,fc - Switch CWD to the directory of the open buffer
+    nnoremap <silent> <leader>fc <esc>:cd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
@@ -918,8 +926,8 @@ endif " }}}
     nnoremap <leader>s <C-w>s
     nnoremap <leader>v <C-w>v
 
-    " ,= - Equalize splits
-    nnoremap <leader>= <C-w>=
+    " ,_ - Equalize splits
+    nnoremap <leader>_ <C-w>=
 
     " ,[hjkl] - Switch to split
     nnoremap <leader>h <C-W>h
