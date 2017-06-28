@@ -1,6 +1,6 @@
 ;;; init.el --- Emacs configuration
 
-;; Author: Ethan Chan <metakirby5@gmail.com
+;; Author: Ethan Chan <metakirby5@gmail.com>
 
 ;;; Commentary:
 
@@ -144,14 +144,11 @@ BINDINGS: extra keybindings."
                    evil-insert-state-cursor 'bar
                    evil-emacs-state-cursor  'hbar))))
 
-(progn (pkg 'linum-relative)
-       (linum-relative-on)
-       (setq-default
-        linum-relative-format "%3s "
-        linum-relative-current-symbol "")
-       (custom-set-faces
-        '(linum-relative-current-face
-          ((t (:background "brightblack" :foreground "white"))))))
+;; (progn (pkg 'linum-relative)
+;;        (linum-relative-on)
+;;        (setq-default
+;;         linum-relative-format "%3s "
+;;         linum-relative-current-symbol ""))
 
 (progn (pkg 'ivy) (pkg 'ivy-hydra) (pkg 'counsel) (pkg 'swiper) (pkg 'flx)
        (ivy-mode 1)
@@ -212,16 +209,7 @@ BINDINGS: extra keybindings."
         company-idle-delay 0)
        (bind company-active-map
              "TAB" 'company-select-next
-             "<backtab>" 'company-select-previous)
-       (custom-set-faces
-        '(company-tooltip
-          ((t (:background "brightblack" :foreground "brightwhite"))))
-        '(company-tooltip-selection
-          ((t (:background "brightblue" :foreground "brightwhite"))))
-        '(company-scrollbar-fg
-          ((t (:background "brightblue"))))
-        '(company-scrollbar-bg
-          ((t (:background "brightwhite"))))))
+             "<backtab>" 'company-select-previous))
 
 (progn (pkg 'yasnippet)
        (yas-global-mode 1)
@@ -257,17 +245,7 @@ BINDINGS: extra keybindings."
 
 (progn (pkg 'git-gutter)
        (global-git-gutter-mode t)
-       (git-gutter:linum-setup)
-       (custom-set-variables
-        '(git-gutter:unchanged-sign "  ")
-        '(git-gutter:modified-sign "~ ")
-        '(git-gutter:added-sign "+ ")
-        '(git-gutter:deleted-sign "- "))
-       (custom-set-faces
-        '(git-gutter:unchanged ((t (:inherit default))))
-        '(git-gutter:modified ((t (:inherit default :foreground "yellow"))))
-        '(git-gutter:added ((t (:inherit default :foreground "green"))))
-        '(git-gutter:removed ((t (:inherit default :foreground "red")))))
+       ;; (git-gutter:linum-setup)
        (bind evil-normal-state-map
              "[g" 'git-gutter:previous-hunk
              "]g" 'git-gutter:next-hunk)
@@ -286,17 +264,7 @@ BINDINGS: extra keybindings."
         highlight-indent-guides-character ?\│))
 
 (progn (pkg 'rainbow-delimiters)
-       (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-       (custom-set-faces
-        '(rainbow-delimiters-depth-1-face ((t (:foreground "brightgreen"))))
-        '(rainbow-delimiters-depth-2-face ((t (:foreground "brightyellow"))))
-        '(rainbow-delimiters-depth-3-face ((t (:foreground "brightblue"))))
-        '(rainbow-delimiters-depth-4-face ((t (:foreground "brightmagenta"))))
-        '(rainbow-delimiters-depth-5-face ((t (:foreground "brightcyan"))))
-        '(rainbow-delimiters-depth-6-face ((t (:foreground "brightgreen"))))
-        '(rainbow-delimiters-depth-7-face ((t (:foreground "brightyellow"))))
-        '(rainbow-delimiters-depth-8-face ((t (:foreground "brightblue"))))
-        '(rainbow-delimiters-depth-9-face ((t (:foreground "brightmagenta"))))))
+       (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (progn (pkg 'autopair)
        (autopair-global-mode))
@@ -325,7 +293,7 @@ BINDINGS: extra keybindings."
            (scroll-bar-mode -1)
            (set-fringe-mode 0)))
 (menu-bar-mode -1)
-(global-linum-mode t)
+;; (global-linum-mode t)
 (show-paren-mode t)
 (global-whitespace-mode)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -392,18 +360,10 @@ BINDINGS: extra keybindings."
    auto-save-file-name-transforms `((".*" ,backupdir t))
    backup-by-copying t))
 
-;; Theme
+;; Theme for graphical
 (if (display-graphic-p)
-    ;; Theme for graphical
     (progn (pkg 'moe-theme)
-           (moe-dark))
-  ;; Custom faces for terminal
-  (custom-set-faces
-   '(whitespace-tab ((t (:foreground "blue"))))
-   '(region ((t (:inverse-video t))))
-   '(show-paren-match ((t (:background "brightblack"))))
-   '(vertical-border ((t (:background "black" :foreground "black"))))
-   '(linum ((t (:inherit default :foreground "gray"))))))
+           (moe-dark)))
 
 ;; Enable mouse
 (xterm-mouse-mode t)
@@ -435,4 +395,47 @@ BINDINGS: extra keybindings."
 ;;     ad-do-it))
 
 (provide 'init)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(git-gutter:added-sign "+ ")
+ '(git-gutter:deleted-sign "- ")
+ '(git-gutter:modified-sign "~ ")
+ '(git-gutter:unchanged-sign "  ")
+ '(package-selected-packages
+   (quote
+    (stylus-mode jade-mode yaml-mode coffee-mode elm-mode company-jedi dtrt-indent autopair rainbow-delimiters highlight-indent-guides aggressive-indent git-gutter smart-mode-line flycheck yasnippet company-flx company which-key counsel-projectile projectile flx counsel ivy-hydra ivy linum-relative evil-terminal-cursor-changer evil-commentary evil-mc evil-surround evil-leader evil xclip exec-path-from-shell))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-scrollbar-bg ((t (:background "brightwhite"))))
+ '(company-scrollbar-fg ((t (:background "brightblue"))))
+ '(company-tooltip ((t (:background "brightblack" :foreground "brightwhite"))))
+ '(company-tooltip-selection ((t (:background "brightblue" :foreground "brightwhite"))))
+ '(git-gutter:added ((t (:inherit default :foreground "green"))))
+ '(git-gutter:modified ((t (:inherit default :foreground "yellow"))))
+ '(git-gutter:removed ((t (:inherit default :foreground "red"))))
+ '(git-gutter:unchanged ((t (:inherit default))))
+ '(linum ((t (:inherit default :foreground "gray"))))
+ '(linum-relative-current-face ((t (:background "brightblack" :foreground "white"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "brightgreen"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "brightyellow"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "brightblue"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "brightmagenta"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "brightcyan"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "brightgreen"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "brightyellow"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "brightblue"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "brightmagenta"))))
+ '(region ((t (:inverse-video t))))
+ '(show-paren-match ((t (:background "brightblack"))))
+ '(vertical-border ((t (:background "black" :foreground "black"))))
+ '(whitespace-tab ((t (:foreground "blue")))))
+
 ;;; init.el ends here
