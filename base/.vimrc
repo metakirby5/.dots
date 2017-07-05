@@ -7,6 +7,7 @@
 " Setup {{{
   let s:configdir = $HOME . (has('nvim') ? '/.config/nvim' : '/.vim')
 
+  " Source any local configuration
   let s:localrc = s:configdir . '/local.vim'
   if !empty(glob(s:localrc))
     exe 'source '.s:localrc
