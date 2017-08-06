@@ -2112,7 +2112,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>810 191 673 252 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>126 442 606 456 0 0 1440 900 </string>
+	<string>243 741 606 456 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>233 374 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
@@ -2120,7 +2120,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>177 384 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 725 1920 475 0 0 1920 1200 </string>
+	<string>972 20 928 1160 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -5359,7 +5359,7 @@
 			<key>Send Code When Idle</key>
 			<false/>
 			<key>Shortcut</key>
-			<string>V</string>
+			<string>S</string>
 			<key>Show Mark Indicators</key>
 			<false/>
 			<key>Silence Bell</key>
@@ -5507,7 +5507,7 @@
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RawCameraSupportVersion</key>
-	<string>7030</string>
+	<string>7040</string>
 	<key>SUAutomaticallyUpdate</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
