@@ -66,6 +66,7 @@ brew "tree"
 brew "ttyrec"
 brew "verilator"
 brew "watchman"
+brew "webp"
 brew "weechat", args: ["with-lua", "with-perl", "with-python", "with-ruby"]
 brew "wget"
 brew "yank"
