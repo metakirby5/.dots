@@ -95,6 +95,8 @@
 	sp = stash pop
 	sa = stash apply
 	sd = stash drop
+	# stash swap
+	ss = "!f(){(git su; git sp stash@{$((1 + ${1:-0}))})};f"
 
 	# rebase
 	rb = rebase
