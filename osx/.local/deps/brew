@@ -30,6 +30,7 @@ brew "hub"
 brew "hugo"
 brew "jq"
 brew "lesspipe", args: ["with-syntax-highlighting"]
+brew "libav"
 brew "macvim", args: ["with-lua", "with-override-system-vim"]
 brew "mas"
 brew "megatools"

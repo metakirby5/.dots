@@ -1,0 +1,5 @@
+--output '%(title)s.%(ext)s'
+--audio-format 'mp3'
+--audio-quality 0
+--embed-thumbnail
+--add-metadata
