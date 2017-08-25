@@ -88,6 +88,11 @@ field() {
     awk "{ print \$$1 }"
 }
 
+# Perform a countdown
+countdown() {
+    for i in $(seq $1); do echo $(($1 - $i + 1)); sleep 1; done
+}
+
 # Urgent bell when task finishes
 remind() {
     eval "$@"
