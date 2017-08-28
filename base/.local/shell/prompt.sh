@@ -155,22 +155,28 @@ __mk5_set_prompt() {
   # Apply color
   mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
 
-  PS1=""                     # Clear PS1
-  PS1+="$hostname"           # (Hostname)
-  PS1+="$jobs_info"          # (Jobs)
-  PS1+="$virtualenv_info"    # (Virtualenv)
-  PS1+="$git_info"           # (Git)
-  PS1+="$mypwd"              # Abbreviated PWD
+  PS1L=""                     # Clear PS1L
+  PS1L+="$hostname"           # (Hostname)
+  PS1L+="$jobs_info"          # (Jobs)
+  PS1L+="$virtualenv_info"    # (Virtualenv)
+  PS1L+="$git_info"           # (Git)
+  PS1L+="$mypwd"              # Abbreviated PWD
 
   # If only one character, single-line
-  local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
+  local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1L")"
   if [ $(wc -c <<< "$stripped") == 2 ]; then
-    PS1="$pchar_color$stripped"
+    PS1L="$pchar_color$stripped"
   else
-    PS1+="\n"                  # Newline
-    PS1+="$pchar_color$pchar"  # Prompt
+    PS1L+="\n"                  # Newline
+    PS1L+="$pchar_color$pchar"  # Prompt
   fi
-  PS1+="$__mk5_normal "      # Clear colors
+  PS1L+="$__mk5_normal "      # Clear colors
+
+  # Grab the time
+  local PS1R="$__mk5_b_black$(date '+%D %H:%M') "
+
+  # Print left and right
+  PS1="$(printf '%*s\r%s' "$(($(tput cols) + 12))" "$PS1R" "$PS1L")"
 
   PS2=""                     # Clear PS2
   PS2+="$__mk5_yellow$pchar" # Yellow continuation line
