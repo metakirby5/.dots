@@ -176,7 +176,7 @@ __mk5_set_prompt() {
   local PS1R="$__mk5_b_black$(date '+%D %H:%M')"
 
   # Print left and right
-  PS1="$(printf '%*s\[\r\]%s' "$(($(tput cols) + 12))" "$PS1R" "$PS1L")"
+  PS1="$(printf '\[%*s\r\]%s' "$(($(tput cols) + 12))" "$PS1R" "$PS1L")"
 
   PS2=""                     # Clear PS2
   PS2+="$__mk5_yellow$pchar" # Yellow continuation line
