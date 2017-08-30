@@ -4,6 +4,20 @@ export EDITOR=$VISUAL                               # part 2
 export LS_COLORS='di=01;34:'                        # Folders are blue
 export LESS_TERMCAP_md="$(echo -ne '\033[1;33m')"   # Yellow headers in less
 
+# Colors
+export normal="$(tput sgr0)"
+export bold="$(tput bold)"
+export underline="$(tput smul)"
+export reverse="$(tput rev)"
+export black="$(tput setaf 0)"
+export red="$(tput setaf 1)"
+export green="$(tput setaf 2)"
+export yellow="$(tput setaf 3)"
+export blue="$(tput setaf 4)"
+export purple="$(tput setaf 5)"
+export cyan="$(tput setaf 6)"
+export white="$(tput setaf 7)"
+
 # Keybindings
 set -o vi  # vim > emacs part 2
 
