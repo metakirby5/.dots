@@ -155,7 +155,7 @@ __mk5_set_prompt() {
   # Apply color
   mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
 
-  PS1L=""                     # Clear PS1L
+  local PS1L=                 # Clear PS1L
   PS1L+="$hostname"           # (Hostname)
   PS1L+="$jobs_info"          # (Jobs)
   PS1L+="$virtualenv_info"    # (Virtualenv)
@@ -173,10 +173,10 @@ __mk5_set_prompt() {
   PS1L+="$__mk5_normal "      # Clear colors
 
   # Grab the time
-  local PS1R="$__mk5_b_black$(date '+%D %H:%M') "
+  local PS1R="$__mk5_b_black$(date '+%D %H:%M')"
 
   # Print left and right
-  PS1="$(printf '%*s\r%s' "$(($(tput cols) + 12))" "$PS1R" "$PS1L")"
+  PS1="$(printf '%*s\[\r\]%s' "$(($(tput cols) + 12))" "$PS1R" "$PS1L")"
 
   PS2=""                     # Clear PS2
   PS2+="$__mk5_yellow$pchar" # Yellow continuation line
