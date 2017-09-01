@@ -74,6 +74,7 @@ __mk5_set_prompt() {
     git_base="$(basename "$git_path")"
     gitpwd="$(git rev-parse --show-prefix)"
     mypwd="$git_base/${gitpwd%/}"
+    mypwd="${mypwd%/}"
 
     # Branch
     read git_head < "$git_path/.git/HEAD"
