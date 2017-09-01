@@ -141,7 +141,7 @@
 	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
 	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
 	zso = "!(c='git so $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
-	zd  = "!(c='p=\"$(git d  {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git ds  | awk '{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
+	zd  = "!f(){(c='p=\"$(git d {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git ds \"$@\" | awk '{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
 	zdc = "!(c='p=\"$(git dc {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git dcs | awk '{print$2}' | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
 	zg  = "!f(){(cd \"$GIT_PREFIX\"; c=\"git -c color.grep=always g $@ -- {}\"; git g -l \"$@\" | fzf --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
 	zco = "!f(){(local x=$(git zb);  [ \"$x\" ] && git co $x \"$@\")};f"
