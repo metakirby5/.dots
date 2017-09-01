@@ -72,7 +72,8 @@ __mk5_set_prompt() {
   if [ "$git_path" ]; then
     # Replace git path
     git_base="$(basename "$git_path")"
-    mypwd="$git_base/$(git rev-parse --show-prefix)"
+    gitpwd="$(git rev-parse --show-prefix)"
+    mypwd="$git_base/${gitpwd%/}"
 
     # Branch
     read git_head < "$git_path/.git/HEAD"
