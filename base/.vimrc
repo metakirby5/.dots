@@ -101,8 +101,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:incsearch#is_stay = 1
         map /  <Plug>(incsearch-forward)
         map ?  <Plug>(incsearch-backward)
-        map n  <Plug>(incsearch-nohl-n)zz
-        map N  <Plug>(incsearch-nohl-N)zz
+        map n  <Plug>(incsearch-nohl-n)
+        map N  <Plug>(incsearch-nohl-N)
         map *  <Plug>(incsearch-nohl-*)
         map #  <Plug>(incsearch-nohl-#)
         map g* <Plug>(incsearch-nohl-g*)
