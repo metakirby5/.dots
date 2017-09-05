@@ -420,9 +420,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Unix buffer-linked utils {{{
       Plug 'tpope/vim-eunuch'
     " }}}
-    " Readline bindings for insert mode {{{
-      Plug 'tpope/vim-rsi'
-    " }}}
     " Autodetect indentation {{{
       Plug 'tpope/vim-sleuth'
     " }}}
@@ -1132,8 +1129,8 @@ endif " }}}
     command! -nargs=* Sudow call s:sudow(<f-args>)
 
     " ,q - edit macro
-    nnoremap <leader>q :<c-u><c-r><c-r>='let @'.v:register.' = '
-          \.string(getreg(v:register))<cr><c-f><left>
+    nnoremap <leader>q :<c-u><c-r><c-r>='let @q = '
+          \.string(getreg('q'))<cr><c-f><left>
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
