@@ -9,6 +9,7 @@ LOCAL_CONF="$LOCAL/shell/local.sh"
 [ -f "$LOCAL_CONF" ] && source "$LOCAL_CONF"
 
 # Paths
+PATH="$PATH:/usr/local/sbin"
 for p in \
     "$LOCAL/bin" \
     "$MY_SCRIPTS"; do

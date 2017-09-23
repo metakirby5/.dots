@@ -17,5 +17,6 @@ python-Levenshtein
 sklearn
 streamlink
 tensorflow
+tzlocal
 virtualenvwrapper
 zenbu
