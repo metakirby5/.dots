@@ -1,7 +1,8 @@
 {
-  "version": "1.13.8.6",
-  "date": 1494268086827,
+  "version": "1.13.11.5",
+  "date": 1506787987137,
   "Conf": {
+    "Redirect to HTTPS": true,
     "JSON Index": true,
     "Use 4chan X Catalog": true,
     "Index Refresh Notifications": false,
@@ -73,6 +74,7 @@
     "Use Faster Image Host": true,
     "Menu": true,
     "Report Link": true,
+    "Copy Text Link": true,
     "Thread Hiding Link": true,
     "Reply Hiding Link": true,
     "Delete Link": true,
@@ -116,6 +118,7 @@
     "Use Recaptcha v1 on Index": false,
     "Use Recaptcha v1 in Reports": false,
     "Force Noscript Captcha": false,
+    "Force Noscript Captcha for v1": true,
     "Pass Link": true,
     "Quote Backlinks": true,
     "OP Backlinks": true,
@@ -146,7 +149,7 @@
     "Stretch to Fit": false,
     "Scroll to Post": true,
     "Slide Delay": 6,
-    "Default Volume": 1,
+    "Default Volume": 0,
     "Current Board": false,
     "Auto Update Thread Watcher": true,
     "Auto Watch": false,
@@ -154,6 +157,7 @@
     "Auto Prune": false,
     "Show Unread Count": true,
     "Require OP Quote Link": true,
+    "general": "",
     "postID": "# Highlight dubs on [s4s]:\n#/(\\d)\\1$/;highlight;top:no;boards:s4s",
     "name": "# Filter any namefags:\n#/^(?!Anonymous$)/",
     "uniqueID": "# Filter a specific ID:\n#/Txhvk1Tl/",
@@ -189,14 +193,15 @@
     "Shortcut Icons": true,
     "Custom Board Navigation": true,
     "archiveLists": "https://mayhemydg.github.io/archives.json/archives.json",
-    "lastarchivecheck": 1494264422988,
+    "lastarchivecheck": 1506787946681,
     "archiveAutoUpdate": true,
     "boardnav": "g-title / w-title / wg-title / a-title / b-title",
     "QR.personas": "#options:\"sage\";boards:jp;always",
     "sjisPreview": false,
-    "jsWhitelist": "http://s.4cdn.org\nhttps://s.4cdn.org\nhttp://www.google.com\nhttps://www.google.com\nhttps://www.gstatic.com\nhttp://cdn.mathjax.org\nhttps://cdn.mathjax.org\n'self'\n'unsafe-inline'\n'unsafe-eval'\n\n# Banner ads\n#http://s.zkcdn.net/ados.js\n#https://s.zkcdn.net/ados.js\n#http://engine.4chan-ads.org\n#https://engine.4chan-ads.org",
+    "jsWhitelist": "http://s.4cdn.org\nhttps://s.4cdn.org\nhttp://www.google.com\nhttps://www.google.com\nhttps://www.gstatic.com\nhttp://cdn.mathjax.org\nhttps://cdn.mathjax.org\nhttps://cdnjs.cloudflare.com\n'self'\n'unsafe-inline'\n'unsafe-eval'\n\n# Banner ads\n#http://s.zkcdn.net/ados.js\n#https://s.zkcdn.net/ados.js\n#http://engine.4chan-ads.org\n#https://engine.4chan-ads.org",
     "captchaLanguage": "",
     "time": "%m/%d/%y(%a)%H:%M:%S",
+    "timeLocale": "",
     "backlink": ">>%id",
     "fileInfo": "%l (%p%s, %r%g)",
     "favicon": "ferongr",
@@ -224,6 +229,9 @@
     "Expand image": "Shift+e",
     "Expand images": "e",
     "Open Gallery": "g",
+    "Next Gallery Image": "Right",
+    "Previous Gallery Image": "Left",
+    "Advance Gallery": "Enter",
     "Pause": "p",
     "Slideshow": "Ctrl+Right",
     "fappeTyme": "f",
@@ -277,34 +285,29 @@
     },
     "lastReadPosts": {
       "boards": {
-        "bant": {
-          "236951": 237666,
-          "251777": 251922,
-          "253044": 253820
-        },
         "g": {
-          "60279512": 60280323,
-          "60279951": 60280284
+          "51971506": 51971506,
+          "62566035": 62577844,
+          "62675669": 62677386
+        },
+        "gif": {
+          "11274692": 11276133
         },
         "w": {
-          "2008336": 2013354
-        },
-        "wg": {
-          "6907979": 6919777,
-          "6914289": 6919708,
-          "6916974": 6919991,
-          "6919859": 6919914
+          "2023677": 2025046,
+          "2031080": 2031663,
+          "2033601": 2033701
         }
       },
-      "lastChecked": 1494264422667
+      "lastChecked": 1506787946376
     },
     "yourPosts": {
       "boards": {},
-      "lastChecked": 1490982339487
+      "lastChecked": 1504625888946
     },
     "watchedThreads": {
       "boards": {},
-      "lastChecked": 1494267968420
+      "lastChecked": 1506787946378
     },
     "customTitles": {
       "boards": {}
@@ -315,8 +318,6 @@
           "adv",
           "f",
           "hr",
-          "mlpol",
-          "mo",
           "o",
           "pol",
           "s4s",
@@ -331,8 +332,6 @@
           "adv",
           "f",
           "hr",
-          "mlpol",
-          "mo",
           "o",
           "pol",
           "s4s",
@@ -387,6 +386,32 @@
         "reports": true,
         "software": "foolfuuka",
         "uid": 4
+      },
+      {
+        "boards": [
+          "c",
+          "d",
+          "e",
+          "i",
+          "lgbt",
+          "t",
+          "u"
+        ],
+        "domain": "archive.loveisover.me",
+        "files": [
+          "c",
+          "d",
+          "e",
+          "i",
+          "lgbt",
+          "t",
+          "u"
+        ],
+        "http": true,
+        "https": true,
+        "name": "Love is Over",
+        "software": "foolfuuka",
+        "uid": 5
       },
       {
         "boards": [
@@ -770,138 +795,16 @@
       },
       {
         "boards": [
-          "3",
-          "a",
-          "aco",
-          "adv",
-          "an",
-          "asp",
-          "b",
-          "biz",
-          "c",
-          "can",
-          "cgl",
-          "ck",
-          "cm",
-          "co",
-          "cock",
-          "d",
-          "diy",
-          "e",
-          "f",
-          "fa",
-          "fap",
-          "fit",
-          "fitlit",
           "g",
-          "gd",
-          "gif",
-          "h",
-          "hc",
-          "his",
-          "hm",
-          "hr",
-          "i",
-          "ic",
-          "int",
-          "jp",
           "k",
-          "lgbt",
-          "lit",
-          "m",
-          "mlp",
-          "mlpol",
-          "mo",
-          "mtv",
-          "mu",
-          "n",
-          "news",
-          "o",
-          "out",
-          "outsoc",
-          "p",
-          "po",
-          "pol",
           "qa",
-          "qst",
-          "r",
-          "r9k",
-          "s",
-          "s4s",
-          "sci",
-          "soc",
-          "sp",
-          "spa",
-          "t",
-          "tg",
-          "toy",
-          "trash",
-          "trv",
-          "tv",
-          "u",
-          "v",
-          "vg",
-          "vint",
-          "vip",
-          "vp",
-          "vr",
-          "w",
-          "wg",
-          "wsg",
-          "wsr",
-          "x",
-          "y"
+          "s4s"
         ],
-        "domain": "boards.4tan.org",
+        "domain": "archive.yeet.net",
         "files": [],
         "http": true,
         "https": true,
-        "name": "4tan",
-        "reports": true,
-        "software": "foolfuuka",
-        "uid": 32
-      },
-      {
-        "boards": [
-          "c",
-          "d",
-          "e",
-          "i",
-          "lgbt",
-          "t",
-          "u"
-        ],
-        "domain": "archive.loveisover.me",
-        "files": [
-          "c",
-          "d",
-          "e",
-          "i",
-          "lgbt",
-          "t",
-          "u"
-        ],
-        "http": true,
-        "https": false,
-        "name": "Love is Over",
-        "software": "foolfuuka",
-        "uid": 5
-      },
-      {
-        "boards": [
-          "g",
-          "k",
-          "qa"
-        ],
-        "domain": "yeet.net",
-        "files": [
-          "g",
-          "k",
-          "qa"
-        ],
-        "http": true,
-        "https": false,
-        "name": "yeet.net",
+        "name": "YEET Archive",
         "software": "foolfuuka",
         "uid": 33
       }
@@ -911,6 +814,9 @@
       "global": {}
     },
     "Index Sort": "bump",
+    "BoardTips.seen": {},
+    "Last Long Reply Thresholds 0": {},
+    "Last Long Reply Thresholds 1": {},
     "Except Archives from Encryption": false,
     "JSON Navigation": true,
     "Oekaki Links": false,
