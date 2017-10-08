@@ -48,7 +48,20 @@ install-leaves() {
                 echo -e "${GREEN}$m up to date!$NORM"
             fi
         else
-            echo -e "${YELLOW}$m not found, skipping...${NORM}"
+            echo -e "${YELLOW}$m not found, skipping...$NORM"
+        fi
+    done
+
+    # Handle these separately
+    local NODEP_INSTALLERS=(
+        [yarn]="yarn global add"
+    )
+    for m in "${!NODEP_INSTALLERS[@]}"; do
+        if which "$m" &>/dev/null; then
+            echo -e "${GREEN}Installing $m leaves with \`${NODEP_INSTALLERS[$m]}\`...$NORM"
+            ${NODEP_INSTALLERS[$m]}
+        else
+            echo -e "${YELLOW}$m not found, skipping...$NORM"
         fi
     done
 
