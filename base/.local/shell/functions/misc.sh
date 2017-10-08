@@ -25,6 +25,7 @@ install-leaves() {
     local GREEN="\033[0;32m"
     local YELLOW="\033[0;33m"
 
+    declare -A INSTALLERS
     local INSTALLERS=(
         [brew]="brew bundle --file=-"
         [pip]="xargs pip install"
@@ -53,6 +54,7 @@ install-leaves() {
     done
 
     # Handle these separately
+    declare -A NODEP_INSTALLERS
     local NODEP_INSTALLERS=(
         [yarn]="yarn global add"
     )
