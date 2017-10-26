@@ -50,6 +50,9 @@ brew() {
       shift
 
       case "$cmd" in
+        up)
+          command brew cu "$@"
+          ;;
         l)
           command brew cask list "$@"
           ;;
