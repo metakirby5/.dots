@@ -16,6 +16,7 @@ pushbullet-cli
 python-Levenshtein
 sklearn
 streamlink
+tabulate
 tensorflow
 tzlocal
 virtualenvwrapper
