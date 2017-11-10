@@ -79,6 +79,7 @@ p =
       size: ['cmd', 'ctrl']
       pour: ['cmd', 'alt', 'ctrl']
       tile: ['cmd', 'ctrl', 'shift']
+      fall: ['ctrl', 'alt']
 
     ## MULTI-MODIFIER KEYS
     snaps:                   # Window snap proportions
@@ -1145,6 +1146,8 @@ p.keys.apps.map (app, key) ->
   , (dir) -> cw()?.moveIn(dir).set() ]
 , [ p.keys.mods.size # size
   , (dir) -> cw()?.sizeIn(dir).set() ]
+, [ p.keys.mods.fall # fall
+  , (dir) -> cw()?.fallIn(dir).set() ]
 , [ p.keys.mods.pour # pour
   , (dir) -> cw()?.pourIn(dir).set() ]
 , [ p.keys.mods.tile # tile
