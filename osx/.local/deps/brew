@@ -76,6 +76,7 @@ brew "weechat", args: ["with-lua", "with-perl", "with-python", "with-ruby"]
 brew "wget"
 brew "yank"
 brew "yarn"
+brew "z3"
 cask "ableton-live-suite"
 cask "airdroid"
 cask "android-file-transfer"
