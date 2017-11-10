@@ -2118,9 +2118,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>484 230 918 498 0 0 1680 1050 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>177 384 592 584 0 0 1680 1027 </string>
+	<string>216 534 592 584 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>247 137 690 476 0 0 1920 1200 </string>
+	<string>0 725 1920 475 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -5522,6 +5522,8 @@
 	<date>2017-01-13T23:37:36Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>Selection Respects Soft Boundaries</key>
+	<true/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -5531,7 +5533,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1469944576</real>
+	<real>1508988672</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>WindowNumber</key>
