@@ -79,7 +79,7 @@ p =
       size: ['cmd', 'ctrl']
       pour: ['cmd', 'alt', 'ctrl']
       tile: ['cmd', 'ctrl', 'shift']
-      fall: ['ctrl', 'alt']
+      fall: ['alt', 'shift']
 
     ## MULTI-MODIFIER KEYS
     snaps:                   # Window snap proportions
