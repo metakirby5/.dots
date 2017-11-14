@@ -137,25 +137,6 @@ String.prototype.poppedFront = -> @substr 1
 String.prototype.insert = (s, i) -> (@substr 0, i) + s + @substr i
 String.prototype.remove = (i) -> (@substr 0, i) + @substr i + 1
 
-# Barebones event class
-class EventEmitter
-  constructor: ->
-    @cbs = {}
-
-  # Add listener
-  on: (e, f) ->
-    if not @cbs[e]?
-      @cbs[e] = []
-    @cbs[e].push f
-
-  # Remove listener
-  off: (e, f) ->
-    @cbs[e] = _.without (@cbs[e] ? []), f
-
-  # Broadcast to listeners
-  emit: (e, args...) ->
-    @cbs[e]?.map (f) -> f args...
-
 # Every bindable key on a Macbook Pro keyboard
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
     .concat [44..57]
@@ -182,6 +163,32 @@ SHIFT_KEYS = _.extend
 ), (
   String.fromCharCode(c) for c in [65..90]
 )
+
+# Barebones event class
+class EventEmitter
+  constructor: ->
+    @cbs = {}
+
+  # Add listener
+  on: (e, f) ->
+    if not @cbs[e]?
+      @cbs[e] = []
+    @cbs[e].push f
+
+  # Remove listener
+  off: (e, f) ->
+    @cbs[e] = _.without (@cbs[e] ? []), f
+
+  # Broadcast to listeners
+  emit: (e, args...) ->
+    @cbs[e]?.map (f) -> f args...
+
+# A fixed length queue
+class FixedQueue
+  queue: []
+  constructor: (@length) ->
+  push: (frame) -> @queue = (@queue.concat frame)[-@length..]
+  at: (idx) -> @queue[idx]
 
 # Coordinate system helpers
 identify = (x) ->
@@ -321,8 +328,18 @@ Window::hint = (seq) ->
   hint.curSeqLen = seq.length
   hint
 
+# Mouse methods
+Mouse.pointQueue = new FixedQueue 2
+Mouse._move = Mouse.move
+Mouse.move = (args...) ->
+  Mouse.pointQueue.push Mouse.location()
+  Mouse._move args...
+Mouse.toggle = ->
+  if _.isEqual Mouse.location(), Mouse.pointQueue.at 1
+    Mouse.move Mouse.pointQueue.at 0
+
 # Modal methods
-Modal::open = []
+Modal.open = []
 
 Modal._build = Modal.build
 Modal.build = (props = {}) ->
@@ -353,15 +370,16 @@ Modal::setText = (@text) -> this
 
 Modal::untrack = ->
   Event.off @clickEvent if @clickEvent?  # Disable clickEvent
-  Modal::open = _.without @open, this  # Untrack modal locaiton
+  Modal.open = _.without Modal.open, this  # Untrack modal locaiton
 
 Modal::resolveOverlaps = ->
-  Modal::open = _.without @open, this
-  while _.some(@open.map (m) => intersects @frame(), m.frame(), p.modals.gap)
+  Modal.open = _.without Modal.open, this
+  while _.some (Modal.open.map (m) =>
+                  intersects @frame(), m.frame(), p.modals.gap)
     @origin =
       x: @origin.x
       y: @origin.y - p.modals.unit
-  @open.push this
+  Modal.open.push this
 
 Modal::center = ->
   mf = @frame()
@@ -749,13 +767,6 @@ class InputMode extends Mode
     @input = if @historyPos == -1 then @current else @history[@historyPos]
     @pos = @input.length
 
-# A queue of Frames
-class FrameQueue
-  queue: []
-  constructor: (@length) ->
-  push: (frame) -> @queue = (@queue.concat frame)[-@length..]
-  at: (idx) -> @queue[idx]
-
 # Window chaining
 class ChainWindow
   @frameQueues: {}  # hash -> FrameQueue
@@ -773,7 +784,7 @@ class ChainWindow
   frameQueue: ->
     hash = @win.hash()
     ChainWindow.frameQueues[hash] =
-      ChainWindow.frameQueues[hash] or new FrameQueue 2
+      ChainWindow.frameQueues[hash] or new FixedQueue 2
 
   # Private: wrap with gap compensation
   ungapped: (f) -> (args...) =>
@@ -1144,6 +1155,7 @@ Key.on p.keys.mouseOut, p.keys.mods.base, ->
   Mouse.move
     x: f.x + f.width
     y: f.y + f.height
+  Mouse.toggle()
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
