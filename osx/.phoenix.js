@@ -103,6 +103,7 @@ p =
     center: 'c'              # Center window
     reFill: 'u'              # Grow window to fill empty space
     status: 'i'              # Show datetime in notification
+    mouseOut: '.'            # Move mouse to lower right corner
     winHintMode: 'y'         # Activate window hint mode
     scrHintMode: 's'         # Activate screen hint mode
     evalInputMode: '\\'      # Activate JS eval mdoe
@@ -1115,6 +1116,11 @@ Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
 Key.on p.keys.shellInputMode, p.keys.mods.base, -> modes.toggle shellInput
+Key.on p.keys.mouseOut, p.keys.mods.base, ->
+  f = Screen.moused().flippedFrame()
+  Mouse.move
+    x: f.x + f.width
+    y: f.y + f.height
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
   "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
 ], (r) ->
