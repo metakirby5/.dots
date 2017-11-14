@@ -82,7 +82,7 @@ p =
       fall: ['alt', 'shift']
 
     ## MULTI-MODIFIER KEYS
-    snaps:                   # Window snap proportions
+    snaps:                   # Toggle: window snap proportions
       q:    [-1/2, -1/2]
       a:    [-1/2, -1  ]
       z:    [-1/2, 1/2 ]
@@ -99,9 +99,9 @@ p =
       p: -1
 
     ## ACTIVATE WITH mods.base
-    maximize: 'm'            # Maximize window, w/ gaps
-    center: 'c'              # Center window
-    reFill: 'u'              # Grow window to fill empty space
+    maximize: 'm'            # Toggle: maximize window, w/ gaps
+    center: 'c'              # Toggle: center window
+    reFill: 'u'              # Toggle: grow window to fill empty space
     status: 'i'              # Show datetime in notification
     mouseOut: '.'            # Move mouse to lower right corner
     winHintMode: 'y'         # Activate window hint mode
@@ -749,14 +749,31 @@ class InputMode extends Mode
     @input = if @historyPos == -1 then @current else @history[@historyPos]
     @pos = @input.length
 
+# A queue of Frames
+class FrameQueue
+  queue: []
+  constructor: (@length) ->
+  push: (frame) -> @queue = (@queue.concat frame)[-@length..]
+  at: (idx) -> @queue[idx]
+
 # Window chaining
 class ChainWindow
+  @frameQueues: {}  # hash -> FrameQueue
+
   gap: p.wins.gap
   unit: p.wins.unit
 
   constructor: (@win) ->
     @dropSize = @gap + p.wins.tolerance
     @updateWin()
+
+    # Save the previous window frame
+    @frameQueue().push _.clone @f
+
+  frameQueue: ->
+    hash = @win.hash()
+    ChainWindow.frameQueues[hash] =
+      ChainWindow.frameQueues[hash] or new FrameQueue 2
 
   # Private: wrap with gap compensation
   ungapped: (f) -> (args...) =>
@@ -1026,6 +1043,12 @@ class ChainWindow
     @f.y += @sf.y
     this
 
+  # If frame is unchanged, revert to previous state
+  toggle: ->
+    if _.isEqual @f, @frameQueue().at 1
+      @f = @frameQueue().at 0
+    this
+
   # Center within screen
   center: ->
     @f.x = @sf.x + (@sf.width - @f.width) / 2
@@ -1108,9 +1131,9 @@ shellInput = modes.add new InputMode p.shell.prompt, (input, keyPressed) ->
   [(if returnPressed then '' else input), null, returnPressed]
 
 # General
-Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().set()
-Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().set()
-Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().set()
+Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().set()
+Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().set()
+Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().toggle().set()
 Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
@@ -1163,7 +1186,7 @@ p.keys.apps.map (app, key) ->
 
 # Snaps
 p.keys.snaps.map (dest, key) ->
-  Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).set()
+  Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).toggle().set()
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
