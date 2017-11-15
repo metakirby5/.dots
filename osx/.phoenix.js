@@ -187,8 +187,11 @@ class EventEmitter
 class FixedQueue
   queue: []
   constructor: (@length) ->
-  push: (frame) -> @queue = (@queue.concat frame)[-@length..]
+  push: (frame) -> @queue = ([frame].concat @queue)[...@length]
   at: (idx) -> @queue[idx]
+
+# Utility function for toggling with FixedQueue
+toggle = (q, x, f) -> f q.at 1 if _.isEqual x, q.at 0
 
 # Coordinate system helpers
 identify = (x) ->
@@ -334,9 +337,7 @@ Mouse._move = Mouse.move
 Mouse.move = (args...) ->
   Mouse.pointQueue.push Mouse.location()
   Mouse._move args...
-Mouse.toggle = ->
-  if _.isEqual Mouse.location(), Mouse.pointQueue.at 1
-    Mouse.move Mouse.pointQueue.at 0
+Mouse.toggle = -> toggle Mouse.pointQueue, Mouse.location(), Mouse.move
 
 # Modal methods
 Modal.open = []
@@ -1056,8 +1057,7 @@ class ChainWindow
 
   # If frame is unchanged, revert to previous state
   toggle: ->
-    if _.isEqual @f, @frameQueue().at 1
-      @f = @frameQueue().at 0
+    toggle @frameQueue(), @f, (x) => @f = x
     this
 
   # Center within screen
