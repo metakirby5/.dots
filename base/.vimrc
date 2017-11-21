@@ -187,6 +187,12 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         let g:{s:completion_prefix}enable_at_startup = 1
         let g:{s:completion_prefix}enable_smart_case = 1
         let g:{s:completion_prefix}enable_auto_delimiter = 1
+        let g:{s:completion_prefix}sources#syntax#min_keyword_length = 3
+
+        if !exists('g:neocomplete#keyword_patterns')
+          let g:{s:completion_prefix}keyword_patterns = {}
+        endif
+        let g:{s:completion_prefix}keyword_patterns['default'] = '\h\w*'
       endif
 
       set completeopt-=preview
