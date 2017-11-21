@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "ajv": "^5.2.3",
+    "bower": "^1.8.2",
+    "bower-away": "^1.1.2",
     "coffee-script": "^1.12.7",
     "coffeelint": "^2.0.6",
     "elm": "^0.18.0",
