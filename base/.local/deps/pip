@@ -6,6 +6,7 @@ eyeD3
 flake8
 fuzzywuzzy
 humanize
+implicit
 jupyter
 jupyter-pip
 matplotlib

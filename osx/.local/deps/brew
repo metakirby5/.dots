@@ -29,7 +29,6 @@ brew "gnupg"
 brew "go"
 brew "haskell-stack"
 brew "highlight"
-brew "htop"
 brew "hugo"
 brew "jq"
 brew "lesspipe", args: ["with-syntax-highlighting"]
