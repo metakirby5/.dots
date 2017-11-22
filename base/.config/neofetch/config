@@ -18,11 +18,20 @@ myprin() {
     prin "$(color 7) $1 $(color 0)│ $(color 15)$info"
 }
 
+mypad() {
+    printf "${text_padding+\033[${text_padding}C}"
+}
+
+mycol() {
+    printf "$(seq 0 7 | xargs printf "\033[${2}%sm$1")$(printf "\033[0m")"
+}
+
 # Info
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 printinfo () {
-    prin "$(color 4)                                    echan "
+    echo
+    prin "$(color 4) $USER "
     prin "$(color 0)────────────────┬─────────────────────────"
     myprin "            os" distro
     myprin "        uptime" uptime
@@ -30,7 +39,8 @@ printinfo () {
     myprin "         shell" shell
     myprin "      packages" packages
     prin "$(color 0)────────────────┴─────────────────────────"
-    get_cols | sed 's/^/     /'
+
+    printf "$(mypad) $(mycol '_____' '1;3')\n"
 }
 
 # Kernel
