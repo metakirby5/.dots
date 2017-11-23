@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "ajv": "^5.2.3",
     "bower": "^1.8.2",
     "bower-away": "^1.1.2",
     "coffee-script": "^1.12.7",
@@ -10,7 +9,6 @@
     "jsonlint": "^1.6.2",
     "nodemon": "^1.12.1",
     "pug-cli": "^1.0.0-alpha6",
-    "react-vr-cli": "^0.3.6",
     "stylus": "^0.54.5",
     "tldr": "^2.0.1",
     "vipe": "juliangruber/vipe",

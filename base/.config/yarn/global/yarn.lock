@@ -52,7 +52,7 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.1.5, ajv@^5.2.3:
+ajv@^5.1.5:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.3.tgz#c06f598778c44c6b161abafe3466b81ad1814ed2"
   dependencies:
@@ -3259,12 +3259,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
-
-react-vr-cli@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/react-vr-cli/-/react-vr-cli-0.3.6.tgz#9c207cc6415e184dfff0538d9d447458bc1f5970"
-  dependencies:
-    chalk "^1.1.3"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
