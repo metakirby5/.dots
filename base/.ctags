@@ -21,3 +21,10 @@
 --regex-javascript=/interface[ \t]+([A-Za-z0-9_]+)/\1/i,interface/
 --regex-javascript=/mixin[ \t]+([A-Za-z0-9_]+)/\1/m,mixin/
 --regex-javascript=/const[ \t]+([A-Za-z0-9_]+)/\1/k,const/
+
+--langdef=coffeescript
+--langmap=coffeescript:.coffee
+--regex-coffeescript=/(^|=[ \t])*class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\2/c,class/
+--regex-coffeescript=/^[ \t]*@?([A-Za-z.]+):.*[-=]>.*$/\1/f,function/ 
+--regex-coffeescript=/^[ \t]*([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\1/f,function/
+--regex-coffeescript=/^[ \t]*([A-Za-z.]+)[ \t]+=[^-=>\n]*$/\1/v,variable/
