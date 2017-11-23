@@ -7,6 +7,7 @@ flake8
 fuzzywuzzy
 humanize
 implicit
+jedi
 jupyter
 jupyter-pip
 matplotlib
