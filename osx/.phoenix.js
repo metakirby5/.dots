@@ -186,12 +186,13 @@ class EventEmitter
 # A fixed length queue
 class FixedQueue
   queue: []
-  constructor: (@length) ->
-  push: (frame) -> @queue = ([frame].concat @queue)[...@length]
+  constructor: (@capacity) ->
+  push: (frame) -> @queue = ([frame].concat @queue)[...@capacity]
+  length: -> @queue.length
   at: (idx) -> @queue[idx]
 
 # Utility function for toggling with FixedQueue
-toggle = (q, x, f) -> f q.at 1 if _.isEqual x, q.at 0
+toggle = (q, x, f) -> f q.at 1 if q.length() >= 2 and _.isEqual x, q.at 0
 
 # Coordinate system helpers
 identify = (x) ->
