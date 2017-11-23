@@ -153,59 +153,21 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " Completion {{{
     " Engine {{{
       if !exists("g:mk5_no_completion")
-        if has('nvim')
-          function! s:do_remote(arg)
-            UpdateRemotePlugins
-          endfunction
+        if version >= 800
+          Plug 'maralla/completor.vim'
+          let g:completor_python_binary = 'python3'
 
-          Plug 'Shougo/Deoplete.nvim', { 'do': function('s:do_remote') }
-          let s:completion_prefix = 'deoplete#'
-        elseif has('lua')
-          if (version >= 704 || version == 703 && has('patch885'))
-            Plug 'Shougo/neocomplete.vim'
-            let s:completion_prefix = 'neocomplete#'
-          else
-            Plug 'Shougo/neocomplcache.vim'
-            let s:completion_prefix = 'neocomplcache_'
-          endif
+          inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+          inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+          inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
+
+          function! s:smart_cr()
+            return pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+          endfunction
         else
           Plug 'ervandew/supertab'
         endif
       endif
-    " }}}
-    " Snippets {{{
-      if (version >= 704)
-        Plug 'SirVer/ultisnips'
-              \| Plug 'honza/vim-snippets'
-        let g:UltiSnipsExpandTrigger = '<c-bslash>'
-        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-        let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-      endif
-    " }}}
-    " Settings {{{
-      if exists('s:completion_prefix')
-        let g:{s:completion_prefix}enable_at_startup = 1
-        let g:{s:completion_prefix}enable_smart_case = 1
-        let g:{s:completion_prefix}enable_auto_delimiter = 1
-        let g:{s:completion_prefix}sources#syntax#min_keyword_length = 3
-
-        if !exists('g:neocomplete#keyword_patterns')
-          let g:{s:completion_prefix}keyword_patterns = {}
-        endif
-        let g:{s:completion_prefix}keyword_patterns['default'] = '\h\w*'
-      endif
-
-      set completeopt-=preview
-      inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-      inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-      inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
-
-      let g:ulti_expand_res = 0
-      function! s:smart_cr()
-        silent! call UltiSnips#ExpandSnippet()
-        return g:ulti_expand_res ? ""
-              \: pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-      endfunction
     " }}}
   " }}}
   " Text objects {{{
@@ -608,6 +570,7 @@ endif " }}}
     set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
     set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
     set list                       " enable whitespace characters
+    set completeopt-=preview       " hide completion description split
     " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
   " Highlights / Colors {{{
