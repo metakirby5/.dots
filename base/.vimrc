@@ -151,24 +151,22 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Completion {{{
-    " Engine {{{
-      if !exists("g:mk5_no_completion")
-        if version >= 800
-          Plug 'maralla/completor.vim'
-          let g:completor_python_binary = 'python3'
+    if !exists("g:mk5_no_completion")
+      if has('nvim') || version >= 800
+        Plug 'maralla/completor.vim'
+        let g:completor_python_binary = 'python3'
 
-          inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-          inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-          inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
+        inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+        inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
 
-          function! s:smart_cr()
-            return pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-          endfunction
-        else
-          Plug 'ervandew/supertab'
-        endif
+        function! s:smart_cr()
+          return pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+        endfunction
+      else
+        Plug 'ervandew/supertab'
       endif
-    " }}}
+    endif
   " }}}
   " Text objects {{{
     Plug 'kana/vim-textobj-user'
@@ -341,20 +339,20 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
     " }}}
     " Syntax checker {{{
-      if !exists("g:mk5_use_syntastic") && (
-            \ has('nvim') ||
-            \ version >= 800 && has('job') && has('channel') && has('timers'))
-        Plug 'w0rp/ale'
-        let g:ale_lint_delay = 100
-        let g:ale_sign_error = '∙'
-        let g:ale_sign_warning = '∙'
-        let g:ale_echo_msg_format = '%linter%: %s'
-        nmap <silent> [s <Plug>(ale_previous_wrap)
-        nmap <silent> ]s <Plug>(ale_next_wrap)
+      if !exists("g:mk5_use_syntastic")
+        if has('nvim') || version >= 800
+          Plug 'w0rp/ale'
+          let g:ale_lint_delay = 100
+          let g:ale_sign_error = '∙'
+          let g:ale_sign_warning = '∙'
+          let g:ale_echo_msg_format = '%linter%: %s'
+          nmap <silent> [s <Plug>(ale_previous_wrap)
+          nmap <silent> ]s <Plug>(ale_next_wrap)
 
-        let g:ale_linters = {
-              \ 'cpp': ['g++'],
-        \}
+          let g:ale_linters = {
+                \ 'cpp': ['g++'],
+          \}
+        endif
       else
         Plug 'scrooloose/syntastic'
       endif
