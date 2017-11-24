@@ -571,7 +571,6 @@ endif " }}}
     set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
     set list                       " enable whitespace characters
     set completeopt-=preview       " hide completion description split
-    " let loaded_matchparen = 0      " this is slow, might disable
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
@@ -1002,7 +1001,6 @@ endif " }}}
 
     let s:default_tw = 78 " default textwidth
     set linebreak         " line break only at breaking characters
-    " set colorcolumn=+1    " column guide
     exe 'set textwidth=' . s:default_tw
 
     " ,\ - Toggle text wrap & color column
@@ -1010,10 +1008,8 @@ endif " }}}
       if (!&paste)
         if (&textwidth == 0)
           exe 'set textwidth=' . s:default_tw
-          " set colorcolumn=+1
         else
           set textwidth=0
-          " set colorcolumn=0
         endif
       else
         echohl WarningMsg | echom 'Paste mode on.' | echohl None
@@ -1044,7 +1040,6 @@ endif " }}}
 
     " C indent options
     set cino+=l1   " align with case label
-    set cino+=(0   " align with first non-white character after (
     set cino+=Ws   " indent after lone (
     set cino+=m1   " align ) like }
     set cino+=j1   " properly indent anonymous classes/functions
