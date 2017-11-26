@@ -433,6 +433,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'tpope/vim-endwise'
     " }}}
   " }}}
+  " Languages {{{
+    Plug 'jparise/vim-graphql'
+  " }}}
   " Post-hooks {{{
     call plug#end()
   " }}}
