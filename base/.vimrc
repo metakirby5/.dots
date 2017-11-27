@@ -154,7 +154,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     if !exists("g:mk5_no_completion")
       if has('nvim') || version >= 800
         Plug 'maralla/completor.vim'
-        let g:completor_python_binary = 'python3'
 
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
