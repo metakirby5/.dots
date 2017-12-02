@@ -155,14 +155,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       if has('nvim') || version >= 800
         Plug 'maralla/completor.vim'
         let g:completor_python_binary = '/usr/local/bin/python3'
-
-        inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-        inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-        inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
-
-        function! s:smart_cr()
-          return pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-        endfunction
       else
         Plug 'ervandew/supertab'
       endif
@@ -367,6 +359,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       nmap <leader>M <Plug>(quickhl-manual-reset)
       xmap <leader>M <Plug>(quickhl-manual-reset)
     " }}}
+    " Multiple cursors {{{
+      Plug 'terryma/vim-multiple-cursors'
+    " }}}
     " Ablolish, Subvert, and Coerce {{{
       Plug 'tpope/vim-abolish'
     " }}}
@@ -558,7 +553,6 @@ endif " }}}
     set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
     set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
     set list                       " enable whitespace characters
-    set completeopt-=preview       " hide completion description split
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
@@ -1083,6 +1077,17 @@ endif " }}}
     " ,q - edit macro
     nnoremap <leader>q :<c-u><c-r><c-r>='let @q = '
           \.string(getreg('q'))<cr><c-f><left>
+  " }}}
+  " Completion {{{
+  set completeopt-=preview
+
+  inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+  inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+  inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
+
+  function! s:smart_cr()
+    return pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+  endfunction
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
