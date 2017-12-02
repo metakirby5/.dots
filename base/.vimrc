@@ -154,6 +154,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     if !exists("g:mk5_no_completion")
       if has('nvim') || version >= 800
         Plug 'maralla/completor.vim'
+        let g:completor_python_binary = '/usr/local/bin/python3'
 
         inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
         inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
@@ -365,19 +366,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap M <Plug>(quickhl-manual-this)
       nmap <leader>M <Plug>(quickhl-manual-reset)
       xmap <leader>M <Plug>(quickhl-manual-reset)
-    " }}}
-    " Multiple cursors {{{
-      Plug 'terryma/vim-multiple-cursors'
-      function! Multiple_cursors_before()
-        if exists(':NeoCompleteLock') == 2
-          NeoCompleteLock
-        endif
-      endfunction
-      function! Multiple_cursors_after()
-        if exists(':NeoCompleteUnlock') == 2
-          NeoCompleteUnlock
-        endif
-      endfunction
     " }}}
     " Ablolish, Subvert, and Coerce {{{
       Plug 'tpope/vim-abolish'
