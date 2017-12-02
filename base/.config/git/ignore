@@ -32,3 +32,6 @@ Thumbs.db
 tags
 tags.lock
 tags.temp
+
+# Metadata
+META-INF
