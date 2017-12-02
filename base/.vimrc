@@ -38,77 +38,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   call plug#begin(s:configdir . '/plugins')
   " }}}
   " Interface {{{
-    " Git gutter {{{
-      Plug 'airblade/vim-gitgutter'
-      let g:gitgutter_map_keys = 0
-      nmap [g <Plug>GitGutterPrevHunk
-      nmap ]g <Plug>GitGutterNextHunk
-      nmap <leader>ga <Plug>GitGutterStageHunk
-      nmap <leader>gu <Plug>GitGutterUndoHunk
-      nmap <leader>go <Plug>GitGutterPreviewHunk
-      omap ig <Plug>GitGutterTextObjectInnerPending
-      omap ag <Plug>GitGutterTextObjectOuterPending
-      xmap ig <Plug>GitGutterTextObjectInnerVisual
-      xmap ag <Plug>GitGutterTextObjectOuterVisual
-    " }}}
-    " Monokai for vim {{{
-      Plug 'gummesson/stereokai.vim'
-    " }}}
-    " Enable minimalism {{{
-      Plug 'junegunn/goyo.vim'
-            \, { 'on': 'Goyo' }
-      function! s:goyo_enter()
-        set noshowmode
-        set noshowcmd
-        set scrolloff=999
-        Limelight
-        IndentLinesDisable
-      endfunction
-
-      function! s:goyo_leave()
-        set showmode
-        set showcmd
-        set scrolloff=5
-        Limelight!
-        IndentLinesEnable
-        call s:apply_highlights()
-      endfunction
-
-      autocmd! User GoyoEnter nested call s:goyo_enter()
-      autocmd! User GoyoLeave nested call s:goyo_leave()
-
-      nnoremap cog <esc>:Goyo<cr>
-    " }}}
-    " Spotlight on text {{{
-      Plug 'junegunn/limelight.vim'
-            \, { 'on': 'Limelight' }
-      let g:limelight_conceal_ctermfg = 'darkgrey'
-      let g:limelight_conceal_guifg = 'DarkGrey'
-    " }}}
-    " Themed rainbow parens {{{
-      Plug 'junegunn/rainbow_parentheses.vim'
-            \, { 'on': 'RainbowParentheses' }
-      augroup PLUG_RAINBOW_PARENTHESES
-        au!
-        au FileType lisp,clojure,scheme RainbowParentheses
-      augroup END
-    " }}}
-    " Highlight all as searching {{{
-      if (version >= 704)
-        Plug 'haya14busa/incsearch.vim'
-        set hlsearch
-        let g:incsearch#auto_nohlsearch = 1
-        let g:incsearch#is_stay = 1
-        map /  <Plug>(incsearch-forward)
-        map ?  <Plug>(incsearch-backward)
-        map n  <Plug>(incsearch-nohl-n)
-        map N  <Plug>(incsearch-nohl-N)
-        map *  <Plug>(incsearch-nohl-*)
-        map #  <Plug>(incsearch-nohl-#)
-        map g* <Plug>(incsearch-nohl-g*)
-        map g# <Plug>(incsearch-nohl-g#)
-      endif
-    " }}}
     " Start screen {{{
       Plug 'mhinz/vim-startify'
       let g:startify_list_order = [
@@ -149,16 +78,81 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:vim_json_syntax_conceal = 0
       let g:vim_markdown_conceal = 0
     " }}}
-  " }}}
-  " Completion {{{
-    if !exists("g:mk5_no_completion")
-      if has('nvim') || version >= 800
-        Plug 'maralla/completor.vim'
-        let g:completor_python_binary = '/usr/local/bin/python3'
-      else
-        Plug 'ervandew/supertab'
+    " Git gutter {{{
+      Plug 'airblade/vim-gitgutter'
+      let g:gitgutter_map_keys = 0
+      nmap [g <Plug>GitGutterPrevHunk
+      nmap ]g <Plug>GitGutterNextHunk
+      nmap <leader>ga <Plug>GitGutterStageHunk
+      nmap <leader>gu <Plug>GitGutterUndoHunk
+      nmap <leader>go <Plug>GitGutterPreviewHunk
+      omap ig <Plug>GitGutterTextObjectInnerPending
+      omap ag <Plug>GitGutterTextObjectOuterPending
+      xmap ig <Plug>GitGutterTextObjectInnerVisual
+      xmap ag <Plug>GitGutterTextObjectOuterVisual
+    " }}}
+    " Register preview {{{
+      Plug 'junegunn/vim-peekaboo'
+      let g:peekaboo_delay = 100
+    " }}}
+    " Highlight all as searching {{{
+      if (version >= 704)
+        Plug 'haya14busa/incsearch.vim'
+        set hlsearch
+        let g:incsearch#auto_nohlsearch = 1
+        let g:incsearch#is_stay = 1
+        map /  <Plug>(incsearch-forward)
+        map ?  <Plug>(incsearch-backward)
+        map n  <Plug>(incsearch-nohl-n)
+        map N  <Plug>(incsearch-nohl-N)
+        map *  <Plug>(incsearch-nohl-*)
+        map #  <Plug>(incsearch-nohl-#)
+        map g* <Plug>(incsearch-nohl-g*)
+        map g# <Plug>(incsearch-nohl-g#)
       endif
-    endif
+    " }}}
+    " Enable minimalism {{{
+      Plug 'junegunn/goyo.vim'
+            \, { 'on': 'Goyo' }
+      function! s:goyo_enter()
+        set noshowmode
+        set noshowcmd
+        set scrolloff=999
+        Limelight
+        IndentLinesDisable
+      endfunction
+
+      function! s:goyo_leave()
+        set showmode
+        set showcmd
+        set scrolloff=5
+        Limelight!
+        IndentLinesEnable
+        call s:apply_highlights()
+      endfunction
+
+      autocmd! User GoyoEnter nested call s:goyo_enter()
+      autocmd! User GoyoLeave nested call s:goyo_leave()
+
+      nnoremap cog <esc>:Goyo<cr>
+    " }}}
+    " Spotlight on text {{{
+      Plug 'junegunn/limelight.vim'
+            \, { 'on': 'Limelight' }
+      let g:limelight_conceal_ctermfg = 'darkgrey'
+      let g:limelight_conceal_guifg = 'DarkGrey'
+    " }}}
+    " Themed rainbow parens {{{
+      Plug 'junegunn/rainbow_parentheses.vim'
+            \, { 'on': 'RainbowParentheses' }
+      augroup PLUG_RAINBOW_PARENTHESES
+        au!
+        au FileType lisp,clojure,scheme RainbowParentheses
+      augroup END
+    " }}}
+    " Monokai for vim {{{
+      Plug 'gummesson/stereokai.vim'
+    " }}}
   " }}}
   " Text objects {{{
     Plug 'kana/vim-textobj-user'
@@ -175,18 +169,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Make repeat work with plugins {{{
       Plug 'tpope/vim-repeat'
     " }}}
-    " Align with ga {{{
-      Plug 'junegunn/vim-easy-align'
-            \, { 'on': '<Plug>(EasyAlign)' }
-      xmap ga <Plug>(EasyAlign)
-      nmap ga <Plug>(EasyAlign)
-    " }}}
-    " Exchange text {{{
-      Plug 'tommcdo/vim-exchange'
-    " }}}
-    " Toggle comments {{{
-      Plug 'tpope/vim-commentary'
-    " }}}
     " Surround with... {{{
       Plug 'tpope/vim-surround'
       nmap s <Plug>Ysurround
@@ -197,60 +179,56 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       xmap s <Plug>VSurround
       xmap S <Plug>VgSurround
     " }}}
+    " Exchange text {{{
+      Plug 'tommcdo/vim-exchange'
+    " }}}
+    " Toggle comments {{{
+      Plug 'tpope/vim-commentary'
+    " }}}
     " Replace with register {{{
       Plug 'vim-scripts/ReplaceWithRegister'
     " }}}
+    " Align with ga {{{
+      Plug 'junegunn/vim-easy-align'
+            \, { 'on': '<Plug>(EasyAlign)' }
+      xmap ga <Plug>(EasyAlign)
+      nmap ga <Plug>(EasyAlign)
+    " }}}
+    " Ablolish, Subvert, and Coerce {{{
+      Plug 'tpope/vim-abolish'
+    " }}}
   " }}}
   " Utility {{{
-    " Emacs which-key for vim {{{
-      Plug 'hecal3/vim-leader-guide'
-      let g:leaderGuide_default_group_name = "+group"
-      let g:leaderGuide_hspace = 2
-      let s:leaderGuide_max_desc_len = 30
-      function! s:leaderGuide_displayfunc()
-        " Kill ending <cr>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname, '<cr>$', '', 'i')
-        " Kill beginning <esc>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname, '^<esc>', '', 'i')
-        " Kill beginning <plug>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname,
-              \ '^<plug>(\?\([^)]*\))\?', '\1', 'i')
-        " Truncate to s:leaderGuide_max_desc_len chars or less
-        if len(g:leaderGuide#displayname) > s:leaderGuide_max_desc_len
-          let g:leaderGuide#displayname =
-                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-1]
-                \."…"
+    " Completion {{{
+      if !exists("g:mk5_no_completion")
+        if has('nvim') || version >= 800
+          Plug 'maralla/completor.vim'
+          let g:completor_python_binary = '/usr/local/bin/python3'
+          let g:completor_min_chars = 1
+          let g:completor_completion_delay = 100
+        else
+          Plug 'ervandew/supertab'
         endif
-      endfunction
-      let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
-      function! s:map_leaderGuides(maps, l)
-        for k in a:l
-          let g = k == '<leader>' ? g:mapleader : k
-          if a:maps =~ 'n'
-            exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
-          endif
-          if a:maps =~ 'v'
-            exe 'xnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
-          endif
-        endfor
-      endfunction
-      call s:map_leaderGuides('n', [
-            \ 'co',
-            \ ])
-      call s:map_leaderGuides('nv', [
-            \ '<leader>', '[', ']',
-            \ ])
+      endif
     " }}}
-    " Emmet {{{
-      Plug 'mattn/emmet-vim'
-      au BufNewFile,BufRead *.dtl set filetype=jinja2
-      let g:user_emmet_leader_key='<c-e>'
-    " }}}
-    " Language packs {{{
-      Plug 'sheerun/vim-polyglot'
+    " Syntax checker {{{
+      if !exists("g:mk5_use_syntastic")
+        if has('nvim') || version >= 800
+          Plug 'w0rp/ale'
+          let g:ale_lint_delay = 100
+          let g:ale_sign_error = '∙'
+          let g:ale_sign_warning = '∙'
+          let g:ale_echo_msg_format = '%linter%: %s'
+          nmap <silent> [s <Plug>(ale_previous_wrap)
+          nmap <silent> ]s <Plug>(ale_next_wrap)
+
+          let g:ale_linters = {
+                \ 'cpp': ['g++'],
+          \}
+        endif
+      else
+        Plug 'scrooloose/syntastic'
+      endif
     " }}}
     " Fuzzy find engine {{{
       Plug 'junegunn/fzf'
@@ -293,9 +271,63 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
             \ 'options': '--ansi --multi',
             \ })
     " }}}
-    " Register preview {{{
-      Plug 'junegunn/vim-peekaboo'
-      let g:peekaboo_delay = 100
+    " Multiple cursors {{{
+      Plug 'terryma/vim-multiple-cursors'
+    " }}}
+    " Emacs which-key for vim {{{
+      Plug 'hecal3/vim-leader-guide'
+      let g:leaderGuide_default_group_name = "+group"
+      let g:leaderGuide_hspace = 2
+      let s:leaderGuide_max_desc_len = 30
+      function! s:leaderGuide_displayfunc()
+        " Kill ending <cr>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname, '<cr>$', '', 'i')
+        " Kill beginning <esc>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname, '^<esc>', '', 'i')
+        " Kill beginning <plug>
+        let g:leaderGuide#displayname =
+              \ substitute(g:leaderGuide#displayname,
+              \ '^<plug>(\?\([^)]*\))\?', '\1', 'i')
+        " Truncate to s:leaderGuide_max_desc_len chars or less
+        if len(g:leaderGuide#displayname) > s:leaderGuide_max_desc_len
+          let g:leaderGuide#displayname =
+                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-1]
+                \."…"
+        endif
+      endfunction
+      let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
+      function! s:map_leaderGuides(maps, l)
+        for k in a:l
+          let g = k == '<leader>' ? g:mapleader : k
+          if a:maps =~ 'n'
+            exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
+          endif
+          if a:maps =~ 'v'
+            exe 'xnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
+          endif
+        endfor
+      endfunction
+      call s:map_leaderGuides('n', [
+            \ 'co',
+            \ ])
+      call s:map_leaderGuides('nv', [
+            \ '<leader>', '[', ']',
+            \ ])
+    " }}}
+    " Better :%s/.../.../ {{{
+      Plug 'osyo-manga/vim-over'
+              \, { 'on': 'OverCommandLine' }
+      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
+      xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
+    " }}}
+    " Undo tree browser {{{
+      Plug 'mbbill/undotree'
+            \, { 'on': 'UndotreeToggle' }
+      nnoremap <silent> <leader>u <esc>:UndotreeToggle<cr>
+      let g:undotree_SetFocusWhenToggle = 1
+      let g:undotree_ShortIndicators = 1
     " }}}
     " Tag browser {{{
       if v:version >= 703
@@ -304,12 +336,31 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
         nnoremap <silent> <leader>[ <esc>:TagbarToggle<cr>
       endif
     " }}}
-    " Undo tree browser {{{
-      Plug 'mbbill/undotree'
-            \, { 'on': 'UndotreeToggle' }
-      nnoremap <silent> <leader>u <esc>:UndotreeToggle<cr>
-      let g:undotree_SetFocusWhenToggle = 1
-      let g:undotree_ShortIndicators = 1
+    " Add highlight groups {{{
+      Plug 't9md/vim-quickhl'
+            \, { 'on': [
+            \ '<Plug>(quickhl',
+            \ '<Plug>(operator-quickhl'] }
+      nmap M <Plug>(operator-quickhl-manual-this-motion)
+      xmap M <Plug>(quickhl-manual-this)
+      nmap <leader>M <Plug>(quickhl-manual-reset)
+      xmap <leader>M <Plug>(quickhl-manual-reset)
+    " }}}
+    " Emmet {{{
+      Plug 'mattn/emmet-vim'
+      au BufNewFile,BufRead *.dtl set filetype=jinja2
+      let g:user_emmet_leader_key='<c-e>'
+    " }}}
+    " Unix buffer-linked utils {{{
+      Plug 'tpope/vim-eunuch'
+    " }}}
+    " Paired keybindings {{{
+      Plug 'tpope/vim-unimpaired'
+    " }}}
+    " Toggle locationlist and quickfix {{{
+      Plug 'Valloric/ListToggle'
+      let g:lt_location_list_toggle_map = 'coo'
+      let g:lt_quickfix_list_toggle_map = 'coq'
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
@@ -324,67 +375,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           \     },
           \ }
     " }}}
-    " Better :%s/.../.../ {{{
-      Plug 'osyo-manga/vim-over'
-              \, { 'on': 'OverCommandLine' }
-      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-      xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
-    " }}}
-    " Syntax checker {{{
-      if !exists("g:mk5_use_syntastic")
-        if has('nvim') || version >= 800
-          Plug 'w0rp/ale'
-          let g:ale_lint_delay = 100
-          let g:ale_sign_error = '∙'
-          let g:ale_sign_warning = '∙'
-          let g:ale_echo_msg_format = '%linter%: %s'
-          nmap <silent> [s <Plug>(ale_previous_wrap)
-          nmap <silent> ]s <Plug>(ale_next_wrap)
-
-          let g:ale_linters = {
-                \ 'cpp': ['g++'],
-          \}
-        endif
-      else
-        Plug 'scrooloose/syntastic'
-      endif
-    " }}}
-    " Add highlight groups {{{
-      Plug 't9md/vim-quickhl'
-            \, { 'on': [
-            \ '<Plug>(quickhl',
-            \ '<Plug>(operator-quickhl'] }
-      nmap M <Plug>(operator-quickhl-manual-this-motion)
-      xmap M <Plug>(quickhl-manual-this)
-      nmap <leader>M <Plug>(quickhl-manual-reset)
-      xmap <leader>M <Plug>(quickhl-manual-reset)
-    " }}}
-    " Multiple cursors {{{
-      Plug 'terryma/vim-multiple-cursors'
-    " }}}
-    " Ablolish, Subvert, and Coerce {{{
-      Plug 'tpope/vim-abolish'
-    " }}}
-    " Unix buffer-linked utils {{{
-      Plug 'tpope/vim-eunuch'
-    " }}}
-    " Autodetect indentation {{{
-      Plug 'tpope/vim-sleuth'
-    " }}}
-    " Paired keybindings {{{
-      Plug 'tpope/vim-unimpaired'
-    " }}}
-    " Toggle locationlist and quickfix {{{
-      Plug 'Valloric/ListToggle'
-      let g:lt_location_list_toggle_map = 'coo'
-      let g:lt_quickfix_list_toggle_map = 'coq'
-    " }}}
     " Vim wiki {{{
       " TODO: learn how to use this
       Plug 'vimwiki/vimwiki'
     " }}}
   " }}}
   " Automation {{{
+    " Autodetect indentation {{{
+      Plug 'tpope/vim-sleuth'
+    " }}}
     " Automatically set paste {{{
       Plug 'ConradIrwin/vim-bracketed-paste'
     " }}}
@@ -416,6 +415,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
   " }}}
   " Languages {{{
+    Plug 'sheerun/vim-polyglot'
     Plug 'jparise/vim-graphql'
   " }}}
   " Post-hooks {{{
@@ -1079,8 +1079,6 @@ endif " }}}
           \.string(getreg('q'))<cr><c-f><left>
   " }}}
   " Completion {{{
-  set completeopt-=preview
-
   inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
   inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
   inoremap <silent> <cr>  <c-r>=<sid>smart_cr()<cr>
