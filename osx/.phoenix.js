@@ -427,7 +427,7 @@ class Toaster
 # Privately emits 'prestart' and 'prestop'
 class Mode extends EventEmitter
   constructor: (@stopEvents = []) ->
-    super
+    super()
     @active = false
     @binds = []
 
