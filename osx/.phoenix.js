@@ -377,7 +377,7 @@ Modal::untrack = ->
 Modal::resolveOverlaps = ->
   Modal.open = _.without Modal.open, this
   while _.some (Modal.open.map (m) =>
-                  intersects @frame(), m.frame(), p.modals.gap)
+    intersects @frame(), m.frame(), p.modals.gap)
     @origin =
       x: @origin.x
       y: @origin.y - p.modals.unit
