@@ -205,7 +205,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           Plug 'maralla/completor.vim'
           let g:completor_python_binary = '/usr/local/bin/python3'
           let g:completor_min_chars = 1
-          let g:completor_completion_delay = 100
+          let g:completor_completion_delay = 250
         else
           Plug 'ervandew/supertab'
         endif
@@ -361,6 +361,14 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'Valloric/ListToggle'
       let g:lt_location_list_toggle_map = 'coo'
       let g:lt_quickfix_list_toggle_map = 'coq'
+    " }}}
+    " EasyMotion {{{
+      Plug 'easymotion/vim-easymotion'
+      let g:EasyMotion_smartcase = 1
+
+      " Sneak
+      map  - <Plug>(easymotion-bd-f2)
+      nmap - <Plug>(easymotion-overwin-f2)
     " }}}
     " Numi-esque code interpreter {{{
       Plug 'metakirby5/codi.vim'
