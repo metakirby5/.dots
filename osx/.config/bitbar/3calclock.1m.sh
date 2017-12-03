@@ -2,7 +2,7 @@
 
 pad_cal() {
   cat - <(echo ' ') |
-    sed 's/_//g' |
+    sed 's/.//g' |
     tr '\n' '\0' |
     xargs -0 printf '  %-20s\n'
 }
