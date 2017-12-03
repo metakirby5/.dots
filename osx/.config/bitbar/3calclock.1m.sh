@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 pad_cal() {
-  cat - <(echo ' ') | tr '\n' '\0' | xargs -0 printf '  %-20s\n'
+  cat - <(echo ' ') |
+    sed 's/_//g' |
+    tr '\n' '\0' |
+    xargs -0 printf '  %-20s\n'
 }
 
 # http://unix.stackexchange.com/a/182545
