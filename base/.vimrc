@@ -1,8 +1,8 @@
 " vimrc / init.vim
-" Ethan Chan
+" Author: Ethan Chan
 
 " Best viewed with vim: syntax=vim foldmethod=marker foldlevel=0
-" Use za to toggle the folds
+" Use za to toggle the folds.
 
 " Setup {{{
   let s:configdir = $HOME . (has('nvim') ? '/.config/nvim' : '/.vim')
@@ -386,6 +386,9 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Vim wiki {{{
       " TODO: learn how to use this
       Plug 'vimwiki/vimwiki'
+    " }}}
+    " Collaborative editing {{{
+      Plug 'FredKSchott/CoVim'
     " }}}
   " }}}
   " Automation {{{
