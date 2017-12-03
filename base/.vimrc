@@ -387,9 +387,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       " TODO: learn how to use this
       Plug 'vimwiki/vimwiki'
     " }}}
-    " Collaborative editing {{{
-      Plug 'FredKSchott/CoVim'
-    " }}}
   " }}}
   " Automation {{{
     " Autodetect indentation {{{
