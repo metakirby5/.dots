@@ -1,15 +1,12 @@
 Unidecode
 beautifulsoup4
 colorz
-docutils
 eyeD3
 flake8
 fuzzywuzzy
 humanize
-implicit
 jedi
 jupyter
-jupyter-pip
 matplotlib
 neovim
 pip-autoremove
