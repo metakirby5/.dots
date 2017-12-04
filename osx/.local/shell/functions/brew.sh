@@ -12,6 +12,10 @@ brew() {
     trim)
       brew-trim
       ;;
+    relink)
+      command brew unlink "$@"
+      command brew link "$@"
+      ;;
     up)
       command brew update
       command brew upgrade
