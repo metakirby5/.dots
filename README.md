@@ -159,5 +159,8 @@ For OS X, use the system theme.
 
 ## TODO
 
+- [ ] Shell config cleanup
+  - [ ] Merge `functions`, `vendor`, `aliases`
+  - [ ] POSIX compatibility
 - [ ] Fix zenbu files to allow light colorschemes
 - [ ] Stick XVimProject/XVim on brew
