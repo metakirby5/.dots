@@ -1,3 +1,6 @@
 [ -d ~/.rbenv ] && export PATH="$HOME/.rbenv/bin:$PATH"
 
-which rbenv &>/dev/null && eval "$(rbenv init -)"
+if which rbenv &>/dev/null; then
+  eval "$(rbenv init -)"
+  alias gemset='rbenv gemset'
+fi
