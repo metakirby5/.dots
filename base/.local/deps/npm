@@ -5,12 +5,11 @@ coffeescript
 elm
 git-open
 jsonlint
-lodash
+juliangruber/vipe
 nodemon
 npm
 pug-cli
 stylus
 tldr
-vipe
 webpack
 webpack-dev-server

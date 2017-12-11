@@ -2,10 +2,11 @@
 npm-leaves() {
   read -rd '' SCRIPT << EOF
     NF >= 2 {
-      github = match(\$3, /github\.com\/.*\/.*\.git/)
+      github = match(\$3, /(github:.*)/)
       if (github) {
-        # 11 to take out github, 15 to take out github + .git
-        dep = substr(\$3, RSTART + 11, RLENGTH - 15)
+        # 7 to take out github:, -42 to take out hash
+        github_len = 7
+        dep = substr(\$3, RSTART + github_len, RLENGTH - github_len - 42)
       } else {
         sub(/@.*$/, "", \$2)
         dep = \$2
