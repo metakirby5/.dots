@@ -1,1 +1,16 @@
+bower
+bower-away
+coffeelint
+coffeescript
+elm
+git-open
+jsonlint
+lodash
+nodemon
 npm
+pug-cli
+stylus
+tldr
+vipe
+webpack
+webpack-dev-server
