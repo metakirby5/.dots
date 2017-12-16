@@ -9,6 +9,7 @@ jedi
 jupyter
 matplotlib
 neovim
+nltk
 pip-autoremove
 pipdeptree
 pushbullet-cli
