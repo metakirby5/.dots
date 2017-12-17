@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+vpad() {
+  input="$(cat -)"
+  len="$(wc -l <<< "$input")"
+  pad="$(echo $(($1 - $len)))"
+  above="$(echo $(($pad / 2)))"
+  below="$(echo $((($pad + 1) / 2)))"
+  [ $above -gt 0 ] && yes ' ' | head -n $above
+  echo "$input"
+  [ $below -gt 0 ] && yes ' ' | head -n $below
+}
+
 pad_cal() {
   cat - <(echo ' ') |
     sed 's/.//g' |
@@ -20,8 +31,16 @@ if ((m == 12)); then
 else
   nm=$((m+1)) ny=$y
 fi
+cal="$(paste -d ' '\
+  <(cal $pm $py | pad_cal) \
+  <(cal | pad_cal) \
+  <(cal $nm $ny | pad_cal) |
+  awk 'NF {print $0 "|trim=false font=Menlo size=12"}' | cut -c2-)"
+
+wtr="$(curl -sf 'wttr.in?m' | head -n7 | awk 'NF' |
+  vpad "$(wc -l <<< "$cal")" |
+  awk 'length {print $0 "|alternate=true trim=false font=Menlo size=12"}')"
 
 LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'
 echo '---'
-paste -d\  <(cal $pm $py | pad_cal) <(cal | pad_cal) <(cal $nm $ny | pad_cal) |
-  awk 'NF {print $0 "|trim=false font=Menlo size=12"}' | cut -c2-
+paste -d '\n' <(echo "$cal") <(echo "$wtr")
