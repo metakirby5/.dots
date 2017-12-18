@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
 vpad() {
-  input="$(cat -)"
-  len="$(wc -l <<< "$input")"
-  pad="$(echo $(($1 - $len)))"
-  above="$(echo $(($pad / 2)))"
-  below="$(echo $((($pad + 1) / 2)))"
-  [ $above -gt 0 ] && yes ' ' | head -n $above
-  echo "$input"
-  [ $below -gt 0 ] && yes ' ' | head -n $below
+  tmp="$(mktemp)"
+  cat >"$tmp"
+
+  len="$(wc -l < "$tmp")"
+  if [ $len -gt 0 ]; then
+    pad="$(echo $(($1 - $len)))"
+    above="$(echo $(($pad / 2)))"
+    below="$(echo $((($pad + 1) / 2)))"
+    [ $above -gt 0 ] && yes ' ' | head -n $above
+    cat "$tmp"
+    [ $below -gt 0 ] && yes ' ' | head -n $below
+  fi
+
+  rm -f "$tmp"
 }
 
 pad_cal() {
