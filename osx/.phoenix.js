@@ -106,7 +106,7 @@ p =
     mouseOut: '.'            # Move mouse to lower right corner
     winHintMode: 'y'         # Activate window hint mode
     scrHintMode: 's'         # Activate screen hint mode
-    evalInputMode: '\\'      # Activate JS eval mdoe
+    evalInputMode: ';'       # Activate JS eval mdoe
     shellInputMode: 'return' # Activate shell input mode
     apps:                    # Launch applications
       t: 'iTerm2'
