@@ -10,7 +10,7 @@ dump-leaves() {
         if which "$m" &>/dev/null; then
             echo "Dumping $m leaves to $dest..."
             local leaves="$(${m}-leaves 2>/dev/null)"
-            [ "$leaves" ] && echo "$leaves" > "$dest" ||\
+            [ $? -eq 0 ] && echo "$leaves" > "$dest" ||
                 echo "    ${m}-leaves FAILED!"
         else
             echo "$m not found, skipping..."
