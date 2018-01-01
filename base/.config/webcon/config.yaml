@@ -8,10 +8,6 @@ cliclick:
     left: cliclick kp:arrow-left
     spacebar: cliclick kp:space
     right: cliclick kp:arrow-right
-    enter: cliclick kp:return
-    esc: cliclick kp:esc
-    click: cliclick c:.
-    doubleclick: cliclick dc:.
 announcer:
     greet: say hello
     part: say farewell
