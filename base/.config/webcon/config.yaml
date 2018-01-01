@@ -4,11 +4,14 @@ mpv:
     rewind: echo seek -5 > {mpvfifo}
     play/pause: echo cycle pause > {mpvfifo}
     fast forward: echo seek 5 > {mpvfifo}
-input:
+cliclick:
+    left: cliclick kp:arrow-left
+    spacebar: cliclick kp:space
+    right: cliclick kp:arrow-right
+    enter: cliclick kp:return
+    esc: cliclick kp:esc
     click: cliclick c:.
     doubleclick: cliclick dc:.
-    spacebar: cliclick kp:space
-    enter: cliclick kb:return
 announcer:
     greet: say hello
     part: say farewell
