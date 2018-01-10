@@ -158,6 +158,7 @@ __mk5_set_prompt() {
   mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
 
   local PS1L=                 # Clear PS1L
+  local PS1R=                 # Clear PS1R
   PS1L+="$hostname"           # (Hostname)
   PS1L+="$jobs_info"          # (Jobs)
   PS1L+="$virtualenv_info"    # (Virtualenv)
@@ -169,16 +170,18 @@ __mk5_set_prompt() {
   if [ $(wc -c <<< "$stripped") == 2 ]; then
     PS1L="$pchar_color$stripped"
   else
-    PS1L+="\n"                  # Newline
-    PS1L+="$pchar_color$pchar"  # Prompt
+    PS1R+="\e[1;30m$(date '+%D %H:%M')"  # Grab the time
+    PS1L+="\n"                           # Newline
+    PS1L+="$pchar_color$pchar"           # Prompt
   fi
   PS1L+="$__mk5_normal "      # Clear colors
 
-  # Grab the time
-  local PS1R="\e[1;30m$(date '+%D %H:%M')"
-
-  # Print left and right
-  PS1="$(printf '\[%*s\r\]%s' "$(($(tput cols) + 8))" "$PS1R" "$PS1L")"
+  # Print left and right if we have a right, otherwise just use left
+  if [ "$PS1R" ]; then
+    PS1="$(printf '\[%*s\r\]%s' "$(($(tput cols) + 8))" "$PS1R" "$PS1L")"
+  else
+    PS1="$PS1L"
+  fi
 
   PS2=""                     # Clear PS2
   PS2+="$__mk5_yellow$pchar" # Yellow continuation line
