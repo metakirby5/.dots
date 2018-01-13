@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>428</string>
+	<string>444.4</string>
 	<key>AMApplicationVersion</key>
-	<string>2.7</string>
+	<string>2.8</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -65,7 +65,7 @@
 					<key>inputMethod</key>
 					<integer>1</integer>
 					<key>shell</key>
-					<string>/usr/local/bin/bash</string>
+					<string>/bin/bash</string>
 					<key>source</key>
 					<string></string>
 				</dict>
@@ -169,8 +169,6 @@
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
