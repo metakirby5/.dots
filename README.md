@@ -1,9 +1,18 @@
 .dots
 =====
 
-All of my dotfiles.
+All of my dotfiles, managed with GNU Stow.
 
 ![dtop](https://s.kirbi.es/dtop.png)
+
+- Folders prefixed with `_` should not be stowed.
+  - `_misc` contains configuration that must be manually applied.
+  - `_setup` contains setup scripts.
+- All other folders can be stowed.
+  - Each stowed folder should self-indicate that it is stowed via presence of
+    a file with the package's name in `.local/stowed`. For example, the `osx`
+    package has the file `.local/stowed/osx`. This allows the `restow-dots`
+    script to work.
 
 Here's what you'll need...
 
