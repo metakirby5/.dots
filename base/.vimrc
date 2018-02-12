@@ -557,6 +557,7 @@ endif " }}}
     set sidescrolloff=5            " keep at least 5 lines left/right
     set title                      " allow titles
     set titlestring=%f             " title is the filename
+    set signcolumn=yes             " always show sign column (e.g. GitGutter)
     set ls=2                       " always show status line
     set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:_ " whitespace characters
     set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:\  " line characters
