@@ -516,9 +516,10 @@ endif " }}}
   set novisualbell                  " disable bell part 2
   set t_vb=                         " disable bell part 3
   set backspace=2                   " backspace over everything
+  set virtualedit=block             " arbitrary cursor position in visual block
   set fileformats=unix,dos,mac      " open files from mac/dos
   set hidden                        " don't bug me about abandoning buffers
-  set nojoinspaces                  " don't add white space when I don't tell you to
+  set nojoinspaces                  " don't add white space on join line
   set autowrite                     " write before make
   set mouse=a                       " allow mouse usage
   silent! set ttymouse=xterm2       " non-jumpy mouse visual select
@@ -830,7 +831,7 @@ endif " }}}
     augroup HELP_SPLITS
       au!
       au BufEnter * if &buftype == 'help'
-            \ | wincmd L | exe 'vert resize ' . (&tw + 1)
+            \ | wincmd L | exe 'vert resize ' . (&tw + 2)
             \ | noremap <buffer> q <esc>:q<cr>
             \ | endif
     augroup END
