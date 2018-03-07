@@ -114,6 +114,7 @@ p =
       t: 'iTerm'
       e: 'Finder'
       g: 'Google Chrome'
+      '.': 'Slack'
 
     ## ACTIVATE WITH mods.pour
     spaceAll: 's'            # Put window on all spaces
