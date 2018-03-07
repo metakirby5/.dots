@@ -802,7 +802,7 @@ endif " }}}
     set statusline+=%=                              " left/right separator
     set statusline+=%*                              " statusline highlight
     set statusline+=%(\ [%{_s_flags()}%M%R]%)       " flags
-    set statusline+=%(\ %{_s_ve()}\ %)%#Normal#\ %* " virtualedit
+    set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %{_s_tw()}                    " text width/paste mode
     set statusline+=\ %#Normal#\ %*                 " separator
     set statusline+=\ %{_s_syntax()}                " syntax
