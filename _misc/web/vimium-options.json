@@ -1,0 +1,194 @@
+{
+  "settingsVersion": "1.63",
+  "exclusionRules": [
+    {
+      "pattern": "https?://cloudpebble.net/ide/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.codecademy.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.google.com/*",
+      "passKeys": "?pnrt"
+    },
+    {
+      "pattern": "https?://soundcloud.com/*",
+      "passKeys": "?Lsmplrh0123456789"
+    },
+    {
+      "pattern": "https?://codeshare.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://joezeng.github.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://zshthem.es/*",
+      "passKeys": "jk"
+    },
+    {
+      "pattern": "https?://still-tor-2690.herokuapp.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://calendar.google.com/*",
+      "passKeys": "?jkpnrt12345dwmxacezgynm/+qCs"
+    },
+    {
+      "pattern": "https?://drewdevault.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.sharelatex.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://foobar.withgoogle.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://doyouevendev.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.toomanychefs.party/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://gradescope.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://vim-adventures.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://metakirby5.github.io/*",
+      "passKeys": "ba"
+    },
+    {
+      "pattern": "https?://inbox.google.com/*",
+      "passKeys": "?c/iqhtBMzojknpey][sPaArR#!m.xX"
+    },
+    {
+      "pattern": "https?://www.hackerrank.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://rik.smith-unna.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://coderpad.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ff0033.github.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://jupyter.kirbi.es/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://localhost:8888/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://cmdchallenge.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://cloud.digitalocean.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ec2-52-11-41-153.us-west-2.compute.amazonaws.com:8888/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ec2-34-208-241-54.us-west-2.compute.amazonaws.com:8888/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ec2-34-208-253-238.us-west-2.compute.amazonaws.com:8888/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.hackertyper.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://hackertyper.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://codecon.bloomberg.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://tty.kirbi.es*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://colab.research.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "about:blank*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.overleaf.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.qualified.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ledyba.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://jsfiddle.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://codepair.hackerrank.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://codepad.remoteinterview.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://leetcode.com/problems/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://trello.com/*",
+      "passKeys": "?jk/cdel;mn,.qstvwx"
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap [[\nmap [ goPrevious\nunmap ]]\nmap ] goNext\nunmap <<\nmap < moveTabLeft\numap >>\nmap > moveTabRight\nmap ' Marks.activateGotoMode\nmap gp togglePinTab",
+  "linkHintCharacters": "fjdkslaghrueiwovncm",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": true,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 60,
+  "smoothScroll": true,
+  "grabBackFocus": true,
+  "searchEngines": "w: http://www.wikipedia.org/w/index.php?title=Special:Search&search=%s wikipedia\ny: https://www.youtube.com/results?search_query=%s youtube",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n  /* linkhint boxes */\n  opacity: 0.8;\n  background: #2D2D2D;\n  border-radius: 0;\n  border: 2px solid #777777;\n}\n\ndiv > .vimiumHintMarker span {\n  /* linkhint text */\n  color: #FFFFFF;\n  font-family: \"Calibri\", sans-serif;\n  font-weight: normal;\n  font-size: 12px;\n  letter-spacing: 1px;\n  text-shadow: none;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n  color: #3FCFEE;\n}"
+}
