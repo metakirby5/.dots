@@ -10,6 +10,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>CheckTestRelease</key>
 	<false/>
 	<key>Custom Color Presets</key>
@@ -2054,15 +2056,15 @@
 	<key>HotKeyTogglesWindow</key>
 	<true/>
 	<key>Hotkey</key>
-	<true/>
+	<false/>
 	<key>HotkeyChar</key>
-	<integer>120</integer>
+	<integer>0</integer>
 	<key>HotkeyCode</key>
-	<integer>7</integer>
+	<integer>0</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>HotkeyModifiers</key>
-	<integer>1573160</integer>
+	<integer>0</integer>
 	<key>JobName</key>
 	<false/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -2103,9 +2105,9 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>158 489 918 452 0 0 1680 1050 </string>
+	<string>158 472 1016 512 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>191 129 650 452 0 0 1680 1050 </string>
+	<string>0 621 1680 429 0 0 1680 1050 </string>
 	<key>NeverWarnAboutShortLivedSessions_74EEFB9A-61C3-4730-A698-E5987B1368F5</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_74EEFB9A-61C3-4730-A698-E5987B1368F5_selection</key>
@@ -4328,8 +4330,34 @@
 			</dict>
 			<key>Guid</key>
 			<string>9A289524-4985-40FF-925C-FE1801440D13</string>
+			<key>Has Hotkey</key>
+			<true/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>HotKey Activated By Modifier</key>
+			<false/>
+			<key>HotKey Alternate Shortcuts</key>
+			<array/>
+			<key>HotKey Characters</key>
+			<string>≈</string>
+			<key>HotKey Characters Ignoring Modifiers</key>
+			<string>x</string>
+			<key>HotKey Key Code</key>
+			<integer>7</integer>
+			<key>HotKey Modifier Activation</key>
+			<integer>0</integer>
+			<key>HotKey Modifier Flags</key>
+			<integer>1572864</integer>
+			<key>HotKey Window Animates</key>
+			<true/>
+			<key>HotKey Window AutoHides</key>
+			<true/>
+			<key>HotKey Window Dock Click Action</key>
+			<integer>0</integer>
+			<key>HotKey Window Floats</key>
+			<true/>
+			<key>HotKey Window Reopens On Activation</key>
+			<false/>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Jobs to Ignore</key>
