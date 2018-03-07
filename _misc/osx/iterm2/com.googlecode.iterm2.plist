@@ -2068,13 +2068,9 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.local/zenbu</string>
+	<string>~/.dots/_misc/osx/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 459}</string>
-	<key>NSNavPanelExpandedSizeForSaveMode</key>
-	<string>{712, 521}</string>
-	<key>NSNavPanelExpandedStateForSaveMode</key>
-	<true/>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -2083,11 +2079,6 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
-	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
-	<array>
-		<string>0.000000, 0.000000, 224.000000, 263.000000, NO, NO</string>
-		<string>0.000000, 264.000000, 224.000000, 43.000000, NO, NO</string>
-	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -2095,7 +2086,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdCAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -2111,35 +2102,10 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
-	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
-	<dict>
-		<key>TB Is Shown</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>810 191 673 252 0 0 1680 1027 </string>
-	<key>NSWindow Frame Preferences</key>
-	<string>243 741 606 456 0 0 1920 1200 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>233 374 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>484 230 918 498 0 0 1680 1050 </string>
-	<key>NSWindow Frame UKCrashReporter</key>
-	<string>216 534 592 584 0 0 1920 1200 </string>
+	<string>158 489 918 452 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>20 20 930 570 0 0 1920 1200 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>957 151 650 452 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>14 0 650 452 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>254 55 650 452 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>275 32 650 452 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 5</key>
-	<string>296 9 650 452 0 0 1680 1027 </string>
-	<key>NSWindow Frame iTerm Window 6</key>
-	<string>317 575 650 452 0 0 1680 1027 </string>
+	<string>191 129 650 452 0 0 1680 1050 </string>
 	<key>NeverWarnAboutShortLivedSessions_74EEFB9A-61C3-4730-A698-E5987B1368F5</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_74EEFB9A-61C3-4730-A698-E5987B1368F5_selection</key>
@@ -2776,7 +2742,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.050000000000000003</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -2794,7 +2760,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>12</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/echan</string>
 		</dict>
@@ -3426,7 +3392,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.050000000000000003</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -3444,7 +3410,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>12</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/echan</string>
 		</dict>
@@ -4078,7 +4044,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.050000000000000003</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -4096,7 +4062,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>12</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/echan</string>
 		</dict>
@@ -5382,7 +5348,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.050000000000000003</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -5400,74 +5366,21 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>12</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/echan</string>
 		</dict>
 	</array>
-	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
-	<true/>
-	<key>NoSyncConfirmBeta</key>
-	<true/>
-	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
-	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>B577FDBB-04C6-47AE-BD9A-C07F3BD9BB88</string>
-	<key>NoSyncLastTipTime</key>
-	<real>493187356.28623801</real>
+	<string>CA4BAB86-FC13-49DC-BC9E-E9DB4EF0F954</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
-	<key>NoSyncPermissionToShowTip</key>
-	<true/>
-	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
-	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>488951570.220945</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-		<string>0001</string>
-		<string>0002</string>
-		<string>0003</string>
-		<string>0004</string>
-		<string>0005</string>
-		<string>0006</string>
-		<string>0007</string>
-		<string>0008</string>
-		<string>0009</string>
-		<string>0010</string>
-		<string>0011</string>
-		<string>0012</string>
-		<string>0013</string>
-		<string>0014</string>
-		<string>0015</string>
-		<string>0016</string>
-		<string>0017</string>
-		<string>0018</string>
-		<string>0019</string>
-		<string>0020</string>
-		<string>0021</string>
-		<string>0022</string>
-		<string>0023</string>
-		<string>0024</string>
-		<string>0025</string>
-		<string>0026</string>
-		<string>0027</string>
-		<string>0028</string>
-		<string>0029</string>
-		<string>0030</string>
-		<string>0031</string>
-		<string>0032</string>
-		<string>0033</string>
-		<string>0034</string>
-	</array>
+	<real>542077849.49447596</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -5517,18 +5430,16 @@
 	<false/>
 	<key>RawCameraSupportVersion</key>
 	<string>7040</string>
-	<key>SUAutomaticallyUpdate</key>
-	<true/>
 	<key>SUEnableAutomaticChecks</key>
-	<false/>
+	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=71</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-01-13T23:37:36Z</date>
+	<date>2018-03-07T01:51:41Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Selection Respects Soft Boundaries</key>
@@ -5541,8 +5452,6 @@
 	<false/>
 	<key>SmartPlacement</key>
 	<false/>
-	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1508988672</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>WindowNumber</key>
@@ -5552,7 +5461,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.git.dcf778ac5e</string>
+	<string>3.1.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
