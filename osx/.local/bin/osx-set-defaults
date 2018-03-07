@@ -105,6 +105,10 @@ DEFAULTS=(
   # com.apple.screencapture
   ["Put screenshots in ~/Pictures/Screenshots/"]="\
     com.apple.screencapture location ~/Pictures/Screenshots/"
+
+  # com.apple.AppleMultitouchTrackpad
+  ["Trackpad three finger drag"]="\
+    com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true"
 )
 
 # Open up the log file
