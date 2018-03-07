@@ -83,12 +83,14 @@ p =
 
     ## MULTI-MODIFIER KEYS
     snaps:                   # Toggle: window snap proportions
-      q:    [-1/2, -1/2]
-      a:    [-1/2, -1  ]
-      z:    [-1/2, 1/2 ]
-      ']':  [1/2,  -1/2]
-      '\'': [1/2,  -1  ]
-      '/':  [1/2,  1/2 ]
+      q:      [-1/2, -1/2]
+      a:      [-1/2, 1  ]
+      z:      [-1/2, 1/2 ]
+      ']':    [1/2,  -1/2]
+      '\'':   [1/2,  1  ]
+      '/':    [1/2,  1/2 ]
+      'down': [1, 1/2]
+      'up':   [1, -1/2]
     dirs:                    # Directionals
       h: WEST
       j: SOUTH
