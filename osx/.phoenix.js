@@ -816,8 +816,7 @@ class ChainWindow
     @updateScr()
 
   # Private: update window screen for chains
-  updateScr: ->
-    next = @win.screen()
+  updateScr: (next = @win.screen()) ->
     @prevScr = @scr ? next
     @prevSf = @prevScr?.flippedVisibleFrame()
     @scr = next
@@ -979,7 +978,7 @@ class ChainWindow
       next.addWindows [@win]
       @win.spaces().map (prev) =>
         prev.removeWindows [@win] if not prev.isEqual(next)
-      @updateScr()
+      @updateScr next.screens()[0]
     this
 
   # Add to space
