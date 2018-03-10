@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 # Do an adb operation with a file, pull it, and remove it.
 
-filename="/sdcard/$(tr -cd 'a-f0-9' </dev/urandom | head -c 32)"
+if [ "$#" -lt  2 ]; then
+  echo 'Usage: adbf [filename] [commands...]'
+  exit 1
+fi
+
+filename="/sdcard/$1"
+shift
+
+finish() {
+  adb pull "$filename"
+  adb shell rm "$filename"
+}
+trap finish EXIT
 
 adb shell "$@" "$filename"
-adb pull "$filename"
-adb shell rm "$filename"
-
-echo "$filename"
