@@ -10,6 +10,7 @@ filename="/sdcard/$1"
 shift
 
 finish() {
+  sleep 0.5
   adb pull "$filename"
   adb shell rm "$filename"
 }
