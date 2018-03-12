@@ -36,16 +36,6 @@ ghp-publish() {
     git checkout $cur_branch
 }
 
-# Get rid of already-merged branches
-# http://stackoverflow.com/questions/17983068/git-delete-local-branches-after-deleting-them-on-remote
-git-clean-branches() {
-    git branch --merged | \
-    grep -v "\*" | \
-    grep -v "master" | \
-    grep -v "develop" | \
-    xargs -n 1 git branch -d
-}
-
 # Get rid of .orig files from merge conflicts
 git-clean-orig() {
     git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
