@@ -1,2 +1,7 @@
-map ; :
 set surround
+
+map ; :
+map : ;
+
+map ^ 0
+map 0 ^
