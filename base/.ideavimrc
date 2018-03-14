@@ -2,8 +2,10 @@
 set surround
 
 " IDE Actions
-noremap H :action VimMotionPreviousTab<CR>
-noremap L :action VimMotionNextTab<CR>
+noremap H :action VimMotionPreviousTab<cr>
+noremap L :action VimMotionNextTab<cr>
+noremap <bslash> :action VimGotoDeclaration<cr>
+noremap <bar> :action ShowUsages<cr>
 
 " Misc
 set ignorecase
@@ -14,7 +16,6 @@ set hlsearch
 set gdefault
 
 set clipboard=unnamedplus,unnamed
-set undolevels=10000
 set scrolloff=5
 
 let mapleader = " "
