@@ -1,17 +1,65 @@
+" Plugins
 set surround
 
-noremap ; :
-noremap : ;
-
-noremap ^ 0
-noremap 0 ^
-
-vnoremap < <gv
-vnoremap > >gv
-
+" IDE Actions
 noremap H :action VimMotionPreviousTab<CR>
 noremap L :action VimMotionNextTab<CR>
 
-noremap / :action Find<CR>
-noremap n :action FindNext<CR>
-noremap N :action FindPrevious<CR>
+" Misc
+set ignorecase
+set smartcase
+set infercase
+
+set hlsearch
+set gdefault
+
+set clipboard=unnamedplus,unnamed
+set undolevels=10000
+set scrolloff=5
+
+let mapleader = " "
+
+" Swap ; and :
+noremap ; :
+noremap : ;
+
+" Swap ' and `
+noremap ' `
+noremap ` '
+
+" Quick play macro
+noremap Q @q
+
+" Split line
+noremap K i<cr><esc>
+
+" Treat long lines as break lines (useful when moving around in them)
+" Account for <count>j/k
+noremap <silent> <expr> j v:count ? 'j' : 'gj'
+noremap <silent> <expr> k v:count ? 'k' : 'gk'
+noremap <silent> <expr> <down> v:count ? 'j' : 'gj'
+noremap <silent> <expr> <up> v:count ? 'k' : 'gk'
+inoremap <silent> <down> <esc>gja
+inoremap <silent> <up> <esc>gka
+
+" Preserve selection when (de)indenting in visual mode
+xnoremap > >gv
+xnoremap < <gv
+
+" Swap 0 and ^, treat long lines as break lines
+noremap 0 g^
+noremap ^ g0
+noremap $ g$
+
+" Shift-tab to go back in jumplist
+noremap <s-tab> <c-o>
+
+" ,[sv] - Horizontal/vertical split
+nnoremap <leader>s <C-w>s
+nnoremap <leader>v <C-w>v
+
+" ,[hjkl] - Switch to split
+nnoremap <leader>h <C-W>h
+nnoremap <leader>j <C-W>j
+nnoremap <leader>k <C-W>k
+nnoremap <leader>l <C-W>l
