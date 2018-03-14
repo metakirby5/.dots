@@ -1,7 +1,17 @@
 set surround
 
-map ; :
-map : ;
+noremap ; :
+noremap : ;
 
-map ^ 0
-map 0 ^
+noremap ^ 0
+noremap 0 ^
+
+vnoremap < <gv
+vnoremap > >gv
+
+noremap H :action VimMotionPreviousTab<CR>
+noremap L :action VimMotionNextTab<CR>
+
+noremap / :action Find<CR>
+noremap n :action FindNext<CR>
+noremap N :action FindPrevious<CR>
