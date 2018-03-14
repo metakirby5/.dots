@@ -18,6 +18,7 @@ AXIS = 'AXIS'
 AXES = [VERTICAL, HORIZONTAL]
 
 # Preferences
+# AVAILABLE KEYS: f v
 Phoenix.set openAtLogin: true
 p =
   ## WINDOWS
@@ -114,7 +115,7 @@ p =
       t: 'iTerm'
       e: 'Finder'
       g: 'Google Chrome'
-      '.': 'Slack'
+      ',': 'Slack'
 
     ## ACTIVATE WITH mods.pour
     spaceAll: 's'            # Put window on all spaces
