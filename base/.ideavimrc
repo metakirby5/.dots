@@ -45,8 +45,8 @@ inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
 
 " Preserve selection when (de)indenting in visual mode
-xnoremap > >gv
-xnoremap < <gv
+vnoremap > >gv
+vnoremap < <gv
 
 " Swap 0 and ^, treat long lines as break lines
 noremap 0 g^
