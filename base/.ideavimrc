@@ -5,7 +5,7 @@ set surround
 noremap H :action VimMotionPreviousTab<cr>
 noremap L :action VimMotionNextTab<cr>
 noremap <bslash> :action VimGotoDeclaration<cr>
-noremap <bar> :action ShowUsages<cr>
+noremap <bar> :action FindUsages<cr>
 noremap <c-n> :action RenameElement<cr>
 
 " Misc
