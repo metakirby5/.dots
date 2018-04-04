@@ -16,7 +16,6 @@ set infercase
 set hlsearch
 set gdefault
 
-set clipboard=unnamedplus,unnamed
 set scrolloff=5
 
 let mapleader = " "
