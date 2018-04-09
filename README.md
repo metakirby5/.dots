@@ -13,6 +13,8 @@ All of my dotfiles, managed with GNU Stow.
     a file with the package's name in `.local/stowed`. For example, the `osx`
     package has the file `.local/stowed/osx`. This allows the `restow-dots`
     script to work.
+  - To prevent unexpected behavior, you should use the `--no-folding` flag
+    with stow.
 
 Here's what you'll need...
 
