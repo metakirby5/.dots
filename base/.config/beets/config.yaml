@@ -1,4 +1,5 @@
 plugins: fromfilename convert fetchart embedart lastgenre duplicates
+directory: '~/Music/Music'
 bell: yes
 paths:
   singleton: '_Singles/$artist/$title'
