@@ -1,9 +1,10 @@
-Unidecode
 beautifulsoup4
+beets
 colorz
 eyeD3
 flake8
 fuzzywuzzy
+grako
 humanize
 jedi
 jupyter
@@ -13,6 +14,7 @@ nltk
 pip-autoremove
 pipdeptree
 pushbullet-cli
+pylast
 python-Levenshtein
 selenium
 sklearn

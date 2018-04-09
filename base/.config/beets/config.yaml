@@ -1,0 +1,12 @@
+plugins: fromfilename convert fetchart embedart lastgenre duplicates
+bell: yes
+paths:
+  singleton: '_Singles/$artist/$title'
+  comp: '_Various/$album%aunique{}/$track. $title'
+  default: '$albumartist/$album%aunique{}/$track. $title'
+convert:
+  auto: yes
+  copy_album_art: yes
+embedart:
+  ifempty: yes
+  remove_art_file: yes
