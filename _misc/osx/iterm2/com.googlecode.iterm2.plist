@@ -2129,7 +2129,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>216 534 592 584 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>970 43 930 1137 0 0 1920 1200 </string>
+	<string>0 745 1920 455 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -5581,6 +5581,8 @@
 	<false/>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
