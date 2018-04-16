@@ -16,6 +16,7 @@ pipdeptree
 pushbullet-cli
 pylast
 python-Levenshtein
+scdl
 selenium
 sklearn
 streamlink
