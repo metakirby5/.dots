@@ -92,6 +92,7 @@
 	su = stash save
 	sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
 	so = stash show --patch --color-words
+	sol = stash show --patch
 	sp = stash pop
 	sa = stash apply
 	sd = stash drop
@@ -108,10 +109,12 @@
 	ll  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d'
 	lr  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
 	lp  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
+	lpl  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
 	ls  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --numstat
 	lg  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
 	lb  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
 	lbp = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
+	lbpl = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch
 	lbs = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --numstat
 	lbg = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
 
@@ -136,20 +139,24 @@
 	pr = pull-request
 
 	# fzf
-	z   = "!cd \"$GIT_PREFIX\"; git ls-files | fzf --ansi --multi"
-	zs  = "!(cd \"$GIT_PREFIX\"; c='x=\"$(awk \"{print\\$2}\" <<< {})\"; (highlight -q --force -O ansi \"$x\" || less \"$x\") 2>/dev/null'; git -c color.status=always s | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{$1=\"\";print}') | cut -c2-"
-	zl  = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
-	zb  = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
-	zso = "!(c='git so $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
-	zd  = "!f(){(c='p=\"$(git d {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git ds \"$@\" | awk '{$1=\"\";print}' | cut -c2- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
-	zdc = "!(c='p=\"$(git dc {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git dcs | awk '{$1=\"\";print}' | cut -c2- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
-	zg  = "!f(){(cd \"$GIT_PREFIX\"; c=\"cd $(git rev-parse --show-toplevel); git -c color.grep=always g $@ -- {}\"; git g -l \"$@\" | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
-	zco = "!f(){(local x=\"$(git zb)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git co {} \"$@\")};f"
-	zci = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git co {} \"$@\")};f"
-	zcd = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git d {} \"$@\")};f"
-	zo  = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git o {} \"$@\" | less -R)};f"
-	za  = "!f(){(local x=\"$(git zd)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git a {} \"$@\")};f"
-	zr  = "!f(){(local x=\"$(git zdc)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git r {} \"$@\")};f"
-	zsp = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sp {} \"$@\")};f"
-	zsa = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sa {} \"$@\")};f"
-	zsd = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sd {} \"$@\")};f"
+	z    = "!cd \"$GIT_PREFIX\"; git ls-files | fzf --ansi --multi"
+	zs   = "!(cd \"$GIT_PREFIX\"; c='x=\"$(awk \"{print\\$2}\" <<< {})\"; (highlight -q --force -O ansi \"$x\" || less \"$x\") 2>/dev/null'; git -c color.status=always s | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{$1=\"\";print}') | cut -c2-"
+	zl   = "!(c='git o $(printf \"%s\n\" {} | cut -d\\  -f1)'; git l | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zb   = "!(c='git lbg $(awk \"{print\\$1}\" <<< {})'; git -c color.branch=always ba | cut -c3- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | awk '{print$1}')"
+	zso  = "!(c='git so $(cut -d\\  -f1 <<< {})'; git sl | fzf --ansi --no-sort --multi --preview \"$c\" --bind \"ctrl-o:execute[$c | less -R >&2]\" | cut -d\\  -f1)"
+	zd   = "!f(){(c='p=\"$(git d {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git ds \"$@\" | awk '{$1=\"\";print}' | cut -c2- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
+	zdc  = "!(c='p=\"$(git dc {})\"; [ \"$p\" ] && echo \"$p\" || less {}'; git dcs | awk '{$1=\"\";print}' | cut -c2- | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")"
+	zg   = "!f(){(cd \"$GIT_PREFIX\"; c=\"cd $(git rev-parse --show-toplevel); git -c color.grep=always g $@ -- {}\"; git g -l \"$@\" | fzf --ansi --multi --preview \"$c\" --bind \"ctrl-o:execute-multi[$c | less -R >&2]\")};f"
+	zcob = "!f(){(local x=\"$(git zb)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git co {} \"$@\")};f"
+	zcoc = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git co {} \"$@\")};f"
+	zdc  = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git d {} \"$@\")};f"
+	zoc  = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git o {} \"$@\" | less -R)};f"
+	zrbi = "!f(){(local x=\"$(git zl)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git rbi {} \"$@\")};f"
+	za   = "!f(){(local x=\"$(git zd)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git a {} \"$@\")};f"
+	zr   = "!f(){(local x=\"$(git zdc)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git r {} \"$@\")};f"
+	zsp  = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sp {} \"$@\")};f"
+	zsa  = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sa {} \"$@\")};f"
+	zsd  = "!f(){(local x=\"$(git zso)\"; [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git sd {} \"$@\")};f"
+	zcos = "!f(){(local x=\"$(git zs)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git co {} \"$@\")};f"
+	zas  = "!f(){(local x=\"$(git zs)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git a {} \"$@\")};f"
+	zrs  = "!f(){(local x=\"$(git zs)\";  [ \"$x\" ] && tr '\\n' '\\0' <<< \"$x\" | xargs -0 -n1 -i git r {} \"$@\")};f"
