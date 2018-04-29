@@ -3,8 +3,6 @@ alias sudo='sudo '
 
 # Tools
 alias flatten-dir='find . -mindepth 2 -type f -exec mv -t . -i "{}" +'
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias ip-public="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ip-local="ipconfig getifaddr en0"
 alias serve="python -m SimpleHTTPServer"
