@@ -12,6 +12,12 @@ __mk5_git() {
     open)
       git-open "$@"
       ;;
+    clean-orig)
+      git-clean-orig "$@"
+      ;;
+    update-gitignore)
+      git-update-gitignore "$@"
+      ;;
     *)
       command "$prog" "$cmd" "$@"
       ;;
@@ -24,21 +30,9 @@ hub() {
   __mk5_git hub "$@"
 }
 
-# Publish to github-pages
-ghp-publish() {
-  local cur_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-  git checkout master && \
-    git pull && \
-    git checkout gh-pages && \
-    git pull && \
-    git merge master --no-edit && \
-    git push && \
-    git checkout $cur_branch
-}
-
 # Get rid of .orig files from merge conflicts
 git-clean-orig() {
-    git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
+  git status -su | grep -e"\.orig$" | cut -f2 -d" " | xargs rm -r
 }
 
 # Update the .gitignore with all currently untracked files

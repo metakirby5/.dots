@@ -14,8 +14,8 @@ pip-diff() {
   local reqs='requirements.txt'
 
   if [ ! -f "$reqs" ]; then
-      echo "ERROR: $reqs not found."
-      return
+    echo "ERROR: $reqs not found."
+    return
   fi
 
   diff <(pip freeze) $reqs
@@ -26,8 +26,8 @@ pip-sync() {
   local reqs='requirements.txt'
 
   if [ ! -f "$reqs" ]; then
-      echo "ERROR: $reqs not found."
-      return
+    echo "ERROR: $reqs not found."
+    return
   fi
 
   pip freeze | grep -v -f $reqs - | xargs pip uninstall -y 2>/dev/null
