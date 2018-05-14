@@ -18,7 +18,7 @@ AXIS = 'AXIS'
 AXES = [VERTICAL, HORIZONTAL]
 
 # Preferences
-# AVAILABLE KEYS: f v
+# AVAILABLE KEYS: f v g
 Phoenix.set openAtLogin: true
 p =
   ## WINDOWS
@@ -83,15 +83,6 @@ p =
       fall: ['alt', 'shift']
 
     ## MULTI-MODIFIER KEYS
-    snaps:                   # Toggle: window snap proportions
-      q:      [-1/2, -1/2]
-      a:      [-1/2, 1  ]
-      z:      [-1/2, 1/2 ]
-      ']':    [1/2,  -1/2]
-      '\'':   [1/2,  1  ]
-      '/':    [1/2,  1/2 ]
-      'down': [1, 1/2]
-      'up':   [1, -1/2]
     dirs:                    # Directionals
       h: WEST
       j: SOUTH
@@ -102,6 +93,15 @@ p =
       p: -1
 
     ## ACTIVATE WITH mods.base
+    snaps:                   # Toggle: window snap proportions
+      q:      [-1/2, -1/2]
+      a:      [-1/2, 1  ]
+      z:      [-1/2, 1/2 ]
+      ']':    [1/2,  -1/2]
+      '\'':   [1/2,  1  ]
+      '/':    [1/2,  1/2 ]
+      'down': [1, 1/2]
+      'up':   [1, -1/2]
     maximize: 'm'            # Toggle: maximize window, w/ gaps
     center: 'c'              # Toggle: center window
     reFill: 'u'              # Toggle: grow window to fill empty space
@@ -114,8 +114,7 @@ p =
     apps:                    # Launch applications
       t: 'iTerm'
       e: 'Finder'
-      g: 'Google Chrome'
-      ',': 'Slack'
+      ',': 'Google Chrome'
 
     ## ACTIVATE WITH mods.pour
     spaceAll: 's'            # Put window on all spaces
