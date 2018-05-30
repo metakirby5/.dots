@@ -319,8 +319,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Better :%s/.../.../ {{{
       Plug 'osyo-manga/vim-over'
               \, { 'on': 'OverCommandLine' }
-      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-      xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
+      nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>
+      xnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>
     " }}}
     " Undo tree browser {{{
       Plug 'mbbill/undotree'
