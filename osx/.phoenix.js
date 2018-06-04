@@ -791,8 +791,15 @@ class ChainWindow
     ChainWindow.frameQueues[hash] =
       ChainWindow.frameQueues[hash] or new FixedQueue 2
 
+  # Private: check @sf first
+  rSf: (f) -> (args...) =>
+    if not (@f? and @sf?)
+      return this
+
+    f args...
+
   # Private: wrap with gap compensation
-  ungapped: (f) -> (args...) =>
+  ungapped: (f) -> (args...) => do @rSf =>
     ungap = @gap / 2
 
     # Ungap
