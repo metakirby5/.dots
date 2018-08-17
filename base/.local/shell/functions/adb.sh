@@ -11,7 +11,7 @@ adb() {
       command adbf "$@"
       ;;
     reinstall)
-      command apk-reinstall "$@"
+      command adb install -r -d "$@"
       ;;
     *)
       command adb "$cmd" "$@"
