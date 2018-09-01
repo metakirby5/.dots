@@ -7,7 +7,7 @@ alias ip-public="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ip-local="ipconfig getifaddr en0"
 alias serve="python -m SimpleHTTPServer"
 for method in GET POST PUT DELETE; do
-	alias "$method"="curl -X $method"
+  alias "$method"="curl -X $method"
 done
 
 # Shortcuts
