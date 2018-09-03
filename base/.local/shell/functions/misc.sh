@@ -32,6 +32,7 @@ install-leaves() {
     [npm]="xargs npm install -g"
     [gem]="xargs gem install"
     [luarocks]="xargs luarocks install"
+    [vscode]="xargs -L1 code --install-extension"
   )
 
   for src in "$DEPS_DIR"/*; do
