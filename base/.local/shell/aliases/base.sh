@@ -19,6 +19,7 @@ alias tetris='bastet'
 alias findr='find -L . ! -type d -regex'
 alias HEAD='git rev-parse --abbrev-ref HEAD'
 alias aniget='anistrm --program="wget -c"'
+alias pbp='pb push -d 0'
 alias pypush='python setup.py sdist bdist_wheel upload -r'
 alias pypush3='python3 setup.py sdist bdist_wheel upload -r'
 alias all="tr '\n' '\0' | xargs -0"
