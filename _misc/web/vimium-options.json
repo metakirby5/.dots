@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.63",
+  "settingsVersion": "1.64",
   "exclusionRules": [
     {
       "pattern": "https?://cloudpebble.net/ide/*",
@@ -171,7 +171,23 @@
     },
     {
       "pattern": "https?://trello.com/*",
-      "passKeys": "?jk/cdel;mn,.qstvwx"
+      "passKeys": "?jk/cdel;mn,.qstvwx1234567890"
+    },
+    {
+      "pattern": "https?://mail.google.com/*",
+      "passKeys": "?ujkopn`~cd/q.vl,xsyem!#rRaAfFN][}{zIU_+=-;:bT"
+    },
+    {
+      "pattern": "https?://airtable.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://dojin.co/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.lexaloffle.com/*",
+      "passKeys": ""
     }
   ],
   "filterLinkHints": false,
