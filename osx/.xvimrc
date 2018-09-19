@@ -17,6 +17,10 @@ noremap K i<cr><esc>
 vnoremap > >gv
 vnoremap < <gv
 
+" [H / L] - Switch tabs
+noremap H :tabprevious<cr>
+noremap L :tabnext<cr>
+
 " ^[p / n] or ^[left / right] - Switch tabs
 noremap <C-p> :tabprevious<cr>
 noremap <C-n> :tabnext<cr>
@@ -36,3 +40,5 @@ set smartcase                 " search with smart casing
 set gdefault                  " default global sub
 set ls=2                      " always show status line
 set clipboard=unnamed         " use system pasteboard
+set expandtab                 " expand tabs
+set shiftwidth=2              " number of spaces to insert per tab
