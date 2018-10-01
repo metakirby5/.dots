@@ -6,7 +6,6 @@ flake8
 fuzzywuzzy
 grako
 humanize
-jedi
 jupyter
 matplotlib
 neovim
@@ -21,8 +20,8 @@ selenium
 sklearn
 streamlink
 tabulate
-tensorflow
 tzlocal
 virtualenvwrapper
 webcon
+wheel
 zenbu

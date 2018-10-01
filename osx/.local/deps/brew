@@ -34,6 +34,7 @@ brew "jq"
 brew "kotlin"
 brew "lesspipe", args: ["with-syntax-highlighting"]
 brew "libav"
+brew "luarocks"
 brew "macvim", args: ["with-lua", "with-override-system-vim"]
 brew "mas"
 brew "mpv", args: ["with-bundle", "with-vapoursynth"]
@@ -46,6 +47,7 @@ brew "ocaml"
 brew "p7zip"
 brew "pandoc"
 brew "parallel"
+brew "pebble/pebble-sdk/pebble-qemu"
 brew "pinentry-mac"
 brew "poppler"
 brew "pup"
@@ -122,6 +124,7 @@ cask "numi"
 cask "openemu"
 cask "osu"
 cask "osxfuse"
+cask "padbury-clock"
 cask "phoenix"
 cask "provisionql"
 cask "qlcolorcode"
@@ -163,7 +166,6 @@ cask "webpquicklook"
 cask "whatsyoursign"
 cask "wineskin-winery"
 cask "xbox360-controller-driver"
-mas "Boxy", id: 1053031090
 mas "Controllers Lite", id: 673660806
 mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
