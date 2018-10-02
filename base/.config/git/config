@@ -93,6 +93,10 @@
   # stash
   su = stash save
   sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
+  slr = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --date=relative
+  slp = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch --color-words
+  slpl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
+  sls = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --stat
   so = stash show --patch --color-words
   sol = stash show --patch
   sp = stash pop
