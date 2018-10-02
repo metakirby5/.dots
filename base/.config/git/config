@@ -109,6 +109,7 @@
   rb = rebase
   rbi = rebase --interactive
   rbc = rebase --continue
+  rbm = "!f(){(local x=\"${1:-master}\"; git co \"$1\" && git p && git co - && git rb \"$1\")};f"
 
   # log
   l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
