@@ -29,16 +29,16 @@ mycol() {
 # Info
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
-printinfo () {
+print_info() {
     echo
-    prin "$(color 4) $USER "
-    prin "$(color 0)────────────────┬─────────────────────────"
+    prin "$(color 4) $USER "
+    prin "$(color 0)────────────────┬────────────────────────────"
     myprin "            os" distro
     myprin "        uptime" uptime
     myprin "window manager" "Phoenix"
     myprin "         shell" shell
     myprin "      packages" packages
-    prin "$(color 0)────────────────┴─────────────────────────"
+    prin "$(color 0)────────────────┴────────────────────────────"
 
     printf "$(mypad) $(mycol '_____' '1;3')\n"
 }
