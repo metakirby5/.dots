@@ -16,7 +16,7 @@ DEFAULTS=(
   ["Black bar and dock"]="\
     NSGlobalDomain AppleInterfaceStyle -string Dark"
   ["Automatically hide menu bar"]="\
-    NSGlobalDomain '_HIHideMenuBar' -bool true"
+    NSGlobalDomain _HIHideMenuBar -bool true"
   ["Show scrollbars when scrolling"]="\
     NSGlobalDomain AppleShowScrollBars -string WhenScrolling"
   ["Click in scroll bar to jump to next page"]="\
@@ -48,25 +48,25 @@ DEFAULTS=(
   ["Minimize to dock with scale"]="\
     com.apple.dock mineffect -string scale"
   ["Don't minimize to application icon"]="\
-    com.apple.dock 'minimize-to-application' -bool false"
+    com.apple.dock minimize-to-application -bool false"
   ["Animate opening dock applications"]="\
     com.apple.dock launchanim -bool true"
   ["Show dock indicators"]="\
-    com.apple.dock 'show-process-indicators' -bool true"
+    com.apple.dock show-process-indicators -bool true"
   ["Autohide dock"]="\
     com.apple.dock autohide -bool true"
   ["Don't reorganize spaces in most recently used order"]="\
-    com.apple.dock 'mru-spaces' -bool false"
+    com.apple.dock mru-spaces -bool false"
   ["Group windows by application"]="\
-    com.apple.dock 'expose-group-apps' -bool true"
+    com.apple.dock expose-group-apps -bool true"
 
   # com.apple.spaces
   ["Displays have separate spaces"]="\
-    com.apple.spaces 'spans-displays' -bool false"
+    com.apple.spaces spans-displays -bool false"
 
   # com.apple.dashboard
   ["Disable dashboard"]="\
-    com.apple.dashboard 'dashboard-enabled-state' -int 1"
+    com.apple.dashboard dashboard-enabled-state -int 1"
 
   # com.apple.menuextra.clock
   ["24 hour clock"]="\
