@@ -59,6 +59,8 @@ DEFAULTS=(
     com.apple.dock mru-spaces -bool false"
   ["Group windows by application"]="\
     com.apple.dock expose-group-apps -bool true"
+  ["Don't show recent apps"]="\
+    com.apple.dock show-recents -bool false"
 
   # com.apple.spaces
   ["Displays have separate spaces"]="\
