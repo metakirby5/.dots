@@ -123,6 +123,7 @@ for d in "${!DEFAULTS[@]}"; do
   cur="$(defaults read ${DEFAULTS[$d]} 2>/dev/null)"
   [ ! "$cur" ] && cur="unset"
   read -rp "$d? ($cur -> $val) [y/N] " set
+  echo "  $d" >> "$LOG_FILE"
   case $set in
     [yY])
       if eval defaults write ${DEFAULTS[$d]}; then
