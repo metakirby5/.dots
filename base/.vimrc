@@ -1016,13 +1016,6 @@ endif " }}}
 
     " Spellcheck
     set spelllang=en
-
-    " Enable spell check for text files
-    augroup SPELLCHECK
-      au!
-      au BufNewFile,BufRead *.txt setlocal spell
-      au Filetype markdown,help setlocal spell
-    augroup END
   " }}}
   " Syntax / FileType {{{
     set smarttab            " remove spaces grouped as tabs
