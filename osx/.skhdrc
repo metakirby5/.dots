@@ -1,0 +1,52 @@
+# Shortcuts.
+cmd + alt - e : open -a Finder
+cmd + alt - t : open -a iTerm
+
+# General.
+cmd + alt - w : chunkc tiling::window -c
+cmd + alt - m : chunkc tiling::window -t fullscreen
+cmd + alt + shift - m : chunkc tiling::window -t parent
+cmd + alt - space : chunkc tiling::window -t float
+cmd + alt - 0x18 : chunkc tiling::desktop -e
+
+# Select window.
+cmd + alt - h : chunkc tiling::window -f west
+cmd + alt - j : chunkc tiling::window -f south
+cmd + alt - k : chunkc tiling::window -f north
+cmd + alt - l : chunkc tiling::window -f east
+
+# Window location.
+shift + cmd + alt - h : chunkc tiling::window -s west
+shift + cmd + alt - j : chunkc tiling::window -s south
+shift + cmd + alt - k : chunkc tiling::window -s north
+shift + cmd + alt - l : chunkc tiling::window -s east
+
+# Window size.
+ctrl + cmd - h : chunkc tiling::window -r -0.025 -e west  -e east
+ctrl + cmd - j : chunkc tiling::window -r  0.025 -e north -e south
+ctrl + cmd - k : chunkc tiling::window -r -0.025 -e north -e south
+ctrl + cmd - l : chunkc tiling::window -r  0.025 -e west  -e east
+
+# Window insertion.
+fn + ctrl + cmd + alt - h : chunkc tiling::window -i west
+fn + ctrl + cmd + alt - j : chunkc tiling::window -i south
+fn + ctrl + cmd + alt - k : chunkc tiling::window -i north
+fn + ctrl + cmd + alt - l : chunkc tiling::window -i east
+
+# Layout manipulation.
+cmd + alt - r : chunkc tiling::desktop -r 270
+cmd + alt - s : chunkc tiling::window -t split
+
+# Send to desktop.
+shift + cmd + alt - p : chunkc tiling::window -d prev
+shift + cmd + alt - n : chunkc tiling::window -d next
+shift + cmd + alt - 1 : chunkc tiling::window -d 1
+shift + cmd + alt - 2 : chunkc tiling::window -d 2
+shift + cmd + alt - 3 : chunkc tiling::window -d 3
+shift + cmd + alt - 4 : chunkc tiling::window -d 4
+shift + cmd + alt - 5 : chunkc tiling::window -d 5
+shift + cmd + alt - 6 : chunkc tiling::window -d 6
+shift + cmd + alt - 7 : chunkc tiling::window -d 7
+shift + cmd + alt - 8 : chunkc tiling::window -d 8
+shift + cmd + alt - 9 : chunkc tiling::window -d 9
+shift + cmd + alt - 0 : chunkc tiling::window -d 10
