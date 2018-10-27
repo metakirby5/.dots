@@ -37,6 +37,8 @@ alias q='fzf --multi | map'
 alias u='pushd'
 alias p='popd'
 alias s='dirs -v'
+alias k='kubectl'
+alias gc='gcloud'
 
 # Prefs
 alias less='less -R'
