@@ -4,7 +4,7 @@ kubectl() {
 
   case "$cmd" in
     desc)
-      commmand kubectl describe pod "$@"
+      command kubectl describe pod "$@"
       ;;
 
     pod)
