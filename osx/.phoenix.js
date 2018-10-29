@@ -1173,7 +1173,9 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
 
 # Apps
 p.keys.apps.map (app, key) ->
-  Key.on key, p.keys.mods.base, -> App.launch(app).focus()
+  Key.on key, p.keys.mods.base, ->
+    Task.run '/usr/bin/open', ['-a', app], (_) ->
+      App.get(app)?.mainWindow()?.chain().mouseTo()
 
 # Spaces
 [ [ p.keys.mods.move # move
