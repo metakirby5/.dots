@@ -96,7 +96,13 @@ brew() {
 # Requires Homebrew/homebrew-bundle.
 brew-leaves() {
   (
-    bundle="$(brew bundle dump --file=-)"
+    # This little file dance is necessary since --file=- doesn't work anymore.
+    out="$(mktemp)"
+    rm "$out"
+    brew bundle dump --file="$out"
+    bundle="$(<"$out")"
+    rm "$out"
+
     grep -f <(
       brew leaves | tr '\n' '\0' | xargs -0 printf "^brew \"%s\"\n"
     ) <<< "$bundle"
