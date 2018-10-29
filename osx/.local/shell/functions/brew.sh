@@ -106,14 +106,6 @@ brew-leaves() {
 
 # https://github.com/Homebrew/legacy-homebrew/issues/16639#issuecomment-42813448
 brew-aliasapps() {
-  # Remove old links/aliases
-  brew linkapps 2>&1 |
-    perl -ne '/^Error: ([^.]*\.app)/ && print "$1\0"' |
-    xargs -0 -n1 rm
-
-  # Link apps
-  brew linkapps
-
   # Convert links to aliases
   find /Applications -maxdepth 1 -type l | while read f; do
     local src="$(stat -c%N "$f" | cut -d\' -f4)"
