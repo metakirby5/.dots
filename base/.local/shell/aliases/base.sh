@@ -37,6 +37,7 @@ alias q='fzf --multi | map'
 alias u='pushd'
 alias p='popd'
 alias s='dirs -v'
+alias t='tmux'
 alias k='kubectl'
 alias gc='gcloud'
 
