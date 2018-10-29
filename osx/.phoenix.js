@@ -112,7 +112,7 @@ p =
     evalInputMode: ';'       # Activate JS eval mdoe
     shellInputMode: 'return' # Activate shell input mode
     apps:                    # Launch applications
-      t: 'Alacritty'
+      t: 'iTerm'
       e: 'Finder'
       ',': 'Google Chrome'
 
@@ -1173,7 +1173,7 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
 
 # Apps
 p.keys.apps.map (app, key) ->
-  Key.on key, p.keys.mods.base, -> Task.run '/usr/bin/open', ['-a', app]
+  Key.on key, p.keys.mods.base, -> App.launch(app).focus()
 
 # Spaces
 [ [ p.keys.mods.move # move

@@ -42,7 +42,6 @@ brew "luarocks"
 brew "macvim", args: ["with-lua", "with-override-system-vim"]
 brew "mas"
 brew "mpv", args: ["with-bundle", "with-vapoursynth"]
-brew "mscharley/homebrew/alacritty"
 brew "mvtools"
 brew "ncdu"
 brew "neofetch"
