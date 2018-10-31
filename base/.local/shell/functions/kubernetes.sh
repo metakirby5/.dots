@@ -17,11 +17,6 @@ kubectl() {
         true
       ;;
 
-    # Describe pod.
-    desc)
-      command kubectl describe pod "$@"
-      ;;
-
     # List pods with fzf.
     pods)
       command kubectl get pods "$@" | fzf --header-lines=1 | awk '{print $1}'
@@ -34,7 +29,17 @@ kubectl() {
         command kubectl get pod | awk "/^$1-[a-z0-9]{5}/ {print \$1}"
       ;;
 
-    # Get node name.
+    # Describe pod.
+    desc)
+      command kubectl describe pod "$(kubectl pod "$1")"
+      ;;
+
+    # Get pod logs.
+    logs)
+      command kubectl logs -f "$(kubectl pod "$1")"
+      ;;
+
+    # Get node name of a pod.
     node)
       command kubectl describe pod "$(kubectl pod "$1")" |
         awk '/^Node:/ {print $2}' |
