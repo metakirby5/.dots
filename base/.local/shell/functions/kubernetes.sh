@@ -17,16 +17,16 @@ kubectl() {
         true
       ;;
 
-    # List pods with fzf.
+    # List pods.
     pods)
-      command kubectl get pods "$@" | fzf --header-lines=1 | awk '{print $1}'
+      command kubectl get pods "$@"
       ;;
 
     # Get full pod name.
     pod)
       [ -z "$1" ] &&
-        kubectl pods ||
-        command kubectl get pod | awk "/^$1-[a-z0-9]{5}/ {print \$1}"
+        command kubectl get pods "$@" | fzf --header-lines=1 | awk '{print $1}' ||
+        command kubectl get pods | awk "/^$1-[a-z0-9]{5}/ {print \$1}"
       ;;
 
     # Describe pod.
