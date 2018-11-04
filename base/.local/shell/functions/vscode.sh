@@ -1,4 +1,4 @@
 # Bundles up vscode dependencies.
-vscode-leaves() {
+code-leaves() {
   code --list-extensions
 }

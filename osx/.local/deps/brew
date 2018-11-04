@@ -41,7 +41,7 @@ brew "libav"
 brew "luarocks"
 brew "macvim", args: ["with-lua", "with-override-system-vim"]
 brew "mas"
-brew "mpv", args: ["with-bundle", "with-vapoursynth"]
+brew "mpv", args: ["with-bundle", "with-vapoursynth"], link: false
 brew "mvtools"
 brew "ncdu"
 brew "neofetch"
@@ -63,7 +63,7 @@ brew "reattach-to-user-namespace"
 brew "renameutils"
 brew "ripgrep"
 brew "rlwrap"
-brew "ruby"
+brew "ruby", link: true
 brew "scala"
 brew "sshfs"
 brew "stow"
@@ -77,7 +77,6 @@ brew "trash"
 brew "tree"
 brew "ttyrec"
 brew "vitorgalvao/tiny-scripts/cask-repair"
-brew "webp"
 brew "weechat", args: ["with-lua", "with-perl", "with-python@2", "with-ruby"]
 brew "wget"
 brew "yank"
