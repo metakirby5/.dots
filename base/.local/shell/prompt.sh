@@ -170,7 +170,6 @@ __mk5_set_prompt() {
   if [ $(wc -c <<< "$stripped") == 2 ]; then
     PS1L="$pchar_color$stripped"
   else
-    PS1R+="\e[1;30m$(date '+%D %H:%M')"  # Grab the time
     PS1L+="\n"                           # Newline
     PS1L+="$pchar_color$pchar"           # Prompt
   fi
