@@ -862,14 +862,14 @@ endif " }}}
     noremap <s-tab> <c-o>
   " }}}
   " Buffers {{{
-    " ,fd - Close the current buffer
-    nnoremap <silent> <leader>fd <esc>:bd<cr>
+    " ,bd - Close the current buffer
+    nnoremap <silent> <leader>bd <esc>:bd<cr>
 
-    " ,fs - Switch to buffer by name
-    nnoremap <leader>fs <esc>:buffers<cr>:buffer<space>
+    " ,bs - Switch to buffer by name
+    nnoremap <leader>bs <esc>:buffers<cr>:buffer<space>
 
-    " ,fc - Switch CWD to the directory of the open buffer
-    nnoremap <silent> <leader>fc <esc>:cd %:p:h<cr> :pwd<cr>
+    " ,bc - Switch buffer CWD to the directory of the open buffer
+    nnoremap <silent> <leader>bc <esc>:lcd %:p:h<cr> :pwd<cr>
 
     " Specify the behavior when switching between buffers
     if exists('&switchbuf')
