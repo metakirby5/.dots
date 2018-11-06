@@ -2125,11 +2125,11 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>233 374 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>911 260 796 473 0 0 1920 1200 </string>
+	<string>71 429 796 473 0 0 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>216 534 592 584 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>247 37 630 391 0 0 1920 1200 </string>
+	<string>226 160 670 478 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>957 151 650 452 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -4985,7 +4985,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>ssh -t kirbies "tmux attach || tmux new"</string>
+			<string>ssh -t kirbies 'tmux has &amp;&gt;/dev/null &amp;&amp; tmux attach || tmux new'</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
