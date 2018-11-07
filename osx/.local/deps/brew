@@ -21,6 +21,7 @@ brew "fasd"
 brew "findutils", args: ["with-default-names"]
 brew "fortune"
 brew "fzf"
+brew "gawk"
 brew "gdb"
 brew "gifsicle"
 brew "git"
