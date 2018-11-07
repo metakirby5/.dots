@@ -11,3 +11,15 @@ cliclick:
 announcer:
     greet: say hello
     part: say farewell
+volume:
+    0: osascript -e "set Volume 0"
+    10: osascript -e "set Volume 10"
+    20: osascript -e "set Volume 20"
+    30: osascript -e "set Volume 30"
+    40: osascript -e "set Volume 40"
+    50: osascript -e "set Volume 50"
+    60: osascript -e "set Volume 60"
+    70: osascript -e "set Volume 70"
+    80: osascript -e "set Volume 80"
+    90: osascript -e "set Volume 90"
+    100: osascript -e "set Volume 100"
