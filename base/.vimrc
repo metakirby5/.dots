@@ -351,9 +351,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       au BufNewFile,BufRead *.dtl set filetype=jinja2
       let g:user_emmet_leader_key='<c-e>'
     " }}}
-    " Unix buffer-linked utils {{{
-      Plug 'tpope/vim-eunuch'
-    " }}}
     " Paired keybindings {{{
       Plug 'tpope/vim-unimpaired'
     " }}}
@@ -382,10 +379,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
           \         'prompt': '^> ',
           \     },
           \ }
-    " }}}
-    " Vim wiki {{{
-      " TODO: learn how to use this
-      Plug 'vimwiki/vimwiki'
     " }}}
   " }}}
   " Automation {{{
@@ -759,24 +752,6 @@ endif " }}}
         return join(flags, ',')
       endfunction
 
-      " Returns a shortened form of &fdm
-      function! _s_fdm()
-        if &fdm == 'manual'
-          return 'm'
-        elseif &fdm == 'syntax'
-          return 's'
-        elseif &fdm == 'indent'
-          return 'i'
-        else
-          return &fdm
-        endif
-      endfunction
-
-      " Returns 've' if virtualedit is not off
-      function! _s_ve()
-        return (&ve == '') ? '' : 've'
-      endfunction
-
       " Returns file's syntax
       function! _s_syntax()
         return (&syntax != '') ? &syntax : 'plaintext'
@@ -997,7 +972,7 @@ endif " }}}
     set linebreak         " line break only at breaking characters
     exe 'set textwidth=' . s:default_tw
 
-    " ,\ - Toggle text wrap & color column
+    " cot - Toggle text wrap & color column
     function! ToggleTextWidth()
       if (!&paste)
         if (&textwidth == 0)
@@ -1059,7 +1034,7 @@ endif " }}}
     command! Diff vert new | set bt=nofile | r ++edit # | 0d_
           \ | diffthis | wincmd p | diffthis
 
-    " :R - Execute current script
+    " :Run - Execute current script
     function! s:runbuf(...)
       if exists('s:runbuf') | exe 'bdel '.s:runbuf | endif
       new
