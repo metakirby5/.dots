@@ -11,6 +11,14 @@ gcloud() {
       fi
       ;;
 
+    zone)
+      if [ -z "$1" ]; then
+        command gcloud config get-value compute/zone
+      else
+        command gcloud config set compute/zone "$1"
+      fi
+      ;;
+
     ssh)
       command gcloud compute ssh "$@"
       ;;
