@@ -21,7 +21,7 @@ git() {
       ;;
 
     *)
-      command "$(basename "$0")" "$cmd" "$@"
+      command "${GIT_COMMAND:-git}" "$cmd" "$@"
       ;;
   esac
 }
