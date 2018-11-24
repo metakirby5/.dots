@@ -1,0 +1,1 @@
+export UPDATEC_PATH="$DOTS:$MY_SCRIPTS"
