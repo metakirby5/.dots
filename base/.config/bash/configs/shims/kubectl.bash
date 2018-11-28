@@ -11,7 +11,7 @@ kubectl() {
       )"
 
       [ "$chosen" ] &&
-        command kubectl config set current-context "$chosen" ||
+        command kubectl config use-context "$chosen" ||
         true
       ;;
 
