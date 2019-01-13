@@ -112,7 +112,7 @@ p =
     evalInputMode: ';'       # Activate JS eval mdoe
     shellInputMode: 'return' # Activate shell input mode
     apps:                    # Launch applications
-      t: 'kitty'
+      t: 'iTerm'
       e: 'Finder'
       ',': 'Google Chrome'
 
