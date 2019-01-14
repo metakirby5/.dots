@@ -43,7 +43,6 @@ brew() {
     up)
       command brew update
       command brew upgrade
-      command brew prune
       command brew cleanup
       ;;
     l)
