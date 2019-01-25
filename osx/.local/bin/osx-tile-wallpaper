@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# https://github.com/sindresorhus/macos-wallpaper/issues/13#issuecomment-284168294
+
+sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "\
+ INSERT INTO data (value) VALUES (2); \
+ INSERT INTO preferences (key, data_id, picture_id) \
+ SELECT DISTINCT 2, last_insert_rowid(), picture_id \
+ FROM preferences; \
+" && killall Dock
