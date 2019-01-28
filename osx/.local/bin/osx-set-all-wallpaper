@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# https://apple.stackexchange.com/a/145174
+
+sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db \
+  "update data set value = '$1'" &&
+  killall Dock
