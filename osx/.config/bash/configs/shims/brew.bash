@@ -22,7 +22,7 @@ brew() {
     # A script to prune the leaves of your brew packages.
     # Requires beeftornado/homebrew-rmtree
     trim)
-      for formula in $(brew leaves); do
+      for formula in $(mpx brew:leaves); do
         read -p "Keep $(brew desc "$formula")? [Y/n] " keep
         case $keep in
           [Nn])

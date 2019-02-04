@@ -1,10 +1,3 @@
-# Bundles up only leaf pip dependencies.
-# Requires pipdeptree.
-# TODO: mpx refactor
-pip-leaves() {
-  pipdeptree --freeze -w silence | command grep -o '^[^ =]\+' | sort
-}
-
 # Cleans all *.pyc files recursively in the current directory
 clean-pyc() {
   find . -name '*.pyc' -delete
