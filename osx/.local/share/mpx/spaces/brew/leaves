@@ -145,6 +145,7 @@ cask "vox2"
 cask "webpquicklook"
 cask "whatsyoursign"
 cask "wineskin-winery"
+cask "zoomus"
 mas "Controllers Lite", id: 673660806
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307

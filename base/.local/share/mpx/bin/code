@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+main() {
+  sub="$1"; shift
+  case "$sub" in
+    leaves)
+      code --list-extensions
+      ;;
+    dump-leaves)
+      main leaves > leaves
+      ;;
+    install-leaves)
+      xargs -L1 code --install-extension < leaves
+      ;;
+  esac
+}
+
+main "$@"

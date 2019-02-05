@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+main() {
+  sub="$1"; shift
+  case "$sub" in
+    # Requires pipdeptree.
+    leaves)
+      pipdeptree --freeze -w silence | command grep -o '^[^ =]\+' | sort
+      ;;
+    dump-leaves)
+      main leaves > leaves
+      ;;
+    install-leaves)
+      xargs pip install < leaves
+      ;;
+  esac
+}
+
+main "$@"

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+main() {
+  sub="$1"; shift
+  case "$sub" in
+    # Requires gem_leaves.
+    leaves)
+      gem_leaves | cut -d' ' -f1 | sort | uniq
+      ;;
+    dump-leaves)
+      main leaves > leaves
+      ;;
+    install-leaves)
+      xargs gem install < leaves
+      ;;
+  esac
+}
+
+main "$@"
