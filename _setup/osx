@@ -41,8 +41,11 @@ echo "Stowing base and osx..."
 cd "$DOTS"
 stow base osx --no-folding
 
-echo "Installing brew dependencies..."
-brew bundle --file=- < "$DEPS/brew"
+echo "Installing mpx..."
+gem install mpx
+
+echo "Installing dependencies..."
+mpx :install-leaves
 
 echo "Changing your shell (sudo required)..."
 grep '/usr/local/bin/bash' /etc/shells &>/dev/null ||
@@ -55,9 +58,6 @@ grep 'source ~/.linker' ~/.bashrc ||
 grep 'source ~/.bashrc' ~/.bash_profile ||
   cat >> ~/.bash_profile <<< 'source ~/.bashrc'
 source ~/.bashrc
-
-echo "Installing other packages..."
-install-leaves
 
 echo "Running zenbu with defaults..."
 zenbu -e

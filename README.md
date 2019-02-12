@@ -24,8 +24,10 @@ Here's what you'll need...
 
 - GNU Stow
 - metakirby5/zenbu
+- metakirby5/mpx
 - metakirby5/scripts (somewhat optional)
-- Packages from relevant managers (`~/.local/deps/*`)
+- Packages from relevant managers 
+  (`~/.local/share/mpx/spaces/*/leaves`)
 
 ### OS X
 
@@ -113,19 +115,12 @@ For OS X, use the system theme.
 - Add `source ~/.linker` to the appropriate files
   (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
-- Install packages from language-specific managers.
-  - You can also try using `install-leaves` instead.
+- Install [`mpx`](https://github.com/metakirby5/mpx).
+- Install packages with `mpx <PACKABGE_MANAGER>:install-leaves`.
 - Install browser extensions/themes.
 - If you want, copy over `_misc/shell/root_bashrc.sh` to your root's
   home directory (to the appropriate file) and symlink the `.vimrc`.
 - Reboot.
-
-### Language-specific package managers
-
-- Python: `xargs pip install --upgrade < ~/.local/deps/pip`
-- Node: `xargs npm install -g < ~/.local/deps/npm`
-- Ruby: `xargs gem install < ~/.local/deps/gem`
-- Lua: `xargs luarocks install < ~/.local/deps/luarocks`
 
 ### OS X
 
@@ -139,7 +134,6 @@ For OS X, use the system theme.
 - Install `stow` using `brew`.
 - `cd ~/.dots`
 - `stow base osx`
-- `brew bundle --file=- < ~/.local/deps/brew`
 - [Set your shell to `brew`'s `bash`.](https://johndjameson.com/blog/updating-your-shell-with-homebrew/)
 - `source ~/.bashrc`
 - Install `zenbu` via `pip` and use it to choose a colorscheme.
@@ -166,12 +160,9 @@ For OS X, use the system theme.
 ## Maintenance
 
 - Regularly pull and `restow-dots` to keep up-to-date.
-- Regularly `dump-leaves` to export dependencies.
+- Regularly `mpx :dump-leaves` to export dependencies.
 
 ## TODO
 
-- [ ] Shell config cleanup
-  - [ ] Merge `functions`, `vendor`, `aliases`
-  - [ ] POSIX compatibility
 - [ ] Fix zenbu files to allow light colorschemes
 - [ ] Stick XVimProject/XVim on brew
