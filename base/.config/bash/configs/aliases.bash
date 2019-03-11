@@ -6,7 +6,7 @@ alias xargs='xargs '
 alias flatten-dir='find . -mindepth 2 -type f -exec mv -t . -i "{}" +'
 alias ip-public="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ip-local="ipconfig getifaddr en0"
-alias serve="python -m SimpleHTTPServer"
+alias simple-serve="python -m SimpleHTTPServer"
 for method in GET POST PUT DELETE; do
   alias "$method"="curl -X $method"
 done
