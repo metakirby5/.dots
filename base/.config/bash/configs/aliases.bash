@@ -17,7 +17,7 @@ alias \
   pbp='pb push -d 0' \
   pypush='python setup.py sdist bdist_wheel upload -r' \
   pypush3='python3 setup.py sdist bdist_wheel upload -r' \
-  all="tr '\n' '\0' | xargs -0" \
+  all="parallel -X --tty" \
   map="all -n 1" \
   fst="awk '{print\$1}'" \
   snd="awk '{print\$2}'" \
@@ -28,7 +28,8 @@ alias \
   la='ls -la' \
   g='git' \
   h='history' \
-  q='fzf --multi | map' \
+  q='fzf --multi | all' \
+  qq='fzf --multi | map' \
   u='pushd' \
   p='popd' \
   s='dirs -v' \
