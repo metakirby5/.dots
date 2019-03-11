@@ -26,13 +26,13 @@ echo "    - Import the Terminal.app profile in \
 _misc/osx/terminal/Japanesque.terminal."
 get_ready
 
-if ! which brew &>/dev/null; then
+if ! command -v brew &>/dev/null; then
   echo "Installing brew..."
   /usr/bin/ruby -e "$(curl -fsSL \
     https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if ! which stow &>/dev/null; then
+if ! command -v stow &>/dev/null; then
   echo "Installing stow using brew..."
   brew install stow
 fi

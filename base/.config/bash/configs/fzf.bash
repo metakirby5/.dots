@@ -2,7 +2,7 @@
 fzf_bin=~/.fzf/bin
 [ -d "$fzf_bin" ] && export PATH="$PATH:$fzf_bin"
 
-if which fzf &>/dev/null; then
+if command -v fzf &>/dev/null; then
   export \
     FZF_DEFAULT_COMMAND='(\
     rg --hidden -l . ||\

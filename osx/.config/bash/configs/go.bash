@@ -1,4 +1,4 @@
-if which go &>/dev/null; then
+if command -v go &>/dev/null; then
   export \
     GOROOT=/usr/local/opt/go/libexec \
     GOPATH="$WORKSPACE/lang/go" \

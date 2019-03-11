@@ -1,4 +1,4 @@
-if which fasd &>/dev/null; then
+if command -v fasd &>/dev/null; then
   fasd_cache="$HOME/.fasd-init"
   [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ] &&
     fasd --init posix-alias posix-hook >| "$fasd_cache"

@@ -1,4 +1,4 @@
-if which java &>/dev/null; then
+if command -v java &>/dev/null; then
   export \
     CLASSPATH='*':'.' \
     JAVA_HOME="$(/usr/libexec/java_home)"
