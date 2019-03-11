@@ -3,6 +3,7 @@
     "coffeelint": "^2.1.0",
     "coffeescript": "^2.3.2",
     "git-open": "^2.1.0",
+    "http-server": "^0.11.1",
     "lodash": "^4.17.11",
     "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.54.5"
