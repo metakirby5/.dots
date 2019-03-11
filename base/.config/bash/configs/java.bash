@@ -1,6 +1,7 @@
 if which java &>/dev/null; then
-  export CLASSPATH='*':'.' # Use current directory for default Java classpath
-  export JAVA_HOME="$(/usr/libexec/java_home)"
+  export \
+    CLASSPATH='*':'.' \
+    JAVA_HOME="$(/usr/libexec/java_home)"
 
   # Compile and run a java file.
   javar() {

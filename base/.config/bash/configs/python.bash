@@ -1,9 +1,9 @@
-# Cleans all *.pyc files recursively in the current directory
+# Cleans all *.pyc files recursively in the current directory.
 clean-pyc() {
   find . -name '*.pyc' -delete
 }
 
-# Check differences between current packages and requirements.txt
+# Check differences between current packages and requirements.txt.
 pip-diff() {
   local reqs='requirements.txt'
 
@@ -15,7 +15,7 @@ pip-diff() {
   diff <(pip freeze) $reqs
 }
 
-# Makes pip packages match requirements.txt
+# Makes pip packages match requirements.txt.
 pip-sync() {
   local reqs='requirements.txt'
 

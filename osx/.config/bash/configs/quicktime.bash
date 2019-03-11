@@ -1,4 +1,4 @@
-# Start a screencast
+# Start a screencast.
 qt-cast() {
   osascript << EOF
   tell application "QuickTime Player"
