@@ -37,7 +37,7 @@ $PATH:\
   HISTFILESIZE=1000000
 
 # Shell options.
-shopt -qs cdspell histappend globstar
+shopt -qs cdspell histappend globstar 2>/dev/null
 
 # Keybindings.
 set -o vi
