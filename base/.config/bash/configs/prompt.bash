@@ -1,4 +1,4 @@
-# Line colors
+# Line colors.
 __mk5_normal="\[\e[0m\]"
 __mk5_black="\[\e[0;30m\]"
 __mk5_red="\[\e[0;31m\]"
@@ -17,34 +17,26 @@ __mk5_b_purple="\[\e[1;35m\]"
 __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
-__mk5_hostname="${HOSTNAME%%.*}"
-__mk5_home="$HOME"
+# Detect SSH once upon loading prompt.
+[ "$SSH_TTY" ] && __mk5_hostname="$__mk5_cyan${HOSTNAME%%.*}$__mk5_b_cyan, "
 
 __mk5_set_prompt() {
-  # Grab status code first
-  local last_status="$?"
+  # Local variables.
+  local \
+    last_status="$?" \
+    pchar_color="$__mk5_b_green" \
+    pchar="┄" \
+    mypwd="$PWD" \
+    git_info= \
+    git_path="$PWD"
 
-  # Status color
-  local pchar_color=
-  if [ "$last_status" == 0 ]; then
-    pchar_color="$__mk5_b_green"
-  else
-    pchar_color="$__mk5_b_red"
-  fi
+  # Status color.
+  [ "$last_status" != 0 ] && pchar_color="$__mk5_b_red"
 
-  # Use $ or # for prompt
-  local pchar=
-  if [ "$EUID" == 0 ]; then
-    pchar="#"
-  else
-    pchar="┄"
-  fi
+  # Root user prompt character.
+  [ "$EUID" == 0 ] && pchar="#"
 
-  # Display hostname if ssh'd
-  local hostname=
-  [ "$SSH_TTY" ] && hostname="$__mk5_cyan$__mk5_hostname$__mk5_b_cyan, "
-
-  # Display job count
+  # Display job count.
   local jobs_info="$(jobs | awk '
   m == 1 { m = 0; }
 
@@ -58,36 +50,27 @@ __mk5_set_prompt() {
 
   [ "$jobs_info" ] && jobs_info="${jobs_info:1}$__mk5_b_yellow, "
 
-  # Git stuff (mostly in bash for speed)
-  local mypwd="$PWD"
-  local git_info=
-  local git_base=
-  local git_path="$PWD"
+  # Git stuff (mostly in bash for speed).
   until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
     git_path="${git_path%/*}"
   done
 
   if [ "$git_path" ]; then
-    # Replace git path
-    git_base="$(basename "$git_path")"
-    gitpwd="$(git rev-parse --show-prefix)"
-    mypwd="$git_base/${gitpwd%/}"
-    mypwd="${mypwd%/}"
+    # Replace git path.
+    mypwd="${git_path##*/}${PWD#$git_path}"
 
-    # Branch
+    # Get branch identifier.
     read git_head < "$git_path/.git/HEAD"
-    if [[ "$git_head" == ref:* ]]; then
-      git_info="${git_head:16}"  # ref name
-    else
-      git_info="${git_head::7}"  # short hash
-    fi
+    [[ "$git_head" == ref:* ]] &&
+      git_info="${git_head:16}" || # Ref name.
+      git_info="${git_head::7}"    # Short hash.
 
-    # Stashed
-    local git_stash="$(wc -l "$git_path/.git/logs/refs/stash" 2>/dev/null |\
-      awk '{print$1}')"
-    if [ "$git_stash" ]; then
-      git_info+=" $__mk5_b_cyan"'\$'"$git_stash"
-    fi
+    # Stash count.
+    local stash="$git_path/.git/logs/refs/stash"
+    [ -f "$stash" ] &&
+      git_stash="$(wc -l < "$stash" 2>/dev/null)" ||
+      git_stash=
+    [ "$git_stash" ] && git_info+=" $__mk5_b_cyan"'\$'"$git_stash"
 
     # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
     git_info+="$(git status --porcelain -b | awk '
@@ -122,69 +105,20 @@ __mk5_set_prompt() {
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
-  # Colorize
-  local suffix=
-  local pwd_color="$__mk5_green"
+  # Shorten $HOME.
+  mypwd="$__mk5_green$(perl -pe "s|^$HOME|~|" <<< "$mypwd")"
 
-  # Virtualenv = blue
-  local virtualenv_info=
-  if [ "$VIRTUAL_ENV" ]; then
-    local project_filename="$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
-    local env_path=
-    [ -f "$project_filename" ] && read env_path < "$project_filename"
+  PS1="$__mk5_hostname$jobs_info$git_info$mypwd"
 
-    if [ ! "$env_path" ]; then
-      virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
-    else
-      [ "$git_path" ] && env_path="$git_base${env_path##$git_path}"
-      case "$mypwd" in
-        "$env_path"*)
-          suffix="${mypwd##$env_path}"
-          pwd_color="$__mk5_blue"
-          ;;
-        *)
-          virtualenv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
-          ;;
-      esac
-    fi
-  fi
+  # Usse single-line prompt for one character, otherwise two-line.
+  local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
+  [ $(wc -c <<< "$stripped") == 2 ] &&
+    PS1="$pchar_color$stripped" ||
+    PS1+="\n$pchar_color$pchar"
+  PS1+="$__mk5_normal "
 
-  # Shorten $HOME
-  mypwd="$(perl -pe "s|^$__mk5_home|~|" <<< "$mypwd")"
-
-  # Apply color
-  mypwd="$pwd_color${mypwd%%$suffix}$__mk5_green$suffix"
-
-  local PS1L=                 # Clear PS1L
-  local PS1R=                 # Clear PS1R
-  PS1L+="$hostname"           # (Hostname)
-  PS1L+="$jobs_info"          # (Jobs)
-  PS1L+="$virtualenv_info"    # (Virtualenv)
-  PS1L+="$git_info"           # (Git)
-  PS1L+="$mypwd"              # Abbreviated PWD
-
-  # If only one character, single-line
-  local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1L")"
-  if [ $(wc -c <<< "$stripped") == 2 ]; then
-    PS1L="$pchar_color$stripped"
-  else
-    PS1L+="\n"                           # Newline
-    PS1L+="$pchar_color$pchar"           # Prompt
-  fi
-  PS1L+="$__mk5_normal "      # Clear colors
-
-  # Print left and right if we have a right, otherwise just use left
-  if [ "$PS1R" ]; then
-    PS1="$(printf '\[%*s\r\]%s' "$(($(tput cols) + 8))" "$PS1R" "$PS1L")"
-  else
-    PS1="$PS1L"
-  fi
-
-  PS2=""                     # Clear PS2
-  PS2+="$__mk5_yellow$pchar" # Yellow continuation line
-  PS2+="$__mk5_normal "      # Clear colors
+  PS2="$__mk5_yellow$pchar$__mk5_normal "
 }
 
-if ! [[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]]; then
+[[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]] ||
   export PROMPT_COMMAND="__mk5_set_prompt; $PROMPT_COMMAND"
-fi
