@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-# Custom brew commands.
-
 brew() {
   local cmd="$1"
   shift

@@ -1,6 +1,7 @@
 # Add fzf to path if installed locally.
 fzf_bin=~/.fzf/bin
 [ -d "$fzf_bin" ] && export PATH="$PATH:$fzf_bin"
+unset fzf_bin
 
 if command -v fzf &>/dev/null; then
   export \
@@ -28,4 +29,6 @@ if command -v fzf &>/dev/null; then
     # Install key bindings.
     source "$fzf_opt/shell/key-bindings.bash"
   fi
+
+  unset fzf_opt
 fi

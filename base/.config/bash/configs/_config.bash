@@ -43,7 +43,7 @@ shopt -qs cdspell histappend globstar 2>/dev/null
 set -o vi
 
 # Save and reload the history after each command finishes
-__mk5_hist_cmd='history -a; history -c; history -r'
-if ! [[ $PROMPT_COMMAND == *"$__mk5_hist_cmd"*  ]]; then
-  export PROMPT_COMMAND="$__mk5_hist_cmd; $PROMPT_COMMAND"
-fi
+history_cmd='history -a; history -c; history -r'
+[[ $PROMPT_COMMAND == *"$history_cmd"*  ]] ||
+  export PROMPT_COMMAND="$history_cmd; $PROMPT_COMMAND"
+unset history_cmd

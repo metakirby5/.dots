@@ -1,3 +1,5 @@
-export \
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" \
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+coreutils=/usr/local/opt/coreutils/libexec
+[ -d "$coreutils" ] && export \
+  PATH="$coreutils/gnubin:$PATH" \
+  MANPATH="$coreutils/gnuman:$MANPATH"
+unset coreutils

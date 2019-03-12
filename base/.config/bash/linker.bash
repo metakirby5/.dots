@@ -7,5 +7,7 @@ for f in $(find -L "$dir/configs/" -type f | sort); do
   source "$f"
 done
 
+unset dir f
+
 # Reset the exit code.
 true

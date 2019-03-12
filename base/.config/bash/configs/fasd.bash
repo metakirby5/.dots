@@ -1,6 +1,7 @@
-if command -v fasd &>/dev/null; then
+fasd_path="$(command -v fasd)"
+if [ "$fasd_path" ]; then
   fasd_cache="$HOME/.fasd-init"
-  [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ] &&
+  [ "$fasd_path" -nt "$fasd_cache" -o ! -s "$fasd_cache" ] &&
     fasd --init posix-alias posix-hook >| "$fasd_cache"
   source "$fasd_cache"
   unset fasd_cache
@@ -9,3 +10,4 @@ if command -v fasd &>/dev/null; then
     v='f -e vim' \
     o='a -e open'
 fi
+unset fasd_path

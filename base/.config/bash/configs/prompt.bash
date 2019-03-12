@@ -28,7 +28,9 @@ __mk5_set_prompt() {
     pchar="┄" \
     mypwd="$PWD" \
     git_info= \
-    git_path="$PWD"
+    git_path="$PWD" \
+    git_head= \
+    git_stash=
 
   # Status color.
   [ "$last_status" != 0 ] && pchar_color="$__mk5_b_red"

@@ -1,7 +1,8 @@
-VIRTUALENVWRAPPER_SH=/usr/local/bin/virtualenvwrapper_lazy.sh
-if [ -f "$VIRTUALENVWRAPPER_SH" ]; then
+virtualenvwrapper=/usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -f "$virtualenvwrapper" ]; then
   export \
-    VIRTUALENVWRAPPER_PYTHON="$(which python3)" \
+    VIRTUALENVWRAPPER_PYTHON="$(command -v python3)" \
     PROJECT_HOME="$WORKSPACE"
-  source "$VIRTUALENVWRAPPER_SH"
+  source "$virtualenvwrapper"
 fi
+unset virtualenvwrapper

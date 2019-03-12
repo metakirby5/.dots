@@ -1,1 +1,3 @@
-export PATH="$PATH:/Library/TeX/texbin"
+texbin=/Library/TeX/texbin
+[ -d "$texbin" ] && export PATH="$PATH:$texbin"
+unset texbin
