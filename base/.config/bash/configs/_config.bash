@@ -8,15 +8,6 @@ export \
   DOTS=~/.dots \
   LOCAL=~/.local \
   WORKSPACE=~/code \
-  MY_SCRIPTS="$WORKSPACE/scripts"
-  \
-  PATH="\
-$LOCAL/bin:\
-$MY_SCRIPTS:\
-$PATH:\
-/usr/local/bin:\
-/usr/local/sbin
-" \
   \
   normal="$(tput sgr0)" \
   bold="$(tput bold)" \
@@ -35,6 +26,16 @@ $PATH:\
   HISTTIMEFORMAT="%d/%m/%y %T " \
   HISTSIZE=1000000 \
   HISTFILESIZE=1000000
+
+export MY_SCRIPTS="$WORKSPACE/scripts"
+
+export PATH="\
+$LOCAL/bin:\
+$MY_SCRIPTS:\
+$PATH:\
+/usr/local/bin:\
+/usr/local/sbin
+"
 
 # Shell options.
 shopt -qs cdspell histappend globstar 2>/dev/null
