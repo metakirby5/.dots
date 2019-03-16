@@ -134,13 +134,20 @@
   root = rev-parse --show-toplevel
   fixup = commit --fixup
   amend = commit --amend
-  squash = "!f(){(git rebase --interactive HEAD~$1)};f"
-  sq = squash
+  rewrite = "!f(){(git rebase --interactive HEAD~$1)};f"
+  rw = rewrite
   find = !git ls-files | grep -iI
   f = find
   g = grep -niI --heading -C 5 --untracked
   rg = !git g
   aliases = !git config -l | grep alias | cut -c 7-
+
+  # index
+  hide = update-index --assume-unchanged
+  unhide = update-index --no-assume-unchanged
+  unhide-all = update-index --really-refresh
+  hidden = "!f(){(git -C \"$GIT_PREFIX\" ls-files -v \"$@\" | grep \"^[a-z]\")}; f"
+  ignored = "!f(){(git -C \"$GIT_PREFIX\" status -s --ignored \"$@\" | grep \"^!!\")}; f"
 
   # hub
   pr = pull-request
