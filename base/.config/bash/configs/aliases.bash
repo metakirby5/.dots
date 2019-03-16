@@ -3,9 +3,11 @@ alias \
   xargs='xargs ' \
   \
   flatten-dir='find . -mindepth 2 -type f -exec mv -t . -i "{}" +' \
-  ip-public="dig +short myip.opendns.com @resolver1.opendns.com" \
+  ip-public='dig +short myip.opendns.com @resolver1.opendns.com' \
   ip-local="ipconfig getifaddr en0" \
-  simple-serve="python -m SimpleHTTPServer" \
+  simple-serve='python -m SimpleHTTPServer' \
+  jpop='clear; ffplay -nodisp -autoexit -hide_banner https://listen.moe/stream' \
+  kpop='clear; ffplay -nodisp -autoexit -hide_banner https://listen.moe/kpop/stream' \
   \
   resource='source ~/.bashrc 2>/dev/null || source ~/.bash_profile' \
   unstow='stow -D' \
@@ -17,8 +19,8 @@ alias \
   pbp='pb push -d 0' \
   pypush='python setup.py sdist bdist_wheel upload -r' \
   pypush3='python3 setup.py sdist bdist_wheel upload -r' \
-  all="parallel -X --tty" \
-  map="all -n 1" \
+  all='parallel -X --tty' \
+  map='all -n 1' \
   fst="awk '{print\$1}'" \
   snd="awk '{print\$2}'" \
   cl='clear' \
