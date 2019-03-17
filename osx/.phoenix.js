@@ -857,7 +857,7 @@ class ChainWindow
 
   # Switch window to neighbor
   neighbor: (dir) ->
-    n = _.head _.filter (@win.neighbors dir), (w) -> w.isNormal()
+    n = _.head _.filter (@win.neighbors dir), (w) -> w.isVisible()
     if n?
       @win = n
       @updateWin()
@@ -1113,7 +1113,7 @@ cw = ->
 modes = new ModeManager()
 
 winHint = modes.add new HintMode (->
-  _.filter Window.recent(), (w) -> w.isNormal()
+  _.filter Window.recent(), (w) -> w.isVisible()
 ), (w) ->
   w.chain().focus().mouseTo()
 
