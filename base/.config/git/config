@@ -134,6 +134,9 @@
   root = rev-parse --show-toplevel
   fixup = commit --fixup
   amend = commit --amend
+  undo = "!f(){(git reset --hard HEAD~$1)};f"
+  uncommit = "!f(){(git reset HEAD~$1)};f"
+  goback = "!f(){(git reset --hard HEAD@{${1:-1}})};f"
   rewrite = "!f(){(git rebase --interactive HEAD~$1)};f"
   rw = rewrite
   find = !git ls-files | grep -iI
