@@ -50,6 +50,7 @@ brew "pv"
 brew "r"
 brew "ranger"
 brew "reattach-to-user-namespace"
+brew "repl"
 brew "ripgrep"
 brew "rlwrap"
 brew "ruby", link: true
