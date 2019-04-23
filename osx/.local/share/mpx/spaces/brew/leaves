@@ -10,7 +10,7 @@ brew "cliclick"
 brew "coreutils"
 brew "ctags"
 brew "dos2unix"
-brew "emacs", restart_service: true
+brew "emacs", restart_service: true, link: false
 brew "entr"
 brew "fasd"
 brew "findutils", args: ["with-default-names"]

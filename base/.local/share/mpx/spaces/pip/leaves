@@ -5,9 +5,11 @@ flake8
 fuzzywuzzy
 humanize
 neovim
+pathlib
 pip-autoremove
 pipdeptree
 pushbullet-cli
+pylast
 python-Levenshtein
 scdl
 tzlocal
