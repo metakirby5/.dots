@@ -141,12 +141,12 @@ cask "vox2"
 cask "webpquicklook"
 cask "whatsyoursign"
 cask "wineskin-winery"
-mas "Controllers Lite", id: 673660806
-mas "Keynote", id: 409183694
-mas "LINE", id: 539883307
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Xcode", id: 497799835
+mas "com.apple.dt.Xcode", id: 497799835
+mas "com.apple.iWork.Keynote", id: 409183694
+mas "com.apple.iWork.Numbers", id: 409203825
+mas "com.apple.iWork.Pages", id: 409201541
+mas "com.vividmachine.Controllers-Lite", id: 673660806
+mas "jp.naver.line.mac", id: 539883307
 tap "alexcormier/personal"
 tap "beeftornado/rmtree"
 tap "buo/cask-upgrade"
