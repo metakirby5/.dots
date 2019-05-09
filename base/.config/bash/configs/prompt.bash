@@ -1,3 +1,6 @@
+# Variables.
+__mk5_pchar="┄"
+
 # Line colors.
 __mk5_normal="\[\e[0m\]"
 __mk5_black="\[\e[0;30m\]"
@@ -17,6 +20,9 @@ __mk5_b_purple="\[\e[1;35m\]"
 __mk5_b_cyan="\[\e[1;36m\]"
 __mk5_b_white="\[\e[1;37m\]"
 
+# Set PS2 once.
+PS2="$__mk5_yellow$__mk5_pchar$__mk5_normal "
+
 # Detect SSH once upon loading prompt.
 [ "$SSH_TTY" ] && __mk5_hostname="$__mk5_cyan${HOSTNAME%%.*}$__mk5_b_cyan, "
 
@@ -24,13 +30,19 @@ __mk5_set_prompt() {
   # Local variables.
   local \
     last_status="$?" \
+    ifs="$IFS" \
     pchar_color="$__mk5_b_green" \
-    pchar="┄" \
+    pchar="$__mk5_pchar" \
     mypwd="$PWD" \
+    jobs_info= \
     git_info= \
     git_path="$PWD" \
     git_head= \
+    git_stash_path= \
     git_stash=
+
+  # Set IFS for prompt use.
+  IFS=$'\n'
 
   # Status color.
   [ "$last_status" != 0 ] && pchar_color="$__mk5_b_red"
@@ -39,7 +51,7 @@ __mk5_set_prompt() {
   [ "$EUID" == 0 ] && pchar="#"
 
   # Display job count.
-  local jobs_info="$(jobs | awk '
+  jobs_info="$(jobs | awk '
   m == 1 { m = 0; }
 
   m == 0 && /^.{6}S/ { stopped++; m = 1; }
@@ -68,11 +80,9 @@ __mk5_set_prompt() {
       git_info="${git_head::7}"    # Short hash.
 
     # Stash count.
-    local stash="$git_path/.git/logs/refs/stash"
-    [ -f "$stash" ] &&
-      git_stash="$(wc -l < "$stash" 2>/dev/null)" ||
-      git_stash=
-    [ "$git_stash" ] && git_info+=" $__mk5_b_cyan"'\$'"$git_stash"
+    git_stash_path="$git_path/.git/logs/refs/stash"
+    [ -f "$git_stash_path" ] && git_stash=($(<"$git_stash_path"))
+    [ "$git_stash" ] && git_info+=" $__mk5_b_cyan"'\$'"${#git_stash[@]}"
 
     # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
     git_info+="$(git status --porcelain -b | awk '
@@ -108,18 +118,19 @@ __mk5_set_prompt() {
   fi
 
   # Shorten $HOME.
-  mypwd="$__mk5_green$(perl -pe "s|^$HOME|~|" <<< "$mypwd")"
+  mypwd="$__mk5_green${mypwd/#$HOME/\~}"
 
   PS1="$__mk5_hostname$jobs_info$git_info$mypwd"
 
-  # Usse single-line prompt for one character, otherwise two-line.
+  # Use single-line prompt for one character, otherwise two-line.
   local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
-  [ $(wc -c <<< "$stripped") == 2 ] &&
+  [ ${#stripped} == 1 ] &&
     PS1="$pchar_color$stripped" ||
     PS1+="\n$pchar_color$pchar"
   PS1+="$__mk5_normal "
 
-  PS2="$__mk5_yellow$pchar$__mk5_normal "
+  # Restore IFS.
+  IFS="$ifs"
 }
 
 [[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]] ||
