@@ -39,7 +39,9 @@ __mk5_set_prompt() {
     git_path="$PWD" \
     git_head= \
     git_stash_path= \
-    git_stash=
+    git_stash= \
+    asdf_path="$PWD" \
+    asdf_info=
 
   # Set IFS for prompt use.
   IFS=$'\n'
@@ -117,10 +119,24 @@ __mk5_set_prompt() {
     git_info="$__mk5_purple$git_info$__mk5_b_purple, "
   fi
 
+  # asdf version manager.
+  if [ "$ASDF_BIN" ]; then
+    until [ -f "$asdf_path/.tool-versions" -o "$asdf_path" == '' ]; do
+      asdf_path="${asdf_path%/*}"
+    done
+    asdf_path="$asdf_path/.tool-versions"
+
+    if [ -f "$asdf_path" ]; then
+      asdf_info=($(<"$asdf_path"))
+      IFS='/'
+      asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
+    fi
+  fi
+
   # Shorten $HOME.
   mypwd="$__mk5_green${mypwd/#$HOME/\~}"
 
-  PS1="$__mk5_hostname$jobs_info$git_info$mypwd"
+  PS1="$asdf_info$__mk5_hostname$jobs_info$git_info$mypwd"
 
   # Use single-line prompt for one character, otherwise two-line.
   local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
