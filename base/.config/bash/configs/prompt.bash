@@ -24,14 +24,17 @@ __mk5_b_white="\[\e[1;37m\]"
 PS2="$__mk5_yellow$__mk5_pchar$__mk5_normal "
 
 # Detect SSH once upon loading prompt.
-[ "$SSH_TTY" ] && __mk5_hostname="$__mk5_cyan${HOSTNAME%%.*}$__mk5_b_cyan, "
+case $SSH_TTY in
+  '') ;;
+  *) __mk5_hostname="$__mk5_cyan${HOSTNAME%%.*}$__mk5_b_cyan, ";;
+esac
 
 __mk5_set_prompt() {
   # Local variables.
   local \
     last_status="$?" \
     ifs="$IFS" \
-    pchar_color="$__mk5_b_green" \
+    pchar_color="$__mk5_b_red" \
     pchar="$__mk5_pchar" \
     mypwd="$PWD" \
     jobs_info= \
@@ -47,10 +50,14 @@ __mk5_set_prompt() {
   IFS=$'\n'
 
   # Status color.
-  [ "$last_status" != 0 ] && pchar_color="$__mk5_b_red"
+  case $last_status in
+    0) pchar_color="$__mk5_b_green";;
+  esac
 
   # Root user prompt character.
-  [ "$EUID" == 0 ] && pchar="#"
+  case $EUID in
+    0) pchar="#";;
+  esac
 
   # Display job count.
   jobs_info="$(jobs | awk '
@@ -64,74 +71,87 @@ __mk5_set_prompt() {
     if (running) printf " \033[33m&%d\033[0m", running;
   }')"
 
-  [ "$jobs_info" ] && jobs_info="${jobs_info:1}$__mk5_b_yellow, "
+  case $jobs_info in
+    '') ;;
+    *) jobs_info="${jobs_info:1}$__mk5_b_yellow, ";;
+  esac
 
   # Git stuff (mostly in bash for speed).
   until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
     git_path="${git_path%/*}"
   done
 
-  if [ "$git_path" ]; then
-    # Replace git path.
-    mypwd="${git_path##*/}${PWD#$git_path}"
+  case $git_path in
+    '') ;;
+    *)
+      # Replace git path.
+      mypwd="${git_path##*/}${PWD#$git_path}"
 
-    # Get branch identifier.
-    read git_head < "$git_path/.git/HEAD"
-    [[ "$git_head" == ref:* ]] &&
-      git_info="${git_head:16}" || # Ref name.
-      git_info="${git_head::7}"    # Short hash.
+      # Get branch identifier.
+      read git_head < "$git_path/.git/HEAD"
+      case $git_head in
+        ref:*) git_info="${git_head:16}";; # Ref name.
+        *)     git_info="${git_head::7}";; # Short hash.
+      esac
 
-    # Stash count.
-    git_stash_path="$git_path/.git/logs/refs/stash"
-    [ -f "$git_stash_path" ] && git_stash=($(<"$git_stash_path"))
-    [ "$git_stash" ] && git_info+=" $__mk5_b_cyan"'\$'"${#git_stash[@]}"
+      # Stash count.
+      git_stash_path="$git_path/.git/logs/refs/stash"
+      [ -f "$git_stash_path" ] && git_stash=($(<"$git_stash_path"))
+      case $git_stash in
+        '') ;;
+        *) git_info+=" $__mk5_b_cyan"'\$'"${#git_stash[@]}";;
+      esac
 
-    # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
-    git_info+="$(git status --porcelain -b | awk '
-    { m = 0; }
+      # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
+      git_info+="$(git status --porcelain -b | awk '
+      { m = 0; }
 
-    /^## / {
-      if ($0 ~ /[[ ]ahead /) {
-        ahead = $0;
-        sub(/.*[[ ]ahead /,  "", ahead);
-        sub(/[,\]].*/, "", ahead);
+      /^## / {
+        if ($0 ~ /[[ ]ahead /) {
+          ahead = $0;
+          sub(/.*[[ ]ahead /,  "", ahead);
+          sub(/[,\]].*/, "", ahead);
+        }
+        if ($0 ~ /[[ ]behind /) {
+          behind = $0;
+          sub(/.*[[ ]behind /, "", behind);
+          sub(/[,\]].*/, "", behind);
+        }
+        m = 1;
       }
-      if ($0 ~ /[[ ]behind /) {
-        behind = $0;
-        sub(/.*[[ ]behind /, "", behind);
-        sub(/[,\]].*/, "", behind);
-      }
-      m = 1;
-    }
 
-    m == 0 && /^\?\?/  { untracked++; m = 1; }
-    m == 0 && /^.[^ ]/ { changed++;          }
-    m == 0 && /^[^ ]./ { staged++;           }
+      m == 0 && /^\?\?/  { untracked++; m = 1; }
+      m == 0 && /^.[^ ]/ { changed++;          }
+      m == 0 && /^[^ ]./ { staged++;           }
 
-    END {
-      if (untracked) printf " \033[1;31m-%d\033[0m", untracked;
-      if (changed  ) printf " \033[1;33m*%d\033[0m", changed  ;
-      if (staged   ) printf " \033[1;32m+%d\033[0m", staged   ;
-      if (behind   ) printf " \033[1;31mv%d\033[0m", behind   ;
-      if (ahead    ) printf " \033[1;34m^%d\033[0m", ahead    ;
-    }')"
+      END {
+        if (untracked) printf " \033[1;31m-%d\033[0m", untracked;
+        if (changed  ) printf " \033[1;33m*%d\033[0m", changed  ;
+        if (staged   ) printf " \033[1;32m+%d\033[0m", staged   ;
+        if (behind   ) printf " \033[1;31mv%d\033[0m", behind   ;
+        if (ahead    ) printf " \033[1;34m^%d\033[0m", ahead    ;
+      }')"
 
-    git_info="$__mk5_purple$git_info$__mk5_b_purple, "
-  fi
+      git_info="$__mk5_purple$git_info$__mk5_b_purple, "
+    ;;
+  esac
 
   # asdf version manager.
-  if [ "$ASDF_BIN" ]; then
-    until [ -f "$asdf_path/.tool-versions" -o "$asdf_path" == '' ]; do
-      asdf_path="${asdf_path%/*}"
-    done
-    asdf_path="$asdf_path/.tool-versions"
+  case $ASDF_BIN in
+    '') ;;
+    *)
+      until [ -f "$asdf_path/.tool-versions" -o "$asdf_path" == '' ]; do
+        asdf_path="${asdf_path%/*}"
+      done
+      asdf_path="$asdf_path/.tool-versions"
 
-    if [ -f "$asdf_path" ]; then
-      asdf_info=($(<"$asdf_path"))
-      IFS='/'
-      asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
-    fi
-  fi
+      if [ -f "$asdf_path" ]; then
+        asdf_info=($(<"$asdf_path"))
+        IFS='/'
+        asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
+      fi
+      ;;
+  esac
 
   # Shorten $HOME.
   mypwd="$__mk5_green${mypwd/#$HOME/\~}"
@@ -140,14 +160,17 @@ __mk5_set_prompt() {
 
   # Use single-line prompt for one character, otherwise two-line.
   local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
-  [ ${#stripped} == 1 ] &&
-    PS1="$pchar_color$stripped" ||
-    PS1+="\n$pchar_color$pchar"
+  case ${#stripped} in
+    1) PS1="$pchar_color$stripped";;
+    *) PS1+="\n$pchar_color$pchar";;
+  esac
   PS1+="$__mk5_normal "
 
   # Restore IFS.
   IFS="$ifs"
 }
 
-[[ $PROMPT_COMMAND == *"__mk5_set_prompt"*  ]] ||
-  export PROMPT_COMMAND="__mk5_set_prompt; $PROMPT_COMMAND"
+case $PROMPT_COMMAND in
+  *__mk5_set_prompt*) ;;
+  *) export PROMPT_COMMAND="__mk5_set_prompt; $PROMPT_COMMAND";;
+esac
