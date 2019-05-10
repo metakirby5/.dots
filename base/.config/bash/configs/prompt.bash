@@ -154,7 +154,7 @@ __mk5_set_prompt() {
   esac
 
   # Shorten $HOME.
-  mypwd="$__mk5_green${mypwd/#$HOME/\~}"
+  mypwd="$__mk5_green${mypwd/#$HOME/$'~'}"
 
   PS1="$asdf_info$__mk5_hostname$jobs_info$git_info$mypwd"
 
