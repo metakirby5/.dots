@@ -8,7 +8,7 @@ brew "cabal-install"
 brew "cdparanoia"
 brew "cliclick"
 brew "ctags"
-brew "docker-compose"
+brew "docker-compose", link: false
 brew "dos2unix"
 brew "emacs", restart_service: true, link: false
 brew "entr"
