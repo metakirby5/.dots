@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [";"],
             "after": [":"]
@@ -8,7 +8,17 @@
         {
             "before": [":"],
             "after": [";"]
+        },
+        {
+            "before": ["H"],
+            "commands": ["workbench.action.previousEditor"]
+        },
+        {
+            "before": ["L"],
+            "commands": ["workbench.action.nextEditor"]
         }
     ],
-    "workbench.startupEditor": "newUntitledFile"
+    "vim.leader": " ",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.enablePreview": false
 }
