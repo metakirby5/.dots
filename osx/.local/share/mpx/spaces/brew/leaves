@@ -10,7 +10,7 @@ brew "cliclick"
 brew "ctags"
 brew "docker-compose", link: false
 brew "dos2unix"
-brew "emacs", restart_service: true, link: false
+brew "emacs", link: false
 brew "entr"
 brew "fasd"
 brew "findutils", args: ["with-default-names"]
@@ -34,7 +34,6 @@ brew "libmagic"
 brew "luarocks"
 brew "macvim"
 brew "mas"
-brew "mpv", link: false
 brew "mvtools"
 brew "mysql@5.6"
 brew "ncdu"
