@@ -10,10 +10,10 @@ brew "cliclick"
 brew "ctags"
 brew "docker-compose", link: false
 brew "dos2unix"
-brew "emacs", link: false
+brew "emacs", restart_service: true, link: false
 brew "entr"
 brew "fasd"
-brew "findutils", args: ["with-default-names"]
+brew "findutils"
 brew "fzf"
 brew "gawk"
 brew "gdb"
@@ -54,7 +54,6 @@ brew "reattach-to-user-namespace"
 brew "repl"
 brew "ripgrep"
 brew "rlwrap"
-brew "ruby", link: true
 brew "scala"
 brew "stow"
 brew "telnet"
