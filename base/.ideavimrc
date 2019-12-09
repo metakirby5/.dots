@@ -2,9 +2,9 @@
 set surround
 
 " IDE Actions
-noremap H :action VimMotionPreviousTab<cr>
-noremap L :action VimMotionNextTab<cr>
-noremap <bslash> :action VimGotoDeclaration<cr>
+noremap H :action PreviousTab<cr>
+noremap L :action NextTab<cr>
+noremap <bslash> :action GotoDeclaration<cr>
 noremap <bar> :action FindUsages<cr>
 noremap <c-n> :action RenameElement<cr>
 
