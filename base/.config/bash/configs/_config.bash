@@ -1,7 +1,7 @@
 # Environment variables.
 export \
+  TERM=xterm-256color \
   VISUAL=vim \
-  EDITOR=$VISUAL \
   LS_COLORS='di=01;34:' \
   LESS_TERMCAP_md="$(echo -ne '\033[1;33m')" \
   \
@@ -27,7 +27,9 @@ export \
   HISTSIZE=1000000 \
   HISTFILESIZE=1000000
 
-export MY_SCRIPTS="$WORKSPACE/scripts"
+export \
+  EDITOR="$VISUAL" \
+  MY_SCRIPTS="$WORKSPACE/scripts"
 
 export PATH="\
 $LOCAL/bin:\
