@@ -5,7 +5,7 @@ adb() {
       command adbf "$@"
       ;;
     reinstall)
-      command adb install -r -d "$@"
+      command adb install -rd "$@"
       ;;
     '')
       command adb
