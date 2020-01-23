@@ -1113,7 +1113,7 @@ cw = ->
 modes = new ModeManager()
 
 winHint = modes.add new HintMode (->
-  _.filter Window.recent(), (w) -> w.isVisible()
+  _.sortBy (Window.all visible: true), ((w) -> w.hash())
 ), (w) ->
   w.chain().focus().mouseTo()
 
