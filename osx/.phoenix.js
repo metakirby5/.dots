@@ -21,6 +21,8 @@ AXES = [VERTICAL, HORIZONTAL]
 # AVAILABLE KEYS: f v g
 Phoenix.set openAtLogin: true
 p =
+  timeout: 0.2                   # Timeout for e.g. window focus
+
   ## WINDOWS
   wins:
     tolerance: 10                # Tolerance for window movement (for pouring)
@@ -139,6 +141,25 @@ String.prototype.popFront = -> @charAt 0
 String.prototype.poppedFront = -> @substr 1
 String.prototype.insert = (s, i) -> (@substr 0, i) + s + @substr i
 String.prototype.remove = (i) -> (@substr 0, i) + @substr i + 1
+
+# Retry until either f returns true or we hit timeout
+persistently = (timeout, f) ->
+  keepTrying = true
+  Timer.after timeout, -> keepTrying = false
+
+  tryIt = ->
+    if f()
+      return
+
+    if keepTrying
+      _.defer tryIt
+      return
+
+    Phoenix.notify 'Persistent call timed out!'
+    Phoenix.log "`persistently` timed out:\n#{f}"
+
+  tryIt()
+
 
 # Every bindable key on a Macbook Pro keyboard
 ALL_KEYS = (String.fromCharCode(c) for c in [39]
@@ -850,9 +871,13 @@ class ChainWindow
     @win.setFrame @f
     this
 
-  # Proxy: focus
+  # Focus window
   focus: ->
-    @win.focus()
+    # Some apps don't focus the right window,
+    # so keep trying until timeout.
+    persistently p.timeout, =>
+      @win.focus()
+      Window.focused().isEqual @win
     this
 
   # Switch window to neighbor
