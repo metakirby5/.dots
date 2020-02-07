@@ -12,6 +12,7 @@ noremap <c-n> :action RenameElement<cr>
 set ignorecase
 set smartcase
 set infercase
+set ideajoin
 
 set hlsearch
 set gdefault
