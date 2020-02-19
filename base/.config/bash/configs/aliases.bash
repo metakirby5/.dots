@@ -17,6 +17,7 @@ alias \
   HEAD='git rev-parse --abbrev-ref HEAD' \
   aniget='anistrm --program="wget -c"' \
   pbp='pb push -d 0' \
+  ns='ntfy send' \
   pypush='python setup.py sdist bdist_wheel upload -r' \
   pypush3='python3 setup.py sdist bdist_wheel upload -r' \
   all='parallel -X --tty ' \
