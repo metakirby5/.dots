@@ -75,7 +75,7 @@ brew() {
 
       case "$cmd" in
         up)
-          command brew cu "$@"
+          command brew cu -y "$@"
           ;;
         l)
           command brew cask list "$@"
