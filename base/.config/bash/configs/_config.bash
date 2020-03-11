@@ -1,5 +1,6 @@
 # Environment variables.
 export \
+  LC_ALL=en_US.UTF-8 \
   VISUAL=vim \
   LS_COLORS='di=01;34:' \
   LESS_TERMCAP_md="$(echo -ne '\033[1;33m')" \
