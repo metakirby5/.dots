@@ -27,6 +27,14 @@ DEFAULTS=(
     NSGlobalDomain AppleSpacesSwitchOnActivate -bool true"
   ["24-hour time"]="\
     NSGlobalDomain AppleICUForce24HourTime -bool true"
+  ["Celsius"]="\
+    NSGlobalDomain AppleTemperatureUnit -string Celsius"
+  ["Smart em dash off"]="\
+    NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false"
+  ["Double space for period off"]="\
+    NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false"
+  ["Smart quotes off"]="\
+    NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false"
   ["Fast key repeat"]="\
     NSGlobalDomain KeyRepeat -int 2"
   ["Quick delay for key repeat"]="\
@@ -39,6 +47,12 @@ DEFAULTS=(
     NSGlobalDomain AppleShowAllExtensions -bool true"
   ["Hide Menu Bar"]="\
     NSGlobalDomain _HiHideMenuBar -bool true"
+
+  # com.apple.systemuiserver
+  ["Volume in status bar"]="\
+    com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.volume' -bool true"
+  ["Bluetooth in status bar"]="\
+    com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.bluetooth' -bool true"
 
   # com.apple.dock
   ["No dock magnification"]="\
@@ -69,6 +83,10 @@ DEFAULTS=(
   # com.apple.dashboard
   ["Disable dashboard"]="\
     com.apple.dashboard dashboard-enabled-state -int 1"
+
+  # com.apple.menuextra.battery
+  ["Percentage in battery"]="\
+    com.apple.menuextra.battery ShowPercent -string YES"
 
   # com.apple.menuextra.clock
   ["24 hour clock"]="\
@@ -106,11 +124,15 @@ DEFAULTS=(
 
   # com.apple.screencapture
   ["Put screenshots in ~/Pictures/Screenshots/"]="\
-    com.apple.screencapture location ~/Pictures/Screenshots/"
+    com.apple.screencapture location -string ~/Pictures/Screenshots/"
 
   # com.apple.AppleMultitouchTrackpad
   ["Trackpad three finger drag"]="\
     com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true"
+
+  # com.apple.touchbar.agent
+  ["Control strip in touch bar"]="\
+    com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip"
 )
 
 # Open up the log file
@@ -118,9 +140,9 @@ mkdir -p "$(dirname "$LOG_FILE")"
 date >> "$LOG_FILE"
 
 for d in "${!DEFAULTS[@]}"; do
-  domain="$(awk '{print $1" "$2" "$3}' <<< "${DEFAULTS[$d]}")"
-  val="$(awk '{$1=$2=$3=""; print substr($0, 4)}' <<< "${DEFAULTS[$d]}")"
-  cur="$(defaults read ${DEFAULTS[$d]} 2>/dev/null)"
+  domain="$(sed 's/ -.*//' <<< "${DEFAULTS[$d]}")"
+  val="$(sed 's/.* -[^ ]* //' <<< "${DEFAULTS[$d]}")"
+  cur="$(eval defaults read ${DEFAULTS[$d]} 2>/dev/null)"
   [ ! "$cur" ] && cur="unset"
   read -rp "$d? ($cur -> $val) [y/N] " set
   echo "  $d" >> "$LOG_FILE"
