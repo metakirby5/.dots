@@ -81,15 +81,15 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Git gutter {{{
       Plug 'airblade/vim-gitgutter'
       let g:gitgutter_map_keys = 0
-      nmap [g <Plug>GitGutterPrevHunk
-      nmap ]g <Plug>GitGutterNextHunk
-      nmap <leader>ga <Plug>GitGutterStageHunk
-      nmap <leader>gu <Plug>GitGutterUndoHunk
-      nmap <leader>go <Plug>GitGutterPreviewHunk
-      omap ig <Plug>GitGutterTextObjectInnerPending
-      omap ag <Plug>GitGutterTextObjectOuterPending
-      xmap ig <Plug>GitGutterTextObjectInnerVisual
-      xmap ag <Plug>GitGutterTextObjectOuterVisual
+      nmap [g <Plug>(GitGutterPrevHunk)
+      nmap ]g <Plug>(GitGutterNextHunk)
+      nmap <leader>ga <Plug>(GitGutterStageHunk)
+      nmap <leader>gu <Plug>(GitGutterUndoHunk)
+      nmap <leader>go <Plug>(GitGutterPreviewHunk)
+      omap ig <Plug>(GitGutterTextObjectInnerPending)
+      omap ag <Plug>(GGitGutterTextObjectOuterPending)
+      xmap ig <Plug>(GGitGutterTextObjectInnerVisual)
+      xmap ag <Plug>(GGitGutterTextObjectOuterVisual)
     " }}}
     " Register preview {{{
       Plug 'junegunn/vim-peekaboo'
