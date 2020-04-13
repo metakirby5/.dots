@@ -67,6 +67,8 @@
   ps = "!git stash push; git pull; git stash pop"
   u = push
   up = push -u origin HEAD
+  us = push -o ci.skip
+  ups = push -o ci.skip -u origin HEAD
 
   # status
   s  = status --short
