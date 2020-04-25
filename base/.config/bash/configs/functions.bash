@@ -49,3 +49,8 @@ remind-say() {
   remind "$@"
   say -- "Finished $@."
 }
+
+# Port tunnel to a remove server.
+portup() {
+  ssh -NTCR "${2:-3000}:localhost:${1:-3000}" "${3:-"$PORTUP_HOST"}"
+}
