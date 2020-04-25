@@ -52,5 +52,9 @@ remind-say() {
 
 # Port tunnel to a remove server.
 portup() {
+  if [ -z "$PORTUP_HOST" ]; then
+    echo "Missing PORTUP_HOST!"
+    return 1
+  fi
   ssh -NTCR "${2:-3000}:localhost:${1:-3000}" "${3:-"$PORTUP_HOST"}"
 }
