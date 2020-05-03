@@ -8,7 +8,7 @@ cliclick:
     left: cliclick kp:arrow-left
     spacebar: cliclick kp:space
     right: cliclick kp:arrow-right
-    gdrive next: cliclick -w 2000 kp:esc kp:arrow-right kp:enter t:f kp:tab
+    gdrive next: cliclick -w 3000 kp:esc kp:arrow-right kp:enter t:f kp:tab
 announcer:
     greet: say hello
     part: say farewell
