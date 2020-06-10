@@ -877,7 +877,7 @@ class ChainWindow
     # so keep trying until timeout.
     persistently p.timeout, =>
       @win.focus()
-      Window.focused().isEqual @win
+      Window.focused()?.isEqual @win
     this
 
   # Switch window to neighbor
