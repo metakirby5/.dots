@@ -137,21 +137,19 @@ __mk5_set_prompt() {
   esac
 
   # asdf version manager.
-  case $ASDF_BIN in
-    '') ;;
-    *)
-      until [ -f "$asdf_path/.tool-versions" -o "$asdf_path" == '' ]; do
-        asdf_path="${asdf_path%/*}"
-      done
-      asdf_path="$asdf_path/.tool-versions"
+  until [ -f "$asdf_path/.tool-versions" -o "$asdf_path" == '' ]; do
+    asdf_path="${asdf_path%/*}"
+  done
+  asdf_path="$asdf_path/.tool-versions"
 
-      if [ -f "$asdf_path" ]; then
-        asdf_info=($(<"$asdf_path"))
-        IFS='/'
-        asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
-      fi
-      ;;
-  esac
+  if [ -f "$asdf_path" ]; then
+    asdf_info=($(<"$asdf_path"))
+    IFS='/'
+    case $ASDF_BIN in
+      '') asdf_info="${__mk5_red}asdf${__mk5_b_red}, ";;
+      *)  asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, ";;
+    esac
+  fi
 
   # Shorten $HOME.
   mypwd="$__mk5_green${mypwd/#$HOME/$'~'}"
