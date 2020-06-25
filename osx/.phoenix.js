@@ -108,6 +108,7 @@ p =
     center: 'c'              # Toggle: center window
     reFill: 'u'              # Toggle: grow window to fill empty space
     status: 'i'              # Show datetime in notification
+    sleep: 'delete'          # Put machine to sleep
     mouseOut: '.'            # Move mouse to lower right corner
     winHintMode: 'y'         # Activate window hint mode
     scrHintMode: 's'         # Activate screen hint mode
@@ -1191,10 +1192,12 @@ Key.on p.keys.mouseOut, p.keys.mods.base, ->
     x: f.x + f.width
     y: f.y + f.height
   Mouse.toggle()
-Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh', [
-  "-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"
-], (r) ->
-  Toaster.toast r.output.trim()
+Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh',
+  ["-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"],
+  (r) -> Toaster.toast r.output.trim()
+Key.on p.keys.sleep, p.keys.mods.base, -> Task.run '/bin/sh',
+  ['-c', 'pmset sleepnow'],
+  (r) -> Toaster.toast (r.output or r.error).trim()
 
 # Apps
 p.keys.apps.map (app, key) ->
