@@ -1196,7 +1196,7 @@ Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh',
   ["-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"],
   (r) -> Toaster.toast r.output.trim()
 Key.on p.keys.sleep, p.keys.mods.base, -> Task.run '/bin/sh',
-  ['-c', 'pmset sleepnow'],
+  ['-c', 'pmset displaysleepnow'],
   (r) -> Toaster.toast (r.output or r.error).trim()
 
 # Apps
