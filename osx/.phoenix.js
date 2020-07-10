@@ -1173,7 +1173,7 @@ evalInput = modes.add new InputMode p.eval.prompt, (input, keyPressed) ->
 shellInput = modes.add new InputMode p.shell.prompt, (input, keyPressed) ->
   returnPressed = keyPressed == 'return'
   if input and returnPressed
-    Task.run p.shell.bin, (['-lc'].concat input), (r) ->
+    Task.run p.shell.bin, (['-c'].concat input), (r) ->
       Toaster.toast (r.output or r.error).trim()
       Phoenix.log r.error if r.error
   [(if returnPressed then '' else input), null, returnPressed]
