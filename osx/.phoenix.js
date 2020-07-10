@@ -104,6 +104,7 @@ p =
       '/':    [1/2,  1/2 ]
       'down': [1, 1/2]
       'up':   [1, -1/2]
+    quick: 'tab'             # Random quick actions
     maximize: 'm'            # Toggle: maximize window, w/ gaps
     center: 'c'              # Toggle: center window
     reFill: 'u'              # Toggle: grow window to fill empty space
@@ -1186,15 +1187,21 @@ Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
 Key.on p.keys.shellInputMode, p.keys.mods.base, -> modes.toggle shellInput
+
+# Move mouse out of the way
 Key.on p.keys.mouseOut, p.keys.mods.base, ->
   f = Screen.moused().flippedFrame()
   Mouse.move
     x: f.x + f.width
     y: f.y + f.height
   Mouse.toggle()
+
+# Show status
 Key.on p.keys.status, p.keys.mods.base, -> Task.run '/bin/sh',
   ["-c", "LANG='ja_JP.UTF-8' date '+%a %-m/%-d %-H:%M'"],
   (r) -> Toaster.toast r.output.trim()
+
+# Sleep
 Key.on p.keys.sleep, p.keys.mods.base, -> Task.run '/bin/sh',
   ['-c', 'pmset sleepnow'],
   (r) -> Toaster.toast (r.output or r.error).trim()
@@ -1239,6 +1246,16 @@ p.keys.apps.map (app, key) ->
 # Snaps
 p.keys.snaps.map (dest, key) ->
   Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).toggle().set()
+
+# Move window to next/prev screen
+moveCurrentWindowToScreen = (delta) ->
+  w = cw()
+  if not w?
+    return
+  next = w.scr.idx() + 1
+  w.setScreen(next % Screen.all().length).reproportion().set().focus().mouseTo()
+Key.on p.keys.quick, p.keys.mods.base, -> moveCurrentWindowToScreen 1
+Key.on p.keys.quick, p.keys.mods.base.concat('shift'), -> moveCurrentWindowToScreen -1
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
