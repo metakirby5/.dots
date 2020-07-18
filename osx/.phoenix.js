@@ -1254,8 +1254,10 @@ moveCurrentWindowToScreen = (delta) ->
     return
   next = w.scr.idx() + 1
   w.setScreen(next % Screen.all().length).reproportion().set().focus().mouseTo()
-Key.on p.keys.quick, p.keys.mods.base, -> moveCurrentWindowToScreen 1
-Key.on p.keys.quick, p.keys.mods.base.concat('shift'), -> moveCurrentWindowToScreen -1
+Key.on p.keys.quick, p.keys.mods.base, ->
+  moveCurrentWindowToScreen 1
+Key.on p.keys.quick, p.keys.mods.base.concat('shift'), ->
+  moveCurrentWindowToScreen -1
 
 # Notify upon load of config
 Phoenix.notify 'Config loaded.'
