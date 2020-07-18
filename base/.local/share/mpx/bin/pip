@@ -11,7 +11,7 @@ main() {
       main leaves > leaves
       ;;
     install-leaves)
-      xargs pip install < leaves
+      xargs pip3 install < leaves
       ;;
   esac
 }
