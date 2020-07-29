@@ -1,0 +1,7 @@
+[NoLighting]
+[Base,Layer1,Layer2,Layer3,FnLayer1,FnLayer2,FnLayer3]
+Esc:BackTick
+CapsLock:Esc
+LWin:LAlt
+LAlt:LWin
+Menu:TempSwitchLayer1
