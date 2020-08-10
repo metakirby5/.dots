@@ -1,4 +1,11 @@
 [NoLighting]
+[Lighting(Spectral Cycle,Base)]
+[Lighting(Rainbow Waves,Base)]
+[Lighting(Windmill,Base)]
+[Lighting(RGB,Base)]
+[Lighting(Full White Light,Base)]
+[Lighting(Full Red Light,Base)]
+
 [Base,Layer1,Layer2,Layer3,FnLayer1,FnLayer2,FnLayer3]
 Esc:BackTick
 CapsLock:Esc
