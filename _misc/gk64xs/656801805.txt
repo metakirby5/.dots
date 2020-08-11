@@ -13,3 +13,4 @@ CapsLock:Esc
 [Base]
 LWin:LAlt
 LAlt:LWin
+Menu:RAlt+RWin
