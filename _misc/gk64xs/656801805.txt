@@ -1,3 +1,6 @@
+# https://github.com/pixeltris/GK6X/blob/master/Build/UserData/Sample.txt
+# https://github.com/pixeltris/GK6X/blob/master/GK6X/KeyValues.cs#L269
+
 [NoLighting]
 [Lighting(Spectral Cycle,Base)]
 [Lighting(Rainbow Waves,Base)]
