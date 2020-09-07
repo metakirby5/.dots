@@ -13,7 +13,14 @@
 Esc:BackTick
 CapsLock:Esc
 
+# Mac
 [Base]
 LWin:LAlt
 LAlt:LWin
 Menu:RAlt+RWin
+
+# Windows
+[Layer1]
+LAlt:LCtrl
+LCtrl:LAlt
+Menu:RWin
