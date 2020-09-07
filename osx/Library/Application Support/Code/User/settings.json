@@ -10,6 +10,14 @@
             "after": [";"]
         },
         {
+            "before": ["j"],
+            "after": ["g", "j"]
+        },
+        {
+            "before": ["k"],
+            "after": ["g", "k"]
+        },
+        {
             "before": ["H"],
             "commands": ["workbench.action.previousEditor"]
         },
@@ -20,5 +28,6 @@
     ],
     "vim.leader": " ",
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "vim.statusBarColors.visualline": ""
 }
