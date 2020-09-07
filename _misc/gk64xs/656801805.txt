@@ -9,18 +9,18 @@
 [Lighting(Full White Light,Base)]
 [Lighting(Full Red Light,Base)]
 
+# All
 [Base,Layer1,Layer2,Layer3,FnLayer1,FnLayer2,FnLayer3]
 Esc:BackTick
 CapsLock:Esc
 
 # Mac
-[Base]
+[Layer1]
 LWin:LAlt
 LAlt:LWin
 Menu:RAlt+RWin
 
 # Windows
-[Layer1]
+[Layer2]
 LAlt:LCtrl
 LCtrl:LAlt
-Menu:RWin
