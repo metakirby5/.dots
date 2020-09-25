@@ -29,13 +29,13 @@ ostruct
 prime
 pstore
 psych
-racc
 readline
 readline-ext
 rexml
 rss
 sdbm
 singleton
+slack-big-emoji
 stringio
 strscan
 timeout
