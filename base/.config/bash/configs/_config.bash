@@ -36,7 +36,7 @@ $LOCAL/bin:\
 $MY_SCRIPTS:\
 $PATH:\
 /usr/local/bin:\
-/usr/local/sbin
+/usr/local/sbin\
 "
 
 # Shell options.
