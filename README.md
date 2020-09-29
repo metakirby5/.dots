@@ -3,7 +3,7 @@
 
 All of my dotfiles, managed with GNU Stow.
 
-![dtop](https://s.kirbi.es/dtop.png)
+![dtop](_misc/dtop.png)
 
 - Folders prefixed with `_` should not be stowed.
   - `_misc` contains configuration that must be manually applied.
