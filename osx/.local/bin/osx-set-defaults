@@ -55,6 +55,8 @@ DEFAULTS=(
     com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.bluetooth' -bool true"
 
   # com.apple.dock
+  ["Dock size 60"]="\
+    com.apple.dock tilesize -int 60"
   ["No dock magnification"]="\
     com.apple.dock magnification -bool false"
   ["Dock on left"]="\
@@ -67,6 +69,8 @@ DEFAULTS=(
     com.apple.dock launchanim -bool true"
   ["Show dock indicators"]="\
     com.apple.dock show-process-indicators -bool true"
+  ["Show 3 recent apps + divider"]="\
+    com.apple.dock show-recents -bool true"
   ["Autohide dock"]="\
     com.apple.dock autohide -bool true"
   ["Don't reorganize spaces in most recently used order"]="\
@@ -95,6 +99,12 @@ DEFAULTS=(
     com.apple.menuextra.clock FlashDateSeparators -bool false"
   ["Digital clock"]="\
     com.apple.menuextra.clock IsAnalog -bool false"
+  ["Show date"]="\
+    com.apple.menuextra.clock ShowDayOfMonth -bool true"
+  ["Show day of week"]="\
+    com.apple.menuextra.clock ShowDayOfWeek -bool true"
+  ["Hide seconds"]="\
+    com.apple.menuextra.clock ShowSeconds -bool false"
 
   # com.apple.screensaver
   ["Require password on sleep"]="\
@@ -133,6 +143,14 @@ DEFAULTS=(
   # com.apple.touchbar.agent
   ["Control strip in touch bar"]="\
     com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip"
+
+  # com.apple.siri
+  ["Hide Siri in status bar"]="\
+    com.apple.siri StatusMenuVisible -bool false"
+
+  # com.apple.TextInputMenuAgent
+  ["Hide Spotlight in status bar"]="\
+    com.apple.TextInputMenuAgent 'NSStatusItem Visible Item-0' -bool false"
 )
 
 # Open up the log file
