@@ -1,9 +1,18 @@
 __variables__:
     mpvfifo: ~/.local/share/mpv/fifo
-mpv:
-    rewind: echo seek -5 > {mpvfifo}
-    play/pause: echo cycle pause > {mpvfifo}
-    fast forward: echo seek 5 > {mpvfifo}
+volume:
+    0: osascript -e "set Volume 0"
+    1: osascript -e "set Volume 1"
+    2: osascript -e "set Volume 2"
+    3: osascript -e "set Volume 3"
+    4: osascript -e "set Volume 4"
+    5: osascript -e "set Volume 5"
+    6: osascript -e "set Volume 6"
+    7: osascript -e "set Volume 7"
+media:
+    previous: cliclick kp:play-previous
+    play/pause: cliclick kp:play-pause
+    next: cliclick kp:play-next
 cliclick:
     left: cliclick kp:arrow-left
     spacebar: cliclick kp:space
@@ -22,15 +31,11 @@ cliclick:
         kp:arrow-right kp:arrow-right
         kp:arrow-right kp:arrow-right
         kp:arrow-right kp:arrow-right
+mpv:
+    rewind: echo seek -5 > {mpvfifo}
+    play/pause: echo cycle pause > {mpvfifo}
+    fast forward: echo seek 5 > {mpvfifo}
 announcer:
     greet: say hello
     part: say farewell
-volume:
-    0: osascript -e "set Volume 0"
-    1: osascript -e "set Volume 1"
-    2: osascript -e "set Volume 2"
-    3: osascript -e "set Volume 3"
-    4: osascript -e "set Volume 4"
-    5: osascript -e "set Volume 5"
-    6: osascript -e "set Volume 6"
-    7: osascript -e "set Volume 7"
+    karl: say are you really from america
