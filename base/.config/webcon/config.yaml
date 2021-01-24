@@ -17,6 +17,7 @@ cliclick:
     left: cliclick kp:arrow-left
     spacebar: cliclick kp:space
     right: cliclick kp:arrow-right
+    mouse to corner: cliclick m:100000,100000
     gdrive next: >
         cliclick -w 2000
         kp:esc kp:arrow-right w:10000
