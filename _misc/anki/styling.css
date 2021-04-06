@@ -1,0 +1,95 @@
+:root {
+  --transparent-bg: rgba(128, 128, 128, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui;
+}
+
+.card {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 2em;
+}
+
+section {
+  margin: 0;
+  padding: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.question {
+  background: none;
+}
+
+.answer {
+  position: relative;
+}
+
+.answer:before {
+  content: "";
+  background-color: var(--transparent-bg);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200vw;
+  left: -100vw;
+}
+
+dl, ol, ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.6em;
+  text-align: left;
+}
+
+/* Vertically center items in cells. */
+
+dl > *, ol > *, ul > * {
+  margin: 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--transparent-bg);
+}
+
+/* Hide definitions after the first... */
+
+dl > *:nth-child(n+3) {
+  display: none;
+}
+
+ol > *:nth-child(n+2), ul > *:nth-child(n+2) {
+  display: none;
+}
+
+/* ...until mouse over. */
+
+.card:hover dl > *:nth-child(n+3) {
+  display: flex;
+}
+
+.card:hover ol > *:nth-child(n+2), .card:hover ul > *:nth-child(n+2) {
+  display: flex;
+}
+
+/* Space out these definitions. */
+
+dl > *:nth-child(2n+3) {
+  margin: 1rem 0 0;
+}
+
+ol > *:nth-child(n+2), ul > *:nth-child(n + 2) {
+  margin: 1rem 0 0;
+}
+
+dt, i {
+  opacity: 0.5;
+  font-size: 0.7em;
+}
