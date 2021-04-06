@@ -95,22 +95,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       Plug 'junegunn/vim-peekaboo'
       let g:peekaboo_delay = 100
     " }}}
-    " Highlight all as searching {{{
-      if (version >= 704)
-        Plug 'haya14busa/incsearch.vim'
-        set hlsearch
-        let g:incsearch#auto_nohlsearch = 1
-        let g:incsearch#is_stay = 1
-        map /  <Plug>(incsearch-forward)
-        map ?  <Plug>(incsearch-backward)
-        map n  <Plug>(incsearch-nohl-n)
-        map N  <Plug>(incsearch-nohl-N)
-        map *  <Plug>(incsearch-nohl-*)
-        map #  <Plug>(incsearch-nohl-#)
-        map g* <Plug>(incsearch-nohl-g*)
-        map g# <Plug>(incsearch-nohl-g#)
-      endif
-    " }}}
     " Enable minimalism {{{
       Plug 'junegunn/goyo.vim'
             \, { 'on': 'Goyo' }
@@ -274,48 +258,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " Multiple cursors {{{
       Plug 'terryma/vim-multiple-cursors'
     " }}}
-    " Emacs which-key for vim {{{
-      Plug 'hecal3/vim-leader-guide'
-      let g:leaderGuide_default_group_name = "+group"
-      let g:leaderGuide_hspace = 2
-      let s:leaderGuide_max_desc_len = 30
-      function! s:leaderGuide_displayfunc()
-        " Kill ending <cr>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname, '<cr>$', '', 'i')
-        " Kill beginning <esc>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname, '^<esc>', '', 'i')
-        " Kill beginning <plug>
-        let g:leaderGuide#displayname =
-              \ substitute(g:leaderGuide#displayname,
-              \ '^<plug>(\?\([^)]*\))\?', '\1', 'i')
-        " Truncate to s:leaderGuide_max_desc_len chars or less
-        if len(g:leaderGuide#displayname) > s:leaderGuide_max_desc_len
-          let g:leaderGuide#displayname =
-                \g:leaderGuide#displayname[:s:leaderGuide_max_desc_len-1]
-                \."…"
-        endif
-      endfunction
-      let g:leaderGuide_displayfunc = [function("s:leaderGuide_displayfunc")]
-      function! s:map_leaderGuides(maps, l)
-        for k in a:l
-          let g = k == '<leader>' ? g:mapleader : k
-          if a:maps =~ 'n'
-            exe 'nnoremap <silent> '.k.' :<c-u>LeaderGuide '''.g.'''<CR>'
-          endif
-          if a:maps =~ 'v'
-            exe 'xnoremap <silent> '.k.' :<c-u>LeaderGuideVisual '''.g.'''<CR>'
-          endif
-        endfor
-      endfunction
-      call s:map_leaderGuides('n', [
-            \ 'co',
-            \ ])
-      call s:map_leaderGuides('nv', [
-            \ '<leader>', '[', ']',
-            \ ])
-    " }}}
     " Better :%s/.../.../ {{{
       Plug 'osyo-manga/vim-over'
               \, { 'on': 'OverCommandLine' }
@@ -361,6 +303,7 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
     " }}}
     " EasyMotion {{{
       Plug 'easymotion/vim-easymotion'
+            \, { 'on': '<Plug>(easymotion' }
       let g:EasyMotion_smartcase = 1
 
       " Sneak
@@ -402,11 +345,6 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
       let g:AutoPairsCenterLine = 0
       let g:AutoPairsMapSpace = 0
       let g:AutoPairsMultilineClose = 0
-    " }}}
-    " Auto-generate ctags {{{
-      if version >= 704 && executable('ctags')
-        Plug 'ludovicchabant/vim-gutentags'
-      endif
     " }}}
     " Automatically mkdir {{{
       Plug 'pbrisbin/vim-mkdir'
