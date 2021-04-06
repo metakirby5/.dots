@@ -2,6 +2,14 @@
   --transparent-bg: rgba(128, 128, 128, 0.1);
 }
 
+.small {
+  font-size: 0.6em;
+}
+
+.left {
+  text-align: left;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,10 +21,6 @@ body {
   padding: 0;
   text-align: center;
   font-size: 2em;
-}
-
-.small {
-  font-size: 0.6em;
 }
 
 section {
@@ -34,6 +38,8 @@ section {
   position: relative;
 }
 
+/* Force answer background to full-width. */
+
 .answer:before {
   content: "";
   background-color: var(--transparent-bg);
@@ -49,50 +55,44 @@ dl, ol, ul {
   padding: 0;
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
-
-/* Vertically center items in cells. */
 
 dl > *, ol > *, ul > * {
   margin: 0;
   padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
+  display: table-cell;
   background: var(--transparent-bg);
 }
 
 /* Hide definitions after the first... */
 
-dl > *:nth-child(n+3) {
-  display: none;
-}
-
-ol > *:nth-child(n+2), ul > *:nth-child(n+2) {
+dl > *:nth-child(n+3),
+ol > *:nth-child(n+2),
+ul > *:nth-child(n+2) {
   display: none;
 }
 
 /* ...until mouse over. */
 
-.card:hover dl > *:nth-child(n+3) {
-  display: flex;
-}
-
-.card:hover ol > *:nth-child(n+2), .card:hover ul > *:nth-child(n+2) {
-  display: flex;
+.card:hover dl > *:nth-child(n+3),
+.card:hover ol > *:nth-child(n+2),
+.card:hover ul > *:nth-child(n+2) {
+  display: table-cell;
 }
 
 /* Space out these definitions. */
 
-dl > *:nth-child(2n+3) {
-  margin: 1rem 0 0;
-}
-
-ol > *:nth-child(n+2), ul > *:nth-child(n + 2) {
+dl > *:nth-child(2n+3),
+ol > *:nth-child(n+2),
+ul > *:nth-child(n + 2) {
   margin: 1rem 0 0;
 }
 
 dt, i {
   opacity: 0.5;
   font-size: 0.7em;
+}
+
+i {
+  display: block;
 }
