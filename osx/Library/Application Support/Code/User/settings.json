@@ -29,5 +29,13 @@
     "vim.leader": " ",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.enablePreview": false,
-    "vim.statusBarColors.visualline": ""
+    "vim.statusBarColors.visualline": "",
+    "python.pythonPath": "/usr/local/bin/python3",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "python.showStartPage": false
 }
