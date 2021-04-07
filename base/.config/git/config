@@ -8,6 +8,8 @@
   default = upstream         # push to upstream
 [pull]
   rebase = true              # rebase instead of merge on pull
+[checkout]
+  defaultRemote = origin     # prefer origin remote
 [merge]
   defaultToUpstream = true   # merge with upstream by default
   log = true                 # summary on merge
