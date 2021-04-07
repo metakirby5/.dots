@@ -84,7 +84,7 @@ ul > *:nth-child(n+2) {
 
 dl > *:nth-child(2n+3),
 ol > *:nth-child(n+2),
-ul > *:nth-child(n + 2) {
+ul > *:nth-child(n+2) {
   margin: 1rem 0 0;
 }
 
