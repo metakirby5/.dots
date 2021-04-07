@@ -57,7 +57,7 @@ dl, ol, ul {
   flex-direction: column;
 }
 
-dl > *, ol > *, ul > * {
+:-webkit-any(dl, ol, ul) > * {
   margin: 0;
   padding: 0.5rem;
   display: table-cell;
@@ -67,24 +67,21 @@ dl > *, ol > *, ul > * {
 /* Hide definitions after the first... */
 
 dl > *:nth-child(n+3),
-ol > *:nth-child(n+2),
-ul > *:nth-child(n+2) {
+:-webkit-any(ol, ul) > *:nth-child(n+2) {
   display: none;
 }
 
 /* ...until mouse over. */
 
 .card:hover dl > *:nth-child(n+3),
-.card:hover ol > *:nth-child(n+2),
-.card:hover ul > *:nth-child(n+2) {
+.card:hover :-webkit-any(ol, ul) > *:nth-child(n+2) {
   display: table-cell;
 }
 
 /* Space out these definitions. */
 
 dl > *:nth-child(2n+3),
-ol > *:nth-child(n+2),
-ul > *:nth-child(n+2) {
+:-webkit-any(ol, ul) > *:nth-child(n+2) {
   margin: 1rem 0 0;
 }
 
