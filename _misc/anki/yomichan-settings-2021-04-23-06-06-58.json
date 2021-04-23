@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-04-13 05:55:40",
+    "date": "2021-04-23 06:06:58",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -79,7 +79,6 @@
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.cb341adffd8283cb67692ed0cbe7c476b4b72c11d72bc138bb2f528d41569b18",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -116,7 +115,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.3.31.1",
+        "version": "21.3.31.2",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -128,7 +127,7 @@
             "os": "mac"
         }
     },
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -138,7 +137,6 @@
             "https://*/*"
         ],
         "permissions": [
-            "clipboardRead",
             "clipboardWrite",
             "storage",
             "unlimitedStorage",
@@ -269,7 +267,7 @@
                         "delay": 20,
                         "hideDelay": 0,
                         "length": 10,
-                        "deepDomScan": false,
+                        "deepDomScan": true,
                         "popupNestingMaxDepth": 0,
                         "enablePopupSearch": false,
                         "enableOnPopupExpressions": false,
