@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-04-23 06:06:58",
+    "date": "2021-04-24 14:07:27",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -79,6 +79,7 @@
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
+        "differential_fingerprint": "1.ba2eaef1669f1fc57b222cfc54d545273cea2f20ae61df96f5329c32297f01a2",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -127,7 +128,7 @@
             "os": "mac"
         }
     },
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -137,6 +138,7 @@
             "https://*/*"
         ],
         "permissions": [
+            "clipboardRead",
             "clipboardWrite",
             "storage",
             "unlimitedStorage",
@@ -313,21 +315,22 @@
                             "quality": 92
                         },
                         "terms": {
-                            "deck": "Japanese",
-                            "model": "Japanese",
+                            "deck": "Japanese::Vocabulary",
+                            "model": "Japanese Vocabulary",
                             "fields": {
                                 "Expression": "{expression}",
-                                "Meaning": "{glossary}",
-                                "Reading": "{reading}"
+                                "Reading": "{reading}",
+                                "Meaning": "{glossary}"
                             }
                         },
                         "kanji": {
-                            "deck": "Japanese",
-                            "model": "Japanese",
+                            "deck": "Japanese::Kanji",
+                            "model": "Japanese Kanji",
                             "fields": {
                                 "Expression": "{character}",
-                                "Meaning": "{glossary}",
-                                "Reading": "<i>音読み: </i>{onyomi}<br /><i>訓読み: </i>{kunyomi}"
+                                "Onyomi": "{onyomi}",
+                                "Kunyomi": "{kunyomi}",
+                                "Meaning": "{glossary}"
                             }
                         },
                         "duplicateScope": "collection",
