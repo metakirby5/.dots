@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-04-24 14:07:27",
+    "date": "2021-05-02 11:25:21",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -128,7 +128,7 @@
             "os": "mac"
         }
     },
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -316,7 +316,7 @@
                         },
                         "terms": {
                             "deck": "Japanese::Vocabulary",
-                            "model": "Japanese Vocabulary",
+                            "model": "Japanese",
                             "fields": {
                                 "Expression": "{expression}",
                                 "Reading": "{reading}",
@@ -324,12 +324,11 @@
                             }
                         },
                         "kanji": {
-                            "deck": "Japanese::Kanji",
-                            "model": "Japanese Kanji",
+                            "deck": "Japanese::Vocabulary",
+                            "model": "Japanese",
                             "fields": {
                                 "Expression": "{character}",
-                                "Onyomi": "{onyomi}",
-                                "Kunyomi": "{kunyomi}",
+                                "Reading": "{onyomi} / {kunyomi}",
                                 "Meaning": "{glossary}"
                             }
                         },
