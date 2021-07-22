@@ -152,15 +152,12 @@ cask "wacom-tablet"
 cask "webpquicklook"
 cask "whatsyoursign"
 cask "zoom"
-darglint
-darktable-dev
 mas "Controllers Lite", id: 673660806
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Xcode", id: 497799835
-odbc-manager
 tap "beeftornado/rmtree"
 tap "buo/cask-upgrade"
 tap "homebrew/bundle"
