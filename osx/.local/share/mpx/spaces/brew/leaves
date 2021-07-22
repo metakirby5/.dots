@@ -1,6 +1,3 @@
-==> Deleted Casks
-==> New Casks
-==> New Formulae
 brew "abcde"
 brew "asdf"
 brew "bash"
