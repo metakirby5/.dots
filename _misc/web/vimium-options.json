@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.64",
+  "settingsVersion": "1.67",
   "exclusionRules": [
     {
       "pattern": "https?://cloudpebble.net/ide/*",
@@ -22,24 +22,8 @@
       "passKeys": ""
     },
     {
-      "pattern": "https?://joezeng.github.io/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://zshthem.es/*",
-      "passKeys": "jk"
-    },
-    {
-      "pattern": "https?://still-tor-2690.herokuapp.com/*",
-      "passKeys": ""
-    },
-    {
       "pattern": "https?://calendar.google.com/*",
       "passKeys": "?jkpnrt12345dwmxacezgynm/+qCs"
-    },
-    {
-      "pattern": "https?://drewdevault.com/*",
-      "passKeys": ""
     },
     {
       "pattern": "https?://www.sharelatex.com/*",
@@ -50,24 +34,8 @@
       "passKeys": ""
     },
     {
-      "pattern": "https?://doyouevendev.org/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://www.toomanychefs.party/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://gradescope.com/*",
-      "passKeys": ""
-    },
-    {
       "pattern": "https?://vim-adventures.com/*",
       "passKeys": ""
-    },
-    {
-      "pattern": "https?://metakirby5.github.io/*",
-      "passKeys": "ba"
     },
     {
       "pattern": "https?://inbox.google.com/*",
@@ -78,43 +46,11 @@
       "passKeys": ""
     },
     {
-      "pattern": "https?://rik.smith-unna.com/*",
-      "passKeys": ""
-    },
-    {
       "pattern": "https?://coderpad.io/*",
       "passKeys": ""
     },
     {
-      "pattern": "https?://ff0033.github.io/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://jupyter.kirbi.es/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://localhost:8888/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://cmdchallenge.com/*",
-      "passKeys": ""
-    },
-    {
       "pattern": "https?://cloud.digitalocean.com/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://ec2-52-11-41-153.us-west-2.compute.amazonaws.com:8888/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://ec2-34-208-241-54.us-west-2.compute.amazonaws.com:8888/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://ec2-34-208-253-238.us-west-2.compute.amazonaws.com:8888/*",
       "passKeys": ""
     },
     {
@@ -123,10 +59,6 @@
     },
     {
       "pattern": "https?://hackertyper.net/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://codecon.bloomberg.com/*",
       "passKeys": ""
     },
     {
@@ -143,14 +75,6 @@
     },
     {
       "pattern": "https?://www.overleaf.com/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://www.qualified.io/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://ledyba.org/*",
       "passKeys": ""
     },
     {
@@ -182,11 +106,63 @@
       "passKeys": ""
     },
     {
-      "pattern": "https?://dojin.co/*",
+      "pattern": "https?://noclip.website/*",
       "passKeys": ""
     },
     {
-      "pattern": "https?://www.lexaloffle.com/*",
+      "pattern": "https?://repl.it/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://leetcode.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://app.codility.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://typingx0.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://en.key-test.ru/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typingtest.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://typings.gg/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://monkey-type.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typing.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.nitrotype.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://play.typeracer.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://backyard.co/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://codesandbox.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://excalidraw.com/*",
       "passKeys": ""
     }
   ],
