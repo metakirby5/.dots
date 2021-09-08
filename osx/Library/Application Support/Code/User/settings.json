@@ -1,41 +1,47 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [";"],
-            "after": [":"]
-        },
-        {
-            "before": [":"],
-            "after": [";"]
-        },
-        {
-            "before": ["j"],
-            "after": ["g", "j"]
-        },
-        {
-            "before": ["k"],
-            "after": ["g", "k"]
-        },
-        {
-            "before": ["H"],
-            "commands": ["workbench.action.previousEditor"]
-        },
-        {
-            "before": ["L"],
-            "commands": ["workbench.action.nextEditor"]
-        }
-    ],
-    "vim.leader": " ",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.enablePreview": false,
-    "vim.statusBarColors.visualline": "",
-    "python.pythonPath": "/usr/local/bin/python3",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
-    "python.showStartPage": false
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [";"],
+      "after": [":"]
+    },
+    {
+      "before": [":"],
+      "after": [";"]
+    },
+    {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["H"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["L"],
+      "commands": ["workbench.action.nextEditor"]
+    }
+  ],
+  "vim.leader": " ",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.enablePreview": false,
+  "vim.statusBarColors.visualline": "",
+  "python.pythonPath": "/usr/local/bin/python3",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "python.showStartPage": false,
+  "explorer.confirmDelete": false,
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "emmet.excludeLanguages": [
+    "markdown",
+    "jsx"
+  ]
 }
