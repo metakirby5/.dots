@@ -38,10 +38,10 @@ noremap K i<cr><esc>
 
 " Treat long lines as break lines (useful when moving around in them)
 " Account for <count>j/k
-noremap <silent> <expr> j v:count ? 'j' : 'gj'
-noremap <silent> <expr> k v:count ? 'k' : 'gk'
-noremap <silent> <expr> <down> v:count ? 'j' : 'gj'
-noremap <silent> <expr> <up> v:count ? 'k' : 'gk'
+noremap <silent> <expr> j 'gj'
+noremap <silent> <expr> k 'gk'
+noremap <silent> <expr> <down> 'gj'
+noremap <silent> <expr> <up> 'gk'
 inoremap <silent> <down> <esc>gja
 inoremap <silent> <up> <esc>gka
 

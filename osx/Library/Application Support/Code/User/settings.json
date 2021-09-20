@@ -43,5 +43,6 @@
   "emmet.excludeLanguages": [
     "markdown",
     "jsx"
-  ]
+  ],
+  "python.defaultInterpreterPath": "/usr/local/bin/python3"
 }
