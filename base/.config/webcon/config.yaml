@@ -29,9 +29,6 @@ cliclick:
         kp:arrow-right kp:arrow-right
         kp:arrow-right kp:arrow-right
         kp:arrow-right kp:arrow-right
-        kp:arrow-right kp:arrow-right
-        kp:arrow-right kp:arrow-right
-        kp:arrow-right kp:arrow-right
 mpv:
     rewind: echo seek -5 > {mpvfifo}
     play/pause: echo cycle pause > {mpvfifo}
