@@ -7,13 +7,14 @@
 [Base,Layer1,Layer2,Layer3,FnLayer1,FnLayer2,FnLayer3]
 Esc:BackTick
 CapsLock:Esc
-Delete:CapsLock
+Backspace:Backslash
+Backslash:Backspace
+Menu:CapsLock
 
 # Mac
 [Layer1]
 LWin:LAlt
 LAlt:LWin
-Menu:RAlt+RWin
 
 # Windows
 [Layer2]
