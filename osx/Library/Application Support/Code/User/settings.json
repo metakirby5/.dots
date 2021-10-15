@@ -45,5 +45,5 @@
     "jsx"
   ],
   "python.defaultInterpreterPath": "/usr/local/bin/python3",
-  "window.zoomLevel": 2
+  "window.zoomLevel": 1
 }
