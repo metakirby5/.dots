@@ -38,6 +38,11 @@ brew() {
       command brew link "$@"
       ;;
     up)
+      if [[ "$@" ]]; then
+        command brew upgrade "$@"
+        return
+      fi
+
       command brew update
       command brew upgrade
       command brew cleanup
@@ -72,39 +77,7 @@ brew() {
     c)
       local cmd="$1"
       shift
-
-      case "$cmd" in
-        up)
-          command brew cu -y "$@"
-          ;;
-        l)
-          command brew cask list "$@"
-          ;;
-        /)
-          command brew cask search "$@"
-          ;;
-        o)
-          command brew cask info "$@"
-          ;;
-        e)
-          command brew cask edit "$@"
-          ;;
-        i)
-          command brew cask install "$@"
-          ;;
-        ri)
-          command brew cask reinstall "$@"
-          ;;
-        ui)
-          command brew cask uninstall "$@"
-          ;;
-        z)
-          command brew cask zap "$@"
-          ;;
-        *)
-          command brew cask "$cmd" "$@"
-          ;;
-      esac
+      brew "$cmd" --cask "$@"
       ;;
     *)
       command brew "$cmd" "$@"
