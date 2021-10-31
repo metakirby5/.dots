@@ -143,7 +143,7 @@ __mk5_set_prompt() {
   done
   asdf_path="$asdf_path/.tool-versions"
 
-  if [ -f "$asdf_path" ]; then
+  if [ -f "$asdf_path" -a "$asdf_path" != "$HOME/.tool-versions" ]; then
     asdf_info=($(<"$asdf_path"))
     IFS='/'
     case $ASDF_BIN in
