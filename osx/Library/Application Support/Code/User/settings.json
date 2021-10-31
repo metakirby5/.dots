@@ -45,5 +45,12 @@
     "jsx"
   ],
   "python.defaultInterpreterPath": "/usr/local/bin/python3",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false
+  }
 }
