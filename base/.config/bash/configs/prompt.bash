@@ -37,14 +37,15 @@ __mk5_set_prompt() {
     pchar_color="$__mk5_b_red" \
     pchar="$__mk5_pchar" \
     mypwd="$PWD" \
-    jobs_info= \
-    git_info= \
+    jobs_info='' \
+    git_info='' \
     git_path="$PWD" \
-    git_head= \
-    git_stash_path= \
-    git_stash= \
+    git_head='' \
+    git_stash_path='' \
+    git_stash='' \
     asdf_path="$PWD" \
-    asdf_info=
+    asdf_info='' \
+    venv_info=''
 
   # Set IFS for prompt use.
   IFS=$'\n'
@@ -151,10 +152,15 @@ __mk5_set_prompt() {
     esac
   fi
 
+  # Python venv.
+  if [ "$VIRTUAL_ENV" ]; then
+    venv_info="$__mk5_blue${VIRTUAL_ENV##*/}$__mk5_b_blue, "
+  fi
+
   # Shorten $HOME.
   mypwd="$__mk5_green${mypwd/#$HOME/$'~'}"
 
-  PS1="$asdf_info$__mk5_hostname$jobs_info$git_info$mypwd"
+  PS1="$asdf_info$venv_info$__mk5_hostname$jobs_info$git_info$mypwd"
 
   # Use single-line prompt for one character, otherwise two-line.
   local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
