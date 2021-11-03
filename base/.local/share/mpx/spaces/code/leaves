@@ -1,8 +1,14 @@
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+GitHub.copilot
+ms-azuretools.vscode-docker
+MS-CEINTL.vscode-language-pack-ja
 ms-dotnettools.csharp
 ms-python.python
 ms-python.vscode-pylance
-ms-toolsai.jupyter
+ms-vscode-remote.remote-containers
 ms-vscode.cpptools
+syler.sass-indented
 Tobiah.unity-tools
 Unity.unity-debug
 vscodevim.vim
