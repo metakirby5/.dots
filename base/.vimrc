@@ -355,6 +355,8 @@ if !empty(glob(s:configdir . '/autoload/plug.vim'))
   " }}}
   " Languages {{{
     Plug 'sheerun/vim-polyglot'
+    let g:polyglot_disabled = ['csv']
+
     Plug 'jparise/vim-graphql'
   " }}}
   " Post-hooks {{{
