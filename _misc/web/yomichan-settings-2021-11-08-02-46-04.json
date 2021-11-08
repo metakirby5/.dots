@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-11-08 02:37:08",
+    "date": "2021-11-08 02:46:04",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -191,7 +191,7 @@
                         "mainDictionary": "JMdict (English)",
                         "popupTheme": "dark",
                         "popupOuterTheme": "auto",
-                        "customPopupCss": "button.action-button:before {\n  color: white;\n}\n\nbutton.action-button[data-icon=view-note]:before {\n  content: \"↪︎\";\n  background-image: none;\n}\n\nbutton.action-button[data-icon=add-term-kanji]:before {\n  content: \"+\";\n  background-image: none;\n}\n\nbutton.action-button[data-icon=add-term-kana] {\n  display: none;\n}\n\nbutton.action-button[data-icon=play-audio] {\n  content: \"▶︎\";\n  background-image: none;\n}",
+                        "customPopupCss": ".action-icon {\n  display: none;\n}\n\nbutton.action-button:before {\n  color: white;\n}\n\n.action-view-note:before {\n  content: \"↪︎\";\n}\n\n.action-add-note:before {\n  content: \"+\";\n}\n\n.action-add-note[data-mode=\"term-kana\"]:before {\n  display: none;\n}\n\n.action-play-audio:before {\n  content: \"▶︎\";\n}",
                         "customPopupOuterCss": "",
                         "enableWanakana": true,
                         "showPitchAccentDownstepNotation": true,
