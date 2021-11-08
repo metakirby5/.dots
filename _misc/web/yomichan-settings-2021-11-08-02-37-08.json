@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-05-02 11:25:21",
+    "date": "2021-11-08 02:37:08",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -74,12 +74,25 @@
                     "http://*/*",
                     "https://*/*",
                     "file://*/*"
-                ]
+                ],
+                "run_at": "document_idle"
+            },
+            {
+                "all_frames": true,
+                "js": [
+                    "js/document-start.js"
+                ],
+                "match_about_blank": true,
+                "matches": [
+                    "http://docs.google.com/*",
+                    "https://docs.google.com/*"
+                ],
+                "run_at": "document_start"
             }
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.ba2eaef1669f1fc57b222cfc54d545273cea2f20ae61df96f5329c32297f01a2",
+        "differential_fingerprint": "1.d7f1b2827c1594f6431b0269305b26490a3c48d1627362c236f63d015d9d0769",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -110,13 +123,13 @@
             "webRequestBlocking"
         ],
         "sandbox": {
-            "content_security_policy": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'",
+            "content_security_policy": "sandbox allow-scripts; default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'",
             "pages": [
                 "template-renderer.html"
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.3.31.2",
+        "version": "21.9.30.2",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -128,17 +141,18 @@
             "os": "mac"
         }
     },
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
             "chrome://favicon/*",
             "file:///*",
             "http://*/*",
-            "https://*/*"
+            "http://docs.google.com/*",
+            "https://*/*",
+            "https://docs.google.com/*"
         ],
         "permissions": [
-            "clipboardRead",
             "clipboardWrite",
             "storage",
             "unlimitedStorage",
@@ -147,7 +161,7 @@
         ]
     },
     "options": {
-        "version": 10,
+        "version": 15,
         "profiles": [
             {
                 "name": "Default",
@@ -191,7 +205,9 @@
                         "popupActionBarVisibility": "auto",
                         "popupActionBarLocation": "top",
                         "frequencyDisplayMode": "split-tags-grouped",
-                        "termDisplayMode": "ruby"
+                        "termDisplayMode": "ruby",
+                        "sortFrequencyDictionary": null,
+                        "sortFrequencyDictionaryOrder": "descending"
                     },
                     "popupWindow": {
                         "width": 400,
@@ -206,13 +222,14 @@
                     "audio": {
                         "enabled": false,
                         "sources": [
-                            "jpod101"
+                            {
+                                "type": "jpod101",
+                                "url": "",
+                                "voice": ""
+                            }
                         ],
                         "volume": 100,
-                        "autoPlay": false,
-                        "customSourceUrl": "",
-                        "customSourceType": "audio",
-                        "textToSpeechVoice": ""
+                        "autoPlay": false
                     },
                     "scanning": {
                         "inputs": [
@@ -289,14 +306,15 @@
                             "groups": []
                         }
                     },
-                    "dictionaries": {
-                        "JMdict (English)": {
+                    "dictionaries": [
+                        {
+                            "name": "JMdict (English)",
                             "priority": 0,
                             "enabled": true,
                             "allowSecondarySearches": false,
                             "definitionsCollapsible": "not-collapsible"
                         }
-                    },
+                    ],
                     "parsing": {
                         "enableScanningParser": true,
                         "enableMecabParser": false,
@@ -335,11 +353,12 @@
                         "duplicateScope": "collection",
                         "checkForDuplicates": true,
                         "fieldTemplates": null,
-                        "suspendNewCards": false
+                        "suspendNewCards": false,
+                        "displayTags": "never",
+                        "duplicateScopeCheckAllModels": false
                     },
                     "sentenceParsing": {
                         "scanExtent": 200,
-                        "enableTerminationCharacters": true,
                         "terminationCharacters": [
                             {
                                 "enabled": true,
@@ -425,7 +444,8 @@
                                 "includeCharacterAtStart": false,
                                 "includeCharacterAtEnd": true
                             }
-                        ]
+                        ],
+                        "terminationCharacterMode": "custom"
                     },
                     "inputs": {
                         "hotkeys": [
@@ -637,6 +657,9 @@
                         "enableSearchPageMonitor": false,
                         "autoSearchContent": true,
                         "maximumSearchLength": 1000
+                    },
+                    "accessibility": {
+                        "forceGoogleDocsHtmlRendering": false
                     }
                 }
             }
