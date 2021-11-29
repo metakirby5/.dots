@@ -1,0 +1,21 @@
+.qmk {
+  color: #99f5ff; /* RGB_AZURE       */
+  color: #000000; /* RGB_BLACK       */
+  color: #0000ff; /* RGB_BLUE        */
+  color: #80ff00; /* RGB_CHARTREUSE  */
+  color: #ff7c4d; /* RGB_CORAL       */
+  color: #00ffff; /* RGB_CYAN        */
+  color: #ffd900; /* RGB_GOLD        */
+  color: #d9a521; /* RGB_GOLDENROD   */
+  color: #00ff00; /* RGB_GREEN       */
+  color: #ff00ff; /* RGB_MAGENTA     */
+  color: #ff8000; /* RGB_ORANGE      */
+  color: #ff80bf; /* RGB_PINK        */
+  color: #7a00ff; /* RGB_PURPLE      */
+  color: #ff0000; /* RGB_RED         */
+  color: #00ff80; /* RGB_SPRINGGREEN */
+  color: #008080; /* RGB_TEAL        */
+  color: #476e6a; /* RGB_TURQUOISE   */
+  color: #ffffff; /* RGB_WHITE       */
+  color: #ffff00; /* RGB_YELLOW      */
+}
