@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-11-08 02:46:04",
+    "date": "2021-12-02 08:41:10",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -92,7 +92,7 @@
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.d7f1b2827c1594f6431b0269305b26490a3c48d1627362c236f63d015d9d0769",
+        "differential_fingerprint": "1.81539742aef125232f43c4b827236a74c1149c73868fd07ee78ffe5f1731c320",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -129,7 +129,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.9.30.2",
+        "version": "21.10.31.1",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -191,7 +191,7 @@
                         "mainDictionary": "JMdict (English)",
                         "popupTheme": "dark",
                         "popupOuterTheme": "auto",
-                        "customPopupCss": ".action-icon {\n  display: none;\n}\n\nbutton.action-button:before {\n  color: white;\n}\n\n.action-view-note:before {\n  content: \"↪︎\";\n}\n\n.action-add-note:before {\n  content: \"+\";\n}\n\n.action-add-note[data-mode=\"term-kana\"]:before {\n  display: none;\n}\n\n.action-play-audio:before {\n  content: \"▶︎\";\n}",
+                        "customPopupCss": ".action-icon {\n  display: none;\n}\n\n.action-button:before {\n  color: white;\n}\n\n.action-button[data-action=\"view-note\"]:before {\n  content: \"↪︎\";\n}\n\n.action-button[data-action=\"add-note\"]:before {\n  content: \"+\";\n}\n\n.action-button[data-action=\"add-note\"][data-mode=\"term-kana\"]:before {\n  display: none;\n}\n\n.action-button[data-action=\"play-audio\"]:before {\n  content: \"▶︎\";\n}",
                         "customPopupOuterCss": "",
                         "enableWanakana": true,
                         "showPitchAccentDownstepNotation": true,
@@ -659,7 +659,7 @@
                         "maximumSearchLength": 1000
                     },
                     "accessibility": {
-                        "forceGoogleDocsHtmlRendering": false
+                        "forceGoogleDocsHtmlRendering": true
                     }
                 }
             }
