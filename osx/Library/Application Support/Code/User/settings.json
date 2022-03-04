@@ -52,5 +52,6 @@
     "yaml": false,
     "plaintext": false,
     "markdown": false
-  }
+  },
+  "update.showReleaseNotes": false
 }
