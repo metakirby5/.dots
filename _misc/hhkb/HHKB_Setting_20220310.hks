@@ -1,14 +1,4 @@
 {
-  "DipSwitch" : [
-    false,
-    true,
-    false,
-    false,
-    false,
-    false
-  ],
-  "TypeNumber" : "PD-KB800YS",
-  "ToolVersion" : "1.2.0.0",
   "Keymap" : {
     "WithFn" : [
       0,
@@ -42,7 +32,7 @@
       234,
       233,
       232,
-      0,
+      57,
       234,
       233,
       232,
@@ -271,5 +261,15 @@
       0
     ]
   },
-  "KeyboardLayout" : 1
+  "KeyboardLayout" : 1,
+  "TypeNumber" : "PD-KB800YS",
+  "ToolVersion" : "1.2.0.0",
+  "DipSwitch" : [
+    false,
+    true,
+    false,
+    false,
+    false,
+    false
+  ]
 }
