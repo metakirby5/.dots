@@ -120,9 +120,6 @@ p =
       e: 'Finder'
       ',': 'Google Chrome'
 
-    ## ACTIVATE WITH mods.pour
-    spaceAll: 's'            # Put window on all spaces
-
 # Utilities
 Object.prototype.map = (f) ->
   Object.keys(this).reduce ((o, k) => o[k] = f this[k], k; o), {}
@@ -870,7 +867,12 @@ class ChainWindow
 
   # Apply frame
   set: ->
-    @win.setFrame @f
+    # NOTE: setFrame no longer works correctly when moving to different
+    # NOTE| screens, so use our own implementation. Original does
+    # NOTE| size-position-size, but we do position-size-position.
+    @win.setTopLeft @f
+    @win.setSize @f
+    @win.setTopLeft @f
     this
 
   # Focus window
@@ -1010,49 +1012,8 @@ class ChainWindow
   setSpace: (num) ->
     next = Space.all()[num]
     if next?
-      next.addWindows [@win]
-      @win.spaces().map (prev) =>
-        prev.removeWindows [@win] if not prev.isEqual(next)
+      next.moveWindows [@win]
       @updateScr next.screens()[0]
-    this
-
-  # Add to space
-  spaceOn: (num) ->
-    Space.all()[num]?.addWindows [@win]
-    this
-
-  # Remove from space
-  spaceOff: (num) ->
-    Space.all()[num]?.removeWindows [@win]
-    this
-
-  # Toggle on space
-  spaceToggle: (num) ->
-    next = Space.all()[num]
-    if next?
-      if _.some (@win.spaces().map (s) -> s.isEqual next)
-        @spaceOff num
-      else
-        @spaceOn num
-    this
-
-  # Put on all spaces
-  spaceAll: ->
-    Space.all().map (s) => s.addWindows [@win]
-    this
-
-  # Only put on this space
-  spaceOnly: ->
-    Space.all().map (s) =>
-      s.removeWindows [@win] if not s.isEqual Space.active()
-    this
-
-  # Toggle on all spaces
-  spaceAllToggle: ->
-    if @win.spaces().length == Space.all().length
-      @spaceOnly()
-    else
-      @spaceAll()
     this
 
   # Absolute screen set
@@ -1182,7 +1143,6 @@ shellInput = modes.add new InputMode p.shell.prompt, (input, keyPressed) ->
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().set()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().toggle().set()
-Key.on p.keys.spaceAll, p.keys.mods.pour, -> cw()?.spaceAllToggle()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
@@ -1214,9 +1174,7 @@ p.keys.apps.map (app, key) ->
 
 # Spaces
 [ [ p.keys.mods.move # move
-  , (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo() ]
-, [ p.keys.mods.pour # toggle
-  , (num) -> cw()?.spaceToggle num ] ]
+  , (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo() ] ]
 .map ([mod, action]) ->
   [1..10].map (num) ->
     s = '' + num
