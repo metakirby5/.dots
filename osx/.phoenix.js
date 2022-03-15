@@ -402,7 +402,7 @@ Modal::setText = (@text) -> this
 
 Modal::untrack = ->
   Event.off @clickEvent if @clickEvent?  # Disable clickEvent
-  Modal.open = _.without Modal.open, this  # Untrack modal locaiton
+  Modal.open = _.without Modal.open, this  # Untrack modal location
 
 Modal::resolveOverlaps = ->
   Modal.open = _.without Modal.open, this
@@ -893,6 +893,8 @@ class ChainWindow
 
   # Switch window to neighbor
   neighbor: (dir) ->
+    # Widnow.neighbours is slow, so implement our own.
+
     myCenter = frameCenter @f
     axis = axisOf dir
     dirCoeff = coeff dir
