@@ -141,6 +141,13 @@ String.prototype.poppedFront = -> @substr 1
 String.prototype.insert = (s, i) -> (@substr 0, i) + s + @substr i
 String.prototype.remove = (i) -> (@substr 0, i) + @substr i + 1
 
+frameCenter = (frame) ->
+  x: frame.x + frame.width / 2
+  y: frame.y + frame.height / 2
+
+sqDist = (a, b) ->
+  Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)
+
 # Retry until either f returns true or we hit timeout
 persistently = (timeout, f) ->
   keepTrying = true
@@ -294,14 +301,14 @@ gapify = (f, gap) ->
 Screen::idx = -> _.findIndex Screen.all(), (s) => @isEqual s
 
 Screen::hint = (seq) ->
-  sf = @frame()
+  sfCenter = frameCenter @frame()
 
   # Build a modal centered within the screen
   hint = Modal.build
     text: seq
     origin: (mf) ->
-      x: sf.x + sf.width / 2 - mf.width / 2
-      y: sf.y + sf.height / 2 - mf.height / 2
+      x: sfCenter.x - mf.width / 2
+      y: sfCenter.y - mf.height / 2
 
   hint.seq = seq
   hint.curSeqLen = seq.length
@@ -886,7 +893,20 @@ class ChainWindow
 
   # Switch window to neighbor
   neighbor: (dir) ->
-    n = _.head _.filter (@win.neighbors dir), (w) -> w.isVisible()
+    myCenter = frameCenter @f
+    axis = axisOf dir
+    dirCoeff = coeff dir
+    isEligible = (other) ->
+      center = frameCenter other.frame()
+      switch axis
+        when VERTICAL then (center.y - myCenter.y) * dirCoeff > 0
+        when HORIZONTAL then (center.x - myCenter.x) * dirCoeff > 0
+
+    all = Window.all visible: true
+    inDirection = _.filter all, isEligible
+    n = _.minBy inDirection, (other) ->
+      sqDist myCenter, frameCenter other.frame()
+
     if n?
       @win = n
       @updateWin()
@@ -894,9 +914,7 @@ class ChainWindow
 
   # Center mouse on window
   mouseTo: ->
-    Mouse.move
-      x: @f.x + @f.width / 2
-      y: @f.y + @f.height / 2
+    Mouse.move frameCenter @f
     this
 
   # Delta move
