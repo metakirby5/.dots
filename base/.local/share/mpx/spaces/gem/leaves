@@ -3,11 +3,11 @@ base64
 benchmark
 bigdecimal
 csv
-dbm
 debug
 did_you_mean
 english
 erb
+error_highlight
 etc
 fcntl
 fiddle
@@ -15,7 +15,6 @@ find
 gem_leaves
 getoptlong
 io-nonblock
-irb
 json
 logger
 matrix
@@ -37,7 +36,6 @@ pathname
 pp
 prime
 pstore
-psych
 racc
 readline
 readline-ext
@@ -50,7 +48,6 @@ shellwords
 syslog
 tempfile
 tmpdir
-tracer
 tsort
 typeprof
 un
