@@ -110,7 +110,7 @@ For OS X, use the system theme.
 ### All platforms
 
 - Clone this repo into `~/.dots`.
-- Add `source ~/.linker` to the appropriate files
+- Add `source ~/.config/bash/linker.bash` to the appropriate files
   (`~/.bashrc` and `~/.bash_profile`)
 - Follow platform-specific instructions.
 - Install [`mpx`](https://github.com/metakirby5/mpx).
