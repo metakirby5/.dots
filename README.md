@@ -33,9 +33,7 @@ Here's what you'll need...
 
 - Xcode
 - brew
-- metakirby5/Spice
 - XVimProject/XVim (hopefully on brew soon)
-- DrabWeb/iTerm2 (borderless + gaps + padding)
 
 ### Linux
 
