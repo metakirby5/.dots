@@ -176,5 +176,5 @@ __mk5_set_prompt() {
 
 case $PROMPT_COMMAND in
   *__mk5_set_prompt*) ;;
-  *) export PROMPT_COMMAND="$PROMPT_COMMAND __mk5_set_prompt;";;
+  *) export PROMPT_COMMAND="$PROMPT_COMMAND :; __mk5_set_prompt;";;
 esac
