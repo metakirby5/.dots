@@ -1,1 +1,1 @@
-export CLOUDSDK_PYTHON="/usr/local/opt/python/libexec/bin/python"
+export CLOUDSDK_PYTHON="$HOMEBREW_PREFIX/opt/python/libexec/bin/python"

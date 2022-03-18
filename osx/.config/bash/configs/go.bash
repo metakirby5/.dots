@@ -1,5 +1,5 @@
 if command -v go &>/dev/null; then
-  GOROOT=/usr/local/opt/go/libexec
+  GOROOT="$HOMEBREW_PREFIX/opt/go/libexec"
   export \
     GOROOT \
     GOPATH="$WORKSPACE/lang/go" \

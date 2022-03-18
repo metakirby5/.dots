@@ -34,9 +34,7 @@ export \
 export PATH="\
 $LOCAL/bin:\
 $MY_SCRIPTS:\
-$PATH:\
-/usr/local/bin:\
-/usr/local/sbin\
+$PATH\
 "
 
 # Shell options.

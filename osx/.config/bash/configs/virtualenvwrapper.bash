@@ -1,4 +1,4 @@
-virtualenvwrapper=/usr/local/bin/virtualenvwrapper_lazy.sh
+virtualenvwrapper="$HOMEBREW_PREFIX/bin/virtualenvwrapper_lazy.sh"
 if [ -f "$virtualenvwrapper" ]; then
   export \
     VIRTUALENVWRAPPER_PYTHON="$(command -v python3)" \

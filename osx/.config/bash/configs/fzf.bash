@@ -23,7 +23,7 @@ if command -v fzf &>/dev/null; then
 
   # Get location of fzf install.
   fzf_opt=~/.fzf
-  [ -d "$fzf_opt" ] || fzf_opt="/usr/local/opt/fzf"
+  [ -d "$fzf_opt" ] || fzf_opt="$HOMEBREW_PREFIX/opt/fzf"
 
   if [ -d "$fzf_opt" ]; then
     # Install key bindings.

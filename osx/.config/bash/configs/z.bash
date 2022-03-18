@@ -1,4 +1,4 @@
-z_path=/usr/local/etc/profile.d/z.sh
+z_path="$HOMEBREW_PREFIX/etc/profile.d/z.sh"
 if [ -f "$z_path" ]; then
   source "$z_path"
 fi
