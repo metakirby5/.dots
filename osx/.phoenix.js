@@ -72,6 +72,9 @@ p =
     prompt: '$ '                 # Prompt character
     bin: '/usr/local/bin/bash'   # Shell to run (abs. path)
 
+  find:                          ## FIND WINDOW MODE
+    prompt: '? '
+
   ## KEYBINDINGS
   keys:
     ## MODIFIER KEYS
@@ -112,7 +115,8 @@ p =
     mouseOut: '.'            # Move mouse to lower right corner
     winHintMode: 'y'         # Activate window hint mode
     scrHintMode: 's'         # Activate screen hint mode
-    evalInputMode: ';'       # Activate JS eval mdoe
+    evalInputMode: '-'       # Activate JS eval mdoe
+    findMode: ';'            # Activate find window mode
     shellInputMode: 'return' # Activate shell input mode
     apps:                    # Launch applications
       t: 'iTerm'
@@ -187,6 +191,8 @@ SHIFT_KEYS = _.extend
   '`': '~', '1': '!', '2': '@', '3': '#', '4': '$', '5': '%', '6': '^',
   '7': '&', '8': '*', '9': '(', '0': ')', '-': '_', '=': '+', '[': '{',
   ']': '}', '\\': '|', ';': ':', '\'': '"', ',': '<', '.': '>', '/': '?',
+  # Custom
+  'tab': 'Tab'
 , _.zipObject (
   String.fromCharCode(c) for c in [97..122]
 ), (
@@ -214,8 +220,9 @@ class EventEmitter
 
 # A fixed length queue
 class FixedQueue
-  queue: []
   constructor: (@capacity) ->
+    @queue = []
+
   push: (frame) -> @queue = ([frame].concat @queue)[...@capacity]
   length: -> @queue.length
   at: (idx) -> @queue[idx]
@@ -720,7 +727,7 @@ class InputMode extends Mode
       k = k.toLowerCase() # normalize
       switch k
         when 'escape' then @stop()
-        else @update if @mod =='shift' then SHIFT_KEYS[k] or k else k
+        else @update if @mod == 'shift' then SHIFT_KEYS[k] or k else k
 
   # Update command state and modal from key event
   update: (k) ->
@@ -750,6 +757,7 @@ class InputMode extends Mode
               @history.unshift @input
             @historyPos = -1
           when 'tab' then  # no-op
+          when 'Tab' then  # no-op
           when 'down' then @moveHistory 1
           when 'up' then @moveHistory -1
           when 'left' then @movePos -1
@@ -1158,6 +1166,63 @@ shellInput = modes.add new InputMode p.shell.prompt, (input, keyPressed) ->
       Phoenix.log r.error if r.error
   [(if returnPressed then '' else input), null, returnPressed]
 
+class FindMode extends InputMode
+  constructor: ->
+    super p.find.prompt, (input, keyPressed) ->
+      @pattern = input.toLowerCase()
+
+      switch keyPressed
+        when 'tab'
+          @winIdx++
+        when 'Tab'
+          @winIdx--
+        else
+          current = @windows[@winIdx]
+          all = Window.all visible: true
+          @windows = _.filter all, (w) => @match w
+          @winIdx = @findWinIdx current
+          @winIdx = @findWinIdx Window.focused() if @winIdx < 0
+          @winIdx = 0 if @winIdx < 0
+
+      @winIdx = @winIdx % @windows.length
+      window = @windows[@winIdx]
+      if window?.hash() != @lastWindow?.hash()
+        window?.focus()
+        @lastWindow = window
+
+      app = window?.app()
+      if app?.hash() != @lastApp?.hash()
+        @outputModal.icon = app?.icon()
+        @lastApp = app
+
+      [input, window?.title() ? '…', keyPressed == 'return']
+
+    @on 'stop', => @reset()
+    @reset()
+
+  findWinIdx: (window) ->
+    hash = window?.hash()
+    if not hash
+      return -1
+
+    _.findIndex @windows, (w) -> w.hash() == hash
+
+  reset: ->
+    @pattern = ''
+    @winIdx = 0
+    @windows = []
+    @lastApp = undefined
+    @lastWindow = undefined
+
+  match: (window) ->
+    if not @pattern
+      return false
+
+    input = "#{window.app().name()} #{window.title()}".toLowerCase()
+    input.includes @pattern
+
+findMode = modes.add new FindMode()
+
 # General
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().set()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().set()
@@ -1166,6 +1231,7 @@ Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
 Key.on p.keys.shellInputMode, p.keys.mods.base, -> modes.toggle shellInput
+Key.on p.keys.findMode, p.keys.mods.base, -> modes.toggle findMode
 
 # Move mouse out of the way
 Key.on p.keys.mouseOut, p.keys.mods.base, ->
