@@ -1174,7 +1174,7 @@ winHint = modes.add new HintMode (->
 
 scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   if mod == 'shift'
-    cw()?.setScreen(s.idx()).reproportion().doSet().focus().mouseTo()
+    cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
   else
     s.mouseTo()
 
@@ -1299,7 +1299,7 @@ p.keys.apps.map (app, key) ->
 
 # Spaces
 [ [ p.keys.mods.move # move
-  , (num) -> cw()?.setSpace(num).reproportion().doSet().focus().mouseTo() ] ]
+  , (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo() ] ]
 .map ([mod, action]) ->
   [1..10].map (num) ->
     s = '' + num
@@ -1338,7 +1338,7 @@ moveCurrentWindowToScreen = (delta) ->
   next = w.scr.idx() + 1
   w.setScreen(next % Screen.all().length)
     .reproportion()
-    .doSet()
+    .set()
     .focus()
     .mouseTo()
 Key.on p.keys.quick, p.keys.mods.base, ->
