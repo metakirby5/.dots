@@ -47,7 +47,6 @@ p =
       , 'appDidActivate'
       , 'appDidHide'
       , 'appDidShow'
-      , 'windowDidFocus'
       , 'windowDidMove'
       , 'windowDidMinimize'
       , 'windowDidUnminimize' ]
