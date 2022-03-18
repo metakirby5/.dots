@@ -144,6 +144,18 @@ String.prototype.poppedFront = -> @substr 1
 String.prototype.insert = (s, i) -> (@substr 0, i) + s + @substr i
 String.prototype.remove = (i) -> (@substr 0, i) + @substr i + 1
 
+lerp = (a, b, t) -> a * (1 - t) + b * t
+inverseLerp = (a, b, t) -> (t - a) / (b - a)
+smoothStep = (min, max, value) ->
+  x = Math.max(0, Math.min(1, (value - min) / (max - min)))
+  x * x * (3 - 2 * x)
+
+frameLerp = (f, g, t) ->
+  x: lerp f.x, g.x, t
+  y: lerp f.y, g.y, t
+  width: lerp f.width, g.width, t
+  height: lerp f.height, g.height, t
+
 frameCenter = (frame) ->
   x: frame.x + frame.width / 2
   y: frame.y + frame.height / 2
@@ -877,16 +889,44 @@ class ChainWindow
         closest = ne
     closest
 
+  setFrame: (f) ->
+    # NOTE: setFrame no longer works correctly when moving to different
+    # NOTE| screens, so use our own implementation. Original does
+    # NOTE| size-position-size, but we do position-size-position.
+    @win.setTopLeft f
+    @win.setSize f
+    @win.setTopLeft f
+
   # Begin chainables
 
   # Apply frame
   set: ->
-    # NOTE: setFrame no longer works correctly when moving to different
-    # NOTE| screens, so use our own implementation. Original does
-    # NOTE| size-position-size, but we do position-size-position.
-    @win.setTopLeft @f
-    @win.setSize @f
-    @win.setTopLeft @f
+    @animations[@win.hash()]?.stop()
+    @setFrame @f
+    this
+
+  animationFps: 60
+  animationSecs: 0.15
+  animations: {}
+  doSet: ->
+    secsPerFrame = 1 / @animationFps
+
+    hash = @win.hash()
+    animation = @animations[hash]
+    animation?.stop()
+
+    oldFrame = @win.frame()
+    newFrame = @f
+    t = 0
+
+    startMs = new Date().getTime()
+    endMs = startMs + @animationSecs * 1000
+    @animations[hash] = anim = new Timer secsPerFrame, true, =>
+      t = inverseLerp startMs, endMs, new Date().getTime()
+      smoothed = smoothStep 0, 1, t
+      @setFrame frameLerp oldFrame, newFrame, smoothed
+      if t >= 1
+        anim.stop()
     this
 
   # Focus window
@@ -1134,7 +1174,7 @@ winHint = modes.add new HintMode (->
 
 scrHint = modes.add new HintMode Screen.all, (s, mod) ->
   if mod == 'shift'
-    cw()?.setScreen(s.idx()).reproportion().set().focus().mouseTo()
+    cw()?.setScreen(s.idx()).reproportion().doSet().focus().mouseTo()
   else
     s.mouseTo()
 
@@ -1224,9 +1264,9 @@ class FindMode extends InputMode
 findMode = modes.add new FindMode()
 
 # General
-Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().set()
-Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().set()
-Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().toggle().set()
+Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().doSet()
+Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().doSet()
+Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().toggle().doSet()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
@@ -1259,7 +1299,7 @@ p.keys.apps.map (app, key) ->
 
 # Spaces
 [ [ p.keys.mods.move # move
-  , (num) -> cw()?.setSpace(num).reproportion().set().focus().mouseTo() ] ]
+  , (num) -> cw()?.setSpace(num).reproportion().doSet().focus().mouseTo() ] ]
 .map ([mod, action]) ->
   [1..10].map (num) ->
     s = '' + num
@@ -1274,21 +1314,21 @@ p.keys.apps.map (app, key) ->
 [ [ p.keys.mods.base # select
   , (dir) -> cw()?.neighbor(dir).focus().mouseTo() ]
 , [ p.keys.mods.move # move
-  , (dir) -> cw()?.moveIn(dir).set() ]
+  , (dir) -> cw()?.moveIn(dir).doSet() ]
 , [ p.keys.mods.size # size
-  , (dir) -> cw()?.sizeIn(dir).set() ]
+  , (dir) -> cw()?.sizeIn(dir).doSet() ]
 , [ p.keys.mods.fall # fall
-  , (dir) -> cw()?.fallIn(dir).set() ]
+  , (dir) -> cw()?.fallIn(dir).doSet() ]
 , [ p.keys.mods.pour # pour
-  , (dir) -> cw()?.pourIn(dir).set() ]
+  , (dir) -> cw()?.pourIn(dir).doSet() ]
 , [ p.keys.mods.tile # tile
-  , (dir) -> cw()?.adjustIn(dir).set() ] ]
+  , (dir) -> cw()?.adjustIn(dir).doSet() ] ]
 .map ([mod, action]) -> p.keys.dirs.map (dir, key) ->
   Key.on key, mod, -> action dir
 
 # Snaps
 p.keys.snaps.map (dest, key) ->
-  Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).toggle().set()
+  Key.on key, p.keys.mods.base, -> cw()?.snap(dest...).toggle().doSet()
 
 # Move window to next/prev screen
 moveCurrentWindowToScreen = (delta) ->
@@ -1296,7 +1336,11 @@ moveCurrentWindowToScreen = (delta) ->
   if not w?
     return
   next = w.scr.idx() + 1
-  w.setScreen(next % Screen.all().length).reproportion().set().focus().mouseTo()
+  w.setScreen(next % Screen.all().length)
+    .reproportion()
+    .doSet()
+    .focus()
+    .mouseTo()
 Key.on p.keys.quick, p.keys.mods.base, ->
   moveCurrentWindowToScreen 1
 Key.on p.keys.quick, p.keys.mods.base.concat('shift'), ->
