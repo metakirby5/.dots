@@ -568,7 +568,7 @@ class HintTree
   constructor: (@chars, objs, @parent, @prefix = '') ->
     # Divide children amongst @chars
     indexed = objs.map (o, i) -> {o, i}
-    @tree = _.groupBy indexed, ({o, i}) => @chars.charAt(i % @chars.length)
+    @tree = _.groupBy indexed, ({o, i}) => @chars.charAt i % @chars.length
       .map (os, k) =>
         # Unpack the object
         os = os.map ({o, i}) -> o
@@ -1306,7 +1306,7 @@ p.keys.apps.map (app, key) ->
     Key.on key, mod, ->
       idx = Screen.moused().currentSpace().idx()
       slen = Space.all().length
-      action (((idx + offset) % slen) + slen) % slen
+      action (idx + offset + slen) % slen
 
 # Directionals
 [ [ p.keys.mods.base # select
@@ -1333,8 +1333,9 @@ moveCurrentWindowToScreen = (delta) ->
   w = cw()
   if not w?
     return
-  next = w.scr.idx() + 1
-  w.setScreen(next % Screen.all().length)
+  numScreens = Screen.all().length
+  next = (w.scr.idx() + delta + numScreens) % numScreens
+  w.setScreen next
     .reproportion()
     .set()
     .focus()
