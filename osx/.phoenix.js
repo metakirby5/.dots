@@ -203,8 +203,6 @@ SHIFT_KEYS = _.extend
   '`': '~', '1': '!', '2': '@', '3': '#', '4': '$', '5': '%', '6': '^',
   '7': '&', '8': '*', '9': '(', '0': ')', '-': '_', '=': '+', '[': '{',
   ']': '}', '\\': '|', ';': ':', '\'': '"', ',': '<', '.': '>', '/': '?',
-  # Custom
-  'tab': 'Tab'
 , _.zipObject (
   String.fromCharCode(c) for c in [97..122]
 ), (
@@ -769,7 +767,6 @@ class InputMode extends Mode
               @history.unshift @input
             @historyPos = -1
           when 'tab' then  # no-op
-          when 'Tab' then  # no-op
           when 'down' then @moveHistory 1
           when 'up' then @moveHistory -1
           when 'left' then @movePos -1
@@ -1213,9 +1210,10 @@ class FindMode extends InputMode
 
       switch keyPressed
         when 'tab'
-          @winIdx++
-        when 'Tab'
-          @winIdx--
+          if @mod == 'shift'
+            @winIdx--
+          else
+            @winIdx++
         else
           current = @windows[@winIdx]
           all = Window.all visible: true
