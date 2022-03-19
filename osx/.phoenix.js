@@ -1222,7 +1222,7 @@ class FindMode extends InputMode
           @winIdx = @findWinIdx Window.focused() if @winIdx < 0
           @winIdx = 0 if @winIdx < 0
 
-      @winIdx = @winIdx % @windows.length
+      @winIdx = (@winIdx + @windows.length) % @windows.length
       window = @windows[@winIdx]
       if window?.hash() != @lastWindow?.hash()
         window?.focus()
