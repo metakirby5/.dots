@@ -921,7 +921,9 @@ class ChainWindow
     @animations[hash] = anim = new Timer secsPerFrame, true, =>
       t = inverseLerp startMs, endMs, new Date().getTime()
       smoothed = smoothStep 0, 1, t
-      @setFrame frameLerp oldFrame, newFrame, smoothed
+      f = frameLerp oldFrame, newFrame, smoothed
+      @win.setTopLeft f
+      @win.setSize f
       if t >= 1
         anim.stop()
     this
