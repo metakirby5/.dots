@@ -1218,8 +1218,7 @@ class FindMode extends InputMode
             @winIdx++
         else
           current = @windows[@winIdx]
-          all = Window.all visible: true
-          @windows = _.filter all, (w) => @match w
+          @windows = _.filter @allWindows, (w) => @match w
           @winIdx = @findWinIdx current
           @winIdx = @findWinIdx Window.focused() if @winIdx < 0
           @winIdx = 0 if @winIdx < 0
@@ -1237,15 +1236,9 @@ class FindMode extends InputMode
 
       [input, window?.title() ? '…', keyPressed == 'return']
 
+    @on 'start', => @allWindows = Window.all visible: true
     @on 'stop', => @reset()
     @reset()
-
-  findWinIdx: (window) ->
-    hash = window?.hash()
-    if not hash
-      return -1
-
-    _.findIndex @windows, (w) -> w.hash() == hash
 
   reset: ->
     @pattern = ''
@@ -1260,6 +1253,13 @@ class FindMode extends InputMode
 
     input = "#{window.app().name()} #{window.title()}".toLowerCase()
     input.includes @pattern
+
+  findWinIdx: (window) ->
+    hash = window?.hash()
+    if not hash
+      return -1
+
+    _.findIndex @windows, (w) -> w.hash() == hash
 
 findMode = modes.add new FindMode()
 
