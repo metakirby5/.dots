@@ -1226,7 +1226,7 @@ class FindMode extends InputMode
       @winIdx = (@winIdx + @windows.length) % @windows.length
       window = @windows[@winIdx]
       if window?.hash() != @lastWindow?.hash()
-        window?.focus()
+        window?.chain().focus().mouseTo()
         @lastWindow = window
 
       app = window?.app()
