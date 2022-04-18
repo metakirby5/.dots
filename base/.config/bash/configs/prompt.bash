@@ -37,10 +37,10 @@ __mk5_set_prompt() {
     pchar_color="$__mk5_b_red" \
     pchar="$__mk5_pchar" \
     mypwd="$PWD" \
+    read_result='' \
     jobs_info='' \
     git_info='' \
     git_path="$PWD" \
-    git_head='' \
     git_stash_path='' \
     git_stash='' \
     asdf_path="$PWD" \
@@ -78,7 +78,7 @@ __mk5_set_prompt() {
   esac
 
   # Git stuff (mostly in bash for speed).
-  until [ -d "$git_path/.git" -o "$git_path" == '' ]; do
+  until [ -e "$git_path/.git" -o "$git_path" == '' ]; do
     git_path="${git_path%/*}"
   done
 
@@ -88,15 +88,22 @@ __mk5_set_prompt() {
       # Replace git path.
       mypwd="${git_path##*/}${PWD#$git_path}"
 
+      # If it's a file, follow the link.
+      [ -f "$git_path/.git" ] && read read_result < "$git_path/.git"
+      case $read_result in
+        gitdir:*) git_path="${read_result:8}";;
+        *)        git_path="$git_path/.git"
+      esac
+
       # Get branch identifier.
-      read git_head < "$git_path/.git/HEAD"
-      case $git_head in
-        ref:*) git_info="${git_head:16}";; # Ref name.
-        *)     git_info="${git_head::7}";; # Short hash.
+      read read_result < "$git_path/HEAD"
+      case $read_result in
+        ref:*) git_info="${read_result:16}";; # Ref name.
+        *)     git_info="${read_result::7}";; # Short hash.
       esac
 
       # Stash count.
-      git_stash_path="$git_path/.git/logs/refs/stash"
+      git_stash_path="$git_path/logs/refs/stash"
       [ -f "$git_stash_path" ] && git_stash=($(<"$git_stash_path"))
       case $git_stash in
         '') ;;
