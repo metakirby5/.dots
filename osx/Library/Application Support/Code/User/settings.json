@@ -40,10 +40,7 @@
   "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "emmet.excludeLanguages": [
-    "markdown",
-    "jsx"
-  ],
+  "emmet.excludeLanguages": ["markdown", "jsx"],
   "python.defaultInterpreterPath": "/usr/local/bin/python3",
   "window.zoomLevel": 1,
   "editor.inlineSuggest.enabled": true,
@@ -53,5 +50,7 @@
     "plaintext": false,
     "markdown": false
   },
-  "update.showReleaseNotes": false
+  "update.showReleaseNotes": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true
 }
