@@ -479,11 +479,7 @@ endif " }}}
   " General {{{
     " Set color scheme
     set background=dark
-    if has('gui_running')
-      silent! colorscheme stereokai
-    else
-      silent! colorscheme peachpuff
-    endif
+    silent! colorscheme stereokai
 
     set guioptions-=r              " no gui scrollbar
     set shortmess+=I               " no splash screen
@@ -501,11 +497,17 @@ endif " }}}
   " }}}
   " Highlights / Colors {{{
     function! s:apply_highlights()
+      " Normal text
+      hi clear Normal | hi Normal
+            \
+            \
+            \ ctermbg=NONE
+
       " Empty lines, etc.
       hi clear NonText | hi NonText
             \
             \ ctermfg=darkgrey guifg=darkgrey
-            \
+            \ ctermbg=NONE
 
       " End of buffer tildes
       hi clear EndOfBuffer | hi EndOfBuffer
