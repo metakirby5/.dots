@@ -53,5 +53,9 @@
   "update.showReleaseNotes": false,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "editor.accessibilitySupport": "off"
 }
