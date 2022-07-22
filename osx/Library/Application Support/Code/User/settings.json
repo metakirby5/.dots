@@ -28,7 +28,6 @@
   ],
   "vim.leader": " ",
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.editor.enablePreview": false,
   "vim.statusBarColors.visualline": "",
   "python.pythonPath": "/usr/local/bin/python3",
   "workbench.editorAssociations": {
