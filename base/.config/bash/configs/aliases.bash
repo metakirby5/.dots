@@ -39,6 +39,7 @@ alias \
   t='tmux' \
   k='kubectl' \
   gc='gcloud' \
+  zc='z -c' \
   \
   less='less -R' \
   grep='grep --color=auto' \
