@@ -133,6 +133,7 @@
   lbpl = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch
   lbs = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
   lbg = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
+  lmd = log --pretty=format:'- %s' master..
 
   # show
   o  = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --color-words
