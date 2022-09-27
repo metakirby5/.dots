@@ -101,11 +101,11 @@
 
   # stash
   su = stash push
-  sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
-  slr = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --date=relative
-  slp = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch --color-words
-  slpl = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
-  sls = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --stat
+  sl   = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
+  slr  = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --date=relative
+  slp  = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch --color-words
+  slpl = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
+  sls  = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --stat
   so = stash show --patch --color-words
   sol = stash show --patch
   sp = stash pop
@@ -121,19 +121,19 @@
   rbm = "!f(){(local x=\"${1:-master}\"; git co \"$x\" && git p && git co - && git rb \"$x\")};f"
 
   # log
-  l   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
-  ll  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d'
-  lr  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
-  lp  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
-  lpl  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
-  ls  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --stat
-  lg  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
-  lb  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
-  lbp = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
+  l    = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
+  ll   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d'
+  lr   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
+  lp   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
+  lpl  = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
+  ls   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --stat
+  lg   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
+  lb   = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
+  lbp  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
   lbpl = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch
-  lbs = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
-  lbg = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
-  lmd = log --pretty=format:'- %s' master..
+  lbs  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
+  lbg  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
+  lmd  = log --pretty=format:'- %s' master..
 
   # show
   o  = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --color-words
