@@ -10,7 +10,7 @@ a.out
 .stack-work
 
 # Temporary files
-*.sw*
+*.swp
 *~
 .nfs*
 
