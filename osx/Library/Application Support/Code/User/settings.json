@@ -10,12 +10,24 @@
       "after": [";"]
     },
     {
+      "before": ["0"],
+      "after": ["^"]
+    },
+    {
+      "before": ["^"],
+      "after": ["0"]
+    },
+    {
       "before": ["j"],
       "after": ["g", "j"]
     },
     {
       "before": ["k"],
       "after": ["g", "k"]
+    },
+    {
+      "before": ["Q"],
+      "after": ["@", "q"]
     },
     {
       "before": ["H"],
@@ -56,5 +68,11 @@
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.analysis.diagnosticSeverityOverrides": {},
+  "python.analysis.typeCheckingMode": "strict",
+  "workbench.editor.showTabs": false
 }
