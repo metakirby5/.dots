@@ -74,5 +74,8 @@
   },
   "python.analysis.diagnosticSeverityOverrides": {},
   "python.analysis.typeCheckingMode": "strict",
-  "workbench.editor.showTabs": false
+  "workbench.editor.showTabs": false,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.banditEnabled": true
 }
