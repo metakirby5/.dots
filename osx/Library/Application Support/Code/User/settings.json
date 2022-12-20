@@ -77,5 +77,9 @@
   "workbench.editor.showTabs": false,
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.banditEnabled": true
+  "python.linting.banditEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "79"],
+  "python.linting.pylintCategorySeverity.convention": "Warning",
+  "python.linting.pylintCategorySeverity.refactor": "Warning"
 }
