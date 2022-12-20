@@ -153,10 +153,11 @@ __mk5_set_prompt() {
   if [ -f "$asdf_path" -a "$asdf_path" != "$HOME/.tool-versions" ]; then
     asdf_info=($(<"$asdf_path"))
     IFS='|'
-    case $ASDF_BIN in
-      '') asdf_info="${__mk5_red}asdf${__mk5_b_red}, ";;
-      *)  asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, ";;
-    esac
+    if command -v asdf &> /dev/null; then
+      asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
+    else
+      asdf_info="${__mk5_red}asdf${__mk5_b_red}, "
+    fi
   fi
 
   # Python venv.
