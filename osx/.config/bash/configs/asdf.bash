@@ -1,3 +1,5 @@
 ASDF_ROOT="$(brew --prefix asdf)"
-[ -d "$ASDF_ROOT" ] && source "$ASDF_ROOT/asdf.sh"
+for script in asdf.sh libexec/asdf.sh; do
+  [ -f "$ASDF_ROOT/$script" ] && source "$ASDF_ROOT/$script"
+done
 unset ASDF_ROOT
