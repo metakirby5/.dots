@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-12-02 08:41:10",
+    "date": "2023-01-12 13:55:06",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -55,11 +55,13 @@
                     "js/app/popup-factory.js",
                     "js/app/popup-proxy.js",
                     "js/app/popup-window.js",
+                    "js/app/theme-controller.js",
                     "js/comm/api.js",
                     "js/comm/cross-frame-api.js",
                     "js/comm/frame-ancestry-handler.js",
                     "js/comm/frame-client.js",
                     "js/comm/frame-offset-forwarder.js",
+                    "js/data/sandbox/string-util.js",
                     "js/dom/dom-text-scanner.js",
                     "js/dom/document-util.js",
                     "js/dom/text-source-element.js",
@@ -76,23 +78,11 @@
                     "file://*/*"
                 ],
                 "run_at": "document_idle"
-            },
-            {
-                "all_frames": true,
-                "js": [
-                    "js/document-start.js"
-                ],
-                "match_about_blank": true,
-                "matches": [
-                    "http://docs.google.com/*",
-                    "https://docs.google.com/*"
-                ],
-                "run_at": "document_start"
             }
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.81539742aef125232f43c4b827236a74c1149c73868fd07ee78ffe5f1731c320",
+        "differential_fingerprint": "1.538e2c16740cf33c6fddf6bac8cc491de18de85a8122a5a4b52cea444343b7e2",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -108,7 +98,8 @@
         "name": "Yomichan",
         "optional_permissions": [
             "clipboardRead",
-            "nativeMessaging"
+            "nativeMessaging",
+            "webNavigation"
         ],
         "options_ui": {
             "open_in_tab": true,
@@ -129,7 +120,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.10.31.1",
+        "version": "22.10.23.0",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -141,7 +132,7 @@
             "os": "mac"
         }
     },
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -161,7 +152,7 @@
         ]
     },
     "options": {
-        "version": 15,
+        "version": 20,
         "profiles": [
             {
                 "name": "Default",
@@ -190,7 +181,7 @@
                         "glossaryLayoutMode": "compact",
                         "mainDictionary": "JMdict (English)",
                         "popupTheme": "dark",
-                        "popupOuterTheme": "auto",
+                        "popupOuterTheme": "site",
                         "customPopupCss": ".action-icon {\n  display: none;\n}\n\n.action-button:before {\n  color: white;\n}\n\n.action-button[data-action=\"view-note\"]:before {\n  content: \"↪︎\";\n}\n\n.action-button[data-action=\"add-note\"]:before {\n  content: \"+\";\n}\n\n.action-button[data-action=\"add-note\"][data-mode=\"term-kana\"]:before {\n  display: none;\n}\n\n.action-button[data-action=\"play-audio\"]:before {\n  content: \"▶︎\";\n}",
                         "customPopupOuterCss": "",
                         "enableWanakana": true,
@@ -249,7 +240,12 @@
                                     "scanOnPenHover": true,
                                     "scanOnPenPress": true,
                                     "scanOnPenRelease": false,
-                                    "preventTouchScrolling": false
+                                    "preventTouchScrolling": false,
+                                    "scanOnPenMove": true,
+                                    "scanOnPenReleaseHover": false,
+                                    "scanOnTouchPress": true,
+                                    "scanOnTouchRelease": false,
+                                    "preventPenScrolling": false
                                 }
                             },
                             {
@@ -268,7 +264,12 @@
                                     "scanOnPenHover": true,
                                     "scanOnPenPress": true,
                                     "scanOnPenRelease": false,
-                                    "preventTouchScrolling": true
+                                    "preventTouchScrolling": true,
+                                    "scanOnPenMove": true,
+                                    "scanOnPenReleaseHover": false,
+                                    "scanOnTouchPress": true,
+                                    "scanOnTouchRelease": false,
+                                    "preventPenScrolling": true
                                 }
                             }
                         ],
@@ -292,7 +293,11 @@
                         "enableOnPopupExpressions": false,
                         "enableOnSearchPage": true,
                         "enableSearchTags": false,
-                        "layoutAwareScan": false
+                        "layoutAwareScan": false,
+                        "matchTypePrefix": false,
+                        "hidePopupOnCursorExit": false,
+                        "hidePopupOnCursorExitDelay": 0,
+                        "normalizeCssZoom": true
                     },
                     "translation": {
                         "convertHalfWidthCharacters": "false",
@@ -355,7 +360,10 @@
                         "fieldTemplates": null,
                         "suspendNewCards": false,
                         "displayTags": "never",
-                        "duplicateScopeCheckAllModels": false
+                        "duplicateScopeCheckAllModels": false,
+                        "noteGuiMode": "browse",
+                        "apiKey": "",
+                        "downloadTimeout": 0
                     },
                     "sentenceParsing": {
                         "scanExtent": 200,
@@ -440,6 +448,34 @@
                             {
                                 "enabled": true,
                                 "character1": "…",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︒",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︕",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︖",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︙",
                                 "character2": null,
                                 "includeCharacterAtStart": false,
                                 "includeCharacterAtEnd": true
