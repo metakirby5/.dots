@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.67",
+  "settingsVersion": "1.67.4",
   "exclusionRules": [
     {
       "pattern": "https?://cloudpebble.net/ide/*",
@@ -163,6 +163,78 @@
     },
     {
       "pattern": "https?://excalidraw.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typescriptlang.org/play*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://app.coderpad.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://monkeytype.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://*.intuit.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://bruno-simon.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://devshop.secretgeek.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://whimsical.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ephixa.izebra.xyz/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://*.typeform.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://karatstudio.karat.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://hellowordl.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://wordle-jp.netlify.app/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://bemuse.ninja/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://app.shortwave.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.nytimes.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://v6p9d9t4.ssl.hwcdn.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://canvas.buildable.dev/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://usevia.app/*",
       "passKeys": ""
     }
   ],
