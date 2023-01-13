@@ -84,5 +84,6 @@
     "79"
   ],
   "python.linting.pylintCategorySeverity.convention": "Warning",
-  "python.linting.pylintCategorySeverity.refactor": "Warning"
+  "python.linting.pylintCategorySeverity.refactor": "Warning",
+  "workbench.colorTheme": "Default Dark+"
 }
