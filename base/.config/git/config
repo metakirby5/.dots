@@ -126,7 +126,7 @@
   lr   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
   lp   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
   lpl  = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
-  ls   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --stat
+  ls   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --stat
   lg   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
   lb   = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
   lbp  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words

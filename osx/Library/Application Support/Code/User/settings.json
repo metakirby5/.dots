@@ -79,11 +79,14 @@
   "python.linting.flake8Enabled": true,
   "python.linting.banditEnabled": true,
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": [
-    "--line-length",
-    "79"
-  ],
+  "python.formatting.blackArgs": ["--line-length", "79"],
   "python.linting.pylintCategorySeverity.convention": "Warning",
   "python.linting.pylintCategorySeverity.refactor": "Warning",
-  "workbench.colorTheme": "Default Dark+"
+  "workbench.colorTheme": "Default Dark+",
+  "python.linting.pylintArgs": [
+    "--disable=missing-module-docstring",
+    "--disable=missing-class-docstring",
+    "--disable=missing-function-docstring"
+  ],
+  "java.autobuild.enabled": false
 }
