@@ -70,7 +70,8 @@
   },
   "editor.accessibilitySupport": "off",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnType": true
   },
   "python.analysis.diagnosticSeverityOverrides": {},
   "python.analysis.typeCheckingMode": "strict",
