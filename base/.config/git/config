@@ -160,6 +160,9 @@
   unhide = update-index --no-assume-unchanged
   unhide-all = update-index --really-refresh
   hidden = "!f(){(git -C \"$GIT_PREFIX\" ls-files -v \"$@\" | grep \"^[a-z]\")}; f"
+  skip = update-index --skip-worktree
+  unskip = update-index --no-skip-worktree
+  skipped = "!f(){(git -C \"$GIT_PREFIX\" ls-files -v \"$@\" | grep \"^S\")}; f"
   ignored = "!f(){(git -C \"$GIT_PREFIX\" status -s --ignored \"$@\" | grep \"^!!\")}; f"
 
   # hub
