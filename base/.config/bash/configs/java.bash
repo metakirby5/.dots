@@ -1,7 +1,5 @@
 if command -v java &>/dev/null; then
-  export \
-    CLASSPATH='*':'.' \
-    JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null)"
+  export CLASSPATH='*':'.'
 
   # Compile and run a java file.
   javar() {
