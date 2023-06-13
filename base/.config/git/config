@@ -57,6 +57,7 @@
   co = checkout
   ci = commit
   cp = cherry-pick
+  cpc = cherry-pick --continue
   t = tag
   r = reset
 
