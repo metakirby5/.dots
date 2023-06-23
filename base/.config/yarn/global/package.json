@@ -2,12 +2,12 @@
   "dependencies": {
     "coffeelint": "^2.1.0",
     "coffeescript": "^2.5.1",
-    "create-react-app": "^4.0.3",
-    "git-open": "^2.1.0",
-    "http-server": "^0.12.3",
+    "create-react-app": "^5.0.1",
+    "git-open": "^3.0.0",
+    "http-server": "^14.1.1",
     "lodash": "^4.17.21",
     "pug-cli": "^1.0.0-alpha6",
     "react-devtools": "^4.24.7",
-    "stylus": "^0.54.5"
+    "stylus": "^0.59.0"
   }
 }
