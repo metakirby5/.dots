@@ -1,5 +1,5 @@
-PyQt5-stubs
-aqt
+bandit
+black
 colorz
 eyed3
 flake8
@@ -9,7 +9,7 @@ ntfy
 pip-autoremove
 pipdeptree
 pytz
-twine
+toml
 webcon
 wheel
 zenbu

@@ -15,6 +15,7 @@ find
 gem_leaves
 getoptlong
 io-nonblock
+io-wait
 json
 logger
 matrix
@@ -45,6 +46,7 @@ rss
 securerandom
 set
 shellwords
+syntax_suggest
 syslog
 tempfile
 tmpdir
