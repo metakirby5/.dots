@@ -59,8 +59,8 @@ DEFAULTS=(
     com.apple.dock tilesize -int 60"
   ["No dock magnification"]="\
     com.apple.dock magnification -bool false"
-  ["Dock on left"]="\
-    com.apple.dock orientation -string left"
+  ["Dock on bottom"]="\
+    com.apple.dock orientation -string bottom"
   ["Minimize to dock with scale"]="\
     com.apple.dock mineffect -string scale"
   ["Don't minimize to application icon"]="\
@@ -69,8 +69,8 @@ DEFAULTS=(
     com.apple.dock launchanim -bool true"
   ["Show dock indicators"]="\
     com.apple.dock show-process-indicators -bool true"
-  ["Show 3 recent apps + divider"]="\
-    com.apple.dock show-recents -bool true"
+  ["Don't show 3 recent apps + divider"]="\
+    com.apple.dock show-recents -bool false"
   ["Autohide dock"]="\
     com.apple.dock autohide -bool true"
   ["Don't reorganize spaces in most recently used order"]="\
