@@ -4,6 +4,12 @@
 [core]
   excludesfile = ~/.config/git/ignore          # global ignore
   whitespace = space-before-tab,trailing-space # error on bad whitespace
+  pager = "command -v delta && exec delta || exec less --tabs=4 -RFX"
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 [push]
   default = upstream         # push to upstream
 [pull]
@@ -27,6 +33,7 @@
   renames = copies           # detect renames and copies
   compactionHeuristic = true # improve diffs
   tool = vimdiff             # use vimdiff
+  colorMoved = default
 [diff "bin"]
   textconv = hexdump -v -C   # diff binaries by hexdump
 [difftool]
@@ -85,12 +92,12 @@
   bd = "!git fetch -p && git branch -vv | awk '/^[^*+].*: gone]/{print $1}' | xargs git branch -D"
 
   # diff
-  d   = diff --color-words
-  dl  = diff
+  d   = diff
+  dw  = diff --color-words
   ds  = diff --stat
   dns  = diff --name-status
-  dc  = diff --color-words --cached
-  dcl = diff --cached
+  dc  = diff --cached
+  dcw = diff --color-words --cached
   dcs  = diff --stat --cached
   dcns  = diff --name-status --cached
 
@@ -104,11 +111,11 @@
   su = stash push
   sl   = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
   slr  = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --date=relative
-  slp  = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch --color-words
-  slpl = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
+  slp  = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
+  slpw = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch --color-words
   sls  = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --stat
-  so = stash show --patch --color-words
-  sol = stash show --patch
+  so  = stash show --patch
+  sow = stash show --patch --color-words
   sp = stash pop
   sa = stash apply
   sd = stash drop
@@ -125,19 +132,20 @@
   l    = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
   ll   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d'
   lr   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=relative
-  lp   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
-  lpl  = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
+  lp   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch
+  lpw  = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d%n' --date=short --patch --color-words
   ls   = log --pretty=format:'=== %C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --stat
   lg   = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short --graph
   lb   = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
-  lbp  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
-  lbpl = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch
+  lbp  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch
+  lbpw = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
   lbs  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
   lbg  = log --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
   lmd  = log --pretty=format:'- %s' master..
 
   # show
-  o  = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --color-words
+  o  = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
+  ow = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --color-words
   os = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
 
   # new commands
