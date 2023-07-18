@@ -4,7 +4,7 @@
 [core]
   excludesfile = ~/.config/git/ignore          # global ignore
   whitespace = space-before-tab,trailing-space # error on bad whitespace
-  pager = "command -v delta && exec delta || exec less --tabs=4 -RFX"
+  pager = "command -v delta &>/dev/null && exec delta || exec less --tabs=4 -RFX"
 [interactive]
   diffFilter = delta --color-only
 [delta]
