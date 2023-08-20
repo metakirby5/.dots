@@ -41,53 +41,25 @@
   "vim.leader": " ",
   "workbench.startupEditor": "newUntitledFile",
   "vim.statusBarColors.visualline": "",
-  "python.pythonPath": "/usr/local/bin/python3",
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
-  },
-  "python.showStartPage": false,
   "explorer.confirmDelete": false,
   "editor.formatOnSave": true,
   "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
   "emmet.excludeLanguages": ["markdown", "jsx"],
-  "python.defaultInterpreterPath": "/usr/local/bin/python3",
   "window.zoomLevel": 1,
   "editor.inlineSuggest.enabled": true,
-  "github.copilot.enable": {
-    "*": true,
-    "yaml": false,
-    "plaintext": false,
-    "markdown": false
-  },
   "update.showReleaseNotes": false,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.autofetch": true,
-  "terminal.integrated.env.osx": {
-    "FIG_NEW_SESSION": "1"
-  },
   "editor.accessibilitySupport": "off",
   "[python]": {
     "editor.defaultFormatter": "ms-python.python",
     "editor.formatOnType": true
   },
-  "python.analysis.diagnosticSeverityOverrides": {},
   "python.analysis.typeCheckingMode": "strict",
   "workbench.editor.showTabs": false,
-  "python.linting.pylintEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.banditEnabled": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "79"],
-  "python.linting.pylintCategorySeverity.convention": "Warning",
-  "python.linting.pylintCategorySeverity.refactor": "Warning",
   "workbench.colorTheme": "Default Dark+",
-  "python.linting.pylintArgs": [
-    "--disable=missing-module-docstring",
-    "--disable=missing-class-docstring",
-    "--disable=missing-function-docstring"
-  ],
   "java.autobuild.enabled": false
 }
