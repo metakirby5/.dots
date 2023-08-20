@@ -55,11 +55,14 @@
   "git.autofetch": true,
   "editor.accessibilitySupport": "off",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
-    "editor.formatOnType": true
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
   "python.analysis.typeCheckingMode": "strict",
   "workbench.editor.showTabs": false,
   "workbench.colorTheme": "Default Dark+",
-  "java.autobuild.enabled": false
+  "java.autobuild.enabled": false,
+  "editor.formatOnType": true
 }
