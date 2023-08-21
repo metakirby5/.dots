@@ -68,5 +68,8 @@
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
-  "editor.formatOnSaveMode": "modificationsIfAvailable"
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "[groovy]": {
+    "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
+  }
 }
