@@ -64,5 +64,9 @@
   "workbench.editor.showTabs": false,
   "workbench.colorTheme": "Default Dark+",
   "java.autobuild.enabled": false,
-  "editor.formatOnType": true
+  "editor.formatOnType": true,
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "editor.formatOnSaveMode": "modificationsIfAvailable"
 }
