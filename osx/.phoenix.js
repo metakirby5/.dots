@@ -110,6 +110,7 @@ p =
     maximize: 'm'            # Toggle: maximize window, w/ gaps
     center: 'c'              # Toggle: center window
     reFill: 'u'              # Toggle: grow window to fill empty space
+    mouseTo: 'o'             # Move mouse to window
     status: 'i'              # Show datetime in notification
     sleep: 'delete'          # Put machine to sleep
     mouseOut: '.'            # Move mouse to lower right corner
@@ -1267,6 +1268,7 @@ findMode = modes.add new FindMode()
 Key.on p.keys.maximize, p.keys.mods.base, -> cw()?.maximize().toggle().doSet()
 Key.on p.keys.center, p.keys.mods.base, -> cw()?.center().toggle().doSet()
 Key.on p.keys.reFill, p.keys.mods.base, -> cw()?.reFill().toggle().doSet()
+Key.on p.keys.mouseTo, p.keys.mods.base, -> cw()?.mouseTo()
 Key.on p.keys.winHintMode, p.keys.mods.base, -> modes.toggle winHint
 Key.on p.keys.scrHintMode, p.keys.mods.base, -> modes.toggle scrHint
 Key.on p.keys.evalInputMode, p.keys.mods.base, -> modes.toggle evalInput
