@@ -25,6 +25,7 @@
   prompt = false             # don't prompt when using mergetool
 [rebase]
   autosquash = true          # reposition fixups
+  instructionFormat = "(%an) %s"
 [branch]
   autosetuprebase = always   # rebase on pull, not merge
 [apply]
