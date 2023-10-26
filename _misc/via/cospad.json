@@ -5,15 +5,15 @@
   "layers": [
     [
       "A(LWIN(KC_BSPC))",
-      "KC_F10",
+      "KC_F12",
       "KC_F8",
       "MO(1)",
       "KC_TRNS",
-      "KC_F12",
+      "KC_F11",
       "KC_F7",
       "A(LWIN(KC_R))",
       "LWIN(KC_W)",
-      "KC_F11",
+      "KC_F10",
       "S(KC_F8)",
       "KC_L",
       "KC_VOLU",
