@@ -6,12 +6,25 @@ to-mp3() {
 }
 
 to-mp4() {
-  extsub "$1" mp4 ffmpeg -i
+  local f
+  for f in "$@"; do
+    extsub "$f" mp4 ffmpeg -i
+  done
 }
 
 to-mp4-all() {
-  for f in *.mov; do
-    extsub "$f" mp4 ffmpeg -i
-    rm "$f"
+  to-mp4 *.mov
+  rm *.mov
+}
+
+to-gif() {
+  local f
+  for f in "$@"; do
+    ffmpeg -i "$f" -r 15 -vf scale=512:-1 "${f%.*}.gif"
   done
+}
+
+to-gif-all() {
+  to-gif *.mp4
+  rm *.mp4
 }
