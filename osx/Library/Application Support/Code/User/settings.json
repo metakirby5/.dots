@@ -61,7 +61,7 @@
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
   "python.analysis.typeCheckingMode": "strict",
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "workbench.colorTheme": "Default Dark+",
   "java.autobuild.enabled": false,
   "editor.formatOnType": true,
@@ -74,5 +74,6 @@
   "cmake.configureOnOpen": true,
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
-  }
+  },
+  "editor.formatOnSaveMode": "modifications"
 }
