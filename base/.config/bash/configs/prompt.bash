@@ -112,8 +112,6 @@ __mk5_set_prompt() {
 
       # https://www.reddit.com/r/commandline/comments/5iueei/tiny_awk_script_for_git_prompt/
       git_info+="$(git status --porcelain -b | awk '
-      { m = 0; }
-
       /^## / {
         if ($0 ~ /[[ ]ahead /) {
           ahead = $0;
@@ -125,12 +123,12 @@ __mk5_set_prompt() {
           sub(/.*[[ ]behind /, "", behind);
           sub(/[,\]].*/, "", behind);
         }
-        m = 1;
+        next;
       }
 
-      m == 0 && /^\?\?/  { untracked++; m = 1; }
-      m == 0 && /^.[^ ]/ { changed++;          }
-      m == 0 && /^[^ ]./ { staged++;           }
+      /^\?\?/  { untracked++; next; }
+      /^.[^ ]/ { changed++; }
+      /^[^ ]./ { staged++; }
 
       END {
         if (untracked) printf " \033[1;31m-%d\033[0m", untracked;
