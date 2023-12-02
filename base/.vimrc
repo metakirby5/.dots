@@ -774,9 +774,6 @@
           \.string(getreg('q'))<cr><c-f><left>
   " }}}
   " Completion {{{
-    " Set completion sources.
-    set cpt=.,k,w,b
-
     " Suppress info messages.
     set shortmess+=c
 
