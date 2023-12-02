@@ -5,6 +5,9 @@
   excludesfile = ~/.config/git/ignore          # global ignore
   whitespace = space-before-tab,trailing-space # error on bad whitespace
   pager = "pager=\"$(which delta)\"; ${pager:-less --tabs=4 -RFX}"
+  fsmonitor = true        # use daemon
+  untrackedCache = true   # faster diff
+  preloadIndex = true     # multi-threaded lstat
 [interactive]
   diffFilter = delta --color-only
 [delta]
