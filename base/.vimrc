@@ -116,8 +116,9 @@
     Plug 'tpope/vim-abolish'
   " }}}
   " Utility {{{
-    " Tab completion
+    " Pop-up completion
     Plug 'vim-scripts/AutoComplPop'
+    Plug 'skywind3000/vim-dict'
 
     " Syntax checker
     let g:ale_completion_enabled = 1
@@ -774,8 +775,13 @@
           \.string(getreg('q'))<cr><c-f><left>
   " }}}
   " Completion {{{
-    inoremap <expr> <tab>   pumvisible() ? "\<c-n>"  : "\<tab>"
-    inoremap <expr> <s-tab> pumvisible() ? "\<c-p>"  : "\<s-tab>"
+    " Set completion sources.
+    set cpt=.,k,w,b
+
+    " Suppress info messages.
+    set shortmess+=c
+
+    inoremap <expr> <tab>   pumvisible() ? "\<c-y>"  : "\<tab>"
     inoremap <expr> <cr>    pumvisible() ? "\<c-y>"  : "\<cr>"
     inoremap <expr> .       pumvisible() ? "\<c-y>." : "."
   " }}}
