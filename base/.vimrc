@@ -238,7 +238,6 @@
   set hlsearch                      " highlights all search hits
   set ignorecase                    " search without regards to case
   set smartcase                     " search with smart casing
-  set infercase                     " smart casing for keyword completion
   set gdefault                      " default global sub
   set tags=./tags;                  " recursive tag search
   set efm+=\ (%l)\ error:\ %m       " lint error format
