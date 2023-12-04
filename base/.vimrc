@@ -278,13 +278,13 @@
       hi clear Normal | hi Normal
             \
             \
-            \ ctermbg=NONE
+            \ ctermbg=NONE guibg=NONE
 
       " Empty lines, etc.
       hi clear NonText | hi NonText
             \
             \ ctermfg=darkgrey guifg=darkgrey
-            \ ctermbg=NONE
+            \ ctermbg=NONE guibg=NONE
 
       " End of buffer tildes
       hi clear EndOfBuffer | hi EndOfBuffer
@@ -404,8 +404,8 @@
       " Completion menu
       hi clear Pmenu | hi Pmenu
             \
-            \ ctermfg=white guifg=black
-            \ ctermbg=black guibg=blue
+            \ ctermfg=white guifg=white
+            \ ctermbg=black guibg=black
       hi clear PmenuSel | hi PmenuSel
             \ term=bold     cterm=bold  gui=bold
             \ ctermfg=white guifg=white
