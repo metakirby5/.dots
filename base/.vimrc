@@ -779,7 +779,6 @@
 
     inoremap <expr> <tab>   pumvisible() ? "\<c-y>"  : "\<tab>"
     inoremap <expr> <cr>    pumvisible() ? "\<c-y>"  : "\<cr>"
-    inoremap <expr> .       pumvisible() ? "\<c-y>." : "."
   " }}}
   " Centralized swap files {{{
     if exists('&directory')
