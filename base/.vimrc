@@ -54,11 +54,8 @@
     Plug 'Yggdroot/indentLine'
     let g:indentLine_color_term = 8
     let g:indentLine_char = '│'
-
-    " Fix conceals
-    Plug 'elzr/vim-json'
-    let g:vim_json_syntax_conceal = 0
-    let g:vim_markdown_conceal = 0
+    let g:indentLine_setConceal = 2
+    let g:indentLine_concealcursor = ''
 
     " Git gutter
     Plug 'airblade/vim-gitgutter'
