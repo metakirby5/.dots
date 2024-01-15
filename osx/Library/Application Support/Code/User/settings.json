@@ -55,7 +55,7 @@
   "git.autofetch": true,
   "editor.accessibilitySupport": "off",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
@@ -75,5 +75,11 @@
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "editor.formatOnSaveMode": "modifications"
+  "editor.formatOnSaveMode": "modifications",
+  "snyk.yesWelcomeNotification": false,
+  "snyk.advanced.cliPath": "/Users/echan/Library/Application Support/snyk-ls/snyk-macos",
+  "snyk.trustedFolders": [],
+  "flake8.args": [
+    "--max-line-length=88"
+  ]
 }
