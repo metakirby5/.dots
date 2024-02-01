@@ -149,12 +149,18 @@ __mk5_set_prompt() {
   asdf_path="$asdf_path/.tool-versions"
 
   if [ -f "$asdf_path" -a "$asdf_path" != "$HOME/.tool-versions" ]; then
-    asdf_info=($(<"$asdf_path"))
-    IFS='|'
     if command -v asdf &> /dev/null; then
-      asdf_info="$__mk5_red${asdf_info[*]}$__mk5_b_red, "
+      asdf_info=($(
+        grep -v '^#' < "$asdf_path" |
+          while IFS=' ' read -r tool version; do
+            if command -v "$tool" &> /dev/null; then
+              echo "$tool" "$version"
+            fi
+          done
+      ))
+      IFS='|' asdf_info="$__mk5_red${asdf_info[*]:-asdf}$__mk5_b_red, "
     else
-      asdf_info="${__mk5_red}asdf${__mk5_b_red}, "
+      IFS='|' asdf_info="${__mk5_red}asdf${__mk5_b_red}, "
     fi
   fi
 
