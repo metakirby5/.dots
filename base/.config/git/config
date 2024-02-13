@@ -112,7 +112,7 @@
   ap = add --patch
 
   # stash
-  su = stash push
+  su = stash push --include-untracked
   sl   = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d'
   slr  = stash list --pretty=format:'%C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --date=relative
   slp  = stash list --pretty=format:'=== %C(yellow)%gd %C(green)%ci %C(reset)%s%C(magenta)%d' --patch
