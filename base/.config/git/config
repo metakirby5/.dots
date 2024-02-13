@@ -27,7 +27,7 @@
 [mergetool]
   prompt = false             # don't prompt when using mergetool
 [rebase]
-  autosquash = true          # reposition fixups
+  autoSquash = true          # reposition fixups
   instructionFormat = "(%an) %s"
 [branch]
   autosetuprebase = always   # rebase on pull, not merge
@@ -127,9 +127,9 @@
   ss = "!f(){(git su; git sp stash@{$((1 + ${1:-0}))})};f"
 
   # rebase
-  rb = rebase
-  rbi = rebase --interactive
-  rbc = rebase --continue
+  rb  = rebase --autostash
+  rbi = rebase --autostash --interactive
+  rbc = rebase --autostash --continue
   rbm = "!f(){(local x=\"${1:-master}\"; git co \"$x\" && git p && git co - && git rb \"$x\")};f"
 
   # log
