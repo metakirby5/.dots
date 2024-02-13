@@ -127,9 +127,9 @@
   ss = "!f(){(git su; git sp stash@{$((1 + ${1:-0}))})};f"
 
   # rebase
-  rb  = rebase --autostash
-  rbi = rebase --autostash --interactive
-  rbc = rebase --autostash --continue
+  rb  = rebase
+  rbi = rebase --interactive
+  rbc = rebase --continue
   rbm = "!f(){(local x=\"${1:-master}\"; git co \"$x\" && git p && git co - && git rb \"$x\")};f"
 
   # log
