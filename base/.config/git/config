@@ -8,6 +8,8 @@
   fsmonitor = true        # use daemon
   untrackedCache = true   # faster diff
   preloadIndex = true     # multi-threaded lstat
+[advice]
+  detachedHead = false    # don't warn me about detached head
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -17,6 +19,8 @@
   default = upstream         # push to upstream
 [pull]
   rebase = true              # rebase instead of merge on pull
+[fetch]
+  prune = true               # remove any remote-tracking references that no longer exist on the remote
 [checkout]
   defaultRemote = origin     # prefer origin remote
 [merge]
