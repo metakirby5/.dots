@@ -17,6 +17,7 @@
   light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 [push]
   default = upstream         # push to upstream
+  autoSetupRemote = true     # automatically set upstream
 [pull]
   rebase = true              # rebase instead of merge on pull
 [fetch]
