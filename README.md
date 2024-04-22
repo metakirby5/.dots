@@ -122,19 +122,16 @@ For OS X, use the system theme.
 
 ### OS X
 
-*EXPERIMENTAL:* Run `_setup/osx`.
-
--- or --
-
 - Install Xcode from the App Store.
 - Import the `Terminal.app` profile in `_misc/osx/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
-- Install `stow` using `brew`.
+- Install `stow` and `bash` using `brew`.
+- Set your shell to `brew`'s `bash` using
+  `chsh -s /opt/homebrew/bin/bash`.
 - `cd ~/.dots`
-- `stow base osx`
-- [Set your shell to `brew`'s `bash`.](https://johndjameson.com/blog/updating-your-shell-with-homebrew/)
-- `source ~/.bashrc`
-- Install `zenbu` via `pip` and use it to choose a colorscheme.
+- `stow base osx --no-folding`
+- Restart your terminal.
+- Install `zenbu` via `pip` and use it to choose a colorscheme with `zenbu -e`.
 - `yes | osx-set-defaults`
 - Tweak whatever other settings you want in Preferences.app.
 
