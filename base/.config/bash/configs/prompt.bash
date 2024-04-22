@@ -36,6 +36,7 @@ __mk5_set_prompt() {
     ifs="$IFS" \
     pchar_color="$__mk5_b_red" \
     pchar="$__mk5_pchar" \
+    pprefix='' \
     mypwd="$PWD" \
     read_result='' \
     jobs_info='' \
@@ -53,11 +54,6 @@ __mk5_set_prompt() {
   # Status color.
   case $last_status in
     0) pchar_color="$__mk5_b_green";;
-  esac
-
-  # Root user prompt character.
-  case $EUID in
-    0) pchar="#";;
   esac
 
   # Display job count.
@@ -173,11 +169,16 @@ __mk5_set_prompt() {
 
   PS1="$asdf_info$venv_info$__mk5_hostname$jobs_info$git_info$mypwd"
 
+  # Root user prompt prefix.
+  case $EUID in
+    0) pprefix="$__mk5_b_red[#] ";;
+  esac
+
   # Use single-line prompt for one character, otherwise two-line.
   local stripped="$(sed 's/\\\[[^]]*\]//g' <<< "$PS1")"
   case ${#stripped} in
-    1) PS1="$pchar_color$stripped";;
-    *) PS1+="\n$pchar_color$pchar";;
+    1) PS1="$pprefix$pchar_color$stripped";;
+    *) PS1+="\n$pprefix$pchar_color$pchar";;
   esac
   PS1+="$__mk5_normal "
 
