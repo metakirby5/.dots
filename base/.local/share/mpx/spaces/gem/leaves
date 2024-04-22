@@ -1,4 +1,3 @@
-abbrev
 base64
 benchmark
 bigdecimal
@@ -36,10 +35,10 @@ ostruct
 pathname
 pp
 prime
+prism
 pstore
 racc
 readline
-readline-ext
 resolv-replace
 rinda
 rss

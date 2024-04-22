@@ -5,10 +5,14 @@ eyed3
 flake8
 fuzzywuzzy
 humanize
+jedi
 ntfy
 pip-autoremove
 pipdeptree
+pluggy
+python-jsonrpc-server
 pytz
+six
 toml
 webcon
 wheel
