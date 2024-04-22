@@ -125,6 +125,7 @@ For OS X, use the system theme.
 - Install Xcode from the App Store.
 - Import the `Terminal.app` profile in `_misc/osx/Japanesque.terminal`.
 - Install `brew` from [brew.sh](http://brew.sh/).
+- Write `/opt/homebrew/bin` to `/etc/paths.d/brew`.
 - Install `stow` and `bash` using `brew`.
 - Set your shell to `brew`'s `bash` using
   `chsh -s /opt/homebrew/bin/bash`.
