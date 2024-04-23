@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Logs changes to osx settings.
+
+cur="$(defaults read)"
+while :; do
+  next="$(defaults read)"
+  diff <(echo "$cur") <(echo "$next")
+  echo
+  cur="$next"
+done
