@@ -47,6 +47,12 @@ DEFAULTS=(
     NSGlobalDomain AppleShowAllExtensions -bool true"
   ["Hide Menu Bar"]="\
     NSGlobalDomain _HiHideMenuBar -bool true"
+  ["Prefer tabs when opening documents"]="\
+    NSGlobalDomain AppleWindowTabbingMode -string always"
+  ["Ask to keep changes when closing documents"]="\
+    NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true"
+  ["Save windows when quitting an application"]="\
+    NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true"
 
   # com.apple.systemuiserver
   ["Volume in status bar"]="\
@@ -79,6 +85,14 @@ DEFAULTS=(
     com.apple.dock expose-group-apps -bool true"
   ["Don't show recent apps"]="\
     com.apple.dock show-recents -bool false"
+  ["Remove bottom left hot corner"]="\
+    com.apple.dock wvous-bl-corner -int 1"
+  ["Remove bottom right hot corner"]="\
+    com.apple.dock wvous-br-corner -int 1"
+  ["Remove top left hot corner"]="\
+    com.apple.dock wvous-tl-corner -int 1"
+  ["Remove top right hot corner"]="\
+    com.apple.dock wvous-tr-corner -int 1"
 
   # com.apple.spaces
   ["Displays have separate spaces"]="\
