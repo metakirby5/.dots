@@ -46,7 +46,10 @@
   "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "emmet.excludeLanguages": ["markdown", "jsx"],
+  "emmet.excludeLanguages": [
+    "markdown",
+    "jsx"
+  ],
   "window.zoomLevel": 1,
   "editor.inlineSuggest.enabled": true,
   "update.showReleaseNotes": false,
@@ -75,11 +78,5 @@
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "editor.formatOnSaveMode": "modifications",
-  "snyk.yesWelcomeNotification": false,
-  "snyk.advanced.cliPath": "/Users/echan/Library/Application Support/snyk-ls/snyk-macos",
-  "snyk.trustedFolders": [],
-  "flake8.args": [
-    "--max-line-length=88"
-  ]
+  "editor.formatOnSaveMode": "modifications"
 }
