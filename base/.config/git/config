@@ -101,14 +101,16 @@
   bd = "!git fetch -p && git branch -vv | awk '/^[^*+].*: gone]/{print $1}' | xargs git branch -D"
 
   # diff
-  d   = diff
-  dw  = diff --color-words
-  ds  = diff --stat
+  d    = diff
+  dl   = -c 'delta.side-by-side=true' diff
+  dw   = diff --color-words
+  ds   = diff --stat
   dns  = diff --name-status
-  dc  = diff --cached
-  dcw = diff --color-words --cached
+  dc   = diff --cached
+  dcl  = -c 'delta.side-by-side=true' diff --cached
+  dcw  = diff --color-words --cached
   dcs  = diff --stat --cached
-  dcns  = diff --name-status --cached
+  dcns = diff --name-status --cached
 
   # add
   a  = add
