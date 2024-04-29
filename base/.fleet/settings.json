@@ -3,5 +3,7 @@
     "theme": "sync-with-os",
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
-    "markdown.splitView": "SplitRight"
+    "markdown.splitView": "SplitRight",
+    "keymap": "macos-ij",
+    "editor.showInlayHints": true
 }
