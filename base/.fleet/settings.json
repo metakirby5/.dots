@@ -1,0 +1,7 @@
+{
+    "vimEmulationEnabled": true,
+    "theme": "sync-with-os",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "markdown.splitView": "SplitRight"
+}
