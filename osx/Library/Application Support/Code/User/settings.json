@@ -78,5 +78,10 @@
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "editor.formatOnSaveMode": "modifications"
+  "editor.formatOnSaveMode": "modifications",
+  "flake8.args": [
+    "--max-line-length=88",
+    "--extend-ignore=E203,E701"
+  ],
+  "cmake.showOptionsMovedNotification": false
 }
