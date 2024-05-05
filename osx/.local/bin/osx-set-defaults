@@ -53,6 +53,8 @@ DEFAULTS=(
     NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true"
   ["Save windows when quitting an application"]="\
     NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true"
+  ["Increase trackpad speed"]="\
+    NSGlobalDomain 'com.apple.trackpad.scaling' -float 1"
 
   # com.apple.systemuiserver
   ["Volume in status bar"]="\
@@ -153,6 +155,12 @@ DEFAULTS=(
   # com.apple.AppleMultitouchTrackpad
   ["Trackpad three finger drag"]="\
     com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true"
+  ["Trackpad tap to click"]="\
+    com.apple.AppleMultitouchTrackpad Clicking -bool true"
+  ["Trackpad light primary click"]="\
+    com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0"
+  ["Trackpad light secondary click"]="\
+    com.apple.AppleMultitouchTrackpad SecondClickThreshold -int 0"
 
   # com.apple.touchbar.agent
   ["Control strip in touch bar"]="\
