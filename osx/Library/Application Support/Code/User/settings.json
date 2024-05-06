@@ -65,7 +65,6 @@
   },
   "python.analysis.typeCheckingMode": "strict",
   "workbench.editor.showTabs": "single",
-  "workbench.colorTheme": "Default Dark+",
   "java.autobuild.enabled": false,
   "editor.formatOnType": true,
   "[java]": {
