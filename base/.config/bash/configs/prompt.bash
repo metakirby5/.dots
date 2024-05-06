@@ -29,6 +29,13 @@ case $SSH_TTY in
   *) __mk5_hostname="$__mk5_cyan${HOSTNAME%%.*}$__mk5_b_cyan, ";;
 esac
 
+__mk5_map_tool() {
+  case "$1" in
+    nodejs) echo 'node';;
+    *) echo "$1";;
+  esac
+}
+
 __mk5_set_prompt() {
   # Local variables.
   local \
@@ -148,7 +155,7 @@ __mk5_set_prompt() {
     if command -v asdf &> /dev/null; then
       asdf_info=($(
         while IFS=' ' read -r tool version; do
-          if command -v "$tool" &> /dev/null; then
+          if command -v "$(__mk5_map_tool "$tool")" &> /dev/null; then
             echo "$tool" "$version"
           fi
         done < "$asdf_path"
