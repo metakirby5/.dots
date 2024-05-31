@@ -82,5 +82,6 @@
     "--max-line-length=88",
     "--extend-ignore=E203,E701"
   ],
-  "cmake.showOptionsMovedNotification": false
+  "cmake.showOptionsMovedNotification": false,
+  "github.copilot.editor.enableAutoCompletions": true
 }
