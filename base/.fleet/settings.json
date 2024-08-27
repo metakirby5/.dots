@@ -4,6 +4,6 @@
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
     "markdown.splitView": "SplitRight",
-    "keymap": "macos-ij",
+    "keymap": "intellij",
     "editor.showInlayHints": true
 }

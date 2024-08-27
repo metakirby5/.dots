@@ -83,5 +83,9 @@
     "--extend-ignore=E203,E701"
   ],
   "cmake.showOptionsMovedNotification": false,
-  "github.copilot.editor.enableAutoCompletions": true
+  "github.copilot.editor.enableAutoCompletions": true,
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ]
 }
