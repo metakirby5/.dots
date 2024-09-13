@@ -4,6 +4,7 @@
 [core]
   excludesfile = ~/.config/git/ignore          # global ignore
   whitespace = space-before-tab,trailing-space # error on bad whitespace
+  autocrlf = input        # don't commit carriage returns
   pager = "pager=\"$(which delta)\"; ${pager:-less --tabs=4 -RFX}"
   fsmonitor = true        # use daemon
   untrackedCache = true   # faster diff
