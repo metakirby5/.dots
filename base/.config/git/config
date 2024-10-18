@@ -138,7 +138,7 @@
   rb  = rebase
   rbi = rebase --interactive
   rbc = rebase --continue
-  rbm = "!f(){(local x=\"${1:-master}\"; git co \"$x\" && git p && git co - && git rb \"$x\")};f"
+  rbm = "!f(){(local x=\"${1:-refs/remotes/origin/HEAD}\"; git co \"$x\" && git p && git co - && git rb \"$x\")};f"
 
   # log
   l    = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an %C(reset)%s%C(magenta)%d' --date=short
@@ -154,7 +154,7 @@
   lbpw = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --patch --color-words
   lbs  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --stat
   lbg  = log --pretty=format:'%C(yellow)%h %C(green)%cd %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B' --graph
-  lmd  = log --pretty=format:'- %s' master..
+  lmd  = log --pretty=format:'- %s' refs/remotes/origin/HEAD..
 
   # show
   o  = show --pretty=format:'%C(yellow)%h %C(green)%ci %C(blue)%an%C(magenta)%d%+n%w(0, 4, 4)%B'
