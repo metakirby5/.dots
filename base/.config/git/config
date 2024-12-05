@@ -13,6 +13,8 @@
   detachedHead = false    # don't warn me about detached head
 [interactive]
   diffFilter = delta --color-only
+[status]
+  showuntrackedfiles = all # better performance
 [delta]
   navigate = true    # use n and N to move between diff sections
   light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
