@@ -57,10 +57,16 @@ DEFAULTS=(
     NSGlobalDomain 'com.apple.trackpad.scaling' -float 1"
 
   # com.apple.systemuiserver
-  ["Volume in status bar"]="\
+  ["Volume in status bar (~14.6)"]="\
     com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.volume' -bool true"
-  ["Bluetooth in status bar"]="\
+  ["Bluetooth in status bar (~14.6)"]="\
     com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.bluetooth' -bool true"
+
+  # com.apple.controlcenter
+  ["Volume in status bar"]="\
+    com.apple.controlcenter 'NSStatusItem Visible Sound' -bool true"
+  ["Hide Spotlight in status bar"]="\
+    com.apple.controlcenter 'NSStatusItem Visible Item-0' -bool false"
 
   # com.apple.dock
   ["Dock size 60"]="\
@@ -171,7 +177,7 @@ DEFAULTS=(
     com.apple.siri StatusMenuVisible -bool false"
 
   # com.apple.TextInputMenuAgent
-  ["Hide Spotlight in status bar"]="\
+  ["Hide Spotlight in status bar (~14.6)"]="\
     com.apple.TextInputMenuAgent 'NSStatusItem Visible Item-0' -bool false"
 )
 
