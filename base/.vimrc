@@ -222,10 +222,6 @@
     " Automatically add endif, etc.
     Plug 'tpope/vim-endwise'
   " }}}
-  " Languages {{{
-    Plug 'sheerun/vim-polyglot'
-    let g:polyglot_disabled = ['csv']
-  " }}}
   call plug#end()
 " }}}
 " General {{{
