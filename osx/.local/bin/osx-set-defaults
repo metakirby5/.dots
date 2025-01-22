@@ -67,6 +67,8 @@ DEFAULTS=(
     com.apple.controlcenter 'NSStatusItem Visible Sound' -bool true"
   ["Hide Spotlight in status bar"]="\
     com.apple.controlcenter 'NSStatusItem Visible Item-0' -bool false"
+  ["Hide Now Playing in status bar"]="\
+    com.apple.controlcenter 'NSStatusItem Visible NowPlaying' -bool false"
 
   # com.apple.dock
   ["Dock size 60"]="\
