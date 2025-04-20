@@ -2,5 +2,6 @@
     "theme": "sync-with-os",
     "plugins": [],
     "vimEmulationEnabled": true,
-    "keymap": "intellij"
+    "keymap": "intellij",
+    "git.push.confirm": false
 }
