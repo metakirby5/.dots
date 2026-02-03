@@ -25,7 +25,10 @@ export \
   HISTCONTROL=ignoreboth:erasedups \
   HISTTIMEFORMAT="%d/%m/%y %T " \
   HISTSIZE=1000000 \
-  HISTFILESIZE=1000000
+  HISTFILESIZE=1000000 \
+  \
+  DISABLE_TELEMETRY=true \
+  MCP_DISABLE_TELEMETRY=true
 
 export \
   EDITOR="$VISUAL" \

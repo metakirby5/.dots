@@ -13,6 +13,8 @@
   detachedHead = false    # don't warn me about detached head
 [interactive]
   diffFilter = delta --color-only
+[init]
+  defaultBranch = main
 [status]
   showuntrackedfiles = all # better performance
 [delta]
