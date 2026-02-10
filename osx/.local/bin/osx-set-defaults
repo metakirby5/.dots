@@ -139,8 +139,10 @@ DEFAULTS=(
   # com.apple.finder
   ["Hide desktop icons"]="\
     com.apple.finder CreateDesktop -bool false"
-  ["Show full path in Finder title"]="\
-    com.apple.finder _FXShowPosixPathInTitle -bool true"
+  ["Show just name in Finder title"]="\
+    com.apple.finder _FXShowPosixPathInTitle -bool false"
+  ["Show Finder path bar"]="\
+    com.apple.finder ShowPathbar -bool true"
   ["Search in current folder by default"]="\
     com.apple.finder FXDefaultSearchScope -string SCcf"
   ["Set default Finder location to \$HOME (1)"]="\
