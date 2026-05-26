@@ -1,0 +1,4 @@
+interface:
+  display_name: "PDF to English"
+  short_description: "Translate PDFs into English while preserving page layout."
+  default_prompt: "Use $pdf-to-english to translate the selected PDF files into English PDFs with layout-preserving overlays."
