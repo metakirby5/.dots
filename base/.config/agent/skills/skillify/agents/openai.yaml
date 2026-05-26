@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skillify"
+  short_description: "Turn repeatable work into a skill"
+  default_prompt: "Use $skillify to capture this workflow as a reusable skill."
