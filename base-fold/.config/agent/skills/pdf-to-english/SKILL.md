@@ -46,6 +46,8 @@ python3 <skill-dir>/scripts/pdf_layout_tools.py render input.pdf /tmp/input_prev
 ]
 ```
 
+For a rotated source being normalized into a true landscape or portrait output page, generate overlay coordinates from a normalized rendered preview and add `"displayCoordinates": true` to each item. The helper then draws those overlays directly in the normalized output coordinate space.
+
 7. Apply overlays:
 
 ```bash
@@ -53,6 +55,7 @@ python3 <skill-dir>/scripts/pdf_layout_tools.py overlay input.pdf output_EN.pdf 
 ```
 
 8. Render the translated PDF and visually compare it to the original. Check that translated text is readable, stays inside intended boxes, does not cover photos/diagrams unintentionally, and preserves page count and page dimensions.
+9. For PDFs whose pages display as landscape via PDF rotation metadata (for example `/Rotate 90` with a portrait media box), produce a true landscape output page. The bundled overlay helper applies the source page rotation while drawing its content, converts overlay coordinates to the new landscape page, and writes no additional rotation flag. If you use another overlay path, do the equivalent; copying `/Rotate` onto already-rotated artwork will rotate it twice and crop the page.
 
 ## Layout Strategy
 
@@ -79,5 +82,6 @@ Before finishing, verify:
 
 - Output PDFs exist at the requested location with `_EN` suffix when applicable.
 - Page count matches the source PDF.
+- Rendered orientation matches the source PDF, especially for landscape pages stored with rotated portrait media boxes. Check the visual content, not only the PDF's `/Rotate` metadata.
 - Rendered previews show no unintended text/photo overlap.
 - The final answer includes absolute links to the generated PDFs and notes any limitations, such as scanned text that required manual visual translation or text that was not extractable.

@@ -32,6 +32,7 @@ struct Overlay: Codable {
     let size: Double?
     let bold: Bool?
     let align: String?
+    let displayCoordinates: Bool?
 }
 
 func jsonEscape(_ s: String) -> String {
@@ -144,7 +145,11 @@ func overlay(_ input: String, _ output: String, _ overlaysPath: String) throws {
     guard let first = doc.page(at: 0) else {
         throw NSError(domain: "pdf-layout-tools", code: 2, userInfo: [NSLocalizedDescriptionKey: "PDF has no pages"])
     }
-    var mediaBox = first.bounds(for: .mediaBox)
+    let firstRawBox = first.bounds(for: .mediaBox)
+    var mediaBox = firstRawBox
+    if abs(first.rotation % 180) == 90 {
+        mediaBox = CGRect(x: 0, y: 0, width: firstRawBox.height, height: firstRawBox.width)
+    }
     guard let consumer = CGDataConsumer(url: URL(fileURLWithPath: output) as CFURL),
           let pdf = CGContext(consumer: consumer, mediaBox: &mediaBox, nil) else {
         throw NSError(domain: "pdf-layout-tools", code: 3, userInfo: [NSLocalizedDescriptionKey: "Cannot create output PDF"])
@@ -152,13 +157,27 @@ func overlay(_ input: String, _ output: String, _ overlaysPath: String) throws {
 
     for i in 0..<doc.pageCount {
         guard let page = doc.page(at: i) else { continue }
-        let box = page.bounds(for: .mediaBox)
+        let rawBox = page.bounds(for: .mediaBox)
+        let box: CGRect
+        if abs(page.rotation % 180) == 90 {
+            box = CGRect(x: 0, y: 0, width: rawBox.height, height: rawBox.width)
+        } else {
+            box = CGRect(x: 0, y: 0, width: rawBox.width, height: rawBox.height)
+        }
         pdf.beginPDFPage([kCGPDFContextMediaBox as String: box] as CFDictionary)
-        page.draw(with: .mediaBox, to: pdf)
+        guard let cgPage = page.pageRef else { continue }
+        let drawingTransform = cgPage.getDrawingTransform(.mediaBox, rect: box, rotate: 0, preserveAspectRatio: true)
+        pdf.saveGState()
+        pdf.concatenate(drawingTransform)
+        pdf.drawPDFPage(cgPage)
+        pdf.restoreGState()
         NSGraphicsContext.saveGraphicsState()
         NSGraphicsContext.current = NSGraphicsContext(cgContext: pdf, flipped: false)
         for item in overlays where item.page == i + 1 {
-            let rect = CGRect(x: item.x, y: item.y, width: item.width, height: item.height)
+            let sourceRect = CGRect(x: item.x, y: item.y, width: item.width, height: item.height)
+            let rect = (item.displayCoordinates ?? false)
+                ? sourceRect
+                : sourceRect.applying(drawingTransform).standardized
             pdf.setFillColor(NSColor.white.cgColor)
             pdf.fill(rect.insetBy(dx: -1.5, dy: -1.5))
             let alignment: CTTextAlignment
