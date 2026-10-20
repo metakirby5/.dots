@@ -28,6 +28,10 @@ p =
     tolerance: 10                # Tolerance for window movement (for pouring)
     unit: 100                    # Increment for moving and resizing
     gap: 20                      # Gap between windows
+    stagedFrames:
+      apps: ['com.google.Chrome'] # Bundle IDs of apps that animate AX updates
+      delay: 0.25                # Seconds for each native move/resize to settle
+      tolerance: 1               # Points of acceptable final-frame rounding
 
   ## MODAL DIALOGS
   modals:
@@ -864,7 +868,8 @@ class ChainWindow
 
   # Private: update window vars
   updateWin: ->
-    @f = @win.frame()
+    # Repeat commands build on the requested frame while native updates settle.
+    @f = _.clone (@animations[@win.hash()]?.target ? @win.frame())
     @updateScr()
 
   # Private: update window screen for chains
@@ -903,10 +908,80 @@ class ChainWindow
     @setFrame @f
     this
 
+  # Serialize native animations; overlapping AX setters can lose a resize.
+  setStagedFrame: ->
+    win = @win
+    hash = win.hash()
+    animations = @animations
+    previous = animations[hash]
+    previous?.stop()
+
+    target = _.clone @f
+    {delay, tolerance} = p.wins.stagedFrames
+    timer = null
+    stopped = false
+    operation = animations[hash] =
+      target: target
+      stop: ->
+        stopped = true
+        timer?.stop()
+        delete animations[hash] if animations[hash] == operation
+
+    active = ->
+      return false if stopped
+      unless win.app()?.windows().some((candidate) -> candidate.isEqual win)
+        operation.stop()
+        return false
+      true
+
+    changed = (keys) ->
+      frame = win.frame()
+      keys.some (key) -> Math.abs(frame[key] - target[key]) > tolerance
+
+    later = (action) ->
+      timer = new Timer delay, false, ->
+        action() if active()
+
+    apply = (done) ->
+      return unless active()
+      resize = ->
+        if changed ['width', 'height']
+          win.setSize target
+          later done
+        else
+          done()
+      if changed ['x', 'y']
+        win.setTopLeft target
+        later resize
+      else
+        resize()
+
+    finish = ->
+      if changed ['x', 'y', 'width', 'height']
+        Phoenix.log "Staged frame update missed its target: #{JSON.stringify target}"
+      operation.stop()
+
+    verify = ->
+      if changed ['x', 'y', 'width', 'height']
+        # At most one correction pass, also separating movement from resizing.
+        apply finish
+      else
+        operation.stop()
+
+    # Stopping our timer cannot stop a native animation already in progress.
+    if previous?
+      later -> apply verify
+    else
+      apply verify
+    this
+
   animationFps: 60
   animationSecs: 0.15
   animations: {}
   doSet: ->
+    if @win.app()?.bundleIdentifier() in p.wins.stagedFrames.apps
+      return @setStagedFrame()
+
     secsPerFrame = 1 / @animationFps
 
     hash = @win.hash()
